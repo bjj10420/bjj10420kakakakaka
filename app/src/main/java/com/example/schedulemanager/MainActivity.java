@@ -1,7 +1,10 @@
 package com.example.schedulemanager;
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -10,6 +13,7 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -144,9 +148,6 @@ public class MainActivity extends AppCompatActivity {
             // 추가
             buttonView.addView(iconView);
             buttonView.addView(textView);
-
-
-
             buttonPanel.addView(buttonView);
 
             //TODO 테스트용 코드
@@ -176,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.d("태그확인", String.valueOf(view.getTag()));
                     switch (event.getActionMasked()) {
                         case MotionEvent.ACTION_DOWN:
-
+                            hoverView(view);
                             dX = view.getX() - event.getRawX();
                             dY = view.getY() - event.getRawY();
                             lastAction = MotionEvent.ACTION_DOWN;
@@ -200,6 +201,70 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    /**
+     * 지정된 뷰의 복사본을 만들어 최상위 프레임레이아웃의 자식으로 보냄
+     * @param view
+     */
+    private void hoverView(View view) {
+        // 뷰 복사본 생성
+        LinearLayout viewLayout = (LinearLayout) view;
+        View iconView = viewLayout.getChildAt(0);
+        TextView textView = (TextView) viewLayout.getChildAt(1);
+        View copiedView = makeButtonView(iconView.getBackground(), String.valueOf(textView.getText()));
+        // 최상위 레이아웃으로 보내고 위치
+        FrameLayout totalLayout = (FrameLayout) findViewById(R.id.totalLayout);
+        totalLayout.addView(copiedView);
+        copiedView.setY(300);
+        copiedView.setX(300);
+    }
+
+    /**
+     * 각 버튼뷰를 생성
+     */
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    private View makeButtonView(Drawable background, String textData) {
+        // 각 버튼의 높이
+        float buttonHeight = convertDpToPixel(50);
+        // 각 텍스트의 높이
+        float textHeight = convertDpToPixel(15);
+        // 각 버튼 뷰 레이아웃 파라메터
+        LinearLayout.LayoutParams buttonViewParams = new LinearLayout.LayoutParams((int) convertDpToPixel(65),
+                (int) convertDpToPixel(65));
+
+
+        // 각 버튼 레이아웃 파라메터
+        ViewGroup.LayoutParams iconParams = new ViewGroup.LayoutParams((int) buttonHeight,
+                (int) buttonHeight);
+        // 각 텍스트 파라메터
+        ViewGroup.LayoutParams textParams = new ViewGroup.LayoutParams((int) buttonHeight,
+                (int) textHeight);
+
+            // 버튼뷰 설정
+            LinearLayout buttonView = new LinearLayout(this);
+            buttonView.setOrientation(LinearLayout.VERTICAL);
+            buttonView.setGravity(Gravity.CENTER);
+            buttonView.setLayoutParams(buttonViewParams);
+            // 아이콘 뷰 설정
+            View iconView = new View(this);
+
+//            iconView.setBackgroundResource(findIdByFileName(iconNameMap.get(textData), this));
+
+            iconView.setBackground(background);
+            iconView.setLayoutParams(iconParams);
+            // 텍스트 뷰 설정
+            TextView textView = new TextView(this);
+            textView.setText(textData);
+            textView.setGravity(Gravity.CENTER);
+            textView.setLayoutParams(textParams);
+            // 태그첨부
+            buttonView.setTag(textData);
+            // 추가
+            buttonView.addView(iconView);
+            buttonView.addView(textView);
+
+            return buttonView;
     }
 
     // 디피를 픽셀로 변환
