@@ -29,6 +29,7 @@ public class MainActivity extends AppCompatActivity {
     private float dY;                               // 드래그 시의 Y좌표
     private int lastAction;
     private View copiedView;                        // 드래그를 시작할 때 임시로 저장 해놓는 뷰
+    private FrameLayout totalLayout;                // 최상위 프레임 레이아웃
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,6 +74,9 @@ public class MainActivity extends AppCompatActivity {
 
         initButtonPanel(R.id.buttonPanel, testList);
         initButtonPanel(R.id.buttonPanel2, testList2);
+
+        // 전체 레이아웃 설정
+        totalLayout = (FrameLayout) findViewById(R.id.totalLayout);
     }
 
     /**
@@ -160,6 +164,8 @@ public class MainActivity extends AppCompatActivity {
 
         // 드래그 이벤트 설정
         setDragEvent(R.id.buttonPanel);
+        setDragEvent(R.id.buttonPanel2);
+
     }
 
 
@@ -191,8 +197,7 @@ public class MainActivity extends AppCompatActivity {
                             break;
 
                         case MotionEvent.ACTION_UP:
-                            if (lastAction == MotionEvent.ACTION_DOWN)
-                                Toast.makeText(MainActivity.this, "Clicked!", Toast.LENGTH_SHORT).show();
+                            totalLayout.removeView(copiedView);
                             break;
 
                         default:
@@ -215,6 +220,7 @@ public class MainActivity extends AppCompatActivity {
         TextView textView = (TextView) viewLayout.getChildAt(1);
         copiedView = makeButtonView(iconView.getBackground(), String.valueOf(textView.getText()),
                 viewLayout.getWidth(), viewLayout.getHeight());
+        copiedView.setAlpha(0.7f);
         // 최상위 레이아웃으로 보내고 위치
         FrameLayout totalLayout = (FrameLayout) findViewById(R.id.totalLayout);
         totalLayout.addView(copiedView);
