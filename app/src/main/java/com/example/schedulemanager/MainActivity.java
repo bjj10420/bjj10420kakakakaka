@@ -144,6 +144,9 @@ public class MainActivity extends AppCompatActivity {
             // 추가
             buttonView.addView(iconView);
             buttonView.addView(textView);
+
+
+
             buttonPanel.addView(buttonView);
 
             //TODO 테스트용 코드
@@ -173,6 +176,7 @@ public class MainActivity extends AppCompatActivity {
                     Log.d("태그확인", String.valueOf(view.getTag()));
                     switch (event.getActionMasked()) {
                         case MotionEvent.ACTION_DOWN:
+
                             dX = view.getX() - event.getRawX();
                             dY = view.getY() - event.getRawY();
                             lastAction = MotionEvent.ACTION_DOWN;
