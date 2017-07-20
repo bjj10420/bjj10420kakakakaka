@@ -161,11 +161,9 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initEvent() {
-
         // 드래그 이벤트 설정
         setDragEvent(R.id.buttonPanel);
         setDragEvent(R.id.buttonPanel2);
-
     }
 
 
@@ -174,7 +172,7 @@ public class MainActivity extends AppCompatActivity {
      * 해당 패널내의 자식 아이콘들의 드래그 이벤트를 설정
      * @param buttonPanelId
      */
-    private void setDragEvent(int buttonPanelId) {
+    private void setDragEvent(final int buttonPanelId) {
         LinearLayout buttonPanel = (LinearLayout) findViewById(buttonPanelId);
         for(int i = 0; i < buttonPanel.getChildCount(); i++){
             View buttonView = buttonPanel.getChildAt(i);
@@ -184,17 +182,28 @@ public class MainActivity extends AppCompatActivity {
                     Log.d("태그확인", String.valueOf(view.getTag()));
                     switch (event.getActionMasked()) {
                         case MotionEvent.ACTION_DOWN:
+                            totalLayout.removeView(copiedView);
                             hoverView(view);
                             dX = view.getX() - event.getRawX();
-                            dY = view.getY() - event.getRawY();
-                            lastAction = MotionEvent.ACTION_DOWN;
+                            dY = 0;
+                            if(buttonPanelId == R.id.buttonPanel)
+                                dY = view.getY() - event.getRawY();
+                            else
+                            //TODO 일단 Y값을 고정값으로 맞춰주었지만 수정해야함(원인 불명)
+                                dY = view.getY() - event.getRawY() + 2000;
+                            Log.d("dY값 체크", "dY = " + dY);
                             break;
 
                         case MotionEvent.ACTION_MOVE:
+                            Log.d("y좌표 체크", "rawY = " + event.getRawY() +", " + "dY = " + dY);
+                            Log.d("y값 합산 체크", "yValue = " + (event.getRawY() + dY));
+                            if(copiedView.getVisibility() == View.GONE){
+                                copiedView.setAlpha(0.7f);
+                                copiedView.setVisibility(View.VISIBLE);
+                            }
                             copiedView.setY(event.getRawY() + dY);
                             copiedView.setX(event.getRawX() + dX);
-                            lastAction = MotionEvent.ACTION_MOVE;
-                            break;
+                             break;
 
                         case MotionEvent.ACTION_UP:
                             totalLayout.removeView(copiedView);
@@ -220,11 +229,9 @@ public class MainActivity extends AppCompatActivity {
         TextView textView = (TextView) viewLayout.getChildAt(1);
         copiedView = makeButtonView(iconView.getBackground(), String.valueOf(textView.getText()),
                 viewLayout.getWidth(), viewLayout.getHeight());
-        copiedView.setAlpha(0.7f);
-        // 최상위 레이아웃으로 보내고 위치
-        FrameLayout totalLayout = (FrameLayout) findViewById(R.id.totalLayout);
+        copiedView.setVisibility(View.GONE);
+        // 최상위 레이아웃으로 보냄
         totalLayout.addView(copiedView);
-
     }
 
     /**
