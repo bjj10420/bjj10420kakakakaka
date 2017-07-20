@@ -25,9 +25,10 @@ public class MainActivity extends AppCompatActivity {
 
     private HashMap<String, String> iconNameMap;    // 해당하는 텍스트에 매칭시키는 아이콘명이 저장되는 맵
     private View.OnTouchListener touchListener;     // 드래그 터치 리스너
-    private float dX;
-    private float dY;
+    private float dX;                               // 드래그 시의 X좌표
+    private float dY;                               // 드래그 시의 Y좌표
     private int lastAction;
+    private View copiedView;                        // 드래그를 시작할 때 임시로 저장 해놓는 뷰
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -184,8 +185,8 @@ public class MainActivity extends AppCompatActivity {
                             break;
 
                         case MotionEvent.ACTION_MOVE:
-                            view.setY(event.getRawY() + dY);
-                            view.setX(event.getRawX() + dX);
+                            copiedView.setY(event.getRawY() + dY);
+                            copiedView.setX(event.getRawX() + dX);
                             lastAction = MotionEvent.ACTION_MOVE;
                             break;
 
@@ -197,7 +198,7 @@ public class MainActivity extends AppCompatActivity {
                         default:
                             return false;
                     }
-                    return false;
+                    return true;
                 }
             });
         }
@@ -212,27 +213,26 @@ public class MainActivity extends AppCompatActivity {
         LinearLayout viewLayout = (LinearLayout) view;
         View iconView = viewLayout.getChildAt(0);
         TextView textView = (TextView) viewLayout.getChildAt(1);
-        View copiedView = makeButtonView(iconView.getBackground(), String.valueOf(textView.getText()));
+        copiedView = makeButtonView(iconView.getBackground(), String.valueOf(textView.getText()),
+                viewLayout.getWidth(), viewLayout.getHeight());
         // 최상위 레이아웃으로 보내고 위치
         FrameLayout totalLayout = (FrameLayout) findViewById(R.id.totalLayout);
         totalLayout.addView(copiedView);
-        copiedView.setY(300);
-        copiedView.setX(300);
+
     }
 
     /**
      * 각 버튼뷰를 생성
      */
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    private View makeButtonView(Drawable background, String textData) {
+    private View makeButtonView(Drawable background, String textData, int width, int height) {
         // 각 버튼의 높이
         float buttonHeight = convertDpToPixel(50);
         // 각 텍스트의 높이
         float textHeight = convertDpToPixel(15);
         // 각 버튼 뷰 레이아웃 파라메터
-        LinearLayout.LayoutParams buttonViewParams = new LinearLayout.LayoutParams((int) convertDpToPixel(65),
-                (int) convertDpToPixel(65));
-
+        LinearLayout.LayoutParams buttonViewParams = new LinearLayout.LayoutParams(width,
+                height);
 
         // 각 버튼 레이아웃 파라메터
         ViewGroup.LayoutParams iconParams = new ViewGroup.LayoutParams((int) buttonHeight,
