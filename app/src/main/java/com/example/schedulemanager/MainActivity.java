@@ -3,6 +3,7 @@ package com.example.schedulemanager;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.v7.app.AppCompatActivity;
@@ -15,6 +16,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -29,7 +31,8 @@ public class MainActivity extends AppCompatActivity {
     private float dY;                               // 드래그 시의 Y좌표
     private int lastAction;
     private View copiedView;                        // 드래그를 시작할 때 임시로 저장 해놓는 뷰
-    private FrameLayout totalLayout;                // 최상위 프레임 레이아웃
+    private RelativeLayout totalLayout;                // 최상위 프레임 레이아웃
+    private View centerIcon;                        // 중앙 아이콘 뷰
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -76,7 +79,9 @@ public class MainActivity extends AppCompatActivity {
         initButtonPanel(R.id.buttonPanel2, testList2);
 
         // 전체 레이아웃 설정
-        totalLayout = (FrameLayout) findViewById(R.id.totalLayout);
+        totalLayout = (RelativeLayout) findViewById(R.id.totalLayout);
+        // 중앙의 스케쥴 아이콘
+        centerIcon = findViewById(R.id.centerIcon);
     }
 
     /**
@@ -118,7 +123,7 @@ public class MainActivity extends AppCompatActivity {
             // 아이콘 뷰 설정
             View iconView = new View(this);
 
-//            iconView.setBackgroundResource(findIdByFileName(iconNameMap.get(textData), this));
+            // iconView.setBackgroundResource(findIdByFileName(iconNameMap.get(textData), this));
 
             //TODO 테스트용 코드
                 switch(count) {
@@ -166,8 +171,6 @@ public class MainActivity extends AppCompatActivity {
         setDragEvent(R.id.buttonPanel2);
     }
 
-
-
     /**
      * 해당 패널내의 자식 아이콘들의 드래그 이벤트를 설정
      * @param buttonPanelId
@@ -203,9 +206,10 @@ public class MainActivity extends AppCompatActivity {
                             }
                             copiedView.setY(event.getRawY() + dY);
                             copiedView.setX(event.getRawX() + dX);
-                             break;
+                            break;
 
                         case MotionEvent.ACTION_UP:
+                            Log.d("체크확인", "충돌 : " + checkCollision(centerIcon, copiedView));
                             totalLayout.removeView(copiedView);
                             break;
 
@@ -262,7 +266,7 @@ public class MainActivity extends AppCompatActivity {
             // 아이콘 뷰 설정
             View iconView = new View(this);
 
-//            iconView.setBackgroundResource(findIdByFileName(iconNameMap.get(textData), this));
+//           iconView.setBackgroundResource(findIdByFileName(iconNameMap.get(textData), this));
 
             iconView.setBackground(background);
             iconView.setLayoutParams(iconParams);
@@ -292,5 +296,32 @@ public class MainActivity extends AppCompatActivity {
         Resources res = mContext.getResources();
         int id = res.getIdentifier(name, "id", mContext.getPackageName());
         return id;
+    }
+
+    /**
+     * 두 뷰의 충돌 판정을 체크
+     * @param v1
+     * @param v2
+     * @return
+     */
+    public boolean checkCollision(View v1,View v2) {
+        Rect R1=new Rect(v1.getLeft(), v1.getTop(), v1.getRight(), v1.getBottom());
+        Log.d("getLeft = ", String.valueOf(v1.getLeft()));
+        Log.d("getTop = ", String.valueOf(v1.getTop()));
+        Log.d("getRight = ", String.valueOf(v1.getRight()));
+        Log.d("getBottom = ", String.valueOf(v1.getBottom()));
+
+        Rect R2=new Rect((int)v2.getTranslationX(), (int)v2.getTranslationY(), (int)v2.getTranslationX() + v2.getWidth(), (int)v2.getTranslationY() + v2.getHeight());
+        Log.d("getLeft2 = ", String.valueOf(v2.getLeft()));
+        Log.d("getTop2 = ", String.valueOf(v2.getTop()));
+        Log.d("getRight2 = ", String.valueOf(v2.getRight()));
+        Log.d("getBottom2 = ", String.valueOf(v2.getBottom()));
+
+        Log.d("getTranslationX = ", String.valueOf(v2.getTranslationX()));
+        Log.d("getTranslationY = ", String.valueOf(v2.getTranslationY()));
+
+        copiedView.getTranslationX();
+
+        return R1.intersect(R2);
     }
 }
