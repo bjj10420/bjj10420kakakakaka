@@ -1,8 +1,11 @@
 package com.example.schedulemanager;
 
+import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
@@ -33,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
     private View copiedView;                        // 드래그를 시작할 때 임시로 저장 해놓는 뷰
     private RelativeLayout totalLayout;                // 최상위 프레임 레이아웃
     private View centerIcon;                        // 중앙 아이콘 뷰
+    private Drawable originalBackground;            // 중앙 아이콘 배경 원본
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -82,6 +86,18 @@ public class MainActivity extends AppCompatActivity {
         totalLayout = (RelativeLayout) findViewById(R.id.totalLayout);
         // 중앙의 스케쥴 아이콘
         centerIcon = findViewById(R.id.centerIcon);
+        // 중앙의 스케쥴 아이콘 원본 저장
+        originalBackground = setOriginalIcon();
+    }
+
+    /**
+     * 초기 아이콘의 백그라운드 저장
+     */
+    private Drawable setOriginalIcon() {
+        Drawable centerIconDrawable = null;
+        Resources res = getResources();
+        centerIconDrawable = res.getDrawable(R.drawable.schedule_icon);
+        return centerIconDrawable;
     }
 
     /**
@@ -206,10 +222,14 @@ public class MainActivity extends AppCompatActivity {
                             }
                             copiedView.setY(event.getRawY() + dY);
                             copiedView.setX(event.getRawX() + dX);
+                            Log.d("체크확인", "충돌 : " + checkCollision(centerIcon, copiedView));
+                            changeCenterIconColor(checkCollision(centerIcon, copiedView) ? true : false);
+
                             break;
 
                         case MotionEvent.ACTION_UP:
-                            Log.d("체크확인", "충돌 : " + checkCollision(centerIcon, copiedView));
+//                            if(checkCollision(centerIcon, copiedView))
+                            changeCenterIconColor(false);
                             totalLayout.removeView(copiedView);
                             break;
 
@@ -306,22 +326,22 @@ public class MainActivity extends AppCompatActivity {
      */
     public boolean checkCollision(View v1,View v2) {
         Rect R1=new Rect(v1.getLeft(), v1.getTop(), v1.getRight(), v1.getBottom());
-        Log.d("getLeft = ", String.valueOf(v1.getLeft()));
-        Log.d("getTop = ", String.valueOf(v1.getTop()));
-        Log.d("getRight = ", String.valueOf(v1.getRight()));
-        Log.d("getBottom = ", String.valueOf(v1.getBottom()));
-
         Rect R2=new Rect((int)v2.getTranslationX(), (int)v2.getTranslationY(), (int)v2.getTranslationX() + v2.getWidth(), (int)v2.getTranslationY() + v2.getHeight());
-        Log.d("getLeft2 = ", String.valueOf(v2.getLeft()));
-        Log.d("getTop2 = ", String.valueOf(v2.getTop()));
-        Log.d("getRight2 = ", String.valueOf(v2.getRight()));
-        Log.d("getBottom2 = ", String.valueOf(v2.getBottom()));
-
-        Log.d("getTranslationX = ", String.valueOf(v2.getTranslationX()));
-        Log.d("getTranslationY = ", String.valueOf(v2.getTranslationY()));
-
-        copiedView.getTranslationX();
-
         return R1.intersect(R2);
+    }
+
+    /**
+     * 중앙 아이콘의 배경색 변경
+     */
+    @SuppressLint("NewApi")
+    public void changeCenterIconColor(boolean isTicked){
+        Drawable tickedIconDrawable = null;
+        Resources res = getResources();
+        tickedIconDrawable = res.getDrawable(R.drawable.schedule_icon);
+        if(isTicked)
+        tickedIconDrawable.setColorFilter(Color.parseColor("#4bf442"), PorterDuff.Mode.SRC_IN);
+        else
+        tickedIconDrawable.clearColorFilter();
+        this.centerIcon.setBackground(tickedIconDrawable);
     }
 }
