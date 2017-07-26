@@ -5,7 +5,6 @@
 
     <RelativeLayout xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/totalLayout"
-
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:background="#ffffff"
@@ -21,6 +20,14 @@
             android:layout_height="50dp"
             android:layout_centerInParent="true"
             android:background="@drawable/schedule_icon" />
+
+        <include
+            android:id="@+id/calendarLayout"
+            layout="@layout/calendar_layout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginBottom="65dp"
+            android:layout_marginTop="65dp"></include>
 
         <LinearLayout
             android:id="@+id/buttonPanel"

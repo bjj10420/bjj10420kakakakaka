@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <GridView
+        android:id="@+id/timetable_param_setter_calendar_gridview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:listSelector="@drawable/rail_selector_calendar_item"
+        android:horizontalSpacing="0dp"
+        android:numColumns="7" />
+
+</LinearLayout>
