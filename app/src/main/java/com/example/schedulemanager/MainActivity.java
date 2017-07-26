@@ -23,8 +23,13 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -36,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
     private View copiedView;                        // 드래그를 시작할 때 임시로 저장 해놓는 뷰
     private RelativeLayout totalLayout;                // 최상위 프레임 레이아웃
     private View centerIcon;                        // 중앙 아이콘 뷰
-    private Drawable originalBackground;            // 중앙 아이콘 배경 원본
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,6 +58,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initData() {
+         DBHelper dbHelper = new DBHelper(this);
         /**
          * 1. favorite테이블에서 메인에 등록된 버튼들의 정보를 로딩
          * 2. hashMap에다 해당 text를 키로 하여 데이터에 아이콘명을 추가
@@ -86,18 +91,7 @@ public class MainActivity extends AppCompatActivity {
         totalLayout = (RelativeLayout) findViewById(R.id.totalLayout);
         // 중앙의 스케쥴 아이콘
         centerIcon = findViewById(R.id.centerIcon);
-        // 중앙의 스케쥴 아이콘 원본 저장
-        originalBackground = setOriginalIcon();
-    }
 
-    /**
-     * 초기 아이콘의 백그라운드 저장
-     */
-    private Drawable setOriginalIcon() {
-        Drawable centerIconDrawable = null;
-        Resources res = getResources();
-        centerIconDrawable = res.getDrawable(R.drawable.schedule_icon);
-        return centerIconDrawable;
     }
 
     /**
@@ -223,8 +217,9 @@ public class MainActivity extends AppCompatActivity {
                             copiedView.setY(event.getRawY() + dY);
                             copiedView.setX(event.getRawX() + dX);
                             Log.d("체크확인", "충돌 : " + checkCollision(centerIcon, copiedView));
-                            changeCenterIconColor(checkCollision(centerIcon, copiedView) ? true : false);
-
+                            boolean isCollided = checkCollision(centerIcon, copiedView);
+                            changeCenterIconColor(isCollided);
+                            if(isCollided) addScheduleForToday(String.valueOf(view.getTag()));
                             break;
 
                         case MotionEvent.ACTION_UP:
@@ -240,6 +235,34 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    /**
+     * 스케쥴 버튼을 드래그하여 중앙 아이콘으로 가져갔을때 추가
+     * @param tagName
+     */
+    private void addScheduleForToday(String tagName) {
+        // 오늘 날짜
+        Date dateOfToday = new Date();
+        DateFormat dateFormatter = new SimpleDateFormat("yyyyMMdd");
+        String dateString = dateFormatter.format(dateOfToday);
+        // 넘버
+        int number = DBHelper.dbHelper.getScheduleCountForToday(dateString);
+        // 이름
+        String activityName = tagName;
+
+        // 삽입할 스케쥴 데이터 객체 생성
+        Schedule newSchedule = new Schedule();
+        newSchedule.setNo(number);
+        newSchedule.setDate(dateString);
+        newSchedule.setActivityName(activityName);
+        //TODO 나머지 order, time, memo는 일단 공란
+        newSchedule.setOrder(0);
+        newSchedule.setTime("");
+        newSchedule.setMemo("");
+
+        // DB에 삽입
+        DBHelper.dbHelper.insertSchedule(newSchedule);
     }
 
     /**
