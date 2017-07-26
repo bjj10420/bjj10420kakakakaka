@@ -11,7 +11,7 @@
         android:layout_gravity="bottom"
         android:background="#ffffff"
         android:orientation="vertical"
-        android:visibility="invisible">
+        android:visibility="visible">
 
         <View
             android:layout_width="match_parent"

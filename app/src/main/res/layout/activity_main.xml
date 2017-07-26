@@ -14,13 +14,6 @@
         android:paddingTop="@dimen/activity_vertical_margin"
         tools:context="com.example.schedulemanager.MainActivity">
 
-        <View
-            android:id="@+id/centerIcon"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_centerInParent="true"
-            android:background="@drawable/schedule_icon" />
-
         <include
             android:id="@+id/calendarLayout"
             layout="@layout/calendar_layout"
@@ -28,6 +21,14 @@
             android:layout_height="match_parent"
             android:layout_marginBottom="65dp"
             android:layout_marginTop="65dp"></include>
+
+        <View
+            android:id="@+id/centerIcon"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:background="@drawable/schedule_icon" />
+
 
         <LinearLayout
             android:id="@+id/buttonPanel"

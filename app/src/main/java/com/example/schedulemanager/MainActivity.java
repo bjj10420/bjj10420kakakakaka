@@ -7,8 +7,10 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.DisplayMetrics;
@@ -17,11 +19,11 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-import android.widget.Toast;
+
+import com.example.schedulemanager.calendar.BPLineCalendarPagerAdapter;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -39,8 +41,9 @@ public class MainActivity extends AppCompatActivity {
     private float dY;                               // 드래그 시의 Y좌표
     private int lastAction;
     private View copiedView;                        // 드래그를 시작할 때 임시로 저장 해놓는 뷰
-    private RelativeLayout totalLayout;                // 최상위 프레임 레이아웃
+    private RelativeLayout totalLayout;             // 최상위 프레임 레이아웃
     private View centerIcon;                        // 중앙 아이콘 뷰
+    private Typeface typeface;                      // 글꼴
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +58,28 @@ public class MainActivity extends AppCompatActivity {
         initData();
         initUI();
         initEvent();
+        initCalndar();
+    }
+
+    /**
+     * 달력 셋팅, 초기화
+     */
+    private void initCalndar() {
+        BPLineCalendarPagerAdapter calendarAdapter =
+                new BPLineCalendarPagerAdapter(this, typeface);
+        ViewPager calendarPager;
+
+        // 달력 구성 어댑터 생성 및 셋팅
+        calendarAdapter.initCalendar();
+        calendarAdapter.notifyDataSetChanged();
+        calendarPager = (ViewPager) findViewById(R.id.timetable_param_setter_calendar_viewpager);
+        calendarPager.setAdapter(calendarAdapter);
+
+        // 달력에 연도, 월 표시
+        calendarPager.setCurrentItem(0);
+        TextView calendarDateText =  (TextView) findViewById(R.id.timetable_param_setter_calendar_date);
+        calendarDateText.setTypeface(typeface);
+        calendarDateText.setText(calendarAdapter.getDateString(0));
     }
 
     private void initData() {
@@ -67,6 +92,8 @@ public class MainActivity extends AppCompatActivity {
         //TODO DB를 구축하면 아이콘 네임맵으로 저장 시켜줘야 함
         // TEST용으로
 //        iconNameMap.put("")
+        // 글꼴 로딩
+        typeface = getApplicationFont();
     }
 
     private void initUI() {
@@ -368,5 +395,15 @@ public class MainActivity extends AppCompatActivity {
         else
         tickedIconDrawable.clearColorFilter();
         this.centerIcon.setBackground(tickedIconDrawable);
+    }
+
+    /**
+     * 지정 글꼴 리턴
+     * @return
+     */
+    public Typeface getApplicationFont() {
+        Typeface mTypeface = null;
+        mTypeface = Typeface.createFromAsset(getAssets(), "nanumgothic.ttf");
+        return mTypeface;
     }
 }
