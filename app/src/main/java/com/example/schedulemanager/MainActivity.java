@@ -219,11 +219,12 @@ public class MainActivity extends AppCompatActivity {
                             Log.d("체크확인", "충돌 : " + checkCollision(centerIcon, copiedView));
                             boolean isCollided = checkCollision(centerIcon, copiedView);
                             changeCenterIconColor(isCollided);
-                            if(isCollided) addScheduleForToday(String.valueOf(view.getTag()));
+//
                             break;
 
                         case MotionEvent.ACTION_UP:
 //                            if(checkCollision(centerIcon, copiedView))
+                            if(checkCollision(centerIcon, copiedView)) addScheduleForToday(String.valueOf(view.getTag()));
                             changeCenterIconColor(false);
                             totalLayout.removeView(copiedView);
                             break;
@@ -262,7 +263,8 @@ public class MainActivity extends AppCompatActivity {
         newSchedule.setMemo("");
 
         // DB에 삽입
-        DBHelper.dbHelper.insertSchedule(newSchedule);
+        long resultNum = DBHelper.dbHelper.insertSchedule(newSchedule);
+        Log.d("insert 결과체크", String.valueOf(resultNum) + "개 삽입 되었습니다.");
     }
 
     /**
