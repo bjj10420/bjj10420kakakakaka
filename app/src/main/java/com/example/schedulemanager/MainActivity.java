@@ -219,7 +219,7 @@ public class MainActivity extends AppCompatActivity {
                             Log.d("체크확인", "충돌 : " + checkCollision(centerIcon, copiedView));
                             boolean isCollided = checkCollision(centerIcon, copiedView);
                             changeCenterIconColor(isCollided);
-//
+
                             break;
 
                         case MotionEvent.ACTION_UP:
