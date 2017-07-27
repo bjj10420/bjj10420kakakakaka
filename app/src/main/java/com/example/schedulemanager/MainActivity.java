@@ -28,10 +28,8 @@ import com.example.schedulemanager.calendar.BPLineCalendarPagerAdapter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -45,6 +43,7 @@ public class MainActivity extends AppCompatActivity {
     private View centerIcon;                        // 중앙 아이콘 뷰
     private Typeface typeface;                      // 글꼴
     private View calendarLayout;                    // 메인 캘린더 레이아웃
+    private ViewPager calendarPager;                // 메인 캘린더 뷰 페이져 객체
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -67,7 +66,6 @@ public class MainActivity extends AppCompatActivity {
     private void initCalndar() {
         BPLineCalendarPagerAdapter calendarAdapter =
                 new BPLineCalendarPagerAdapter(this, typeface);
-        ViewPager calendarPager;
 
         // 달력 구성 어댑터 생성 및 셋팅
         calendarAdapter.initCalendar();
@@ -212,6 +210,36 @@ public class MainActivity extends AppCompatActivity {
         setCenterIconClickEvent();
         // 뒤로가기 버튼 클릭 이벤트 설정
         setBackBtnClickEvent();
+        // 달력 내 사용 버튼 이벤트 설정( 이전, 다음 )
+        setCalendarBtnEvent(R.id.timetable_param_setter_calendar_prev);
+        setCalendarBtnEvent(R.id.timetable_param_setter_calendar_next);
+    }
+
+    private void setCalendarBtnEvent(int viewId) {
+        // 달력 내 사용 버튼
+        View calendarBtn =  findViewById(viewId);
+
+        calendarBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                pageCalendar(v);
+            }
+        });
+    }
+
+    /**
+     * 메인 캘린더의 이전, 다음 버튼 클릭시 페이징
+     * @param v
+     */
+    private void pageCalendar(View v) {
+        int currentPage = -1;
+        int keyValue = v.getId() == R.id.timetable_param_setter_calendar_prev ? 0 : 1;
+
+        currentPage = calendarPager.getCurrentItem();
+        if(currentPage != keyValue)
+        {
+            calendarPager.setCurrentItem(keyValue, true);
+        }
     }
 
     private void setBackBtnClickEvent() {
