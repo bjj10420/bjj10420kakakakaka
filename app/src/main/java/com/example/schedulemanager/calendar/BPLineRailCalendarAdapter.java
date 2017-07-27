@@ -260,12 +260,13 @@ public class BPLineRailCalendarAdapter extends BaseAdapter
 						
 						if((position < currentItemIdx) || (visibleLastItemIdx >= 0 && visibleLastItemIdx < position))
 						{	
+							// TODO 이번 달의 오늘 이전의 모든 날을 활성화시켜주기 위해 주석 처리
 							// 오늘보다 작은 날짜의 경우는 반투명하게
 							// 오늘보다 한 달을 넘어가는 경우도 반투명하게 처리한다.
-							opacity = "1a";
+							opacity = "";
 							
 							// 터치가 안 되게 막는다.
-							convertView.setOnTouchListener(nullTouchListener);
+//							convertView.setOnTouchListener(nullTouchListener);
 						}
 						else
 						{
