@@ -44,13 +44,13 @@ public class MainActivity extends AppCompatActivity {
     private RelativeLayout totalLayout;             // 최상위 프레임 레이아웃
     private View centerIcon;                        // 중앙 아이콘 뷰
     private Typeface typeface;                      // 글꼴
+    private View calendarLayout;                    // 메인 캘린더 레이아웃
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // 초기화
         init();
     }
 
@@ -118,6 +118,8 @@ public class MainActivity extends AppCompatActivity {
         totalLayout = (RelativeLayout) findViewById(R.id.totalLayout);
         // 중앙의 스케쥴 아이콘
         centerIcon = findViewById(R.id.centerIcon);
+        // 캘린더 레이아웃 설정
+        calendarLayout = findViewById(R.id.calendarLayout);
 
     }
 
@@ -206,6 +208,19 @@ public class MainActivity extends AppCompatActivity {
         // 드래그 이벤트 설정
         setDragEvent(R.id.buttonPanel);
         setDragEvent(R.id.buttonPanel2);
+        // 중앙 아이콘 클릭 이벤트 설정
+        setCenterIconClickEvent();
+    }
+
+    private void setCenterIconClickEvent() {
+        centerIcon.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                calendarLayout.setVisibility(View.VISIBLE);
+                // 중앙 아이콘 비표시
+                v.setVisibility(View.GONE);
+            }
+        });
     }
 
     /**
