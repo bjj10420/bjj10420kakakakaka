@@ -39,6 +39,8 @@ public class BPLineCalendarPagerAdapter extends PagerAdapter
 	private Calendar						nextCal;
 	private List<Integer>					list1;
 	private List<Integer>					list2;
+	private List<Integer>					list3;
+	private List<Integer>					list4;
 	private BPLineRailCalendarAdapter[] 	adapters;
 	private SparseArray<View> 				views;
 	
@@ -64,11 +66,13 @@ public class BPLineCalendarPagerAdapter extends PagerAdapter
 			thisCal = Calendar.getInstance(Locale.getDefault());
 
 			
-			adapters = new BPLineRailCalendarAdapter[2];
+			adapters = new BPLineRailCalendarAdapter[4];
 			views = new SparseArray<View>();
 			list1 = new ArrayList<Integer>();
 			list2 = new ArrayList<Integer>();
-			
+			list3 = new ArrayList<Integer>();
+			list4 = new ArrayList<Integer>();
+
 			formatter = new SimpleDateFormat("yyyy.  M", Locale.getDefault());
 		}
 		catch (Exception e)
@@ -143,7 +147,7 @@ public class BPLineCalendarPagerAdapter extends PagerAdapter
 	@Override
 	public int getCount()
 	{
-		return 2;	// 이번달과 다음달만 조회 가능
+		return 4;	// 이번달과 다음달만 조회 가능
 	}
 
 	@Override
@@ -264,14 +268,26 @@ public class BPLineCalendarPagerAdapter extends PagerAdapter
 				list = list1;
 				adapter = adapters[0];
 			}
+
 			else
 			{
 				base = Calendar.getInstance(Locale.getDefault());
 				base.set(year, month, date);
-				base.add(Calendar.MONTH, 1);
-				list2.clear();
-				list = list2;
-				adapter = adapters[1];
+				base.add(Calendar.MONTH, page);
+				if(page == 1) {
+					list2.clear();
+					list = list2;
+				}
+				if(page == 2) {
+					list3.clear();
+					list = list3;
+				}
+				if(page == 3) {
+					list4.clear();
+					list = list4;
+				}
+
+				adapter = adapters[page];
 				
 				next = Calendar.getInstance(Locale.getDefault());
 				next.set(year, month, date);
