@@ -210,6 +210,20 @@ public class MainActivity extends AppCompatActivity {
         setDragEvent(R.id.buttonPanel2);
         // 중앙 아이콘 클릭 이벤트 설정
         setCenterIconClickEvent();
+        // 뒤로가기 버튼 클릭 이벤트 설정
+        setBackBtnClickEvent();
+    }
+
+    private void setBackBtnClickEvent() {
+        View backBtn = findViewById(R.id.back_btn);
+        backBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // 중앙 뷰 복구
+                centerIcon.setVisibility(View.VISIBLE);
+                calendarLayout.setVisibility(View.GONE);
+            }
+        });
     }
 
     private void setCenterIconClickEvent() {

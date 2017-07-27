@@ -7,7 +7,7 @@
     <LinearLayout
         android:id="@+id/calendar_wrapper"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="bottom"
         android:background="#ffffff"
         android:orientation="vertical"
@@ -84,7 +84,8 @@
                 android:background="#ffffff"
                 android:orientation="vertical"
                 android:paddingLeft="16dp"
-                android:paddingRight="16dp">
+                android:paddingRight="16dp"
+                android:visibility="gone">
 
                 <View
                     android:layout_width="match_parent"
@@ -131,13 +132,13 @@
                 android:visibility="gone" />
 
             <TextView
-                android:id="@+id/ok_btn"
+                android:id="@+id/back_btn"
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:background="@drawable/rail_selector_train_type_ok_btn3"
                 android:gravity="center"
-                android:text="현재시간으로 시간표 조회"
+                android:text="뒤로가기"
                 android:textColor="#FFC000"
                 android:textSize="14dp" />
         </LinearLayout>
