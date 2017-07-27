@@ -333,14 +333,15 @@ public class BPLineCalendarPagerAdapter extends PagerAdapter
 				{	// 선택된 아이템이라면 인덱스를 저장한다.
 					selectedItemIdx = list.size()-1;
 				}
-				
-				if(page == 1)
-				{	// 2페이지, 즉 다음달은 오늘에서 +30일까지만 보여준다.
-					if(i == next.get(Calendar.DAY_OF_MONTH))
-					{
-						visibleLastItemIdx = i;
-					}
-				}
+
+
+//				if(page == 1)
+//				{	// 2페이지, 즉 다음달은 오늘에서 +30일까지만 보여준다.
+//					if(i == next.get(Calendar.DAY_OF_MONTH))
+//					{
+//						visibleLastItemIdx = i;
+//					}
+//				}
 			}
 			
 			// 마지막 날의 인덱스를 저장한다.
