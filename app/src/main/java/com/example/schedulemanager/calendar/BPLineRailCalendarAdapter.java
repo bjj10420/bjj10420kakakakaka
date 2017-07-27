@@ -226,7 +226,7 @@ public class BPLineRailCalendarAdapter extends BaseAdapter
 					{	// 그 외의 경우는 배경을 없앤다.
 						convertView.setBackground(null);
 					}
-					
+					//
 					if(position < firstItemIdx || position > lastItemIdx)
 					{	// 전달의 날짜거나, 다음달의 날짜라면 감춘다. 
 						holder.day.setVisibility(View.INVISIBLE);
