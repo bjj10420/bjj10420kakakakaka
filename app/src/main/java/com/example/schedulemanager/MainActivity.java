@@ -65,8 +65,7 @@ public class MainActivity extends AppCompatActivity {
      * 달력 셋팅, 초기화
      */
     private void initCalndar() {
-        final BPLineCalendarPagerAdapter calendarAdapter =
-                new BPLineCalendarPagerAdapter(this, typeface);
+        final BPLineCalendarPagerAdapter calendarAdapter = new BPLineCalendarPagerAdapter(this, typeface);
 
         // 달력 구성 어댑터 생성 및 셋팅
         calendarAdapter.initCalendar();
@@ -78,8 +77,8 @@ public class MainActivity extends AppCompatActivity {
         calendarPager.setCurrentItem(12);
         final TextView calendarDateText =  (TextView) findViewById(R.id.timetable_param_setter_calendar_date);
         calendarDateText.setTypeface(typeface);
-//        calendarDateText.setText(calendarAdapter.getDateString(0));
-ㄴ
+        setCalendarTitleDate(calendarDateText, calendarAdapter, 12);
+
         // 이벤트 리스너 추가
         setPagingEvent(calendarDateText, calendarAdapter);
     }
@@ -92,15 +91,28 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onPageSelected(int position) {
-                // nextCal을 같이 변경
-                calendarAdapter.getNextCal().set(Calendar.MONTH, calendarAdapter.getThisCal().get(Calendar.MONTH) + position);
-                calendarDateText.setText(calendarAdapter.getDateString(position));
+                setCalendarTitleDate(calendarDateText, calendarAdapter, position);
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
             }
         });
+    }
+
+    /**
+     * 캘린더의 상단 날짜 텍스트를 변경
+     * @param calendarDateText
+     * @param calendarAdapter
+     * @param position
+     */
+    private void setCalendarTitleDate(TextView calendarDateText, BPLineCalendarPagerAdapter calendarAdapter, int position) {
+        // nextCal을 같이 변경
+        calendarAdapter.getNextCal().set(calendarAdapter.getThisCal().get(Calendar.YEAR),
+                calendarAdapter.getThisCal().get(Calendar.MONTH) + position,
+                calendarAdapter.getThisCal().get(Calendar.DATE)
+        );
+        calendarDateText.setText(calendarAdapter.getDateString(position));
     }
 
     private void initData() {
