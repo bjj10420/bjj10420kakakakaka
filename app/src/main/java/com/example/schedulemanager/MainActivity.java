@@ -268,13 +268,12 @@ public class MainActivity extends AppCompatActivity {
      */
     private void pageCalendar(View v) {
         int currentPage = -1;
-        int keyValue = v.getId() == R.id.timetable_param_setter_calendar_prev ? 0 : 1;
+
+        int keyValue = v.getId() == R.id.timetable_param_setter_calendar_prev ? -1 : +1;
 
         currentPage = calendarPager.getCurrentItem();
-        if(currentPage != keyValue)
-        {
-            calendarPager.setCurrentItem(keyValue, true);
-        }
+        calendarPager.setCurrentItem(currentPage + keyValue, true);
+
     }
 
     private void setBackBtnClickEvent() {
