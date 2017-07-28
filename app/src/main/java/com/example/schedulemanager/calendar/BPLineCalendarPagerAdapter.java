@@ -66,7 +66,7 @@ public class BPLineCalendarPagerAdapter extends PagerAdapter
 			thisCal = Calendar.getInstance(Locale.getDefault());
 
 			
-			adapters = new BPLineRailCalendarAdapter[4];
+			adapters = new BPLineRailCalendarAdapter[25];
 			views = new SparseArray<View>();
 			list1 = new ArrayList<Integer>();
 			list2 = new ArrayList<Integer>();
@@ -149,7 +149,8 @@ public class BPLineCalendarPagerAdapter extends PagerAdapter
 	@Override
 	public int getCount()
 	{
-		return 4;	// 이번달과 다음달만 조회 가능
+		// 이번 달을 기준으로 1년전부터 1년후 데이터까지 생성 합계 25개
+		return 25;
 	}
 
 	@Override
