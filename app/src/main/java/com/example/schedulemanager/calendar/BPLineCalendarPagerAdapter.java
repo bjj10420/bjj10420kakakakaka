@@ -96,15 +96,17 @@ public class BPLineCalendarPagerAdapter extends PagerAdapter
 	{
 		try
 		{
-			
-			
+
 			/**
 			 * 이번달 달력 객체는 생성자에서 생성 ( NULL 포인트 에러 처리 )
 			 */
 			// 이번달 달력 객체
-			 thisCal = Calendar.getInstance(Locale.getDefault());
-				
-			 
+			thisCal = Calendar.getInstance(Locale.getDefault());
+
+			// 이번달 달력(시작 달력)을 객체를 수정 => -12달
+			// 1년전부터 시작되는 정보이므로
+			thisCal.add(Calendar.MONTH, -12);
+
 			// 다음달 달력 객체
 			nextCal = Calendar.getInstance(Locale.getDefault());
 
