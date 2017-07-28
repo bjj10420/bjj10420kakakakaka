@@ -4,23 +4,25 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <LinearLayout
+    <RelativeLayout
         android:id="@+id/calendar_wrapper"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="bottom"
         android:background="#ffffff"
-        android:orientation="vertical"
         android:visibility="visible">
 
         <View
             android:layout_width="match_parent"
             android:layout_height="10dp"
+            android:layout_alignParentTop="true"
             android:background="#f0f0f0" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="10dp"
             android:background="#f0f0f0"
             android:orientation="vertical"
             android:paddingLeft="8dp"
@@ -106,6 +108,7 @@
             android:id="@+id/btn_layout"
             android:layout_width="match_parent"
             android:layout_height="70dp"
+            android:layout_alignParentBottom="true"
             android:background="#f0f0f0"
             android:orientation="horizontal"
             android:paddingBottom="10dp"
@@ -142,5 +145,5 @@
                 android:textColor="#FFC000"
                 android:textSize="14dp" />
         </LinearLayout>
-    </LinearLayout>
+    </RelativeLayout>
 </LinearLayout>
