@@ -74,7 +74,7 @@ public class MainActivity extends AppCompatActivity {
         calendarPager.setAdapter(calendarAdapter);
 
         // 달력에 연도, 월 표시
-        calendarPager.setCurrentItem(0);
+        calendarPager.setCurrentItem(12);
         TextView calendarDateText =  (TextView) findViewById(R.id.timetable_param_setter_calendar_date);
         calendarDateText.setTypeface(typeface);
         calendarDateText.setText(calendarAdapter.getDateString(0));
