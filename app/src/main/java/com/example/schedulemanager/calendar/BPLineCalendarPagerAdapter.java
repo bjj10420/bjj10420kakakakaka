@@ -631,4 +631,6 @@ public class BPLineCalendarPagerAdapter extends PagerAdapter
 	public String getCurrentDate() {
 		return currentDate;
 	}
+
+	public Calendar getNextCal() { return nextCal; }
 }

@@ -28,6 +28,7 @@ import com.example.schedulemanager.calendar.BPLineCalendarPagerAdapter;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -64,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
      * 달력 셋팅, 초기화
      */
     private void initCalndar() {
-        BPLineCalendarPagerAdapter calendarAdapter =
+        final BPLineCalendarPagerAdapter calendarAdapter =
                 new BPLineCalendarPagerAdapter(this, typeface);
 
         // 달력 구성 어댑터 생성 및 셋팅
@@ -75,9 +76,31 @@ public class MainActivity extends AppCompatActivity {
 
         // 달력에 연도, 월 표시
         calendarPager.setCurrentItem(12);
-        TextView calendarDateText =  (TextView) findViewById(R.id.timetable_param_setter_calendar_date);
+        final TextView calendarDateText =  (TextView) findViewById(R.id.timetable_param_setter_calendar_date);
         calendarDateText.setTypeface(typeface);
-        calendarDateText.setText(calendarAdapter.getDateString(0));
+//        calendarDateText.setText(calendarAdapter.getDateString(0));
+ㄴ
+        // 이벤트 리스너 추가
+        setPagingEvent(calendarDateText, calendarAdapter);
+    }
+
+    private void setPagingEvent(final TextView calendarDateText, final BPLineCalendarPagerAdapter calendarAdapter) {
+        calendarPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                // nextCal을 같이 변경
+                calendarAdapter.getNextCal().set(Calendar.MONTH, calendarAdapter.getThisCal().get(Calendar.MONTH) + position);
+                calendarDateText.setText(calendarAdapter.getDateString(position));
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+            }
+        });
     }
 
     private void initData() {
