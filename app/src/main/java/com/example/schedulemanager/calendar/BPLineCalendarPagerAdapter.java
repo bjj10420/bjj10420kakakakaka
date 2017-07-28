@@ -29,6 +29,7 @@ import java.util.Locale;
  */
 public class BPLineCalendarPagerAdapter extends PagerAdapter
 {
+	private ArrayList<ArrayList<Integer>> 	totalList;
 	private Context							mContext;
 	private Typeface						mTypeface;
 	private LayoutInflater					mInflater;
@@ -64,14 +65,16 @@ public class BPLineCalendarPagerAdapter extends PagerAdapter
 			 * 생성자에서 달력을 생성해준다
 			 */
 			thisCal = Calendar.getInstance(Locale.getDefault());
-
-			
 			adapters = new BPLineRailCalendarAdapter[25];
 			views = new SparseArray<View>();
-			list1 = new ArrayList<Integer>();
-			list2 = new ArrayList<Integer>();
-			list3 = new ArrayList<Integer>();
-			list4 = new ArrayList<Integer>();
+
+			// 모든 숫자리스트를 담는 저장소
+			totalList = new ArrayList<ArrayList<Integer>>();
+
+				for(int i = 0; i < 25; i++) {
+					ArrayList<Integer> numberList = new ArrayList<Integer>();
+					totalList.add(numberList);
+				}
 
 			formatter = new SimpleDateFormat("yyyy.  M", Locale.getDefault());
 		}
@@ -260,6 +263,7 @@ public class BPLineCalendarPagerAdapter extends PagerAdapter
 			int date = thisCal.get(Calendar.DATE);
 			
 			List<Integer> list = null;
+			List<Integer> tempNumberList = null;
 			Calendar base = null;
 			Calendar next = null;
 			BPLineRailCalendarAdapter adapter = null;
@@ -267,8 +271,9 @@ public class BPLineCalendarPagerAdapter extends PagerAdapter
 			if(page == 0)
 			{
 				base = thisCal;
-				list1.clear();
-				list = list1;
+				tempNumberList = totalList.get(0);
+				tempNumberList.clear();
+				list = tempNumberList;
 				adapter = adapters[0];
 			}
 
@@ -277,21 +282,11 @@ public class BPLineCalendarPagerAdapter extends PagerAdapter
 				base = Calendar.getInstance(Locale.getDefault());
 				base.set(year, month, date);
 				base.add(Calendar.MONTH, page);
-				if(page == 1) {
-					list2.clear();
-					list = list2;
-				}
-				if(page == 2) {
-					list3.clear();
-					list = list3;
-				}
-				if(page == 3) {
-					list4.clear();
-					list = list4;
-				}
-
+				tempNumberList = totalList.get(page);
+				tempNumberList.clear();
+				list = tempNumberList;
 				adapter = adapters[page];
-				
+
 				next = Calendar.getInstance(Locale.getDefault());
 				next.set(year, month, date);
 				next.add(Calendar.DAY_OF_MONTH, 30);
