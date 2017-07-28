@@ -337,8 +337,9 @@ public class BPLineCalendarPagerAdapter extends PagerAdapter
 			for(int i = firstDay; i <= lastDay; i++)
 			{
 				list.add(i);
-				
-				if(year == currentYear && month == currentMonth && i == date)
+
+				//TODO 수정이되면서 오늘이 선택되게 할때 고정 페이지(이번 달)와 인덱스로 판단하도록 바꿈 => 테스트 필요
+				if(page == 12 && i == date)
 				{	// 오늘 날짜의 인덱스를 저장한다.
 					currentItemIdx = list.size()-1;
 				}
@@ -359,7 +360,7 @@ public class BPLineCalendarPagerAdapter extends PagerAdapter
 			}
 			
 			// 마지막 날의 인덱스를 저장한다.
-			lastItemIdx = list.size()-1;
+			lastItemIdx = list.size() - 1;
 			
 			if(lastDayOfWeek != Calendar.SATURDAY)
 			{	// 마지막 날이 일요일이 아니다. 달력에 표시될 다음 달의 날짜가 있다.
