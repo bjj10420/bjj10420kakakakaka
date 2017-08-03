@@ -173,12 +173,12 @@ public class MainActivity extends AppCompatActivity {
         // 추가되는 패널 뷰
         LinearLayout buttonPanel = (LinearLayout) findViewById(panelId);
         // 각 버튼의 높이
-        float buttonHeight = convertDpToPixel(50);
+        float buttonHeight = Util.convertDpToPixel(50);
         // 각 텍스트의 높이
-        float textHeight = convertDpToPixel(15);
+        float textHeight = Util.convertDpToPixel(15);
         // 각 버튼 뷰 레이아웃 파라메터
         LinearLayout.LayoutParams buttonViewParams = new LinearLayout.LayoutParams(0,
-                (int) convertDpToPixel(65));
+                (int) Util.convertDpToPixel(65));
         buttonViewParams.weight = 1;
 
         // 각 버튼 레이아웃 파라메터
@@ -339,15 +339,15 @@ public class MainActivity extends AppCompatActivity {
                             }
                             copiedView.setY(event.getRawY() + dY);
                             copiedView.setX(event.getRawX() + dX);
-                            Log.d("체크확인", "충돌 : " + checkCollision(centerIcon, copiedView));
-                            boolean isCollided = checkCollision(centerIcon, copiedView);
+                            Log.d("체크확인", "충돌 : " + Util.checkCollision(centerIcon, copiedView));
+                            boolean isCollided = Util.checkCollision(centerIcon, copiedView);
                             changeCenterIconColor(isCollided);
 
                             break;
 
                         case MotionEvent.ACTION_UP:
 //                            if(checkCollision(centerIcon, copiedView))
-                            if(checkCollision(centerIcon, copiedView)) addScheduleForToday(String.valueOf(view.getTag()));
+                            if(Util.checkCollision(centerIcon, copiedView)) addScheduleForToday(String.valueOf(view.getTag()));
                             changeCenterIconColor(false);
                             totalLayout.removeView(copiedView);
                             break;
@@ -412,9 +412,9 @@ public class MainActivity extends AppCompatActivity {
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private View makeButtonView(Drawable background, String textData, int width, int height) {
         // 각 버튼의 높이
-        float buttonHeight = convertDpToPixel(50);
+        float buttonHeight = Util.convertDpToPixel(50);
         // 각 텍스트의 높이
-        float textHeight = convertDpToPixel(15);
+        float textHeight = Util.convertDpToPixel(15);
         // 각 버튼 뷰 레이아웃 파라메터
         LinearLayout.LayoutParams buttonViewParams = new LinearLayout.LayoutParams(width,
                 height);
@@ -452,31 +452,6 @@ public class MainActivity extends AppCompatActivity {
             return buttonView;
     }
 
-    // 디피를 픽셀로 변환
-    public static float convertDpToPixel(float dp) {
-        DisplayMetrics metrics = Resources.getSystem().getDisplayMetrics();
-        float px = dp * (metrics.densityDpi / 160f);
-        return Math.round(px);
-    }
-
-    // 리소스내의 파일이름을 가지고 아이디를 찾아주는 함수
-    public int findIdByFileName(String name, Context mContext) {
-        Resources res = mContext.getResources();
-        int id = res.getIdentifier(name, "id", mContext.getPackageName());
-        return id;
-    }
-
-    /**
-     * 두 뷰의 충돌 판정을 체크
-     * @param v1
-     * @param v2
-     * @return
-     */
-    public boolean checkCollision(View v1,View v2) {
-        Rect R1=new Rect(v1.getLeft(), v1.getTop(), v1.getRight(), v1.getBottom());
-        Rect R2=new Rect((int)v2.getTranslationX(), (int)v2.getTranslationY(), (int)v2.getTranslationX() + v2.getWidth(), (int)v2.getTranslationY() + v2.getHeight());
-        return R1.intersect(R2);
-    }
 
     /**
      * 중앙 아이콘의 배경색 변경

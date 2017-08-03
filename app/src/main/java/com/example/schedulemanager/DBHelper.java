@@ -133,7 +133,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 schedule.setMemo(c.getString(c.getColumnIndex(timeValue_colum)));
                 schedule.setTime(c.getString(c.getColumnIndex(memoValue_colum)));
 
-                String scheduleMonth = getMonthFromDate(scheduleDate);
+                String scheduleMonth = Util.getMonthFromDate(scheduleDate);
                 // 스케쥴 추가
                 addScheduleToMapByMonth(allScheduleMap,scheduleMonth, schedule);
                 Log.d("scheduleMonth", scheduleMonth);
@@ -154,13 +154,5 @@ public class DBHelper extends SQLiteOpenHelper {
         scheduleMap.put(schedule.getDate(), schedule);
     }
 
-    /**
-     * 날짜값에서 월값 추출
-     * @param scheduleDate
-     * @return
-     */
-    private String getMonthFromDate(String scheduleDate) {
-        String month = scheduleDate.substring(4,6);
-        return month;
-    }
+
 }
