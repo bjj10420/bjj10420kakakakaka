@@ -45,6 +45,8 @@ public class MainActivity extends AppCompatActivity {
     private Typeface typeface;                      // 글꼴
     private View calendarLayout;                    // 메인 캘린더 레이아웃
     private ViewPager calendarPager;                // 메인 캘린더 뷰 페이져 객체
+    private HashMap<String, HashMap<String, Schedule>> scheduleMapByMonth;
+                                                    // 달력월값을 키로 갖는 스케쥴 저장소
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -127,9 +129,9 @@ public class MainActivity extends AppCompatActivity {
 //        iconNameMap.put("")
         // 글꼴 로딩
         typeface = getApplicationFont();
-
         // 모든 스케쥴 데이터 로딩
-        Log.d("모든 스케쥴 로딩 개수 = ",dbHelper.selectAllSchedule() + "개");
+        scheduleMapByMonth = new HashMap<String, HashMap<String, Schedule>>();
+        dbHelper.selectAllSchedule(scheduleMapByMonth);
     }
 
     private void initUI() {

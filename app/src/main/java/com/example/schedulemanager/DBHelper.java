@@ -6,7 +6,9 @@ import android.database.Cursor;
 import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
+import java.util.HashMap;
 import java.util.Locale;
 
 /**
@@ -112,7 +114,7 @@ public class DBHelper extends SQLiteOpenHelper {
      * 모든 스케쥴을 읽어온다
      * @return
      */
-    public int selectAllSchedule(){
+    public void selectAllSchedule(HashMap<String, HashMap<String, Schedule>> allScheduleMap){
         DB = getWritableDatabase();
 
         String sql = String.format(Locale.getDefault(),
@@ -121,18 +123,29 @@ public class DBHelper extends SQLiteOpenHelper {
                 );
 
         Cursor c = DB.rawQuery(sql, null);
-        int count = 0;
         if(c != null) {
             while (c.moveToNext()) {
                 Schedule schedule = new Schedule();
-                schedule.setDate(c.getString(1));
+                String scheduleDate = c.getString(c.getColumnIndex(dateValue_colum));
+                schedule.setDate(scheduleDate);
                 schedule.setActivityName(c.getString(c.getColumnIndex(activityName_colum)));
                 schedule.setOrder(c.getInt(c.getColumnIndex(orderValue_colum)));
                 schedule.setMemo(c.getString(c.getColumnIndex(timeValue_colum)));
                 schedule.setTime(c.getString(c.getColumnIndex(memoValue_colum)));
-                count++;
+
+                String scheduleMonth = getMonthFromDate(scheduleDate);
+                Log.d("scheduleMonth", scheduleMonth);
             }
         }
-        return count;
+     }
+
+    /**
+     * 날짜값에서 월값 추출
+     * @param scheduleDate
+     * @return
+     */
+    private String getMonthFromDate(String scheduleDate) {
+        String month = scheduleDate.substring(4,6);
+        return month;
     }
 }
