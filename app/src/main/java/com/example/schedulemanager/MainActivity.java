@@ -127,6 +127,9 @@ public class MainActivity extends AppCompatActivity {
 //        iconNameMap.put("")
         // 글꼴 로딩
         typeface = getApplicationFont();
+
+        // 모든 스케쥴 데이터 로딩
+        Log.d("모든 스케쥴 로딩 개수 = ",dbHelper.selectAllSchedule() + "개");
     }
 
     private void initUI() {

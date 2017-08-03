@@ -96,7 +96,7 @@ public class DBHelper extends SQLiteOpenHelper {
         String sql = String.format(Locale.getDefault(),
        "SELECT COUNT(*) FROM %s WHERE %s = %s",
         scheduleTableName, 							// 테이블 이름
-        dateValue_colum,	                                    // 조건 칼럼
+        dateValue_colum,	                        // 조건 칼럼
         dateForToday);
 
         Cursor c = DB.rawQuery(sql, null);
@@ -104,6 +104,34 @@ public class DBHelper extends SQLiteOpenHelper {
         if(c != null) {
             c.moveToFirst();
             count = c.getInt(0);
+        }
+        return count;
+    }
+
+    /**
+     * 모든 스케쥴을 읽어온다
+     * @return
+     */
+    public int selectAllSchedule(){
+        DB = getWritableDatabase();
+
+        String sql = String.format(Locale.getDefault(),
+                "SELECT * FROM %s",
+                scheduleTableName
+                );
+
+        Cursor c = DB.rawQuery(sql, null);
+        int count = 0;
+        if(c != null) {
+            while (c.moveToNext()) {
+                Schedule schedule = new Schedule();
+                schedule.setDate(c.getString(1));
+                schedule.setActivityName(c.getString(c.getColumnIndex(activityName_colum)));
+                schedule.setOrder(c.getInt(c.getColumnIndex(orderValue_colum)));
+                schedule.setMemo(c.getString(c.getColumnIndex(timeValue_colum)));
+                schedule.setTime(c.getString(c.getColumnIndex(memoValue_colum)));
+                count++;
+            }
         }
         return count;
     }
