@@ -111,7 +111,7 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * 모든 스케쥴을 읽어온다
+     * 모든 스케쥴을 읽어와서 스케쥴맵으로 저장
      * @return
      */
     public void selectAllSchedule(HashMap<String, HashMap<String, Schedule>> allScheduleMap){
@@ -134,10 +134,25 @@ public class DBHelper extends SQLiteOpenHelper {
                 schedule.setTime(c.getString(c.getColumnIndex(memoValue_colum)));
 
                 String scheduleMonth = getMonthFromDate(scheduleDate);
+                // 스케쥴 추가
+                addScheduleToMapByMonth(allScheduleMap,scheduleMonth, schedule);
                 Log.d("scheduleMonth", scheduleMonth);
             }
         }
      }
+
+    /**
+     * 날짜에 맞는 해쉬맵을 불러와 스케쥴추가
+     * @param allScheduleMap
+     * @param scheduleMonth
+     * @param schedule
+     */
+    private void addScheduleToMapByMonth(HashMap<String, HashMap<String, Schedule>> allScheduleMap, String scheduleMonth, Schedule schedule) {
+        HashMap<String, Schedule> scheduleMap = allScheduleMap.get(scheduleMonth);
+        //만약 해당 월의 scheduleMap이 없다면 생성
+        if(scheduleMap == null) scheduleMap = new HashMap<String, Schedule>();
+        scheduleMap.put(schedule.getDate(), schedule);
+    }
 
     /**
      * 날짜값에서 월값 추출
