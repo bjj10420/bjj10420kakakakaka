@@ -13,11 +13,13 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 
 import com.example.schedulemanager.R;
+import com.example.schedulemanager.Schedule;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 
@@ -52,7 +54,9 @@ public class BPLineCalendarPagerAdapter extends PagerAdapter
 	private String							currentDate			= null;
 	
 	private OnCalendarItemClickListener		onCalendarItemClickListener;
-	
+
+	private HashMap<Integer, HashMap<String, Schedule>> scheduleMapByMonth;
+
 	public BPLineCalendarPagerAdapter(Context context, Typeface typeface)
 	{
 		try
@@ -616,7 +620,10 @@ public class BPLineCalendarPagerAdapter extends PagerAdapter
 		}
 	}
 
-	
+	public void setScheduleMapByMonth(HashMap<Integer, HashMap<String, Schedule>> scheduleMapByMonth) {
+		this.scheduleMapByMonth = scheduleMapByMonth;
+	}
+
 	/**
 	 * @category getter
 	 * @return the selectedTime

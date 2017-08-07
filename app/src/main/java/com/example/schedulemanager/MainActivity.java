@@ -73,6 +73,8 @@ public class MainActivity extends AppCompatActivity {
         calendarAdapter.initCalendar();
         calendarAdapter.notifyDataSetChanged();
         calendarPager = (ViewPager) findViewById(R.id.timetable_param_setter_calendar_viewpager);
+        // 스케쥴 맵 전달
+        calendarAdapter.setScheduleMapByMonth(scheduleMapByMonth);
         calendarPager.setAdapter(calendarAdapter);
 
         // 달력에 연도, 월 표시
