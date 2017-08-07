@@ -38,12 +38,12 @@ public class Util {
     }
 
     /**
-     * 날짜값에서 월값 추출
+     * 날짜값에서 연월값 추출
      * @param scheduleDate
      * @return
      */
     public static String getYearMonthFromDate(String scheduleDate) {
-        String month = scheduleDate.substring(4,6);
-        return month;
+        String yearMonth = scheduleDate.substring(0,6);
+        return yearMonth;
     }
 }

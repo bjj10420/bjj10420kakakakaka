@@ -133,10 +133,10 @@ public class DBHelper extends SQLiteOpenHelper {
                 schedule.setMemo(c.getString(c.getColumnIndex(timeValue_colum)));
                 schedule.setTime(c.getString(c.getColumnIndex(memoValue_colum)));
 
-                String scheduleMonth = Util.getYearMonthFromDate(scheduleDate);
+                String scheduleYearMonth = Util.getYearMonthFromDate(scheduleDate);
                 // 스케쥴 추가
-                addScheduleToMapByMonth(allScheduleMap, Integer.parseInt(scheduleMonth), schedule);
-                Log.d("scheduleMonth", scheduleMonth);
+                addScheduleToMapByMonth(allScheduleMap, Integer.parseInt(scheduleYearMonth), schedule);
+                Log.d("scheduleYearMonth", scheduleYearMonth);
             }
         }
      }
