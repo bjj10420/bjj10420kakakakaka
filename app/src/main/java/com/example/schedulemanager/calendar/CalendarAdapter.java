@@ -20,10 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * 전체 시간표 조회 설정 시의 달력을 위한 베이스 어댑터(GridView)
- * @작성자 Hwang(mmuse1230@gmail.com)
- * @작성일 2016. 6. 19.
- * 
+ * 칼랜더의 한페이지안의 각 한칸을 구성하는 어댑터
  */
 public class CalendarAdapter extends BaseAdapter
 {
@@ -196,6 +193,8 @@ public class CalendarAdapter extends BaseAdapter
 			
 			if(item != null)
 			{
+
+
 				if(position == selectedItemIdx)
 				{	// 선택된 날짜
 					holder.day.setVisibility(View.VISIBLE);
@@ -282,14 +281,19 @@ public class CalendarAdapter extends BaseAdapter
 						}
 					}
 				}
-				
+
 				// 날짜 색깔 및 텍스트 설정 
 				String textColor = "#" + opacity + color;
 				holder.day.setTextColor(Color.parseColor(textColor));
 				holder.day.setText(String.valueOf(item));
-				
+
+				// 스케쥴이 들어있는 날짜일경우
+				if(scheduleMapForCurrentPage.get(position - 1) != null)
+				holder.day.setText("스케쥴 있음");
+
 				// 엑스트라 텍스트 설정
 				holder.extra.setText(extraText);
+
 			}
 			else
 			{	// 비어 있는 날짜
