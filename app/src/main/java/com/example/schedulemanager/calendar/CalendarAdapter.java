@@ -282,7 +282,7 @@ public class CalendarAdapter extends BaseAdapter
 						}
 					}
 				}
-
+//
 				// 날짜 색깔 및 텍스트 설정 
 				String textColor = "#" + opacity + color;
 				holder.day.setTextColor(Color.parseColor(textColor));
