@@ -2,18 +2,15 @@ package com.example.schedulemanager;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
-import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
-import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.MotionEvent;
@@ -23,7 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.example.schedulemanager.calendar.BPLineCalendarPagerAdapter;
+import com.example.schedulemanager.calendar.CalendarPagerAdapter;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -67,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
      * 달력 셋팅, 초기화
      */
     private void initCalndar() {
-        final BPLineCalendarPagerAdapter calendarAdapter = new BPLineCalendarPagerAdapter(this, typeface);
+        final CalendarPagerAdapter calendarAdapter = new CalendarPagerAdapter(this, typeface);
 
         // 달력 구성 어댑터 생성 및 셋팅
         calendarAdapter.initCalendar();
@@ -76,18 +73,16 @@ public class MainActivity extends AppCompatActivity {
         // 스케쥴 맵 전달
         calendarAdapter.setScheduleMapByMonth(scheduleMapByMonth);
         calendarPager.setAdapter(calendarAdapter);
-
         // 달력에 연도, 월 표시
         calendarPager.setCurrentItem(12);
         final TextView calendarDateText =  (TextView) findViewById(R.id.timetable_param_setter_calendar_date);
         calendarDateText.setTypeface(typeface);
         setCalendarTitleDate(calendarDateText, calendarAdapter, 12);
-
         // 이벤트 리스너 추가
         setPagingEvent(calendarDateText, calendarAdapter);
     }
 
-    private void setPagingEvent(final TextView calendarDateText, final BPLineCalendarPagerAdapter calendarAdapter) {
+    private void setPagingEvent(final TextView calendarDateText, final CalendarPagerAdapter calendarAdapter) {
         calendarPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -110,7 +105,7 @@ public class MainActivity extends AppCompatActivity {
      * @param calendarAdapter
      * @param position
      */
-    private void setCalendarTitleDate(TextView calendarDateText, BPLineCalendarPagerAdapter calendarAdapter, int position) {
+    private void setCalendarTitleDate(TextView calendarDateText, CalendarPagerAdapter calendarAdapter, int position) {
         // nextCal을 같이 변경
         calendarAdapter.getNextCal().set(calendarAdapter.getThisCal().get(Calendar.YEAR),
                 calendarAdapter.getThisCal().get(Calendar.MONTH) + position,

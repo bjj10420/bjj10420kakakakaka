@@ -29,7 +29,7 @@ import java.util.Locale;
  * @author inhohwang(mmuse1230@gmail.com)
  * @date 2016. 7. 18.
  */
-public class BPLineCalendarPagerAdapter extends PagerAdapter
+public class CalendarPagerAdapter extends PagerAdapter
 {
 	private ArrayList<ArrayList<Integer>> 	totalList;
 	private Context							mContext;
@@ -44,7 +44,7 @@ public class BPLineCalendarPagerAdapter extends PagerAdapter
 	private List<Integer>					list2;
 	private List<Integer>					list3;
 	private List<Integer>					list4;
-	private BPLineRailCalendarAdapter[] 	adapters;
+	private CalendarAdapter[] 	adapters;
 	private SparseArray<View> 				views;
 	
 	private int								selectedYear		= -1;
@@ -57,7 +57,7 @@ public class BPLineCalendarPagerAdapter extends PagerAdapter
 
 	private HashMap<Integer, HashMap<String, Schedule>> scheduleMapByMonth;
 
-	public BPLineCalendarPagerAdapter(Context context, Typeface typeface)
+	public CalendarPagerAdapter(Context context, Typeface typeface)
 	{
 		try
 		{
@@ -69,7 +69,7 @@ public class BPLineCalendarPagerAdapter extends PagerAdapter
 			 * 생성자에서 달력을 생성해준다
 			 */
 			thisCal = Calendar.getInstance(Locale.getDefault());
-			adapters = new BPLineRailCalendarAdapter[25];
+			adapters = new CalendarAdapter[25];
 			views = new SparseArray<View>();
 
 			// 모든 숫자리스트를 담는 저장소
@@ -189,7 +189,7 @@ public class BPLineCalendarPagerAdapter extends PagerAdapter
 				
 				holder.calendarGridView = (GridView) convertView.findViewById(R.id.timetable_param_setter_calendar_gridview);
 				
-				BPLineRailCalendarAdapter adapter = new BPLineRailCalendarAdapter(mContext, mTypeface);
+				CalendarAdapter adapter = new CalendarAdapter(mContext, mTypeface);
 				adapters[position] = adapter;
 				
 				if(position == 0)
@@ -270,7 +270,7 @@ public class BPLineCalendarPagerAdapter extends PagerAdapter
 			List<Integer> tempNumberList = null;
 			Calendar base = null;
 			Calendar next = null;
-			BPLineRailCalendarAdapter adapter = null;
+			CalendarAdapter adapter = null;
 			
 			if(page == 0)
 			{
@@ -555,7 +555,7 @@ public class BPLineCalendarPagerAdapter extends PagerAdapter
 		try
 		{
 			// 페이지에 따라 달력 어댑터를 찾는다.
-			BPLineRailCalendarAdapter adapter = adapters[page];
+			CalendarAdapter adapter = adapters[page];
 			
 			int first = adapter.getFirstItemIdx();
 			int last = adapter.getLastItemIdx();

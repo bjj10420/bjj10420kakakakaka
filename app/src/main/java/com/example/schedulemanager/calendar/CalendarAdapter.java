@@ -23,7 +23,7 @@ import java.util.List;
  * @작성일 2016. 6. 19.
  * 
  */
-public class BPLineRailCalendarAdapter extends BaseAdapter
+public class CalendarAdapter extends BaseAdapter
 {
 	private Context					mContext;
 	private Typeface				mTypeface;
@@ -38,7 +38,7 @@ public class BPLineRailCalendarAdapter extends BaseAdapter
 	
 	private List<Integer> 			calendarItems;
 		
-	public BPLineRailCalendarAdapter(Context context, Typeface typeface)
+	public CalendarAdapter(Context context, Typeface typeface)
 	{
 		try
 		{
