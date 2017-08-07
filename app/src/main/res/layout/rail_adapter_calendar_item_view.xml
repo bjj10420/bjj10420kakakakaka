@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="100dp"
-    android:orientation="vertical">
+    android:layout_height="100dp">
+
+    <View
+        android:id="@+id/check_mark"
+        android:layout_width="15dp"
+        android:layout_height="15dp"
+        android:layout_alignParentRight="true"
+        android:background="@drawable/check_icon3"
+        android:visibility="gone"
+        />
+
 
     <TextView
         android:id="@+id/calendar_item_day"
@@ -10,7 +19,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="top"
         android:layout_marginTop="14dp"
-        android:layout_marginBottom="12dp"
         android:gravity="center_horizontal"
         android:textSize="14dp" />
 
@@ -18,10 +26,11 @@
         android:id="@+id/calendar_item_extra"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_below="@id/calendar_item_day"
         android:layout_gravity="bottom"
-        android:layout_marginBottom="2dp"
+        android:layout_marginBottom="14dp"
         android:gravity="center_horizontal"
         android:textColor="#ffffff"
         android:textSize="10dp" />
 
-</LinearLayout>
+</RelativeLayout>

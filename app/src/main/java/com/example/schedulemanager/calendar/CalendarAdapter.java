@@ -173,7 +173,8 @@ public class CalendarAdapter extends BaseAdapter
 				
 				holder.day = (TextView) convertView.findViewById(R.id.calendar_item_day);
 				holder.extra = (TextView) convertView.findViewById(R.id.calendar_item_extra);
-				
+				holder.checkMark = convertView.findViewById(R.id.check_mark);
+
 				holder.day.setTypeface(mTypeface, Typeface.BOLD);
 				holder.extra.setTypeface(mTypeface, Typeface.BOLD);
 				
@@ -229,7 +230,7 @@ public class CalendarAdapter extends BaseAdapter
 					{	// 그 외의 경우는 배경을 없앤다.
 						convertView.setBackground(null);
 					}
-					//
+
 					if(position < firstItemIdx || position > lastItemIdx)
 					{	// 전달의 날짜거나, 다음달의 날짜라면 감춘다. 
 						holder.day.setVisibility(View.INVISIBLE);
@@ -289,7 +290,7 @@ public class CalendarAdapter extends BaseAdapter
 
 				// 스케쥴이 들어있는 날짜일경우
 				if(scheduleMapForCurrentPage.get(position - 1) != null)
-				holder.day.setText("스케쥴 있음");
+				holder.checkMark.setVisibility(View.VISIBLE);
 
 				// 엑스트라 텍스트 설정
 				holder.extra.setText(extraText);
@@ -313,6 +314,7 @@ public class CalendarAdapter extends BaseAdapter
 	{
 		public TextView		day;		// 날짜
 		public TextView		extra;		// 하단 문구(시간이나 '지금' 문구 표시)
+		public View			checkMark;	// 체크마크
 	}
 	
 	/**
