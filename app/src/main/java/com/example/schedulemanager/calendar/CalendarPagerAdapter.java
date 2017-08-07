@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -117,20 +118,16 @@ public class CalendarPagerAdapter extends PagerAdapter
 			// 다음달 달력 객체
 			nextCal = Calendar.getInstance(Locale.getDefault());
 
-			
 			int year = thisCal.get(Calendar.YEAR);
 			int month = thisCal.get(Calendar.MONTH);
 			int date = thisCal.get(Calendar.DATE);
 
-			
  			String curTime = String.format("%02d:%02d", thisCal.get(Calendar.HOUR_OF_DAY), thisCal.get(Calendar.MINUTE));
  			currentDate = String.format("%04d-%02d-%02d", thisCal.get(Calendar.YEAR), thisCal.get(Calendar.MONTH)+1, thisCal.get(Calendar.DATE));
- 			
- 			
+
 			nextCal.set(year, month, date);
 			nextCal.add(Calendar.MONTH, 1);
 
-			
 			// 변수 초기화
 			selectedYear = -1;
 			selectedMonth = -1;
@@ -295,7 +292,14 @@ public class CalendarPagerAdapter extends PagerAdapter
 				next.set(year, month, date);
 				next.add(Calendar.DAY_OF_MONTH, 30);
 			}
-			
+
+			// 연월값을 가지고 생성시에 받은 스케쥴 맵에 해당하는 내부스케쥴맵값을 가지고 온다.
+			// base값을 이용
+			SimpleDateFormat formatter = new SimpleDateFormat("yyyyMM", Locale.getDefault());
+			String baseYearMonthValue = formatter.format(new Date(base.getTimeInMillis()));
+			HashMap<Integer, Schedule> scheduleHashMapForPage = scheduleMapByMonth.get(Integer.parseInt(baseYearMonthValue));
+			Log.d("scheduleHashMapForPage", String.valueOf(scheduleHashMapForPage));
+
 			// 현재 보고 있는 달의 첫째 날과 마지막 날을 구한다.
 			int firstDay = base.getActualMinimum(Calendar.DAY_OF_MONTH);
 			int lastDay = base.getActualMaximum(Calendar.DAY_OF_MONTH);

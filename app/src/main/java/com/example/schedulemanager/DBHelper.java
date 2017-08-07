@@ -150,7 +150,10 @@ public class DBHelper extends SQLiteOpenHelper {
     private void addScheduleToMapByMonth(HashMap<Integer, HashMap<Integer, Schedule>> allScheduleMap, int scheduleMonth, Schedule schedule) {
         HashMap<Integer, Schedule> scheduleMap = allScheduleMap.get(scheduleMonth);
         //만약 해당 월의 scheduleMap이 없다면 생성
-        if(scheduleMap == null) scheduleMap = new HashMap<Integer, Schedule>();
+        if(scheduleMap == null){
+            scheduleMap = new HashMap<Integer, Schedule>();
+            allScheduleMap.put(scheduleMonth, scheduleMap);
+        }
         Log.d("addScheduleToMapByMonth" , String.valueOf(Integer.parseInt(schedule.getDate().substring(6,8))));
         scheduleMap.put(Integer.parseInt(schedule.getDate().substring(6,8)), schedule);
     }
