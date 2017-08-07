@@ -115,7 +115,7 @@ public class DBHelper extends SQLiteOpenHelper {
      * @return
      * @param allScheduleMap
      */
-    public void selectAllSchedule(HashMap<Integer, HashMap<String, Schedule>> allScheduleMap){
+    public void selectAllSchedule(HashMap<Integer, HashMap<Integer, Schedule>> allScheduleMap){
         DB = getWritableDatabase();
 
         String sql = String.format(Locale.getDefault(),
@@ -148,11 +148,12 @@ public class DBHelper extends SQLiteOpenHelper {
      * @param scheduleMonth
      * @param schedule
      */
-    private void addScheduleToMapByMonth(HashMap<Integer, HashMap<String, Schedule>> allScheduleMap, int scheduleMonth, Schedule schedule) {
-        HashMap<String, Schedule> scheduleMap = allScheduleMap.get(scheduleMonth);
+    private void addScheduleToMapByMonth(HashMap<Integer, HashMap<Integer, Schedule>> allScheduleMap, int scheduleMonth, Schedule schedule) {
+        HashMap<Integer, Schedule> scheduleMap = allScheduleMap.get(scheduleMonth);
         //만약 해당 월의 scheduleMap이 없다면 생성
-        if(scheduleMap == null) scheduleMap = new HashMap<String, Schedule>();
-        scheduleMap.put(schedule.getDate(), schedule);
+        if(scheduleMap == null) scheduleMap = new HashMap<Integer, Schedule>();
+        Log.d("addScheduleToMapByMonth" , String.valueOf(Integer.parseInt(schedule.getDate().substring(6,8))));
+        scheduleMap.put(Integer.parseInt(schedule.getDate().substring(6,8)), schedule);
     }
 
 }

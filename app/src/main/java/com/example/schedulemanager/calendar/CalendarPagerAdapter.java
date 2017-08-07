@@ -55,7 +55,7 @@ public class CalendarPagerAdapter extends PagerAdapter
 	
 	private OnCalendarItemClickListener		onCalendarItemClickListener;
 
-	private HashMap<Integer, HashMap<String, Schedule>> scheduleMapByMonth;
+	private HashMap<Integer, HashMap<Integer, Schedule>> scheduleMapByMonth;
 
 	public CalendarPagerAdapter(Context context, Typeface typeface)
 	{
@@ -620,7 +620,7 @@ public class CalendarPagerAdapter extends PagerAdapter
 		}
 	}
 
-	public void setScheduleMapByMonth(HashMap<Integer, HashMap<String, Schedule>> scheduleMapByMonth) {
+	public void setScheduleMapByMonth(HashMap<Integer, HashMap<Integer, Schedule>> scheduleMapByMonth) {
 		this.scheduleMapByMonth = scheduleMapByMonth;
 	}
 

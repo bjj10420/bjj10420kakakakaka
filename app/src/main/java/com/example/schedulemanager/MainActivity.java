@@ -42,7 +42,7 @@ public class MainActivity extends AppCompatActivity {
     private Typeface typeface;                      // 글꼴
     private View calendarLayout;                    // 메인 캘린더 레이아웃
     private ViewPager calendarPager;                // 메인 캘린더 뷰 페이져 객체
-    private HashMap<Integer, HashMap<String, Schedule>> scheduleMapByMonth;
+    private HashMap<Integer, HashMap<Integer, Schedule>> scheduleMapByMonth;
                                                     // 달력월값을 키로 갖는 스케쥴 저장소
 
     @Override
@@ -127,7 +127,7 @@ public class MainActivity extends AppCompatActivity {
         // 글꼴 로딩
         typeface = getApplicationFont();
         // 모든 스케쥴 데이터 로딩
-        scheduleMapByMonth = new HashMap<Integer, HashMap<String, Schedule>>();
+        scheduleMapByMonth = new HashMap<Integer, HashMap<Integer, Schedule>>();
         dbHelper.selectAllSchedule(scheduleMapByMonth);
     }
 
@@ -323,19 +323,15 @@ public class MainActivity extends AppCompatActivity {
                             else
                             //TODO 일단 Y값을 고정값으로 맞춰주었지만 수정해야함(원인 불명)
                                 dY = view.getY() - event.getRawY() + 2000;
-                            Log.d("dY값 체크", "dY = " + dY);
                             break;
 
                         case MotionEvent.ACTION_MOVE:
-                            Log.d("y좌표 체크", "rawY = " + event.getRawY() +", " + "dY = " + dY);
-                            Log.d("y값 합산 체크", "yValue = " + (event.getRawY() + dY));
-                            if(copiedView.getVisibility() == View.GONE){
+                                if(copiedView.getVisibility() == View.GONE){
                                 copiedView.setAlpha(0.7f);
                                 copiedView.setVisibility(View.VISIBLE);
                             }
                             copiedView.setY(event.getRawY() + dY);
                             copiedView.setX(event.getRawX() + dX);
-                            Log.d("체크확인", "충돌 : " + Util.checkCollision(centerIcon, copiedView));
                             boolean isCollided = Util.checkCollision(centerIcon, copiedView);
                             changeCenterIconColor(isCollided);
 
@@ -383,7 +379,6 @@ public class MainActivity extends AppCompatActivity {
 
         // DB에 삽입
         long resultNum = DBHelper.dbHelper.insertSchedule(newSchedule);
-        Log.d("insert 결과체크", String.valueOf(resultNum) + "개 삽입 되었습니다.");
     }
 
     /**
