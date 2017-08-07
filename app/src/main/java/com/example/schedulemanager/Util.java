@@ -42,7 +42,7 @@ public class Util {
      * @param scheduleDate
      * @return
      */
-    public static String getMonthFromDate(String scheduleDate) {
+    public static String getYearMonthFromDate(String scheduleDate) {
         String month = scheduleDate.substring(4,6);
         return month;
     }

@@ -3,7 +3,6 @@ package com.example.schedulemanager;
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
-import android.database.DatabaseErrorHandler;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
@@ -134,7 +133,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 schedule.setMemo(c.getString(c.getColumnIndex(timeValue_colum)));
                 schedule.setTime(c.getString(c.getColumnIndex(memoValue_colum)));
 
-                String scheduleMonth = Util.getMonthFromDate(scheduleDate);
+                String scheduleMonth = Util.getYearMonthFromDate(scheduleDate);
                 // 스케쥴 추가
                 addScheduleToMapByMonth(allScheduleMap, Integer.parseInt(scheduleMonth), schedule);
                 Log.d("scheduleMonth", scheduleMonth);
