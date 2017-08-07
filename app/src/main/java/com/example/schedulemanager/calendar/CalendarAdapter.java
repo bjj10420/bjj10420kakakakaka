@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -291,9 +292,18 @@ public class CalendarAdapter extends BaseAdapter
 				// 스케쥴이 들어있는 날짜일경우
 				if(scheduleMapForCurrentPage.get(position - 1) != null)
 				holder.checkMark.setVisibility(View.VISIBLE);
-
 				// 엑스트라 텍스트 설정
 				holder.extra.setText(extraText);
+				// 태그 첨부
+				convertView.setTag(String.valueOf(item));
+				// 이벤트 설정
+				convertView.setOnTouchListener(new OnTouchListener() {
+					@Override
+					public boolean onTouch(View v, MotionEvent event) {
+						Log.d("touchEventTest", String.valueOf(v.getTag()));
+						return true;
+					}
+				});
 
 			}
 			else
