@@ -258,7 +258,6 @@ public class MainActivity extends AppCompatActivity {
     private void setCalendarBtnEvent(int viewId) {
         // 달력 내 사용 버튼
         View calendarBtn =  findViewById(viewId);
-
         calendarBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

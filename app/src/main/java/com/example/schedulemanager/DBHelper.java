@@ -155,5 +155,4 @@ public class DBHelper extends SQLiteOpenHelper {
         scheduleMap.put(schedule.getDate(), schedule);
     }
 
-
 }
