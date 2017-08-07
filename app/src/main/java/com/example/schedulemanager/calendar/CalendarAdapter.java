@@ -163,7 +163,7 @@ public class CalendarAdapter extends BaseAdapter
 	public View getView(int position, View convertView, ViewGroup parent)
 	{
 		ViewHolder holder = null;
-		
+		//
 		try
 		{
 			if(convertView == null)
