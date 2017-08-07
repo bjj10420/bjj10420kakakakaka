@@ -20,7 +20,7 @@ import java.util.HashMap;
 import java.util.List;
 
 /**
- * 칼랜더의 한페이지안의 각 한칸을 구성하는 어댑터
+ * 칼랜더 한페이지안의 각 한칸을 구성하는 어댑터
  */
 public class CalendarAdapter extends BaseAdapter
 {
@@ -294,7 +294,7 @@ public class CalendarAdapter extends BaseAdapter
 				// 엑스트라 텍스트 설정
 				holder.extra.setText(extraText);
 
-			}//
+			}
 			else
 			{	// 비어 있는 날짜
 				holder.day.setVisibility(View.INVISIBLE);
