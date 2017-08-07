@@ -14,7 +14,9 @@ import android.widget.TextView;
 
 
 import com.example.schedulemanager.R;
+import com.example.schedulemanager.Schedule;
 
+import java.util.HashMap;
 import java.util.List;
 
 /**
@@ -37,7 +39,9 @@ public class CalendarAdapter extends BaseAdapter
 	private String					selectedTime;
 	
 	private List<Integer> 			calendarItems;
-		
+	private HashMap<Integer, Schedule> scheduleMapForCurrentPage;
+
+
 	public CalendarAdapter(Context context, Typeface typeface)
 	{
 		try
@@ -319,4 +323,8 @@ public class CalendarAdapter extends BaseAdapter
 			return true;
 		}
 	};
+
+	public void setScheduleMapForCurrentPage(HashMap<Integer, Schedule> scheduleMapForCurrentPage) {
+		this.scheduleMapForCurrentPage = scheduleMapForCurrentPage;
+	}
 }
