@@ -474,6 +474,7 @@ public class MainActivity extends AppCompatActivity {
             if(Util.checkCollisionForChildView(calendarCellView, copiedView)) {
                 isCellCollided = true;
                 Log.d("충돌!!", dateKey + "일에서" + "충돌이 일어났습니다.");
+                Log.d("충돌거리!!", String.valueOf(Util.getDistanceFromTwoPoints(calendarCellView.getX(), calendarCellView.getY(),copiedView.getX(), copiedView.getY())));
             }
             }
         return isCellCollided;

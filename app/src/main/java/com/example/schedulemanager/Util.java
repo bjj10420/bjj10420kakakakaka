@@ -66,4 +66,12 @@ public class Util {
         String yearMonth = scheduleDate.substring(0,6);
         return yearMonth;
     }
+
+    /**
+     * 화면상의 두점 사이의 거리
+     */
+    public static double getDistanceFromTwoPoints(float x1, float y1, float x2, float y2){
+        double distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
+        return distance;
+    }
 }
