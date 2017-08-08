@@ -166,9 +166,8 @@ public class CalendarAdapter extends BaseAdapter
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent)
 	{
-		Log.d("CalendarAdapter", "getView()");
 		ViewHolder holder = null;
-		//
+
 		try
 		{
 			if(convertView == null)
@@ -200,9 +199,11 @@ public class CalendarAdapter extends BaseAdapter
 			// 태그 첨부
 			convertView.setTag(String.valueOf(item));
 
+			// 메인 저장소에 뷰 저장
+			((MainActivity)mContext).getCurrentCalendarViewMap().put(item, convertView);
+
 			if(item != null)
 			{
-
 
 				if(position == selectedItemIdx)
 				{	// 선택된 날짜
@@ -316,7 +317,7 @@ public class CalendarAdapter extends BaseAdapter
 		{
 		}
 
-		return convertView;
+			return convertView;
 	}
 	
 	public class ViewHolder
