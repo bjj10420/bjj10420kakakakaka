@@ -39,6 +39,8 @@ public class MainActivity extends AppCompatActivity {
     private View copiedView;                        // 드래그를 시작할 때 임시로 저장 해놓는 뷰
     private RelativeLayout totalLayout;             // 최상위 프레임 레이아웃
     private View centerIcon;                        // 중앙 아이콘 뷰
+
+    private View calendarRow;                       // 임시 저장용 달력칸
     private Typeface typeface;                      // 글꼴
     private View calendarLayout;                    // 메인 캘린더 레이아웃
     private ViewPager calendarPager;                // 메인 캘린더 뷰 페이져 객체
@@ -311,7 +313,6 @@ public class MainActivity extends AppCompatActivity {
             buttonView.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View view, MotionEvent event) {
-                    Log.d("태그확인", String.valueOf(view.getTag()));
                     switch (event.getActionMasked()) {
                         case MotionEvent.ACTION_DOWN:
                             totalLayout.removeView(copiedView);
@@ -338,7 +339,13 @@ public class MainActivity extends AppCompatActivity {
 
                         case MotionEvent.ACTION_UP:
 //                            if(checkCollision(centerIcon, copiedView))
-                            if(Util.checkCollision(centerIcon, copiedView)) addScheduleForToday(String.valueOf(view.getTag()));
+
+                            if(calendarRow != null) {
+                                Log.d("calendarRow", "calendarRow X" + calendarRow.getX());
+                                Log.d("calendarRow", "calendarRow Y" + calendarRow.getY());
+                            }
+//                            if(Util.checkCollision(centerIcon, copiedView)) addScheduleForToday(String.valueOf(view.getTag()));
+                            if(Util.checkCollision(calendarRow, copiedView)) Log.d("calendarRowCollision!!!", "calendarRowCollision");
                             changeCenterIconColor(false);
                             totalLayout.removeView(copiedView);
                             break;
@@ -466,5 +473,9 @@ public class MainActivity extends AppCompatActivity {
         Typeface mTypeface = null;
         mTypeface = Typeface.createFromAsset(getAssets(), "nanumgothic.ttf");
         return mTypeface;
+    }
+
+    public void setCalendarRow(View calendarRow) {
+        this.calendarRow = calendarRow;
     }
 }

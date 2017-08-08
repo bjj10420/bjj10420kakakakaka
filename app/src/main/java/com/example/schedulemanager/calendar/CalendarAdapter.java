@@ -14,6 +14,7 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 
+import com.example.schedulemanager.MainActivity;
 import com.example.schedulemanager.R;
 import com.example.schedulemanager.Schedule;
 
@@ -38,6 +39,8 @@ public class CalendarAdapter extends BaseAdapter
 	
 	private List<Integer> 			calendarItems;
 	private HashMap<Integer, Schedule> scheduleMapForCurrentPage;
+	private float dX;
+	private float dY;
 
 
 	public CalendarAdapter(Context context, Typeface typeface)
@@ -293,11 +296,13 @@ public class CalendarAdapter extends BaseAdapter
 				holder.day.setText(String.valueOf(item));
 
 				// 스케쥴이 들어있는 날짜일경우
-				if(scheduleMapForCurrentPage.get(position - 1) != null)
-				holder.checkMark.setVisibility(View.VISIBLE);
-				// 엑스트라 텍스트 설정
-				holder.extra.setText(extraText);
-
+				if(scheduleMapForCurrentPage.get(position - 1) != null) {
+					holder.checkMark.setVisibility(View.VISIBLE);
+					// 메인 액티비티에 임시저장
+					((MainActivity)mContext).setCalendarRow(convertView);
+					// 엑스트라 텍스트 설정
+					holder.extra.setText(extraText);
+				}
 			}
 			else
 			{	// 비어 있는 날짜
@@ -310,14 +315,6 @@ public class CalendarAdapter extends BaseAdapter
 		{
 		}
 
-		// 이벤트 설정
-		convertView.setOnTouchListener(new OnTouchListener() {
-			@Override
-			public boolean onTouch(View v, MotionEvent event) {
-				Log.d("touchEventTest", String.valueOf(v.getTag()));
-				return true;
-			}
-		});
 		return convertView;
 	}
 	
@@ -344,4 +341,5 @@ public class CalendarAdapter extends BaseAdapter
 	public void setScheduleMapForCurrentPage(HashMap<Integer, Schedule> scheduleMapForCurrentPage) {
 		this.scheduleMapForCurrentPage = scheduleMapForCurrentPage;
 	}
+
 }

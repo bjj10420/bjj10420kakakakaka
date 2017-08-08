@@ -4,6 +4,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.util.DisplayMetrics;
+import android.util.Log;
 import android.view.View;
 
 /**
@@ -32,8 +33,16 @@ public class Util {
      * @return
      */
     public static boolean checkCollision(View v1, View v2) {
-        Rect R1=new Rect(v1.getLeft(), v1.getTop(), v1.getRight(), v1.getBottom());
+        int[] numberArray = new int[2];
+        numberArray[0] = v1.getLeft();
+        numberArray[1] = v1.getTop();
+
+        v1.getLocationInWindow(numberArray);
+        Rect R1=new Rect(numberArray[0], numberArray[1], numberArray[0] + v1.getWidth(), numberArray[1] + v1.getHeight());
         Rect R2=new Rect((int)v2.getTranslationX(), (int)v2.getTranslationY(), (int)v2.getTranslationX() + v2.getWidth(), (int)v2.getTranslationY() + v2.getHeight());
+        Log.d("R1", " left = " + numberArray[0] + "," + " top = " + numberArray[1] +
+                " right = " + v1.getRight() + "," + " bottom = " + v1.getBottom()
+        );
         return R1.intersect(R2);
     }
 
