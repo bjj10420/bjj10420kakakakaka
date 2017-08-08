@@ -192,7 +192,10 @@ public class CalendarAdapter extends BaseAdapter
 			String color = null;
 			String opacity = null;			
 			String extraText = null;
-			
+
+			// 태그 첨부
+			convertView.setTag(String.valueOf(item));
+
 			if(item != null)
 			{
 
@@ -294,16 +297,6 @@ public class CalendarAdapter extends BaseAdapter
 				holder.checkMark.setVisibility(View.VISIBLE);
 				// 엑스트라 텍스트 설정
 				holder.extra.setText(extraText);
-				// 태그 첨부
-				convertView.setTag(String.valueOf(item));
-				// 이벤트 설정
-				convertView.setOnTouchListener(new OnTouchListener() {
-					@Override
-					public boolean onTouch(View v, MotionEvent event) {
-						Log.d("touchEventTest", String.valueOf(v.getTag()));
-						return true;
-					}
-				});
 
 			}
 			else
@@ -316,7 +309,15 @@ public class CalendarAdapter extends BaseAdapter
 		catch (Exception e)
 		{
 		}
-		
+
+		// 이벤트 설정
+		convertView.setOnTouchListener(new OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				Log.d("touchEventTest", String.valueOf(v.getTag()));
+				return true;
+			}
+		});
 		return convertView;
 	}
 	
