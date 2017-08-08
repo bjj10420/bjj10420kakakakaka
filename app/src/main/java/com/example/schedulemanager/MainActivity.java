@@ -46,7 +46,8 @@ public class MainActivity extends AppCompatActivity {
     private ViewPager calendarPager;                // 메인 캘린더 뷰 페이져 객체
     private HashMap<Integer, HashMap<Integer, Schedule>> scheduleMapByMonth;
                                                     // 달력월값을 키로 갖는 스케쥴 저장소
-
+    private HashMap<Integer, View> currentCalendarViewMap;
+                                                    // 현재 보고있는 달력의 각 칸을 저장해놓는 저장소
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -131,7 +132,8 @@ public class MainActivity extends AppCompatActivity {
         // 모든 스케쥴 데이터 로딩
         scheduleMapByMonth = new HashMap<Integer, HashMap<Integer, Schedule>>();
         dbHelper.selectAllSchedule(scheduleMapByMonth);
-    }
+        currentCalendarViewMap = new HashMap<Integer, View>();
+     }
 
     private void initUI() {
         //TODO 스트링 리스트 파라메터를 나중에 DB에서 읽어오게 해야 함
@@ -476,5 +478,9 @@ public class MainActivity extends AppCompatActivity {
 
     public void setCalendarRow(View calendarRow) {
         this.calendarRow = calendarRow;
+    }
+
+    public HashMap<Integer, View> getCurrentCalendarViewMap() {
+        return currentCalendarViewMap;
     }
 }

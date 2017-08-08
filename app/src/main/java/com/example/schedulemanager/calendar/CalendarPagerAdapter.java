@@ -13,6 +13,7 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 
+import com.example.schedulemanager.MainActivity;
 import com.example.schedulemanager.R;
 import com.example.schedulemanager.Schedule;
 
@@ -203,11 +204,11 @@ public class CalendarPagerAdapter extends PagerAdapter
 				convertView.setTag(holder);
 				views.put(position, convertView);
 			}
-			// 메인액티비티의 뷰저장소 클리어
 
+			// 메인액티비티의 뷰저장소 클리어
+			((MainActivity)mContext).getCurrentCalendarViewMap().clear();
 			// 달력을 셋팅한다.
 			setCalendar(position);
-			
 			// 페이저에 뷰를 붙인다.
 			((ViewPager) pager).addView(convertView, 0);
 		}
