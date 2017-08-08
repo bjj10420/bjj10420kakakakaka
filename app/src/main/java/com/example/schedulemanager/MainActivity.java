@@ -365,7 +365,7 @@ public class MainActivity extends AppCompatActivity {
 
     /**
      * 드래그시 최단거리인 달력 한칸의 색을 변경
-     * @param view
+     * @param calendarCellView
      */
     private void changeCalendarCellColor(View calendarCellView) {
         calendarCellView.setBackgroundColor(Color.parseColor("#c8c8c8"));
@@ -500,7 +500,10 @@ public class MainActivity extends AppCompatActivity {
      * 맵안에 저장되어 있는 모든 달력 칸과의 충돌 체크
      */
     public boolean checkCollisionForCalendarCell(){
+        // 저장소의 뷰들은 먼저 클리어
+        arroundViewGroup.clear();
         boolean isCellCollided = false;
+
         for (int dateKey : currentCalendarViewMap.keySet()){
             View calendarCellView = currentCalendarViewMap.get(dateKey);
             if(Util.checkCollisionForChildView(calendarCellView, copiedView)) {
