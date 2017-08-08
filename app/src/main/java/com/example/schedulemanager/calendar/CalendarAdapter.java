@@ -199,10 +199,10 @@ public class CalendarAdapter extends BaseAdapter
 			// 태그 첨부
 			convertView.setTag(String.valueOf(item));
 
-
 			if(item != null)
 			{
-				// 메인 저장소에 뷰 저장
+				// 메인 저장소에 뷰 저장( 전달이나 다음달 제외 )
+				if(!(position < firstItemIdx || position > lastItemIdx))
 				((MainActivity)mContext).getCurrentCalendarViewMap().put(item, convertView);
 
 				if(position == selectedItemIdx)
