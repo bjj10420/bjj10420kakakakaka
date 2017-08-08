@@ -199,11 +199,11 @@ public class CalendarAdapter extends BaseAdapter
 			// 태그 첨부
 			convertView.setTag(String.valueOf(item));
 
-			// 메인 저장소에 뷰 저장
-			((MainActivity)mContext).getCurrentCalendarViewMap().put(item, convertView);
 
 			if(item != null)
 			{
+				// 메인 저장소에 뷰 저장
+				((MainActivity)mContext).getCurrentCalendarViewMap().put(item, convertView);
 
 				if(position == selectedItemIdx)
 				{	// 선택된 날짜
@@ -300,8 +300,6 @@ public class CalendarAdapter extends BaseAdapter
 				// 스케쥴이 들어있는 날짜일경우
 				if(scheduleMapForCurrentPage.get(position - 1) != null) {
 					holder.checkMark.setVisibility(View.VISIBLE);
-					// 메인 액티비티에 임시저장
-					((MainActivity)mContext).setCalendarRow(convertView);
 					// 엑스트라 텍스트 설정
 					holder.extra.setText(extraText);
 				}

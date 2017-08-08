@@ -39,8 +39,6 @@ public class MainActivity extends AppCompatActivity {
     private View copiedView;                        // 드래그를 시작할 때 임시로 저장 해놓는 뷰
     private RelativeLayout totalLayout;             // 최상위 프레임 레이아웃
     private View centerIcon;                        // 중앙 아이콘 뷰
-
-    private View calendarRow;                       // 임시 저장용 달력칸
     private Typeface typeface;                      // 글꼴
     private View calendarLayout;                    // 메인 캘린더 레이아웃
     private ViewPager calendarPager;                // 메인 캘린더 뷰 페이져 객체
@@ -344,8 +342,8 @@ public class MainActivity extends AppCompatActivity {
                             if(centerIcon.getVisibility() == View.VISIBLE &&
                                     Util.checkCollision(centerIcon, copiedView)) addScheduleForToday(String.valueOf(view.getTag()));
                             // 메인 달력 활성화인 경우
-                            if(calendarRow != null && calendarRow.getVisibility() == View.VISIBLE &&
-                                    Util.checkCollisionForChildView(calendarRow, copiedView)) Log.d("calendarRowCollision!!!", "calendarRowCollision");
+                            if(centerIcon.getVisibility() == View.GONE &&
+                                    checkCollisionForCalendarCell()) Log.d("calendarRowCollision!!!", "calendarRowCollision");
                             changeCenterIconColor(false);
                             totalLayout.removeView(copiedView);
                             break;
@@ -467,6 +465,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * 맵안에 저장되어 있는 모든 달력 칸과의 충돌 체크
+     */
+    public boolean checkCollisionForCalendarCell(){
+        boolean isCellCollided = false;
+        for (int dateKey : currentCalendarViewMap.keySet()){
+            View calendarCellView = currentCalendarViewMap.get(dateKey);
+            if(Util.checkCollisionForChildView(calendarCellView, copiedView)) {
+                isCellCollided = true;
+                Log.d("충돌!!", dateKey + "일에서" + "충돌이 일어났습니다.");
+            }
+            }
+        return isCellCollided;
+    }
+
+    /**
      * 지정 글꼴 리턴
      * @return
      */
@@ -476,9 +489,6 @@ public class MainActivity extends AppCompatActivity {
         return mTypeface;
     }
 
-    public void setCalendarRow(View calendarRow) {
-        this.calendarRow = calendarRow;
-    }
 
     public HashMap<Integer, View> getCurrentCalendarViewMap() {
         return currentCalendarViewMap;
