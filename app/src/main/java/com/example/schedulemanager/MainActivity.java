@@ -343,7 +343,7 @@ public class MainActivity extends AppCompatActivity {
                                     Util.checkCollision(centerIcon, copiedView)) addScheduleForToday(String.valueOf(view.getTag()));
                             // 메인 달력 활성화인 경우
                             if(calendarRow != null && calendarRow.getVisibility() == View.VISIBLE &&
-                                    Util.checkCollision2(calendarRow, copiedView)) Log.d("calendarRowCollision!!!", "calendarRowCollision");
+                                    Util.checkCollisionForChildView(calendarRow, copiedView)) Log.d("calendarRowCollision!!!", "calendarRowCollision");
                             changeCenterIconColor(false);
                             totalLayout.removeView(copiedView);
                             break;

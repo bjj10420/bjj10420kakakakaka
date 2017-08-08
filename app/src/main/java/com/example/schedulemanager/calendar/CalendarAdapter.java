@@ -166,6 +166,7 @@ public class CalendarAdapter extends BaseAdapter
 	@Override
 	public View getView(int position, View convertView, ViewGroup parent)
 	{
+		Log.d("CalendarAdapter", "getView()");
 		ViewHolder holder = null;
 		//
 		try

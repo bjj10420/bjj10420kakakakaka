@@ -203,7 +203,8 @@ public class CalendarPagerAdapter extends PagerAdapter
 				convertView.setTag(holder);
 				views.put(position, convertView);
 			}
-			
+			// 메인액티비티의 뷰저장소 클리어
+
 			// 달력을 셋팅한다.
 			setCalendar(position);
 			

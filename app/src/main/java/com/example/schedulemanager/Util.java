@@ -44,7 +44,7 @@ public class Util {
      * @param v2
      * @return
      */
-    public static boolean checkCollision2(View v1, View v2) {
+    public static boolean checkCollisionForChildView(View v1, View v2) {
         int[] numberArray = new int[2];
         numberArray[0] = v1.getLeft();
         numberArray[1] = v1.getTop();
