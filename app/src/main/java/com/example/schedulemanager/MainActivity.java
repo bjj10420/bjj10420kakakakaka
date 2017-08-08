@@ -28,14 +28,13 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
     private HashMap<String, String> iconNameMap;    // 해당하는 텍스트에 매칭시키는 아이콘명이 저장되는 맵
-    private View.OnTouchListener touchListener;     // 드래그 터치 리스너
     private float dX;                               // 드래그 시의 X좌표
     private float dY;                               // 드래그 시의 Y좌표
-    private int lastAction;
     private View copiedView;                        // 드래그를 시작할 때 임시로 저장 해놓는 뷰
     private RelativeLayout totalLayout;             // 최상위 프레임 레이아웃
     private View centerIcon;                        // 중앙 아이콘 뷰
@@ -46,6 +45,9 @@ public class MainActivity extends AppCompatActivity {
                                                     // 달력월값을 키로 갖는 스케쥴 저장소
     private HashMap<Integer, View> currentCalendarViewMap;
                                                     // 현재 보고있는 달력의 각 칸을 저장해놓는 저장소
+    private HashMap<Integer, View> arroundViewGroup;
+                                                    // 드래그중에 포인터주위의 뷰들
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -131,6 +133,7 @@ public class MainActivity extends AppCompatActivity {
         scheduleMapByMonth = new HashMap<Integer, HashMap<Integer, Schedule>>();
         dbHelper.selectAllSchedule(scheduleMapByMonth);
         currentCalendarViewMap = new HashMap<Integer, View>();
+        arroundViewGroup = new HashMap<Integer, View>();
      }
 
     private void initUI() {
@@ -343,7 +346,10 @@ public class MainActivity extends AppCompatActivity {
                                     Util.checkCollision(centerIcon, copiedView)) addScheduleForToday(String.valueOf(view.getTag()));
                             // 메인 달력 활성화인 경우
                             if(centerIcon.getVisibility() == View.GONE &&
-                                    checkCollisionForCalendarCell()) Log.d("calendarRowCollision!!!", "calendarRowCollision");
+                                    checkCollisionForCalendarCell()) {
+                                    Log.d("calendarRowCollision!!!", "calendarRowCollision");
+                                    changeCalendarCellColor(arroundViewGroup.get(findTheClosestView()));
+                            }
                             changeCenterIconColor(false);
                             totalLayout.removeView(copiedView);
                             break;
@@ -355,6 +361,32 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    /**
+     * 드래그시 최단거리인 달력 한칸의 색을 변경
+     * @param view
+     */
+    private void changeCalendarCellColor(View calendarCellView) {
+        calendarCellView.setBackgroundColor(Color.parseColor("#c8c8c8"));
+    }
+
+    /**
+     * 저장소에 있는 모든 뷰중에 최단거리를 추출
+     */
+    private int findTheClosestView() {
+        int count = 0;
+        int min = 0;
+
+        for(int distance : arroundViewGroup.keySet()) {
+            if(count == 0) min = distance;
+            else {
+                if(distance < min)
+                    min = distance;
+            }
+            count++;
+        }
+        return min;
     }
 
     /**
@@ -473,8 +505,10 @@ public class MainActivity extends AppCompatActivity {
             View calendarCellView = currentCalendarViewMap.get(dateKey);
             if(Util.checkCollisionForChildView(calendarCellView, copiedView)) {
                 isCellCollided = true;
-                Log.d("충돌!!", dateKey + "일에서" + "충돌이 일어났습니다.");
-                Log.d("충돌거리!!", String.valueOf(Util.getDistanceFromTwoPoints(calendarCellView.getX(), calendarCellView.getY(),copiedView.getX(), copiedView.getY())));
+                // 후보군 저장소에 저장
+                arroundViewGroup.put((int) Util.getDistanceFromTwoPoints(
+                        calendarCellView.getX(), calendarCellView.getY(), copiedView.getX(), copiedView.getY()),
+                        calendarCellView);
             }
             }
         return isCellCollided;
