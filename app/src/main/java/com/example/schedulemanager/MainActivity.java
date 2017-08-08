@@ -338,14 +338,12 @@ public class MainActivity extends AppCompatActivity {
                             break;
 
                         case MotionEvent.ACTION_UP:
-//                            if(checkCollision(centerIcon, copiedView))
-
-                            if(calendarRow != null) {
-                                Log.d("calendarRow", "calendarRow X" + calendarRow.getX());
-                                Log.d("calendarRow", "calendarRow Y" + calendarRow.getY());
-                            }
-//                            if(Util.checkCollision(centerIcon, copiedView)) addScheduleForToday(String.valueOf(view.getTag()));
-                            if(Util.checkCollision(calendarRow, copiedView)) Log.d("calendarRowCollision!!!", "calendarRowCollision");
+                            // 중앙 아이콘 활성화인 경우
+                            if(centerIcon.getVisibility() == View.VISIBLE &&
+                                    Util.checkCollision(centerIcon, copiedView)) addScheduleForToday(String.valueOf(view.getTag()));
+                            // 메인 달력 활성화인 경우
+                            if(calendarRow != null && calendarRow.getVisibility() == View.VISIBLE &&
+                                    Util.checkCollision2(calendarRow, copiedView)) Log.d("calendarRowCollision!!!", "calendarRowCollision");
                             changeCenterIconColor(false);
                             totalLayout.removeView(copiedView);
                             break;
@@ -385,6 +383,7 @@ public class MainActivity extends AppCompatActivity {
 
         // DB에 삽입
         long resultNum = DBHelper.dbHelper.insertSchedule(newSchedule);
+        Log.d(tagName + "을", " 삽입하였습니다");
     }
 
     /**

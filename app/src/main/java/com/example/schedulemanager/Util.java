@@ -27,12 +27,24 @@ public class Util {
     }
 
     /**
-     * 두 뷰의 충돌 판정을 체크
+     * 두 뷰의 충돌 판정을 체크 (v1이 최상위 레이아웃의 자식인 경우)
      * @param v1
      * @param v2
      * @return
      */
     public static boolean checkCollision(View v1, View v2) {
+        Rect R1=new Rect(v1.getLeft(), v1.getTop(), v1.getRight(), v1.getBottom());
+        Rect R2=new Rect((int)v2.getTranslationX(), (int)v2.getTranslationY(), (int)v2.getTranslationX() + v2.getWidth(), (int)v2.getTranslationY() + v2.getHeight());
+        return R1.intersect(R2);
+    }
+
+    /**
+     * 두 뷰의 충돌 판정을 체크 (v1이 다른레이아웃의 자식인 경우)
+     * @param v1
+     * @param v2
+     * @return
+     */
+    public static boolean checkCollision2(View v1, View v2) {
         int[] numberArray = new int[2];
         numberArray[0] = v1.getLeft();
         numberArray[1] = v1.getTop();
@@ -40,9 +52,6 @@ public class Util {
         v1.getLocationInWindow(numberArray);
         Rect R1=new Rect(numberArray[0], numberArray[1], numberArray[0] + v1.getWidth(), numberArray[1] + v1.getHeight());
         Rect R2=new Rect((int)v2.getTranslationX(), (int)v2.getTranslationY(), (int)v2.getTranslationX() + v2.getWidth(), (int)v2.getTranslationY() + v2.getHeight());
-        Log.d("R1", " left = " + numberArray[0] + "," + " top = " + numberArray[1] +
-                " right = " + v1.getRight() + "," + " bottom = " + v1.getBottom()
-        );
         return R1.intersect(R2);
     }
 
