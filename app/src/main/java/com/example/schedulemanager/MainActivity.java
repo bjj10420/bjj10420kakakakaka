@@ -334,7 +334,6 @@ public class MainActivity extends AppCompatActivity {
                             copiedView.setX(event.getRawX() + dX);
                             boolean isCollided = Util.checkCollision(centerIcon, copiedView);
                             changeCenterIconColor(isCollided);
-
                             break;
 
                         case MotionEvent.ACTION_UP:
