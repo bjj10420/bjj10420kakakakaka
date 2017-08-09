@@ -177,7 +177,7 @@ public class CalendarPagerAdapter extends PagerAdapter
 		try
 		{
 			convertView = views.get(position);
-			
+
 			if(convertView == null)
 			{
 				convertView = mInflater.inflate(R.layout.rail_adapter_calendar, null);
