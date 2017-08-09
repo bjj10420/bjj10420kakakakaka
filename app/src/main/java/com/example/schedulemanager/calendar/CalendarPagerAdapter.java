@@ -658,4 +658,8 @@ public class CalendarPagerAdapter extends PagerAdapter
 	public CalendarAdapter[] getAdapters() {
 		return adapters;
 	}
+
+	public SparseArray<View> getViews() {
+		return views;
+	}
 }
