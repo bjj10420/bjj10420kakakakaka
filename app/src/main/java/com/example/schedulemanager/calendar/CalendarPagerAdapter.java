@@ -293,6 +293,9 @@ public class CalendarPagerAdapter extends PagerAdapter
 				next.add(Calendar.DAY_OF_MONTH, 30);
 			}
 
+			// 필드로 base값저장
+			this.baseCal = base;
+
 			// 연월값을 가지고 생성시에 받은 스케쥴 맵에 해당하는 내부스케쥴맵값을 가지고 온다.
 			// base값을 이용
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyyMM", Locale.getDefault());

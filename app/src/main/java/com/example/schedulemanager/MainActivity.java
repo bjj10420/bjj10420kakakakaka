@@ -28,7 +28,6 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -48,6 +47,8 @@ public class MainActivity extends AppCompatActivity {
     private HashMap<Integer, View> arroundViewGroup;
                                                     // 드래그중에 포인터주위의 뷰들
     private View closestView;                       // 드래그 이벤트 도중 포인터주위의 가장 가까운 뷰
+    private CalendarPagerAdapter calendarPagerAdapter;
+                                                    // 메인 캘린더 페이져 어댑터
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -68,22 +69,22 @@ public class MainActivity extends AppCompatActivity {
      * 달력 셋팅, 초기화
      */
     private void initCalndar() {
-        final CalendarPagerAdapter calendarAdapter = new CalendarPagerAdapter(this, typeface);
+        calendarPagerAdapter = new CalendarPagerAdapter(this, typeface);
 
         // 달력 구성 어댑터 생성 및 셋팅
-        calendarAdapter.initCalendar();
-        calendarAdapter.notifyDataSetChanged();
+        calendarPagerAdapter.initCalendar();
+        calendarPagerAdapter.notifyDataSetChanged();
         calendarPager = (ViewPager) findViewById(R.id.timetable_param_setter_calendar_viewpager);
         // 스케쥴 맵 전달
-        calendarAdapter.setScheduleMapByMonth(scheduleMapByMonth);
-        calendarPager.setAdapter(calendarAdapter);
+        calendarPagerAdapter.setScheduleMapByMonth(scheduleMapByMonth);
+        calendarPager.setAdapter(calendarPagerAdapter);
         // 달력에 연도, 월 표시
         calendarPager.setCurrentItem(12);
         final TextView calendarDateText =  (TextView) findViewById(R.id.timetable_param_setter_calendar_date);
         calendarDateText.setTypeface(typeface);
-        setCalendarTitleDate(calendarDateText, calendarAdapter, 12);
+        setCalendarTitleDate(calendarDateText, calendarPagerAdapter, 12);
         // 이벤트 리스너 추가
-        setPagingEvent(calendarDateText, calendarAdapter);
+        setPagingEvent(calendarDateText, calendarPagerAdapter);
     }
 
     private void setPagingEvent(final TextView calendarDateText, final CalendarPagerAdapter calendarAdapter) {
@@ -355,11 +356,14 @@ public class MainActivity extends AppCompatActivity {
                                 addScheduleForToday(String.valueOf(view.getTag()));
                             }
                             // 메인 달력 활성화인 경우
-                            if(centerIcon.getVisibility() == View.GONE) {
+                            if(centerIcon.getVisibility() == View.GONE &&
+                                closestView != null) {
                                 closestView.setBackgroundColor(Color.parseColor("#ffffff"));
+                                Log.d("메인 달력 액션업 이벤트", String.valueOf(calendarPagerAdapter.getBaseCal().get(Calendar.YEAR))
+                                + "." + String.valueOf(calendarPagerAdapter.getBaseCal().get(Calendar.MONTH))
+                                );
                                 closestView = null;
                             }
-
                             changeCenterIconColor(false);
                             // 카피된 아이콘 제거
                             totalLayout.removeView(copiedView);
