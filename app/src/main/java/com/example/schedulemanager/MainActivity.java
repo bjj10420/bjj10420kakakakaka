@@ -359,6 +359,8 @@ public class MainActivity extends AppCompatActivity {
                             if(centerIcon.getVisibility() == View.GONE &&
                                 closestView != null) {
                                 closestView.setBackgroundColor(Color.parseColor("#ffffff"));
+                                addScheduleForTheDate(String.valueOf(view.getTag()));
+
                                 Log.d("메인 달력 액션업 이벤트", String.valueOf(calendarPagerAdapter.getBaseCal().get(Calendar.YEAR))
                                 + "." + String.valueOf(calendarPagerAdapter.getBaseCal().get(Calendar.MONTH))
                                 );
@@ -443,6 +445,39 @@ public class MainActivity extends AppCompatActivity {
         Log.d(tagName + "을", " 삽입하였습니다");
     }
 
+    /**
+     * 스케쥴 버튼을 드래그하여 메인 캘린더의 한칸으로 가져갔을때 추가
+     * @param tagName
+     */
+    private void addScheduleForTheDate(String tagName) {
+//        String dateString = String.valueOf(calendarPagerAdapter.getBaseCal().get(Calendar.YEAR)) +
+//                String.valueOf(calendarPagerAdapter.getBaseCal().get(Calendar.MONTH)) + closestView.getTag();
+//        Log.d("dateString확인", dateString);
+        // 해당 날짜
+        Date dateOfTheDay = calendarPagerAdapter.getBaseCal().getTime();
+        DateFormat dateFormatter = new SimpleDateFormat("yyyyMM");
+        String dateString = dateFormatter.format(dateOfTheDay) + closestView.getTag();
+        // 넘버
+        int number = DBHelper.dbHelper.getScheduleCountForToday(dateString);
+        Log.d("number체크 ", String.valueOf(number));
+
+        // 이름
+        String activityName = tagName;
+
+        // 삽입할 스케쥴 데이터 객체 생성
+        Schedule newSchedule = new Schedule();
+        newSchedule.setNo(number == 0 ? 1 : number);
+        newSchedule.setDate(dateString);
+        newSchedule.setActivityName(activityName);
+        //TODO 나머지 order, time, memo는 일단 공란
+        newSchedule.setOrder(0);
+        newSchedule.setTime("");
+        newSchedule.setMemo("");
+
+        // DB에 삽입
+        long resultNum = DBHelper.dbHelper.insertSchedule(newSchedule);
+        Log.d(tagName + "을", " 삽입하였습니다 dateString = " + dateString);
+    }
     /**
      * 지정된 뷰의 복사본을 만들어 최상위 프레임레이아웃의 자식으로 보냄
      * @param view

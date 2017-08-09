@@ -76,7 +76,8 @@ public class DBHelper extends SQLiteOpenHelper {
     public long insertSchedule(Schedule schedule){
         ContentValues values = new ContentValues();
         values.clear();
-        values.put(no_colum, schedule.getNo());
+        //TODO no에서 sqlite 에러가 나서 이쪽을 막고 나중에 같은 date값을 order로 표시하게
+//        values.put(no_colum, schedule.getNo());
         values.put(dateValue_colum, schedule.getDate());
         values.put(activityName_colum, schedule.getActivityName());
         values.put(orderValue_colum, schedule.getOrder());
