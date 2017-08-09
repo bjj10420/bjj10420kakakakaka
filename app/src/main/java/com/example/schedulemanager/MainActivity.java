@@ -279,7 +279,6 @@ public class MainActivity extends AppCompatActivity {
 
         currentPage = calendarPager.getCurrentItem();
         calendarPager.setCurrentItem(currentPage + keyValue, true);
-
     }
 
     private void setBackBtnClickEvent() {
@@ -311,6 +310,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private void setDragEvent(final int buttonPanelId) {
         LinearLayout buttonPanel = (LinearLayout) findViewById(buttonPanelId);
+
         for(int i = 0; i < buttonPanel.getChildCount(); i++){
             View buttonView = buttonPanel.getChildAt(i);
             buttonView.setOnTouchListener(new View.OnTouchListener() {
@@ -330,7 +330,7 @@ public class MainActivity extends AppCompatActivity {
                             break;
 
                         case MotionEvent.ACTION_MOVE:
-                                if(copiedView.getVisibility() == View.GONE){
+                            if(copiedView.getVisibility() == View.GONE){
                                 copiedView.setAlpha(0.7f);
                                 copiedView.setVisibility(View.VISIBLE);
                             }
@@ -343,12 +343,12 @@ public class MainActivity extends AppCompatActivity {
                         case MotionEvent.ACTION_UP:
                             // 중앙 아이콘 활성화인 경우
                             if(centerIcon.getVisibility() == View.VISIBLE &&
-                                    Util.checkCollision(centerIcon, copiedView)) addScheduleForToday(String.valueOf(view.getTag()));
+                                Util.checkCollision(centerIcon, copiedView)) addScheduleForToday(String.valueOf(view.getTag()));
                             // 메인 달력 활성화인 경우
                             if(centerIcon.getVisibility() == View.GONE &&
-                                    checkCollisionForCalendarCell()) {
-                                    Log.d("calendarRowCollision!!!", "calendarRowCollision");
-                                    changeCalendarCellColor(arroundViewGroup.get(findTheClosestView()));
+                                checkCollisionForCalendarCell()) {
+                                Log.d("calendarRowCollision!!!", "calendarRowCollision");
+                                changeCalendarCellColor(arroundViewGroup.get(findTheClosestView()));
                             }
                             changeCenterIconColor(false);
                             totalLayout.removeView(copiedView);
