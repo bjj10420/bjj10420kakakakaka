@@ -344,7 +344,7 @@ public class MainActivity extends AppCompatActivity {
                             }
                             if(centerIcon.getVisibility() == View.GONE &&
                                     checkCollisionForCalendarCell()) {
-                                Log.d("calendarRowCollision!!!", "calendarRowCollision");
+//                                Log.d("calendarRowCollision!!!", "calendarRowCollision");
                                 changeCalendarCellColor(arroundViewGroup.get(findTheClosestView()));
                             }
                             break;
@@ -450,23 +450,16 @@ public class MainActivity extends AppCompatActivity {
      * @param tagName
      */
     private void addScheduleForTheDate(String tagName) {
-//        String dateString = String.valueOf(calendarPagerAdapter.getBaseCal().get(Calendar.YEAR)) +
-//                String.valueOf(calendarPagerAdapter.getBaseCal().get(Calendar.MONTH)) + closestView.getTag();
-//        Log.d("dateString확인", dateString);
-        // 해당 날짜
-        Date dateOfTheDay = calendarPagerAdapter.getBaseCal().getTime();
-        DateFormat dateFormatter = new SimpleDateFormat("yyyyMM");
-        String dateString = dateFormatter.format(dateOfTheDay) + closestView.getTag();
-        // 넘버
-        int number = DBHelper.dbHelper.getScheduleCountForToday(dateString);
-        Log.d("number체크 ", String.valueOf(number));
+        int baseCalMonth = calendarPagerAdapter.getBaseCal().get(Calendar.MONTH);
+        String baseCalMonthString = baseCalMonth < 10 ? "0" + baseCalMonth : String.valueOf(baseCalMonth);
+        String dateString = String.valueOf(calendarPagerAdapter.getBaseCal().get(Calendar.YEAR)) +
+                baseCalMonthString + closestView.getTag();
 
         // 이름
         String activityName = tagName;
 
         // 삽입할 스케쥴 데이터 객체 생성
         Schedule newSchedule = new Schedule();
-        newSchedule.setNo(number == 0 ? 1 : number);
         newSchedule.setDate(dateString);
         newSchedule.setActivityName(activityName);
         //TODO 나머지 order, time, memo는 일단 공란
