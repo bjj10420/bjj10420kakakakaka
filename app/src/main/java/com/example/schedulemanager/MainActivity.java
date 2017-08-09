@@ -278,9 +278,7 @@ public class MainActivity extends AppCompatActivity {
      */
     private void pageCalendar(View v) {
         int currentPage = -1;
-
         int keyValue = v.getId() == R.id.timetable_param_setter_calendar_prev ? -1 : +1;
-
         currentPage = calendarPager.getCurrentItem();
         calendarPager.setCurrentItem(currentPage + keyValue, true);
     }
@@ -466,8 +464,9 @@ public class MainActivity extends AppCompatActivity {
     private void addScheduleForTheDate(String tagName) {
         int baseCalMonth = calendarPagerAdapter.getBaseCal().get(Calendar.MONTH);
         String baseCalMonthString = baseCalMonth < 10 ? "0" + baseCalMonth : String.valueOf(baseCalMonth);
+        String baseCalDateString = String.valueOf(Integer.parseInt(String.valueOf(closestView.getTag())) < 10 ? "0" + closestView.getTag() : closestView.getTag());
         String dateString = String.valueOf(calendarPagerAdapter.getBaseCal().get(Calendar.YEAR)) +
-                baseCalMonthString + closestView.getTag();
+                baseCalMonthString + baseCalDateString;
 
         // 이름
         String activityName = tagName;
