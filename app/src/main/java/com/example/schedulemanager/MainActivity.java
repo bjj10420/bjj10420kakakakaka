@@ -351,9 +351,17 @@ public class MainActivity extends AppCompatActivity {
                         case MotionEvent.ACTION_UP:
                             // 중앙 아이콘 활성화인 경우
                             if(centerIcon.getVisibility() == View.VISIBLE &&
-                                Util.checkCollision(centerIcon, copiedView)) addScheduleForToday(String.valueOf(view.getTag()));
+                                Util.checkCollision(centerIcon, copiedView)) {
+                                addScheduleForToday(String.valueOf(view.getTag()));
+                            }
                             // 메인 달력 활성화인 경우
+                            if(centerIcon.getVisibility() == View.GONE) {
+                                closestView.setBackgroundColor(Color.parseColor("#ffffff"));
+                                closestView = null;
+                            }
+
                             changeCenterIconColor(false);
+                            // 카피된 아이콘 제거
                             totalLayout.removeView(copiedView);
                             break;
 
