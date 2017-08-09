@@ -47,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
                                                     // 현재 보고있는 달력의 각 칸을 저장해놓는 저장소
     private HashMap<Integer, View> arroundViewGroup;
                                                     // 드래그중에 포인터주위의 뷰들
+    private View closestView;                       // 드래그 이벤트 도중 포인터주위의 가장 가까운 뷰
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -336,8 +337,15 @@ public class MainActivity extends AppCompatActivity {
                             }
                             copiedView.setY(event.getRawY() + dY);
                             copiedView.setX(event.getRawX() + dX);
-                            boolean isCollided = Util.checkCollision(centerIcon, copiedView);
-                            changeCenterIconColor(isCollided);
+                            if(centerIcon.getVisibility() == View.VISIBLE){
+                                boolean isCollided = Util.checkCollision(centerIcon, copiedView);
+                                changeCenterIconColor(isCollided);
+                            }
+                            if(centerIcon.getVisibility() == View.GONE &&
+                                    checkCollisionForCalendarCell()) {
+                                Log.d("calendarRowCollision!!!", "calendarRowCollision");
+                                changeCalendarCellColor(arroundViewGroup.get(findTheClosestView()));
+                            }
                             break;
 
                         case MotionEvent.ACTION_UP:
@@ -345,11 +353,6 @@ public class MainActivity extends AppCompatActivity {
                             if(centerIcon.getVisibility() == View.VISIBLE &&
                                 Util.checkCollision(centerIcon, copiedView)) addScheduleForToday(String.valueOf(view.getTag()));
                             // 메인 달력 활성화인 경우
-                            if(centerIcon.getVisibility() == View.GONE &&
-                                checkCollisionForCalendarCell()) {
-                                Log.d("calendarRowCollision!!!", "calendarRowCollision");
-                                changeCalendarCellColor(arroundViewGroup.get(findTheClosestView()));
-                            }
                             changeCenterIconColor(false);
                             totalLayout.removeView(copiedView);
                             break;
@@ -368,8 +371,18 @@ public class MainActivity extends AppCompatActivity {
      * @param calendarCellView
      */
     private void changeCalendarCellColor(View calendarCellView) {
-        calendarCellView.setBackgroundColor(Color.parseColor("#c8c8c8"));
-    }
+        // 1. 원래 있는 경우 기존셀을 원복, 새로운 곳에는 색을 + 저장
+        if(closestView != null) {
+            closestView.setBackgroundColor(Color.parseColor("#ffffff"));
+            calendarCellView.setBackgroundColor(Color.parseColor("#c8c8c8"));
+            closestView = calendarCellView;
+        }
+        // 2. 첫 변화
+        else {
+            calendarCellView.setBackgroundColor(Color.parseColor("#c8c8c8"));
+            closestView = calendarCellView;
+        }
+        }
 
     /**
      * 저장소에 있는 모든 뷰중에 최단거리를 추출
