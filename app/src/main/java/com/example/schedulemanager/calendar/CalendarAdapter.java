@@ -39,8 +39,7 @@ public class CalendarAdapter extends BaseAdapter
 	
 	private List<Integer> 			calendarItems;
 	private HashMap<Integer, Schedule> scheduleMapForCurrentPage;
-	private float dX;
-	private float dY;
+
 
 
 	public CalendarAdapter(Context context, Typeface typeface)

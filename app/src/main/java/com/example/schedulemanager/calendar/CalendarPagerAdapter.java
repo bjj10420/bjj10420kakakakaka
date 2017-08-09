@@ -42,10 +42,8 @@ public class CalendarPagerAdapter extends PagerAdapter
 	
 	private Calendar						thisCal;
 	private Calendar						nextCal;
-	private List<Integer>					list1;
-	private List<Integer>					list2;
-	private List<Integer>					list3;
-	private List<Integer>					list4;
+	private Calendar						baseCal;
+
 	private CalendarAdapter[] 	adapters;
 	private SparseArray<View> 				views;
 	
@@ -649,4 +647,8 @@ public class CalendarPagerAdapter extends PagerAdapter
 	}
 
 	public Calendar getNextCal() { return nextCal; }
+
+	public Calendar getBaseCal() {
+		return baseCal;
+	}
 }
