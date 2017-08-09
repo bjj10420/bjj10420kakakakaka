@@ -44,7 +44,7 @@ public class CalendarPagerAdapter extends PagerAdapter
 	private Calendar						nextCal;
 	private Calendar						baseCal;
 
-	private CalendarAdapter[] 	adapters;
+	private CalendarAdapter[] 				adapters;
 	private SparseArray<View> 				views;
 	
 	private int								selectedYear		= -1;
@@ -653,5 +653,9 @@ public class CalendarPagerAdapter extends PagerAdapter
 
 	public Calendar getBaseCal() {
 		return baseCal;
+	}
+
+	public CalendarAdapter[] getAdapters() {
+		return adapters;
 	}
 }

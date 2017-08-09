@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     private View closestView;                       // 드래그 이벤트 도중 포인터주위의 가장 가까운 뷰
     private CalendarPagerAdapter calendarPagerAdapter;
                                                     // 메인 캘린더 페이져 어댑터
+    private DBHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,7 +121,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initData() {
-         DBHelper dbHelper = new DBHelper(this);
+         dbHelper = new DBHelper(this);
         /**
          * 1. favorite테이블에서 메인에 등록된 버튼들의 정보를 로딩
          * 2. hashMap에다 해당 text를 키로 하여 데이터에 아이콘명을 추가
@@ -360,7 +361,7 @@ public class MainActivity extends AppCompatActivity {
                                 closestView != null) {
                                 closestView.setBackgroundColor(Color.parseColor("#ffffff"));
                                 addScheduleForTheDate(String.valueOf(view.getTag()));
-
+                                refreshCalendar();
                                 Log.d("메인 달력 액션업 이벤트", String.valueOf(calendarPagerAdapter.getBaseCal().get(Calendar.YEAR))
                                 + "." + String.valueOf(calendarPagerAdapter.getBaseCal().get(Calendar.MONTH))
                                 );
@@ -378,6 +379,17 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    /**
+     * 메인 달력 갱신
+     */
+    private void refreshCalendar() {
+        dbHelper.selectAllSchedule(scheduleMapByMonth);
+        initCalndar();
+
+//        calendarPagerAdapter.getAdapters()[calendarPager.getCurrentItem()].notifyDataSetChanged();
+//        calendarPagerAdapter.notifyDataSetChanged();
     }
 
     /**
