@@ -343,7 +343,7 @@ public class MainActivity extends AppCompatActivity {
                                 changeCenterIconColor(isCollided);
                             }
                             if(centerIcon.getVisibility() == View.GONE &&
-                                    checkCollisionForCalendarCell()) {
+                                checkCollisionForCalendarCell()) {
 //                                Log.d("calendarRowCollision!!!", "calendarRowCollision");
                                 changeCalendarCellColor(arroundViewGroup.get(findTheClosestView()));
                             }
@@ -389,15 +389,17 @@ public class MainActivity extends AppCompatActivity {
         calendarPagerAdapter.getAdapters()[calendarPager.getCurrentItem()].notifyDataSetChanged();
         GridView calendarGridView = (GridView) calendarPagerAdapter.getViews().get(calendarPager.getCurrentItem()).findViewById(R.id.timetable_param_setter_calendar_gridview);
         calendarGridView.setAdapter(calendarPagerAdapter.getAdapters()[calendarPager.getCurrentItem()]);
-//        calendarPagerAdapter.notifyDataSetChanged();
+        //TODO 처음 데이터가 아무것도 없는 상태에서 갱신이 안되기때문에 추가 처리해줌
+        calendarPagerAdapter.notifyDataSetChanged();
+
     }
 
-    /**
-     * 드래그시 최단거리인 달력 한칸의 색을 변경
-     * @param calendarCellView
-     */
-    private void changeCalendarCellColor(View calendarCellView) {
-        // 1. 원래 있는 경우 기존셀을 원복, 새로운 곳에는 색을 + 저장
+        /**
+         * 드래그시 최단거리인 달력 한칸의 색을 변경
+         * @param calendarCellView
+         */
+        private void changeCalendarCellColor(View calendarCellView) {
+            // 1. 원래 있는 경우 기존셀을 원복, 새로운 곳에는 색을 + 저장
         if(closestView != null) {
             closestView.setBackgroundColor(Color.parseColor("#ffffff"));
             calendarCellView.setBackgroundColor(Color.parseColor("#c8c8c8"));
@@ -408,7 +410,7 @@ public class MainActivity extends AppCompatActivity {
             calendarCellView.setBackgroundColor(Color.parseColor("#c8c8c8"));
             closestView = calendarCellView;
         }
-        }
+    }
 
     /**
      * 저장소에 있는 모든 뷰중에 최단거리를 추출
