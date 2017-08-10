@@ -98,6 +98,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
                 setCalendarTitleDate(calendarDateText, calendarAdapter, position);
+                refreshCalendar();
+
             }
 
             @Override
