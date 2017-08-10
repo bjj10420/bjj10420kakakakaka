@@ -98,6 +98,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
                 setCalendarTitleDate(calendarDateText, calendarAdapter, position);
+                refreshCalendar();
             }
 
             @Override
@@ -385,13 +386,11 @@ public class MainActivity extends AppCompatActivity {
      */
     private void refreshCalendar() {
         dbHelper.selectAllSchedule(scheduleMapByMonth);
-
         calendarPagerAdapter.getAdapters()[calendarPager.getCurrentItem()].notifyDataSetChanged();
         GridView calendarGridView = (GridView) calendarPagerAdapter.getViews().get(calendarPager.getCurrentItem()).findViewById(R.id.timetable_param_setter_calendar_gridview);
         calendarGridView.setAdapter(calendarPagerAdapter.getAdapters()[calendarPager.getCurrentItem()]);
         //TODO 처음 데이터가 아무것도 없는 상태에서 갱신이 안되기때문에 추가 처리해줌
         calendarPagerAdapter.notifyDataSetChanged();
-
     }
 
         /**
