@@ -446,7 +446,7 @@ public class MainActivity extends AppCompatActivity {
     private void changeCalendarCellColor(View calendarCellView) {
         // 1. 원래 있는 경우 기존셀을 원복, 새로운 곳에는 색을 + 저장
         if(closestView != null) {
-            closestView.setBackgroundColor(Color.parseColor(isToday(closestView) ? "#f0f0f0": "#ffffff"));
+            closestView.setBackgroundColor(Color.parseColor(isToday(closestView) ? "#ffc000": "#ffffff"));
             calendarCellView.setBackgroundColor(Color.parseColor("#c8c8c8"));
             closestView = calendarCellView;
         }
