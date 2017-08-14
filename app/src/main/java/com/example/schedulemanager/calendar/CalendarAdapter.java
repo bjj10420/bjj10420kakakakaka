@@ -218,9 +218,8 @@ public class CalendarAdapter extends BaseAdapter
 					}
 					else
 					{
-						
 						extraText ="지금";
-						
+
 					}
 					
 					convertView.setBackgroundResource(R.drawable.rail_calendar_item_selected_bg);

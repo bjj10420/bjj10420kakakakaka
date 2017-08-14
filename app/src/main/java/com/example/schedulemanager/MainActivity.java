@@ -446,7 +446,7 @@ public class MainActivity extends AppCompatActivity {
     private void changeCalendarCellColor(View calendarCellView) {
         // 1. 원래 있는 경우 기존셀을 원복, 새로운 곳에는 색을 + 저장
         if(closestView != null) {
-            closestView.setBackgroundColor(Color.parseColor("#ffffff"));
+            closestView.setBackgroundColor(Color.parseColor(isToday(closestView) ? "#f0f0f0": "#ffffff"));
             calendarCellView.setBackgroundColor(Color.parseColor("#c8c8c8"));
             closestView = calendarCellView;
         }
@@ -455,6 +455,16 @@ public class MainActivity extends AppCompatActivity {
             calendarCellView.setBackgroundColor(Color.parseColor("#c8c8c8"));
             closestView = calendarCellView;
         }
+    }
+
+    /**
+     * 오늘 날짜라 선택되어 있는지 판단
+     * @param closestView
+     */
+    private boolean isToday(View closestView) {
+        // extraView가 활성화인지( 오늘이라 선택되어있는지 )
+        boolean isToday = !((TextView)((RelativeLayout) closestView).getChildAt(2)).getText().equals("");
+        return isToday;
     }
 
     /**
