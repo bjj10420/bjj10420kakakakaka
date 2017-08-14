@@ -347,17 +347,17 @@ public class MainActivity extends AppCompatActivity {
      * @param view
      */
     private void actionUpEvent(View view) {
-        // 취소 버튼 위에서 드래그
-        if(Util.checkCollisionForChildView(cancelBtn, copiedView)){
-            closestView.setBackgroundColor(Color.parseColor("#ffffff"));
-            closestView = null;
-        }
         // 중앙 아이콘 활성화인 경우
         if(centerIcon.getVisibility() == View.VISIBLE &&
                 Util.checkCollision(centerIcon, copiedView)) {
             addScheduleForToday(String.valueOf(view.getTag()));
         }
-        // 메인 달력 활성화인 경우
+        // 메인 달력 활성화 중 취소 버튼 위에서 마우스 업
+        if(Util.checkCollisionForChildView(cancelBtn, copiedView)){
+            closestView.setBackgroundColor(Color.parseColor("#ffffff"));
+            closestView = null;
+        }
+        // 메인 달력 활성화 중 캘린더 칸 위에서 마우스 업
         if(centerIcon.getVisibility() == View.GONE &&
                 closestView != null) {
             closestView.setBackgroundColor(Color.parseColor("#ffffff"));
