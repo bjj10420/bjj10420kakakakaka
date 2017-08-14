@@ -372,7 +372,7 @@ public class MainActivity extends AppCompatActivity {
         // 카피된 아이콘 제거
         totalLayout.removeView(copiedView);
     }
-
+//
     /**
      * 아이콘 버튼 드래그 중 이벤트
      * @param view
