@@ -322,55 +322,15 @@ public class MainActivity extends AppCompatActivity {
                 public boolean onTouch(View view, MotionEvent event) {
                     switch (event.getActionMasked()) {
                         case MotionEvent.ACTION_DOWN:
-                            totalLayout.removeView(copiedView);
-                            hoverView(view);
-                            dX = view.getX() - event.getRawX();
-                            dY = 0;
-                            if(buttonPanelId == R.id.buttonPanel)
-                                dY = view.getY() - event.getRawY();
-                            else
-                            //TODO 일단 Y값을 고정값으로 맞춰주었지만 수정해야함(원인 불명)
-                                dY = view.getY() - event.getRawY() + 2000;
+                            actionDownEvent(view, event, buttonPanelId);
                             break;
 
                         case MotionEvent.ACTION_MOVE:
-                            if(copiedView.getVisibility() == View.GONE){
-                                copiedView.setAlpha(0.7f);
-                                copiedView.setVisibility(View.VISIBLE);
-                            }
-                            copiedView.setY(event.getRawY() + dY);
-                            copiedView.setX(event.getRawX() + dX);
-                            if(centerIcon.getVisibility() == View.VISIBLE){
-                                boolean isCollided = Util.checkCollision(centerIcon, copiedView);
-                                changeCenterIconColor(isCollided);
-                            }
-                            if(centerIcon.getVisibility() == View.GONE &&
-                                checkCollisionForCalendarCell()) {
-//                                Log.d("calendarRowCollision!!!", "calendarRowCollision");
-                                changeCalendarCellColor(arroundViewGroup.get(findTheClosestView()));
-                            }
+                            actionMoveEvent(view, event);
                             break;
 
                         case MotionEvent.ACTION_UP:
-                            // 중앙 아이콘 활성화인 경우
-                            if(centerIcon.getVisibility() == View.VISIBLE &&
-                                Util.checkCollision(centerIcon, copiedView)) {
-                                addScheduleForToday(String.valueOf(view.getTag()));
-                            }
-                            // 메인 달력 활성화인 경우
-                            if(centerIcon.getVisibility() == View.GONE &&
-                                closestView != null) {
-                                closestView.setBackgroundColor(Color.parseColor("#ffffff"));
-                                addScheduleForTheDate(String.valueOf(view.getTag()));
-                                refreshCalendar();
-                                Log.d("메인 달력 액션업 이벤트", String.valueOf(calendarPagerAdapter.getBaseCal().get(Calendar.YEAR))
-                                + "." + String.valueOf(calendarPagerAdapter.getBaseCal().get(Calendar.MONTH))
-                                );
-                                closestView = null;
-                            }
-                            changeCenterIconColor(false);
-                            // 카피된 아이콘 제거
-                            totalLayout.removeView(copiedView);
+                            actionUpEvent(view, event);
                             break;
 
                         default:
@@ -380,6 +340,58 @@ public class MainActivity extends AppCompatActivity {
                 }
             });
         }
+    }
+
+    private void actionUpEvent(View view, MotionEvent event) {
+        // 중앙 아이콘 활성화인 경우
+        if(centerIcon.getVisibility() == View.VISIBLE &&
+                Util.checkCollision(centerIcon, copiedView)) {
+            addScheduleForToday(String.valueOf(view.getTag()));
+        }
+        // 메인 달력 활성화인 경우
+        if(centerIcon.getVisibility() == View.GONE &&
+                closestView != null) {
+            closestView.setBackgroundColor(Color.parseColor("#ffffff"));
+            addScheduleForTheDate(String.valueOf(view.getTag()));
+            refreshCalendar();
+            Log.d("메인 달력 액션업 이벤트", String.valueOf(calendarPagerAdapter.getBaseCal().get(Calendar.YEAR))
+                    + "." + String.valueOf(calendarPagerAdapter.getBaseCal().get(Calendar.MONTH))
+            );
+            closestView = null;
+        }
+        changeCenterIconColor(false);
+        // 카피된 아이콘 제거
+        totalLayout.removeView(copiedView);
+    }
+
+    private void actionMoveEvent(View view, MotionEvent event) {
+        if(copiedView.getVisibility() == View.GONE){
+            copiedView.setAlpha(0.7f);
+            copiedView.setVisibility(View.VISIBLE);
+        }
+        copiedView.setY(event.getRawY() + dY);
+        copiedView.setX(event.getRawX() + dX);
+        if(centerIcon.getVisibility() == View.VISIBLE){
+            boolean isCollided = Util.checkCollision(centerIcon, copiedView);
+            changeCenterIconColor(isCollided);
+        }
+        if(centerIcon.getVisibility() == View.GONE &&
+                checkCollisionForCalendarCell()) {
+//                                Log.d("calendarRowCollision!!!", "calendarRowCollision");
+            changeCalendarCellColor(arroundViewGroup.get(findTheClosestView()));
+        }
+    }
+
+    private void actionDownEvent(View view, MotionEvent event, int buttonPanelId) {
+        totalLayout.removeView(copiedView);
+        hoverView(view);
+        dX = view.getX() - event.getRawX();
+        dY = 0;
+        if(buttonPanelId == R.id.buttonPanel)
+            dY = view.getY() - event.getRawY();
+        else
+            //TODO 일단 Y값을 고정값으로 맞춰주었지만 수정해야함(원인 불명)
+            dY = view.getY() - event.getRawY() + 2000;
     }
 
     /**
