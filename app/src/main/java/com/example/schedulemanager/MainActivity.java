@@ -6,7 +6,9 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
+import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
+import android.graphics.drawable.PaintDrawable;
 import android.os.Build;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
@@ -48,6 +50,7 @@ public class MainActivity extends AppCompatActivity {
     private HashMap<Integer, View> arroundViewGroup;
                                                     // 드래그중에 포인터주위의 뷰들
     private View closestView;                       // 드래그 이벤트 도중 포인터주위의 가장 가까운 뷰
+    private int originalColorCode;               // 드래그 이벤트 시 캘린더 한칸의 본래 색상
     private CalendarPagerAdapter calendarPagerAdapter;
                                                     // 메인 캘린더 페이져 어댑터
     private DBHelper dbHelper;
@@ -354,13 +357,13 @@ public class MainActivity extends AppCompatActivity {
         }
         // 메인 달력 활성화 중 취소 버튼 위에서 마우스 업
         if(Util.checkCollisionForChildView(cancelBtn, copiedView)){
-            closestView.setBackgroundColor(Color.parseColor("#ffffff"));
+            closestView.setBackgroundColor(originalColorCode);
             closestView = null;
         }
         // 메인 달력 활성화 중 캘린더 칸 위에서 마우스 업
         if(centerIcon.getVisibility() == View.GONE &&
                 closestView != null) {
-            closestView.setBackgroundColor(Color.parseColor("#ffffff"));
+            closestView.setBackgroundColor(originalColorCode);
             addScheduleForTheDate(String.valueOf(view.getTag()));
             refreshCalendar();
             closestView = null;
@@ -395,7 +398,7 @@ public class MainActivity extends AppCompatActivity {
         if(centerIcon.getVisibility() == View.GONE && checkCollisionForCalendarCell()) {
             changeCalendarCellColor(arroundViewGroup.get(findTheClosestView()));
         }
-        // 하단 버튼 전환(뒤로가기 => X )
+        // 하단 버튼 전환( 뒤로가기 => X )
         changeBottomButton(true);
     }
 
@@ -446,14 +449,15 @@ public class MainActivity extends AppCompatActivity {
     private void changeCalendarCellColor(View calendarCellView) {
         // 1. 원래 있는 경우 기존셀을 원복, 새로운 곳에는 색을 + 저장
         if(closestView != null) {
-            closestView.setBackgroundColor(Color.parseColor("#ffffff"));
+            closestView.setBackgroundColor(originalColorCode);
             calendarCellView.setBackgroundColor(Color.parseColor("#c8c8c8"));
             closestView = calendarCellView;
         }
-        // 2. 첫 변화
+        // 2. 첫 변화 ( 뷰, 색 저장 )
         else {
-            calendarCellView.setBackgroundColor(Color.parseColor("#c8c8c8"));
             closestView = calendarCellView;
+            originalColorCode = calendarCellView.getDrawingCacheBackgroundColor();
+            calendarCellView.setBackgroundColor(Color.parseColor("#c8c8c8"));
         }
     }
 
