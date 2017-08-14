@@ -244,7 +244,13 @@ public class CalendarAdapter extends BaseAdapter
 						holder.extra.setVisibility(View.INVISIBLE);
 						
 						convertView.setOnTouchListener(nullTouchListener);
-						
+						convertView.setOnClickListener(new View.OnClickListener() {
+							@Override
+							public void onClick(View v) {
+
+							}
+						});
+
 						return convertView;
 					}
 					else

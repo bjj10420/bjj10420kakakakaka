@@ -67,6 +67,14 @@ public class MainActivity extends AppCompatActivity {
         initUI();
         initEvent();
         initCalndar();
+        initSchedule();
+    }
+
+    /**
+     * 스케쥴 화면 초기화
+     */
+    private void initSchedule() {
+
     }
 
     /**
