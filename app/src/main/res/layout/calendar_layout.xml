@@ -108,8 +108,8 @@
             android:layout_height="70dp"
             android:layout_alignParentBottom="true"
             android:background="#f0f0f0"
-            android:orientation="horizontal"
             android:gravity="center"
+            android:orientation="horizontal"
             android:paddingBottom="10dp"
             android:paddingLeft="8dp"
             android:paddingRight="8dp"
@@ -141,8 +141,8 @@
                 android:gravity="center"
                 android:text="뒤로가기"
                 android:textColor="#FFC000"
-                android:visibility="gone"
                 android:textSize="14dp" />
+
             <View
                 android:id="@+id/cancel_btn"
                 android:layout_width="30dp"
@@ -150,7 +150,8 @@
                 android:background="@drawable/cancel"
                 android:gravity="center"
                 android:textColor="#FFC000"
-                android:textSize="14dp" />
+                android:textSize="14dp"
+                android:visibility="gone" />
         </LinearLayout>
     </RelativeLayout>
 </LinearLayout>

@@ -51,6 +51,8 @@ public class MainActivity extends AppCompatActivity {
     private CalendarPagerAdapter calendarPagerAdapter;
                                                     // 메인 캘린더 페이져 어댑터
     private DBHelper dbHelper;
+    private View backBtn;                           // 하단 뒤로가기 버튼
+    private View cancelBtn;                         // 하단 X 버튼
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -160,13 +162,11 @@ public class MainActivity extends AppCompatActivity {
         initButtonPanel(R.id.buttonPanel, testList);
         initButtonPanel(R.id.buttonPanel2, testList2);
 
-        // 전체 레이아웃 설정
         totalLayout = (RelativeLayout) findViewById(R.id.totalLayout);
-        // 중앙의 스케쥴 아이콘
         centerIcon = findViewById(R.id.centerIcon);
-        // 캘린더 레이아웃 설정
         calendarLayout = findViewById(R.id.calendarLayout);
-
+        backBtn = findViewById(R.id.back_btn);
+        cancelBtn = findViewById(R.id.cancel_btn);
     }
 
     /**
@@ -330,7 +330,7 @@ public class MainActivity extends AppCompatActivity {
                             break;
 
                         case MotionEvent.ACTION_UP:
-                            actionUpEvent(view, event);
+                            actionUpEvent(view);
                             break;
 
                         default:
@@ -342,7 +342,16 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void actionUpEvent(View view, MotionEvent event) {
+    /**
+     * 아이콘 버튼 드래그 중 업할때 이벤트
+     * @param view
+     */
+    private void actionUpEvent(View view) {
+        // 취소 버튼 위에서 드래그
+        if(Util.checkCollisionForChildView(cancelBtn, copiedView)){
+            closestView.setBackgroundColor(Color.parseColor("#ffffff"));
+            closestView = null;
+        }
         // 중앙 아이콘 활성화인 경우
         if(centerIcon.getVisibility() == View.VISIBLE &&
                 Util.checkCollision(centerIcon, copiedView)) {
@@ -354,34 +363,56 @@ public class MainActivity extends AppCompatActivity {
             closestView.setBackgroundColor(Color.parseColor("#ffffff"));
             addScheduleForTheDate(String.valueOf(view.getTag()));
             refreshCalendar();
-            Log.d("메인 달력 액션업 이벤트", String.valueOf(calendarPagerAdapter.getBaseCal().get(Calendar.YEAR))
-                    + "." + String.valueOf(calendarPagerAdapter.getBaseCal().get(Calendar.MONTH))
-            );
             closestView = null;
         }
+        // 중앙 아이콘 컬러 복구( 메인모드시 )
         changeCenterIconColor(false);
+        // 하단 버튼 복구
+        changeBottomButton(false);
         // 카피된 아이콘 제거
         totalLayout.removeView(copiedView);
     }
 
+    /**
+     * 아이콘 버튼 드래그 중 이벤트
+     * @param view
+     * @param event
+     */
     private void actionMoveEvent(View view, MotionEvent event) {
+        // 복사된 뷰 표시
         if(copiedView.getVisibility() == View.GONE){
             copiedView.setAlpha(0.7f);
             copiedView.setVisibility(View.VISIBLE);
         }
         copiedView.setY(event.getRawY() + dY);
         copiedView.setX(event.getRawX() + dX);
+        // 메인모드 처리
         if(centerIcon.getVisibility() == View.VISIBLE){
             boolean isCollided = Util.checkCollision(centerIcon, copiedView);
             changeCenterIconColor(isCollided);
         }
-        if(centerIcon.getVisibility() == View.GONE &&
-                checkCollisionForCalendarCell()) {
-//                                Log.d("calendarRowCollision!!!", "calendarRowCollision");
+        // 캘린더모드 처리
+        if(centerIcon.getVisibility() == View.GONE && checkCollisionForCalendarCell()) {
             changeCalendarCellColor(arroundViewGroup.get(findTheClosestView()));
         }
+        // 하단 버튼 전환(뒤로가기 => X )
+        changeBottomButton(true);
     }
 
+    /**
+     * 아이콘 버튼 드래그시 바텀버튼 전환
+     */
+    private void changeBottomButton(boolean isBackBtnVisible) {
+        backBtn.setVisibility(isBackBtnVisible ? View.GONE : View.VISIBLE);
+        cancelBtn.setVisibility(isBackBtnVisible ? View.VISIBLE : View.GONE);
+    }
+
+    /**
+     * 아이콘 버튼 터치 다운시 이벤트
+     * @param view
+     * @param event
+     * @param buttonPanelId
+     */
     private void actionDownEvent(View view, MotionEvent event, int buttonPanelId) {
         totalLayout.removeView(copiedView);
         hoverView(view);
