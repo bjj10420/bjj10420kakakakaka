@@ -93,13 +93,13 @@ public class MainActivity extends AppCompatActivity {
         calendarPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-            }//
+            }
 
             @Override
             public void onPageSelected(int position) {
+                currentCalendarViewMap.clear();
                 setCalendarTitleDate(calendarDateText, calendarAdapter, position);
                 refreshCalendar();
-
             }
 
             @Override
@@ -388,20 +388,20 @@ public class MainActivity extends AppCompatActivity {
     private void refreshCalendar() {
         dbHelper.selectAllSchedule(scheduleMapByMonth);
 
+        // 어댑터 업데이트
         calendarPagerAdapter.getAdapters()[calendarPager.getCurrentItem()].notifyDataSetChanged();
         GridView calendarGridView = (GridView) calendarPagerAdapter.getViews().get(calendarPager.getCurrentItem()).findViewById(R.id.timetable_param_setter_calendar_gridview);
         calendarGridView.setAdapter(calendarPagerAdapter.getAdapters()[calendarPager.getCurrentItem()]);
         //TODO 처음 데이터가 아무것도 없는 상태에서 갱신이 안되기때문에 추가 처리해줌
         calendarPagerAdapter.notifyDataSetChanged();
-
     }
 
-        /**
-         * 드래그시 최단거리인 달력 한칸의 색을 변경
-         * @param calendarCellView
-         */
-        private void changeCalendarCellColor(View calendarCellView) {
-            // 1. 원래 있는 경우 기존셀을 원복, 새로운 곳에는 색을 + 저장
+    /**
+    * 드래그시 최단거리인 달력 한칸의 색을 변경
+    * @param calendarCellView
+    */
+    private void changeCalendarCellColor(View calendarCellView) {
+        // 1. 원래 있는 경우 기존셀을 원복, 새로운 곳에는 색을 + 저장
         if(closestView != null) {
             closestView.setBackgroundColor(Color.parseColor("#ffffff"));
             calendarCellView.setBackgroundColor(Color.parseColor("#c8c8c8"));
