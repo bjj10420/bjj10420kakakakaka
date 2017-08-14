@@ -23,9 +23,11 @@ import android.widget.TextView;
 
 import com.example.schedulemanager.calendar.CalendarPagerAdapter;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -89,8 +91,36 @@ public class MainActivity extends AppCompatActivity {
 
         PieDataSet set = new PieDataSet(entries, "Election Results");
         PieData data = new PieData(set);
+        data.setValueTextSize(0f);
+        data.setValueTextColor(Color.GRAY);
+
+        // add many colors
+        ArrayList<Integer> colors = new ArrayList<Integer>();
+
+        for (int c : ColorTemplate.VORDIPLOM_COLORS)
+            colors.add(c);
+
+        for (int c : ColorTemplate.JOYFUL_COLORS)
+            colors.add(c);
+
+        for (int c : ColorTemplate.COLORFUL_COLORS)
+            colors.add(c);
+
+        for (int c : ColorTemplate.LIBERTY_COLORS)
+            colors.add(c);
+
+        for (int c : ColorTemplate.PASTEL_COLORS)
+            colors.add(c);
+
+        colors.add(ColorTemplate.getHoloBlue());
+        set.setColors(colors);
+
+
         pieChart.setData(data);
         pieChart.setDrawHoleEnabled(false);
+        pieChart.getLegend().setEnabled(false);
+        pieChart.setDrawSliceText(false);
+
         pieChart.invalidate(); // refresh
     }
 
