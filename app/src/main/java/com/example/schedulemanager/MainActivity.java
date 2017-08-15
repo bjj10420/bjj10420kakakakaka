@@ -29,6 +29,8 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
+import org.w3c.dom.Text;
+
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -173,8 +175,10 @@ public class MainActivity extends AppCompatActivity {
         GridView calendarGridView = (GridView) calendarPagerAdapter.getViews().get(calendarPager.getCurrentItem()).findViewById(R.id.timetable_param_setter_calendar_gridview);
         for(int i = 0; i < calendarGridView.getChildCount(); i++) {
             View calendarView = calendarGridView.getChildAt(i);
+            // 활성화되어있는 View만 추가
+            if(!((TextView)(calendarView.findViewById(R.id.calendar_item_day))).getText().equals(""))
             currentCalendarViewMap.put(i + 1, calendarView);
-            if(i == 9) calendarView.setBackgroundColor(Color.parseColor("#b2b2b2"));
+            if(i == 13) calendarView.setBackgroundColor(Color.parseColor("#b2b2b2"));
         }
         Log.d("캘린더뷰맵개수확인 = ", String.valueOf(currentCalendarViewMap.size()));
     }
