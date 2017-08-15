@@ -156,13 +156,27 @@ public class MainActivity extends AppCompatActivity {
             public void onPageSelected(int position) {
                 currentCalendarViewMap.clear();
                 setCalendarTitleDate(calendarDateText, calendarAdapter, position);
-                refreshCalendar();
+                reloadCalendarView();
+//                refreshCalendar();
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
             }
         });
+    }
+
+    /**
+     * 현재 보고 있는 페이지의 캘린더뷰를 다시 리로드하여 저장
+     */
+    private void reloadCalendarView() {
+        GridView calendarGridView = (GridView) calendarPagerAdapter.getViews().get(calendarPager.getCurrentItem()).findViewById(R.id.timetable_param_setter_calendar_gridview);
+        for(int i = 0; i < calendarGridView.getChildCount(); i++) {
+            View calendarView = calendarGridView.getChildAt(i);
+            currentCalendarViewMap.put(i + 1, calendarView);
+            if(i == 9) calendarView.setBackgroundColor(Color.parseColor("#b2b2b2"));
+        }
+        Log.d("캘린더뷰맵개수확인 = ", String.valueOf(currentCalendarViewMap.size()));
     }
 
     /**
@@ -684,7 +698,7 @@ public class MainActivity extends AppCompatActivity {
 
         for (int dateKey : currentCalendarViewMap.keySet()){
             View calendarCellView = currentCalendarViewMap.get(dateKey);
-            if(Util.checkCollisionForChildView(calendarCellView, copiedView)) {
+            if(Util.checkCollision(calendarCellView, copiedView)) {
                 isCellCollided = true;
                 // 후보군 저장소에 저장
                 arroundViewGroup.put((int) Util.getDistanceFromTwoPoints(
@@ -692,6 +706,7 @@ public class MainActivity extends AppCompatActivity {
                         calendarCellView);
             }
             }
+        Log.d("충돌 실험", "충돌 " + isCellCollided);
         return isCellCollided;
     }
 

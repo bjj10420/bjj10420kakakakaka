@@ -26,7 +26,7 @@
             android:layout_height="match_parent"
             android:layout_marginBottom="65dp"
             android:layout_marginTop="65dp"
-            android:visibility="visible"></include>
+            android:visibility="gone"></include>
 
         <View
             android:id="@+id/centerIcon"
@@ -34,7 +34,7 @@
             android:layout_height="50dp"
             android:layout_centerInParent="true"
             android:background="@drawable/schedule_icon"
-            android:visibility="gone" />
+            android:visibility="visible" />
 
 
         <LinearLayout
