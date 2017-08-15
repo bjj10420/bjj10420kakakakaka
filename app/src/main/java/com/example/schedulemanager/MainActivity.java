@@ -173,12 +173,16 @@ public class MainActivity extends AppCompatActivity {
      */
     private void reloadCalendarView() {
         GridView calendarGridView = (GridView) calendarPagerAdapter.getViews().get(calendarPager.getCurrentItem()).findViewById(R.id.timetable_param_setter_calendar_gridview);
+        int dateCount = 1;
         for(int i = 0; i < calendarGridView.getChildCount(); i++) {
             View calendarView = calendarGridView.getChildAt(i);
+            if(((TextView)(calendarView.findViewById(R.id.calendar_item_day))).getText().equals("")) continue;
             // 활성화되어있는 View만 추가
-            if(!((TextView)(calendarView.findViewById(R.id.calendar_item_day))).getText().equals(""))
-            currentCalendarViewMap.put(i + 1, calendarView);
-            if(i == 13) calendarView.setBackgroundColor(Color.parseColor("#b2b2b2"));
+            currentCalendarViewMap.put(dateCount, calendarView);
+            Log.d("캘린더뷰맵삽입확인 = ", "dateCount = " + dateCount);
+
+            dateCount++;
+            if(dateCount == 13) calendarView.setBackgroundColor(Color.parseColor("#b2b2b2"));
         }
         Log.d("캘린더뷰맵개수확인 = ", String.valueOf(currentCalendarViewMap.size()));
     }
