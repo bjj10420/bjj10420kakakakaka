@@ -157,6 +157,8 @@ public class DBHelper extends SQLiteOpenHelper {
         }
 //        Log.d("addScheduleToMapByMonth" , String.valueOf(Integer.parseInt(schedule.getDate().substring(6,8))));
         scheduleMap.put(Integer.parseInt(schedule.getDate().substring(6,8)), schedule);
+        Log.d("addScheduleToMapByMonth put 테스트" , schedule.getDate().substring(6,8));
     }
+
 
 }
