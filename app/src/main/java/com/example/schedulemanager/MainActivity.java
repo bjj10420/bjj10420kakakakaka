@@ -456,7 +456,7 @@ public class MainActivity extends AppCompatActivity {
      * @param event
      */
     private void actionMoveEvent(View view, MotionEvent event) {
-        // 복사된 뷰 표시
+        // 복사된 뷰 표시 g
         if(copiedView.getVisibility() == View.GONE){
             copiedView.setAlpha(0.7f);
             copiedView.setVisibility(View.VISIBLE);
