@@ -211,7 +211,7 @@ public class CalendarAdapter extends BaseAdapter
 						int month = activity.getCalendarPagerAdapter().getBaseCal().get(Calendar.MONTH);
 						String baseCalMonthString = month < 10 ? "0" + month : String.valueOf(month);
 						String yearMonthKey = year + baseCalMonthString;
-						activity.changeToScheduleLayout(activity.getScheduleMapByMonth().get(Integer.parseInt(yearMonthKey)).get(Integer.parseInt(dateValue)));
+						activity.changeToScheduleLayout(makeDailyScheduleMap(activity, yearMonthKey, dateValue));
 					}
 				});
 				// 메인 저장소에 뷰 저장( 전달이나 다음달 제외 )
@@ -336,7 +336,23 @@ public class CalendarAdapter extends BaseAdapter
 
 			return convertView;
 	}
-	
+
+	/**
+	 * 하루의 모든 스케쥴을 가지고와서 새로 하나 생성
+	 * @param activity
+	 * @param yearMonthKey
+	 * @param dateValue
+	 */
+	private HashMap<Integer, Schedule> makeDailyScheduleMap(MainActivity activity, String yearMonthKey, String dateValue) {
+		HashMap<Integer, Schedule> dailySchedules = new HashMap<Integer, Schedule>();
+		HashMap<Integer, Schedule> thisMonthSchedules = activity.getScheduleMapByMonth().get(Integer.parseInt(yearMonthKey));
+		for(Integer dateKey : thisMonthSchedules.keySet()){
+			Schedule schedule = thisMonthSchedules.get(dateKey);
+				if(String.valueOf(dateKey).equals(dateValue))dailySchedules.put(dateKey, schedule);
+		}
+		return dailySchedules;
+	}
+
 	public class ViewHolder
 	{
 		public TextView		day;		// 날짜

@@ -127,6 +127,53 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * 하루 일정을 셋팅
+     */
+    private void setDailySchedule(HashMap<Integer, Schedule> dailyScheduleMap) {
+        PieChart pieChart = (PieChart) findViewById(R.id.chart);
+        List<PieEntry> entries = new ArrayList<>();
+        // 모든 스케쥴은 균등한 점유값을 갖는다
+        // 100을 개수로 나눈값으로 지정
+        float fillValue = 100 / dailyScheduleMap.size();
+            for(Integer dateValue : dailyScheduleMap.keySet()) {
+                Schedule schedule = dailyScheduleMap.get(dateValue);
+                entries.add(new PieEntry(fillValue, schedule.getActivityName()));
+            }
+
+        PieDataSet set = new PieDataSet(entries, "Election Results");
+        PieData data = new PieData(set);
+        data.setValueTextSize(0f);
+        data.setValueTextColor(Color.GRAY);
+
+        // add many colors
+        ArrayList<Integer> colors = new ArrayList<Integer>();
+
+        for (int c : ColorTemplate.VORDIPLOM_COLORS)
+            colors.add(c);
+
+        for (int c : ColorTemplate.JOYFUL_COLORS)
+            colors.add(c);
+
+        for (int c : ColorTemplate.COLORFUL_COLORS)
+            colors.add(c);
+
+        for (int c : ColorTemplate.LIBERTY_COLORS)
+            colors.add(c);
+
+        for (int c : ColorTemplate.PASTEL_COLORS)
+            colors.add(c);
+
+        colors.add(ColorTemplate.getHoloBlue());
+        set.setColors(colors);
+
+        pieChart.setData(data);
+        pieChart.setDrawHoleEnabled(false);
+        pieChart.getLegend().setEnabled(false);
+        pieChart.setDrawSliceText(true);
+        pieChart.invalidate(); // refresh
+    }
+
+    /**
      * 달력 셋팅, 초기화
      */
     private void initCalndar() {
@@ -754,8 +801,9 @@ public class MainActivity extends AppCompatActivity {
      * 캘린더 한칸을 클릭시 하루 일정화면으로 전환
      * @param dailySchedule
      */
-    public void changeToScheduleLayout(Schedule dailySchedule) {
+    public void changeToScheduleLayout(HashMap<Integer, Schedule> dailySchedule) {
         calendarLayout.setVisibility(View.GONE);
         scheduleLayout.setVisibility(View.VISIBLE);
+        setDailySchedule(dailySchedule);
     }
 }
