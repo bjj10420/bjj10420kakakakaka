@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -212,7 +211,7 @@ public class CalendarAdapter extends BaseAdapter
 						int month = activity.getCalendarPagerAdapter().getBaseCal().get(Calendar.MONTH);
 						String baseCalMonthString = month < 10 ? "0" + month : String.valueOf(month);
 						String yearMonthKey = year + baseCalMonthString;
-						Log.d("Clicked", "Clicked" + activity.getScheduleMapByMonth().get(Integer.parseInt(yearMonthKey)).get(Integer.parseInt(dateValue)));
+						activity.changeToScheduleLayout(activity.getScheduleMapByMonth().get(Integer.parseInt(yearMonthKey)).get(Integer.parseInt(dateValue)));
 					}
 				});
 				// 메인 저장소에 뷰 저장( 전달이나 다음달 제외 )

@@ -49,6 +49,7 @@ public class MainActivity extends AppCompatActivity {
     private View centerIcon;                        // 중앙 아이콘 뷰
     private Typeface typeface;                      // 글꼴
     private View calendarLayout;                    // 메인 캘린더 레이아웃
+    private View scheduleLayout;                    // 하루 일정 레이아웃
     private ViewPager calendarPager;                // 메인 캘린더 뷰 페이져 객체
     private HashMap<Integer, HashMap<Integer, Schedule>> scheduleMapByMonth;
                                                     // 달력월값을 키로 갖는 스케쥴 저장소
@@ -241,6 +242,7 @@ public class MainActivity extends AppCompatActivity {
         totalLayout = (RelativeLayout) findViewById(R.id.totalLayout);
         centerIcon = findViewById(R.id.centerIcon);
         calendarLayout = findViewById(R.id.calendarLayout);
+        scheduleLayout = findViewById(R.id.scheduleLayout);
         backBtn = findViewById(R.id.back_btn);
         cancelBtn = findViewById(R.id.cancel_btn);
     }
@@ -746,5 +748,14 @@ public class MainActivity extends AppCompatActivity {
 
     public CalendarPagerAdapter getCalendarPagerAdapter() {
         return calendarPagerAdapter;
+    }
+
+    /**
+     * 캘린더 한칸을 클릭시 하루 일정화면으로 전환
+     * @param dailySchedule
+     */
+    public void changeToScheduleLayout(Schedule dailySchedule) {
+        calendarLayout.setVisibility(View.GONE);
+        scheduleLayout.setVisibility(View.VISIBLE);
     }
 }
