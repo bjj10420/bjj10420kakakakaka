@@ -89,17 +89,17 @@ public class DBHelper extends SQLiteOpenHelper {
 
     /**
      * 당일의 스케쥴 갯수 카운트
-     * @param dateForToday
+     * @param date
      * @return
      */
-    public int getScheduleCountForToday(String dateForToday){
+    public int getScheduleCountForDate(String date){
         DB = getWritableDatabase();
 
         String sql = String.format(Locale.getDefault(),
        "SELECT COUNT(*) FROM %s WHERE %s = %s",
         scheduleTableName, 							// 테이블 이름
         dateValue_colum,	                        // 조건 칼럼
-        dateForToday);
+                date);
 
         Cursor c = DB.rawQuery(sql, null);
         int count = 0;
@@ -156,9 +156,7 @@ public class DBHelper extends SQLiteOpenHelper {
             allScheduleMap.put(scheduleYearMonth, scheduleMap);
         }
 //        Log.d("addScheduleToMapByMonth" , String.valueOf(Integer.parseInt(schedule.getDate().substring(6,8))));
-        scheduleMap.put(Integer.parseInt(schedule.getDate().substring(6,8)), schedule);
-        Log.d("addScheduleToMapByMonth put 테스트" , schedule.getDate().substring(6,8));
+        scheduleMap.put(Integer.parseInt(schedule.getDate().substring(6,8) + "/" + schedule.getNo()), schedule);
+        Log.d("addScheduleToMapByMonth put 테스트" , schedule.getDate().substring(6,8) + "/" + schedule.getNo());
     }
-
-
 }

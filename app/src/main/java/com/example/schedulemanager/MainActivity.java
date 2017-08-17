@@ -23,13 +23,10 @@ import android.widget.TextView;
 
 import com.example.schedulemanager.calendar.CalendarPagerAdapter;
 import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.components.XAxis;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
-
-import org.w3c.dom.Text;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
@@ -621,7 +618,7 @@ public class MainActivity extends AppCompatActivity {
         DateFormat dateFormatter = new SimpleDateFormat("yyyyMMdd");
         String dateString = dateFormatter.format(dateOfToday);
         // 넘버
-        int number = DBHelper.dbHelper.getScheduleCountForToday(dateString);
+        int number = DBHelper.dbHelper.getScheduleCountForDate(dateString);
         // 이름
         String activityName = tagName;
 
@@ -651,6 +648,9 @@ public class MainActivity extends AppCompatActivity {
         String activityName = tagName;
         // 삽입할 스케쥴 데이터 객체 생성
         Schedule newSchedule = new Schedule();
+        // 넘버
+        int number = DBHelper.dbHelper.getScheduleCountForDate(dateString);
+        newSchedule.setNo(number);
         newSchedule.setDate(dateString);
         newSchedule.setActivityName(activityName);
         //TODO 나머지 order, time, memo는 일단 공란
