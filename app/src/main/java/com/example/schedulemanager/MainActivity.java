@@ -454,7 +454,7 @@ public class MainActivity extends AppCompatActivity {
      * 아이콘 버튼 드래그 중 이벤트
      * @param view
      * @param event
-     */
+    */
     private void actionMoveEvent(View view, MotionEvent event) {
         // 복사된 뷰 표시 g
         if(copiedView.getVisibility() == View.GONE){
@@ -706,7 +706,7 @@ public class MainActivity extends AppCompatActivity {
 
         for (int dateKey : currentCalendarViewMap.keySet()){
             View calendarCellView = currentCalendarViewMap.get(dateKey);
-            if(Util.checkCollision(calendarCellView, copiedView)) {
+            if(Util.checkCollisionForChildView(calendarCellView, copiedView)) {
                 isCellCollided = true;
                 // 후보군 저장소에 저장
                 arroundViewGroup.put((int) Util.getDistanceFromTwoPoints(
