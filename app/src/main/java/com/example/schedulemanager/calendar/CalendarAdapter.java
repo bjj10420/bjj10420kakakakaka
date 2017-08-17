@@ -205,6 +205,7 @@ public class CalendarAdapter extends BaseAdapter
 				convertView.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
+						//TODO 리팩토링때 이벤트헬퍼로 가져가야 할 것
 						MainActivity activity = ((MainActivity) mContext);
 						String dateValue = String.valueOf(v.getTag());
 						String year = String.valueOf(activity.getCalendarPagerAdapter().getBaseCal().get(Calendar.YEAR));
