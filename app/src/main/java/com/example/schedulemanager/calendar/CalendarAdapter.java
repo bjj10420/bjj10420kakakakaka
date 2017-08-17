@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -346,9 +347,10 @@ public class CalendarAdapter extends BaseAdapter
 	private HashMap<Integer, Schedule> makeDailyScheduleMap(MainActivity activity, String yearMonthKey, String dateValue) {
 		HashMap<Integer, Schedule> dailySchedules = new HashMap<Integer, Schedule>();
 		HashMap<Integer, Schedule> thisMonthSchedules = activity.getScheduleMapByMonth().get(Integer.parseInt(yearMonthKey));
+		Log.d("thisMonthSchedules 개수", String.valueOf(thisMonthSchedules.size()));
 		for(Integer dateKey : thisMonthSchedules.keySet()){
 			Schedule schedule = thisMonthSchedules.get(dateKey);
-				if(String.valueOf(dateKey).equals(dateValue))dailySchedules.put(dateKey, schedule);
+				if(String.valueOf(dateKey).equals(dateValue))dailySchedules.put((int) Math.random(), schedule);
 		}
 		return dailySchedules;
 	}
