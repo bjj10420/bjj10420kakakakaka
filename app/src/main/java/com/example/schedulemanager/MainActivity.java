@@ -650,11 +650,10 @@ public class MainActivity extends AppCompatActivity {
         Schedule newSchedule = new Schedule();
         // 넘버
         int number = DBHelper.dbHelper.getScheduleCountForDate(dateString);
-        newSchedule.setNo(number);
         newSchedule.setDate(dateString);
         newSchedule.setActivityName(activityName);
         //TODO 나머지 order, time, memo는 일단 공란
-        newSchedule.setOrder(0);
+        newSchedule.setOrder(number);
         newSchedule.setTime("");
         newSchedule.setMemo("");
 

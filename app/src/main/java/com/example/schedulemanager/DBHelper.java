@@ -107,6 +107,7 @@ public class DBHelper extends SQLiteOpenHelper {
             c.moveToFirst();
             count = c.getInt(0);
         }
+        Log.d("getScheduleCountForDate 테스트", "date = " + date + ", count = " + count);
         return count;
     }
 
