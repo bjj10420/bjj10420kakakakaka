@@ -200,6 +200,13 @@ public class CalendarAdapter extends BaseAdapter
 
 			if(item != null)
 			{
+				// 클릭 이벤트 설정
+				convertView.setOnClickListener(new View.OnClickListener() {
+					@Override
+					public void onClick(View v) {
+						Log.d("Clicked", "Clicked");
+					}
+				});
 				// 메인 저장소에 뷰 저장( 전달이나 다음달 제외 )
 				if(!(position < firstItemIdx || position > lastItemIdx))
 				((MainActivity)mContext).getCurrentCalendarViewMap().put(item, convertView);
@@ -247,6 +254,7 @@ public class CalendarAdapter extends BaseAdapter
 						convertView.setOnClickListener(new View.OnClickListener() {
 							@Override
 							public void onClick(View v) {
+
 
 							}
 						});
