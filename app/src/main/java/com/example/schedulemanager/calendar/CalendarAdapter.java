@@ -204,6 +204,7 @@ public class CalendarAdapter extends BaseAdapter
 				convertView.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
+						//
 						Log.d("Clicked", "Clicked");
 					}
 				});
