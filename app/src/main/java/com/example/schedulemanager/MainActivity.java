@@ -67,7 +67,6 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
         init();
     }
 
@@ -596,15 +595,10 @@ public class MainActivity extends AppCompatActivity {
      * @param tagName
      */
     private void addScheduleForTheDate(String tagName) {
-        int baseCalMonth = calendarPagerAdapter.getBaseCal().get(Calendar.MONTH);
-        String baseCalMonthString = baseCalMonth < 10 ? "0" + baseCalMonth : String.valueOf(baseCalMonth);
-        String baseCalDateString = String.valueOf(Integer.parseInt(String.valueOf(closestView.getTag())) < 10 ? "0" + closestView.getTag() : closestView.getTag());
-        String dateString = String.valueOf(calendarPagerAdapter.getBaseCal().get(Calendar.YEAR)) +
-                baseCalMonthString + baseCalDateString;
-
+        // 데이트 스트링값 생성
+        String dateString = makeDateString(String.valueOf(closestView.getTag()));
         // 이름
         String activityName = tagName;
-
         // 삽입할 스케쥴 데이터 객체 생성
         Schedule newSchedule = new Schedule();
         newSchedule.setDate(dateString);
@@ -618,6 +612,19 @@ public class MainActivity extends AppCompatActivity {
         long resultNum = DBHelper.dbHelper.insertSchedule(newSchedule);
         Log.d(tagName + "을", " 삽입하였습니다 dateString = " + dateString);
     }
+
+    /**
+     * 스케쥴 추가시의 데이트 스트링 값 생성
+     */
+    public String makeDateString(String dateValue) {
+        int baseCalMonth = calendarPagerAdapter.getBaseCal().get(Calendar.MONTH);
+        String baseCalMonthString = baseCalMonth < 10 ? "0" + baseCalMonth : String.valueOf(baseCalMonth);
+        String baseCalDateString = String.valueOf(Integer.parseInt(dateValue) < 10 ? "0" + dateValue : dateValue);
+        String dateString = String.valueOf(calendarPagerAdapter.getBaseCal().get(Calendar.YEAR)) +
+                baseCalMonthString + baseCalDateString;
+        return dateString;
+    }
+
     /**
      * 지정된 뷰의 복사본을 만들어 최상위 프레임레이아웃의 자식으로 보냄
      * @param view
@@ -731,5 +738,13 @@ public class MainActivity extends AppCompatActivity {
 
     public HashMap<Integer, View> getCurrentCalendarViewMap() {
         return currentCalendarViewMap;
+    }
+
+    public HashMap<Integer, HashMap<Integer, Schedule>> getScheduleMapByMonth() {
+        return scheduleMapByMonth;
+    }
+
+    public CalendarPagerAdapter getCalendarPagerAdapter() {
+        return calendarPagerAdapter;
     }
 }

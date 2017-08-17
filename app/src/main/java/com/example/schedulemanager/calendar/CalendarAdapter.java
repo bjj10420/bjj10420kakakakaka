@@ -18,6 +18,7 @@ import com.example.schedulemanager.MainActivity;
 import com.example.schedulemanager.R;
 import com.example.schedulemanager.Schedule;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -204,8 +205,13 @@ public class CalendarAdapter extends BaseAdapter
 				convertView.setOnClickListener(new View.OnClickListener() {
 					@Override
 					public void onClick(View v) {
-						//
-						Log.d("Clicked", "Clicked");
+						MainActivity activity = ((MainActivity) mContext);
+						String dateValue = String.valueOf(v.getTag());
+						String year = String.valueOf(activity.getCalendarPagerAdapter().getBaseCal().get(Calendar.YEAR));
+						int month = activity.getCalendarPagerAdapter().getBaseCal().get(Calendar.MONTH);
+						String baseCalMonthString = month < 10 ? "0" + month : String.valueOf(month);
+						String yearMonthKey = year + baseCalMonthString;
+						Log.d("Clicked", "Clicked" + activity.getScheduleMapByMonth().get(Integer.parseInt(yearMonthKey)).get(Integer.parseInt(dateValue)));
 					}
 				});
 				// 메인 저장소에 뷰 저장( 전달이나 다음달 제외 )
