@@ -318,7 +318,8 @@ public class CalendarAdapter extends BaseAdapter
 				holder.day.setText(String.valueOf(item));
 
 				// 스케쥴이 들어있는 날짜일경우
-				if(scheduleMapForCurrentPage.get(position - 1) != null) {
+				// 키값이 "000" + 순서값
+				if(scheduleMapForCurrentPage.get(Integer.parseInt((position - 1) + "0000")) != null) {
 					holder.checkMark.setVisibility(View.VISIBLE);
 					// 엑스트라 텍스트 설정
 					holder.extra.setText(extraText);
