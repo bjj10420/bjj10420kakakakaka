@@ -124,7 +124,7 @@ public class MainActivity extends AppCompatActivity {
     /**
      * 하루 일정을 셋팅
      */
-    private void setDailySchedule(HashMap<Integer, Schedule> dailyScheduleMap) {
+    private void setDailyScheduleDisplay(HashMap<Integer, Schedule> dailyScheduleMap) {
         PieChart pieChart = (PieChart) findViewById(R.id.chart);
         List<PieEntry> entries = new ArrayList<>();
         // 모든 스케쥴은 균등한 점유값을 갖는다
@@ -166,6 +166,7 @@ public class MainActivity extends AppCompatActivity {
         pieChart.setDrawHoleEnabled(false);
         pieChart.getLegend().setEnabled(false);
         pieChart.setDrawSliceText(true);
+        pieChart.getDescription().setEnabled(false);
         pieChart.invalidate(); // refresh
     }
 
@@ -803,7 +804,7 @@ public class MainActivity extends AppCompatActivity {
         if(dailySchedule.size() > 0) {
             calendarLayout.setVisibility(View.GONE);
             scheduleLayout.setVisibility(View.VISIBLE);
-            setDailySchedule(dailySchedule);
+            setDailyScheduleDisplay(dailySchedule);
         }
     }
 
