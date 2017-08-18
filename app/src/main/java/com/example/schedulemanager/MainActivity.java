@@ -821,4 +821,20 @@ public class MainActivity extends AppCompatActivity {
             centerIcon.setVisibility(View.VISIBLE);
         }
     }
+
+    /**
+     * 일정 화면의 날짜 텍스트 지정
+     * @param yearMonthKey
+     * @param dateValue
+     */
+    public void setDailyScheduleDateText(String yearMonthKey, String dateValue) {
+        String dateValueString = Integer.parseInt(dateValue) < 10 ? "0" + dateValue : dateValue;
+        StringBuilder sb = new StringBuilder();
+        sb.append(yearMonthKey.substring(0,4))
+                .append(".")
+                .append(yearMonthKey.substring(4,6))
+                .append(".").append(dateValueString).toString();
+        TextView dailyScheduleDateText = (TextView) findViewById(R.id.dailyScheduleDateText);
+        dailyScheduleDateText.setText(sb);
+    }
 }

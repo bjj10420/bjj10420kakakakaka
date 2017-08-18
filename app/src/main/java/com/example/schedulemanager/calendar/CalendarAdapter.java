@@ -30,14 +30,14 @@ public class CalendarAdapter extends BaseAdapter
 	private Context					mContext;
 	private Typeface				mTypeface;
 	private LayoutInflater			mInlfater;
-	
+
 	private int						selectedItemIdx = -1;
 	private int 					currentItemIdx = -1;
 	private int						firstItemIdx;
 	private int						lastItemIdx;
 	private int 					visibleLastItemIdx = -1;
 	private String					selectedTime;
-	
+
 	private List<Integer> 			calendarItems;
 	private HashMap<Integer, Schedule> scheduleMapForCurrentPage;
 
@@ -54,9 +54,9 @@ public class CalendarAdapter extends BaseAdapter
 		catch (Exception e)
 		{
 
-		}		
+		}
 	}
-		
+
 	public int getSelectedItemIdx()
 	{
 		return selectedItemIdx;
@@ -96,7 +96,7 @@ public class CalendarAdapter extends BaseAdapter
 	{
 		this.lastItemIdx = lastItemIdx;
 	}
-	
+
 	public int getVisibleLastItemIdx()
 	{
 		return visibleLastItemIdx;
@@ -136,7 +136,7 @@ public class CalendarAdapter extends BaseAdapter
 //		}
 //		
 //		return 0;
-		
+
 		return 42; 		// 6 * 7
 	}
 
@@ -152,7 +152,7 @@ public class CalendarAdapter extends BaseAdapter
 		{
 			//CommonUtils.printDebugStackTrace(e);
 		}
-		
+
 		return null;
 	}
 
@@ -174,26 +174,26 @@ public class CalendarAdapter extends BaseAdapter
 			{
 				holder = new ViewHolder();
 				convertView = mInlfater.inflate(R.layout.rail_adapter_calendar_item_view, null);
-				
+
 				holder.day = (TextView) convertView.findViewById(R.id.calendar_item_day);
 				holder.extra = (TextView) convertView.findViewById(R.id.calendar_item_extra);
 				holder.checkMark = convertView.findViewById(R.id.check_mark);
 
 				holder.day.setTypeface(mTypeface, Typeface.BOLD);
 				holder.extra.setTypeface(mTypeface, Typeface.BOLD);
-				
+
 				convertView.setTag(holder);
 			}
 			else
 			{
 				holder = (ViewHolder) convertView.getTag();
 			}
-			
+
 			Integer item = getItem(position);
 			int mod = position % 7;
-			
+
 			String color = null;
-			String opacity = null;			
+			String opacity = null;
 			String extraText = null;
 
 			// 태그 첨부
@@ -212,8 +212,9 @@ public class CalendarAdapter extends BaseAdapter
 						int month = activity.getCalendarPagerAdapter().getBaseCal().get(Calendar.MONTH);
 						String baseCalMonthString = month < 10 ? "0" + month : String.valueOf(month);
 						String yearMonthKey = year + baseCalMonthString;
+						activity.setDailyScheduleDateText(yearMonthKey, dateValue);
 						activity.changeToScheduleLayout(makeDailyScheduleMap(activity, yearMonthKey, dateValue));
-					}
+						}
 				});
 				// 메인 저장소에 뷰 저장( 전달이나 다음달 제외 )
 				if(!(position < firstItemIdx || position > lastItemIdx))
@@ -223,10 +224,10 @@ public class CalendarAdapter extends BaseAdapter
 				{	// 선택된 날짜
 					holder.day.setVisibility(View.VISIBLE);
 					holder.extra.setVisibility(View.VISIBLE);
-					
+
 					color = "ffffff";
 					opacity = "";
-					
+
 					if(selectedTime != null && selectedTime.trim().isEmpty() == false)
 					{
 						extraText = selectedTime;
@@ -236,14 +237,14 @@ public class CalendarAdapter extends BaseAdapter
 						extraText ="지금";
 
 					}
-					
+
 					convertView.setBackgroundResource(R.drawable.rail_calendar_item_selected_bg);
 					convertView.setOnTouchListener(null);
 				}
 				else
 				{	// 선택되지 않은 날짜
 					extraText = "";
-					
+
 					if(position == currentItemIdx)
 					{	// 선택되지 않았지만 오늘 날짜라면 배경을 바꿔준다.
 						convertView.setBackgroundResource(R.drawable.rail_calendar_item_nonselected_now);
@@ -254,10 +255,10 @@ public class CalendarAdapter extends BaseAdapter
 					}
 
 					if(position < firstItemIdx || position > lastItemIdx)
-					{	// 전달의 날짜거나, 다음달의 날짜라면 감춘다. 
+					{	// 전달의 날짜거나, 다음달의 날짜라면 감춘다.
 						holder.day.setVisibility(View.INVISIBLE);
 						holder.extra.setVisibility(View.INVISIBLE);
-						
+
 						convertView.setOnTouchListener(nullTouchListener);
 						convertView.setOnClickListener(new View.OnClickListener() {
 							@Override
@@ -280,24 +281,24 @@ public class CalendarAdapter extends BaseAdapter
 							case 0:		// SUN
 								color = "ff0000";
 								break;
-								
+
 							case 6: 	// SAT
 								color = "558ed5";
 								break;
-								
+
 							default:	// MON~FRI
 								color = "262626";
 								break;
-								
+
 						}
-						
+
 						if((position < currentItemIdx) || (visibleLastItemIdx >= 0 && visibleLastItemIdx < position))
-						{	
+						{
 							// TODO 이번 달의 오늘 이전의 모든 날을 활성화시켜주기 위해 주석 처리
 							// 오늘보다 작은 날짜의 경우는 반투명하게
 							// 오늘보다 한 달을 넘어가는 경우도 반투명하게 처리한다.
 							opacity = "";
-							
+
 							// 터치가 안 되게 막는다.
 //							convertView.setOnTouchListener(nullTouchListener);
 						}
@@ -305,14 +306,14 @@ public class CalendarAdapter extends BaseAdapter
 						{
 							// 그 외의 경우는 opacity = 0%
 							opacity = "";
-							
+
 							// 터치가 가능하게 null 터치 리스너를 해제해준다.
 							convertView.setOnTouchListener(null);
 						}
 					}
 				}
 //
-				// 날짜 색깔 및 텍스트 설정 
+				// 날짜 색깔 및 텍스트 설정
 				String textColor = "#" + opacity + color;
 				holder.day.setTextColor(Color.parseColor(textColor));
 				holder.day.setText(String.valueOf(item));
@@ -362,7 +363,7 @@ public class CalendarAdapter extends BaseAdapter
 		public TextView		extra;		// 하단 문구(시간이나 '지금' 문구 표시)
 		public View			checkMark;	// 체크마크
 	}
-	
+
 	/**
 	 * 터치 이벤트 전파를 막기 위한 터치 리스너
 	 */
