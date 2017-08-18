@@ -73,13 +73,13 @@ public class MainActivity extends AppCompatActivity {
         initUI();
         initEvent();
         initCalndar();
-        initSchedule();
+//        initScheduleDisplay();
     }
 
     /**
      * 스케쥴 화면 초기화
      */
-    private void initSchedule() {
+    private void initScheduleDisplay() {
         PieChart pieChart = (PieChart) findViewById(R.id.chart);
         List<PieEntry> entries = new ArrayList<>();
 
@@ -114,12 +114,10 @@ public class MainActivity extends AppCompatActivity {
         colors.add(ColorTemplate.getHoloBlue());
         set.setColors(colors);
 
-
         pieChart.setData(data);
         pieChart.setDrawHoleEnabled(false);
         pieChart.getLegend().setEnabled(false);
         pieChart.setDrawSliceText(false);
-
         pieChart.invalidate(); // refresh
     }
 
