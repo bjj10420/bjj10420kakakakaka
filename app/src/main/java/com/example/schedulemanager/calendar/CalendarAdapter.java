@@ -351,7 +351,7 @@ public class CalendarAdapter extends BaseAdapter
 		Log.d("thisMonthSchedules 개수", String.valueOf(thisMonthSchedules.size()));
 		for(Integer dateKey : thisMonthSchedules.keySet()){
 			Schedule schedule = thisMonthSchedules.get(dateKey);
-				if(String.valueOf(dateKey).equals(dateValue))dailySchedules.put((int) Math.random(), schedule);
+				if(String.valueOf(dateKey).substring(0, 2).equals(dateValue))dailySchedules.put(dateKey, schedule);
 		}
 		return dailySchedules;
 	}
