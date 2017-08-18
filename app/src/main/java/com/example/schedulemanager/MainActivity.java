@@ -161,6 +161,7 @@ public class MainActivity extends AppCompatActivity {
 
         colors.add(ColorTemplate.getHoloBlue());
         set.setColors(colors);
+        set.setHighlightEnabled(true); // allow highlighting for DataSet
 
         pieChart.setData(data);
         pieChart.setDrawHoleEnabled(false);
