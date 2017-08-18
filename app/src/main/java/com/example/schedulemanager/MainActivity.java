@@ -808,4 +808,18 @@ public class MainActivity extends AppCompatActivity {
             setDailySchedule(dailySchedule);
         }
     }
+
+    @Override
+    public void onBackPressed() {
+        // 하루 일정화면이 ON이면 닫아준다
+        if(scheduleLayout.getVisibility() == View.VISIBLE) {
+            scheduleLayout.setVisibility(View.GONE);
+            calendarLayout.setVisibility(View.VISIBLE);
+        }
+        // 캘린더화면이 ON이면 닫아준다
+        else if(calendarLayout.getVisibility() == View.VISIBLE) {
+            calendarLayout.setVisibility(View.GONE);
+            centerIcon.setVisibility(View.VISIBLE);
+        }
+    }
 }
