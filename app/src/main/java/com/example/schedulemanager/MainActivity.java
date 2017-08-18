@@ -798,12 +798,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * 캘린더 한칸을 클릭시 하루 일정화면으로 전환
+     * 캘린더 한칸을 클릭시 하루 일정화면으로 전환 (스케쥴이 한개이상 들어가있을경우)
      * @param dailySchedule
      */
     public void changeToScheduleLayout(HashMap<Integer, Schedule> dailySchedule) {
-        calendarLayout.setVisibility(View.GONE);
-        scheduleLayout.setVisibility(View.VISIBLE);
-        setDailySchedule(dailySchedule);
+        if(dailySchedule.size() > 0) {
+            calendarLayout.setVisibility(View.GONE);
+            scheduleLayout.setVisibility(View.VISIBLE);
+            setDailySchedule(dailySchedule);
+        }
     }
 }

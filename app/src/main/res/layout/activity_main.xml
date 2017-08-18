@@ -42,7 +42,7 @@
             android:layout_width="match_parent"
             android:layout_height="65dp"
             android:layout_alignParentTop="true"
-            android:background="#c8c8c8"
+
             android:orientation="horizontal"></LinearLayout>
 
         <LinearLayout
@@ -50,7 +50,6 @@
             android:layout_width="match_parent"
             android:layout_height="65dp"
             android:layout_alignParentBottom="true"
-            android:background="#c8c8c8"
             android:orientation="horizontal"></LinearLayout>
 
     </RelativeLayout>
