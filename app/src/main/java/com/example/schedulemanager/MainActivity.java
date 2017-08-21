@@ -439,6 +439,7 @@ public class MainActivity extends AppCompatActivity {
      * @param scheduleOrderValue
      */
     private void updateDailyScheduleMapByMonth(int scheduleOrderValue) {
+      Log.d("스케쥴오더값테스트", String.valueOf(scheduleOrderValue) + ", " + scheduleMapByMonth.get(Integer.parseInt(yearMonthKey)).get(Integer.parseInt(dateValue + "000" +scheduleOrderValue)).getActivityName());
       scheduleMapByMonth.get(Integer.parseInt(yearMonthKey)).remove(Integer.parseInt(dateValue + "000" +scheduleOrderValue));
     }
 
