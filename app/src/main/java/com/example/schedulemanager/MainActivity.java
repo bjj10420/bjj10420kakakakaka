@@ -416,7 +416,8 @@ public class MainActivity extends AppCompatActivity {
                         dailyScheduleDataSet.removeEntry((PieEntry)e);
                         refreshCalendar();
                         reloadDailyScheduleData();
-                        pieChart.postInvalidate();//
+                        pieChart.notifyDataSetChanged();
+                        pieChart.invalidate();
                     }
                 });
             }
