@@ -404,12 +404,12 @@ public class MainActivity extends AppCompatActivity {
 
         pieChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
-            public void onValueSelected(Entry e, Highlight h) {
+            public void onValueSelected(final Entry e, Highlight h) {
                 // 다이얼로그 띄움
                 new DialogHelper().setChoiceStyleDialog(MainActivity.this, new GeneralCallback() {
                     @Override
                     public void onCallBack() {
-
+                        new DBHelper(MainActivity.this).deleteSchedule(selectedDateData, dailyScheduleDataSet.getEntryIndex((PieEntry)e));
                     }
                 });
             }

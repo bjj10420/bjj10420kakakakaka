@@ -88,6 +88,18 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     /**
+     * 스케쥴 1개 삭제
+     * @param dateColumValue
+     * @param orderColumValue
+     */
+    public void deleteSchedule(String dateColumValue, int orderColumValue) {
+        DB = getWritableDatabase();
+        int resultNumber = DB.delete(scheduleTableName, dateValue_colum + " = ? AND " + orderValue_colum + " = ?",
+                new String[]{dateColumValue, String.valueOf(orderColumValue)});
+        Log.d("스케쥴삭제테스트", String.valueOf(resultNumber));
+     }
+
+    /**
      * 당일의 스케쥴 갯수 카운트
      * @param date
      * @return
