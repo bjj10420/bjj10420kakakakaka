@@ -10,7 +10,7 @@ import com.example.schedulemanager.GeneralCallback;
  * 여러가지 용도의 다이얼로그 박스를 생성
  */
 public class DialogHelper {
-
+//
     /**
      * 선택형 다이얼 로그 생성
      */
