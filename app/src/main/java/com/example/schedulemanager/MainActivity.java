@@ -66,6 +66,9 @@ public class MainActivity extends AppCompatActivity {
     private View cancelBtn;                         // 하단 X 버튼
     private PieDataSet dailyScheduleDataSet;        // 데일리 스케쥴 차트용 데이터 저장소
     private String selectedDateData;                // 선택된 날짜 값
+    private PieChart pieChart;                      // 데일리 스케쥴 챠트 화면
+    private HashMap<Integer, Schedule> dailyScheduleMap;
+                                                    // 선택된 일자의 하루 스케쥴 맵
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,7 +134,6 @@ public class MainActivity extends AppCompatActivity {
      * 하루 일정을 셋팅
      */
     private void setDailyScheduleDisplay(HashMap<Integer, Schedule> dailyScheduleMap) {
-        PieChart pieChart = (PieChart) findViewById(R.id.chart);
         List<PieEntry> entries = new ArrayList<>();
         // 모든 스케쥴은 균등한 점유값을 갖는다
         // 100을 개수로 나눈값으로 지정
@@ -297,6 +299,8 @@ public class MainActivity extends AppCompatActivity {
         scheduleLayout = findViewById(R.id.scheduleLayout);
         backBtn = findViewById(R.id.back_btn);
         cancelBtn = findViewById(R.id.cancel_btn);
+        pieChart = (PieChart) findViewById(R.id.chart);
+
     }
 
     /**
@@ -400,7 +404,6 @@ public class MainActivity extends AppCompatActivity {
      * @param chartId
      */
     private void setDailyScheduleEvent(int chartId) {
-        PieChart pieChart = (PieChart) findViewById(chartId);
 
         pieChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
@@ -410,6 +413,10 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onCallBack() {
                         new DBHelper(MainActivity.this).deleteSchedule(selectedDateData, dailyScheduleDataSet.getEntryIndex((PieEntry)e));
+                        dailyScheduleDataSet.removeEntry((PieEntry)e);
+                        refreshCalendar();
+                        reloadDailyScheduleData();
+                        pieChart.postInvalidate();
                     }
                 });
             }
@@ -419,6 +426,18 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    /**
+     * 하루 일정 데이터를 리로드
+     */
+    private void reloadDailyScheduleData() {
+        float fillValue = 100 / dailyScheduleDataSet.getEntryCount();
+
+        for(int i = 0; i < dailyScheduleDataSet.getEntryCount(); i++) {
+            PieEntry entry = dailyScheduleDataSet.getEntryForIndex(i);
+            entry.setY(fillValue);
+        }
     }
 
     private void setCalendarBtnEvent(int viewId) {
@@ -877,5 +896,9 @@ public class MainActivity extends AppCompatActivity {
     public void setSelectedDateData(String selectedDateData) {
         Log.d("선택된날짜값테스트", selectedDateData);
         this.selectedDateData = selectedDateData;
+    }
+
+    public void setDailyScheduleMap(HashMap<Integer, Schedule> dailyScheduleMap) {
+        this.dailyScheduleMap = dailyScheduleMap;
     }
 }

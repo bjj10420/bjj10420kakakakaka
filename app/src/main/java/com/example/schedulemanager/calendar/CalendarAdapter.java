@@ -202,19 +202,11 @@ public class CalendarAdapter extends BaseAdapter
 			if(item != null)
 			{
 				// 클릭 이벤트 설정
-				convertView.setOnClickListener(new View.OnClickListener() {
-					@Override
-					public void onClick(View v) {
+						convertView.setOnClickListener(new View.OnClickListener() {
+							@Override
+							public void onClick(View v) {
 						//TODO 리팩토링때 이벤트헬퍼로 가져가야 할 것
-						MainActivity activity = ((MainActivity) mContext);
-						String dateValue = String.valueOf(v.getTag());
-						String year = String.valueOf(activity.getCalendarPagerAdapter().getBaseCal().get(Calendar.YEAR));
-						int month = activity.getCalendarPagerAdapter().getBaseCal().get(Calendar.MONTH);
-						String baseCalMonthString = month < 10 ? "0" + month : String.valueOf(month);
-						String yearMonthKey = year + baseCalMonthString;
-						activity.setSelectedDateData(yearMonthKey + (Integer.parseInt(dateValue) < 10 ? "0" + dateValue : dateValue));
-						activity.setDailyScheduleDateText(yearMonthKey, dateValue);
-						activity.changeToScheduleLayout(makeDailyScheduleMap(activity, yearMonthKey, dateValue));
+								actionClicked(v);
 						}
 				});
 				// 메인 저장소에 뷰 저장( 전달이나 다음달 제외 )
@@ -339,6 +331,24 @@ public class CalendarAdapter extends BaseAdapter
 		}
 
 			return convertView;
+	}
+
+	/**
+	 * 클릭시 이벤트 처리
+	 * @param v
+     */
+	private void actionClicked(View v) {
+		MainActivity activity = ((MainActivity) mContext);
+		String dateValue = String.valueOf(v.getTag());
+		String year = String.valueOf(activity.getCalendarPagerAdapter().getBaseCal().get(Calendar.YEAR));
+		int month = activity.getCalendarPagerAdapter().getBaseCal().get(Calendar.MONTH);
+		String baseCalMonthString = month < 10 ? "0" + month : String.valueOf(month);
+		String yearMonthKey = year + baseCalMonthString;
+		activity.setSelectedDateData(yearMonthKey + (Integer.parseInt(dateValue) < 10 ? "0" + dateValue : dateValue));
+		activity.setDailyScheduleDateText(yearMonthKey, dateValue);
+		HashMap<Integer, Schedule> dailySchedule = makeDailyScheduleMap(activity, yearMonthKey, dateValue);
+		activity.setDailyScheduleMap(dailySchedule);
+		activity.changeToScheduleLayout(dailySchedule);
 	}
 
 	/**
