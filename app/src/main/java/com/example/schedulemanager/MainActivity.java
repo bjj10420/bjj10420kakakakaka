@@ -414,8 +414,8 @@ public class MainActivity extends AppCompatActivity {
                     public void onCallBack() {
                         new DBHelper(MainActivity.this).deleteSchedule(selectedDateData, dailyScheduleDataSet.getEntryIndex((PieEntry)e));
                         dailyScheduleDataSet.removeEntry((PieEntry)e);
-                        refreshCalendar();
-                        reloadDailyScheduleData();
+//                        refreshCalendar();
+//                        reloadDailyScheduleData();
                         pieChart.notifyDataSetChanged();
                         pieChart.invalidate();
                     }
