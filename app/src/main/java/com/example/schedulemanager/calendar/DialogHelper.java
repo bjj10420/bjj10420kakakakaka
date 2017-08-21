@@ -10,12 +10,12 @@ import android.content.DialogInterface;
 public class DialogHelper {
 
     /**
-     * 선택형 다이얼 로그
+     * 선택형 다이얼 로그 생성
      */
     public void setChoiceStyleDialog(Context context){
         AlertDialog.Builder alt_bld = new AlertDialog.Builder(context, 3);
         alt_bld.setCancelable(
-                false).setPositiveButton("삭제",
+                true).setPositiveButton("삭제",
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // Action for 'Yes' Button

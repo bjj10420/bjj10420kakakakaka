@@ -64,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
     private DBHelper dbHelper;
     private View backBtn;                           // 하단 뒤로가기 버튼
     private View cancelBtn;                         // 하단 X 버튼
-    private PieDataSet dailyScheduleDataSet;
+    private PieDataSet dailyScheduleDataSet;        // 데일리 스케쥴 차트용 데이터 저장소
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -404,7 +404,6 @@ public class MainActivity extends AppCompatActivity {
         pieChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
             public void onValueSelected(Entry e, Highlight h) {
-                Log.d("챠트 섹션이 눌렸다", String.valueOf(dailyScheduleDataSet.getEntryIndex((PieEntry)e)));
                 // 다이얼로그 띄움
                 new DialogHelper().setChoiceStyleDialog(MainActivity.this);
             }
