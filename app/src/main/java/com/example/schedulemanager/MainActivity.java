@@ -28,8 +28,6 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.highlight.Highlight;
-import com.github.mikephil.charting.listener.ChartTouchListener;
-import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
@@ -65,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
     private DBHelper dbHelper;
     private View backBtn;                           // 하단 뒤로가기 버튼
     private View cancelBtn;                         // 하단 X 버튼
+    private PieDataSet dailyScheduleDataSet;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -141,8 +140,9 @@ public class MainActivity extends AppCompatActivity {
                 Log.d("엔트리 추가 확인", "fillValue = " + fillValue);
             }
 
-        PieDataSet set = new PieDataSet(entries, "Election Results");
-        PieData data = new PieData(set);
+        dailyScheduleDataSet = new PieDataSet(entries, "Election Results");
+
+        PieData data = new PieData(dailyScheduleDataSet);
         data.setValueTextSize(0f);
         data.setValueTextColor(Color.GRAY);
 
@@ -165,8 +165,8 @@ public class MainActivity extends AppCompatActivity {
             colors.add(c);
 
         colors.add(ColorTemplate.getHoloBlue());
-        set.setColors(colors);
-        set.setHighlightEnabled(true); // allow highlighting for DataSet
+        dailyScheduleDataSet.setColors(colors);
+        dailyScheduleDataSet.setHighlightEnabled(true); // allow highlighting for DataSet
 
         pieChart.setData(data);
         pieChart.setDrawHoleEnabled(false);
@@ -390,20 +390,20 @@ public class MainActivity extends AppCompatActivity {
         setCalendarBtnEvent(R.id.timetable_param_setter_calendar_prev);
         setCalendarBtnEvent(R.id.timetable_param_setter_calendar_next);
         // 파이 챠트 탭(클릭) 이벤트 설정
-        setChartEvent(R.id.chart);
+        setDailyScheduleEvent(R.id.chart);
     }
 
     /**
      * 챠트 이벤트 설정
      * @param chartId
      */
-    private void setChartEvent(int chartId) {
+    private void setDailyScheduleEvent(int chartId) {
         PieChart pieChart = (PieChart) findViewById(chartId);
 
         pieChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
             public void onValueSelected(Entry e, Highlight h) {
-                Log.d("챠트 섹션이 눌렸다", String.valueOf(((PieEntry)e).getLabel()));
+                Log.d("챠트 섹션이 눌렸다", String.valueOf(dailyScheduleDataSet.getEntryIndex((PieEntry)e)));
             }
 
             @Override
