@@ -212,6 +212,7 @@ public class CalendarAdapter extends BaseAdapter
 						int month = activity.getCalendarPagerAdapter().getBaseCal().get(Calendar.MONTH);
 						String baseCalMonthString = month < 10 ? "0" + month : String.valueOf(month);
 						String yearMonthKey = year + baseCalMonthString;
+						activity.setSelectedDateData(yearMonthKey + (Integer.parseInt(dateValue) < 10 ? "0" + dateValue : dateValue));
 						activity.setDailyScheduleDateText(yearMonthKey, dateValue);
 						activity.changeToScheduleLayout(makeDailyScheduleMap(activity, yearMonthKey, dateValue));
 						}

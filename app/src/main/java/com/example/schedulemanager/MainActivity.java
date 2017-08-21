@@ -65,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
     private View backBtn;                           // 하단 뒤로가기 버튼
     private View cancelBtn;                         // 하단 X 버튼
     private PieDataSet dailyScheduleDataSet;        // 데일리 스케쥴 차트용 데이터 저장소
+    private String selectedDateData;                // 선택된 날짜 값
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -405,7 +406,12 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onValueSelected(Entry e, Highlight h) {
                 // 다이얼로그 띄움
-                new DialogHelper().setChoiceStyleDialog(MainActivity.this);
+                new DialogHelper().setChoiceStyleDialog(MainActivity.this, new GeneralCallback() {
+                    @Override
+                    public void onCallBack() {
+
+                    }
+                });
             }
 
             @Override
@@ -866,5 +872,10 @@ public class MainActivity extends AppCompatActivity {
                 .append(".").append(dateValueString).toString();
         TextView dailyScheduleDateText = (TextView) findViewById(R.id.dailyScheduleDateText);
         dailyScheduleDateText.setText(sb);
+    }
+
+    public void setSelectedDateData(String selectedDateData) {
+        Log.d("선택된날짜값테스트", selectedDateData);
+        this.selectedDateData = selectedDateData;
     }
 }

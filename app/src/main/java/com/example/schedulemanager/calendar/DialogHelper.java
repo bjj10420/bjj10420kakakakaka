@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 
+import com.example.schedulemanager.GeneralCallback;
+
 /**
  * 여러가지 용도의 다이얼로그 박스를 생성
  */
@@ -12,7 +14,7 @@ public class DialogHelper {
     /**
      * 선택형 다이얼 로그 생성
      */
-    public void setChoiceStyleDialog(Context context){
+    public void setChoiceStyleDialog(Context context, GeneralCallback callback1){
         AlertDialog.Builder alt_bld = new AlertDialog.Builder(context, 3);
         alt_bld.setCancelable(
                 true).setPositiveButton("삭제",
