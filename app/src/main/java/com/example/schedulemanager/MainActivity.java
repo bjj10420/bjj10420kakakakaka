@@ -22,6 +22,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.schedulemanager.calendar.CalendarPagerAdapter;
+import com.example.schedulemanager.calendar.DialogHelper;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
@@ -404,6 +405,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onValueSelected(Entry e, Highlight h) {
                 Log.d("챠트 섹션이 눌렸다", String.valueOf(dailyScheduleDataSet.getEntryIndex((PieEntry)e)));
+                // 다이얼로그 띄움
+                new DialogHelper().setChoiceStyleDialog(MainActivity.this);
             }
 
             @Override
