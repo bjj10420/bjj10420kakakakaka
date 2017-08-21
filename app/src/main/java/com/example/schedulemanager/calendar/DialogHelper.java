@@ -13,7 +13,7 @@ public class DialogHelper {
      * 선택형 다이얼 로그
      */
     public void setChoiceStyleDialog(Context context){
-        AlertDialog.Builder alt_bld = new AlertDialog.Builder(context, 2);
+        AlertDialog.Builder alt_bld = new AlertDialog.Builder(context, 3);
         alt_bld.setCancelable(
                 false).setPositiveButton("삭제",
                 new DialogInterface.OnClickListener() {
