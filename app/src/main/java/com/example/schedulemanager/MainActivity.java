@@ -66,9 +66,11 @@ public class MainActivity extends AppCompatActivity {
     private View cancelBtn;                         // 하단 X 버튼
     private PieDataSet dailyScheduleDataSet;        // 데일리 스케쥴 차트용 데이터 저장소
     private String selectedDateData;                // 선택된 날짜 값
+    private String yearMonthKey;                    // 선택된 연월 값
     private PieChart pieChart;                      // 데일리 스케쥴 챠트 화면
     private HashMap<Integer, Schedule> dailyScheduleMap;
                                                     // 선택된 일자의 하루 스케쥴 맵
+    private String dateValue;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -412,13 +414,15 @@ public class MainActivity extends AppCompatActivity {
                 new DialogHelper().setChoiceStyleDialog(MainActivity.this, new GeneralCallback() {
                     @Override
                     public void onCallBack() {
-                        new DBHelper(MainActivity.this).deleteSchedule(selectedDateData, dailyScheduleDataSet.getEntryIndex((PieEntry)e));
+                        int index = dailyScheduleDataSet.getEntryIndex((PieEntry)e);
+                        new DBHelper(MainActivity.this).deleteSchedule(selectedDateData, index);
                         dailyScheduleDataSet.removeEntry((PieEntry)e);
 //                        reloadDailyScheduleData();
                         pieChart.notifyDataSetChanged();
                         pieChart.invalidate();
-                        scheduleMapByMonth.clear();
-                        dbHelper.selectAllSchedule(scheduleMapByMonth);
+                        updateDailyScheduleMapByMonth(index);
+//                        scheduleMapByMonth.clear();
+//                        dbHelper.selectAllSchedule(scheduleMapByMonth);
                     }
                 });
             }
@@ -428,6 +432,20 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+
+    /**
+     * 스케쥴 맵을 업데이트 (해당 스케쥴 맵에서도 제거)
+     * @param scheduleOrderValue
+     */
+    private void updateDailyScheduleMapByMonth(int scheduleOrderValue) {
+      scheduleMapByMonth.get(Integer.parseInt(yearMonthKey)).remove(Integer.parseInt(dateValue + "000" +scheduleOrderValue));
+    }
+
+    /**
+     * 스케쥴 맵에서 해당 키(날짜+순서값)을 제거
+     */
+    private void removeScheduleMapByMonth() {
     }
 
     /**
@@ -902,5 +920,10 @@ public class MainActivity extends AppCompatActivity {
 
     public void setDailyScheduleMap(HashMap<Integer, Schedule> dailyScheduleMap) {
         this.dailyScheduleMap = dailyScheduleMap;
+    }
+
+    public void setYearMonthKeyAndDateValue(String yearMonthKey, String dateValue) {
+        this.yearMonthKey = yearMonthKey;
+        this.dateValue = dateValue;
     }
 }
