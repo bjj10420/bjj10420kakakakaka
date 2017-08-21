@@ -26,6 +26,8 @@ import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.listener.ChartTouchListener;
+import com.github.mikephil.charting.listener.OnChartGestureListener;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 import java.text.DateFormat;
@@ -384,6 +386,57 @@ public class MainActivity extends AppCompatActivity {
         // 달력 내 사용 버튼 이벤트 설정( 이전, 다음 )
         setCalendarBtnEvent(R.id.timetable_param_setter_calendar_prev);
         setCalendarBtnEvent(R.id.timetable_param_setter_calendar_next);
+        // 파이 챠트 탭(클릭) 이벤트 설정
+        setChartEvent(R.id.chart);
+    }
+
+    /**
+     * 챠트 이벤트 설정
+     * @param chartId
+     */
+    private void setChartEvent(int chartId) {
+        PieChart pieChart = (PieChart) findViewById(chartId);
+        pieChart.setOnChartGestureListener(new OnChartGestureListener() {
+            @Override
+            public void onChartGestureStart(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
+
+            }
+
+            @Override
+            public void onChartGestureEnd(MotionEvent me, ChartTouchListener.ChartGesture lastPerformedGesture) {
+
+            }
+
+            @Override
+            public void onChartLongPressed(MotionEvent me) {
+
+            }
+
+            @Override
+            public void onChartDoubleTapped(MotionEvent me) {
+
+            }
+
+            @Override
+            public void onChartSingleTapped(MotionEvent me) {
+
+            }
+
+            @Override
+            public void onChartFling(MotionEvent me1, MotionEvent me2, float velocityX, float velocityY) {
+
+            }
+
+            @Override
+            public void onChartScale(MotionEvent me, float scaleX, float scaleY) {
+
+            }
+
+            @Override
+            public void onChartTranslate(MotionEvent me, float dX, float dY) {
+
+            }
+        });
     }
 
     private void setCalendarBtnEvent(int viewId) {
