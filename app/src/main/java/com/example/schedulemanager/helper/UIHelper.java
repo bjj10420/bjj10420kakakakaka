@@ -220,7 +220,7 @@ public class UIHelper {
      * 지정된 뷰의 복사본을 만들어 최상위 프레임레이아웃의 자식으로 보냄
      * @param view
      */
-    private void hoverView(View view) {
+    public void hoverView(View view) {
         // 뷰 복사본 생성
         LinearLayout viewLayout = (LinearLayout) view;
         View iconView = viewLayout.getChildAt(0);
@@ -235,7 +235,7 @@ public class UIHelper {
     /**
      * 아이콘 버튼 드래그시 바텀버튼 전환
      */
-    private void changeBottomButton(boolean isBackBtnVisible) {
+    public void changeBottomButton(boolean isBackBtnVisible) {
         backBtn.setVisibility(isBackBtnVisible ? View.GONE : View.VISIBLE);
         cancelBtn.setVisibility(isBackBtnVisible ? View.VISIBLE : View.GONE);
     }
@@ -290,48 +290,39 @@ public class UIHelper {
         pieChart.invalidate(); // refresh
     }
 
-    /**
-     * 스케쥴 화면 초기화
-     */
-    private void initScheduleDisplay() {
-        PieChart pieChart = (PieChart) findViewById(R.id.chart);
-        List<PieEntry> entries = new ArrayList<>();
+    public View getCopiedView() {
+        return copiedView;
+    }
 
-        entries.add(new PieEntry(18.5f, "Green"));
-        entries.add(new PieEntry(26.7f, "Yellow"));
-        entries.add(new PieEntry(24.0f, "Red"));
-        entries.add(new PieEntry(30.8f, "Blue"));
+    public RelativeLayout getTotalLayout() {
+        return totalLayout;
+    }
 
-        PieDataSet set = new PieDataSet(entries, "Election Results");
-        PieData data = new PieData(set);
-        data.setValueTextSize(0f);
-        data.setValueTextColor(Color.GRAY);
+    public View getCenterIcon() {
+        return centerIcon;
+    }
 
-        // add many colors
-        ArrayList<Integer> colors = new ArrayList<Integer>();
+    public View getClosestView() {
+        return closestView;
+    }
 
-        for (int c : ColorTemplate.VORDIPLOM_COLORS)
-            colors.add(c);
+    public View getCalendarLayout() {
+        return calendarLayout;
+    }
 
-        for (int c : ColorTemplate.JOYFUL_COLORS)
-            colors.add(c);
+    public View getScheduleLayout() {
+        return scheduleLayout;
+    }
 
-        for (int c : ColorTemplate.COLORFUL_COLORS)
-            colors.add(c);
+    public View getBackBtn() {
+        return backBtn;
+    }
 
-        for (int c : ColorTemplate.LIBERTY_COLORS)
-            colors.add(c);
+    public View getCancelBtn() {
+        return cancelBtn;
+    }
 
-        for (int c : ColorTemplate.PASTEL_COLORS)
-            colors.add(c);
-
-        colors.add(ColorTemplate.getHoloBlue());
-        set.setColors(colors);
-
-        pieChart.setData(data);
-        pieChart.setDrawHoleEnabled(false);
-        pieChart.getLegend().setEnabled(false);
-        pieChart.setDrawSliceText(false);
-        pieChart.invalidate(); // refresh
+    public PieChart getPieChart() {
+        return pieChart;
     }
 }

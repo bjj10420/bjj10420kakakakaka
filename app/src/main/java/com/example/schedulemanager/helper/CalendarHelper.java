@@ -168,36 +168,13 @@ public class CalendarHelper {
         return dateString;
     }
 
-    /**
-     * 스케쥴 버튼을 드래그하여 메인 캘린더의 한칸으로 가져갔을때 추가
-     * @param tagName
-     */
-    private void addScheduleForTheDate(String tagName) {
-        // 데이트 스트링값 생성
-        String dateString = makeDateString(String.valueOf(closestView.getTag()));
-        // 이름
-        String activityName = tagName;
-        // 삽입할 스케쥴 데이터 객체 생성
-        Schedule newSchedule = new Schedule();
-        // 넘버
-        int number = DBHelper.dbHelper.getScheduleCountForDate(dateString);
-        newSchedule.setDate(dateString);
-        newSchedule.setActivityName(activityName);
-        //TODO 나머지 order, time, memo는 일단 공란
-        newSchedule.setOrder(number);
-        newSchedule.setTime("");
-        newSchedule.setMemo("");
 
-        // DB에 삽입
-        long resultNum = DBHelper.dbHelper.insertSchedule(newSchedule);
-        Log.d(tagName + "을", " 삽입하였습니다 dateString = " + dateString);
-    }
 
     /**
      * 스케쥴 버튼을 드래그하여 중앙 아이콘으로 가져갔을때 추가
      * @param tagName
      */
-    private void addScheduleForToday(String tagName) {
+    public void addScheduleForToday(String tagName) {
         // 오늘 날짜
         Date dateOfToday = new Date();
         DateFormat dateFormatter = new SimpleDateFormat("yyyyMMdd");
@@ -225,7 +202,7 @@ public class CalendarHelper {
     /**
      * 저장소에 있는 모든 뷰중에 최단거리를 추출
      */
-    private int findTheClosestView() {
+    public int findTheClosestView() {
         int count = 0;
         int min = 0;
 
@@ -244,7 +221,7 @@ public class CalendarHelper {
      * 드래그시 최단거리인 달력 한칸의 색을 변경
      * @param calendarCellView
      */
-    private void changeCalendarCellColor(View calendarCellView) {
+    public void changeCalendarCellColor(View calendarCellView) {
         // 1. 원래 있는 경우 기존셀을 원복, 새로운 곳에는 색을 + 저장
         if(closestView != null) {
             closestView.setBackgroundColor(Color.parseColor(isToday(closestView) ? "#ffc000": "#ffffff"));
@@ -271,7 +248,7 @@ public class CalendarHelper {
     /**
      * 메인 달력 갱신
      */
-    private void refreshCalendar() {
+    public void refreshCalendar() {
         dbHelper.selectAllSchedule(scheduleMapByMonth);
 
         // 어댑터 업데이트
@@ -286,7 +263,7 @@ public class CalendarHelper {
      * 메인 캘린더의 이전, 다음 버튼 클릭시 페이징
      * @param v
      */
-    private void pageCalendar(View v) {
+    public void pageCalendar(View v) {
         int currentPage = -1;
         int keyValue = v.getId() == R.id.timetable_param_setter_calendar_prev ? -1 : +1;
         currentPage = calendarPager.getCurrentItem();

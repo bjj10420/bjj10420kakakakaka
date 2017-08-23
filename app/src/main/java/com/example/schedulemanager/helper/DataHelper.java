@@ -4,7 +4,6 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.util.Log;
 import android.view.View;
-
 import com.example.schedulemanager.Schedule;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
@@ -15,6 +14,7 @@ import java.util.HashMap;
  * 모든 데이터 처리 담당
  */
 public class DataHelper {
+
     private DBHelper dbHelper;
     private HashMap<String, String> iconNameMap;    // 해당하는 텍스트에 매칭시키는 아이콘명이 저장되는 맵
     private Typeface typeface;                      // 글꼴
@@ -64,7 +64,7 @@ public class DataHelper {
      * 스케쥴 맵을 업데이트 (해당 스케쥴 맵에서도 제거)
      * @param scheduleOrderValue
      */
-    private void updateDailyScheduleMapByMonth(int scheduleOrderValue) {
+    public void updateDailyScheduleMapByMonth(int scheduleOrderValue) {
         HashMap<Integer, Schedule> scheduleMapForThisMonth = scheduleMapByMonth.get(Integer.parseInt(yearMonthKey));
         Log.d("업데이트 데일리 스케쥴맵 체크 삭제 전 개수", String.valueOf(scheduleMapForThisMonth.size()));
         scheduleMapForThisMonth.remove(Integer.parseInt(dateValue + "000" + scheduleOrderValue));
@@ -128,10 +128,62 @@ public class DataHelper {
     }
 
     public HashMap<Integer, View> getCurrentCalendarViewMap() {
-        return currentCalendarViewMap;
+         return currentCalendarViewMap;
     }
 
     public HashMap<Integer, HashMap<Integer, Schedule>> getScheduleMapByMonth() {
         return scheduleMapByMonth;
+    }
+
+    public void setdX(float dX) {
+        this.dX = dX;
+    }
+
+    public void setdY(float dY) {
+        this.dY = dY;
+    }
+
+    public float getdX() {
+        return dX;
+    }
+
+    public float getdY() {
+        return dY;
+    }
+
+    public HashMap<Integer, View> getArroundViewGroup() {
+        return arroundViewGroup;
+    }
+
+    public DBHelper getDbHelper() {
+        return dbHelper;
+    }
+
+    public HashMap<String, String> getIconNameMap() {
+        return iconNameMap;
+    }
+
+    public Typeface getTypeface() {
+        return typeface;
+    }
+
+    public PieDataSet getDailyScheduleDataSet() {
+        return dailyScheduleDataSet;
+    }
+
+    public String getSelectedDateData() {
+        return selectedDateData;
+    }
+
+    public String getYearMonthKey() {
+        return yearMonthKey;
+    }
+
+    public HashMap<Integer, Schedule> getDailyScheduleMap() {
+        return dailyScheduleMap;
+    }
+
+    public String getDateValue() {
+        return dateValue;
     }
 }

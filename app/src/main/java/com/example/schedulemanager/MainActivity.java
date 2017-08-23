@@ -62,11 +62,11 @@ public class MainActivity extends AppCompatActivity {
         UIHelper uiHelper = new UIHelper();
         uiHelper.initUI(this);
 
-        EventHelper eventHelper = new EventHelper();
-        eventHelper.initEvent();
-
         CalendarHelper calendarHelper = new CalendarHelper();
         calendarHelper.initCalendar(this);
+
+        EventHelper eventHelper = new EventHelper();
+        eventHelper.initEvent(this, dataHelper, uiHelper, calendarHelper);
  //        initScheduleDisplay();
     }
 
