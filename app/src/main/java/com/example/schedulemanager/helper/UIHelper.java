@@ -246,7 +246,7 @@ public class UIHelper {
     /**
      * 하루 일정을 셋팅
      */
-    private void setDailyScheduleDisplay(HashMap<Integer, Schedule> dailyScheduleMap) {
+    public void setDailyScheduleDisplay(HashMap<Integer, Schedule> dailyScheduleMap) {
         List<PieEntry> entries = new ArrayList<>();
         // 모든 스케쥴은 균등한 점유값을 갖는다
         // 100을 개수로 나눈값으로 지정
@@ -328,5 +328,33 @@ public class UIHelper {
 
     public PieChart getPieChart() {
         return pieChart;
+    }
+
+    public void setCopiedView(View copiedView) {
+        this.copiedView = copiedView;
+    }
+
+    public void setPieChart(PieChart pieChart) {
+        this.pieChart = pieChart;
+    }
+
+    public void setCancelBtn(View cancelBtn) {
+        this.cancelBtn = cancelBtn;
+    }
+
+    public void setBackBtn(View backBtn) {
+        this.backBtn = backBtn;
+    }
+
+    public void setClosestView(View closestView) {
+        this.closestView = closestView;
+    }
+
+    public void setScheduleLayout(View scheduleLayout) {
+        this.scheduleLayout = scheduleLayout;
+    }
+
+    public void setCalendarLayout(View calendarLayout) {
+        this.calendarLayout = calendarLayout;
     }
 }

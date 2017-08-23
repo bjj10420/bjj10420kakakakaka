@@ -2,6 +2,7 @@ package com.example.schedulemanager.helper;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Typeface;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
@@ -26,22 +27,28 @@ import java.util.HashMap;
  * 달력의 모든 처리 담당
  */
 public class CalendarHelper {
+
+    private Context context;
     private CalendarPagerAdapter calendarPagerAdapter;
     private ViewPager calendarPager;                // 메인 캘린더 뷰 페이져 객체
+    private DataHelper dataHelper;
+    private UIHelper uiHelepr;
 
-    public void initCalendar(Context context) {
-        calendarPagerAdapter = new CalendarPagerAdapter(this, typeface);
-
+    public void initCalendar(Context context, Typeface typeface, UIHelper uiHelper, DataHelper dataHelper) {
+        this.context = context;
+        this.uiHelepr = uiHelper;
+        this.dataHelper = dataHelper;
+        calendarPagerAdapter = new CalendarPagerAdapter(context, typeface);
         // 달력 구성 어댑터 생성 및 셋팅
         calendarPagerAdapter.initCalendar();
         calendarPagerAdapter.notifyDataSetChanged();
         calendarPager = (ViewPager) Util.getViewById(context, R.id.timetable_param_setter_calendar_viewpager);
         // 스케쥴 맵 전달
-        calendarPagerAdapter.setScheduleMapByMonth(scheduleMapByMonth);
+        calendarPagerAdapter.setScheduleMapByMonth(dataHelper.getScheduleMapByMonth());
         calendarPager.setAdapter(calendarPagerAdapter);
         // 달력에 연도, 월 표시
         calendarPager.setCurrentItem(12);
-        final TextView calendarDateText =  (TextView) findViewById(R.id.timetable_param_setter_calendar_date);
+        final TextView calendarDateText =  (TextView) Util.getViewById(context, R.id.timetable_param_setter_calendar_date);
         calendarDateText.setTypeface(typeface);
         setCalendarTitleDate(calendarDateText, calendarPagerAdapter, 12);
         // 이벤트 리스너 추가
@@ -73,13 +80,13 @@ public class CalendarHelper {
             View calendarView = calendarGridView.getChildAt(i);
             if(((TextView)(calendarView.findViewById(R.id.calendar_item_day))).getText().equals("")) continue;
             // 활성화되어있는 View만 추가
-            currentCalendarViewMap.put(dateCount, calendarView);
+            dataHelper.getCurrentCalendarViewMap().put(dateCount, calendarView);
             Log.d("캘린더뷰맵삽입확인 = ", "dateCount = " + dateCount);
 
             dateCount++;
             if(dateCount == 13) calendarView.setBackgroundColor(Color.parseColor("#b2b2b2"));
         }
-        Log.d("캘린더뷰맵개수확인 = ", String.valueOf(currentCalendarViewMap.size()));
+        Log.d("캘린더뷰맵개수확인 = ", String.valueOf(dataHelper.getCurrentCalendarViewMap().size()));
     }
 
     private void setPagingEvent(final TextView calendarDateText, final CalendarPagerAdapter calendarAdapter) {
@@ -90,7 +97,7 @@ public class CalendarHelper {
 
             @Override
             public void onPageSelected(int position) {
-                currentCalendarViewMap.clear();
+                dataHelper.getCurrentCalendarViewMap().clear();
                 setCalendarTitleDate(calendarDateText, calendarAdapter, position);
                 reloadCalendarView();
 //                refreshCalendar();
@@ -114,7 +121,7 @@ public class CalendarHelper {
                 .append(".")
                 .append(yearMonthKey.substring(4,6))
                 .append(".").append(dateValueString).toString();
-        TextView dailyScheduleDateText = (TextView) findViewById(R.id.dailyScheduleDateText);
+        TextView dailyScheduleDateText = (TextView) Util.getViewById(context, R.id.dailyScheduleDateText);
         dailyScheduleDateText.setText(sb);
     }
 
@@ -128,9 +135,9 @@ public class CalendarHelper {
 
     public void changeToScheduleLayout(HashMap<Integer, Schedule> dailySchedule) {
         if(dailySchedule.size() > 0) {
-            calendarLayout.setVisibility(View.GONE);
-            scheduleLayout.setVisibility(View.VISIBLE);
-            setDailyScheduleDisplay(dailySchedule);
+            uiHelepr.getCalendarLayout().setVisibility(View.GONE);
+            uiHelepr.getScheduleLayout().setVisibility(View.VISIBLE);
+            uiHelepr.setDailyScheduleDisplay(dailySchedule);
         }
     }
 
@@ -138,6 +145,10 @@ public class CalendarHelper {
      * 맵안에 저장되어 있는 모든 달력 칸과의 충돌 체크
      */
     public boolean checkCollisionForCalendarCell(){
+        HashMap<Integer, View> arroundViewGroup = dataHelper.getArroundViewGroup();
+        HashMap<Integer, View> currentCalendarViewMap = dataHelper.getCurrentCalendarViewMap();
+        View copiedView = uiHelepr.getCopiedView();
+
         // 저장소의 뷰들은 먼저 클리어
         arroundViewGroup.clear();
         boolean isCellCollided = false;
@@ -206,7 +217,7 @@ public class CalendarHelper {
         int count = 0;
         int min = 0;
 
-        for(int distance : arroundViewGroup.keySet()) {
+        for(int distance : dataHelper.getArroundViewGroup().keySet()) {
             if(count == 0) min = distance;
             else {
                 if(distance < min)
@@ -222,17 +233,18 @@ public class CalendarHelper {
      * @param calendarCellView
      */
     public void changeCalendarCellColor(View calendarCellView) {
+        View closestView = uiHelepr.getClosestView();
+
         // 1. 원래 있는 경우 기존셀을 원복, 새로운 곳에는 색을 + 저장
         if(closestView != null) {
             closestView.setBackgroundColor(Color.parseColor(isToday(closestView) ? "#ffc000": "#ffffff"));
             calendarCellView.setBackgroundColor(Color.parseColor("#c8c8c8"));
-            closestView = calendarCellView;
-        }
+         }
         // 2. 첫 변화
         else {
             calendarCellView.setBackgroundColor(Color.parseColor("#c8c8c8"));
-            closestView = calendarCellView;
-        }
+         }
+        uiHelepr.setClosestView(calendarCellView);
     }
 
     /**
@@ -249,7 +261,7 @@ public class CalendarHelper {
      * 메인 달력 갱신
      */
     public void refreshCalendar() {
-        dbHelper.selectAllSchedule(scheduleMapByMonth);
+        dataHelper.getDbHelper().selectAllSchedule(dataHelper.getScheduleMapByMonth());
 
         // 어댑터 업데이트
         calendarPagerAdapter.getAdapters()[calendarPager.getCurrentItem()].notifyDataSetChanged();

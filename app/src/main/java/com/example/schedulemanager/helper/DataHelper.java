@@ -190,4 +190,5 @@ public class DataHelper {
     public void setDailyScheduleDataSet(PieDataSet dailyScheduleDataSet) {
         this.dailyScheduleDataSet = dailyScheduleDataSet;
     }
+
 }
