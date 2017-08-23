@@ -23,6 +23,10 @@ import android.widget.TextView;
 
 import com.example.schedulemanager.calendar.CalendarPagerAdapter;
 import com.example.schedulemanager.calendar.DialogHelper;
+import com.example.schedulemanager.helper.DBHelper;
+import com.example.schedulemanager.helper.DataHelper;
+import com.example.schedulemanager.helper.EventHelper;
+import com.example.schedulemanager.helper.UIHelper;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
@@ -38,37 +42,20 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
-    private HashMap<String, String> iconNameMap;    // 해당하는 텍스트에 매칭시키는 아이콘명이 저장되는 맵
     private float dX;                               // 드래그 시의 X좌표
     private float dY;                               // 드래그 시의 Y좌표
     private View copiedView;                        // 드래그를 시작할 때 임시로 저장 해놓는 뷰
-    private RelativeLayout totalLayout;             // 최상위 프레임 레이아웃
-    private View centerIcon;                        // 중앙 아이콘 뷰
-    private Typeface typeface;                      // 글꼴
-    private View calendarLayout;                    // 메인 캘린더 레이아웃
-    private View scheduleLayout;                    // 하루 일정 레이아웃
-    private ViewPager calendarPager;                // 메인 캘린더 뷰 페이져 객체
-    private HashMap<Integer, HashMap<Integer, Schedule>> scheduleMapByMonth;
-                                                    // 달력월값을 키로 갖는 스케쥴 저장소
-    private HashMap<Integer, View> currentCalendarViewMap;
-                                                    // 현재 보고있는 달력의 각 칸을 저장해놓는 저장소
-    private HashMap<Integer, View> arroundViewGroup;
-                                                    // 드래그중에 포인터주위의 뷰들
-    private View closestView;                       // 드래그 이벤트 도중 포인터주위의 가장 가까운 뷰
-    private CalendarPagerAdapter calendarPagerAdapter;
+      private CalendarPagerAdapter calendarPagerAdapter;
                                                     // 메인 캘린더 페이져 어댑터
     private DBHelper dbHelper;
-    private View backBtn;                           // 하단 뒤로가기 버튼
-    private View cancelBtn;                         // 하단 X 버튼
+                        // 하단 X 버튼
     private PieDataSet dailyScheduleDataSet;        // 데일리 스케쥴 차트용 데이터 저장소
     private String selectedDateData;                // 선택된 날짜 값
     private String yearMonthKey;                    // 선택된 연월 값
-    private PieChart pieChart;                      // 데일리 스케쥴 챠트 화면
     private HashMap<Integer, Schedule> dailyScheduleMap;
                                                     // 선택된 일자의 하루 스케쥴 맵
     private String dateValue;
@@ -81,9 +68,12 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void init() {
-        initData();
-        initUI();
-        initEvent();
+        DataHelper dataHelper = new DataHelper();
+        dataHelper.initData(this);
+        UIHelper uiHelper = new UIHelper();
+        uiHelper.initUI(this);
+        EventHelper eventHelper = new EventHelper();
+        eventHelper.initEvent();
         initCalndar();
 //        initScheduleDisplay();
     }
@@ -259,184 +249,6 @@ public class MainActivity extends AppCompatActivity {
         calendarDateText.setText(calendarAdapter.getDateString(position));
     }
 
-    private void initData() {
-         dbHelper = new DBHelper(this);
-        /**
-         * 1. favorite테이블에서 메인에 등록된 버튼들의 정보를 로딩
-         * 2. hashMap에다 해당 text를 키로 하여 데이터에 아이콘명을 추가
-         */
-        iconNameMap = new HashMap<String, String>();
-        //TODO DB를 구축하면 아이콘 네임맵으로 저장 시켜줘야 함
-        // TEST용으로
-//        iconNameMap.put("")
-        // 글꼴 로딩
-        typeface = getApplicationFont();
-        // 모든 스케쥴 데이터 로딩
-        scheduleMapByMonth = new HashMap<Integer, HashMap<Integer, Schedule>>();
-        dbHelper.selectAllSchedule(scheduleMapByMonth);
-        currentCalendarViewMap = new HashMap<Integer, View>();
-        arroundViewGroup = new HashMap<Integer, View>();
-     }
-
-    private void initUI() {
-        //TODO 스트링 리스트 파라메터를 나중에 DB에서 읽어오게 해야 함
-        //TODO 나중에 버튼 패널의 아이콘들에 weight를 줘야한다
-        ArrayList<String> testList = new ArrayList<String>();
-        ArrayList<String> testList2 = new ArrayList<String>();
-
-        testList.add("교류");
-        testList.add("이메일");
-        testList.add("여가");
-        testList.add("만남");
-        testList2.add("약속");
-        testList2.add("독서");
-        testList2.add("학교");
-        testList2.add("공부");
-
-        initButtonPanel(R.id.buttonPanel, testList);
-        initButtonPanel(R.id.buttonPanel2, testList2);
-
-        totalLayout = (RelativeLayout) findViewById(R.id.totalLayout);
-        centerIcon = findViewById(R.id.centerIcon);
-        calendarLayout = findViewById(R.id.calendarLayout);
-        scheduleLayout = findViewById(R.id.scheduleLayout);
-        backBtn = findViewById(R.id.back_btn);
-        cancelBtn = findViewById(R.id.cancel_btn);
-        pieChart = (PieChart) findViewById(R.id.chart);
-
-    }
-
-    /**
-     * 모서리의 버튼 패널 초기화
-     * 1. 넘겨받은 스트링 리스트데이터를 for 문으로 순환
-     * 2. 데이터 하나에 뷰를 생성해서 해당 아이콘 코드값(아이콘명)으로 이미지뷰를 지정, 스트링 데이터로 텍스트 뷰 지정
-     * 3. 해당 패널에 생성한 뷰 추가
-      * @param panelId
-     * @param stringArrayList
-     */
-    private void initButtonPanel(int panelId, ArrayList<String> stringArrayList) {
-        // 추가되는 패널 뷰
-        LinearLayout buttonPanel = (LinearLayout) findViewById(panelId);
-        // 각 버튼의 높이
-        float buttonHeight = Util.convertDpToPixel(50);
-        // 각 텍스트의 높이
-        float textHeight = Util.convertDpToPixel(15);
-        // 각 버튼 뷰 레이아웃 파라메터
-        LinearLayout.LayoutParams buttonViewParams = new LinearLayout.LayoutParams(0,
-                (int) Util.convertDpToPixel(65));
-        buttonViewParams.weight = 1;
-
-        // 각 버튼 레이아웃 파라메터
-        ViewGroup.LayoutParams iconParams = new ViewGroup.LayoutParams((int) buttonHeight,
-        (int) buttonHeight);
-        // 각 텍스트 파라메터
-        ViewGroup.LayoutParams textParams = new ViewGroup.LayoutParams((int) buttonHeight,
-        (int) textHeight);
-        //TODO 테스트용 코드
-        int count = 0;
-        if(panelId == R.id.buttonPanel2) count = 4;
-
-        for(String textData : stringArrayList){
-            // 버튼뷰 설정
-            LinearLayout buttonView = new LinearLayout(this);
-            buttonView.setOrientation(LinearLayout.VERTICAL);
-            buttonView.setGravity(Gravity.CENTER);
-            buttonView.setLayoutParams(buttonViewParams);
-            // 아이콘 뷰 설정
-            View iconView = new View(this);
-
-            // iconView.setBackgroundResource(findIdByFileName(iconNameMap.get(textData), this));
-
-            //TODO 테스트용 코드
-                switch(count) {
-                    case 0 : iconView.setBackgroundResource(R.drawable.community);
-                            break;
-                    case 1 : iconView.setBackgroundResource(R.drawable.email);
-                        break;
-                    case 2 : iconView.setBackgroundResource(R.drawable.leasure);
-                        break;
-                    case 3 : iconView.setBackgroundResource(R.drawable.meet);
-                        break;
-                    case 4 : iconView.setBackgroundResource(R.drawable.promise);
-                        break;
-                    case 5 : iconView.setBackgroundResource(R.drawable.read);
-                        break;
-                    case 6 : iconView.setBackgroundResource(R.drawable.school);
-                        break;
-                    case 7 : iconView.setBackgroundResource(R.drawable.shopping);
-                        break;
-                    case 8 : iconView.setBackgroundResource(R.drawable.study);
-                        break;
-                }
-
-            iconView.setLayoutParams(iconParams);
-            // 텍스트 뷰 설정
-            TextView textView = new TextView(this);
-            textView.setText(textData);
-            textView.setGravity(Gravity.CENTER);
-            textView.setLayoutParams(textParams);
-            // 태그첨부
-            buttonView.setTag(textData);
-            // 추가
-            buttonView.addView(iconView);
-            buttonView.addView(textView);
-            buttonPanel.addView(buttonView);
-
-            //TODO 테스트용 코드
-            count++;
-        }
-    }
-
-    private void initEvent() {
-        // 드래그 이벤트 설정
-        setDragEvent(R.id.buttonPanel);
-        setDragEvent(R.id.buttonPanel2);
-        // 중앙 아이콘 클릭 이벤트 설정
-        setCenterIconClickEvent();
-        // 뒤로가기 버튼 클릭 이벤트 설정
-        setBackBtnClickEvent();
-        // 달력 내 사용 버튼 이벤트 설정( 이전, 다음 )
-        setCalendarBtnEvent(R.id.timetable_param_setter_calendar_prev);
-        setCalendarBtnEvent(R.id.timetable_param_setter_calendar_next);
-        // 파이 챠트 탭(클릭) 이벤트 설정
-        setDailyScheduleEvent(R.id.chart);
-    }
-
-    /**
-     * 하루 스케쥴 이벤트 설정
-     * @param chartId
-     */
-    private void setDailyScheduleEvent(int chartId) {
-
-        pieChart.setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
-            @Override
-            public void onValueSelected(final Entry e, Highlight h) {
-                // 다이얼로그 띄움
-                new DialogHelper().setChoiceStyleDialog(MainActivity.this, new GeneralCallback() {
-                    @Override
-                    public void onCallBack() {
-                        int index = dailyScheduleDataSet.getEntryIndex((PieEntry)e);
-                        int orderValue = getOrderValueFromSchedule(index);
-                        Log.d("orderValue값 체크", String.valueOf(orderValue));
-                        new DBHelper(MainActivity.this).deleteSchedule(selectedDateData, orderValue);
-                        dailyScheduleDataSet.removeEntry((PieEntry)e);
-//                        reloadDailyScheduleData();
-                        pieChart.notifyDataSetChanged();
-                        pieChart.invalidate();
-                        updateDailyScheduleMapByMonth(orderValue);
-//                        scheduleMapByMonth.clear();
-//                        dbHelper.selectAllSchedule(scheduleMapByMonth);
-                    }
-                });
-            }
-
-            @Override
-            public void onNothingSelected() {
-
-            }
-        });
-    }
-
     /**
      * 해당 인덱스로 추출된 스케쥴값의 order값 리턴
      * @param selectedIndex
@@ -498,16 +310,6 @@ public class MainActivity extends AppCompatActivity {
         }
     }
 
-    private void setCalendarBtnEvent(int viewId) {
-        // 달력 내 사용 버튼
-        View calendarBtn =  findViewById(viewId);
-        calendarBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                pageCalendar(v);
-            }
-        });
-    }
 
     /**
      * 메인 캘린더의 이전, 다음 버튼 클릭시 페이징
@@ -520,119 +322,14 @@ public class MainActivity extends AppCompatActivity {
         calendarPager.setCurrentItem(currentPage + keyValue, true);
     }
 
-    private void setBackBtnClickEvent() {
-        View backBtn = findViewById(R.id.back_btn);
-        backBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // 중앙 뷰 복구
-                centerIcon.setVisibility(View.VISIBLE);
-                calendarLayout.setVisibility(View.GONE);
-            }
-        });
-    }
 
-    private void setCenterIconClickEvent() {
-        centerIcon.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                calendarLayout.setVisibility(View.VISIBLE);
-                // 중앙 아이콘 비표시
-                v.setVisibility(View.GONE);
-            }
-        });
-    }
 
-    /**
-     * 해당 패널내의 자식 아이콘들의 드래그 이벤트를 설정
-     * @param buttonPanelId
-     */
-    private void setDragEvent(final int buttonPanelId) {
-        LinearLayout buttonPanel = (LinearLayout) findViewById(buttonPanelId);
 
-        for(int i = 0; i < buttonPanel.getChildCount(); i++){
-            View buttonView = buttonPanel.getChildAt(i);
-            buttonView.setOnTouchListener(new View.OnTouchListener() {
-                @Override
-                public boolean onTouch(View view, MotionEvent event) {
-                    switch (event.getActionMasked()) {
-                        case MotionEvent.ACTION_DOWN:
-                            actionDownEvent(view, event, buttonPanelId);
-                            break;
 
-                        case MotionEvent.ACTION_MOVE:
-                            actionMoveEvent(view, event);
-                            break;
 
-                        case MotionEvent.ACTION_UP:
-                            actionUpEvent(view);
-                            break;
 
-                        default:
-                            return false;
-                    }
-                    return true;
-                }
-            });
-        }
-    }
 
-    /**
-     * 아이콘 버튼 드래그 중 업할때 이벤트
-     * @param view
-     */
-    private void actionUpEvent(View view) {
-        // 중앙 아이콘 활성화인 경우
-        if(centerIcon.getVisibility() == View.VISIBLE &&
-                Util.checkCollision(centerIcon, copiedView)) {
-            addScheduleForToday(String.valueOf(view.getTag()));
-        }
-        // 메인 달력 활성화 중 취소 버튼 위에서 마우스 업
-        if(Util.checkCollisionForChildView(cancelBtn, copiedView)){
-            closestView.setBackgroundColor(Color.parseColor("#ffffff"));
-            closestView = null;
-        }
-        // 메인 달력 활성화 중 캘린더 칸 위에서 마우스 업
-        if(centerIcon.getVisibility() == View.GONE &&
-                closestView != null) {
-            closestView.setBackgroundColor(Color.parseColor("#ffffff"));
-            addScheduleForTheDate(String.valueOf(view.getTag()));
-            refreshCalendar();
-            closestView = null;
-        }
-        // 중앙 아이콘 컬러 복구( 메인모드시 )
-        changeCenterIconColor(false);
-        // 하단 버튼 복구
-        changeBottomButton(false);
-        // 카피된 아이콘 제거
-        totalLayout.removeView(copiedView);
-    }
 
-    /**
-     * 아이콘 버튼 드래그 중 이벤트
-     * @param view
-     * @param event
-    */
-    private void actionMoveEvent(View view, MotionEvent event) {
-        // 복사된 뷰 표시 g
-        if(copiedView.getVisibility() == View.GONE){
-            copiedView.setAlpha(0.7f);
-            copiedView.setVisibility(View.VISIBLE);
-        }
-        copiedView.setY(event.getRawY() + dY);
-        copiedView.setX(event.getRawX() + dX);
-        // 메인모드 처리
-        if(centerIcon.getVisibility() == View.VISIBLE){
-            boolean isCollided = Util.checkCollision(centerIcon, copiedView);
-            changeCenterIconColor(isCollided);
-        }
-        // 캘린더모드 처리
-        if(centerIcon.getVisibility() == View.GONE && checkCollisionForCalendarCell()) {
-            changeCalendarCellColor(arroundViewGroup.get(findTheClosestView()));
-        }
-        // 하단 버튼 전환(뒤로가기 => X )
-        changeBottomButton(true);
-    }
 
     /**
      * 아이콘 버튼 드래그시 바텀버튼 전환
@@ -642,23 +339,6 @@ public class MainActivity extends AppCompatActivity {
         cancelBtn.setVisibility(isBackBtnVisible ? View.VISIBLE : View.GONE);
     }
 
-    /**
-     * 아이콘 버튼 터치 다운시 이벤트
-     * @param view
-     * @param event
-     * @param buttonPanelId
-     */
-    private void actionDownEvent(View view, MotionEvent event, int buttonPanelId) {
-        totalLayout.removeView(copiedView);
-        hoverView(view);
-        dX = view.getX() - event.getRawX();
-        dY = 0;
-        if(buttonPanelId == R.id.buttonPanel)
-            dY = view.getY() - event.getRawY();
-        else
-            //TODO 일단 Y값을 고정값으로 맞춰주었지만 수정해야함(원인 불명)
-            dY = view.getY() - event.getRawY() + 2000;
-    }
 
     /**
      * 메인 달력 갱신
@@ -886,15 +566,6 @@ public class MainActivity extends AppCompatActivity {
         return isCellCollided;
     }
 
-    /**
-     * 지정 글꼴 리턴
-     * @return
-     */
-    public Typeface getApplicationFont() {
-        Typeface mTypeface = null;
-        mTypeface = Typeface.createFromAsset(getAssets(), "nanumgothic.ttf");
-        return mTypeface;
-    }
 
 
     public HashMap<Integer, View> getCurrentCalendarViewMap() {

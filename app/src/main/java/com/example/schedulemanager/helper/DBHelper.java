@@ -1,4 +1,4 @@
-package com.example.schedulemanager;
+package com.example.schedulemanager.helper;
 
 import android.content.ContentValues;
 import android.content.Context;
@@ -6,6 +6,9 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+
+import com.example.schedulemanager.Schedule;
+import com.example.schedulemanager.Util;
 
 import java.util.HashMap;
 import java.util.Locale;

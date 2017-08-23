@@ -1,5 +1,6 @@
 package com.example.schedulemanager;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Rect;
@@ -73,5 +74,13 @@ public class Util {
     public static double getDistanceFromTwoPoints(float x1, float y1, float x2, float y2){
         double distance = Math.sqrt(Math.pow(x2 - x1, 2) + Math.pow(y2 - y1, 2));
         return distance;
+    }
+
+    /**
+     * context와 resourceId를 가지고 뷰를 구해주는 함수
+     */
+    public static View getViewById(Context context,int resourceId){
+        View view = ((Activity) context).findViewById(resourceId);
+        return view;
     }
 }
