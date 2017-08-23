@@ -109,8 +109,6 @@ public class CalendarHelper {
         });
     }
 
-
-
     public CalendarPagerAdapter getCalendarPagerAdapter() {
         return calendarPagerAdapter;
     }
@@ -267,7 +265,6 @@ public class CalendarHelper {
         calendarPager.setCurrentItem(currentPage + keyValue, true);
     }
 
-
     public void setEventHelper(EventHelper eventHelper) {
         this.eventHelper = eventHelper;
     }
@@ -286,5 +283,4 @@ public class CalendarHelper {
         dataHelper.setDailyScheduleMap(dailySchedule);
         changeToScheduleLayout(dailySchedule);
     }
-
 }

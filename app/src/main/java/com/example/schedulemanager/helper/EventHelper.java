@@ -48,7 +48,7 @@ public class EventHelper {
         setCalendarBtnEvent(R.id.timetable_param_setter_calendar_prev);
         setCalendarBtnEvent(R.id.timetable_param_setter_calendar_next);
         // 파이 챠트 탭(클릭) 이벤트 설정
-        setDailyScheduleEvent(R.id.chart);
+        setDailyScheduleEvent();
     }
 
     /**
@@ -205,9 +205,8 @@ public class EventHelper {
 
     /**
      * 하루 스케쥴 이벤트 설정
-     * @param chartId
      */
-    private void setDailyScheduleEvent(int chartId) {
+    private void setDailyScheduleEvent() {
 
         uiHelper.getPieChart().setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
