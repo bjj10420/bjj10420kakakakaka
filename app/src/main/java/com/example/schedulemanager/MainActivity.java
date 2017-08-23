@@ -417,7 +417,7 @@ public class MainActivity extends AppCompatActivity {
                     public void onCallBack() {
                         int index = dailyScheduleDataSet.getEntryIndex((PieEntry)e);
                         int orderValue = getOrderValueFromSchedule(index);
-                        Log.d("인덱스테스트", String.valueOf(index));
+                        Log.d("orderValue값 체크", String.valueOf(orderValue));
                         new DBHelper(MainActivity.this).deleteSchedule(selectedDateData, orderValue);
                         dailyScheduleDataSet.removeEntry((PieEntry)e);
 //                        reloadDailyScheduleData();
@@ -462,17 +462,22 @@ public class MainActivity extends AppCompatActivity {
      * @param scheduleOrderValue
      */
     private void updateDailyScheduleMapByMonth(int scheduleOrderValue) {
-      Log.d("업데이트 데일리 스케쥴맵 체크", "yearMonthKey = " + yearMonthKey + ", dateValue = " + dateValue + " , scheduleOrderValue = " + scheduleOrderValue);
       HashMap<Integer, Schedule> scheduleMapForThisMonth = scheduleMapByMonth.get(Integer.parseInt(yearMonthKey));
-         Iterator it = scheduleMapForThisMonth.keySet().iterator();
+        Log.d("업데이트 데일리 스케쥴맵 체크 삭제 전 개수", String.valueOf(scheduleMapForThisMonth.size()));
+        scheduleMapForThisMonth.remove(Integer.parseInt(dateValue + "000" + scheduleOrderValue));
+        Log.d("업데이트 데일리 스케쥴맵 맵 키 체크", dateValue + "000" + scheduleOrderValue);
+        Log.d("업데이트 데일리 스케쥴맵 체크 삭제 후 개수", String.valueOf(scheduleMapForThisMonth.size()));
 
-        while(it.hasNext()) {
-           Schedule schedule = scheduleMapForThisMonth.get(it.next());
-           if(schedule.getOrder() == scheduleOrderValue) {
-              it.remove();
-              break;
-          }
-         }
+//        Iterator it = scheduleMapForThisMonth.keySet().iterator();
+//
+//        while(it.hasNext()) {
+//           Schedule schedule = scheduleMapForThisMonth.get(it.next());
+//           if(schedule.getOrder() == scheduleOrderValue) {
+//              it.remove();
+//               Log.d("업데이트 데일리 스케쥴맵 체크", "order값이 " + scheduleOrderValue + "인 값을 삭제하였습니다.");
+//               break;
+//          }
+//         }
     }
 
     /**
