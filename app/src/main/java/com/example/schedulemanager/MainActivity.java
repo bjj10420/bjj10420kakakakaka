@@ -38,6 +38,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
@@ -402,7 +403,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
-     * 챠트 이벤트 설정
+     * 하루 스케쥴 이벤트 설정
      * @param chartId
      */
     private void setDailyScheduleEvent(int chartId) {
@@ -415,12 +416,14 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onCallBack() {
                         int index = dailyScheduleDataSet.getEntryIndex((PieEntry)e);
-                        new DBHelper(MainActivity.this).deleteSchedule(selectedDateData, index);
+                        int orderValue = getOrderValueFromSchedule(index);
+                        Log.d("인덱스테스트", String.valueOf(index));
+                        new DBHelper(MainActivity.this).deleteSchedule(selectedDateData, orderValue);
                         dailyScheduleDataSet.removeEntry((PieEntry)e);
 //                        reloadDailyScheduleData();
                         pieChart.notifyDataSetChanged();
                         pieChart.invalidate();
-                        updateDailyScheduleMapByMonth(index);
+                        updateDailyScheduleMapByMonth(orderValue);
 //                        scheduleMapByMonth.clear();
 //                        dbHelper.selectAllSchedule(scheduleMapByMonth);
                     }
@@ -435,12 +438,41 @@ public class MainActivity extends AppCompatActivity {
     }
 
     /**
+     * 해당 인덱스로 추출된 스케쥴값의 order값 리턴
+     * @param selectedIndex
+     * @return
+     */
+    public int getOrderValueFromSchedule(int selectedIndex) {
+        int orderValue = 0;
+        int countIndex = 0;
+        HashMap<Integer, Schedule> scheduleMapForThisMonth = scheduleMapByMonth.get(Integer.parseInt(yearMonthKey));
+
+            for(Integer key : scheduleMapForThisMonth.keySet()) {
+                if(countIndex == selectedIndex) {
+                    orderValue = scheduleMapForThisMonth.get(key).getOrder();
+                    break;
+                }
+                countIndex++;
+            }
+        return orderValue;
+    }
+
+    /**
      * 스케쥴 맵을 업데이트 (해당 스케쥴 맵에서도 제거)
      * @param scheduleOrderValue
      */
     private void updateDailyScheduleMapByMonth(int scheduleOrderValue) {
-      Log.d("스케쥴오더값테스트", String.valueOf(scheduleOrderValue) + ", " + scheduleMapByMonth.get(Integer.parseInt(yearMonthKey)).get(Integer.parseInt(dateValue + "000" +scheduleOrderValue)).getActivityName());
-      scheduleMapByMonth.get(Integer.parseInt(yearMonthKey)).remove(Integer.parseInt(dateValue + "000" +scheduleOrderValue));
+      Log.d("업데이트 데일리 스케쥴맵 체크", "yearMonthKey = " + yearMonthKey + ", dateValue = " + dateValue + " , scheduleOrderValue = " + scheduleOrderValue);
+      HashMap<Integer, Schedule> scheduleMapForThisMonth = scheduleMapByMonth.get(Integer.parseInt(yearMonthKey));
+         Iterator it = scheduleMapForThisMonth.keySet().iterator();
+
+        while(it.hasNext()) {
+           Schedule schedule = scheduleMapForThisMonth.get(it.next());
+           if(schedule.getOrder() == scheduleOrderValue) {
+              it.remove();
+              break;
+          }
+         }
     }
 
     /**
