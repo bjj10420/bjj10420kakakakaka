@@ -1,4 +1,4 @@
-package com.example.schedulemanager;
+package com.example.schedulemanager.vo;
 
 /**
  * 스케쥴 데이터 1개를 표현하는 VO

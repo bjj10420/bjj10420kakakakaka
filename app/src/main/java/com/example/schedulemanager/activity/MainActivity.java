@@ -1,4 +1,4 @@
-package com.example.schedulemanager;
+package com.example.schedulemanager.activity;
 
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
@@ -22,6 +22,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.example.schedulemanager.R;
 import com.example.schedulemanager.calendar.CalendarPagerAdapter;
 import com.example.schedulemanager.calendar.DialogHelper;
 import com.example.schedulemanager.helper.CalendarHelper;

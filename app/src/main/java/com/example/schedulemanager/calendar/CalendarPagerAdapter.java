@@ -13,9 +13,9 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 
-import com.example.schedulemanager.MainActivity;
+import com.example.schedulemanager.activity.MainActivity;
 import com.example.schedulemanager.R;
-import com.example.schedulemanager.Schedule;
+import com.example.schedulemanager.vo.Schedule;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;

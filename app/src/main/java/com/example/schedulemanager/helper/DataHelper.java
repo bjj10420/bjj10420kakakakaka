@@ -4,7 +4,7 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.util.Log;
 import android.view.View;
-import com.example.schedulemanager.Schedule;
+import com.example.schedulemanager.vo.Schedule;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 

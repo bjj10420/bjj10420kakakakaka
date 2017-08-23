@@ -11,11 +11,9 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.schedulemanager.R;
-import com.example.schedulemanager.Schedule;
+import com.example.schedulemanager.vo.Schedule;
 import com.example.schedulemanager.Util;
 import com.example.schedulemanager.calendar.CalendarPagerAdapter;
-import com.github.mikephil.charting.data.PieEntry;
-import com.github.mikephil.charting.utils.Utils;
 
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;

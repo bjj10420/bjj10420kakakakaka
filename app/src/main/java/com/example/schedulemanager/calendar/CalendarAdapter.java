@@ -14,9 +14,9 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 
-import com.example.schedulemanager.MainActivity;
+import com.example.schedulemanager.activity.MainActivity;
 import com.example.schedulemanager.R;
-import com.example.schedulemanager.Schedule;
+import com.example.schedulemanager.vo.Schedule;
 
 import java.util.Calendar;
 import java.util.HashMap;

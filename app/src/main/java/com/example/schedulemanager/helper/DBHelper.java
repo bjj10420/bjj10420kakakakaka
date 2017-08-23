@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.example.schedulemanager.Schedule;
+import com.example.schedulemanager.vo.Schedule;
 import com.example.schedulemanager.Util;
 
 import java.util.HashMap;

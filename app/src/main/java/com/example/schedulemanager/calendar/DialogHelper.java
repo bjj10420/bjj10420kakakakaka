@@ -4,7 +4,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 
-import com.example.schedulemanager.GeneralCallback;
+import com.example.schedulemanager.interface_.GeneralCallback;
 
 /**
  * 여러가지 용도의 다이얼로그 박스를 생성
