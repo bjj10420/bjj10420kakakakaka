@@ -19,7 +19,12 @@ import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
  * 모든 이벤트를 처리, 관리
  */
 public class EventHelper {
-    private void initEvent() {
+
+    public static EventHelper eventHelper;
+
+    public void initEvent() {
+        // 스테틱 저장
+        eventHelper = this;
         // 드래그 이벤트 설정
         setDragEvent(R.id.buttonPanel);
         setDragEvent(R.id.buttonPanel2);
@@ -209,5 +214,18 @@ public class EventHelper {
 
             }
         });
+    }
+
+    public void onBackPresssed(){
+        // 하루 일정화면이 ON이면 닫아준다
+        if(scheduleLayout.getVisibility() == View.VISIBLE) {
+            scheduleLayout.setVisibility(View.GONE);
+            calendarLayout.setVisibility(View.VISIBLE);
+        }
+        // 캘린더화면이 ON이면 닫아준다
+        else if(calendarLayout.getVisibility() == View.VISIBLE) {
+            calendarLayout.setVisibility(View.GONE);
+            centerIcon.setVisibility(View.VISIBLE);
+        }
     }
 }

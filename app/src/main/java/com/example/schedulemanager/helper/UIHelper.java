@@ -1,7 +1,15 @@
 package com.example.schedulemanager.helper;
 
+import android.annotation.SuppressLint;
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,26 +17,34 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.example.schedulemanager.R;
+import com.example.schedulemanager.Schedule;
 import com.example.schedulemanager.Util;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.PieData;
+import com.github.mikephil.charting.data.PieDataSet;
+import com.github.mikephil.charting.data.PieEntry;
+import com.github.mikephil.charting.utils.ColorTemplate;
 
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 /**
  * 모든 UI처리 담당
  */
 public class UIHelper {
+
     private Context context;
     private RelativeLayout totalLayout;             // 최상위 프레임 레이아웃
     private View centerIcon;                        // 중앙 아이콘 뷰
     private View calendarLayout;                    // 메인 캘린더 레이아웃
     private View scheduleLayout;                    // 하루 일정 레이아웃
-    private ViewPager calendarPager;                // 메인 캘린더 뷰 페이져 객체
     private View closestView;                       // 드래그 이벤트 도중 포인터주위의 가장 가까운 뷰
     private View backBtn;                           // 하단 뒤로가기 버튼
-    private View cancelBtn;
+    private View cancelBtn;                         // 하단 X 버튼
     private PieChart pieChart;                      // 데일리 스케쥴 챠트 화면
+    private View copiedView;                        // 드래그를 시작할 때 임시로 저장 해놓는 뷰
 
     public void initUI(Context context) {
         this.context = context;
@@ -137,5 +153,185 @@ public class UIHelper {
             //TODO 테스트용 코드
             count++;
         }
+    }
+
+    /**
+     * 각 버튼뷰를 생성
+     */
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    private View makeButtonView(Drawable background, String textData, int width, int height) {
+        // 각 버튼의 높이
+        float buttonHeight = Util.convertDpToPixel(50);
+        // 각 텍스트의 높이
+        float textHeight = Util.convertDpToPixel(15);
+        // 각 버튼 뷰 레이아웃 파라메터
+        LinearLayout.LayoutParams buttonViewParams = new LinearLayout.LayoutParams(width,
+                height);
+
+        // 각 버튼 레이아웃 파라메터
+        ViewGroup.LayoutParams iconParams = new ViewGroup.LayoutParams((int) buttonHeight,
+                (int) buttonHeight);
+        // 각 텍스트 파라메터
+        ViewGroup.LayoutParams textParams = new ViewGroup.LayoutParams((int) buttonHeight,
+                (int) textHeight);
+
+        // 버튼뷰 설정
+        LinearLayout buttonView = new LinearLayout(context);
+        buttonView.setOrientation(LinearLayout.VERTICAL);
+        buttonView.setGravity(Gravity.CENTER);
+        buttonView.setLayoutParams(buttonViewParams);
+        // 아이콘 뷰 설정
+        View iconView = new View(context);
+
+//           iconView.setBackgroundResource(findIdByFileName(iconNameMap.get(textData), this));
+
+        iconView.setBackground(background);
+        iconView.setLayoutParams(iconParams);
+        // 텍스트 뷰 설정
+        TextView textView = new TextView(context);
+        textView.setText(textData);
+        textView.setGravity(Gravity.CENTER);
+        textView.setLayoutParams(textParams);
+        // 태그첨부
+        buttonView.setTag(textData);
+        // 추가
+        buttonView.addView(iconView);
+        buttonView.addView(textView);
+
+        return buttonView;
+    }
+
+    /**
+     * 중앙 아이콘의 배경색 변경
+     */
+    @SuppressLint("NewApi")
+    public void changeCenterIconColor(boolean isTicked){
+        Drawable tickedIconDrawable = null;
+        Resources res = context.getResources();
+        tickedIconDrawable = res.getDrawable(R.drawable.schedule_icon);
+        if(isTicked)
+            tickedIconDrawable.setColorFilter(Color.parseColor("#4bf442"), PorterDuff.Mode.SRC_IN);
+        else
+            tickedIconDrawable.clearColorFilter();
+        this.centerIcon.setBackground(tickedIconDrawable);
+    }
+
+    /**
+     * 지정된 뷰의 복사본을 만들어 최상위 프레임레이아웃의 자식으로 보냄
+     * @param view
+     */
+    private void hoverView(View view) {
+        // 뷰 복사본 생성
+        LinearLayout viewLayout = (LinearLayout) view;
+        View iconView = viewLayout.getChildAt(0);
+        TextView textView = (TextView) viewLayout.getChildAt(1);
+        copiedView = makeButtonView(iconView.getBackground(), String.valueOf(textView.getText()),
+                viewLayout.getWidth(), viewLayout.getHeight());
+        copiedView.setVisibility(View.GONE);
+        // 최상위 레이아웃으로 보냄
+        totalLayout.addView(copiedView);
+    }
+
+    /**
+     * 아이콘 버튼 드래그시 바텀버튼 전환
+     */
+    private void changeBottomButton(boolean isBackBtnVisible) {
+        backBtn.setVisibility(isBackBtnVisible ? View.GONE : View.VISIBLE);
+        cancelBtn.setVisibility(isBackBtnVisible ? View.VISIBLE : View.GONE);
+    }
+
+    /**
+     * 하루 일정을 셋팅
+     */
+    private void setDailyScheduleDisplay(HashMap<Integer, Schedule> dailyScheduleMap) {
+        List<PieEntry> entries = new ArrayList<>();
+        // 모든 스케쥴은 균등한 점유값을 갖는다
+        // 100을 개수로 나눈값으로 지정
+        float fillValue = 100 / dailyScheduleMap.size();
+        for(Integer dateValue : dailyScheduleMap.keySet()) {
+            Schedule schedule = dailyScheduleMap.get(dateValue);
+            entries.add(new PieEntry(fillValue, schedule.getActivityName()));
+            Log.d("엔트리 추가 확인", "fillValue = " + fillValue);
+        }
+
+        dailyScheduleDataSet = new PieDataSet(entries, "Election Results");
+
+        PieData data = new PieData(dailyScheduleDataSet);
+        data.setValueTextSize(0f);
+        data.setValueTextColor(Color.GRAY);
+
+        // add many colors
+        ArrayList<Integer> colors = new ArrayList<Integer>();
+
+        for (int c : ColorTemplate.VORDIPLOM_COLORS)
+            colors.add(c);
+
+        for (int c : ColorTemplate.JOYFUL_COLORS)
+            colors.add(c);
+
+        for (int c : ColorTemplate.COLORFUL_COLORS)
+            colors.add(c);
+
+        for (int c : ColorTemplate.LIBERTY_COLORS)
+            colors.add(c);
+
+        for (int c : ColorTemplate.PASTEL_COLORS)
+            colors.add(c);
+
+        colors.add(ColorTemplate.getHoloBlue());
+        dailyScheduleDataSet.setColors(colors);
+        dailyScheduleDataSet.setHighlightEnabled(true); // allow highlighting for DataSet
+
+        pieChart.setData(data);
+        pieChart.setDrawHoleEnabled(false);
+        pieChart.getLegend().setEnabled(false);
+        pieChart.setDrawSliceText(true);
+        pieChart.getDescription().setEnabled(false);
+        pieChart.invalidate(); // refresh
+    }
+
+    /**
+     * 스케쥴 화면 초기화
+     */
+    private void initScheduleDisplay() {
+        PieChart pieChart = (PieChart) findViewById(R.id.chart);
+        List<PieEntry> entries = new ArrayList<>();
+
+        entries.add(new PieEntry(18.5f, "Green"));
+        entries.add(new PieEntry(26.7f, "Yellow"));
+        entries.add(new PieEntry(24.0f, "Red"));
+        entries.add(new PieEntry(30.8f, "Blue"));
+
+        PieDataSet set = new PieDataSet(entries, "Election Results");
+        PieData data = new PieData(set);
+        data.setValueTextSize(0f);
+        data.setValueTextColor(Color.GRAY);
+
+        // add many colors
+        ArrayList<Integer> colors = new ArrayList<Integer>();
+
+        for (int c : ColorTemplate.VORDIPLOM_COLORS)
+            colors.add(c);
+
+        for (int c : ColorTemplate.JOYFUL_COLORS)
+            colors.add(c);
+
+        for (int c : ColorTemplate.COLORFUL_COLORS)
+            colors.add(c);
+
+        for (int c : ColorTemplate.LIBERTY_COLORS)
+            colors.add(c);
+
+        for (int c : ColorTemplate.PASTEL_COLORS)
+            colors.add(c);
+
+        colors.add(ColorTemplate.getHoloBlue());
+        set.setColors(colors);
+
+        pieChart.setData(data);
+        pieChart.setDrawHoleEnabled(false);
+        pieChart.getLegend().setEnabled(false);
+        pieChart.setDrawSliceText(false);
+        pieChart.invalidate(); // refresh
     }
 }
