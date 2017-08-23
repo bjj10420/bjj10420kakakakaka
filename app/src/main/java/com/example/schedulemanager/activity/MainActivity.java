@@ -59,7 +59,7 @@ public class MainActivity extends AppCompatActivity {
     private void init() {
         DataHelper dataHelper = new DataHelper();
         dataHelper.initData(this);
-
+//
         UIHelper uiHelper = new UIHelper();
         uiHelper.initUI(this, dataHelper);
 
