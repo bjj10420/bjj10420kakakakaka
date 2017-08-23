@@ -186,4 +186,8 @@ public class DataHelper {
     public String getDateValue() {
         return dateValue;
     }
+
+    public void setDailyScheduleDataSet(PieDataSet dailyScheduleDataSet) {
+        this.dailyScheduleDataSet = dailyScheduleDataSet;
+    }
 }

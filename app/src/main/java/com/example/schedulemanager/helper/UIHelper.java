@@ -36,6 +36,7 @@ import java.util.List;
 public class UIHelper {
 
     private Context context;
+    private DataHelper dataHelper;
     private RelativeLayout totalLayout;             // 최상위 프레임 레이아웃
     private View centerIcon;                        // 중앙 아이콘 뷰
     private View calendarLayout;                    // 메인 캘린더 레이아웃
@@ -46,8 +47,10 @@ public class UIHelper {
     private PieChart pieChart;                      // 데일리 스케쥴 챠트 화면
     private View copiedView;                        // 드래그를 시작할 때 임시로 저장 해놓는 뷰
 
-    public void initUI(Context context) {
+    public void initUI(Context context, DataHelper dataHelper) {
         this.context = context;
+        this.dataHelper = dataHelper;
+
         //TODO 스트링 리스트 파라메터를 나중에 DB에서 읽어오게 해야 함
         //TODO 나중에 버튼 패널의 아이콘들에 weight를 줘야한다
         ArrayList<String> testList = new ArrayList<String>();
@@ -254,7 +257,8 @@ public class UIHelper {
             Log.d("엔트리 추가 확인", "fillValue = " + fillValue);
         }
 
-        dailyScheduleDataSet = new PieDataSet(entries, "Election Results");
+        PieDataSet dailyScheduleDataSet = new PieDataSet(entries, "Election Results");
+        dataHelper.setDailyScheduleDataSet(dailyScheduleDataSet);
 
         PieData data = new PieData(dailyScheduleDataSet);
         data.setValueTextSize(0f);
