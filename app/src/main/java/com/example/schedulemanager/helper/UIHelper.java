@@ -293,6 +293,22 @@ public class UIHelper {
         pieChart.invalidate(); // refresh
     }
 
+    /**
+     * 일정 화면의 날짜 텍스트 지정
+     * @param yearMonthKey
+     * @param dateValue
+     */
+    public void setDailyScheduleDateText(String yearMonthKey, String dateValue) {
+        String dateValueString = Integer.parseInt(dateValue) < 10 ? "0" + dateValue : dateValue;
+        StringBuilder sb = new StringBuilder();
+        sb.append(yearMonthKey.substring(0,4))
+                .append(".")
+                .append(yearMonthKey.substring(4,6))
+                .append(".").append(dateValueString).toString();
+        TextView dailyScheduleDateText = (TextView) Util.getViewById(context, R.id.dailyScheduleDateText);
+        dailyScheduleDateText.setText(sb);
+    }
+
     public View getCopiedView() {
         return copiedView;
     }
@@ -329,31 +345,7 @@ public class UIHelper {
         return pieChart;
     }
 
-    public void setCopiedView(View copiedView) {
-        this.copiedView = copiedView;
-    }
-
-    public void setPieChart(PieChart pieChart) {
-        this.pieChart = pieChart;
-    }
-
-    public void setCancelBtn(View cancelBtn) {
-        this.cancelBtn = cancelBtn;
-    }
-
-    public void setBackBtn(View backBtn) {
-        this.backBtn = backBtn;
-    }
-
     public void setClosestView(View closestView) {
         this.closestView = closestView;
-    }
-
-    public void setScheduleLayout(View scheduleLayout) {
-        this.scheduleLayout = scheduleLayout;
-    }
-
-    public void setCalendarLayout(View calendarLayout) {
-        this.calendarLayout = calendarLayout;
     }
 }

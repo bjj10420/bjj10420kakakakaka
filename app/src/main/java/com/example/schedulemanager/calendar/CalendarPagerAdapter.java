@@ -15,6 +15,7 @@ import android.widget.GridView;
 
 import com.example.schedulemanager.activity.MainActivity;
 import com.example.schedulemanager.R;
+import com.example.schedulemanager.helper.DataHelper;
 import com.example.schedulemanager.vo.Schedule;
 
 import java.text.SimpleDateFormat;
@@ -204,7 +205,7 @@ public class CalendarPagerAdapter extends PagerAdapter
 			}
 
 			// 메인액티비티의 뷰저장소 클리어
-			((MainActivity)mContext).getCurrentCalendarViewMap().clear();
+			DataHelper.dataHelper.getCurrentCalendarViewMap().clear();
 			// 달력을 셋팅한다.
 			setCalendar(position);
 			// 페이저에 뷰를 붙인다.

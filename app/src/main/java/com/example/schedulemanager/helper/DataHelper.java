@@ -4,6 +4,8 @@ import android.content.Context;
 import android.graphics.Typeface;
 import android.util.Log;
 import android.view.View;
+
+import com.example.schedulemanager.activity.MainActivity;
 import com.example.schedulemanager.vo.Schedule;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
@@ -15,6 +17,7 @@ import java.util.HashMap;
  */
 public class DataHelper {
 
+    public static DataHelper dataHelper;
     private DBHelper dbHelper;
     private HashMap<String, String> iconNameMap;    // 해당하는 텍스트에 매칭시키는 아이콘명이 저장되는 맵
     private Typeface typeface;                      // 글꼴
@@ -30,6 +33,7 @@ public class DataHelper {
     private String dateValue;
 
     public void initData(Context context) {
+        dataHelper = this;
         dbHelper = new DBHelper(context);
         /**
          * 1. favorite테이블에서 메인에 등록된 버튼들의 정보를 로딩
@@ -46,18 +50,6 @@ public class DataHelper {
         dbHelper.selectAllSchedule(scheduleMapByMonth);
         currentCalendarViewMap = new HashMap<Integer, View>();
         arroundViewGroup = new HashMap<Integer, View>();
-    }
-
-    /**
-     * 하루 일정 데이터를 리로드
-     */
-    private void reloadDailyScheduleData() {
-        float fillValue = 100 / dailyScheduleDataSet.getEntryCount();
-
-        for(int i = 0; i < dailyScheduleDataSet.getEntryCount(); i++) {
-            PieEntry entry = dailyScheduleDataSet.getEntryForIndex(i);
-            entry.setY(fillValue);
-        }
     }
 
     /**
@@ -113,18 +105,21 @@ public class DataHelper {
         return mTypeface;
     }
 
-    public void setSelectedDateData(String selectedDateData) {
-        Log.d("선택된날짜값테스트", selectedDateData);
-        this.selectedDateData = selectedDateData;
-    }
-
-    public void setDailyScheduleMap(HashMap<Integer, Schedule> dailyScheduleMap) {
-        this.dailyScheduleMap = dailyScheduleMap;
-    }
-
-    public void setYearMonthKeyAndDateValue(String yearMonthKey, String dateValue) {
-        this.yearMonthKey = yearMonthKey;
-        this.dateValue = dateValue;
+    /**
+     * 하루의 모든 스케쥴을 가지고와서 새로 하나 생성
+     * @param activity
+     * @param yearMonthKey
+     * @param dateValue
+     */
+    public HashMap<Integer, Schedule> makeDailyScheduleMap(MainActivity activity, String yearMonthKey, String dateValue) {
+        HashMap<Integer, Schedule> dailySchedules = new HashMap<Integer, Schedule>();
+        HashMap<Integer, Schedule> thisMonthSchedules = getScheduleMapByMonth().get(Integer.parseInt(yearMonthKey));
+        Log.d("thisMonthSchedules 개수", String.valueOf(thisMonthSchedules.size()));
+        for(Integer dateKey : thisMonthSchedules.keySet()){
+            Schedule schedule = thisMonthSchedules.get(dateKey);
+            if(String.valueOf(dateKey).substring(0, 2).equals(dateValue))dailySchedules.put(dateKey, schedule);
+        }
+        return dailySchedules;
     }
 
     public HashMap<Integer, View> getCurrentCalendarViewMap() {
@@ -175,20 +170,20 @@ public class DataHelper {
         return selectedDateData;
     }
 
-    public String getYearMonthKey() {
-        return yearMonthKey;
-    }
-
-    public HashMap<Integer, Schedule> getDailyScheduleMap() {
-        return dailyScheduleMap;
-    }
-
-    public String getDateValue() {
-        return dateValue;
-    }
-
     public void setDailyScheduleDataSet(PieDataSet dailyScheduleDataSet) {
         this.dailyScheduleDataSet = dailyScheduleDataSet;
     }
 
+    public void setYearMonthKeyAndDateValue(String yearMonthKey, String dateValue) {
+        this.yearMonthKey = yearMonthKey;
+        this.dateValue = dateValue;
+    }
+
+    public void setSelectedDateData(String selectedDateData) {
+        this.selectedDateData = selectedDateData;
+    }
+
+    public void setDailyScheduleMap(HashMap<Integer,Schedule> dailyScheduleMap) {
+        this.dailyScheduleMap = dailyScheduleMap;
+    }
 }

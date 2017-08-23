@@ -11,6 +11,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.schedulemanager.R;
+import com.example.schedulemanager.activity.MainActivity;
 import com.example.schedulemanager.vo.Schedule;
 import com.example.schedulemanager.Util;
 import com.example.schedulemanager.calendar.CalendarPagerAdapter;
@@ -31,6 +32,7 @@ public class CalendarHelper {
     private ViewPager calendarPager;                // 메인 캘린더 뷰 페이져 객체
     private DataHelper dataHelper;
     private UIHelper uiHelepr;
+    private EventHelper eventHelper;
 
     public void initCalendar(Context context, Typeface typeface, UIHelper uiHelper, DataHelper dataHelper) {
         this.context = context;
@@ -107,21 +109,7 @@ public class CalendarHelper {
         });
     }
 
-    /**
-     * 일정 화면의 날짜 텍스트 지정
-     * @param yearMonthKey
-     * @param dateValue
-     */
-    public void setDailyScheduleDateText(String yearMonthKey, String dateValue) {
-        String dateValueString = Integer.parseInt(dateValue) < 10 ? "0" + dateValue : dateValue;
-        StringBuilder sb = new StringBuilder();
-        sb.append(yearMonthKey.substring(0,4))
-                .append(".")
-                .append(yearMonthKey.substring(4,6))
-                .append(".").append(dateValueString).toString();
-        TextView dailyScheduleDateText = (TextView) Util.getViewById(context, R.id.dailyScheduleDateText);
-        dailyScheduleDateText.setText(sb);
-    }
+
 
     public CalendarPagerAdapter getCalendarPagerAdapter() {
         return calendarPagerAdapter;
@@ -260,7 +248,6 @@ public class CalendarHelper {
      */
     public void refreshCalendar() {
         dataHelper.getDbHelper().selectAllSchedule(dataHelper.getScheduleMapByMonth());
-
         // 어댑터 업데이트
         calendarPagerAdapter.getAdapters()[calendarPager.getCurrentItem()].notifyDataSetChanged();
         GridView calendarGridView = (GridView) calendarPagerAdapter.getViews().get(calendarPager.getCurrentItem()).findViewById(R.id.timetable_param_setter_calendar_gridview);
@@ -280,5 +267,24 @@ public class CalendarHelper {
         calendarPager.setCurrentItem(currentPage + keyValue, true);
     }
 
+
+    public void setEventHelper(EventHelper eventHelper) {
+        this.eventHelper = eventHelper;
+    }
+
+    public void getCalendarCellClickEvent(View v) {
+        MainActivity activity = ((MainActivity) context);
+        String dateValue = String.valueOf(v.getTag());
+        String year = String.valueOf(calendarPagerAdapter.getBaseCal().get(Calendar.YEAR));
+        int month = calendarPagerAdapter.getBaseCal().get(Calendar.MONTH);
+        String baseCalMonthString = month < 10 ? "0" + month : String.valueOf(month);
+        String yearMonthKey = year + baseCalMonthString;
+        dataHelper.setYearMonthKeyAndDateValue(yearMonthKey, dateValue);
+        dataHelper.setSelectedDateData(yearMonthKey + (Integer.parseInt(dateValue) < 10 ? "0" + dateValue : dateValue));
+        uiHelepr.setDailyScheduleDateText(yearMonthKey, dateValue);
+        HashMap<Integer, Schedule> dailySchedule = dataHelper.makeDailyScheduleMap(activity, yearMonthKey, dateValue);
+        dataHelper.setDailyScheduleMap(dailySchedule);
+        changeToScheduleLayout(dailySchedule);
+    }
 
 }

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.util.EventLog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -16,6 +17,8 @@ import android.widget.TextView;
 
 import com.example.schedulemanager.activity.MainActivity;
 import com.example.schedulemanager.R;
+import com.example.schedulemanager.helper.DataHelper;
+import com.example.schedulemanager.helper.EventHelper;
 import com.example.schedulemanager.vo.Schedule;
 
 import java.util.Calendar;
@@ -205,13 +208,13 @@ public class CalendarAdapter extends BaseAdapter
 						convertView.setOnClickListener(new View.OnClickListener() {
 							@Override
 							public void onClick(View v) {
-						//TODO 리팩토링때 이벤트헬퍼로 가져가야 할 것
+								//TODO 리팩토링때 이벤트헬퍼로 가져가야 할 것
 								actionClicked(v);
-						}
+							}
 				});
 				// 메인 저장소에 뷰 저장( 전달이나 다음달 제외 )
 				if(!(position < firstItemIdx || position > lastItemIdx))
-				((MainActivity)mContext).getCurrentCalendarViewMap().put(item, convertView);
+				DataHelper.dataHelper.getCurrentCalendarViewMap().put(item, convertView);
 
 				if(position == selectedItemIdx)
 				{	// 선택된 날짜
@@ -338,36 +341,10 @@ public class CalendarAdapter extends BaseAdapter
 	 * @param v
      */
 	private void actionClicked(View v) {
-		MainActivity activity = ((MainActivity) mContext);
-		String dateValue = String.valueOf(v.getTag());
-		String year = String.valueOf(activity.getCalendarPagerAdapter().getBaseCal().get(Calendar.YEAR));
-		int month = activity.getCalendarPagerAdapter().getBaseCal().get(Calendar.MONTH);
-		String baseCalMonthString = month < 10 ? "0" + month : String.valueOf(month);
-		String yearMonthKey = year + baseCalMonthString;
-		activity.setYearMonthKeyAndDateValue(yearMonthKey, dateValue);
-		activity.setSelectedDateData(yearMonthKey + (Integer.parseInt(dateValue) < 10 ? "0" + dateValue : dateValue));
-		activity.setDailyScheduleDateText(yearMonthKey, dateValue);
-		HashMap<Integer, Schedule> dailySchedule = makeDailyScheduleMap(activity, yearMonthKey, dateValue);
-		activity.setDailyScheduleMap(dailySchedule);
-		activity.changeToScheduleLayout(dailySchedule);
+		EventHelper.eventHelper.getCalendarHelper().getCalendarCellClickEvent(v);
 	}
 
-	/**
-	 * 하루의 모든 스케쥴을 가지고와서 새로 하나 생성
-	 * @param activity
-	 * @param yearMonthKey
-	 * @param dateValue
-	 */
-	private HashMap<Integer, Schedule> makeDailyScheduleMap(MainActivity activity, String yearMonthKey, String dateValue) {
-		HashMap<Integer, Schedule> dailySchedules = new HashMap<Integer, Schedule>();
-		HashMap<Integer, Schedule> thisMonthSchedules = activity.getScheduleMapByMonth().get(Integer.parseInt(yearMonthKey));
-		Log.d("thisMonthSchedules 개수", String.valueOf(thisMonthSchedules.size()));
-		for(Integer dateKey : thisMonthSchedules.keySet()){
-			Schedule schedule = thisMonthSchedules.get(dateKey);
-				if(String.valueOf(dateKey).substring(0, 2).equals(dateValue))dailySchedules.put(dateKey, schedule);
-		}
-		return dailySchedules;
-	}
+
 
 	public class ViewHolder
 	{
