@@ -58,12 +58,7 @@ public class DataHelper {
      */
     public void updateDailyScheduleMapByMonth(int scheduleOrderValue) {
         HashMap<Integer, Schedule> scheduleMapForThisMonth = scheduleMapByMonth.get(Integer.parseInt(yearMonthKey));
-        Log.d("업데이트 데일리 스케쥴맵 체크 스케쥴 오더 값", String.valueOf(scheduleOrderValue));
-
-        Log.d("업데이트 데일리 스케쥴맵 체크 삭제 전 개수", String.valueOf(scheduleMapForThisMonth.size()));
         scheduleMapForThisMonth.remove(Integer.parseInt(dateValue + "000" + scheduleOrderValue));
-        Log.d("업데이트 데일리 스케쥴맵 맵 키 체크", dateValue + "000" + scheduleOrderValue);
-        Log.d("업데이트 데일리 스케쥴맵 체크 삭제 후 개수", String.valueOf(scheduleMapForThisMonth.size()));
 
     }
 
@@ -75,13 +70,10 @@ public class DataHelper {
     public int getOrderValueFromSchedule(int selectedIndex) {
         int orderValue = 0;
         int countIndex = 0;
-        Log.d("getOrderValueFromSchedule 테스트 selectedIndex", String.valueOf(selectedIndex));
-        for(Integer key : dailyScheduleMap.keySet()) {
+           for(Integer key : dailyScheduleMap.keySet()) {
             if(countIndex == selectedIndex) {
                 orderValue = dailyScheduleMap.get(key).getOrder();
-                Log.d("getOrderValueFromSchedule 테스트 orderValue", String.valueOf(orderValue));
-                Log.d("getOrderValueFromSchedule 테스트 activityName", String.valueOf(dailyScheduleMap.get(key).getActivityName()));
-                break;
+                   break;
             }
             countIndex++;
         }
@@ -107,14 +99,10 @@ public class DataHelper {
     public HashMap<Integer, Schedule> makeDailyScheduleMap(String yearMonthKey, String dateValue) {
         HashMap<Integer, Schedule> dailySchedules = new HashMap<Integer, Schedule>();
         HashMap<Integer, Schedule> thisMonthSchedules = getScheduleMapByMonth().get(Integer.parseInt(yearMonthKey));
-        Log.d("thisMonthSchedules 개수", String.valueOf(thisMonthSchedules.size()));
         for(Integer dateKey : thisMonthSchedules.keySet()) {
             Schedule schedule = thisMonthSchedules.get(dateKey);
-            Log.d("데이트키체크", String.valueOf(dateKey));
-            Log.d("데이트밸류", String.valueOf(dateValue));
             if(String.valueOf(dateKey).length() == 6 && String.valueOf(dateKey).substring(0, 2).equals(dateValue))dailySchedules.put(dateKey, schedule);
             else if(String.valueOf(dateKey).length() == 5 && String.valueOf(dateKey).substring(0, 1).equals(dateValue))dailySchedules.put(dateKey, schedule);
-
         }
         return dailySchedules;
     }

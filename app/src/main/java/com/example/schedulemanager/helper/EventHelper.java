@@ -285,7 +285,6 @@ public class EventHelper {
 
         // DB에 삽입
         long resultNum = DBHelper.dbHelper.insertSchedule(newSchedule);
-        Log.d(tagName + "을", " 삽입하였습니다 dateString = " + dateString);
     }
 
     public CalendarHelper getCalendarHelper() {

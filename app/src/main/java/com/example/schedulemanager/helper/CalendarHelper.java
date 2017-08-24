@@ -81,12 +81,9 @@ public class CalendarHelper {
             if(((TextView)(calendarView.findViewById(R.id.calendar_item_day))).getText().equals("")) continue;
             // 활성화되어있는 View만 추가
             dataHelper.getCurrentCalendarViewMap().put(dateCount, calendarView);
-            Log.d("캘린더뷰맵삽입확인 = ", "dateCount = " + dateCount);
-
             dateCount++;
             if(dateCount == 13) calendarView.setBackgroundColor(Color.parseColor("#b2b2b2"));
         }
-        Log.d("캘린더뷰맵개수확인 = ", String.valueOf(dataHelper.getCurrentCalendarViewMap().size()));
     }
 
     private void setPagingEvent(final TextView calendarDateText, final CalendarPagerAdapter calendarAdapter) {
@@ -148,7 +145,6 @@ public class CalendarHelper {
                         calendarCellView);
             }
         }
-        Log.d("충돌 실험", "충돌 " + isCellCollided);
         return isCellCollided;
     }
 
@@ -192,7 +188,6 @@ public class CalendarHelper {
 
         // DB에 삽입
         long resultNum = DBHelper.dbHelper.insertSchedule(newSchedule);
-        Log.d(tagName + "을", " 삽입하였습니다 number = " + number);
     }
 
     /**

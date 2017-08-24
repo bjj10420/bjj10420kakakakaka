@@ -253,7 +253,6 @@ public class UIHelper {
         for(Integer dateValue : dailyScheduleMap.keySet()) {
             Schedule schedule = dailyScheduleMap.get(dateValue);
             entries.add(new PieEntry(fillValue, schedule.getActivityName()));
-            Log.d("엔트리 추가 확인", "fillValue = " + fillValue);
         }
 
         PieDataSet dailyScheduleDataSet = new PieDataSet(entries, "Election Results");

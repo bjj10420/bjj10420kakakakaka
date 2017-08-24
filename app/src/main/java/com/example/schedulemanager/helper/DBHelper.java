@@ -99,7 +99,6 @@ public class DBHelper extends SQLiteOpenHelper {
         DB = getWritableDatabase();
         int resultNumber = DB.delete(scheduleTableName, dateValue_colum + " = ? AND " + orderValue_colum + " = ?",
                 new String[]{dateColumValue, String.valueOf(orderColumValue)});
-        Log.d("스케쥴삭제테스트", String.valueOf(resultNumber));
      }
 
     /**
@@ -122,7 +121,6 @@ public class DBHelper extends SQLiteOpenHelper {
             c.moveToFirst();
             count = c.getInt(0);
         }
-        Log.d("getScheduleCountForDate 테스트", "date = " + date + ", count = " + count);
         return count;
     }
 
@@ -153,7 +151,6 @@ public class DBHelper extends SQLiteOpenHelper {
                 String scheduleYearMonth = Util.getYearMonthFromDate(scheduleDate);
                 // 스케쥴 추가
                 addScheduleToMapByMonth(allScheduleMap, Integer.parseInt(scheduleYearMonth), schedule);
-                Log.d("scheduleYearMonth", scheduleYearMonth);
             }
         }
      }
@@ -173,6 +170,5 @@ public class DBHelper extends SQLiteOpenHelper {
         }
 //        Log.d("addScheduleToMapByMonth" , String.valueOf(Integer.parseInt(schedule.getDate().substring(6,8))));
         scheduleMap.put(Integer.parseInt(schedule.getDate().substring(6,8) + "000" + schedule.getOrder()), schedule);
-        Log.d("addScheduleToMapByMonth put 테스트" , schedule.getDate().substring(6,8) + "/" + schedule.getOrder());
     }
 }

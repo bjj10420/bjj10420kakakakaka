@@ -302,7 +302,6 @@ public class CalendarPagerAdapter extends PagerAdapter
 			SimpleDateFormat formatter = new SimpleDateFormat("yyyyMM", Locale.getDefault());
 			String baseYearMonthValue = formatter.format(new Date(base.getTimeInMillis()));
 			HashMap<Integer, Schedule> scheduleHashMapForPage = scheduleMapByMonth.get(Integer.parseInt(baseYearMonthValue));
-			Log.d("scheduleHashMapForPage", String.valueOf(scheduleHashMapForPage));
 			// 해당 어댑터에 내부스케쥴맵값 설정
 			adapter.setScheduleMapForCurrentPage(scheduleHashMapForPage);
 
