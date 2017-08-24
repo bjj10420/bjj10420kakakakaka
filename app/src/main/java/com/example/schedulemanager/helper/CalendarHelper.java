@@ -119,6 +119,7 @@ public class CalendarHelper {
 
     public void changeToScheduleLayout(HashMap<Integer, Schedule> dailySchedule) {
         if(dailySchedule.size() > 0) {
+            uiHelepr.setNoDateText(false);
             uiHelepr.getCalendarLayout().setVisibility(View.GONE);
             uiHelepr.getScheduleLayout().setVisibility(View.VISIBLE);
             uiHelepr.setDailyScheduleDisplay(dailySchedule);

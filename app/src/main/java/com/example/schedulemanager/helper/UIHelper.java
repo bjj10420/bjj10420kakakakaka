@@ -348,4 +348,13 @@ public class UIHelper {
     public void setClosestView(View closestView) {
         this.closestView = closestView;
     }
+
+    /**
+     * 데이터 유무에 따른 문구표시 설정
+     * @param isVisible
+     */
+    public void setNoDateText(boolean isVisible) {
+        View noDateTextView = Util.getViewById(context, R.id.dailyScheduleNoDataText);
+        noDateTextView.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+    }
 }

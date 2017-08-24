@@ -65,16 +65,6 @@ public class DataHelper {
         Log.d("업데이트 데일리 스케쥴맵 맵 키 체크", dateValue + "000" + scheduleOrderValue);
         Log.d("업데이트 데일리 스케쥴맵 체크 삭제 후 개수", String.valueOf(scheduleMapForThisMonth.size()));
 
-//        Iterator it = scheduleMapForThisMonth.keySet().iterator();
-//
-//        while(it.hasNext()) {
-//           Schedule schedule = scheduleMapForThisMonth.get(it.next());
-//           if(schedule.getOrder() == scheduleOrderValue) {
-//              it.remove();
-//               Log.d("업데이트 데일리 스케쥴맵 체크", "order값이 " + scheduleOrderValue + "인 값을 삭제하였습니다.");
-//               break;
-//          }
-//         }
     }
 
     /**
