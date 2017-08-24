@@ -285,6 +285,8 @@ public class UIHelper {
         dailyScheduleDataSet.setColors(colors);
         dailyScheduleDataSet.setHighlightEnabled(true); // allow highlighting for DataSet
 
+        pieChart.getOnTouchListener().setLastHighlighted(null);
+        pieChart.highlightValues(null);
         pieChart.setData(data);
         pieChart.setDrawHoleEnabled(false);
         pieChart.getLegend().setEnabled(false);
