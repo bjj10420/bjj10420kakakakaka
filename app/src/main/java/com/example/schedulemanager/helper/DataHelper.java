@@ -58,6 +58,8 @@ public class DataHelper {
      */
     public void updateDailyScheduleMapByMonth(int scheduleOrderValue) {
         HashMap<Integer, Schedule> scheduleMapForThisMonth = scheduleMapByMonth.get(Integer.parseInt(yearMonthKey));
+        Log.d("업데이트 데일리 스케쥴맵 체크 스케쥴 오더 값", String.valueOf(scheduleOrderValue));
+
         Log.d("업데이트 데일리 스케쥴맵 체크 삭제 전 개수", String.valueOf(scheduleMapForThisMonth.size()));
         scheduleMapForThisMonth.remove(Integer.parseInt(dateValue + "000" + scheduleOrderValue));
         Log.d("업데이트 데일리 스케쥴맵 맵 키 체크", dateValue + "000" + scheduleOrderValue);
@@ -83,17 +85,19 @@ public class DataHelper {
     public int getOrderValueFromSchedule(int selectedIndex) {
         int orderValue = 0;
         int countIndex = 0;
-        HashMap<Integer, Schedule> scheduleMapForThisMonth = scheduleMapByMonth.get(Integer.parseInt(yearMonthKey));
-
-        for(Integer key : scheduleMapForThisMonth.keySet()) {
+        Log.d("getOrderValueFromSchedule 테스트 selectedIndex", String.valueOf(selectedIndex));
+        for(Integer key : dailyScheduleMap.keySet()) {
             if(countIndex == selectedIndex) {
-                orderValue = scheduleMapForThisMonth.get(key).getOrder();
+                orderValue = dailyScheduleMap.get(key).getOrder();
+                Log.d("getOrderValueFromSchedule 테스트 orderValue", String.valueOf(orderValue));
+                Log.d("getOrderValueFromSchedule 테스트 activityName", String.valueOf(dailyScheduleMap.get(key).getActivityName()));
                 break;
             }
             countIndex++;
         }
         return orderValue;
     }
+
     /**
      * 지정 글꼴 리턴
      * @return
@@ -107,15 +111,14 @@ public class DataHelper {
 
     /**
      * 하루의 모든 스케쥴을 가지고와서 새로 하나 생성
-     * @param activity
      * @param yearMonthKey
      * @param dateValue
      */
-    public HashMap<Integer, Schedule> makeDailyScheduleMap(MainActivity activity, String yearMonthKey, String dateValue) {
+    public HashMap<Integer, Schedule> makeDailyScheduleMap(String yearMonthKey, String dateValue) {
         HashMap<Integer, Schedule> dailySchedules = new HashMap<Integer, Schedule>();
         HashMap<Integer, Schedule> thisMonthSchedules = getScheduleMapByMonth().get(Integer.parseInt(yearMonthKey));
         Log.d("thisMonthSchedules 개수", String.valueOf(thisMonthSchedules.size()));
-        for(Integer dateKey : thisMonthSchedules.keySet()){
+        for(Integer dateKey : thisMonthSchedules.keySet()) {
             Schedule schedule = thisMonthSchedules.get(dateKey);
             if(String.valueOf(dateKey).substring(0, 2).equals(dateValue))dailySchedules.put(dateKey, schedule);
         }

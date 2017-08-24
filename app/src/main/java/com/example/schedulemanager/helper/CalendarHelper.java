@@ -279,7 +279,7 @@ public class CalendarHelper {
         dataHelper.setYearMonthKeyAndDateValue(yearMonthKey, dateValue);
         dataHelper.setSelectedDateData(yearMonthKey + (Integer.parseInt(dateValue) < 10 ? "0" + dateValue : dateValue));
         uiHelepr.setDailyScheduleDateText(yearMonthKey, dateValue);
-        HashMap<Integer, Schedule> dailySchedule = dataHelper.makeDailyScheduleMap(activity, yearMonthKey, dateValue);
+        HashMap<Integer, Schedule> dailySchedule = dataHelper.makeDailyScheduleMap(yearMonthKey, dateValue);
         dataHelper.setDailyScheduleMap(dailySchedule);
         changeToScheduleLayout(dailySchedule);
     }

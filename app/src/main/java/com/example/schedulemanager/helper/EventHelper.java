@@ -48,7 +48,7 @@ public class EventHelper {
         setCalendarBtnEvent(R.id.timetable_param_setter_calendar_prev);
         setCalendarBtnEvent(R.id.timetable_param_setter_calendar_next);
         // 파이 챠트 탭(클릭) 이벤트 설정
-        setDailyScheduleEvent();
+        setDailyScheduleClickEvent();
     }
 
     /**
@@ -206,7 +206,7 @@ public class EventHelper {
     /**
      * 하루 스케쥴 이벤트 설정
      */
-    private void setDailyScheduleEvent() {
+    private void setDailyScheduleClickEvent() {
 
         uiHelper.getPieChart().setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
@@ -220,14 +220,14 @@ public class EventHelper {
                         int orderValue = dataHelper.getOrderValueFromSchedule(index);
                         PieChart pieChart = uiHelper.getPieChart();
 
+                        // DB에서 삭제
                         new DBHelper(context).deleteSchedule(dataHelper.getSelectedDateData(), orderValue);
+                        // 현재 보는 스케쥴 챠트에서 삭제
                         dailyScheduleDataSet.removeEntry((PieEntry)e);
-//                        reloadDailyScheduleData();
                         pieChart.notifyDataSetChanged();
                         pieChart.invalidate();
+                        // 필드로 가지고있는 자료구조에서 삭제
                         dataHelper.updateDailyScheduleMapByMonth(orderValue);
-//                        scheduleMapByMonth.clear();
-//                        dbHelper.selectAllSchedule(scheduleMapByMonth);
                     }
                 });
             }
