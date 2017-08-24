@@ -277,6 +277,7 @@ public class CalendarHelper {
         int month = calendarPagerAdapter.getBaseCal().get(Calendar.MONTH);
         String baseCalMonthString = month < 10 ? "0" + month : String.valueOf(month);
         String yearMonthKey = year + baseCalMonthString;
+
         dataHelper.setYearMonthKeyAndDateValue(yearMonthKey, dateValue);
         dataHelper.setSelectedDateData(yearMonthKey + (Integer.parseInt(dateValue) < 10 ? "0" + dateValue : dateValue));
         uiHelepr.setDailyScheduleDateText(yearMonthKey, dateValue);

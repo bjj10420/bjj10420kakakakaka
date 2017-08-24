@@ -110,7 +110,11 @@ public class DataHelper {
         Log.d("thisMonthSchedules 개수", String.valueOf(thisMonthSchedules.size()));
         for(Integer dateKey : thisMonthSchedules.keySet()) {
             Schedule schedule = thisMonthSchedules.get(dateKey);
-            if(String.valueOf(dateKey).substring(0, 2).equals(dateValue))dailySchedules.put(dateKey, schedule);
+            Log.d("데이트키체크", String.valueOf(dateKey));
+            Log.d("데이트밸류", String.valueOf(dateValue));
+            if(String.valueOf(dateKey).length() == 6 && String.valueOf(dateKey).substring(0, 2).equals(dateValue))dailySchedules.put(dateKey, schedule);
+            else if(String.valueOf(dateKey).length() == 5 && String.valueOf(dateKey).substring(0, 1).equals(dateValue))dailySchedules.put(dateKey, schedule);
+
         }
         return dailySchedules;
     }
