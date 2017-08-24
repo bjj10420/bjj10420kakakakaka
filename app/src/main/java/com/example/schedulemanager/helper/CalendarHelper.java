@@ -284,4 +284,14 @@ public class CalendarHelper {
         dataHelper.setDailyScheduleMap(dailySchedule);
         changeToScheduleLayout(dailySchedule);
     }
+
+    /**
+     * 선택되어있는 체크 마크 표시 설정
+     * @param isVisible
+     */
+    public void setCheckMark(boolean isVisible) {
+        View calendarCellView = dataHelper.getCurrentCalendarViewMap().get(Integer.parseInt(dataHelper.getDateValue()));
+        View checkMarkView = calendarCellView.findViewById(R.id.check_mark);
+        checkMarkView.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+    }
 }

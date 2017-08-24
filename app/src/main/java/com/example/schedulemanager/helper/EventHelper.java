@@ -231,9 +231,11 @@ public class EventHelper {
                         pieChart.highlightValues(null);
                         // 필드로 가지고있는 자료구조에서 삭제
                         dataHelper.updateDailyScheduleMapByMonth(orderValue);
-                        // 데이터가 하나도 없을때는 문구표시
-                        if(dailyScheduleDataSet.getEntryCount()==0)
+                        // 데이터가 하나도 없을때는 처리
+                        if(dailyScheduleDataSet.getEntryCount()==0) {
                             uiHelper.setNoDateText(true);
+                            calendarHelper.setCheckMark(false);
+                        }
                     }
                 });
             }

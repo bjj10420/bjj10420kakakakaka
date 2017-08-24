@@ -357,4 +357,5 @@ public class UIHelper {
         View noDateTextView = Util.getViewById(context, R.id.dailyScheduleNoDataText);
         noDateTextView.setVisibility(isVisible ? View.VISIBLE : View.GONE);
     }
+
 }

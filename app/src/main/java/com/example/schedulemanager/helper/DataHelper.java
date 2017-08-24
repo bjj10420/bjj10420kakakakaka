@@ -27,10 +27,10 @@ public class DataHelper {
     private float dX;                               // 드래그 시의 X좌표
     private float dY;                               // 드래그 시의 Y좌표
     private PieDataSet dailyScheduleDataSet;        // 데일리 스케쥴 차트용 데이터 저장소
-    private String selectedDateData;                // 선택된 날짜 값
-    private String yearMonthKey;                    // 선택된 연월 값
+    private String selectedDateData;                // 선택된 날짜(연월포함)
+    private String yearMonthKey;                    // 선택된 연월
     private HashMap<Integer, Schedule> dailyScheduleMap; // 선택된 일자의 하루 스케쥴 맵
-    private String dateValue;
+    private String dateValue;                       // 선택된 일
 
     public void initData(Context context) {
         dataHelper = this;
@@ -178,5 +178,9 @@ public class DataHelper {
 
     public void setDailyScheduleMap(HashMap<Integer,Schedule> dailyScheduleMap) {
         this.dailyScheduleMap = dailyScheduleMap;
+    }
+
+    public String getDateValue() {
+        return dateValue;
     }
 }
