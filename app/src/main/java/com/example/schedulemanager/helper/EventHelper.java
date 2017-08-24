@@ -226,6 +226,9 @@ public class EventHelper {
                         dailyScheduleDataSet.removeEntry((PieEntry)e);
                         pieChart.notifyDataSetChanged();
                         pieChart.invalidate();
+                        // 챠트 리셋
+                        pieChart.getOnTouchListener().setLastHighlighted(null);
+                        pieChart.highlightValues(null);
                         // 필드로 가지고있는 자료구조에서 삭제
                         dataHelper.updateDailyScheduleMapByMonth(orderValue);
                     }
