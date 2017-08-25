@@ -265,26 +265,14 @@ public class EventHelper {
 
     /**
      * 스케쥴 버튼을 드래그하여 메인 캘린더의 한칸으로 가져갔을때 추가
+     *
      * @param tagName
      */
     public void addScheduleForTheDate(String tagName) {
-        // 데이트 스트링값 생성
-        String dateString = calendarHelper.makeDateString(String.valueOf(uiHelper.getClosestView().getTag()));
-        // 이름
-        String activityName = tagName;
-        // 삽입할 스케쥴 데이터 객체 생성
-        Schedule newSchedule = new Schedule();
-        // 넘버
-        int number = DBHelper.dbHelper.getScheduleCountForDate(dateString);
-        newSchedule.setDate(dateString);
-        newSchedule.setActivityName(activityName);
-        //TODO 나머지 order, time, memo는 일단 공란
-        newSchedule.setOrder(number);
-        newSchedule.setTime("");
-        newSchedule.setMemo("");
 
-        // DB에 삽입
-        long resultNum = DBHelper.dbHelper.insertSchedule(newSchedule);
+    }
+
+    private void addScheduleByDateString(String dateString) {
     }
 
     public CalendarHelper getCalendarHelper() {
