@@ -21,6 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.TreeMap;
 
 /**
  * 달력의 모든 처리 담당
@@ -277,8 +278,11 @@ public class CalendarHelper {
         dataHelper.setSelectedDateData(yearMonthKey + (Integer.parseInt(dateValue) < 10 ? "0" + dateValue : dateValue));
         uiHelepr.setDailyScheduleDateText(yearMonthKey, dateValue);
         HashMap<Integer, Schedule> dailySchedule = dataHelper.makeDailyScheduleMap(yearMonthKey, dateValue);
-        dataHelper.setDailyScheduleMap(dailySchedule);
-        changeToScheduleLayout(dailySchedule);
+        //정렬
+        TreeMap<Integer,Schedule> tm = new TreeMap<Integer,Schedule>(dailySchedule);
+
+        dataHelper.setDailyScheduleMap(tm);
+        changeToScheduleLayout(tm);
     }
 
     /**

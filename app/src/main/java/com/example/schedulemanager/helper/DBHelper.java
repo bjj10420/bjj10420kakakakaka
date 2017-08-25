@@ -133,7 +133,7 @@ public class DBHelper extends SQLiteOpenHelper {
         DB = getWritableDatabase();
 
         String sql = String.format(Locale.getDefault(),
-                "SELECT * FROM %s order by " + orderValue_colum,
+                "SELECT * FROM %s order by " + orderValue_colum + "asc ",
                 scheduleTableName
                 );
 
