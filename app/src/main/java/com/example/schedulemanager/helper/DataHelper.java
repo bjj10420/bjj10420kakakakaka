@@ -11,6 +11,7 @@ import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 
 import java.util.HashMap;
+import java.util.TreeMap;
 
 /**
  * 모든 데이터 처리 담당
@@ -29,7 +30,7 @@ public class DataHelper {
     private PieDataSet dailyScheduleDataSet;        // 데일리 스케쥴 차트용 데이터 저장소
     private String selectedDateData;                // 선택된 날짜(연월포함)
     private String yearMonthKey;                    // 선택된 연월
-    private HashMap<Integer, Schedule> dailyScheduleMap; // 선택된 일자의 하루 스케쥴 맵
+    private TreeMap<Integer, Schedule> dailyScheduleMap; // 선택된 일자의 하루 스케쥴 맵
     private String dateValue;                       // 선택된 일
 
     public void initData(Context context) {
@@ -170,7 +171,7 @@ public class DataHelper {
         this.selectedDateData = selectedDateData;
     }
 
-    public void setDailyScheduleMap(HashMap<Integer,Schedule> dailyScheduleMap) {
+    public void setDailyScheduleMap(TreeMap<Integer, Schedule> dailyScheduleMap) {
         this.dailyScheduleMap = dailyScheduleMap;
     }
 

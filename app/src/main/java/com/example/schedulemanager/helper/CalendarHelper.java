@@ -115,7 +115,7 @@ public class CalendarHelper {
      * @param dailySchedule
      */
 
-    public void changeToScheduleLayout(HashMap<Integer, Schedule> dailySchedule) {
+    public void changeToScheduleLayout(TreeMap<Integer, Schedule> dailySchedule) {
         if(dailySchedule.size() > 0) {
             uiHelepr.setNoDateText(false);
             uiHelepr.getCalendarLayout().setVisibility(View.GONE);

@@ -28,6 +28,7 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.TreeMap;
 
 /**
  * 모든 UI처리 담당
@@ -244,8 +245,9 @@ public class UIHelper {
 
     /**
      * 하루 일정을 셋팅
+     * @param dailyScheduleMap
      */
-    public void setDailyScheduleDisplay(HashMap<Integer, Schedule> dailyScheduleMap) {
+    public void setDailyScheduleDisplay(TreeMap<Integer, Schedule> dailyScheduleMap) {
         List<PieEntry> entries = new ArrayList<>();
         // 모든 스케쥴은 균등한 점유값을 갖는다
         // 100을 개수로 나눈값으로 지정
