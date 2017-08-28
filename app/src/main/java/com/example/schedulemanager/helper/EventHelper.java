@@ -208,6 +208,9 @@ public class EventHelper {
                 closestView != null) {
             Log.d("메인 캘린더 셀 액션", "메인 캘린더 셀 액션");
             closestView.setBackgroundColor(Color.parseColor("#ffffff"));
+            String dateValue = String.valueOf(closestView.getTag());
+            // TODO 처음 앱을 설치하고 일정을 스케쥴했을때 DATE값이 없으므로 여기서 저장
+            dataHelper.setDateValue(dateValue);
             addScheduleForTheDate(String.valueOf(view.getTag()));
             calendarHelper.refreshCalendar();
             closestView = null;
