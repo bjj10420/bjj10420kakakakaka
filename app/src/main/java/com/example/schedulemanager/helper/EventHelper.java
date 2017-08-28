@@ -143,30 +143,64 @@ public class EventHelper {
         View closestView = uiHelper.getClosestView();
         View copiedView = uiHelper.getCopiedView();
 
-        // 중앙 아이콘 활성화인 경우
-        if(centerIcon.getVisibility() == View.VISIBLE &&
-                Util.checkCollision(centerIcon, copiedView)) {
-            calendarHelper.addScheduleForToday(String.valueOf(view.getTag()));
-        }
-        // 메인 달력 활성화 중 취소 버튼 위에서 마우스 업
-        if(Util.checkCollisionForChildView(uiHelper.getCancelBtn(), copiedView)){
-            closestView.setBackgroundColor(Color.parseColor("#ffffff"));
-            closestView = null;
-        }
-        // 메인 달력 활성화 중 캘린더 칸 위에서 마우스 업
-        if(centerIcon.getVisibility() == View.GONE &&
-                closestView != null) {
-            closestView.setBackgroundColor(Color.parseColor("#ffffff"));
-            addScheduleForTheDate(String.valueOf(view.getTag()));
-            calendarHelper.refreshCalendar();
-            closestView = null;
-        }
+        actionWhenCenterIconActivated(centerIcon, copiedView, view);
+        actionAtCancelBtnWhenCalendarActivated(copiedView, closestView);
+        actionAtCalendarCellWhenCalendarActivated(centerIcon, closestView, copiedView, view);
+        actionAtDailyScheduleLayout(centerIcon, closestView, copiedView, view);
+        resetAfterMouseUp();
+    }
+
+    /**
+     * 스케쥴 버튼을 드래그 한후 복구
+     */
+    private void resetAfterMouseUp() {
         // 중앙 아이콘 컬러 복구( 메인모드시 )
         uiHelper.changeCenterIconColor(false);
         // 하단 버튼 복구
         uiHelper.changeBottomButton(false);
         // 카피된 아이콘 제거
         uiHelper.getTotalLayout().removeView(uiHelper.getCopiedView());
+    }
+
+    // 데일리 스케쥴 위에서 마우스 업
+    private void actionAtDailyScheduleLayout(View centerIcon, View closestView, View copiedView, View view) {
+        if(centerIcon.getVisibility() == View.GONE &&
+                closestView != null) {
+            Log.d("데일리 스케쥴 액션", dataHelper.getSelectedDateData());
+            closestView.setBackgroundColor(Color.parseColor("#ffffff"));
+            addScheduleForTheDate(String.valueOf(view.getTag()));
+            calendarHelper.refreshCalendar();
+            closestView = null;
+        }
+    }
+
+    // 메인 달력 활성화 중 캘린더 칸 위에서 마우스 업
+    private void actionAtCalendarCellWhenCalendarActivated(View centerIcon, View closestView, View copiedView, View view) {
+        if(centerIcon.getVisibility() == View.GONE &&
+                closestView != null) {
+            Log.d("메인 캘린더 셀 액션", dataHelper.getSelectedDateData());
+            closestView.setBackgroundColor(Color.parseColor("#ffffff"));
+            addScheduleForTheDate(String.valueOf(view.getTag()));
+            calendarHelper.refreshCalendar();
+            closestView = null;
+        }
+    }
+
+    // 메인 달력 활성화 중 취소 버튼 위에서 마우스 업
+    private void actionAtCancelBtnWhenCalendarActivated(View copiedView, View closestView) {
+        if(Util.checkCollisionForChildView(uiHelper.getCancelBtn(), copiedView)){
+            closestView.setBackgroundColor(Color.parseColor("#ffffff"));
+            closestView = null;
+        }
+
+    }
+
+    // 중앙 아이콘 활성화인 경우
+    private void actionWhenCenterIconActivated(View centerIcon, View copiedView, View view) {
+        if(centerIcon.getVisibility() == View.VISIBLE &&
+                Util.checkCollision(centerIcon, copiedView)) {
+            calendarHelper.addScheduleForToday(String.valueOf(view.getTag()));
+        }
     }
 
     private void setCenterIconClickEvent() {
@@ -265,14 +299,44 @@ public class EventHelper {
 
     /**
      * 스케쥴 버튼을 드래그하여 메인 캘린더의 한칸으로 가져갔을때 추가
-     *
      * @param tagName
      */
     public void addScheduleForTheDate(String tagName) {
-
+        Log.d("선택된 데이트 데이터", dataHelper.getSelectedDateData());
+        addScheduleByDateString(dataHelper.getSelectedDateData(), tagName);
     }
 
-    private void addScheduleByDateString(String dateString) {
+    /**
+     * 스케쥴 버튼을 드래그하여 하루 일정 스케쥴로 가져갔을때 추가
+     * @param tagName
+     */
+    public void addScheduleForTheSchedule(String tagName) {
+        String dateString = calendarHelper.makeDateString(dataHelper.getDateValue());
+        addScheduleByDateString(dateString, tagName);
+    }
+
+    /**
+     * 데이트 스트링과 태그네임으로 DB에 스케쥴 추가
+     * @param dateString
+     * @param tagName
+     */
+    private void addScheduleByDateString(String dateString, String tagName) {
+        // 이름
+        String activityName = tagName;
+        // 삽입할 스케쥴 데이터 객체 생성
+        Schedule newSchedule = new Schedule();
+        // 넘버
+        int number = DBHelper.dbHelper.getScheduleCountForDate(dateString);
+        newSchedule.setDate(dateString);
+        newSchedule.setActivityName(activityName);
+        //TODO 나머지 order, time, memo는 일단 공란
+        newSchedule.setOrder(number);
+        newSchedule.setTime("");
+        newSchedule.setMemo("");
+
+        // DB에 삽입
+        long resultNum = DBHelper.dbHelper.insertSchedule(newSchedule);
+
     }
 
     public CalendarHelper getCalendarHelper() {
