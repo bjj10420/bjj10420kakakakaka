@@ -184,7 +184,6 @@ public class EventHelper {
                 uiHelper.getScheduleLayout().getVisibility() == View.VISIBLE &&
                 closestView != null) {
             String activityName = String.valueOf(view.getTag());
-            closestView.setBackgroundColor(Color.parseColor("#ffffff"));
             // DB에 추가
             addScheduleForTheSchedule(activityName);
             // 현재 보고 있는 스케쥴 챠트에서 추가
