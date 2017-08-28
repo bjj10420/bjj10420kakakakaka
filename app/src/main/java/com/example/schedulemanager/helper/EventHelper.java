@@ -114,25 +114,39 @@ public class EventHelper {
      */
     private void actionMoveEvent(View view, MotionEvent event) {
         View copiedView = uiHelper.getCopiedView();
-        // 복사된 뷰 표시 g
+        setCopiedViewVisible(copiedView, event);
+        // 메인모드 처리
+        if(uiHelper.getCenterIcon().getVisibility() == View.VISIBLE)
+            changeCenterIconColorWhenCollided(copiedView);
+        // 캘린더모드 처리
+        if(uiHelper.getCenterIcon().getVisibility() == View.GONE && calendarHelper.checkCollisionForCalendarCell())
+            changeCalendarCellColorWhenCollided();
+        // 하단 버튼 전환(뒤로가기 => X )
+        uiHelper.changeBottomButton(true);
+    }
+
+    private void changeCalendarCellColorWhenCollided() {
+        calendarHelper.changeCalendarCellColor(dataHelper.getArroundViewGroup().get(calendarHelper.findTheClosestView()));
+        dataHelper.setDateValue(String.valueOf(uiHelper.getClosestView().getTag()));
+    }
+
+    private void changeCenterIconColorWhenCollided(View copiedView) {
+        boolean isCollided = Util.checkCollision(uiHelper.getCenterIcon(), copiedView);
+        uiHelper.changeCenterIconColor(isCollided);
+    }
+
+    /**
+     * 복사된 뷰 표시
+     * @param copiedView
+     * @param event
+     */
+    private void setCopiedViewVisible(View copiedView, MotionEvent event) {
         if(copiedView.getVisibility() == View.GONE){
             copiedView.setAlpha(0.7f);
             copiedView.setVisibility(View.VISIBLE);
         }
         copiedView.setY(event.getRawY() + dataHelper.getdY());
         copiedView.setX(event.getRawX() + dataHelper.getdX());
-        // 메인모드 처리
-        if(uiHelper.getCenterIcon().getVisibility() == View.VISIBLE){
-            boolean isCollided = Util.checkCollision(uiHelper.getCenterIcon(), copiedView);
-            uiHelper.changeCenterIconColor(isCollided);
-        }
-        // 캘린더모드 처리
-        if(uiHelper.getCenterIcon().getVisibility() == View.GONE && calendarHelper.checkCollisionForCalendarCell()) {
-            calendarHelper.changeCalendarCellColor(dataHelper.getArroundViewGroup().get(calendarHelper.findTheClosestView()));
-            dataHelper.setDateValue(String.valueOf(uiHelper.getClosestView().getTag()));
-        }
-        // 하단 버튼 전환(뒤로가기 => X )
-        uiHelper.changeBottomButton(true);
     }
 
     /**
