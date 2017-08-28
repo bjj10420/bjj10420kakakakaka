@@ -361,4 +361,11 @@ public class UIHelper {
         noDateTextView.setVisibility(isVisible ? View.VISIBLE : View.GONE);
     }
 
+    public void pieChartReset(PieChart pieChart) {
+        pieChart.notifyDataSetChanged();
+        pieChart.invalidate();
+        // 챠트 리셋
+        pieChart.getOnTouchListener().setLastHighlighted(null);
+        pieChart.highlightValues(null);
+    }
 }

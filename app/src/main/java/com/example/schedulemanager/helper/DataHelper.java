@@ -54,13 +54,26 @@ public class DataHelper {
     }
 
     /**
-     * 스케쥴 맵을 업데이트 (해당 스케쥴 맵에서도 제거)
+     * 스케쥴맵에서 제거
      * @param scheduleOrderValue
      */
-    public void updateDailyScheduleMapByMonth(int scheduleOrderValue) {
+    public void removeFromDailyScheduleMapByMonth(int scheduleOrderValue) {
         HashMap<Integer, Schedule> scheduleMapForThisMonth = scheduleMapByMonth.get(Integer.parseInt(yearMonthKey));
         scheduleMapForThisMonth.remove(Integer.parseInt(dateValue + "000" + scheduleOrderValue));
+    }
 
+    /**
+     * 스케쥴맵에 추가
+     * @param countForTheDate
+     */
+    public void addToDailyScheduleMapByMonth(int countForTheDate, String activityName) {
+        HashMap<Integer, Schedule> scheduleMapForThisMonth = scheduleMapByMonth.get(Integer.parseInt(yearMonthKey));
+        Schedule schedule = new Schedule();
+        schedule.setDate(selectedDateData);
+        schedule.setOrder(countForTheDate);
+        schedule.setActivityName(activityName);
+        Log.d("스케쥴맵에 스케쥴추가", schedule.getOrder() + ", " + activityName + ", " + dateValue);
+        scheduleMapForThisMonth.put(Integer.parseInt(dateValue + "000" + countForTheDate), schedule);
     }
 
     /**
@@ -181,5 +194,9 @@ public class DataHelper {
 
     public void setDateValue(String dateValue) {
         this.dateValue = dateValue;
+    }
+
+    public String getYearMonthKey() {
+        return yearMonthKey;
     }
 }

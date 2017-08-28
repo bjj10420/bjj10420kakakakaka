@@ -119,7 +119,8 @@ public class EventHelper {
         if(uiHelper.getCenterIcon().getVisibility() == View.VISIBLE)
             changeCenterIconColorWhenCollided(copiedView);
         // 캘린더모드 처리
-        if(uiHelper.getCenterIcon().getVisibility() == View.GONE && calendarHelper.checkCollisionForCalendarCell())
+        if(uiHelper.getCenterIcon().getVisibility() == View.GONE &&
+                calendarHelper.checkCollisionForCalendarCell())
             changeCalendarCellColorWhenCollided();
         // 하단 버튼 전환(뒤로가기 => X )
         uiHelper.changeBottomButton(true);
@@ -127,7 +128,7 @@ public class EventHelper {
 
     private void changeCalendarCellColorWhenCollided() {
         calendarHelper.changeCalendarCellColor(dataHelper.getArroundViewGroup().get(calendarHelper.findTheClosestView()));
-        dataHelper.setDateValue(String.valueOf(uiHelper.getClosestView().getTag()));
+//        dataHelper.setDateValue(String.valueOf(uiHelper.getClosestView().getTag()));
     }
 
     private void changeCenterIconColorWhenCollided(View copiedView) {
@@ -182,12 +183,22 @@ public class EventHelper {
         if(centerIcon.getVisibility() == View.GONE &&
                 uiHelper.getScheduleLayout().getVisibility() == View.VISIBLE &&
                 closestView != null) {
-            Log.d("데일리 스케쥴 액션", dataHelper.getSelectedDateData());
+            String activityName = String.valueOf(view.getTag());
             closestView.setBackgroundColor(Color.parseColor("#ffffff"));
-            addScheduleForTheSchedule(String.valueOf(view.getTag()));
-            calendarHelper.refreshCalendar();
+            // DB에 추가
+            addScheduleForTheSchedule(activityName);
+            // 현재 보고 있는 스케쥴 챠트에서 추가
+            addScheduleToPieChart(activityName);
+            // 자료구조에도 추가
+            dataHelper.addToDailyScheduleMapByMonth(DBHelper.dbHelper.getScheduleCountForDate(dataHelper.getSelectedDateData()),activityName);
+            uiHelper.pieChartReset(uiHelper.getPieChart());
             closestView = null;
         }
+    }
+
+    private void addScheduleToPieChart(String s) {
+        int fillValue = 100 / dataHelper.getDailyScheduleDataSet().getEntryCount() + 1;
+        dataHelper.getDailyScheduleDataSet().addEntry(new PieEntry(fillValue, s));
     }
 
     // 메인 달력 활성화 중 캘린더 칸 위에서 마우스 업
@@ -275,13 +286,9 @@ public class EventHelper {
                         new DBHelper(context).deleteSchedule(dataHelper.getSelectedDateData(), orderValue);
                         // 현재 보는 스케쥴 챠트에서 삭제
                         dailyScheduleDataSet.removeEntry((PieEntry)e);
-                        pieChart.notifyDataSetChanged();
-                        pieChart.invalidate();
-                        // 챠트 리셋
-                        pieChart.getOnTouchListener().setLastHighlighted(null);
-                        pieChart.highlightValues(null);
-                        // 필드로 가지고있는 자료구조에서 삭제
-                        dataHelper.updateDailyScheduleMapByMonth(orderValue);
+                        uiHelper.pieChartReset(pieChart);
+                        // 자료구조에서 삭제
+                        dataHelper.removeFromDailyScheduleMapByMonth(orderValue);
                         // 데이터가 하나도 없을때는 처리
                         if(dailyScheduleDataSet.getEntryCount()==0) {
                             uiHelper.setNoDateText(true);
@@ -297,6 +304,8 @@ public class EventHelper {
             }
         });
     }
+
+
 
     public void onBackPresssed(){
         View scheduleLayout = uiHelper.getScheduleLayout();
