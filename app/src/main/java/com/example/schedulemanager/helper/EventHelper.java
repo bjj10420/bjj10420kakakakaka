@@ -129,6 +129,7 @@ public class EventHelper {
         // 캘린더모드 처리
         if(uiHelper.getCenterIcon().getVisibility() == View.GONE && calendarHelper.checkCollisionForCalendarCell()) {
             calendarHelper.changeCalendarCellColor(dataHelper.getArroundViewGroup().get(calendarHelper.findTheClosestView()));
+            dataHelper.setDateValue(String.valueOf(uiHelper.getClosestView().getTag()));
         }
         // 하단 버튼 전환(뒤로가기 => X )
         uiHelper.changeBottomButton(true);
@@ -165,10 +166,11 @@ public class EventHelper {
     // 데일리 스케쥴 위에서 마우스 업
     private void actionAtDailyScheduleLayout(View centerIcon, View closestView, View copiedView, View view) {
         if(centerIcon.getVisibility() == View.GONE &&
+                uiHelper.getScheduleLayout().getVisibility() == View.VISIBLE &&
                 closestView != null) {
             Log.d("데일리 스케쥴 액션", dataHelper.getSelectedDateData());
             closestView.setBackgroundColor(Color.parseColor("#ffffff"));
-            addScheduleForTheDate(String.valueOf(view.getTag()));
+            addScheduleForTheSchedule(String.valueOf(view.getTag()));
             calendarHelper.refreshCalendar();
             closestView = null;
         }
@@ -177,8 +179,9 @@ public class EventHelper {
     // 메인 달력 활성화 중 캘린더 칸 위에서 마우스 업
     private void actionAtCalendarCellWhenCalendarActivated(View centerIcon, View closestView, View copiedView, View view) {
         if(centerIcon.getVisibility() == View.GONE &&
+                uiHelper.getScheduleLayout().getVisibility() == View.GONE &&
                 closestView != null) {
-            Log.d("메인 캘린더 셀 액션", dataHelper.getSelectedDateData());
+            Log.d("메인 캘린더 셀 액션", "메인 캘린더 셀 액션");
             closestView.setBackgroundColor(Color.parseColor("#ffffff"));
             addScheduleForTheDate(String.valueOf(view.getTag()));
             calendarHelper.refreshCalendar();
@@ -298,19 +301,19 @@ public class EventHelper {
     }
 
     /**
-     * 스케쥴 버튼을 드래그하여 메인 캘린더의 한칸으로 가져갔을때 추가
+     * 스케쥴 버튼을 드래그하여 하루 일정 스케쥴로 가져갔을때 추가
      * @param tagName
      */
-    public void addScheduleForTheDate(String tagName) {
+    public void addScheduleForTheSchedule(String tagName) {
         Log.d("선택된 데이트 데이터", dataHelper.getSelectedDateData());
         addScheduleByDateString(dataHelper.getSelectedDateData(), tagName);
     }
 
     /**
-     * 스케쥴 버튼을 드래그하여 하루 일정 스케쥴로 가져갔을때 추가
+     * 스케쥴 버튼을 드래그하여 메인 캘린더의 한칸으로 가져갔을때 추가
      * @param tagName
      */
-    public void addScheduleForTheSchedule(String tagName) {
+    public void addScheduleForTheDate(String tagName) {
         String dateString = calendarHelper.makeDateString(dataHelper.getDateValue());
         addScheduleByDateString(dateString, tagName);
     }

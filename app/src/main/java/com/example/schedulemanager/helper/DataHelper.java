@@ -178,4 +178,8 @@ public class DataHelper {
     public String getDateValue() {
         return dateValue;
     }
+
+    public void setDateValue(String dateValue) {
+        this.dateValue = dateValue;
+    }
 }
