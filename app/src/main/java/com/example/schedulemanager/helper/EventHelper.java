@@ -186,18 +186,22 @@ public class EventHelper {
             String activityName = String.valueOf(view.getTag());
             // DB에 추가
             addScheduleForTheSchedule(activityName);
-            // 현재 보고 있는 스케쥴 챠트에서 추가
-            addScheduleToPieChart(activityName);
+            // 현재 보고 있는 스케쥴 챠트에서 추가 (추가전 엔트리 카운터 리턴)
+            int entryCount = addScheduleToPieChart(activityName);
             // 자료구조에도 추가
             dataHelper.addToDailyScheduleMapByMonth(DBHelper.dbHelper.getScheduleCountForDate(dataHelper.getSelectedDateData()),activityName);
             uiHelper.pieChartReset(uiHelper.getPieChart());
-            closestView = null;
+            // 전환이 필요한경우
+            if(entryCount == -1)
+            uiHelper.setNoDateText(false);
         }
     }
 
-    private void addScheduleToPieChart(String s) {
-        int fillValue = 100 / dataHelper.getDailyScheduleDataSet().getEntryCount() + 1;
+    private int addScheduleToPieChart(String s) {
+        int entryCount = dataHelper.getDailyScheduleDataSet().getEntryCount();
+        int fillValue = 100 / (entryCount != -1 ? entryCount + 1 : 100);
         dataHelper.getDailyScheduleDataSet().addEntry(new PieEntry(fillValue, s));
+        return entryCount;
     }
 
     // 메인 달력 활성화 중 캘린더 칸 위에서 마우스 업
@@ -268,7 +272,7 @@ public class EventHelper {
     }
 
     /**
-     * 하루 스케쥴 이벤트 설정
+     * 하루 스케쥴 클릭 이벤트 설정
      */
     private void setDailyScheduleClickEvent() {
 
@@ -279,23 +283,17 @@ public class EventHelper {
                 new DialogHelper().setChoiceStyleDialog(context, new GeneralCallback() {
                     @Override
                     public void onCallBack() {
-                        PieDataSet dailyScheduleDataSet = dataHelper.getDailyScheduleDataSet();
-                        int index = dailyScheduleDataSet.getEntryIndex((PieEntry)e);
-                        int orderValue = dataHelper.getOrderValueFromSchedule(index);
-                        PieChart pieChart = uiHelper.getPieChart();
-//
-                        // DB에서 삭제
-                        new DBHelper(context).deleteSchedule(dataHelper.getSelectedDateData(), orderValue);
-                        // 현재 보는 스케쥴 챠트에서 삭제
-                        dailyScheduleDataSet.removeEntry((PieEntry)e);
-                        uiHelper.pieChartReset(pieChart);
-                        // 자료구조에서 삭제
-                        dataHelper.removeFromDailyScheduleMapByMonth(orderValue);
-                        // 데이터가 하나도 없을때는 처리
-                        if(dailyScheduleDataSet.getEntryCount()==0) {
-                            uiHelper.setNoDateText(true);
-                            calendarHelper.setCheckMark(false);
-                        }
+                        deleteSchedule(e);
+                    }
+                }, new GeneralCallback() {
+                    @Override
+                    public void onCallBack() {
+                        new DialogHelper().setMessageDialog(context, new GeneralCallback() {
+                            @Override
+                            public void onCallBack() {
+                                
+                            }
+                        }, null);
                     }
                 });
             }
@@ -307,6 +305,29 @@ public class EventHelper {
         });
     }
 
+    /**
+     * 삭제 버튼이 눌렸을때 삭제
+     * @param e
+     */
+    private void deleteSchedule(Entry e) {
+        PieDataSet dailyScheduleDataSet = dataHelper.getDailyScheduleDataSet();
+        int index = dailyScheduleDataSet.getEntryIndex((PieEntry) e);
+        int orderValue = dataHelper.getOrderValueFromSchedule(index);
+        PieChart pieChart = uiHelper.getPieChart();
+//
+        // DB에서 삭제
+        new DBHelper(context).deleteSchedule(dataHelper.getSelectedDateData(), orderValue);
+        // 현재 보는 스케쥴 챠트에서 삭제
+        dailyScheduleDataSet.removeEntry((PieEntry) e);
+        uiHelper.pieChartReset(pieChart);
+        // 자료구조에서 삭제
+        dataHelper.removeFromDailyScheduleMapByMonth(orderValue);
+        // 데이터가 하나도 없을때는 처리
+        if (dailyScheduleDataSet.getEntryCount() == 0) {
+            uiHelper.setNoDateText(true);
+            calendarHelper.setCheckMark(false);
+        }
+    }
 
 
     public void onBackPresssed(){
