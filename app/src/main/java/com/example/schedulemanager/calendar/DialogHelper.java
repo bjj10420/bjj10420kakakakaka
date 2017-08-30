@@ -8,6 +8,7 @@ import android.widget.EditText;
 
 import com.example.schedulemanager.activity.MainActivity;
 import com.example.schedulemanager.interface_.GeneralCallback;
+import com.example.schedulemanager.interface_.GeneralCallback2;
 
 /**
  * 여러가지 용도의 다이얼로그 박스를 생성
@@ -43,7 +44,7 @@ public class DialogHelper {
     /**
      * 메세지 입력형 다이얼 로그 생성
      */
-    public void setMessageDialog(Context context, final GeneralCallback callback1, final GeneralCallback callback2){
+    public void setMessageDialog(Context context, final GeneralCallback2 callback1, final GeneralCallback callback2){
         AlertDialog.Builder alt_bld = new AlertDialog.Builder(context, 3);
         final EditText et = new EditText(context);
 
@@ -53,7 +54,7 @@ public class DialogHelper {
                     public void onClick(DialogInterface dialog, int id) {
                         Log.d("메모입력테스트", et.getText().toString());
                         if(callback1 != null)
-                        callback1.onCallBack();
+                        callback1.onCallBack(et.getText().toString());
                     }
                 }).setNegativeButton("취소",
                 new DialogInterface.OnClickListener() {

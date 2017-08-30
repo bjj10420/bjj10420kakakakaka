@@ -8,6 +8,7 @@ import android.view.View;
 import android.widget.LinearLayout;
 import com.example.schedulemanager.interface_.GeneralCallback;
 import com.example.schedulemanager.R;
+import com.example.schedulemanager.interface_.GeneralCallback2;
 import com.example.schedulemanager.vo.Schedule;
 import com.example.schedulemanager.Util;
 import com.example.schedulemanager.calendar.DialogHelper;
@@ -288,10 +289,12 @@ public class EventHelper {
                 }, new GeneralCallback() {
                     @Override
                     public void onCallBack() {
-                        new DialogHelper().setMessageDialog(context, new GeneralCallback() {
+                        new DialogHelper().setMessageDialog(context, new GeneralCallback2() {
+
+
                             @Override
-                            public void onCallBack() {
-                                
+                            public void onCallBack(Object parameter) {
+                                DBHelper.updateMemo(parameter);
                             }
                         }, null);
                     }
