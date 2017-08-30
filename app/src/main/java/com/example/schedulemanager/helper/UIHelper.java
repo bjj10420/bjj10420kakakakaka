@@ -19,6 +19,7 @@ import com.example.schedulemanager.R;
 import com.example.schedulemanager.vo.Schedule;
 import com.example.schedulemanager.Util;
 import com.github.mikephil.charting.charts.PieChart;
+import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
@@ -368,4 +369,5 @@ public class UIHelper {
         pieChart.getOnTouchListener().setLastHighlighted(null);
         pieChart.highlightValues(null);
     }
+
 }
