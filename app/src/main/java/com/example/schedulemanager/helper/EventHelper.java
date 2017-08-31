@@ -311,7 +311,7 @@ public class EventHelper {
     private void updateMemo(Object parameter, Entry e) {
         int index = dataHelper.getDailyScheduleDataSet().getEntryIndex((PieEntry) e);
         int orderValue = dataHelper.getOrderValueFromSchedule(index);
-
+        //
     }
 
     /**
