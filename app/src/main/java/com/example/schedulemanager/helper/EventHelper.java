@@ -280,7 +280,7 @@ public class EventHelper {
         uiHelper.getPieChart().setOnChartValueSelectedListener(new OnChartValueSelectedListener() {
             @Override
             public void onValueSelected(final Entry e, Highlight h) {
-                // 다이얼로그 띄움
+                // 삭제 버튼 클릭
                 new DialogHelper().setChoiceStyleDialog(context, new GeneralCallback() {
                     @Override
                     public void onCallBack() {
@@ -289,9 +289,8 @@ public class EventHelper {
                 }, new GeneralCallback() {
                     @Override
                     public void onCallBack() {
+                        // 메모첨부 버튼 클릭
                         new DialogHelper().setMessageDialog(context, new GeneralCallback2() {
-
-
                             @Override
                             public void onCallBack(Object parameter) {
                                 updateMemo(parameter, e);
@@ -308,11 +307,28 @@ public class EventHelper {
         });
     }
 
+    /**
+     * 메모를 업데이트
+     * @param parameter
+     * @param e
+     */
     private void updateMemo(Object parameter, Entry e) {
-        int index = dataHelper.getDailyScheduleDataSet().getEntryIndex((PieEntry) e);
+        PieEntry pieEntry = ((PieEntry) e);
+        StringBuilder sb = new StringBuilder();
+
+        int index = dataHelper.getDailyScheduleDataSet().getEntryIndex(pieEntry);
         int orderValue = dataHelper.getOrderValueFromSchedule(index);
+        // DB
         int result = dataHelper.getDbHelper().updateMemo(parameter, e, dataHelper.getSelectedDateData(), orderValue);
         Log.d("업데이트메모 결과값 체크 = ", String.valueOf(result));
+        // 필드맵에 추가되어있는 스케쥴변경
+        dataHelper.getScheduleFromDailyScheduleMapByMonth(orderValue).setMemo(String.valueOf(parameter));
+        // 파이챠트 데이터업데이트
+        sb.append((pieEntry).getLabel()).append("\n\n").append("(").append(String.valueOf(parameter)).append(")");
+        (pieEntry).setLabel(sb.toString());
+//        dataHelper.getDailyScheduleDataSet().getEntry
+        // 파이챠트
+        uiHelper.pieChartReset(uiHelper.getPieChart());
     }
 
     /**

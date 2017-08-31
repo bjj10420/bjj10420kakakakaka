@@ -175,12 +175,11 @@ public class DBHelper extends SQLiteOpenHelper {
     }
 
     /**
-     * 해당 스케쥴 데이터의 메모를 업데이트
+     * 해당 스케쥴 데이터의 메모를 DB에 업데이트
      * @param parameter
      */
     public int updateMemo(Object parameter, final Entry e, String dateValue, int orderValue) {
         String memo = String.valueOf(parameter);
-        Log.d("업데이트 메모 테스트", String.valueOf(parameter));
         DB = getWritableDatabase();
         ContentValues values = new ContentValues();
         values.clear();

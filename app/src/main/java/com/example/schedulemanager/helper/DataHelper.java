@@ -54,15 +54,6 @@ public class DataHelper {
     }
 
     /**
-     * 스케쥴맵에서 제거
-     * @param scheduleOrderValue
-     */
-    public void removeFromDailyScheduleMapByMonth(int scheduleOrderValue) {
-        HashMap<Integer, Schedule> scheduleMapForThisMonth = scheduleMapByMonth.get(Integer.parseInt(yearMonthKey));
-        scheduleMapForThisMonth.remove(Integer.parseInt(dateValue + "000" + scheduleOrderValue));
-    }
-
-    /**
      * 스케쥴맵에 추가
      * @param countForTheDate
      */
@@ -74,6 +65,25 @@ public class DataHelper {
         schedule.setActivityName(activityName);
         Log.d("스케쥴맵에 스케쥴추가", schedule.getOrder() + ", " + activityName + ", " + dateValue);
         scheduleMapForThisMonth.put(Integer.parseInt(dateValue + "000" + countForTheDate), schedule);
+    }
+
+    /**
+     * 스케쥴맵에서 제거
+     * @param scheduleOrderValue
+     */
+    public void removeFromDailyScheduleMapByMonth(int scheduleOrderValue) {
+        HashMap<Integer, Schedule> scheduleMapForThisMonth = scheduleMapByMonth.get(Integer.parseInt(yearMonthKey));
+        scheduleMapForThisMonth.remove(Integer.parseInt(dateValue + "000" + scheduleOrderValue));
+    }
+
+    /**
+     * 스케쥴맵에서 스케쥴 가져오기
+     * @param scheduleOrderValue
+     */
+    public Schedule getScheduleFromDailyScheduleMapByMonth(int scheduleOrderValue) {
+        HashMap<Integer, Schedule> scheduleMapForThisMonth = scheduleMapByMonth.get(Integer.parseInt(yearMonthKey));
+        Schedule schedule = scheduleMapForThisMonth.get(Integer.parseInt(dateValue + "000" + scheduleOrderValue));
+        return schedule;
     }
 
     /**
