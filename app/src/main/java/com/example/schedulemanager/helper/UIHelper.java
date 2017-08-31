@@ -255,7 +255,10 @@ public class UIHelper {
         float fillValue = 100 / dailyScheduleMap.size();
         for(Integer dateValue : dailyScheduleMap.keySet()) {
             Schedule schedule = dailyScheduleMap.get(dateValue);
-            entries.add(new PieEntry(fillValue, schedule.getActivityName()));
+            String label = schedule.getActivityName();
+            String memo = schedule.getMemo();
+            if(!memo.equals("")) label += "\n\n (" + memo + ")";
+            entries.add(new PieEntry(fillValue, label));
         }
 
         PieDataSet dailyScheduleDataSet = new PieDataSet(entries, "Election Results");

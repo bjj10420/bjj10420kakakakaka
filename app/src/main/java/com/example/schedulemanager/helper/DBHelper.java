@@ -147,8 +147,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 schedule.setDate(scheduleDate);
                 schedule.setActivityName(c.getString(c.getColumnIndex(activityName_colum)));
                 schedule.setOrder(c.getInt(c.getColumnIndex(orderValue_colum)));
-                schedule.setMemo(c.getString(c.getColumnIndex(timeValue_colum)));
-                schedule.setTime(c.getString(c.getColumnIndex(memoValue_colum)));
+                schedule.setMemo(c.getString(c.getColumnIndex(memoValue_colum)));
+                schedule.setTime(c.getString(c.getColumnIndex(timeValue_colum)));
 
                 String scheduleYearMonth = Util.getYearMonthFromDate(scheduleDate);
                 // 스케쥴 추가
