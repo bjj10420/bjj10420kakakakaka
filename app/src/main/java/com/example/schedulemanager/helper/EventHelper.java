@@ -313,16 +313,26 @@ public class EventHelper {
      * @param e
      */
     private void updateMemo(Object parameter, Entry e) {
+        String memoContent = "";
+        String memo = String.valueOf(parameter);
         PieEntry pieEntry = ((PieEntry) e);
         StringBuilder sb = new StringBuilder();
-
         int index = dataHelper.getDailyScheduleDataSet().getEntryIndex(pieEntry);
         int orderValue = dataHelper.getOrderValueFromSchedule(index);
+        Schedule originalSchedule = dataHelper.getScheduleFromDailyScheduleMapByMonth(orderValue);
+        String originalScheduleMemo = originalSchedule.getMemo();
+
+        // 원본이 있는경우
+        if(!originalScheduleMemo.equals(""))
+            memoContent = originalScheduleMemo + memo;
+        else
+            memoContent = memo;
+
         // DB 업데이트
-        int result = dataHelper.getDbHelper().updateMemo(parameter, e, dataHelper.getSelectedDateData(), orderValue);
+        int result = dataHelper.getDbHelper().updateMemo(memoContent, e, dataHelper.getSelectedDateData(), orderValue);
         Log.d("업데이트메모 결과값 체크 = ", String.valueOf(result));
         // 필드맵에 추가되어있는 스케쥴변경
-        dataHelper.getScheduleFromDailyScheduleMapByMonth(orderValue).setMemo(String.valueOf(parameter));
+        dataHelper.getScheduleFromDailyScheduleMapByMonth(orderValue).setMemo(memoContent);
         // 파이챠트 변경
         uiHelper.updatePiechart(sb, parameter, pieEntry);
         uiHelper.resetPiechart(uiHelper.getPieChart());

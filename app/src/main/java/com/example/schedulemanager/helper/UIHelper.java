@@ -297,6 +297,7 @@ public class UIHelper {
         pieChart.getLegend().setEnabled(false);
         pieChart.setDrawSliceText(true);
         pieChart.getDescription().setEnabled(false);
+        pieChart.setEntryLabelColor(Color.parseColor("#404040"));
         pieChart.invalidate(); // refresh
     }
 
