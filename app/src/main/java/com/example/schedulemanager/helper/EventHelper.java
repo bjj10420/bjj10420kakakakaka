@@ -311,7 +311,8 @@ public class EventHelper {
     private void updateMemo(Object parameter, Entry e) {
         int index = dataHelper.getDailyScheduleDataSet().getEntryIndex((PieEntry) e);
         int orderValue = dataHelper.getOrderValueFromSchedule(index);
-        //
+        int result = dataHelper.getDbHelper().updateMemo(parameter, e, dataHelper.getSelectedDateData(), orderValue);
+        Log.d("업데이트메모 결과값 체크 = ", String.valueOf(result));
     }
 
     /**
