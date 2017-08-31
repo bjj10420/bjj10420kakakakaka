@@ -380,12 +380,12 @@ public class UIHelper {
     /**
      * 파이챠트 업데이트
      * @param sb
-     * @param parameter
+     * @param memoContent
      * @param pieEntry
      */
-    public void updatePiechart(StringBuilder sb, Object parameter, PieEntry pieEntry) {
+    public void updatePiechart(StringBuilder sb, String memoContent, PieEntry pieEntry,String activityName) {
         String lineBreak = System.getProperty("line.separator");
-        sb.append((pieEntry).getLabel()).append(lineBreak).append("(").append(String.valueOf(parameter)).append(")");
+        sb.append(activityName).append(lineBreak).append("(").append(String.valueOf(memoContent)).append(")");
         (pieEntry).setLabel(sb.toString());
     }
 }

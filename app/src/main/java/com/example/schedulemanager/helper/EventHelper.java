@@ -324,7 +324,7 @@ public class EventHelper {
 
         // 원본이 있는경우
         if(!originalScheduleMemo.equals(""))
-            memoContent = originalScheduleMemo + memo;
+            memoContent = originalScheduleMemo + ", " + memo;
         else
             memoContent = memo;
 
@@ -334,7 +334,7 @@ public class EventHelper {
         // 필드맵에 추가되어있는 스케쥴변경
         dataHelper.getScheduleFromDailyScheduleMapByMonth(orderValue).setMemo(memoContent);
         // 파이챠트 변경
-        uiHelper.updatePiechart(sb, parameter, pieEntry);
+        uiHelper.updatePiechart(sb, memoContent, pieEntry,originalSchedule.getActivityName());
         uiHelper.resetPiechart(uiHelper.getPieChart());
     }
 

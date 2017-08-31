@@ -185,7 +185,6 @@ public class DBHelper extends SQLiteOpenHelper {
         values.clear();
         values.put(memoValue_colum, memo);
 
-
         int result = DB.update(scheduleTableName, values,
                 dateValue_colum + " = ? AND "
                         + orderValue_colum + " = ?",
