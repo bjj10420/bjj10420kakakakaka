@@ -257,7 +257,7 @@ public class UIHelper {
             Schedule schedule = dailyScheduleMap.get(dateValue);
             String label = schedule.getActivityName();
             String memo = schedule.getMemo();
-            if(!memo.equals("")) label += "\n\n (" + memo + ")";
+            if(memo != null && !memo.equals("")) label += "\n\n (" + memo + ")";
             entries.add(new PieEntry(fillValue, label));
         }
 
@@ -383,7 +383,8 @@ public class UIHelper {
      * @param pieEntry
      */
     public void updatePiechart(StringBuilder sb, Object parameter, PieEntry pieEntry) {
-        sb.append((pieEntry).getLabel()).append("\n\n").append("(").append(String.valueOf(parameter)).append(")");
+        String lineBreak = System.getProperty("line.separator");
+        sb.append((pieEntry).getLabel()).append(lineBreak).append("(").append(String.valueOf(parameter)).append(")");
         (pieEntry).setLabel(sb.toString());
     }
 }

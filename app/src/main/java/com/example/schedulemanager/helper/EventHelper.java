@@ -193,7 +193,7 @@ public class EventHelper {
             dataHelper.addToDailyScheduleMapByMonth(DBHelper.dbHelper.getScheduleCountForDate(dataHelper.getSelectedDateData()),activityName);
             uiHelper.resetPiechart(uiHelper.getPieChart());
             // 전환이 필요한경우
-            if(entryCount == -1)
+            if(entryCount == 0)
             uiHelper.setNoDateText(false);
         }
     }
