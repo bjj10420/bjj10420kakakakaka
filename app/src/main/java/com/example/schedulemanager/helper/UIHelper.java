@@ -362,12 +362,25 @@ public class UIHelper {
         noDateTextView.setVisibility(isVisible ? View.VISIBLE : View.GONE);
     }
 
-    public void pieChartReset(PieChart pieChart) {
+    /**
+     * 파이챠트 리셋
+     * @param pieChart
+     */
+    public void resetPiechart(PieChart pieChart) {
         pieChart.notifyDataSetChanged();
         pieChart.invalidate();
-        // 챠트 리셋
         pieChart.getOnTouchListener().setLastHighlighted(null);
         pieChart.highlightValues(null);
     }
 
+    /**
+     * 파이챠트 업데이트
+     * @param sb
+     * @param parameter
+     * @param pieEntry
+     */
+    public void updatePiechart(StringBuilder sb, Object parameter, PieEntry pieEntry) {
+        sb.append((pieEntry).getLabel()).append("\n\n").append("(").append(String.valueOf(parameter)).append(")");
+        (pieEntry).setLabel(sb.toString());
+    }
 }

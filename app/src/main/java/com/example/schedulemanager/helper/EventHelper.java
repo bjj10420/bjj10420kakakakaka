@@ -191,7 +191,7 @@ public class EventHelper {
             int entryCount = addScheduleToPieChart(activityName);
             // 자료구조에도 추가
             dataHelper.addToDailyScheduleMapByMonth(DBHelper.dbHelper.getScheduleCountForDate(dataHelper.getSelectedDateData()),activityName);
-            uiHelper.pieChartReset(uiHelper.getPieChart());
+            uiHelper.resetPiechart(uiHelper.getPieChart());
             // 전환이 필요한경우
             if(entryCount == -1)
             uiHelper.setNoDateText(false);
@@ -318,17 +318,14 @@ public class EventHelper {
 
         int index = dataHelper.getDailyScheduleDataSet().getEntryIndex(pieEntry);
         int orderValue = dataHelper.getOrderValueFromSchedule(index);
-        // DB
+        // DB 업데이트
         int result = dataHelper.getDbHelper().updateMemo(parameter, e, dataHelper.getSelectedDateData(), orderValue);
         Log.d("업데이트메모 결과값 체크 = ", String.valueOf(result));
         // 필드맵에 추가되어있는 스케쥴변경
         dataHelper.getScheduleFromDailyScheduleMapByMonth(orderValue).setMemo(String.valueOf(parameter));
-        // 파이챠트 데이터업데이트
-        sb.append((pieEntry).getLabel()).append("\n\n").append("(").append(String.valueOf(parameter)).append(")");
-        (pieEntry).setLabel(sb.toString());
-//        dataHelper.getDailyScheduleDataSet().getEntry
-        // 파이챠트
-        uiHelper.pieChartReset(uiHelper.getPieChart());
+        // 파이챠트 변경
+        uiHelper.updatePiechart(sb, parameter, pieEntry);
+        uiHelper.resetPiechart(uiHelper.getPieChart());
     }
 
     /**
@@ -345,7 +342,7 @@ public class EventHelper {
         new DBHelper(context).deleteSchedule(dataHelper.getSelectedDateData(), orderValue);
         // 현재 보는 스케쥴 챠트에서 삭제
         dailyScheduleDataSet.removeEntry((PieEntry) e);
-        uiHelper.pieChartReset(pieChart);
+        uiHelper.resetPiechart(pieChart);
         // 자료구조에서 삭제
         dataHelper.removeFromDailyScheduleMapByMonth(orderValue);
         // 데이터가 하나도 없을때는 처리
