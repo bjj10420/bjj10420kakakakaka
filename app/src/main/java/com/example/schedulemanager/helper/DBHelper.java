@@ -178,20 +178,20 @@ public class DBHelper extends SQLiteOpenHelper {
      * 해당 스케쥴 데이터의 메모를 업데이트
      * @param parameter
      */
-    public void updateMemo(Object parameter, final Entry e, int orderValue) {
+    public int updateMemo(Object parameter, final Entry e, String dateValue, int orderValue) {
+        String memo = String.valueOf(parameter);
         Log.d("업데이트 메모 테스트", String.valueOf(parameter));
         DB = getWritableDatabase();
         ContentValues values = new ContentValues();
         values.clear();
-        //TODO no에서 sqlite 에러가 나서 이쪽을 막고 나중에 같은 date값을 order로 표시하게
-//        values.put(no_colum, schedule.getNo());
-        values.put(dateValue_colum, schedule.getDate());
-        values.put(activityName_colum, schedule.getActivityName());
-        values.put(orderValue_colum, schedule.getOrder());
-        values.put(timeValue_colum, schedule.getTime());
-        values.put(memoValue_colum, schedule.getMemo());
-        long result = DB.update(scheduleTableName, values
-        , null, values);
+        values.put(memoValue_colum, memo);
 
+
+        int result = DB.update(scheduleTableName, values,
+                dateValue_colum + " = ? AND "
+                        + orderValue_colum + " = ?",
+                new String[] { dateValue,
+                        String.valueOf(orderValue)});
+        return result;
     }
 }
