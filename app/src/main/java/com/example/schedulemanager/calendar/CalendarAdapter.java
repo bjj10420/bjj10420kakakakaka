@@ -314,9 +314,13 @@ public class CalendarAdapter extends BaseAdapter
 				holder.day.setTextColor(Color.parseColor(textColor));
 				holder.day.setText(String.valueOf(item));
 
+				for(Integer key : scheduleMapForCurrentPage.keySet()){
+					Log.d("현재 페이지 스케쥴맵 키값 체크", String.valueOf(key));
+				}
+
 				// 스케쥴이 들어있는 날짜일경우
-				// 키값이 "000" + 순서값
-				if(scheduleMapForCurrentPage.get(Integer.parseInt((position - 1) + "0000")) != null) {
+				// 키값이 "000" + 순서값 0
+				if(scheduleMapForCurrentPage.get(Integer.parseInt(item + "0000")) != null) {
 					holder.checkMark.setVisibility(View.VISIBLE);
 					// 엑스트라 텍스트 설정
 					holder.extra.setText(extraText);

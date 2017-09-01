@@ -172,7 +172,9 @@ public class DBHelper extends SQLiteOpenHelper {
         }
 //        Log.d("addScheduleToMapByMonth" , String.valueOf(Integer.parseInt(schedule.getDate().substring(6,8))));
         scheduleMap.put(Integer.parseInt(schedule.getDate().substring(6,8) + "000" + schedule.getOrder()), schedule);
+        Log.d("해당 월의 스케쥴맵에 추가할 때 키값 체크", String.valueOf(Integer.parseInt(schedule.getDate().substring(6,8) + "000" + schedule.getOrder())));
     }
+
 
     /**
      * 해당 스케쥴 데이터의 메모를 DB에 업데이트
