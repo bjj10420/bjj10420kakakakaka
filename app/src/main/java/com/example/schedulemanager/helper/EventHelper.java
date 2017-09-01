@@ -322,10 +322,10 @@ public class EventHelper {
         int orderValue = dataHelper.getOrderValueFromSchedule(index);
         Log.d("오더벨류 체크", String.valueOf(orderValue));
         Schedule originalSchedule = dataHelper.getScheduleFromDailyScheduleMapByMonth(orderValue);
-        String originalScheduleMemo = originalSchedule.getMemo();
+        String originalScheduleMemo = originalSchedule != null ? originalSchedule.getMemo() : "";
 
         // 원본이 있는경우
-        if(!originalScheduleMemo.equals(""))
+        if(originalScheduleMemo != null && !originalScheduleMemo.equals(""))
             memoContent = originalScheduleMemo + ", " + memo;
         else
             memoContent = memo;
