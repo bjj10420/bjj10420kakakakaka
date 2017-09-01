@@ -318,9 +318,8 @@ public class EventHelper {
         PieEntry pieEntry = ((PieEntry) e);
         int index = dataHelper.getDailyScheduleDataSet().getEntryIndex(pieEntry);
         int orderValue = dataHelper.getOrderValueFromSchedule(index);
-        Schedule originalSchedule = dataHelper.getScheduleFromDailyScheduleMapByMonth(orderValue);
+        Schedule originalSchedule = dataHelper.getScheduleFromDailyScheduleMapByMonth2(index);
         String originalScheduleMemo = originalSchedule != null ? originalSchedule.getMemo() : "";
-
 
         Log.d("인덱스벨류 체크", String.valueOf(index));
         Log.d("오더벨류 체크", String.valueOf(orderValue));
@@ -335,7 +334,7 @@ public class EventHelper {
         int result = dataHelper.getDbHelper().updateMemo(memoContent, e, dataHelper.getSelectedDateData(), orderValue);
         Log.d("업데이트메모 결과값 체크 = ", String.valueOf(result) + ", " + orderValue);
         // 필드맵에 추가되어있는 스케쥴변경
-        dataHelper.getScheduleFromDailyScheduleMapByMonth(orderValue).setMemo(memoContent);
+        originalSchedule.setMemo(memoContent);
         // 파이챠트 변경//
         uiHelper.updatePiechart(memoContent, pieEntry,originalSchedule.getActivityName());
         uiHelper.resetPiechart(uiHelper.getPieChart());

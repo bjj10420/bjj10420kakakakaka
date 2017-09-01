@@ -73,12 +73,20 @@ public class DataHelper {
      * 스케쥴맵에서 제거
      * @param scheduleOrderValue
      */
-    public void removeFromDailyScheduleMapByMonth(int scheduleOrderValue) {
-        HashMap<Integer, Schedule> scheduleMapForThisMonth = scheduleMapByMonth.get(Integer.parseInt(yearMonthKey));
-        scheduleMapForThisMonth.remove(Integer.parseInt(dateValue + "000" + scheduleOrderValue));
-    }
+     public void removeFromDailyScheduleMapByMonth(int scheduleOrderValue) {
+     Log.d("데일리 스케쥴 맵 사이즈 삭제전", String.valueOf(dailyScheduleMap.size()));
+     HashMap<Integer, Schedule> scheduleMapForThisMonth = scheduleMapByMonth.get(Integer.parseInt(yearMonthKey));
+     scheduleMapForThisMonth.remove(Integer.parseInt(dateValue + "000" + scheduleOrderValue));
+     dailyScheduleMap.remove(Integer.parseInt(dateValue + "000" + scheduleOrderValue));
 
-    /**
+     for(Integer key : dailyScheduleMap.keySet()) {
+     Log.d("데일리 스케쥴 맵 남은 데이터확인", dailyScheduleMap.get(key).getActivityName());
+     }
+     Log.d("데일리 스케쥴 맵 사이즈 삭제후", String.valueOf(dailyScheduleMap.size()));
+
+     }
+
+     /**
      * 스케쥴맵에서 스케쥴 가져오기
      * @param scheduleOrderValue
      */
@@ -88,6 +96,19 @@ public class DataHelper {
             Log.d("이번달 스케쥴맵 컨텐츠 체크", String.valueOf(key));
         }
         Schedule schedule = scheduleMapForThisMonth.get(Integer.parseInt(dateValue + "000" + scheduleOrderValue));
+        return schedule;
+    }
+
+    /**
+     * 스케쥴맵에서 인덱스 값으로 가져오기
+     * @param index
+     */
+    public Schedule getScheduleFromDailyScheduleMapByMonth2(int index) {
+        Schedule schedule = null;
+        for(int i = 0; i < dailyScheduleMap.size(); i++){
+            if(index == i)
+                schedule = dailyScheduleMap.get(i);
+        }
         return schedule;
     }
 
@@ -102,6 +123,7 @@ public class DataHelper {
            for(Integer key : dailyScheduleMap.keySet()) {
             if(countIndex == selectedIndex) {
                 orderValue = dailyScheduleMap.get(key).getOrder();
+                Log.d("getORderValueFromSchedule 메소드 데일리스케쥴맵 체크", dailyScheduleMap.get(key).getActivityName());
                    break;
             }
             countIndex++;
@@ -132,6 +154,8 @@ public class DataHelper {
             Schedule schedule = thisMonthSchedules.get(dateKey);
             Log.d("데일리스케쥴맵 생성 체크 dateKey ", String.valueOf(dateKey));
             Log.d("데일리스케쥴맵 생성 체크 order ", String.valueOf(schedule.getOrder()));
+            Log.d("데일리스케쥴맵 생성 체크 activityName ", String.valueOf(schedule.getActivityName()));
+
             if(String.valueOf(dateKey).length() == 6 && String.valueOf(dateKey).substring(0, 2).equals(dateValue))dailySchedules.put(dateKey, schedule);
             else if(String.valueOf(dateKey).length() == 5 && String.valueOf(dateKey).substring(0, 1).equals(dateValue))dailySchedules.put(dateKey, schedule);
         }
