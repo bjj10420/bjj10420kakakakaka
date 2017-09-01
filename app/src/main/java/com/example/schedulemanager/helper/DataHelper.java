@@ -65,6 +65,8 @@ public class DataHelper {
         schedule.setActivityName(activityName);
         Log.d("스케쥴맵에 스케쥴추가", schedule.getOrder() + ", " + activityName + ", " + dateValue);
         scheduleMapForThisMonth.put(Integer.parseInt(dateValue + "000" + countForTheDate), schedule);
+        // 데일리 맵에도 추가
+        dailyScheduleMap.put(Integer.parseInt(dateValue + "000" + countForTheDate), schedule);
     }
 
     /**

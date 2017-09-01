@@ -396,6 +396,7 @@ public class EventHelper {
      */
     public void addScheduleForTheDate(String tagName) {
         String dateString = calendarHelper.makeDateString(dataHelper.getDateValue());
+        Log.d("스케쥴 추가 체크", dateString + ", " + tagName);
         addScheduleByDateString(dateString, tagName);
     }
 
