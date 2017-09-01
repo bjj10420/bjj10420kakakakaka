@@ -316,13 +316,14 @@ public class EventHelper {
         String memoContent = "";
         String memo = String.valueOf(parameter);
         PieEntry pieEntry = ((PieEntry) e);
-        StringBuilder sb = new StringBuilder();
         int index = dataHelper.getDailyScheduleDataSet().getEntryIndex(pieEntry);
-        Log.d("인덱스벨류 체크", String.valueOf(index));
         int orderValue = dataHelper.getOrderValueFromSchedule(index);
-        Log.d("오더벨류 체크", String.valueOf(orderValue));
         Schedule originalSchedule = dataHelper.getScheduleFromDailyScheduleMapByMonth(orderValue);
         String originalScheduleMemo = originalSchedule != null ? originalSchedule.getMemo() : "";
+
+
+        Log.d("인덱스벨류 체크", String.valueOf(index));
+        Log.d("오더벨류 체크", String.valueOf(orderValue));
 
         // 원본이 있는경우
         if(originalScheduleMemo != null && !originalScheduleMemo.equals(""))
@@ -332,11 +333,11 @@ public class EventHelper {
 
         // DB업데이트
         int result = dataHelper.getDbHelper().updateMemo(memoContent, e, dataHelper.getSelectedDateData(), orderValue);
-        Log.d("업데이트메모 결과값 체크 = ", String.valueOf(result));
+        Log.d("업데이트메모 결과값 체크 = ", String.valueOf(result) + ", " + orderValue);
         // 필드맵에 추가되어있는 스케쥴변경
         dataHelper.getScheduleFromDailyScheduleMapByMonth(orderValue).setMemo(memoContent);
         // 파이챠트 변경//
-        uiHelper.updatePiechart(sb, memoContent, pieEntry,originalSchedule.getActivityName());
+        uiHelper.updatePiechart(memoContent, pieEntry,originalSchedule.getActivityName());
         uiHelper.resetPiechart(uiHelper.getPieChart());
     }
 

@@ -84,6 +84,9 @@ public class DataHelper {
      */
     public Schedule getScheduleFromDailyScheduleMapByMonth(int scheduleOrderValue) {
         HashMap<Integer, Schedule> scheduleMapForThisMonth = scheduleMapByMonth.get(Integer.parseInt(yearMonthKey));
+        for(Integer key : scheduleMapForThisMonth.keySet()) {
+            Log.d("이번달 스케쥴맵 컨텐츠 체크", String.valueOf(key));
+        }
         Schedule schedule = scheduleMapForThisMonth.get(Integer.parseInt(dateValue + "000" + scheduleOrderValue));
         return schedule;
     }

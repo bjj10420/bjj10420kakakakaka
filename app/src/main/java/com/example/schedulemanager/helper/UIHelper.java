@@ -379,11 +379,11 @@ public class UIHelper {
 
     /**
      * 파이챠트 업데이트
-     * @param sb
      * @param memoContent
      * @param pieEntry
      */
-    public void updatePiechart(StringBuilder sb, String memoContent, PieEntry pieEntry,String activityName) {
+    public void updatePiechart(String memoContent, PieEntry pieEntry,String activityName) {
+        StringBuilder sb = new StringBuilder();
         sb.append(activityName).append("(").append(String.valueOf(memoContent)).append(")");
         (pieEntry).setLabel(sb.toString());
     }
