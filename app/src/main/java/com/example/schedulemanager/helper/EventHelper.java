@@ -335,7 +335,7 @@ public class EventHelper {
         Log.d("업데이트메모 결과값 체크 = ", String.valueOf(result));
         // 필드맵에 추가되어있는 스케쥴변경
         dataHelper.getScheduleFromDailyScheduleMapByMonth(orderValue).setMemo(memoContent);
-        // 파이챠트 변경
+        // 파이챠트 변경//
         uiHelper.updatePiechart(sb, memoContent, pieEntry,originalSchedule.getActivityName());
         uiHelper.resetPiechart(uiHelper.getPieChart());
     }
