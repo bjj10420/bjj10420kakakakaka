@@ -289,7 +289,7 @@ public class DataHelper {
         String baseCalMonthString = month < 10 ? "0" + month : String.valueOf(month);
         String yearMonthKey = year + baseCalMonthString;
         return yearMonthKey;
-    }
+    }//
 
     public boolean isEmptyData(String dateKey){
         boolean isEmptyData = true;
