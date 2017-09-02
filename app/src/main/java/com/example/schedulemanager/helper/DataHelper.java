@@ -63,7 +63,7 @@ public class DataHelper {
         schedule.setDate(selectedDateData);
         schedule.setOrder(countForTheDate);
         schedule.setActivityName(activityName);
-        Log.d("스케쥴맵에 스케쥴추가", schedule.getOrder() + ", " + activityName + ", " + dateValue);
+        Log.d("스케쥴맵에 스케쥴추가", schedule.getOrder() + ", " + activityName + ", " + dateValue + ", countForTheDate = " + countForTheDate);
         scheduleMapForThisMonth.put(Integer.parseInt(dateValue + "000" + countForTheDate), schedule);
         // 데일리 맵에도 추가
         dailyScheduleMap.put(Integer.parseInt(dateValue + "000" + countForTheDate), schedule);
@@ -152,13 +152,17 @@ public class DataHelper {
         HashMap<Integer, Schedule> thisMonthSchedules = getScheduleMapByMonth().get(Integer.parseInt(yearMonthKey));
         for(Integer dateKey : thisMonthSchedules.keySet()) {
             Schedule schedule = thisMonthSchedules.get(dateKey);
-            Log.d("데일리스케쥴맵 생성 체크 dateKey ", String.valueOf(dateKey));
-            Log.d("데일리스케쥴맵 생성 체크 order ", String.valueOf(schedule.getOrder()));
-            Log.d("데일리스케쥴맵 생성 체크 activityName ", String.valueOf(schedule.getActivityName()));
 
-            if(String.valueOf(dateKey).length() == 6 && String.valueOf(dateKey).substring(0, 2).equals(dateValue))dailySchedules.put(dateKey, schedule);
-            else if(String.valueOf(dateKey).length() == 5 && String.valueOf(dateKey).substring(0, 1).equals(dateValue))dailySchedules.put(dateKey, schedule);
-        }
+            if(String.valueOf(dateKey).length() == 6 && String.valueOf(dateKey).substring(0, 2).equals(dateValue)){dailySchedules.put(dateKey, schedule);
+                Log.d("데일리스케쥴맵 생성 체크 dateKey ", String.valueOf(dateKey));
+                Log.d("데일리스케쥴맵 생성 체크 order ", String.valueOf(schedule.getOrder()));
+                Log.d("데일리스케쥴맵 생성 체크 activityName ", String.valueOf(schedule.getActivityName()));
+            }
+            else if(String.valueOf(dateKey).length() == 5 && String.valueOf(dateKey).substring(0, 1).equals(dateValue)){dailySchedules.put(dateKey, schedule);
+                Log.d("데일리스케쥴맵 생성 체크 dateKey ", String.valueOf(dateKey));
+                Log.d("데일리스케쥴맵 생성 체크 order ", String.valueOf(schedule.getOrder()));
+                Log.d("데일리스케쥴맵 생성 체크 activityName ", String.valueOf(schedule.getActivityName()));
+                }}
         return dailySchedules;
     }
 

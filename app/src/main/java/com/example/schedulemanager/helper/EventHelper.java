@@ -191,7 +191,7 @@ public class EventHelper {
             int entryCount = addScheduleToPieChart(activityName);
             // 자료구조에도 추가
             //
-            dataHelper.addToDailyScheduleMapByMonth(DBHelper.dbHelper.getScheduleCountForDate(dataHelper.getSelectedDateData()),activityName);
+            dataHelper.addToDailyScheduleMapByMonth(DBHelper.dbHelper.getScheduleCountForDate(dataHelper.getSelectedDateData())-1,activityName);
             uiHelper.resetPiechart(uiHelper.getPieChart());
             // 전환이 필요한경우
             if(entryCount == 0)
