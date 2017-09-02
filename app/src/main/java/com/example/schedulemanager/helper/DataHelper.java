@@ -231,6 +231,10 @@ public class DataHelper {
         this.dailyScheduleMap = dailyScheduleMap;
     }
 
+    public TreeMap<Integer, Schedule> getDailyScheduleMap() {
+        return dailyScheduleMap;
+    }
+
     public String getDateValue() {
         return dateValue;
     }
@@ -241,5 +245,17 @@ public class DataHelper {
 
     public String getYearMonthKey() {
         return yearMonthKey;
+    }
+
+    /**
+     * 데일리 스케쥴안의 각 데이터의 순서값중 최대값을 추출
+     */
+    public int getMaxOrderAmongDailyScheduleMap() {
+        int temp = 0;
+            for(int key : dailyScheduleMap.keySet()) {
+                int order = dailyScheduleMap.get(key).getOrder();
+                if(order > temp) temp = order;
+            }
+        return temp;
     }
 }

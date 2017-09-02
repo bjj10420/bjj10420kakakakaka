@@ -33,7 +33,7 @@ public class CalendarHelper {
     private ViewPager calendarPager;                // 메인 캘린더 뷰 페이져 객체
     private DataHelper dataHelper;
     private UIHelper uiHelepr;
-    private EventHelper eventHelper;
+    EventHelper eventHelper;
 
     public void initCalendar(Context context, Typeface typeface, UIHelper uiHelper, DataHelper dataHelper) {
         this.context = context;
@@ -161,35 +161,6 @@ public class CalendarHelper {
         return dateString;
     }
 
-
-
-    /**
-     * 스케쥴 버튼을 드래그하여 중앙 아이콘으로 가져갔을때 추가
-     * @param tagName
-     */
-    public void addScheduleForToday(String tagName) {
-        // 오늘 날짜
-        Date dateOfToday = new Date();
-        DateFormat dateFormatter = new SimpleDateFormat("yyyyMMdd");
-        String dateString = dateFormatter.format(dateOfToday);
-        // 넘버
-        int number = DBHelper.dbHelper.getScheduleCountForDate(dateString);
-        // 이름
-        String activityName = tagName;
-
-        // 삽입할 스케쥴 데이터 객체 생성
-        Schedule newSchedule = new Schedule();
-        newSchedule.setNo(number);
-        newSchedule.setDate(dateString);
-        newSchedule.setActivityName(activityName);
-        //TODO 나머지 order, time, memo는 일단 공란
-        newSchedule.setOrder(0);
-        newSchedule.setTime("");
-        newSchedule.setMemo("");
-
-        // DB에 삽입
-        long resultNum = DBHelper.dbHelper.insertSchedule(newSchedule);
-    }
 
     /**
      * 저장소에 있는 모든 뷰중에 최단거리를 추출

@@ -19,6 +19,10 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.highlight.Highlight;
 import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
 /**
  * 모든 이벤트를 처리, 관리
  */
@@ -190,8 +194,12 @@ public class EventHelper {
             // 현재 보고 있는 스케쥴 챠트에서 추가 (추가전 엔트리 카운터 리턴)
             int entryCount = addScheduleToPieChart(activityName);
             // 자료구조에도 추가
-            //
-            dataHelper.addToDailyScheduleMapByMonth(DBHelper.dbHelper.getScheduleCountForDate(dataHelper.getSelectedDateData())-1,activityName);
+            int newOrder = 0;
+            if(dataHelper.getDailyScheduleMap() != null)
+                if(dataHelper.getDailyScheduleMap().size() != 0)
+                    newOrder = dataHelper.getMaxOrderAmongDailyScheduleMap() + 1;
+
+            dataHelper.addToDailyScheduleMapByMonth(newOrder,activityName);
             uiHelper.resetPiechart(uiHelper.getPieChart());
             // 전환이 필요한경우
             if(entryCount == 0)
@@ -235,7 +243,7 @@ public class EventHelper {
     private void actionWhenCenterIconActivated(View centerIcon, View copiedView, View view) {
         if(centerIcon.getVisibility() == View.VISIBLE &&
                 Util.checkCollision(centerIcon, copiedView)) {
-            calendarHelper.addScheduleForToday(String.valueOf(view.getTag()));
+            addScheduleForToday(String.valueOf(view.getTag()));
         }
     }
 
@@ -412,7 +420,12 @@ public class EventHelper {
         // 삽입할 스케쥴 데이터 객체 생성
         Schedule newSchedule = new Schedule();
         // 넘버
-        int number = DBHelper.dbHelper.getScheduleCountForDate(dateString);
+//        int number = DBHelper.dbHelper.getScheduleCountForDate(dateString);
+        int number = 0;
+        if(dataHelper.getDailyScheduleMap() != null)
+            if(dataHelper.getDailyScheduleMap().size() != 0)
+                number = dataHelper.getMaxOrderAmongDailyScheduleMap();
+
         newSchedule.setDate(dateString);
         newSchedule.setActivityName(activityName);
         //TODO 나머지 order, time, memo는 일단 공란
@@ -427,5 +440,37 @@ public class EventHelper {
 
     public CalendarHelper getCalendarHelper() {
         return calendarHelper;
+    }
+
+    /**
+     * 스케쥴 버튼을 드래그하여 중앙 아이콘으로 가져갔을때 추가
+     * @param tagName
+     */
+    public void addScheduleForToday(String tagName) {
+        // 오늘 날짜
+        Date dateOfToday = new Date();
+        DateFormat dateFormatter = new SimpleDateFormat("yyyyMMdd");
+        String dateString = dateFormatter.format(dateOfToday);
+        // 넘버
+//        int number = DBHelper.dbHelper.getScheduleCountForDate(dateString);
+        int number = 0;
+        if(dataHelper.getDailyScheduleMap() != null)
+            if(dataHelper.getDailyScheduleMap().size() != 0)
+                number = dataHelper.getMaxOrderAmongDailyScheduleMap();
+
+        String activityName = tagName;
+
+        // 삽입할 스케쥴 데이터 객체 생성
+        Schedule newSchedule = new Schedule();
+        newSchedule.setNo(number);
+        newSchedule.setDate(dateString);
+        newSchedule.setActivityName(activityName);
+        //TODO 나머지 order, time, memo는 일단 공란
+        newSchedule.setOrder(0);
+        newSchedule.setTime("");
+        newSchedule.setMemo("");
+
+        // DB에 삽입
+        long resultNum = DBHelper.dbHelper.insertSchedule(newSchedule);
     }
 }
