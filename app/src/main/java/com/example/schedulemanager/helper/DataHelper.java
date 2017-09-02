@@ -6,10 +6,12 @@ import android.util.Log;
 import android.view.View;
 
 import com.example.schedulemanager.activity.MainActivity;
+import com.example.schedulemanager.calendar.CalendarPagerAdapter;
 import com.example.schedulemanager.vo.Schedule;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.TreeMap;
 
@@ -258,5 +260,57 @@ public class DataHelper {
                 if(order > temp) temp = order;
             }
         return temp;
+    }
+
+    /**
+     * 현재월안의 값중에서 날짜값이 파라메터와 같은 데이터중에서 가장 큰 순서값
+     */
+    public int getMaxOrderAmongScheduleMapByThisMonth(String dateKey) {
+        String yearMonthKey = makeYearMonthKey();
+        HashMap<Integer, Schedule> scheduleMapForThisMonth = scheduleMapByMonth.get(Integer.parseInt(yearMonthKey));
+        Log.d("getMaxOrderAmongScheduleMapByThisMonth", "getMaxOrderAmongScheduleMapByThisMonth");
+        int temp = 0;
+        for(int key : scheduleMapForThisMonth.keySet()) {
+            Schedule schedule = scheduleMapForThisMonth.get(key);
+            int order = schedule.getOrder();
+            if(schedule.getDate().equals(dateKey) && order > temp) temp = order;
+        }
+        return temp;
+    }
+
+    /**
+     * 연월스트링 값 생성
+     * @return
+     */
+    private String makeYearMonthKey() {
+        CalendarPagerAdapter calendarPagerAdapter = EventHelper.eventHelper.getCalendarHelper().getCalendarPagerAdapter();
+        String year = String.valueOf(calendarPagerAdapter.getBaseCal().get(Calendar.YEAR));
+        int month = calendarPagerAdapter.getBaseCal().get(Calendar.MONTH);
+        String baseCalMonthString = month < 10 ? "0" + month : String.valueOf(month);
+        String yearMonthKey = year + baseCalMonthString;
+        return yearMonthKey;
+    }
+
+    public boolean isEmptyData(String dateKey){
+        boolean isEmptyData = true;
+        String yearMonthKey = makeYearMonthKey();
+        HashMap<Integer, Schedule> scheduleMapForThisMonth = scheduleMapByMonth.get(Integer.parseInt(yearMonthKey));
+
+        //TODO 만약 비어져있으면 여기서 한번 생성해준다 (초기화단계에서 해주도록 나중에 리팩토링)
+        if(scheduleMapForThisMonth == null) {
+            HashMap<Integer, Schedule> scheduleMap = new HashMap<Integer, Schedule>();
+            scheduleMapByMonth.put(Integer.valueOf(yearMonthKey), scheduleMap);
+            scheduleMapForThisMonth = scheduleMap;
+        }
+
+        Log.d("데이터가 비어있는지 체크", String.valueOf(dateKey));
+        Log.d("yearMonthKey 상세정보", String.valueOf(yearMonthKey));
+        Log.d("scheduleMapByMonth 상세정보", String.valueOf(scheduleMapByMonth));
+
+        Log.d("scheduleMapForThisMonth 상세정보", String.valueOf(scheduleMapForThisMonth));
+        Schedule scheduleData = scheduleMapForThisMonth.get(Integer.parseInt(dateKey.substring(6,8) + "0000"));
+        if(scheduleData != null) isEmptyData = false;
+        Log.d("데이터가 비어있는지 체크", String.valueOf(isEmptyData));
+        return isEmptyData;
     }
 }

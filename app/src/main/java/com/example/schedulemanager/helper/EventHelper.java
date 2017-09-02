@@ -452,9 +452,8 @@ public class EventHelper {
         // 넘버
 //        int number = DBHelper.dbHelper.getScheduleCountForDate(dateString);
         int number = 0;
-        if(dataHelper.getDailyScheduleMap() != null)
-            if(dataHelper.getDailyScheduleMap().size() != 0)
-                number = dataHelper.getMaxOrderAmongDailyScheduleMap();
+        if(!dataHelper.isEmptyData(dateString))
+        number = dataHelper.getMaxOrderAmongScheduleMapByThisMonth(dateString) + 1;
 
         // 삽입할 스케쥴 데이터 객체 생성
         Schedule newSchedule = makeNewSchedule(number, dateString, activityName);
