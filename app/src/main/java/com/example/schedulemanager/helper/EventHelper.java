@@ -22,6 +22,8 @@ import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.TreeMap;
 
 /**
  * 모든 이벤트를 처리, 관리
@@ -224,7 +226,7 @@ public class EventHelper {
             String dateValue = String.valueOf(closestView.getTag());
             // TODO 처음 앱을 설치하고 일정을 스케쥴했을때 DATE값이 없으므로 여기서 저장
             dataHelper.setDateValue(dateValue);
-            addScheduleForTheDate(String.valueOf(view.getTag()));
+            addScheduleForTheCalendarCell(String.valueOf(view.getTag()));
             calendarHelper.refreshCalendar();
             closestView = null;
         }
@@ -396,29 +398,57 @@ public class EventHelper {
      */
     public void addScheduleForTheSchedule(String tagName) {
         Log.d("선택된 데이트 데이터", dataHelper.getSelectedDateData());
-        addScheduleByDateString(dataHelper.getSelectedDateData(), tagName);
+        addScheduleForDiailyScheduleMode(dataHelper.getSelectedDateData(), tagName);
     }
 
     /**
      * 스케쥴 버튼을 드래그하여 메인 캘린더의 한칸으로 가져갔을때 추가
      * @param tagName
      */
-    public void addScheduleForTheDate(String tagName) {
+    public void addScheduleForTheCalendarCell(String tagName) {
         String dateString = calendarHelper.makeDateString(dataHelper.getDateValue());
         Log.d("스케쥴 추가 체크", dateString + ", " + tagName);
-        addScheduleByDateString(dateString, tagName);
+        addScheduleForCalendarMode(dateString, tagName);
     }
 
     /**
-     * 데이트 스트링과 태그네임으로 DB에 스케쥴 추가
+     * 데이트 스트링과 태그네임으로 DB에 스케쥴 추가(스케쥴일정화면)
      * @param dateString
      * @param tagName
      */
-    private void addScheduleByDateString(String dateString, String tagName) {
+    private void addScheduleForDiailyScheduleMode(String dateString, String tagName) {
         // 이름
         String activityName = tagName;
+
+        // 넘버
+//        int number = DBHelper.dbHelper.getScheduleCountForDate(dateString);
+        int number = 0;
+        if(dataHelper.getDailyScheduleMap() != null)
+            if(dataHelper.getDailyScheduleMap().size() != 0)
+                number = dataHelper.getMaxOrderAmongDailyScheduleMap() + 1;
+
         // 삽입할 스케쥴 데이터 객체 생성
-        Schedule newSchedule = new Schedule();
+        Schedule newSchedule = makeNewSchedule(number, dateString, activityName);
+
+        // DB에 삽입
+        long resultNum = DBHelper.dbHelper.insertSchedule(newSchedule);
+    }
+
+    /**
+     * 데이트 스트링과 태그네임으로 DB에 스케쥴 추가(달력한칸에서 사용)
+     * @param dateString
+     * @param tagName
+     */
+    private void addScheduleForCalendarMode(String dateString, String tagName) {
+        // 이름
+        String activityName = tagName;
+
+//        HashMap<Integer, Schedule> dailySchedule = dataHelper.makeDailyScheduleMap(yearMonthKey, dateValue);
+//        //정렬
+//        TreeMap<Integer,Schedule> tm = new TreeMap<Integer,Schedule>(dailySchedule);
+//
+//        dataHelper.setDailyScheduleMap(tm);
+
         // 넘버
 //        int number = DBHelper.dbHelper.getScheduleCountForDate(dateString);
         int number = 0;
@@ -426,16 +456,25 @@ public class EventHelper {
             if(dataHelper.getDailyScheduleMap().size() != 0)
                 number = dataHelper.getMaxOrderAmongDailyScheduleMap();
 
+        // 삽입할 스케쥴 데이터 객체 생성
+        Schedule newSchedule = makeNewSchedule(number, dateString, activityName);
+
+        // DB에 삽입
+        long resultNum = DBHelper.dbHelper.insertSchedule(newSchedule);
+
+    }
+
+    private Schedule makeNewSchedule(int number, String dateString, String activityName) {
+        // 삽입할 스케쥴 데이터 객체 생성
+        Schedule newSchedule = new Schedule();
+
         newSchedule.setDate(dateString);
         newSchedule.setActivityName(activityName);
         //TODO 나머지 order, time, memo는 일단 공란
         newSchedule.setOrder(number);
         newSchedule.setTime("");
         newSchedule.setMemo("");
-
-        // DB에 삽입
-        long resultNum = DBHelper.dbHelper.insertSchedule(newSchedule);
-
+        return newSchedule;
     }
 
     public CalendarHelper getCalendarHelper() {

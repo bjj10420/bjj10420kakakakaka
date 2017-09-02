@@ -251,6 +251,7 @@ public class DataHelper {
      * 데일리 스케쥴안의 각 데이터의 순서값중 최대값을 추출
      */
     public int getMaxOrderAmongDailyScheduleMap() {
+        Log.d("getMaxOrderAmongDailyScheduleMap", "getMaxOrderAmongDailyScheduleMap");
         int temp = 0;
             for(int key : dailyScheduleMap.keySet()) {
                 int order = dailyScheduleMap.get(key).getOrder();

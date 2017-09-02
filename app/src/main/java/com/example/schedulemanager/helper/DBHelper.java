@@ -88,6 +88,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.put(orderValue_colum, schedule.getOrder());
         values.put(timeValue_colum, schedule.getTime());
         values.put(memoValue_colum, schedule.getMemo());
+        Log.d("인설트스케쥴 체크", String.valueOf(schedule.getOrder()));
         long result = DB.insert(scheduleTableName, null, values);
         return result;
     }
