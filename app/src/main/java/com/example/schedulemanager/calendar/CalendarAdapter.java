@@ -221,7 +221,25 @@ public class CalendarAdapter extends BaseAdapter
 					holder.day.setVisibility(View.VISIBLE);
 					holder.extra.setVisibility(View.VISIBLE);
 
-					color = "ffffff";
+//					color = "ffffff";
+
+					// 요일에 따라서 색깔을 설정한다.
+					switch (mod)
+					{
+						case 0:		// SUN
+							color = "ff0000";
+							break;
+
+						case 6: 	// SAT
+							color = "558ed5";
+							break;
+
+						default:	// MON~FRI
+							color = "262626";
+							break;
+
+					}
+
 					opacity = "";
 
 					if(selectedTime != null && selectedTime.trim().isEmpty() == false)
@@ -321,7 +339,7 @@ public class CalendarAdapter extends BaseAdapter
 				if(scheduleMapForCurrentPage.get(Integer.parseInt(item + "0000")) != null) {
 					holder.checkMark.setVisibility(View.VISIBLE);
 					// 엑스트라 텍스트 설정
-					holder.extra.setText(extraText);
+//					holder.extra.setText(extraText);
 
 				}
 			}
