@@ -166,7 +166,8 @@ public class DataHelper {
                 Log.d("데일리스케쥴맵 생성 체크 order ", String.valueOf(schedule.getOrder()));
                 Log.d("데일리스케쥴맵 생성 체크 activityName ", String.valueOf(schedule.getActivityName()));
             }
-            else if(String.valueOf(dateKey).length() == 5 && String.valueOf(dateKey).substring(0, 1).equals(dateValue)){dailySchedules.put(dateKey, schedule);
+            else if(String.valueOf(dateKey).length() == 5 && String.valueOf(dateKey).substring(0, 1).equals(dateValue)){
+                dailySchedules.put(dateKey, schedule);
                 Log.d("데일리스케쥴맵 생성 체크 dateKey ", String.valueOf(dateKey));
                 Log.d("데일리스케쥴맵 생성 체크 order ", String.valueOf(schedule.getOrder()));
                 Log.d("데일리스케쥴맵 생성 체크 activityName ", String.valueOf(schedule.getActivityName()));
