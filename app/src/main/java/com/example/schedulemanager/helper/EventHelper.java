@@ -528,4 +528,8 @@ public class EventHelper {
         // DB에 삽입
         long resultNum = DBHelper.dbHelper.insertSchedule(newSchedule);
     }
+
+    public DataHelper getDataHelper() {
+        return dataHelper;
+    }
 }

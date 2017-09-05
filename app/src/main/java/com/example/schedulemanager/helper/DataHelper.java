@@ -35,6 +35,7 @@ public class DataHelper {
     private String yearMonthKey;                    // 선택된 연월
     private TreeMap<Integer, Schedule> dailyScheduleMap; // 선택된 일자의 하루 스케쥴 맵
     private String dateValue;                       // 선택된 일
+    private String dateOfToday;                     // 오늘 일자
 
     public void initData(Context context) {
         dataHelper = this;
@@ -319,5 +320,13 @@ public class DataHelper {
         if(scheduleData != null) isEmptyData = false;
         Log.d("데이터가 비어있는지 체크", String.valueOf(isEmptyData));
         return isEmptyData;
+    }
+
+    public void setDateOfToday(String dateOfToday) {
+        this.dateOfToday = dateOfToday;
+    }
+
+    public String getDateOfToday() {
+        return dateOfToday;
     }
 }

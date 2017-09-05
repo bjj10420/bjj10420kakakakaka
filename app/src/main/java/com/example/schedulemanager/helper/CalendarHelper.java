@@ -205,7 +205,12 @@ public class CalendarHelper {
      */
     private boolean isToday(View closestView) {
         // extraView가 활성화인지( 오늘이라 선택되어있는지 )
-        boolean isToday = !((TextView)((RelativeLayout) closestView).getChildAt(2)).getText().equals("");
+//        boolean isToday = !((TextView)((RelativeLayout) closestView).getChildAt(2)).getText().equals("");
+        Log.d("데이터 헬퍼 체크", String.valueOf(DataHelper.dataHelper));
+        Log.d("데이터 헬퍼 체크", DataHelper.dataHelper.getDateOfToday());
+
+        boolean isToday = DataHelper.dataHelper.getDateOfToday().equals(String.valueOf(closestView.getTag()));
+
         return isToday;
     }
 //

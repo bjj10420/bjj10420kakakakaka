@@ -233,9 +233,10 @@ public class CalendarAdapter extends BaseAdapter
 						extraText ="지금";
 
 					}
-
 					convertView.setBackgroundResource(R.drawable.rail_calendar_item_selected_bg);
-					convertView.setOnTouchListener(null);
+					//TODO 시간표현은 필요없고 오늘날짜값을 저장
+					Log.d("오늘 날짜를 저장하였습니다.", String.valueOf(item));
+					DataHelper.dataHelper.setDateOfToday(String.valueOf(item));
 				}
 				else
 				{	// 선택되지 않은 날짜
@@ -244,6 +245,7 @@ public class CalendarAdapter extends BaseAdapter
 					if(position == currentItemIdx)
 					{	// 선택되지 않았지만 오늘 날짜라면 배경을 바꿔준다.
 						convertView.setBackgroundResource(R.drawable.rail_calendar_item_nonselected_now);
+						convertView.setOnTouchListener(null);
 					}
 					else
 					{	// 그 외의 경우는 배경을 없앤다.
@@ -320,6 +322,7 @@ public class CalendarAdapter extends BaseAdapter
 					holder.checkMark.setVisibility(View.VISIBLE);
 					// 엑스트라 텍스트 설정
 					holder.extra.setText(extraText);
+
 				}
 			}
 			else
