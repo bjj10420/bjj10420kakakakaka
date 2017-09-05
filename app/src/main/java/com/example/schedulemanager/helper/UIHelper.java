@@ -249,6 +249,7 @@ public class UIHelper {
      * @param dailyScheduleMap
      */
     public void setDailyScheduleDisplay(TreeMap<Integer, Schedule> dailyScheduleMap) {
+
         List<PieEntry> entries = new ArrayList<>();
         // 모든 스케쥴은 균등한 점유값을 갖는다
         // 100을 개수로 나눈값으로 지정
@@ -298,6 +299,7 @@ public class UIHelper {
         pieChart.setDrawSliceText(true);
         pieChart.getDescription().setEnabled(false);
         pieChart.setEntryLabelColor(Color.parseColor("#404040"));
+        pieChart.setRotationEnabled(false);
         pieChart.invalidate(); // refresh
     }
 

@@ -245,15 +245,25 @@ public class CalendarHelper {
         String baseCalMonthString = month < 10 ? "0" + month : String.valueOf(month);
         String yearMonthKey = year + baseCalMonthString;
 
+        if(isNodataInThisMonth(yearMonthKey))
+            return;
+
         dataHelper.setYearMonthKeyAndDateValue(yearMonthKey, dateValue);
         dataHelper.setSelectedDateData(yearMonthKey + (Integer.parseInt(dateValue) < 10 ? "0" + dateValue : dateValue));
         uiHelepr.setDailyScheduleDateText(yearMonthKey, dateValue);
         HashMap<Integer, Schedule> dailySchedule = dataHelper.makeDailyScheduleMap(yearMonthKey, dateValue);
         //정렬
         TreeMap<Integer,Schedule> tm = new TreeMap<Integer,Schedule>(dailySchedule);
-
         dataHelper.setDailyScheduleMap(tm);
         changeToScheduleLayout(tm);
+    }
+
+    /**
+     * 이번 달에는 데이터가 하나도 없는 경우
+     */
+    private boolean isNodataInThisMonth(String yearMonthKey) {
+         HashMap<Integer, Schedule> thisMonthSchedules = dataHelper.getScheduleMapByMonth().get(Integer.parseInt(yearMonthKey));
+        return thisMonthSchedules == null ? true : false;
     }
 
     /**
