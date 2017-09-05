@@ -190,11 +190,11 @@ public class CalendarHelper {
         // 1. 원래 있는 경우 기존셀을 원복, 새로운 곳에는 색을 + 저장
         if(closestView != null) {
             closestView.setBackgroundColor(Color.parseColor(isToday(closestView) ? "#ffc000": "#ffffff"));
-            calendarCellView.setBackgroundColor(Color.parseColor("#c8c8c8"));
+            calendarCellView.setBackgroundResource(R.drawable.calendar_hover_bg);
          }
         // 2. 첫 변화
         else {
-            calendarCellView.setBackgroundColor(Color.parseColor("#c8c8c8"));
+            calendarCellView.setBackgroundResource(R.drawable.calendar_hover_bg);
          }
         uiHelepr.setClosestView(calendarCellView);
     }
