@@ -203,10 +203,12 @@ public class EventHelper {
 
             dataHelper.addToDailyScheduleMapByMonth(newOrder,activityName);
             uiHelper.resetPiechart(uiHelper.getPieChart());
-            // 전환이 필요한경우
-            if(entryCount == 0)
-            uiHelper.setNoDateText(false);
-        }
+            // 전환이 필요한경우 (추가가 된후 달력뷰에서도 체크마크표시를 해줘야한다)
+            if(entryCount == 0) {
+                uiHelper.setNoDateText(false);
+                calendarHelper.setCheckMark(true);
+            }
+            }
     }
 
     private int addScheduleToPieChart(String s) {
