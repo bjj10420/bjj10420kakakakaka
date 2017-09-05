@@ -6,6 +6,7 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
+import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.Log;
@@ -43,7 +44,7 @@ public class UIHelper {
     private View calendarLayout;                    // 메인 캘린더 레이아웃
     private View scheduleLayout;                    // 하루 일정 레이아웃
     private View closestView;                       // 드래그 이벤트 도중 포인터주위의 가장 가까운 뷰
-    private View backBtn;                           // 하단 뒤로가기 버튼
+    private TextView backBtn;                       // 하단 뒤로가기 버튼
     private View cancelBtn;                         // 하단 X 버튼
     private PieChart pieChart;                      // 데일리 스케쥴 챠트 화면
     private View copiedView;                        // 드래그를 시작할 때 임시로 저장 해놓는 뷰
@@ -73,7 +74,8 @@ public class UIHelper {
         centerIcon = Util.getViewById(context,R.id.centerIcon);
         calendarLayout = Util.getViewById(context,R.id.calendarLayout);
         scheduleLayout = Util.getViewById(context,R.id.scheduleLayout);
-        backBtn = Util.getViewById(context,R.id.back_btn);
+        backBtn = (TextView) Util.getViewById(context,R.id.back_btn);
+        backBtn.setTypeface(dataHelper.getTypeface());
         cancelBtn = Util.getViewById(context,R.id.cancel_btn);
         pieChart = (PieChart) Util.getViewById(context,R.id.chart);
     }
@@ -144,7 +146,8 @@ public class UIHelper {
             iconView.setLayoutParams(iconParams);
             // 텍스트 뷰 설정
             TextView textView = new TextView(context);
-            textView.setText(textData);
+//            textView.setText(textData);
+            setTextWithFont(textView, textData);
             textView.setGravity(Gravity.CENTER);
             textView.setLayoutParams(textParams);
             // 태그첨부
@@ -193,7 +196,8 @@ public class UIHelper {
         iconView.setLayoutParams(iconParams);
         // 텍스트 뷰 설정
         TextView textView = new TextView(context);
-        textView.setText(textData);
+//        textView.setText(textData);
+        setTextWithFont(textView, textData);
         textView.setGravity(Gravity.CENTER);
         textView.setLayoutParams(textParams);
         // 태그첨부
@@ -316,7 +320,9 @@ public class UIHelper {
                 .append(yearMonthKey.substring(4,6))
                 .append(".").append(dateValueString).toString();
         TextView dailyScheduleDateText = (TextView) Util.getViewById(context, R.id.dailyScheduleDateText);
-        dailyScheduleDateText.setText(sb);
+//        dailyScheduleDateText.setText(sb);
+        setTextWithFont(dailyScheduleDateText, sb.toString());
+
     }
 
     public View getCopiedView() {
@@ -388,5 +394,16 @@ public class UIHelper {
         StringBuilder sb = new StringBuilder();
         sb.append(activityName).append("(").append(String.valueOf(memoContent)).append(")");
         (pieEntry).setLabel(sb.toString());
+    }
+
+    /**
+     * 폰트로 텍스트를 설정
+     * @param textView
+     * @param text
+     */
+    public void setTextWithFont(TextView textView, String text){
+        Typeface typeface = dataHelper.getTypeface();
+        textView.setTypeface(typeface);
+        textView.setText(text);
     }
 }
