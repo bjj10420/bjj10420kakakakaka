@@ -22,10 +22,8 @@ import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.TreeMap;
 
 /**
  * 모든 이벤트를 처리, 관리
@@ -197,7 +195,6 @@ public class EventHelper {
             addScheduleForTheSchedule(activityName);
             // 현재 보고 있는 스케쥴 챠트에서 추가 (추가전 엔트리 카운터 리턴)
             int entryCount = addScheduleToPieChart(activityName);
-            // 데이터
 
             // 자료구조에도 추가
             int newOrder = 0;
@@ -215,20 +212,25 @@ public class EventHelper {
             }
     }
 
-    private int addScheduleToPieChart(String s) {
-        PieDataSet pieDataSet = dataHelper.getDailyScheduleDataSet();
+    public void resetPieChartDataSet(PieDataSet pieDataSet, int fillValue) {
         List<PieEntry> pieEntryList = pieDataSet.getValues();
-
-        int entryCount = dataHelper.getDailyScheduleDataSet().getEntryCount();
-        int fillValue = 100 / (entryCount != -1 ? entryCount + 1 : 100);
-        pieDataSet.addEntry(new PieEntry(fillValue, s));
 
         Iterator it = pieEntryList.iterator();
         while(it.hasNext()) {
             PieEntry pieEntry = (PieEntry) it.next();
             pieEntry.setY(fillValue);
         }
+    }
 
+    private int addScheduleToPieChart(String s) {
+        PieDataSet pieDataSet = dataHelper.getDailyScheduleDataSet();
+
+        int entryCount = dataHelper.getDailyScheduleDataSet().getEntryCount();
+        int fillValue = 100 / (entryCount != -1 ? entryCount + 1 : 100);
+        pieDataSet.addEntry(new PieEntry(fillValue, s));
+
+        // 데이터 값 재정의
+        resetPieChartDataSet(pieDataSet, fillValue);
         return entryCount;
     }
 
