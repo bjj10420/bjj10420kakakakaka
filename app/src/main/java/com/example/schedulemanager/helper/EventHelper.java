@@ -23,6 +23,8 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.List;
 import java.util.TreeMap;
 
 /**
@@ -195,6 +197,8 @@ public class EventHelper {
             addScheduleForTheSchedule(activityName);
             // 현재 보고 있는 스케쥴 챠트에서 추가 (추가전 엔트리 카운터 리턴)
             int entryCount = addScheduleToPieChart(activityName);
+            // 데이터
+
             // 자료구조에도 추가
             int newOrder = 0;
             if(dataHelper.getDailyScheduleMap() != null)
@@ -212,9 +216,19 @@ public class EventHelper {
     }
 
     private int addScheduleToPieChart(String s) {
+        PieDataSet pieDataSet = dataHelper.getDailyScheduleDataSet();
+        List<PieEntry> pieEntryList = pieDataSet.getValues();
+
         int entryCount = dataHelper.getDailyScheduleDataSet().getEntryCount();
         int fillValue = 100 / (entryCount != -1 ? entryCount + 1 : 100);
-        dataHelper.getDailyScheduleDataSet().addEntry(new PieEntry(fillValue, s));
+        pieDataSet.addEntry(new PieEntry(fillValue, s));
+
+        Iterator it = pieEntryList.iterator();
+        while(it.hasNext()) {
+            PieEntry pieEntry = (PieEntry) it.next();
+            pieEntry.setY(fillValue);
+        }
+
         return entryCount;
     }
 
