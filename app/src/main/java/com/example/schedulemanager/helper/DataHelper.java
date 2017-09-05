@@ -13,6 +13,7 @@ import com.github.mikephil.charting.data.PieEntry;
 
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.TreeMap;
 
 /**
@@ -107,9 +108,11 @@ public class DataHelper {
      */
     public Schedule getScheduleFromDailyScheduleMapByMonth2(int index) {
         Schedule schedule = null;
-        for(int i = 0; i < dailyScheduleMap.size(); i++){
-            if(index == i)
-                schedule = dailyScheduleMap.get(i);
+        int count = 0;
+        for(Integer key : dailyScheduleMap.keySet()){
+            if(index == count)
+                schedule = dailyScheduleMap.get(key);
+            count++;
         }
         return schedule;
     }
