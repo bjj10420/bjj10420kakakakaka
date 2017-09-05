@@ -155,10 +155,13 @@ public class DataHelper {
     public HashMap<Integer, Schedule> makeDailyScheduleMap(String yearMonthKey, String dateValue) {
         HashMap<Integer, Schedule> dailySchedules = new HashMap<Integer, Schedule>();
         HashMap<Integer, Schedule> thisMonthSchedules = getScheduleMapByMonth().get(Integer.parseInt(yearMonthKey));
+
         for(Integer dateKey : thisMonthSchedules.keySet()) {
             Schedule schedule = thisMonthSchedules.get(dateKey);
 
-            if(String.valueOf(dateKey).length() == 6 && String.valueOf(dateKey).substring(0, 2).equals(dateValue)){dailySchedules.put(dateKey, schedule);
+            if(String.valueOf(dateKey).length() == 6 && String.valueOf(dateKey).substring(0, 2).equals(dateValue)
+             || String.valueOf(dateKey).length() == 6 && String.valueOf(dateKey).substring(0, 1).equals(dateValue)
+                    ){dailySchedules.put(dateKey, schedule);
                 Log.d("데일리스케쥴맵 생성 체크 dateKey ", String.valueOf(dateKey));
                 Log.d("데일리스케쥴맵 생성 체크 order ", String.valueOf(schedule.getOrder()));
                 Log.d("데일리스케쥴맵 생성 체크 activityName ", String.valueOf(schedule.getActivityName()));
