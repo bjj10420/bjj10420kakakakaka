@@ -270,6 +270,7 @@ public class UIHelper {
         dataHelper.setDailyScheduleDataSet(dailyScheduleDataSet);
 
         PieData data = new PieData(dailyScheduleDataSet);
+
         data.setValueTextSize(0f);
         data.setValueTextColor(Color.GRAY);
 
@@ -303,6 +304,7 @@ public class UIHelper {
         pieChart.setDrawSliceText(true);
         pieChart.getDescription().setEnabled(false);
         pieChart.setEntryLabelColor(Color.parseColor("#404040"));
+        pieChart.setEntryLabelTypeface(dataHelper.getTypeface());
         pieChart.setRotationEnabled(false);
         pieChart.invalidate(); // refresh
     }
