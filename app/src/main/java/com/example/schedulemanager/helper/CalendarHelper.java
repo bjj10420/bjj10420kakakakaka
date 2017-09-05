@@ -208,7 +208,7 @@ public class CalendarHelper {
         boolean isToday = !((TextView)((RelativeLayout) closestView).getChildAt(2)).getText().equals("");
         return isToday;
     }
-
+//
     /**
      * 메인 달력 갱신
      */
