@@ -58,18 +58,18 @@ public class DataHelper {
 
     /**
      * 스케쥴맵에 추가
-     * @param countForTheDate
+     * @param newOrderValue
      */
-    public void addToDailyScheduleMapByMonth(int countForTheDate, String activityName) {
+    public void addToDailyScheduleMapByMonth(int newOrderValue, String activityName) {
         HashMap<Integer, Schedule> scheduleMapForThisMonth = scheduleMapByMonth.get(Integer.parseInt(yearMonthKey));
         Schedule schedule = new Schedule();
         schedule.setDate(selectedDateData);
-        schedule.setOrder(countForTheDate);
+        schedule.setOrder(newOrderValue);
         schedule.setActivityName(activityName);
-        Log.d("스케쥴맵에 스케쥴추가", schedule.getOrder() + ", " + activityName + ", " + dateValue + ", countForTheDate = " + countForTheDate);
-        scheduleMapForThisMonth.put(Integer.parseInt(dateValue + "000" + countForTheDate), schedule);
+        Log.d("스케쥴맵에 스케쥴추가", schedule.getOrder() + ", " + activityName + ", " + dateValue + ", newOrderValue = " + newOrderValue);
+        scheduleMapForThisMonth.put(Integer.parseInt(dateValue + "000" + newOrderValue), schedule);
         // 데일리 맵에도 추가
-        dailyScheduleMap.put(Integer.parseInt(dateValue + "000" + countForTheDate), schedule);
+        dailyScheduleMap.put(Integer.parseInt(dateValue + "000" + newOrderValue), schedule);
     }
 
     /**
