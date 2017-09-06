@@ -165,10 +165,11 @@ public class EventHelper {
         View centerIcon = uiHelper.getCenterIcon();
         View closestView = uiHelper.getClosestView();
         View copiedView = uiHelper.getCopiedView();
+        boolean isCanceled = false;
 
         actionWhenCenterIconActivated(centerIcon, copiedView, view);
-        actionAtCancelBtnWhenCalendarActivated(copiedView, closestView);
-        actionAtCalendarCellWhenCalendarActivated(centerIcon, closestView, copiedView, view);
+        isCanceled = actionAtCancelBtnWhenCalendarActivated(copiedView, closestView);
+        actionAtCalendarCellWhenCalendarActivated(centerIcon, closestView, copiedView, view, isCanceled);
         actionAtDailyScheduleLayout(centerIcon, closestView, copiedView, view);
         resetAfterMouseUp();
     }
@@ -234,10 +235,10 @@ public class EventHelper {
     }
 
     // 메인 달력 활성화 중 캘린더 칸 위에서 마우스 업
-    private void actionAtCalendarCellWhenCalendarActivated(View centerIcon, View closestView, View copiedView, View view) {
+    private void actionAtCalendarCellWhenCalendarActivated(View centerIcon, View closestView, View copiedView, View view, boolean isCanceled) {
         if(centerIcon.getVisibility() == View.GONE &&
                 uiHelper.getScheduleLayout().getVisibility() == View.GONE &&
-                closestView != null) {
+                closestView != null && !isCanceled) {
             Log.d("메인 캘린더 셀 액션", "메인 캘린더 셀 액션");
             closestView.setBackgroundColor(Color.parseColor("#ffffff"));
             String dateValue = String.valueOf(closestView.getTag());
@@ -250,12 +251,18 @@ public class EventHelper {
     }
 
     // 메인 달력 활성화 중 취소 버튼 위에서 마우스 업
-    private void actionAtCancelBtnWhenCalendarActivated(View copiedView, View closestView) {
+    private boolean actionAtCancelBtnWhenCalendarActivated(View copiedView, View closestView) {
+        boolean isCanceled = false;
+
         if(Util.checkCollisionForChildView(uiHelper.getCancelBtn(), copiedView)){
-            closestView.setBackgroundColor(Color.parseColor("#ffffff"));
-            closestView = null;
+            isCanceled = true;
+            if(calendarHelper.isToday(closestView))
+                closestView.setBackgroundResource(R.drawable.calendar_item_selected_bg);
+            else
+                closestView.setBackgroundColor(Color.parseColor("#ffffff"));
         }
 
+        return isCanceled;
     }
 
     // 중앙 아이콘 활성화인 경우
