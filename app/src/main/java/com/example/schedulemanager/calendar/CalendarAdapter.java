@@ -333,7 +333,7 @@ public class CalendarAdapter extends BaseAdapter
 				String textColor = "#" + opacity + color;
 				holder.day.setTextColor(Color.parseColor(textColor));
 				holder.day.setText(String.valueOf(item));
-
+//
 				// 스케쥴이 들어있는 날짜일경우
 				// 키값이 "000" + 순서값 0
 				if(scheduleMapForCurrentPage.get(Integer.parseInt(item + "0000")) != null) {
