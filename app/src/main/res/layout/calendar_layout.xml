@@ -39,7 +39,7 @@
                     android:layout_width="56dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="left"
-                    android:background="@drawable/rail_selector_timetable_param_setter_cal_prev_btn"
+                    android:background="@drawable/selector_timetable_param_setter_cal_prev_btn"
                     android:clickable="true" />
 
                 <TextView
@@ -57,7 +57,7 @@
                     android:layout_width="56dp"
                     android:layout_height="match_parent"
                     android:layout_gravity="right"
-                    android:background="@drawable/rail_selector_timetable_param_setter_cal_next_btn"
+                    android:background="@drawable/selector_timetable_param_setter_cal_next_btn"
                     android:clickable="true" />
             </LinearLayout>
 
@@ -119,7 +119,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/rail_selector_train_type_ok_btn"
+                android:background="@drawable/selector_ok_btn"
                 android:gravity="center"
                 android:text="취소"
                 android:textColor="#ffffff"
@@ -137,7 +137,7 @@
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
                 android:layout_weight="1"
-                android:background="@drawable/rail_selector_train_type_ok_btn3"
+                android:background="@drawable/selector_ok_btn3"
                 android:gravity="center"
                 android:text="뒤로가기"
                 android:textColor="#FFC000"

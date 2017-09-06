@@ -11,7 +11,7 @@
         android:layout_height="match_parent"
         android:horizontalSpacing="0dp"
 
-        android:listSelector="@drawable/rail_selector_calendar_item"
+        android:listSelector="@drawable/selector_calendar_item"
         android:numColumns="7" />
 
 </LinearLayout>

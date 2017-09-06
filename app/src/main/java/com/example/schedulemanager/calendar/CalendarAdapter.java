@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.util.EventLog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -15,13 +14,11 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 
-import com.example.schedulemanager.activity.MainActivity;
 import com.example.schedulemanager.R;
 import com.example.schedulemanager.helper.DataHelper;
 import com.example.schedulemanager.helper.EventHelper;
 import com.example.schedulemanager.vo.Schedule;
 
-import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 
@@ -251,7 +248,7 @@ public class CalendarAdapter extends BaseAdapter
 						extraText ="지금";
 
 					}
-					convertView.setBackgroundResource(R.drawable.rail_calendar_item_selected_bg);
+					convertView.setBackgroundResource(R.drawable.calendar_item_selected_bg);
 					//TODO 시간표현은 필요없고 오늘날짜값을 저장
 					Log.d("오늘 날짜를 저장하였습니다.", String.valueOf(item));
 					DataHelper.dataHelper.setDateOfToday(String.valueOf(item));
@@ -262,7 +259,7 @@ public class CalendarAdapter extends BaseAdapter
 
 					if(position == currentItemIdx)
 					{	// 선택되지 않았지만 오늘 날짜라면 배경을 바꿔준다.
-						convertView.setBackgroundResource(R.drawable.rail_calendar_item_nonselected_now);
+						convertView.setBackgroundResource(R.drawable.calendar_item_nonselected_now);
 						convertView.setOnTouchListener(null);
 					}
 					else
