@@ -47,12 +47,13 @@ public class Util {
      */
     public static boolean checkCollisionForChildView(View v1, View v2) {
         int[] numberArray = new int[2];
-        numberArray[0] = v1.getLeft();
-        numberArray[1] = v1.getTop();
 
         v1.getLocationInWindow(numberArray);
+
         Rect R1=new Rect(numberArray[0], numberArray[1], numberArray[0] + v1.getWidth(), numberArray[1] + v1.getHeight());
         Rect R2=new Rect((int)v2.getTranslationX(), (int)v2.getTranslationY(), (int)v2.getTranslationX() + v2.getWidth(), (int)v2.getTranslationY() + v2.getHeight());
+        Log.d("충돌체크 함수 rect값 검사 R1 ", numberArray[0] +  " , " + numberArray[1]);
+        Log.d("충돌체크 함수 rect값 검사 R2 ", (int)v2.getTranslationX() +  " , " + (int)v2.getTranslationY());
 
         return R1.intersect(R2);
     }

@@ -44,6 +44,7 @@ public class CalendarHelper {
         calendarPagerAdapter.initCalendar();
         calendarPagerAdapter.notifyDataSetChanged();
         calendarPager = (ViewPager) Util.getViewById(context, R.id.timetable_param_setter_calendar_viewpager);
+
         // 스케쥴 맵 전달
         calendarPagerAdapter.setScheduleMapByMonth(dataHelper.getScheduleMapByMonth());
         calendarPager.setAdapter(calendarPagerAdapter);
@@ -103,7 +104,7 @@ public class CalendarHelper {
                 dataHelper.getCurrentCalendarViewMap().clear();
                 setCalendarTitleDate(calendarDateText, calendarAdapter, position);
                 reloadCalendarView();
-//                refreshCalendar();
+                refreshCalendar();
             }
 
             @Override
@@ -143,7 +144,9 @@ public class CalendarHelper {
 
         for (int dateKey : currentCalendarViewMap.keySet()){
             View calendarCellView = currentCalendarViewMap.get(dateKey);
-//            Log.d("체크 캘린더 셀 충돌 캘린더셀뷰", String.valueOf(calendarCellView));
+            if(calendarCellView.getTag() != null)
+            Log.d("체크 캘린더 셀 충돌 캘린더셀뷰", String.valueOf(calendarCellView.getTag()) + "일");
+//            Log.d("체크 캘린더 셀 충돌 카피드뷰", String.valueOf(copiedView));
 
             if(Util.checkCollisionForChildView(calendarCellView, copiedView)) {
                 isCellCollided = true;
