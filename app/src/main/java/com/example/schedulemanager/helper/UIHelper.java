@@ -408,4 +408,10 @@ public class UIHelper {
         textView.setTypeface(typeface);
         textView.setText(text);
     }
+
+    public void setCalendarLayoutVisible(View v) {
+        calendarLayout.setVisibility(View.VISIBLE);
+        // 중앙 아이콘 비표시
+        v.setVisibility(View.GONE);
+    }
 }

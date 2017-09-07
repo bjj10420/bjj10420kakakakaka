@@ -1,7 +1,9 @@
 package com.example.schedulemanager.helper;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -12,6 +14,7 @@ import android.widget.TextView;
 
 import com.example.schedulemanager.R;
 import com.example.schedulemanager.activity.MainActivity;
+import com.example.schedulemanager.vo.CalendarCell;
 import com.example.schedulemanager.vo.Schedule;
 import com.example.schedulemanager.Util;
 import com.example.schedulemanager.calendar.CalendarPagerAdapter;
@@ -33,7 +36,9 @@ public class CalendarHelper {
     private ViewPager calendarPager;                // 메인 캘린더 뷰 페이져 객체
     private DataHelper dataHelper;
     private UIHelper uiHelepr;
-    EventHelper eventHelper;
+    private EventHelper eventHelper;
+    private HashMap<Rect,View> rectMap;             // 캘린더의 한칸에 해당하는 사각형 범위 저장
+    private CalendarCell firstCalendarCell;         // 캘린더의 첫 한칸 객체
 
     public void initCalendar(Context context, Typeface typeface, UIHelper uiHelper, DataHelper dataHelper) {
         this.context = context;
@@ -44,6 +49,15 @@ public class CalendarHelper {
         passScheduleMapToCalendarAdapter();
         setCalendarText(typeface);
         setPagingEvent();
+        makeCalendarCellRectMap();
+    }
+
+    public void makeCalendarCellRectMap() {
+        rectMap = new HashMap<Rect, View>();
+
+        Log.d("dastaHelper.getCurrentCalendarViewMap()", String.valueOf(dataHelper.getCurrentCalendarViewMap()));
+        View firstCellView = dataHelper.getCurrentCalendarViewMap().get(1);
+//                setFirstCalendarCell(firstCellView);
     }
 
     private void setCalendarText(Typeface typeface) {
@@ -126,6 +140,7 @@ public class CalendarHelper {
     public CalendarPagerAdapter getCalendarPagerAdapter() {
         return calendarPagerAdapter;
     }
+
     /**
      * 캘린더 한칸을 클릭시 하루 일정화면으로 전환 (스케쥴이 한개이상 들어가있을경우)
      * @param dailySchedule
@@ -304,5 +319,23 @@ public class CalendarHelper {
         View calendarCellView = dataHelper.getCurrentCalendarViewMap().get(Integer.parseInt(dataHelper.getDateValue()));
         View checkMarkView = calendarCellView.findViewById(R.id.check_mark);
         checkMarkView.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+    }
+
+    public void setFirstCalendarCell(CalendarCell firstCalendarCell) {
+        this.firstCalendarCell = firstCalendarCell;
+    }
+
+    private void setFirstCalendarCell(View cellView) {
+        CalendarCell calendarCell = new CalendarCell();
+        calendarCell.setLeft(cellView.getLeft());
+        calendarCell.setTop(cellView.getTop());
+        calendarCell.setWidth(cellView.getWidth());
+        calendarCell.setHeight(cellView.getHeight());
+        Log.d("첫 캘린더 셀 체크", cellView.getLeft() + ", " +
+                cellView.getTop() + ", " +
+                cellView.getWidth() + ", " +
+                cellView.getHeight() + ", "
+        );
+        EventHelper.eventHelper.getCalendarHelper().setFirstCalendarCell(calendarCell);
     }
 }

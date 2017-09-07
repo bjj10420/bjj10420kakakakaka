@@ -277,9 +277,8 @@ public class EventHelper {
         uiHelper.getCenterIcon().setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                uiHelper.getCalendarLayout().setVisibility(View.VISIBLE);
-                // 중앙 아이콘 비표시
-                v.setVisibility(View.GONE);
+                uiHelper.setCalendarLayoutVisible(v);
+//                Log.d("dastaHelper.getCurrentCalendarViewMap()", String.valueOf(dataHelper.getCurrentCalendarViewMap()));
             }
         });
     }

@@ -47,8 +47,6 @@ public class Util {
      */
     public static boolean checkCollisionForChildView(View v1, View v2) {
         int[] numberArray = new int[2];
-        numberArray[0] = v1.getLeft();
-        numberArray[1] = v1.getTop();
 
         v1.getLocationInWindow(numberArray);
         Rect R1=new Rect(numberArray[0], numberArray[1], numberArray[0] + v1.getWidth(), numberArray[1] + v1.getHeight());

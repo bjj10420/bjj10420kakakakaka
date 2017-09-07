@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.example.schedulemanager.R;
 import com.example.schedulemanager.helper.DataHelper;
 import com.example.schedulemanager.helper.EventHelper;
+import com.example.schedulemanager.vo.CalendarCell;
 import com.example.schedulemanager.vo.Schedule;
 
 import java.util.HashMap;
@@ -183,6 +184,7 @@ public class CalendarAdapter extends BaseAdapter
 				holder.extra.setTypeface(mTypeface, Typeface.BOLD);
 
 				convertView.setTag(holder);
+
 			}
 			else
 			{
@@ -202,7 +204,7 @@ public class CalendarAdapter extends BaseAdapter
 			if(item != null)
 			{
 				// 클릭 이벤트 설정
-						convertView.setOnClickListener(new View.OnClickListener() {
+				convertView.setOnClickListener(new View.OnClickListener() {
 							@Override
 							public void onClick(View v) {
 								//TODO 리팩토링때 이벤트헬퍼로 가져가야 할 것
@@ -210,9 +212,11 @@ public class CalendarAdapter extends BaseAdapter
 							}
 				});
 				// 메인 저장소에 뷰 저장( 전달이나 다음달 제외 )
-				if(!(position < firstItemIdx || position > lastItemIdx))
-				DataHelper.dataHelper.getCurrentCalendarViewMap().put(item, convertView);
-
+				if(!(position < firstItemIdx || position > lastItemIdx)) {
+					DataHelper.dataHelper.getCurrentCalendarViewMap().put(item, convertView);
+					Log.d("캘린더어댑터 맵에 뷰 추가", "키 " + item + "으로 뷰를 추가하였습니다");
+					
+				}
 				if(position == selectedItemIdx)
 				{	// 선택된 날짜
 					holder.day.setVisibility(View.VISIBLE);
