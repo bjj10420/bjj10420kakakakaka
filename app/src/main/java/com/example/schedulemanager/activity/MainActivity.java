@@ -17,6 +17,7 @@ import android.view.Gravity;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
 import android.widget.GridView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -77,4 +78,5 @@ public class MainActivity extends AppCompatActivity {
     public void onBackPressed() {
         EventHelper.eventHelper.onBackPresssed();
     }
+
 }

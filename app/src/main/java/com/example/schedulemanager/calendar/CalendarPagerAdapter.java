@@ -9,6 +9,7 @@ import android.util.Log;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
@@ -16,6 +17,7 @@ import android.widget.GridView;
 import com.example.schedulemanager.activity.MainActivity;
 import com.example.schedulemanager.R;
 import com.example.schedulemanager.helper.DataHelper;
+import com.example.schedulemanager.helper.EventHelper;
 import com.example.schedulemanager.vo.Schedule;
 
 import java.text.SimpleDateFormat;
@@ -185,7 +187,22 @@ public class CalendarPagerAdapter extends PagerAdapter
 				holder = new ViewHolder();
 				
 				holder.calendarGridView = (GridView) convertView.findViewById(R.id.timetable_param_setter_calendar_gridview);
-				
+
+				// 어댑터가 적용을 끝낸후의 리스너
+				holder.calendarGridView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+					@Override
+					public void onGlobalLayout() {
+						View v1 = DataHelper.dataHelper.getCurrentCalendarViewMap().get(3);
+						Log.d("dastaHelper.getCurrentCalendarViewMap() #1", String.valueOf(DataHelper.dataHelper.getCurrentCalendarViewMap().get(1).getTop()));
+						int[] numberArray = new int[2];
+
+						v1.getLocationInWindow(numberArray);
+						Log.d("dastaHelper.getCurrentCalendarViewMap() #2-1", String.valueOf(numberArray[0]));
+						Log.d("dastaHelper.getCurrentCalendarViewMap() #2-2", String.valueOf(numberArray[1]));
+
+
+					}
+				});
 				CalendarAdapter adapter = new CalendarAdapter(mContext, mTypeface);
 				adapters[position] = adapter;
 				
@@ -199,7 +216,8 @@ public class CalendarPagerAdapter extends PagerAdapter
 				}
 				
 				holder.calendarGridView.setAdapter(adapters[position]);
-				
+
+
 				convertView.setTag(holder);
 				views.put(position, convertView);
 			}
@@ -210,6 +228,7 @@ public class CalendarPagerAdapter extends PagerAdapter
 			setCalendar(position);
 			// 페이저에 뷰를 붙인다.
 			((ViewPager) pager).addView(convertView, 0);
+
 		}
 		catch (Exception e)
 		{
