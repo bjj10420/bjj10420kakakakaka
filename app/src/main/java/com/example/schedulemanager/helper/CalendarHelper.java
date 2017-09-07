@@ -39,21 +39,30 @@ public class CalendarHelper {
         this.context = context;
         this.uiHelepr = uiHelper;
         this.dataHelper = dataHelper;
-        calendarPagerAdapter = new CalendarPagerAdapter(context, typeface);
-        // 달력 구성 어댑터 생성 및 셋팅
-        calendarPagerAdapter.initCalendar();
-        calendarPagerAdapter.notifyDataSetChanged();
-        calendarPager = (ViewPager) Util.getViewById(context, R.id.timetable_param_setter_calendar_viewpager);
-        // 스케쥴 맵 전달
-        calendarPagerAdapter.setScheduleMapByMonth(dataHelper.getScheduleMapByMonth());
-        calendarPager.setAdapter(calendarPagerAdapter);
-        // 달력에 연도, 월 표시
+
+        composeCalendar(typeface);
+        passScheduleMapToCalendarAdapter();
+        setCalendarText(typeface);
+        setPagingEvent();
+    }
+
+    private void setCalendarText(Typeface typeface) {
         calendarPager.setCurrentItem(12);
         final TextView calendarDateText =  (TextView) Util.getViewById(context, R.id.timetable_param_setter_calendar_date);
         calendarDateText.setTypeface(typeface);
         setCalendarTitleDate(calendarDateText, calendarPagerAdapter, 12);
-        // 이벤트 리스너 추가
-        setPagingEvent(calendarDateText, calendarPagerAdapter);
+    }
+
+    private void passScheduleMapToCalendarAdapter() {
+        calendarPagerAdapter.setScheduleMapByMonth(dataHelper.getScheduleMapByMonth());
+        calendarPager.setAdapter(calendarPagerAdapter);
+    }
+
+    private void composeCalendar(Typeface typeface) {
+        calendarPagerAdapter = new CalendarPagerAdapter(context, typeface);
+        calendarPagerAdapter.initCalendar();
+        calendarPagerAdapter.notifyDataSetChanged();
+        calendarPager = (ViewPager) Util.getViewById(context, R.id.timetable_param_setter_calendar_viewpager);
     }
 
     /**
@@ -92,7 +101,9 @@ public class CalendarHelper {
 
     }
 
-    private void setPagingEvent(final TextView calendarDateText, final CalendarPagerAdapter calendarAdapter) {
+    private void setPagingEvent() {
+        final TextView calendarDateText =  (TextView) Util.getViewById(context, R.id.timetable_param_setter_calendar_date);
+
         calendarPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -101,7 +112,7 @@ public class CalendarHelper {
             @Override
             public void onPageSelected(int position) {
                 dataHelper.getCurrentCalendarViewMap().clear();
-                setCalendarTitleDate(calendarDateText, calendarAdapter, position);
+                setCalendarTitleDate(calendarDateText, getCalendarPagerAdapter(), position);
                 reloadCalendarView();
 //                refreshCalendar();
             }

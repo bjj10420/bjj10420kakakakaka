@@ -67,6 +67,8 @@ public class MainActivity extends AppCompatActivity {
         CalendarHelper calendarHelper = new CalendarHelper();
         calendarHelper.initCalendar(this, dataHelper.getTypeface(), uiHelper, dataHelper);
 
+
+
         EventHelper eventHelper = new EventHelper();
         eventHelper.initEvent(this, dataHelper, uiHelper, calendarHelper);
         calendarHelper.setEventHelper(eventHelper);
