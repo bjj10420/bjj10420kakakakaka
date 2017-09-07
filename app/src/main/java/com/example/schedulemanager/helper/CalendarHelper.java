@@ -85,6 +85,11 @@ public class CalendarHelper {
             dateCount++;
             if(dateCount == 13) calendarView.setBackgroundColor(Color.parseColor("#b2b2b2"));
         }
+
+        for(Integer dateKey : dataHelper.getCurrentCalendarViewMap().keySet()) {
+            Log.d("커런트 캘린더 뷰맵 체크", String.valueOf(dateKey));
+        }
+
     }
 
     private void setPagingEvent(final TextView calendarDateText, final CalendarPagerAdapter calendarAdapter) {
@@ -138,6 +143,8 @@ public class CalendarHelper {
 
         for (int dateKey : currentCalendarViewMap.keySet()){
             View calendarCellView = currentCalendarViewMap.get(dateKey);
+//            Log.d("체크 캘린더 셀 충돌 캘린더셀뷰", String.valueOf(calendarCellView));
+
             if(Util.checkCollisionForChildView(calendarCellView, copiedView)) {
                 isCellCollided = true;
                 // 후보군 저장소에 저장
@@ -146,6 +153,8 @@ public class CalendarHelper {
                         calendarCellView);
             }
         }
+
+        Log.d("체크 캘린더 셀 충돌", String.valueOf(isCellCollided));
         return isCellCollided;
     }
 
@@ -211,8 +220,8 @@ public class CalendarHelper {
     public boolean isToday(View closestView) {
         // extraView가 활성화인지( 오늘이라 선택되어있는지 )
 //        boolean isToday = !((TextView)((RelativeLayout) closestView).getChildAt(2)).getText().equals("");
-        Log.d("데이터 헬퍼 체크", String.valueOf(DataHelper.dataHelper));
-        Log.d("데이터 헬퍼 체크", DataHelper.dataHelper.getDateOfToday());
+//        Log.d("데이터 헬퍼 체크", String.valueOf(DataHelper.dataHelper));
+//        Log.d("데이터 헬퍼 체크", DataHelper.dataHelper.getDateOfToday());
 
         boolean isToday = DataHelper.dataHelper.getDateOfToday().equals(String.valueOf(closestView.getTag()));
 
