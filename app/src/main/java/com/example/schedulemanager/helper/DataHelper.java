@@ -337,13 +337,14 @@ public class DataHelper {
      */
     public void makeRectZoneWithFirstCell() {
 
-        View firstCellView = getFirstCellView();
-        CalendarCellInfo calendarCellInfo = makeCalendarCellInfo(firstCellView);
+        if(rectZoneWithView == null) {
+            rectZoneWithView = new HashMap<Rect, View>();
 
-        rectZoneWithView = new HashMap<Rect, View>();
-        makeRectToPut(calendarCellInfo);
-
+            View firstCellView = getFirstCellView();
+            CalendarCellInfo calendarCellInfo = makeCalendarCellInfo(firstCellView);
+            makeRectToPut(calendarCellInfo);
         }
+    }
 
     private void makeRectToPut(CalendarCellInfo calendarCellInfo) {
         for(int i = 0; i < 31; i++) {

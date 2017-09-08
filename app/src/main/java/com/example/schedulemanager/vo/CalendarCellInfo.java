@@ -6,7 +6,6 @@ package com.example.schedulemanager.vo;
 public class CalendarCellInfo {
     int originalLeft;
     int originalTop;
-
     int left;
     int top;
     int width;
