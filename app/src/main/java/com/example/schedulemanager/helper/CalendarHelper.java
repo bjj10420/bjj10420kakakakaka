@@ -55,6 +55,7 @@ public class CalendarHelper {
         setCalendarTitleDate(calendarDateText, calendarPagerAdapter, 12);
         // 이벤트 리스너 추가
         setPagingEvent(calendarDateText, calendarPagerAdapter);
+
     }
 
     /**
@@ -104,7 +105,8 @@ public class CalendarHelper {
                 dataHelper.getCurrentCalendarViewMap().clear();
                 setCalendarTitleDate(calendarDateText, calendarAdapter, position);
                 reloadCalendarView();
-                refreshCalendar();
+
+//                refreshCalendar();
             }
 
             @Override
