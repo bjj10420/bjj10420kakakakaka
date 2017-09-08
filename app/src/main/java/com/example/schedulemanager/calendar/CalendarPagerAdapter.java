@@ -2,6 +2,7 @@ package com.example.schedulemanager.calendar;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.graphics.Color;
 import android.graphics.Typeface;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -192,14 +193,14 @@ public class CalendarPagerAdapter extends PagerAdapter
 				holder.calendarGridView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 					@Override
 					public void onGlobalLayout() {
-						View v1 = DataHelper.dataHelper.getCurrentCalendarViewMap().get(3);
+						View v1 = EventHelper.eventHelper.getUiHelper().getFirstCalendarCell();
 						Log.d("dastaHelper.getCurrentCalendarViewMap() #1", String.valueOf(DataHelper.dataHelper.getCurrentCalendarViewMap().get(1).getTop()));
 						int[] numberArray = new int[2];
 
 						v1.getLocationInWindow(numberArray);
 						Log.d("dastaHelper.getCurrentCalendarViewMap() #2-1", String.valueOf(numberArray[0]));
 						Log.d("dastaHelper.getCurrentCalendarViewMap() #2-2", String.valueOf(numberArray[1]));
-
+						v1.setBackgroundColor(Color.parseColor("#c8c8c8"));
 
 					}
 				});

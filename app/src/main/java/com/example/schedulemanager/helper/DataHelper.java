@@ -37,6 +37,7 @@ public class DataHelper {
     private String dateValue;                       // 선택된 일
     private String dateOfToday;                     // 오늘 일자
 
+
     public void initData(Context context) {
         dataHelper = this;
         dbHelper = new DBHelper(context);

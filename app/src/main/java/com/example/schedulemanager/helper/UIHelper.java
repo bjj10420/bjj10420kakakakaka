@@ -48,6 +48,7 @@ public class UIHelper {
     private View cancelBtn;                         // 하단 X 버튼
     private PieChart pieChart;                      // 데일리 스케쥴 챠트 화면
     private View copiedView;                        // 드래그를 시작할 때 임시로 저장 해놓는 뷰
+    private View firstCalendarCell;                 // 캘린더가 랜더링된 후의 첫 셀뷰
 
     public void initUI(Context context, DataHelper dataHelper) {
         this.context = context;
@@ -413,5 +414,13 @@ public class UIHelper {
         calendarLayout.setVisibility(View.VISIBLE);
         // 중앙 아이콘 비표시
         v.setVisibility(View.GONE);
+    }
+
+    public View getFirstCalendarCell() {
+        return firstCalendarCell;
+    }
+
+    public void setFirstCalendarCell(View firstCalendarCell) {
+        this.firstCalendarCell = firstCalendarCell;
     }
 }

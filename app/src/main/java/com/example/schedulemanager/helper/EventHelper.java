@@ -535,7 +535,7 @@ public class EventHelper {
         long resultNum = DBHelper.dbHelper.insertSchedule(newSchedule);
     }
 
-    public DataHelper getDataHelper() {
-        return dataHelper;
+    public UIHelper getUiHelper() {
+        return uiHelper;
     }
 }

@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.util.EventLog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -175,16 +176,12 @@ public class CalendarAdapter extends BaseAdapter
 			{
 				holder = new ViewHolder();
 				convertView = mInlfater.inflate(R.layout.rail_adapter_calendar_item_view, null);
-
 				holder.day = (TextView) convertView.findViewById(R.id.calendar_item_day);
 				holder.extra = (TextView) convertView.findViewById(R.id.calendar_item_extra);
 				holder.checkMark = convertView.findViewById(R.id.check_mark);
-
 				holder.day.setTypeface(mTypeface, Typeface.BOLD);
 				holder.extra.setTypeface(mTypeface, Typeface.BOLD);
-
 				convertView.setTag(holder);
-
 			}
 			else
 			{
@@ -200,6 +197,11 @@ public class CalendarAdapter extends BaseAdapter
 
 			// 태그 첨부
 			convertView.setTag(String.valueOf(item));
+
+			// 첫번째 뷰는 rect존 생성을 위해 저장
+			if(position == 0)
+				EventHelper.eventHelper.getUiHelper().setFirstCalendarCell(convertView);
+
 
 			if(item != null)
 			{
