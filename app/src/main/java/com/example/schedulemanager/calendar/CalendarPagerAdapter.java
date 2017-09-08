@@ -15,7 +15,6 @@ import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.GridView;
 
-import com.example.schedulemanager.activity.MainActivity;
 import com.example.schedulemanager.R;
 import com.example.schedulemanager.helper.DataHelper;
 import com.example.schedulemanager.helper.EventHelper;
@@ -193,15 +192,8 @@ public class CalendarPagerAdapter extends PagerAdapter
 				holder.calendarGridView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 					@Override
 					public void onGlobalLayout() {
-						View v1 = EventHelper.eventHelper.getUiHelper().getFirstCalendarCell();
-						Log.d("dastaHelper.getCurrentCalendarViewMap() #1", String.valueOf(DataHelper.dataHelper.getCurrentCalendarViewMap().get(1).getTop()));
-						int[] numberArray = new int[2];
 
-						v1.getLocationInWindow(numberArray);
-						Log.d("dastaHelper.getCurrentCalendarViewMap() #2-1", String.valueOf(numberArray[0]));
-						Log.d("dastaHelper.getCurrentCalendarViewMap() #2-2", String.valueOf(numberArray[1]));
-						v1.setBackgroundColor(Color.parseColor("#c8c8c8"));
-
+						DataHelper.dataHelper.makeRectZoneWithFirstCell();
 					}
 				});
 				CalendarAdapter adapter = new CalendarAdapter(mContext, mTypeface);

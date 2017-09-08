@@ -1,19 +1,19 @@
 package com.example.schedulemanager.helper;
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.util.Log;
 import android.view.View;
 
-import com.example.schedulemanager.activity.MainActivity;
 import com.example.schedulemanager.calendar.CalendarPagerAdapter;
+import com.example.schedulemanager.vo.CalendarCellInfo;
 import com.example.schedulemanager.vo.Schedule;
 import com.github.mikephil.charting.data.PieDataSet;
-import com.github.mikephil.charting.data.PieEntry;
 
 import java.util.Calendar;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.TreeMap;
 
 /**
@@ -36,6 +36,7 @@ public class DataHelper {
     private TreeMap<Integer, Schedule> dailyScheduleMap; // 선택된 일자의 하루 스케쥴 맵
     private String dateValue;                       // 선택된 일
     private String dateOfToday;                     // 오늘 일자
+    private HashMap<Rect, View> rectZoneWithView;   // 이벤트 구역을 나누는 rect존과 매칭하는 뷰를 담는 저장소
 
 
     public void initData(Context context) {
@@ -329,5 +330,69 @@ public class DataHelper {
 
     public String getDateOfToday() {
         return dateOfToday;
+    }
+
+    /**
+     * 이벤트 범위를 지정해주는 렉트존을 생성
+     */
+    public void makeRectZoneWithFirstCell() {
+
+        View firstCellView = getFirstCellView();
+        CalendarCellInfo calendarCellInfo = makeCalendarCellInfo(firstCellView);
+
+        rectZoneWithView = new HashMap<Rect, View>();
+        makeRectToPut(calendarCellInfo);
+
+        }
+
+    private void makeRectToPut(CalendarCellInfo calendarCellInfo) {
+        for(int i = 0; i < 31; i++) {
+
+            if(i != 0 && (i % 7) == 0 ) {
+                calendarCellInfo.setLeft(calendarCellInfo.getOriginalLeft());
+                calendarCellInfo.updateTop(i);
+            }
+            else
+                calendarCellInfo.updateLeft(i);
+
+
+            makeRectAndPut(calendarCellInfo);
+        }
+    }
+
+    private void makeRectAndPut(CalendarCellInfo calendarCellInfo) {
+        Rect rect = new Rect(calendarCellInfo.getLeft(), calendarCellInfo.getTop(),
+                calendarCellInfo.getLeft() + calendarCellInfo.getWidth(),
+                calendarCellInfo.getTop() + calendarCellInfo.getHeight());
+        Log.d("렉트존 생성 체크", "left = " + calendarCellInfo.getLeft() + " , top = " + calendarCellInfo.getTop());
+        rectZoneWithView.put(rect, null);
+    }
+
+    private CalendarCellInfo makeCalendarCellInfo(View firstCellView) {
+        CalendarCellInfo calendarCellInfo = new CalendarCellInfo();
+        int[] viewWindowInfos = getViewWindowInfo(firstCellView);
+        calendarCellInfo.setWidth(firstCellView.getWidth());
+        calendarCellInfo.setHeight(firstCellView.getHeight());
+        calendarCellInfo.setLeft(viewWindowInfos[0]);
+        calendarCellInfo.setOriginalLeft(viewWindowInfos[0]);
+        calendarCellInfo.setTop(viewWindowInfos[1]);
+        calendarCellInfo.setOriginalTop(viewWindowInfos[1]);
+
+        return calendarCellInfo;
+    }
+
+    private int[] getViewWindowInfo(View firstCellView) {
+        int[] numberArray = new int[2];
+        firstCellView.getLocationInWindow(numberArray);
+        Log.d("dastaHelper.getCurrentCalendarViewMap() #2-1", String.valueOf(numberArray[0]));
+        Log.d("dastaHelper.getCurrentCalendarViewMap() #2-2", String.valueOf(numberArray[1]));
+        firstCellView.setBackgroundColor(Color.parseColor("#c8c8c8"));
+
+        return numberArray;
+    }
+
+    private View getFirstCellView() {
+        View firstCell = EventHelper.eventHelper.getUiHelper().getFirstCalendarCell();
+        return firstCell;
     }
 }

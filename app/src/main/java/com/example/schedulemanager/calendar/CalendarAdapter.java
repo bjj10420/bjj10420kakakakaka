@@ -4,7 +4,6 @@ import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.util.EventLog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -18,7 +17,6 @@ import android.widget.TextView;
 import com.example.schedulemanager.R;
 import com.example.schedulemanager.helper.DataHelper;
 import com.example.schedulemanager.helper.EventHelper;
-import com.example.schedulemanager.vo.CalendarCell;
 import com.example.schedulemanager.vo.Schedule;
 
 import java.util.HashMap;
