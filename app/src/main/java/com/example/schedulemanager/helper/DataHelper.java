@@ -397,7 +397,7 @@ public class DataHelper {
         View firstCell = EventHelper.eventHelper.getUiHelper().getFirstCalendarCell();
         return firstCell;
     }
-
+//
     public void matchRectZoneWithCurrentPageViewMap(int currentPageStartIndex) {
         int count = 0;
         int countForKeyValue = 0;
@@ -408,7 +408,7 @@ public class DataHelper {
             entry = (HashMap.Entry<Rect, View>) it.next();
             if(entry != null && count >= currentPageStartIndex){
                 entry.setValue(getMapValueByIndex(countForKeyValue));
-                Log.d("matchRectZoneWithCurrentPageViewMap 체크", String.valueOf(entry));
+//                Log.d("matchRectZoneWithCurrentPageViewMap 체크", String.valueOf(entry));
                 countForKeyValue++;
             }
             count++;
