@@ -299,4 +299,8 @@ public class CalendarHelper {
         View checkMarkView = calendarCellView.findViewById(R.id.check_mark);
         checkMarkView.setVisibility(isVisible ? View.VISIBLE : View.GONE);
     }
+
+    public ViewPager getCalendarPager() {
+        return calendarPager;
+    }
 }

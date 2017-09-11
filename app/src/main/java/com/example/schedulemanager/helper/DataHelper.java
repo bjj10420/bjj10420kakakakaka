@@ -14,6 +14,7 @@ import com.github.mikephil.charting.data.PieDataSet;
 
 import java.util.Calendar;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.TreeMap;
 
 /**
@@ -347,7 +348,7 @@ public class DataHelper {
     }
 
     private void makeRectToPut(CalendarCellInfo calendarCellInfo) {
-        for(int i = 0; i < 31; i++) {
+        for(int i = 0; i < 35; i++) {
 
             if(i != 0 && (i % 7) == 0 ) {
                 calendarCellInfo.setLeft(calendarCellInfo.getOriginalLeft());
@@ -356,6 +357,7 @@ public class DataHelper {
             else
                 calendarCellInfo.updateLeft(i);
 
+            Log.d("렉트 생성 인덱스 체크", String.valueOf(i));
             makeRectAndPut(calendarCellInfo);
         }
     }
@@ -394,5 +396,38 @@ public class DataHelper {
     private View getFirstCellView() {
         View firstCell = EventHelper.eventHelper.getUiHelper().getFirstCalendarCell();
         return firstCell;
+    }
+
+    public void matchRectZoneWithCurrentPageViewMap(int currentPageStartIndex) {
+        int count = 0;
+        int countForKeyValue = 0;
+
+        for(Rect rect : rectZoneWithView.keySet()) {
+            if(count >= currentPageStartIndex){
+                rectZoneWithView.put(rect, getMapValueByIndex(countForKeyValue));
+                Log.d("matchRectZoneWithCurrentPageViewMap 체크", String.valueOf((rectZoneWithView.get(rect)).getTag()));
+                countForKeyValue++;
+            }
+            count++;
+        }
+//        int startIndex = calen
+    }
+
+    /**
+     * 해당 인댁스의 해쉬맵 값을 가지고 온다
+     * @param countForKeyValue
+     * @return
+     */
+    private View getMapValueByIndex(int countForKeyValue) {
+        int index = 0;
+        View view = null;
+        for(Integer key : currentCalendarViewMap.keySet()) {
+            if(index == countForKeyValue){
+                view = currentCalendarViewMap.get(key);
+                break;
+            }
+            index++;
+        }
+        return view;
     }
 }

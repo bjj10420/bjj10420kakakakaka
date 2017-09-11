@@ -172,7 +172,7 @@ public class CalendarPagerAdapter extends PagerAdapter
 	}
 	
 	@SuppressLint("InflateParams")
-	public View instantiateItem(View pager, int position)
+	public View instantiateItem(View pager, final int position)
 	{
 		View convertView = null;
 		ViewHolder holder = null;
@@ -194,8 +194,8 @@ public class CalendarPagerAdapter extends PagerAdapter
 					public void onGlobalLayout() {
 
 						DataHelper.dataHelper.makeRectZoneWithFirstCell();
-
-						}
+						callMatchRectZoneWithCurrentPageViewMap();
+					}
 				});
 				CalendarAdapter adapter = new CalendarAdapter(mContext, mTypeface);
 				adapters[position] = adapter;
@@ -229,6 +229,12 @@ public class CalendarPagerAdapter extends PagerAdapter
 		}
 		
 		return convertView;
+	}
+
+	private void callMatchRectZoneWithCurrentPageViewMap() {
+		int currentPagerIndex = EventHelper.eventHelper.getCalendarHelper().getCalendarPager().getCurrentItem();
+		DataHelper.dataHelper.matchRectZoneWithCurrentPageViewMap(adapters[currentPagerIndex].getFirstItemIdx());
+		Log.d("각 어댑터 첫 인덱스확인", String.valueOf(adapters[currentPagerIndex].getFirstItemIdx()));
 	}
 
 	@Override
