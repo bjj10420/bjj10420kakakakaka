@@ -2,6 +2,7 @@ package com.example.schedulemanager.helper;
 
 import android.content.Context;
 import android.graphics.Color;
+import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
@@ -162,6 +163,36 @@ public class CalendarHelper {
         Log.d("체크 캘린더 셀 충돌", String.valueOf(isCellCollided));
         return isCellCollided;
     }
+
+    /**
+     * 맵안에 저장되어 있는 모든 달력 칸과의 충돌 체크(rect존을 이용)
+     */
+    public boolean checkCollisionForCalendarCellByRectZone(){
+        HashMap<Integer, View> arroundViewGroup = dataHelper.getArroundViewGroup();
+        HashMap<Integer, View> currentCalendarViewMap = dataHelper.getCurrentCalendarViewMap();
+        View copiedView = uiHelepr.getCopiedView();
+        Rect copiedViewRect = new Rect((int)copiedView.getTranslationX(), (int)copiedView.getTranslationY(), (int)copiedView.getTranslationX() + copiedView.getWidth(), (int)copiedView.getTranslationY() + copiedView.getHeight());
+
+
+        boolean isCellCollided = false;
+
+        for (Rect rectKey : dataHelper.getRectZoneWithView().keySet()){
+            View calendarCellView = dataHelper.getRectZoneWithView().get(rectKey);
+
+            if(calendarCellView != null && Util.checkCollisionByRect(rectKey, copiedViewRect)) {
+                isCellCollided = true;
+                Log.d("체크 캘린더 셀 충돌 확인", String.valueOf(calendarCellView.getTag()));
+
+                // 후보군 저장소에 저장
+                arroundViewGroup.put((int) Util.getDistanceFromTwoPoints(
+                        calendarCellView.getX(), calendarCellView.getY(), copiedView.getX(), copiedView.getY()),
+                        calendarCellView);
+            }
+        }
+
+        return isCellCollided;
+    }
+
 
     /**
      * 스케쥴 추가시의 데이트 스트링 값 생성

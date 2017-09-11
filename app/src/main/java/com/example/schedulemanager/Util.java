@@ -58,6 +58,10 @@ public class Util {
         return R1.intersect(R2);
     }
 
+    public static boolean checkCollisionByRect(Rect rect1, Rect rect2) {
+        return rect1.intersect(rect2);
+    }
+
     /**
      * 두 뷰의 충돌 판정을 체크 (v1이 다른레이아웃의 자식인 경우)
      * @param v1

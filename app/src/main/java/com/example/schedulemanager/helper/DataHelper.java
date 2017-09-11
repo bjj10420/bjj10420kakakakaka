@@ -401,16 +401,27 @@ public class DataHelper {
     public void matchRectZoneWithCurrentPageViewMap(int currentPageStartIndex) {
         int count = 0;
         int countForKeyValue = 0;
+        Iterator it = rectZoneWithView.entrySet().iterator();
+        HashMap.Entry<Rect, View> entry = null;
 
-        for(Rect rect : rectZoneWithView.keySet()) {
-            if(count >= currentPageStartIndex){
-                rectZoneWithView.put(rect, getMapValueByIndex(countForKeyValue));
-                Log.d("matchRectZoneWithCurrentPageViewMap 체크", String.valueOf((rectZoneWithView.get(rect)).getTag()));
+        while(it.hasNext()) {
+            entry = (HashMap.Entry<Rect, View>) it.next();
+            if(entry != null && count >= currentPageStartIndex){
+                entry.setValue(getMapValueByIndex(countForKeyValue));
+                Log.d("matchRectZoneWithCurrentPageViewMap 체크", String.valueOf(entry));
                 countForKeyValue++;
             }
             count++;
         }
 
+//        for(Rect rect : rectZoneWithView.keySet()) {
+//            if(count >= currentPageStartIndex){
+//                rectZoneWithView.put(rect, getMapValueByIndex(countForKeyValue));
+//                Log.d("matchRectZoneWithCurrentPageViewMap 체크", String.valueOf((rectZoneWithView.get(rect)).getTag()));
+//                countForKeyValue++;
+//            }
+//            count++;
+//        }
 //        int startIndex = calen
     }
 
@@ -430,5 +441,9 @@ public class DataHelper {
             index++;
         }
         return view;
+    }
+
+    public HashMap<Rect, View> getRectZoneWithView() {
+        return rectZoneWithView;
     }
 }
