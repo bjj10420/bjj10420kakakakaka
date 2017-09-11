@@ -194,7 +194,8 @@ public class CalendarPagerAdapter extends PagerAdapter
 					public void onGlobalLayout() {
 
 						DataHelper.dataHelper.makeRectZoneWithFirstCell();
-					}
+
+						}
 				});
 				CalendarAdapter adapter = new CalendarAdapter(mContext, mTypeface);
 				adapters[position] = adapter;

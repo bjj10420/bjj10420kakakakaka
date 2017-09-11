@@ -356,7 +356,6 @@ public class DataHelper {
             else
                 calendarCellInfo.updateLeft(i);
 
-
             makeRectAndPut(calendarCellInfo);
         }
     }
