@@ -128,7 +128,7 @@ public class EventHelper {
         // 캘린더모드 처리
         if(uiHelper.getCenterIcon().getVisibility() == View.GONE &&
                 calendarHelper.checkCollisionForCalendarCellByRectZone())
-//            changeCalendarCellColorWhenCollided();
+            changeCalendarCellColorWhenCollided();
         // 하단 버튼 전환(뒤로가기 => X )
         uiHelper.changeBottomButton(true);
     }

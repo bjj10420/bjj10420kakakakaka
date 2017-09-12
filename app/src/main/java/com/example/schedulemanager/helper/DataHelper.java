@@ -404,27 +404,29 @@ public class DataHelper {
     public void matchRectZoneWithCurrentPageViewMap(int currentPageStartIndex) {
         int count = 0;
         int countForKeyValue = 0;
-        Iterator it = rectZoneWithViewSorted.entrySet().iterator();
+        Iterator it = rectZoneWithViewSorted.keySet().iterator();
         HashMap.Entry<Integer, RectAndView> entry = null;
 
-        while(it.hasNext()) {
-            entry = (HashMap.Entry<Integer, RectAndView>) it.next();
-            if(entry != null && count >= currentPageStartIndex){
-                entry.getValue().setView(getMapValueByIndex(countForKeyValue));
-//                Log.d("matchRectZoneWithCurrentPageViewMap 체크", String.valueOf(entry));
-                countForKeyValue++;
-            }
-            count++;
-        }
-
-//        for(Rect rect : rectZoneWithView.keySet()) {
+//        while(it.hasNext()) {
+////            entry = (HashMap.Entry<Integer, RectAndView>) rectZoneWithViewSorted.get(it.next());
+//            RectAndView rav = rectZoneWithViewSorted.get(it.next());
 //            if(count >= currentPageStartIndex){
-//                rectZoneWithView.put(rect, getMapValueByIndex(countForKeyValue));
-//                Log.d("matchRectZoneWithCurrentPageViewMap 체크", String.valueOf((rectZoneWithView.get(rect)).getTag()));
+//                rav.setView(getMapValueByIndex(countForKeyValue));
+//                Log.d("뷰집어넣을때 체크", rav.getView().getTag() + "일 인덱스");
 //                countForKeyValue++;
 //            }
 //            count++;
 //        }
+
+        for(Integer key : rectZoneWithViewSorted.keySet()) {
+            if(count >= currentPageStartIndex){
+                RectAndView rav = rectZoneWithViewSorted.get(key);
+                rav.setView(getMapValueByIndex(countForKeyValue));
+                Log.d("rectZoneWithViewSorted순환문체크", String.valueOf("인덱스키 = " + key + ", 뷰 = " + (rectZoneWithViewSorted.get(key)).getView().getTag()));
+                countForKeyValue++;
+            }
+            count++;
+        }
 //        int startIndex = calen
     }
 
@@ -436,9 +438,10 @@ public class DataHelper {
     private View getMapValueByIndex(int countForKeyValue) {
         int index = 0;
         View view = null;
-        for(Integer key : currentCalendarViewMap.keySet()) {
+        TreeMap <Integer, View> tempTreeMap = new TreeMap <Integer, View>(currentCalendarViewMap);
+        for(Integer key : tempTreeMap.keySet()) {
             if(index == countForKeyValue){
-                view = currentCalendarViewMap.get(key);
+                view = tempTreeMap.get(key);
                 break;
             }
             index++;

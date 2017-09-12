@@ -177,6 +177,8 @@ public class CalendarHelper {
         Rect copiedViewRect = new Rect(numberArray[0], numberArray[1],
                 numberArray[0] + copiedView.getWidth(), numberArray[1] + copiedView.getHeight());
 
+        // 저장소의 뷰들은 먼저 클리어
+        arroundViewGroup.clear();
         boolean isCellCollided = false;
         for (Integer indexKey : dataHelper.getRectZoneWithViewSorted().keySet()){
             RectAndView rav = dataHelper.getRectZoneWithViewSorted().get(indexKey);
@@ -187,10 +189,10 @@ public class CalendarHelper {
                 isCellCollided = true;
                 Log.d("체크 캘린더 셀 충돌 확인", String.valueOf(calendarCellView.getTag() + "일"));
 
-                // 후보군 저장소에 저장
-//                arroundViewGroup.put((int) Util.getDistanceFromTwoPoints(
-//                        rect.left, rect.top, copiedView.getX(), copiedView.getY()),
-//                        calendarCellView);
+                // 후보군 저장
+                arroundViewGroup.put((int) Util.getDistanceFromTwoPoints(
+                        rect.left + rect.width() / 2, rect.top + rect.height() / 2, copiedView.getX() + copiedView.getWidth() / 2, copiedView.getY() + copiedView.getHeight() / 2),
+                        calendarCellView);
             }
         }
 
@@ -234,6 +236,7 @@ public class CalendarHelper {
      * @param calendarCellView
      */
     public void changeCalendarCellColor(View calendarCellView) {
+        Log.d("포인트에 가장 가까운 뷰", String.valueOf(calendarCellView.getTag()));
         View closestView = uiHelepr.getClosestView();
 
         // 1. 원래 있는 경우 기존셀을 원복, 새로운 곳에는 색을 + 저장
