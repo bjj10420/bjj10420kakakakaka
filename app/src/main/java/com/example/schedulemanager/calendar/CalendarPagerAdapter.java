@@ -238,7 +238,7 @@ public class CalendarPagerAdapter extends PagerAdapter
 
 		int index = 0;
 		for(Integer key : DataHelper.dataHelper.getRectZoneWithViewSorted().keySet()) {
- 			Log.d("rectZonWithView 정보확인", String.valueOf(DataHelper.dataHelper.getRectZoneWithViewSorted().get(key)));
+ 			Log.d("rectZonWithView 정보확인", String.valueOf("index = " + index + " , view = " + DataHelper.dataHelper.getRectZoneWithViewSorted().get(key).getView()));
 			index++;
 		}
 	}
