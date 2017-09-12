@@ -9,6 +9,7 @@ import android.view.View;
 
 import com.example.schedulemanager.calendar.CalendarPagerAdapter;
 import com.example.schedulemanager.vo.CalendarCellInfo;
+import com.example.schedulemanager.vo.RectAndView;
 import com.example.schedulemanager.vo.Schedule;
 import com.github.mikephil.charting.data.PieDataSet;
 
@@ -37,7 +38,7 @@ public class DataHelper {
     private TreeMap<Integer, Schedule> dailyScheduleMap; // 선택된 일자의 하루 스케쥴 맵
     private String dateValue;                       // 선택된 일
     private String dateOfToday;                     // 오늘 일자
-    private HashMap<Rect, View> rectZoneWithView;   // 이벤트 구역을 나누는 rect존과 매칭하는 뷰를 담는 저장소
+    private HashMap<Integer, RectAndView> rectZoneWithView;   // 이벤트 구역을 나누는 rect존과 매칭하는 뷰를 담는 저장소
 
 
     public void initData(Context context) {
@@ -339,7 +340,7 @@ public class DataHelper {
     public void makeRectZoneWithFirstCell() {
 
         if(rectZoneWithView == null) {
-            rectZoneWithView = new HashMap<Rect, View>();
+            rectZoneWithView = new HashMap<Integer, RectAndView>();
 
             View firstCellView = getFirstCellView();
             CalendarCellInfo calendarCellInfo = makeCalendarCellInfo(firstCellView);
@@ -358,16 +359,18 @@ public class DataHelper {
                 calendarCellInfo.updateLeft(i);
 
             Log.d("렉트 생성 인덱스 체크", String.valueOf(i));
-            makeRectAndPut(calendarCellInfo);
+            makeRectAndPut(i,calendarCellInfo);
         }
     }
 
-    private void makeRectAndPut(CalendarCellInfo calendarCellInfo) {
+    private void makeRectAndPut(int index, CalendarCellInfo calendarCellInfo) {
         Rect rect = new Rect(calendarCellInfo.getLeft(), calendarCellInfo.getTop(),
                 calendarCellInfo.getLeft() + calendarCellInfo.getWidth(),
                 calendarCellInfo.getTop() + calendarCellInfo.getHeight());
         Log.d("렉트존 생성 체크", "left = " + calendarCellInfo.getLeft() + " , top = " + calendarCellInfo.getTop());
-        rectZoneWithView.put(rect, null);
+        RectAndView rav = new RectAndView();
+        rav.setRect(rect);
+        rectZoneWithView.put(index, rav);
     }
 
     private CalendarCellInfo makeCalendarCellInfo(View firstCellView) {
