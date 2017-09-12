@@ -13,6 +13,7 @@ import android.widget.TextView;
 
 import com.example.schedulemanager.R;
 import com.example.schedulemanager.activity.MainActivity;
+import com.example.schedulemanager.vo.RectAndView;
 import com.example.schedulemanager.vo.Schedule;
 import com.example.schedulemanager.Util;
 import com.example.schedulemanager.calendar.CalendarPagerAdapter;
@@ -171,22 +172,27 @@ public class CalendarHelper {
         HashMap<Integer, View> arroundViewGroup = dataHelper.getArroundViewGroup();
         HashMap<Integer, View> currentCalendarViewMap = dataHelper.getCurrentCalendarViewMap();
         View copiedView = uiHelepr.getCopiedView();
-        Rect copiedViewRect = new Rect((int)copiedView.getTranslationX(), (int)copiedView.getTranslationY(), (int)copiedView.getTranslationX() + copiedView.getWidth(), (int)copiedView.getTranslationY() + copiedView.getHeight());
+        int[] numberArray = new int[2];
+        copiedView.getLocationInWindow(numberArray);
+        Rect copiedViewRect = new Rect(numberArray[0], numberArray[1],
+                numberArray[0] + copiedView.getWidth(), numberArray[1] + copiedView.getHeight());
 
         boolean isCellCollided = false;
-//        for (Rect rectKey : dataHelper.getRectZoneWithView().keySet()){
-//            View calendarCellView = dataHelper.getRectZoneWithView().get(rectKey);
-//
-//            if(calendarCellView != null && Util.checkCollisionByRect(rectKey, copiedViewRect)) {
-//                isCellCollided = true;
-//                Log.d("체크 캘린더 셀 충돌 확인", String.valueOf(calendarCellView.getTag() + "일"));
-//
-//                // 후보군 저장소에 저장
+        for (Integer indexKey : dataHelper.getRectZoneWithViewSorted().keySet()){
+            RectAndView rav = dataHelper.getRectZoneWithViewSorted().get(indexKey);
+            View calendarCellView = rav.getView();
+            Rect rect = rav.getRect();
+
+            if(calendarCellView != null && Util.checkCollisionByRect(rect, copiedViewRect)) {
+                isCellCollided = true;
+                Log.d("체크 캘린더 셀 충돌 확인", String.valueOf(calendarCellView.getTag() + "일"));
+
+                // 후보군 저장소에 저장
 //                arroundViewGroup.put((int) Util.getDistanceFromTwoPoints(
-//                        rectKey.left, rectKey.top, copiedView.getX(), copiedView.getY()),
+//                        rect.left, rect.top, copiedView.getX(), copiedView.getY()),
 //                        calendarCellView);
-//            }
-//        }
+            }
+        }
 
         return isCellCollided;
     }
