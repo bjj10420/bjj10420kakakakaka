@@ -247,7 +247,12 @@ public class EventHelper {
 
             // DB추가
             addScheduleForTheCalendarCell(String.valueOf(view.getTag()));
-
+            // 자료구조 추가
+            int newOrder = 0;
+            if(dataHelper.getDailyScheduleMap() != null)
+                if(dataHelper.getDailyScheduleMap().size() != 0)
+                    newOrder = dataHelper.getMaxOrderAmongDailyScheduleMap() + 1;
+            dataHelper.addToDailyScheduleMapByMonth(newOrder,String.valueOf(view.getTag()));
             // 캘린더 추가
             calendarHelper.setCheckMark(true);
 
