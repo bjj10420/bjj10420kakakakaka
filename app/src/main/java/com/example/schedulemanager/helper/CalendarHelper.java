@@ -107,7 +107,7 @@ public class CalendarHelper {
                 dataHelper.getCurrentCalendarViewMap().clear();
                 setCalendarTitleDate(calendarDateText, calendarAdapter, position);
                 reloadCalendarView();
-
+                redrawRectZone();
 //                refreshCalendar();
             }
 
@@ -115,6 +115,26 @@ public class CalendarHelper {
             public void onPageScrollStateChanged(int state) {
             }
         });
+    }
+
+    /**
+     * 렉트존을 다시 준비
+     */
+    private void redrawRectZone() {
+            claerRectZoneView();
+            rematchRectAndView();
+    }
+
+    private void rematchRectAndView() {
+        calendarPagerAdapter.callMatchRectZoneWithCurrentPageViewMap();
+    }
+
+    private void claerRectZoneView() {
+        TreeMap<Integer, RectAndView> rectZoneWithView = dataHelper.getRectZoneWithViewSorted();
+        for(Integer key : rectZoneWithView.keySet()) {
+            RectAndView rav = rectZoneWithView.get(key);
+            rav.setView(null);
+        }
     }
 
     public CalendarPagerAdapter getCalendarPagerAdapter() {

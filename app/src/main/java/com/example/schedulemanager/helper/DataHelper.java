@@ -430,7 +430,7 @@ public class DataHelper {
             if(count >= currentPageStartIndex){
                 RectAndView rav = rectZoneWithViewSorted.get(key);
                 rav.setView(getMapValueByIndex(countForKeyValue));
-                Log.d("rectZoneWithViewSorted순환문체크", String.valueOf("인덱스키 = " + key + ", 뷰 = " + (rectZoneWithViewSorted.get(key)).getView().getTag()));
+//                Log.d("rectZoneWithViewSorted순환문체크", String.valueOf("인덱스키 = " + key + ", 뷰 = " + (rectZoneWithViewSorted.get(key)).getView().getTag()));
                 countForKeyValue++;
             }
             count++;
