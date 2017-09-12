@@ -2,7 +2,6 @@ package com.example.schedulemanager.calendar;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.support.v4.view.PagerAdapter;
@@ -19,6 +18,7 @@ import android.widget.GridView;
 import com.example.schedulemanager.R;
 import com.example.schedulemanager.helper.DataHelper;
 import com.example.schedulemanager.helper.EventHelper;
+import com.example.schedulemanager.vo.RectAndView;
 import com.example.schedulemanager.vo.Schedule;
 
 import java.text.SimpleDateFormat;
@@ -193,8 +193,8 @@ public class CalendarPagerAdapter extends PagerAdapter
 				holder.calendarGridView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 					@Override
 					public void onGlobalLayout() {
-
 						DataHelper.dataHelper.makeRectZoneWithFirstCell();
+						DataHelper.dataHelper.sortRectZoneByKey();
 						callMatchRectZoneWithCurrentPageViewMap();
 					}
 				});
@@ -235,12 +235,10 @@ public class CalendarPagerAdapter extends PagerAdapter
 	private void callMatchRectZoneWithCurrentPageViewMap() {
 		int currentPagerIndex = EventHelper.eventHelper.getCalendarHelper().getCalendarPager().getCurrentItem();
 		DataHelper.dataHelper.matchRectZoneWithCurrentPageViewMap(adapters[currentPagerIndex].getFirstItemIdx());
-		Log.d("각 어댑터 첫 인덱스확인", String.valueOf(adapters[currentPagerIndex].getFirstItemIdx()));
 
 		int index = 0;
-		for(Rect rect : DataHelper.dataHelper.getRectZoneWithView().keySet()) {
-			Log.d("rectZonWithView 정보확인", "index = " + index + "rect = " + rect + " , view" +
-					DataHelper.dataHelper.getRectZoneWithView().get(rect));
+		for(Integer key : DataHelper.dataHelper.getRectZoneWithViewSorted().keySet()) {
+ 			Log.d("rectZonWithView 정보확인", String.valueOf(DataHelper.dataHelper.getRectZoneWithViewSorted().get(key)));
 			index++;
 		}
 	}

@@ -174,19 +174,19 @@ public class CalendarHelper {
         Rect copiedViewRect = new Rect((int)copiedView.getTranslationX(), (int)copiedView.getTranslationY(), (int)copiedView.getTranslationX() + copiedView.getWidth(), (int)copiedView.getTranslationY() + copiedView.getHeight());
 
         boolean isCellCollided = false;
-        for (Rect rectKey : dataHelper.getRectZoneWithView().keySet()){
-            View calendarCellView = dataHelper.getRectZoneWithView().get(rectKey);
-
-            if(calendarCellView != null && Util.checkCollisionByRect(rectKey, copiedViewRect)) {
-                isCellCollided = true;
-                Log.d("체크 캘린더 셀 충돌 확인", String.valueOf(calendarCellView.getTag() + "일"));
-
-                // 후보군 저장소에 저장
-                arroundViewGroup.put((int) Util.getDistanceFromTwoPoints(
-                        rectKey.left, rectKey.top, copiedView.getX(), copiedView.getY()),
-                        calendarCellView);
-            }
-        }
+//        for (Rect rectKey : dataHelper.getRectZoneWithView().keySet()){
+//            View calendarCellView = dataHelper.getRectZoneWithView().get(rectKey);
+//
+//            if(calendarCellView != null && Util.checkCollisionByRect(rectKey, copiedViewRect)) {
+//                isCellCollided = true;
+//                Log.d("체크 캘린더 셀 충돌 확인", String.valueOf(calendarCellView.getTag() + "일"));
+//
+//                // 후보군 저장소에 저장
+//                arroundViewGroup.put((int) Util.getDistanceFromTwoPoints(
+//                        rectKey.left, rectKey.top, copiedView.getX(), copiedView.getY()),
+//                        calendarCellView);
+//            }
+//        }
 
         return isCellCollided;
     }

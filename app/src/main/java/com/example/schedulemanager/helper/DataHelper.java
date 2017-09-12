@@ -39,7 +39,7 @@ public class DataHelper {
     private String dateValue;                       // 선택된 일
     private String dateOfToday;                     // 오늘 일자
     private HashMap<Integer, RectAndView> rectZoneWithView;   // 이벤트 구역을 나누는 rect존과 매칭하는 뷰를 담는 저장소
-
+    private TreeMap<Integer, RectAndView> rectZoneWithViewSorted;   // 이벤트 구역을 나누는 rect존과 매칭하는 뷰를 담는 저장소
 
     public void initData(Context context) {
         dataHelper = this;
@@ -404,13 +404,13 @@ public class DataHelper {
     public void matchRectZoneWithCurrentPageViewMap(int currentPageStartIndex) {
         int count = 0;
         int countForKeyValue = 0;
-        Iterator it = rectZoneWithView.entrySet().iterator();
-        HashMap.Entry<Rect, View> entry = null;
+        Iterator it = rectZoneWithViewSorted.entrySet().iterator();
+        HashMap.Entry<Integer, RectAndView> entry = null;
 
         while(it.hasNext()) {
-            entry = (HashMap.Entry<Rect, View>) it.next();
+            entry = (HashMap.Entry<Integer, RectAndView>) it.next();
             if(entry != null && count >= currentPageStartIndex){
-                entry.setValue(getMapValueByIndex(countForKeyValue));
+                entry.getValue().setView(getMapValueByIndex(countForKeyValue));
 //                Log.d("matchRectZoneWithCurrentPageViewMap 체크", String.valueOf(entry));
                 countForKeyValue++;
             }
@@ -446,7 +446,15 @@ public class DataHelper {
         return view;
     }
 
-    public HashMap<Rect, View> getRectZoneWithView() {
+    public HashMap<Integer, RectAndView> getRectZoneWithView() {
         return rectZoneWithView;
+    }
+
+    public void sortRectZoneByKey() {
+        rectZoneWithViewSorted = new TreeMap<Integer, RectAndView>(rectZoneWithView);
+    }
+
+    public TreeMap<Integer, RectAndView> getRectZoneWithViewSorted() {
+        return rectZoneWithViewSorted;
     }
 }
