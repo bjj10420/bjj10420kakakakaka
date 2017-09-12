@@ -245,7 +245,7 @@ public class EventHelper {
             // TODO 처음 앱을 설치하고 일정을 스케쥴했을때 DATE값이 없으므로 여기서 저장
             dataHelper.setDateValue(dateValue);
             addScheduleForTheCalendarCell(String.valueOf(view.getTag()));
-            calendarHelper.refreshCalendar();
+//            calendarHelper.refreshCalendar();
             closestView = null;
         }
     }

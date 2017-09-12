@@ -193,9 +193,9 @@ public class CalendarPagerAdapter extends PagerAdapter
 				holder.calendarGridView.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
 					@Override
 					public void onGlobalLayout() {
-						DataHelper.dataHelper.makeRectZoneWithFirstCell();
-						DataHelper.dataHelper.sortRectZoneByKey();
-						callMatchRectZoneWithCurrentPageViewMap();
+						DataHelper.dataHelper.makeRectZoneWithFirstCell(CalendarPagerAdapter.this);
+//						DataHelper.dataHelper.sortRectZoneByKey();
+//						callMatchRectZoneWithCurrentPageViewMap();
 					}
 				});
 				CalendarAdapter adapter = new CalendarAdapter(mContext, mTypeface);
@@ -232,7 +232,7 @@ public class CalendarPagerAdapter extends PagerAdapter
 		return convertView;
 	}
 
-	private void callMatchRectZoneWithCurrentPageViewMap() {
+	public void callMatchRectZoneWithCurrentPageViewMap() {
 		int currentPagerIndex = EventHelper.eventHelper.getCalendarHelper().getCalendarPager().getCurrentItem();
 		DataHelper.dataHelper.matchRectZoneWithCurrentPageViewMap(adapters[currentPagerIndex].getFirstItemIdx());
 

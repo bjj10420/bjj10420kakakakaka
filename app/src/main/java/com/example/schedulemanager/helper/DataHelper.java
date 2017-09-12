@@ -336,8 +336,9 @@ public class DataHelper {
 
     /**
      * 이벤트 범위를 지정해주는 렉트존을 생성
+     * @param calendarPagerAdapter
      */
-    public void makeRectZoneWithFirstCell() {
+    public void makeRectZoneWithFirstCell(CalendarPagerAdapter calendarPagerAdapter) {
 
         if(rectZoneWithView == null) {
             rectZoneWithView = new HashMap<Integer, RectAndView>();
@@ -345,6 +346,9 @@ public class DataHelper {
             View firstCellView = getFirstCellView();
             CalendarCellInfo calendarCellInfo = makeCalendarCellInfo(firstCellView);
             makeRectToPut(calendarCellInfo);
+
+            sortRectZoneByKey();
+            calendarPagerAdapter.callMatchRectZoneWithCurrentPageViewMap();
         }
     }
 
@@ -454,6 +458,7 @@ public class DataHelper {
     }
 
     public void sortRectZoneByKey() {
+
         rectZoneWithViewSorted = new TreeMap<Integer, RectAndView>(rectZoneWithView);
     }
 
