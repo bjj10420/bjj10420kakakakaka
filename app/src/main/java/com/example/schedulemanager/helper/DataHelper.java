@@ -400,9 +400,6 @@ public class DataHelper {
     private int[] getViewWindowInfo(View firstCellView) {
         int[] numberArray = new int[2];
         firstCellView.getLocationInWindow(numberArray);
-        Log.d("dastaHelper.getCurrentCalendarViewMap() #2-1", String.valueOf(numberArray[0]));
-        Log.d("dastaHelper.getCurrentCalendarViewMap() #2-2", String.valueOf(numberArray[1]));
-        firstCellView.setBackgroundColor(Color.parseColor("#c8c8c8"));
 
         return numberArray;
     }
