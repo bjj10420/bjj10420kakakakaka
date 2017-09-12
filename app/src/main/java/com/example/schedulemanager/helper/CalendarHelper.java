@@ -210,12 +210,12 @@ public class CalendarHelper {
                 Log.d("체크 캘린더 셀 충돌 확인", String.valueOf(calendarCellView.getTag() + "일"));
 
                 // 후보군 저장
-//                arroundViewGroup.put((int) Util.getDistanceFromTwoPoints(
-//                        rect.left + rect.width() / 3, rect.top + rect.height() / 3, copiedView.getX() + copiedView.getWidth() / 3, copiedView.getY() + copiedView.getHeight() / 3),
-//                        calendarCellView);
                 arroundViewGroup.put((int) Util.getDistanceFromTwoPoints(
-                        rect.left , rect.top, copiedView.getX(), copiedView.getY()),
+                        rect.left + rect.width() / 2, rect.top + rect.height() / 2, copiedView.getX() + copiedView.getWidth() / 2, copiedView.getY() + copiedView.getHeight() / 2),
                         calendarCellView);
+//                arroundViewGroup.put((int) Util.getDistanceFromTwoPoints(
+//                        rect.left , rect.top, copiedView.getX(), copiedView.getY()),
+//                        calendarCellView);
             }
         }
 
@@ -357,6 +357,8 @@ public class CalendarHelper {
      */
     public void setCheckMark(boolean isVisible) {
         View calendarCellView = dataHelper.getCurrentCalendarViewMap().get(Integer.parseInt(dataHelper.getDateValue()));
+        Log.d("셋체크마크확인", String.valueOf(calendarCellView));
+        calendarCellView.setBackgroundColor(Color.parseColor("#c8c8c8"));
         View checkMarkView = calendarCellView.findViewById(R.id.check_mark);
         checkMarkView.setVisibility(isVisible ? View.VISIBLE : View.GONE);
     }

@@ -254,6 +254,7 @@ public class EventHelper {
                     newOrder = dataHelper.getMaxOrderAmongDailyScheduleMap() + 1;
             dataHelper.makeSelectedDateData(dateValue);
             dataHelper.addToDailyScheduleMapByMonth(newOrder,String.valueOf(view.getTag()));
+            Log.d("페이징한뒤데이트벨류확인", String.valueOf(Integer.parseInt(dataHelper.getDateValue())));
             // 캘린더 추가
             calendarHelper.setCheckMark(true);
 
