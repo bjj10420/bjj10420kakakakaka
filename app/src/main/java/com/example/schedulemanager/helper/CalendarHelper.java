@@ -119,6 +119,7 @@ public class CalendarHelper {
      * 렉트존을 다시 준비
      */
     private void redrawRectZone() {
+            Log.d("redrawRectZone 체크", "redrawRectZone 체크");
             claerRectZoneView();
             rematchRectAndView();
     }
