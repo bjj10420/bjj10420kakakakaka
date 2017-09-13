@@ -196,6 +196,7 @@ public class CalendarHelper {
         Rect copiedViewRect = new Rect(numberArray[0], numberArray[1],
                 numberArray[0] + copiedView.getWidth(), numberArray[1] + copiedView.getHeight());
 
+
         // 저장소의 뷰들은 먼저 클리어
         arroundViewGroup.clear();
         boolean isCellCollided = false;
@@ -206,7 +207,6 @@ public class CalendarHelper {
 
             if(calendarCellView != null && Util.checkCollisionByRect(rect, copiedViewRect)) {
                 isCellCollided = true;
-//                Log.d("체크 캘린더 셀 충돌 확인", String.valueOf(calendarCellView.getTag() + "일"));
 
                 // 후보군 저장
                 arroundViewGroup.put((int) Util.getDistanceFromTwoPoints(
@@ -322,15 +322,20 @@ public class CalendarHelper {
     }
 
     public void getCalendarCellClickEvent(View v) {
+        Log.d("getCalendarCellClickEvent 체크", String.valueOf(v));
+
         MainActivity activity = ((MainActivity) context);
         String dateValue = String.valueOf(v.getTag());
         String year = String.valueOf(calendarPagerAdapter.getBaseCal().get(Calendar.YEAR));
         int month = calendarPagerAdapter.getBaseCal().get(Calendar.MONTH);
         String baseCalMonthString = month < 10 ? "0" + month : String.valueOf(month);
         String yearMonthKey = year + baseCalMonthString;
+        Log.d("getCalendarCellClickEvent yearMonthKey 체크", String.valueOf(yearMonthKey));
 
-        if(isNodataInThisMonth(yearMonthKey))
+        if(isNodataInThisMonth(yearMonthKey)){
+            Log.d("getCalendarCellClickEvent isNodataInThisMonth(yearMonthKey) 체크", String.valueOf(isNodataInThisMonth(yearMonthKey)));
             return;
+        }
 
         dataHelper.setYearMonthKeyAndDateValue(yearMonthKey, dateValue);
         dataHelper.setSelectedDateData(yearMonthKey + (Integer.parseInt(dateValue) < 10 ? "0" + dateValue : dateValue));
