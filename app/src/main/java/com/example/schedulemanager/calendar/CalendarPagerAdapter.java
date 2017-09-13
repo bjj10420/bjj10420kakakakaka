@@ -177,10 +177,11 @@ public class CalendarPagerAdapter extends PagerAdapter
 	{
 		View convertView = null;
 		ViewHolder holder = null;
-		
+
 		try
 		{
 			convertView = views.get(position);
+			Log.d("CalendarPagerAdapter instantiateItem", "체크 position = " + position);
 
 			if(convertView == null)
 			{

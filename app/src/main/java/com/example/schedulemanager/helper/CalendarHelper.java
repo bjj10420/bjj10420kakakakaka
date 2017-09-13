@@ -72,6 +72,13 @@ public class CalendarHelper {
                 calendarAdapter.getThisCal().get(Calendar.MONTH) + position,
                 calendarAdapter.getThisCal().get(Calendar.DATE)
         );
+//
+//        if(calendarAdapter.getBaseCal() != null)
+//            calendarAdapter.getBaseCal().set(calendarAdapter.getThisCal().get(Calendar.YEAR),
+//                    calendarAdapter.getThisCal().get(Calendar.MONTH) + position + 2,
+//                    calendarAdapter.getThisCal().get(Calendar.DATE)
+//            );
+
         calendarDateText.setText(calendarAdapter.getDateString(position));
     }
 
