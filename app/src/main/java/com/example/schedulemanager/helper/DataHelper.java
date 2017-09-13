@@ -369,7 +369,7 @@ public class DataHelper {
             else
                 calendarCellInfo.updateLeft(i);
 
-            Log.d("렉트 생성 인덱스 체크", String.valueOf(i));
+//            Log.d("렉트 생성 인덱스 체크", String.valueOf(i));
             makeRectAndPut(i,calendarCellInfo);
         }
     }
@@ -378,7 +378,7 @@ public class DataHelper {
         Rect rect = new Rect(calendarCellInfo.getLeft(), calendarCellInfo.getTop(),
                 calendarCellInfo.getLeft() + calendarCellInfo.getWidth(),
                 calendarCellInfo.getTop() + calendarCellInfo.getHeight());
-        Log.d("렉트존 생성 체크", "left = " + calendarCellInfo.getLeft() + " , top = " + calendarCellInfo.getTop());
+//        Log.d("렉트존 생성 체크", "left = " + calendarCellInfo.getLeft() + " , top = " + calendarCellInfo.getTop());
         RectAndView rav = new RectAndView();
         rav.setRect(rect);
         rectZoneWithView.put(index, rav);

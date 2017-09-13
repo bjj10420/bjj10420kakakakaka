@@ -90,9 +90,7 @@ public class CalendarHelper {
             if(dateCount == 13) calendarView.setBackgroundColor(Color.parseColor("#b2b2b2"));
         }
 
-        for(Integer dateKey : dataHelper.getCurrentCalendarViewMap().keySet()) {
-            Log.d("커런트 캘린더 뷰맵 체크", String.valueOf(dateKey));
-        }
+
 
     }
 
@@ -169,7 +167,7 @@ public class CalendarHelper {
         for (int dateKey : currentCalendarViewMap.keySet()){
             View calendarCellView = currentCalendarViewMap.get(dateKey);
             if(calendarCellView.getTag() != null)
-            Log.d("체크 캘린더 셀 충돌 캘린더셀뷰", String.valueOf(calendarCellView.getTag()) + "일");
+//            Log.d("체크 캘린더 셀 충돌 캘린더셀뷰", String.valueOf(calendarCellView.getTag()) + "일");
 //            Log.d("체크 캘린더 셀 충돌 카피드뷰", String.valueOf(copiedView));
 
             if(Util.checkCollisionForChildView(calendarCellView, copiedView)) {
@@ -181,7 +179,7 @@ public class CalendarHelper {
             }
         }
 
-        Log.d("체크 캘린더 셀 충돌", String.valueOf(isCellCollided));
+//        Log.d("체크 캘린더 셀 충돌", String.valueOf(isCellCollided));
         return isCellCollided;
     }
 
@@ -207,7 +205,7 @@ public class CalendarHelper {
 
             if(calendarCellView != null && Util.checkCollisionByRect(rect, copiedViewRect)) {
                 isCellCollided = true;
-                Log.d("체크 캘린더 셀 충돌 확인", String.valueOf(calendarCellView.getTag() + "일"));
+//                Log.d("체크 캘린더 셀 충돌 확인", String.valueOf(calendarCellView.getTag() + "일"));
 
                 // 후보군 저장
                 arroundViewGroup.put((int) Util.getDistanceFromTwoPoints(
@@ -259,7 +257,7 @@ public class CalendarHelper {
      * @param calendarCellView
      */
     public void changeCalendarCellColor(View calendarCellView) {
-        Log.d("포인트에 가장 가까운 뷰", String.valueOf(calendarCellView.getTag()));
+//        Log.d("포인트에 가장 가까운 뷰", String.valueOf(calendarCellView.getTag()));
         View closestView = uiHelepr.getClosestView();
 
         // 1. 원래 있는 경우 기존셀을 원복, 새로운 곳에는 색을 + 저장
@@ -364,7 +362,7 @@ public class CalendarHelper {
         else
             calendarCellView = dataHelper.getCurrentCalendarViewMap().get(Integer.parseInt(dataHelper.getDateValue()));
 
-        Log.d("셋체크마크확인", String.valueOf(calendarCellView));
+//        Log.d("셋체크마크확인", String.valueOf(calendarCellView));
         View checkMarkView = calendarCellView.findViewById(R.id.check_mark);
         checkMarkView.setVisibility(isVisible ? View.VISIBLE : View.GONE);
     }

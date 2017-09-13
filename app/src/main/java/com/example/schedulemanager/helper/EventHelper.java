@@ -245,15 +245,15 @@ public class EventHelper {
             String dateValue = String.valueOf(closestView.getTag());
             // TODO 처음 앱을 설치하고 일정을 스케쥴했을때 DATE값이 없으므로 여기서 저장
             dataHelper.setDateValue(dateValue);
+            dataHelper.makeSelectedDateData(dateValue);
 
             // DB추가
             addScheduleForTheCalendarCell(String.valueOf(view.getTag()));
             // 자료구조 추가
             int newOrder = 0;
-            if(dataHelper.getDailyScheduleMap() != null)
-                if(dataHelper.getDailyScheduleMap().size() != 0)
-                    newOrder = dataHelper.getMaxOrderAmongDailyScheduleMap() + 1;
-            dataHelper.makeSelectedDateData(dateValue);
+
+
+            newOrder = dataHelper.getMaxOrderAmongScheduleMapByThisMonth(dataHelper.getSelectedDateData()) + 1;
             dataHelper.addToDailyScheduleMapByMonth(newOrder,String.valueOf(view.getTag()));
             Log.d("페이징한뒤데이트벨류확인", String.valueOf(Integer.parseInt(dataHelper.getDateValue())));
             // 캘린더 추가
@@ -497,7 +497,6 @@ public class EventHelper {
 
         // DB에 삽입
         long resultNum = DBHelper.dbHelper.insertSchedule(newSchedule);
-
     }
 
     private Schedule makeNewSchedule(int number, String dateString, String activityName) {

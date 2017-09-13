@@ -214,7 +214,7 @@ public class CalendarAdapter extends BaseAdapter
 				// 메인 저장소에 뷰 저장( 전달이나 다음달 제외 )
 				if(!(position < firstItemIdx || position > lastItemIdx)) {
 					DataHelper.dataHelper.getCurrentCalendarViewMap().put(item, convertView);
-					Log.d("캘린더어댑터 맵에 뷰 추가", "키 " + item + "으로 뷰를 추가하였습니다");
+//					Log.d("캘린더어댑터 맵에 뷰 추가", "키 " + item + "으로 뷰를 추가하였습니다");
 					
 				}
 				if(position == selectedItemIdx)
@@ -254,7 +254,7 @@ public class CalendarAdapter extends BaseAdapter
 					}
 					convertView.setBackgroundResource(R.drawable.calendar_item_selected_bg);
 					//TODO 시간표현은 필요없고 오늘날짜값을 저장
-					Log.d("오늘 날짜를 저장하였습니다.", String.valueOf(item));
+//					Log.d("오늘 날짜를 저장하였습니다.", String.valueOf(item));
 					DataHelper.dataHelper.setDateOfToday(String.valueOf(item));
 				}
 				else
