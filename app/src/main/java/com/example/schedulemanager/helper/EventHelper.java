@@ -251,9 +251,8 @@ public class EventHelper {
             addScheduleForTheCalendarCell(String.valueOf(view.getTag()));
             // 자료구조 추가
             int newOrder = 0;
-
-
-            newOrder = dataHelper.getMaxOrderAmongScheduleMapByThisMonth(dataHelper.getSelectedDateData()) + 1;
+            if(!dataHelper.isEmptyData(dataHelper.getSelectedDateData()))
+                newOrder = dataHelper.getMaxOrderAmongScheduleMapByThisMonth(dataHelper.getSelectedDateData()) + 1;
             dataHelper.addToDailyScheduleMapByMonth(newOrder,String.valueOf(view.getTag()));
             Log.d("페이징한뒤데이트벨류확인", String.valueOf(Integer.parseInt(dataHelper.getDateValue())));
             // 캘린더 추가
@@ -489,6 +488,7 @@ public class EventHelper {
         // 넘버
 //        int number = DBHelper.dbHelper.getScheduleCountForDate(dateString);
         int number = 0;
+        Log.d("스케쥴DB에추가 체크", "dateString = " + dateString);
         if(!dataHelper.isEmptyData(dateString))
         number = dataHelper.getMaxOrderAmongScheduleMapByThisMonth(dateString) + 1;
 
