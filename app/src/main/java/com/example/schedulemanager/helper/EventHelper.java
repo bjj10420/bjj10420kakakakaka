@@ -207,7 +207,7 @@ public class EventHelper {
             // 전환이 필요한경우 (추가가 된후 달력뷰에서도 체크마크표시를 해줘야한다)
             if(entryCount == 0) {
                 uiHelper.setNoDateText(false);
-                calendarHelper.setCheckMark(true);
+                calendarHelper.setCheckMark(true, null);
             }
             }
     }
@@ -256,7 +256,7 @@ public class EventHelper {
             dataHelper.addToDailyScheduleMapByMonth(newOrder,String.valueOf(view.getTag()));
             Log.d("페이징한뒤데이트벨류확인", String.valueOf(Integer.parseInt(dataHelper.getDateValue())));
             // 캘린더 추가
-            calendarHelper.setCheckMark(true);
+            calendarHelper.setCheckMark(true, closestView);
 
 //            calendarHelper.refreshCalendar();
             closestView = null;
@@ -407,7 +407,7 @@ public class EventHelper {
         // 데이터가 하나도 없을때는 처리
         if (dailyScheduleDataSet.getEntryCount() == 0) {
             uiHelper.setNoDateText(true);
-            calendarHelper.setCheckMark(false);
+            calendarHelper.setCheckMark(false, uiHelper.getClosestView());
         }
     }
 

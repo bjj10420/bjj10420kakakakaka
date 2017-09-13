@@ -354,11 +354,17 @@ public class CalendarHelper {
     /**
      * 선택되어있는 체크 마크 표시 설정
      * @param isVisible
+     * @param closestView
      */
-    public void setCheckMark(boolean isVisible) {
-        View calendarCellView = dataHelper.getCurrentCalendarViewMap().get(Integer.parseInt(dataHelper.getDateValue()));
+    public void setCheckMark(boolean isVisible, View closestView) {
+        View calendarCellView = null;
+
+        if(closestView != null)
+            calendarCellView = closestView;
+        else
+            calendarCellView = dataHelper.getCurrentCalendarViewMap().get(Integer.parseInt(dataHelper.getDateValue()));
+
         Log.d("셋체크마크확인", String.valueOf(calendarCellView));
-        calendarCellView.setBackgroundColor(Color.parseColor("#c8c8c8"));
         View checkMarkView = calendarCellView.findViewById(R.id.check_mark);
         checkMarkView.setVisibility(isVisible ? View.VISIBLE : View.GONE);
     }
