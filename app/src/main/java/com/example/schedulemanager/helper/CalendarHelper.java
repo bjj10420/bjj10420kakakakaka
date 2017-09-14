@@ -310,6 +310,8 @@ public class CalendarHelper {
         else {
             calendarCellView.setBackgroundResource(R.drawable.calendar_hover_bg);
          }
+
+        if(calendarCellView != null)
         uiHelepr.setClosestView(calendarCellView);
     }
 
