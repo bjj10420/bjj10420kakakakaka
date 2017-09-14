@@ -387,7 +387,7 @@ public class CalendarHelper {
          HashMap<Integer, Schedule> thisMonthSchedules = dataHelper.getScheduleMapByMonth().get(Integer.parseInt(yearMonthKey));
         return thisMonthSchedules == null ? true : false;
     }
-
+//
     /**
      * 선택되어있는 체크 마크 표시 설정
      * @param isVisible
