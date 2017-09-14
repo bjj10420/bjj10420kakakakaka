@@ -246,7 +246,7 @@ public class CalendarPagerAdapter extends PagerAdapter
 		boolean isFirstInit = false;
 		if(DataHelper.dataHelper.getCurrentPageIndex() == position || this.isFirstInit)
 			isFirstInit = true;
-
+		Log.d("체크 isFirstInit", "체크 isFirstInit = " + isFirstInit);
 		return isFirstInit;
 	}
 

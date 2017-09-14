@@ -53,7 +53,7 @@ public class CalendarHelper {
     private void initCaledarPagerAndPagerAdapter(Typeface typeface) {
         initCalendarPagerAdapter(typeface);
         initCalendarPager();
-        setEventAfterRendering();
+        setEventAfterPagerRendering();
     }
 
     private void initCalendarPager() {
@@ -72,13 +72,16 @@ public class CalendarHelper {
         calendarPagerAdapter.notifyDataSetChanged();
     }
 
-    private void setEventAfterRendering() {
+    private void setEventAfterPagerRendering() {
         calendarPager.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-                // 초기화 플래그 OFF
-                Log.d("초기화 플래그 OFF", "초기화 플래그 OFF");
-                calendarPagerAdapter.setFirstInit(false);
+
+                if(uiHelepr.getCalendarLayout().getVisibility() == View.VISIBLE) {
+                    calendarPagerAdapter.setFirstInit(false);
+                    // 초기화 플래그 OFF
+                    Log.d("초기화 플래그 OFF", "초기화 플래그 OFF");
+                }
             }
         });
     }
