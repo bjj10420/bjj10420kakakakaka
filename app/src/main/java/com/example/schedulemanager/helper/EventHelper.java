@@ -1,5 +1,6 @@
 package com.example.schedulemanager.helper;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Color;
 import android.util.Log;
@@ -188,6 +189,7 @@ public class EventHelper {
     }
 
     // 데일리 스케쥴 위에서 마우스 업
+    @SuppressLint("LongLogTag")
     private void actionAtDailyScheduleLayout(View centerIcon, View closestView, View copiedView, View view) {
         if(centerIcon.getVisibility() == View.GONE &&
                 uiHelper.getScheduleLayout().getVisibility() == View.VISIBLE &&
@@ -211,7 +213,7 @@ public class EventHelper {
             // 전환이 필요한경우 (추가가 된후 달력뷰에서도 체크마크표시를 해줘야한다)
             if(entryCount == 0) {
                 uiHelper.setNoDateText(false);
-                calendarHelper.setCheckMark(true, null);
+                calendarHelper.setCheckMark(true, uiHelper.getSelectedCalendarCellView());
             }
             }
     }
@@ -410,10 +412,9 @@ public class EventHelper {
         // 데이터가 하나도 없을때는 처리
         if (dailyScheduleDataSet.getEntryCount() == 0) {
             uiHelper.setNoDateText(true);
-            calendarHelper.setCheckMark(false, uiHelper.getClosestView());
+            calendarHelper.setCheckMark(false, uiHelper.getSelectedCalendarCellView());
         }
     }
-
 
     public void onBackPresssed(){
         View scheduleLayout = uiHelper.getScheduleLayout();

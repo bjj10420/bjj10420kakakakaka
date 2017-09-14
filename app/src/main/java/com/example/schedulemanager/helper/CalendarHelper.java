@@ -378,6 +378,8 @@ public class CalendarHelper {
         TreeMap<Integer,Schedule> tm = new TreeMap<Integer,Schedule>(dailySchedule);
         dataHelper.setDailyScheduleMap(tm);
         changeToScheduleLayout(tm);
+
+        uiHelepr.setSelectedCalendarCellView(v);
     }
 
     /**

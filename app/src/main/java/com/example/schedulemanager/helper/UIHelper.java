@@ -44,6 +44,7 @@ public class UIHelper {
     private View calendarLayout;                    // 메인 캘린더 레이아웃
     private View scheduleLayout;                    // 하루 일정 레이아웃
     private View closestView;                       // 드래그 이벤트 도중 포인터주위의 가장 가까운 뷰
+    private View selectedCalendarCellView;          // 선택된 달력 셀 뷰
     private TextView backBtn;                       // 하단 뒤로가기 버튼
     private View cancelBtn;                         // 하단 X 버튼
     private PieChart pieChart;                      // 데일리 스케쥴 챠트 화면
@@ -423,5 +424,13 @@ public class UIHelper {
 
     public void setFirstCalendarCell(View firstCalendarCell) {
         this.firstCalendarCell = firstCalendarCell;
+    }
+
+    public View getSelectedCalendarCellView() {
+        return selectedCalendarCellView;
+    }
+
+    public void setSelectedCalendarCellView(View selectedCalendarCellView) {
+        this.selectedCalendarCellView = selectedCalendarCellView;
     }
 }
