@@ -56,7 +56,8 @@ public class CalendarPagerAdapter extends PagerAdapter
 	private int								selectedDay			= -1;
 	private String							selectedTime		= null;
 	private String							currentDate			= null;
-	
+	private boolean							isFirstInit			= true;
+
 	private OnCalendarItemClickListener		onCalendarItemClickListener;
 
 	private HashMap<Integer, HashMap<Integer, Schedule>> scheduleMapByMonth;
@@ -232,9 +233,21 @@ public class CalendarPagerAdapter extends PagerAdapter
 	}
 
 	private void controlPageIndex(int position) {
+		Log.d("체크 controlPageIndex", "체크 controlPageIndex");
+		if(isFirstInit(position)) return;
 		boolean isNext = decidePrevOrNext(position);
 		setCurrnetPageIndex(isNext);
 		changeBaseCal();
+	}
+
+	private boolean isFirstInit(int position) {
+		Log.d("체크 isFirstInit", "체크 eventHelper" + EventHelper.eventHelper);
+		Log.d("체크 EventHelper", "체크 position = " + position);
+		boolean isFirstInit = false;
+		if(DataHelper.dataHelper.getCurrentPageIndex() == position || this.isFirstInit)
+			isFirstInit = true;
+
+		return isFirstInit;
 	}
 
 	private void changeBaseCal() {
@@ -249,6 +262,8 @@ public class CalendarPagerAdapter extends PagerAdapter
 	}
 
 	private boolean decidePrevOrNext(int position) {
+		Log.d("체크 decidePrevOrNext", "체크 decidePrevOrNext");
+
 		boolean isNext = true;
 		if(position < DataHelper.dataHelper.getCurrentPageIndex())
 			isNext = false;
@@ -703,5 +718,9 @@ public class CalendarPagerAdapter extends PagerAdapter
 
 	public SparseArray<View> getViews() {
 		return views;
+	}
+
+	public void setFirstInit(boolean firstInit) {
+		isFirstInit = firstInit;
 	}
 }

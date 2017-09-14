@@ -7,8 +7,8 @@ import android.graphics.Typeface;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewTreeObserver;
 import android.widget.GridView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.schedulemanager.R;
@@ -18,10 +18,7 @@ import com.example.schedulemanager.vo.Schedule;
 import com.example.schedulemanager.Util;
 import com.example.schedulemanager.calendar.CalendarPagerAdapter;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.TreeMap;
 
@@ -41,23 +38,49 @@ public class CalendarHelper {
         this.context = context;
         this.uiHelepr = uiHelper;
         this.dataHelper = dataHelper;
+
+        initCaledarPagerAndPagerAdapter(typeface);
+        initCaledarDateTextAndPagingEvent(typeface);
+    }
+
+    private void initCaledarDateTextAndPagingEvent(Typeface typeface) {
+        final TextView calendarDateText =  (TextView) Util.getViewById(context, R.id.timetable_param_setter_calendar_date);
+        calendarDateText.setTypeface(typeface);
+        setCalendarTitleDate(calendarDateText, calendarPagerAdapter, 12);
+        setPagingEvent(calendarDateText, calendarPagerAdapter);
+    }
+
+    private void initCaledarPagerAndPagerAdapter(Typeface typeface) {
+        initCalendarPagerAdapter(typeface);
+        initCalendarPager();
+        setEventAfterRendering();
+    }
+
+    private void initCalendarPager() {
+        calendarPager = (ViewPager) Util.getViewById(context, R.id.timetable_param_setter_calendar_viewpager);
+        // 스케쥴 맵 전달
+        calendarPagerAdapter.setScheduleMapByMonth(dataHelper.getScheduleMapByMonth());
+        calendarPager.setAdapter(calendarPagerAdapter);
+        // 초기 페이지 설정
+        calendarPager.setCurrentItem(12);
+    }
+
+    private void initCalendarPagerAdapter(Typeface typeface) {
         calendarPagerAdapter = new CalendarPagerAdapter(context, typeface);
         // 달력 구성 어댑터 생성 및 셋팅
         calendarPagerAdapter.initCalendar();
         calendarPagerAdapter.notifyDataSetChanged();
-        calendarPager = (ViewPager) Util.getViewById(context, R.id.timetable_param_setter_calendar_viewpager);
+    }
 
-        // 스케쥴 맵 전달
-        calendarPagerAdapter.setScheduleMapByMonth(dataHelper.getScheduleMapByMonth());
-        calendarPager.setAdapter(calendarPagerAdapter);
-        // 달력에 연도, 월 표시
-        calendarPager.setCurrentItem(12);
-        final TextView calendarDateText =  (TextView) Util.getViewById(context, R.id.timetable_param_setter_calendar_date);
-        calendarDateText.setTypeface(typeface);
-        setCalendarTitleDate(calendarDateText, calendarPagerAdapter, 12);
-        // 이벤트 리스너 추가
-        setPagingEvent(calendarDateText, calendarPagerAdapter);
-
+    private void setEventAfterRendering() {
+        calendarPager.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
+            @Override
+            public void onGlobalLayout() {
+                // 초기화 플래그 OFF
+                Log.d("초기화 플래그 OFF", "초기화 플래그 OFF");
+                calendarPagerAdapter.setFirstInit(false);
+            }
+        });
     }
 
     /**
