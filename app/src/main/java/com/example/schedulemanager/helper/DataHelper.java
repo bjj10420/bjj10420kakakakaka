@@ -40,6 +40,7 @@ public class DataHelper {
     private String dateOfToday;                     // 오늘 일자
     private HashMap<Integer, RectAndView> rectZoneWithView;   // 이벤트 구역을 나누는 rect존과 매칭하는 뷰를 담는 저장소
     private TreeMap<Integer, RectAndView> rectZoneWithViewSorted;   // 이벤트 구역을 나누는 rect존과 매칭하는 뷰를 담는 저장소
+    private int currentPageIndex;
 
     public void initData(Context context) {
         dataHelper = this;
@@ -59,6 +60,8 @@ public class DataHelper {
         dbHelper.selectAllSchedule(scheduleMapByMonth);
         currentCalendarViewMap = new HashMap<Integer, View>();
         arroundViewGroup = new HashMap<Integer, View>();
+        // 페이지 초기화
+        currentPageIndex = 12;
     }
 
     /**
@@ -454,5 +457,13 @@ public class DataHelper {
 
     public TreeMap<Integer, RectAndView> getRectZoneWithViewSorted() {
         return rectZoneWithViewSorted;
+    }
+
+    public int getCurrentPageIndex() {
+        return currentPageIndex;
+    }
+
+    public void setCurrentPageIndex(int currentPageIndex) {
+        this.currentPageIndex = currentPageIndex;
     }
 }

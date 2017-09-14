@@ -218,11 +218,9 @@ public class CalendarPagerAdapter extends PagerAdapter
 				views.put(position, convertView);
 			}
 
-			// 메인액티비티의 뷰저장소 클리어
 			DataHelper.dataHelper.getCurrentCalendarViewMap().clear();
-			// 달력을 셋팅한다.
 			setCalendar(position);
-			// 페이저에 뷰를 붙인다.
+			controlPageIndex(position);
 			((ViewPager) pager).addView(convertView, 0);
 
 		}
@@ -231,6 +229,30 @@ public class CalendarPagerAdapter extends PagerAdapter
 		}
 		
 		return convertView;
+	}
+
+	private void controlPageIndex(int position) {
+		boolean isNext = decidePrevOrNext(position);
+		setCurrnetPageIndex(isNext);
+		changeBaseCal();
+	}
+
+	private void changeBaseCal() {
+		baseCal.set(thisCal.get(Calendar.YEAR),
+				thisCal.get(Calendar.MONTH) + DataHelper.dataHelper.getCurrentPageIndex(),
+				thisCal.get(Calendar.DATE));
+	}
+
+	private void setCurrnetPageIndex(boolean isNext) {
+		int currentPageIndex = DataHelper.dataHelper.getCurrentPageIndex();
+		DataHelper.dataHelper.setCurrentPageIndex(isNext ? currentPageIndex + 1 : currentPageIndex - 1);
+	}
+
+	private boolean decidePrevOrNext(int position) {
+		boolean isNext = true;
+		if(position < DataHelper.dataHelper.getCurrentPageIndex())
+			isNext = false;
+		return isNext;
 	}
 
 	public void callMatchRectZoneWithCurrentPageViewMap() {
@@ -251,7 +273,7 @@ public class CalendarPagerAdapter extends PagerAdapter
 		{
 		}
 	}
-	
+
 	public class ViewHolder
 	{
 		public GridView		calendarGridView;	// 달력 그리드뷰
