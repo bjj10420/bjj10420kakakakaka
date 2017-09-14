@@ -233,7 +233,6 @@ public class CalendarPagerAdapter extends PagerAdapter
 	}
 
 	private void controlPageIndex(int position) {
-		Log.d("체크 controlPageIndex", "체크 controlPageIndex");
 		if(isFirstInit(position)) return;
 		boolean isNext = decidePrevOrNext(position);
 		setCurrnetPageIndex(isNext);
@@ -241,35 +240,28 @@ public class CalendarPagerAdapter extends PagerAdapter
 	}
 
 	private boolean isFirstInit(int position) {
-		Log.d("체크 isFirstInit", "체크 eventHelper" + EventHelper.eventHelper);
-		Log.d("체크 EventHelper", "체크 position = " + position);
 		boolean isFirstInit = false;
 		if(DataHelper.dataHelper.getCurrentPageIndex() == position || this.isFirstInit)
 			isFirstInit = true;
-		Log.d("체크 isFirstInit", "체크 isFirstInit = " + isFirstInit);
 		return isFirstInit;
 	}
 
 	private void changeBaseCal() {
-		Log.d("체크 changeBaseCal", "체크 thisCal.get(Calendar.MONTH) = " + thisCal.get(Calendar.MONTH) + 1);
+		//TODO 달값이 1부족해서 baseCal을 바꿔줄때 +1을 더해놓았다 (테스트 더필요)
 		baseCal.set(thisCal.get(Calendar.YEAR),
 				thisCal.get(Calendar.MONTH) + DataHelper.dataHelper.getCurrentPageIndex() + 1,
 				thisCal.get(Calendar.DATE));
 	}
 
 	private void setCurrnetPageIndex(boolean isNext) {
-		Log.d("체크 setCurrnetPageIndex", "체크 isNext = " + isNext);
 		int currentPageIndex = DataHelper.dataHelper.getCurrentPageIndex();
 		DataHelper.dataHelper.setCurrentPageIndex(isNext ? currentPageIndex + 1 : currentPageIndex - 1);
-		Log.d("체크 setCurrnetPageIndex", "체크 currentPageIndex = " + DataHelper.dataHelper.getCurrentPageIndex());
-
 	}
 
 	private boolean decidePrevOrNext(int position) {
 		boolean isNext = true;
 		if(position < DataHelper.dataHelper.getCurrentPageIndex())
 			isNext = false;
-		Log.d("체크 decidePrevOrNext", "체크 isNext = " + isNext);
 		return isNext;
 	}
 
