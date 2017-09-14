@@ -251,8 +251,9 @@ public class CalendarPagerAdapter extends PagerAdapter
 	}
 
 	private void changeBaseCal() {
+		Log.d("체크 changeBaseCal", "체크 thisCal.get(Calendar.MONTH) = " + thisCal.get(Calendar.MONTH) + 1);
 		baseCal.set(thisCal.get(Calendar.YEAR),
-				thisCal.get(Calendar.MONTH) + DataHelper.dataHelper.getCurrentPageIndex(),
+				thisCal.get(Calendar.MONTH) + DataHelper.dataHelper.getCurrentPageIndex() + 1,
 				thisCal.get(Calendar.DATE));
 	}
 
