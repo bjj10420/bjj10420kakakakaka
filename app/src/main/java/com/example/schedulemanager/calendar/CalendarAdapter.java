@@ -252,6 +252,9 @@ public class CalendarAdapter extends BaseAdapter
 						extraText ="지금";
 
 					}
+
+					// 이번달일때만
+					if(DataHelper.dataHelper.getCurrentPageIndex() == 12)
 					convertView.setBackgroundResource(R.drawable.calendar_item_selected_bg);
 					//TODO 시간표현은 필요없고 오늘날짜값을 저장
 //					Log.d("오늘 날짜를 저장하였습니다.", String.valueOf(item));

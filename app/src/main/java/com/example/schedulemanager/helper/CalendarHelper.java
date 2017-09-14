@@ -106,7 +106,6 @@ public class CalendarHelper {
 //                    calendarAdapter.getThisCal().get(Calendar.MONTH) + position + 2,
 //                    calendarAdapter.getThisCal().get(Calendar.DATE)
 //            );
-
         calendarDateText.setText(calendarAdapter.getDateString(position));
     }
 
@@ -123,9 +122,6 @@ public class CalendarHelper {
             dataHelper.getCurrentCalendarViewMap().put(dateCount, calendarView);
             dateCount++;
         }
-
-
-
     }
 
     private void setPagingEvent(final TextView calendarDateText, final CalendarPagerAdapter calendarAdapter) {
@@ -324,7 +320,8 @@ public class CalendarHelper {
 //        Log.d("데이터 헬퍼 체크", String.valueOf(DataHelper.dataHelper));
 //        Log.d("데이터 헬퍼 체크", DataHelper.dataHelper.getDateOfToday());
 
-        boolean isToday = DataHelper.dataHelper.getDateOfToday().equals(String.valueOf(closestView.getTag()));
+        boolean isToday = DataHelper.dataHelper.getCurrentPageIndex() == 12
+                && DataHelper.dataHelper.getDateOfToday().equals(String.valueOf(closestView.getTag()));
 
         return isToday;
     }
