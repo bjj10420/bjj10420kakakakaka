@@ -76,8 +76,8 @@ public class CalendarHelper {
         calendarPager.getViewTreeObserver().addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
             @Override
             public void onGlobalLayout() {
-
-                if(uiHelepr.getCalendarLayout().getVisibility() == View.VISIBLE) {
+                if(uiHelepr.getCalendarLayout().getVisibility() == View.VISIBLE &&
+                        calendarPagerAdapter.isFirstInit()) {
                     calendarPagerAdapter.setFirstInit(false);
                     // 초기화 플래그 OFF
                     Log.d("초기화 플래그 OFF", "초기화 플래그 OFF");

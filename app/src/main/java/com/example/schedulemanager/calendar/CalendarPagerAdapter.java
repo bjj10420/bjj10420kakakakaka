@@ -257,16 +257,18 @@ public class CalendarPagerAdapter extends PagerAdapter
 	}
 
 	private void setCurrnetPageIndex(boolean isNext) {
+		Log.d("체크 setCurrnetPageIndex", "체크 isNext = " + isNext);
 		int currentPageIndex = DataHelper.dataHelper.getCurrentPageIndex();
 		DataHelper.dataHelper.setCurrentPageIndex(isNext ? currentPageIndex + 1 : currentPageIndex - 1);
+		Log.d("체크 setCurrnetPageIndex", "체크 currentPageIndex = " + DataHelper.dataHelper.getCurrentPageIndex());
+
 	}
 
 	private boolean decidePrevOrNext(int position) {
-		Log.d("체크 decidePrevOrNext", "체크 decidePrevOrNext");
-
 		boolean isNext = true;
 		if(position < DataHelper.dataHelper.getCurrentPageIndex())
 			isNext = false;
+		Log.d("체크 decidePrevOrNext", "체크 isNext = " + isNext);
 		return isNext;
 	}
 
@@ -722,5 +724,9 @@ public class CalendarPagerAdapter extends PagerAdapter
 
 	public void setFirstInit(boolean firstInit) {
 		isFirstInit = firstInit;
+	}
+
+	public boolean isFirstInit() {
+		return isFirstInit;
 	}
 }
