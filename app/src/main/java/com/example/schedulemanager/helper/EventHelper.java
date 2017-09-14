@@ -206,6 +206,8 @@ public class EventHelper {
             dataHelper.addToDailyScheduleMapByMonth(newOrder,activityName);
             uiHelper.resetPiechart(uiHelper.getPieChart());
 
+            Log.d("actionAtDailyScheduleLayout 체크", "actionAtDailyScheduleLayout 체크 entryCount = " + entryCount);
+
             // 전환이 필요한경우 (추가가 된후 달력뷰에서도 체크마크표시를 해줘야한다)
             if(entryCount == 0) {
                 uiHelper.setNoDateText(false);
