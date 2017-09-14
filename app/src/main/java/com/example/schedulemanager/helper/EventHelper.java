@@ -126,8 +126,9 @@ public class EventHelper {
         if(uiHelper.getCenterIcon().getVisibility() == View.VISIBLE)
             changeCenterIconColorWhenCollided(copiedView);
         // 캘린더모드 처리
-        if(uiHelper.getCenterIcon().getVisibility() == View.GONE &&
-                calendarHelper.checkCollisionForCalendarCellByRectZone())
+        if (uiHelper.getCenterIcon().getVisibility() == View.GONE
+                && calendarHelper.checkCollisionForCalendarCellByRectZone()
+                && uiHelper.getScheduleLayout().getVisibility() == View.GONE)
             changeCalendarCellColorWhenCollided();
         // 하단 버튼 전환(뒤로가기 => X )
         uiHelper.changeBottomButton(true);

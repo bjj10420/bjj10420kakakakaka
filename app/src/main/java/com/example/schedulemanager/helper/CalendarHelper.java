@@ -396,6 +396,7 @@ public class CalendarHelper {
     public void setCheckMark(boolean isVisible, View closestView) {
         View calendarCellView = null;
 
+        Log.d("setCheckMark 체크", "setCheckMark 체크 closestView = " + closestView);
         if(closestView != null)
             calendarCellView = closestView;
         else
