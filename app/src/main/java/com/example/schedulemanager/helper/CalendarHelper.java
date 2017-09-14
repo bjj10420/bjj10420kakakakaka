@@ -67,7 +67,8 @@ public class CalendarHelper {
      * @param position
      */
     private void setCalendarTitleDate(TextView calendarDateText, CalendarPagerAdapter calendarAdapter, int position) {
-        Log.d("")
+        Log.d("setCalendarTitleDate 체크", "setCalendarTitleDate 체크");
+
         // nextCal을 같이 변경
         calendarAdapter.getNextCal().set(calendarAdapter.getThisCal().get(Calendar.YEAR),
                 calendarAdapter.getThisCal().get(Calendar.MONTH) + position,
