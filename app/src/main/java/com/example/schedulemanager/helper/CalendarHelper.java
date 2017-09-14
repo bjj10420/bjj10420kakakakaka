@@ -122,7 +122,6 @@ public class CalendarHelper {
             // 활성화되어있는 View만 추가
             dataHelper.getCurrentCalendarViewMap().put(dateCount, calendarView);
             dateCount++;
-            if(dateCount == 13) calendarView.setBackgroundColor(Color.parseColor("#b2b2b2"));
         }
 
 
