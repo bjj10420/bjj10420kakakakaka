@@ -345,7 +345,7 @@ public class CalendarAdapter extends BaseAdapter
 					// 엑스트라 텍스트 설정
 //					holder.extra.setText(extraText);
 				}
-			}
+			}//
 			else
 			{	// 비어 있는 날짜
 				holder.day.setVisibility(View.INVISIBLE);
