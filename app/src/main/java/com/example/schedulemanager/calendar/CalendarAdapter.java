@@ -368,7 +368,9 @@ public class CalendarAdapter extends BaseAdapter
 				Schedule schedule = scheduleMapForCurrentPage.get(key);
 				Log.d("datepart체크", schedule.getDate());
 				String scheduleDate = schedule.getDate().substring(6, 8);
-				if(scheduleDate.equals(dateKey)) isExistSchedule = true;
+					if(scheduleDate.equals(dateKey))
+						isExistSchedule = true;
+						break;
 				}
 		return isExistSchedule;
 	}
