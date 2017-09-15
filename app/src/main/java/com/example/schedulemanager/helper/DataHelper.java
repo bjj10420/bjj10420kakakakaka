@@ -330,8 +330,8 @@ public class DataHelper {
         Log.d("scheduleMapByMonth 상세정보", String.valueOf(scheduleMapByMonth));
 
         Log.d("scheduleMapForThisMonth 상세정보", String.valueOf(scheduleMapForThisMonth));
-        Schedule scheduleData = scheduleMapForThisMonth.get(Integer.parseInt(dateKey.substring(6,8) + "0000"));
-        if(scheduleData != null) isEmptyData = false;
+        if(isExistSchedule(dateKey.substring(6,8), scheduleMapForThisMonth))
+            isEmptyData = false;
         Log.d("데이터가 비어있는지 체크", String.valueOf(isEmptyData));
         return isEmptyData;
     }
@@ -465,5 +465,18 @@ public class DataHelper {
 
     public void setCurrentPageIndex(int currentPageIndex) {
         this.currentPageIndex = currentPageIndex;
+    }
+
+    public boolean isExistSchedule(String dateKey, HashMap<Integer, Schedule> scheduleMapForThisMonth){
+        boolean isExistSchedule = false;
+
+        for(Integer key : scheduleMapForThisMonth.keySet()) {
+            Schedule schedule = scheduleMapForThisMonth.get(key);
+            String scheduleDate = schedule.getDate().substring(6, 8);
+            if(scheduleDate.equals(dateKey))
+                isExistSchedule = true;
+            break;
+        }
+        return isExistSchedule;
     }
 }
