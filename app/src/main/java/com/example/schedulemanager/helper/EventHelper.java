@@ -192,8 +192,8 @@ public class EventHelper {
     @SuppressLint("LongLogTag")
     private void actionAtDailyScheduleLayout(View centerIcon, View closestView, View copiedView, View view) {
         if(centerIcon.getVisibility() == View.GONE &&
-                uiHelper.getScheduleLayout().getVisibility() == View.VISIBLE &&
-                closestView != null) {
+                uiHelper.getScheduleLayout().getVisibility() == View.VISIBLE
+                ) {
             String activityName = String.valueOf(view.getTag());
             // DB에 추가
             addScheduleForTheSchedule(activityName);
