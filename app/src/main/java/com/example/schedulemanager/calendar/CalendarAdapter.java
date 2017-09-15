@@ -340,12 +340,12 @@ public class CalendarAdapter extends BaseAdapter
 //
 				// 스케쥴이 들어있는 날짜일경우
 				// 키값이 "000" + 순서값 0
-				if(scheduleMapForCurrentPage.get(Integer.parseInt(item + "0000")) != null) {
+				if(isExistSchedule(String.valueOf(item))) {
 					holder.checkMark.setVisibility(View.VISIBLE);
 					// 엑스트라 텍스트 설정
 //					holder.extra.setText(extraText);
-
 				}
+				isExistSchedule(String.valueOf(item));
 			}
 			else
 			{	// 비어 있는 날짜
@@ -359,6 +359,18 @@ public class CalendarAdapter extends BaseAdapter
 		}
 
 			return convertView;
+	}
+
+	public boolean isExistSchedule(String dateKey){
+		boolean isExistSchedule = false;
+
+			for(Integer key : scheduleMapForCurrentPage.keySet()) {
+				Schedule schedule = scheduleMapForCurrentPage.get(key);
+				Log.d("datepart체크", schedule.getDate());
+				String scheduleDate = schedule.getDate().substring(6, 8);
+				if(scheduleDate.equals(dateKey)) isExistSchedule = true;
+				}
+		return isExistSchedule;
 	}
 
 	/**
