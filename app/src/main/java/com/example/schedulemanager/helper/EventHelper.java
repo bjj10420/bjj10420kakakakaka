@@ -71,6 +71,11 @@ public class EventHelper {
             buttonView.setOnTouchListener(new View.OnTouchListener() {
                 @Override
                 public boolean onTouch(View view, MotionEvent event) {
+
+                    if(isEtcButton(view)) {
+                        Log.d("isEtcButton", "isEtcButton ");
+                        return true;
+                    }
                     switch (event.getActionMasked()) {
                         case MotionEvent.ACTION_DOWN:
                             actionDownEvent(view, event, buttonPanelId);
@@ -100,6 +105,7 @@ public class EventHelper {
      * @param buttonPanelId
      */
     private void actionDownEvent(View view, MotionEvent event, int buttonPanelId) {
+
         uiHelper.getTotalLayout().removeView(uiHelper.getCopiedView());
         uiHelper.hoverView(view);
 
@@ -113,6 +119,10 @@ public class EventHelper {
             dY = view.getY() - event.getRawY() + 2000;
         // dY설정
         dataHelper.setdY(dY);
+    }
+
+    private boolean isEtcButton(View view) {
+            return String.valueOf(view.getTag()).equals("기타");
     }
 
     /**
