@@ -354,12 +354,7 @@ public class CalendarHelper {
 
     public void getCalendarCellClickEvent(View v) {
         Log.d("getCalendarCellClickEvent 체크", String.valueOf(v));
-
-        MainActivity activity = ((MainActivity) context);
         String dateValue = String.valueOf(v.getTag());
-        String year = String.valueOf(calendarPagerAdapter.getBaseCal().get(Calendar.YEAR));
-        int month = calendarPagerAdapter.getBaseCal().get(Calendar.MONTH);
-        String baseCalMonthString = month < 10 ? "0" + month : String.valueOf(month);
         String yearMonthKey = DataHelper.dataHelper.makeDateString2(null, this);
         Log.d("getCalendarCellClickEvent yearMonthKey 체크", String.valueOf(yearMonthKey));
 
