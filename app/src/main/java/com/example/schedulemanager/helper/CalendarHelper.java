@@ -18,8 +18,11 @@ import com.example.schedulemanager.vo.Schedule;
 import com.example.schedulemanager.Util;
 import com.example.schedulemanager.calendar.CalendarPagerAdapter;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.TreeMap;
 
 /**
@@ -251,7 +254,6 @@ public class CalendarHelper {
         return isCellCollided;
     }
 
-
     /**
      * 스케쥴 추가시의 데이트 스트링 값 생성
      */
@@ -264,6 +266,17 @@ public class CalendarHelper {
         return dateString;
     }
 
+    /**
+     * 스케쥴 추가시의 데이트 스트링 값 생성
+     */
+    public String makeDateString2(String dateValue) {
+        int position = dataHelper.getCurrentPageIndex();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMM", Locale.getDefault());
+        String date = String.valueOf(Integer.parseInt(dateValue) < 10 ? "0" + dateValue : dateValue);
+        String yearMonth = formatter.format(position == 0 ? calendarPagerAdapter.getThisCal().getTimeInMillis()
+                 : new Date(calendarPagerAdapter.getNextCal().getTimeInMillis()));
+        return yearMonth + date;
+    }
 
     /**
      * 저장소에 있는 모든 뷰중에 최단거리를 추출
