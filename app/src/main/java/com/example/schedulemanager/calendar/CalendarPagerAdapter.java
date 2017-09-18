@@ -499,6 +499,7 @@ public class CalendarPagerAdapter extends PagerAdapter
 		@Override
 		public void onItemClick(AdapterView<?> parent, View view, int position, long id)
 		{
+
 			try
 			{
 				int day = adapters[1].getItem(position);

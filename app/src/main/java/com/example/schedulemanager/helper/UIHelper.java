@@ -67,7 +67,7 @@ public class UIHelper {
         testList2.add("약속");
         testList2.add("독서");
         testList2.add("학교");
-        testList2.add("공부");
+        testList2.add("기타");
 
         initButtonPanel(R.id.buttonPanel, testList);
         initButtonPanel(R.id.buttonPanel2, testList2);
@@ -139,9 +139,9 @@ public class UIHelper {
                     break;
                 case 6 : iconView.setBackgroundResource(R.drawable.school);
                     break;
-                case 7 : iconView.setBackgroundResource(R.drawable.shopping);
+                case 7 : iconView.setBackgroundResource(R.drawable.etc);
                     break;
-                case 8 : iconView.setBackgroundResource(R.drawable.study);
+                case 8 : iconView.setBackgroundResource(R.drawable.shopping);
                     break;
             }
 
@@ -152,6 +152,7 @@ public class UIHelper {
             setTextWithFont(textView, textData);
             textView.setGravity(Gravity.CENTER);
             textView.setLayoutParams(textParams);
+            textView.setTextColor(Color.parseColor("#404040"));
             // 태그첨부
             buttonView.setTag(textData);
             // 추가
