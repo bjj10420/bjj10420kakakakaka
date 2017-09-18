@@ -203,6 +203,8 @@ public class UIHelper {
         setTextWithFont(textView, textData);
         textView.setGravity(Gravity.CENTER);
         textView.setLayoutParams(textParams);
+        textView.setTextColor(Color.parseColor("#404040"));
+
         // 태그첨부
         buttonView.setTag(textData);
         // 추가
