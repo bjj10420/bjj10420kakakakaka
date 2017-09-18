@@ -517,22 +517,7 @@ public class CalendarPagerAdapter extends PagerAdapter
 	
 	public String getDateString(int position)
 	{
-		try
-		{
-			if(position == 0)
-			{
-				return formatter.format(new Date(thisCal.getTimeInMillis()));
-			}
-			else
-			{
-				return formatter.format(new Date(nextCal.getTimeInMillis()));
-			}
-		}
-		catch (Exception e)
-		{
-		}
-		
-		return null;
+		return formatter.format(new Date(nextCal.getTimeInMillis()));
 	}
 
 	public int getSelectedYear()
