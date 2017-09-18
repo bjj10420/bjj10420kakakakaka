@@ -13,9 +13,12 @@ import com.example.schedulemanager.vo.RectAndView;
 import com.example.schedulemanager.vo.Schedule;
 import com.github.mikephil.charting.data.PieDataSet;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.Locale;
 import java.util.TreeMap;
 
 /**
@@ -305,11 +308,10 @@ public class DataHelper {
      * @return
      */
     private String makeYearMonthKey() {
-        CalendarPagerAdapter calendarPagerAdapter = EventHelper.eventHelper.getCalendarHelper().getCalendarPagerAdapter();
-        String year = String.valueOf(calendarPagerAdapter.getBaseCal().get(Calendar.YEAR));
-        int month = calendarPagerAdapter.getBaseCal().get(Calendar.MONTH);
-        String baseCalMonthString = month < 10 ? "0" + month : String.valueOf(month);
-        String yearMonthKey = year + baseCalMonthString;
+//        CalendarPagerAdapter calendarPagerAdapter = EventHelper.eventHelper.getCalendarHelper().getCalendarPagerAdapter();
+//        String year = String.valueOf(calendarPagerAdapter.getBaseCal().get(Calendar.YEAR));
+//        int month = calendarPagerAdapter.getBaseCal().get(Calendar.MONTH);
+        String yearMonthKey = makeDateString2(null, EventHelper.eventHelper.getCalendarHelper());
         return yearMonthKey;
     }//
 
@@ -478,5 +480,22 @@ public class DataHelper {
             break;
         }
         return isExistSchedule;
+    }
+
+    /**
+     * 스케쥴 추가시의 데이트 스트링 값 생성
+     * @param dateValue
+     * @param calendarHelper
+     */
+    public String makeDateString2(String dateValue, CalendarHelper calendarHelper) {
+        int position = getCurrentPageIndex();
+        String date = "";
+
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMM", Locale.getDefault());
+        if(dateValue != null)
+            date = String.valueOf(Integer.parseInt(dateValue) < 10 ? "0" + dateValue : dateValue);
+        String yearMonth = formatter.format(position == 0 ? calendarHelper.getCalendarPagerAdapter().getThisCal().getTimeInMillis()
+                 : new Date(calendarHelper.getCalendarPagerAdapter().getNextCal().getTimeInMillis()));
+        return yearMonth + date;
     }
 }

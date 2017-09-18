@@ -18,11 +18,8 @@ import com.example.schedulemanager.vo.Schedule;
 import com.example.schedulemanager.Util;
 import com.example.schedulemanager.calendar.CalendarPagerAdapter;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
-import java.util.Locale;
 import java.util.TreeMap;
 
 /**
@@ -33,7 +30,7 @@ public class CalendarHelper {
     private Context context;
     private CalendarPagerAdapter calendarPagerAdapter;
     private ViewPager calendarPager;                // 메인 캘린더 뷰 페이져 객체
-    private DataHelper dataHelper;
+    DataHelper dataHelper;
     private UIHelper uiHelepr;
     EventHelper eventHelper;
 
@@ -267,18 +264,6 @@ public class CalendarHelper {
     }
 
     /**
-     * 스케쥴 추가시의 데이트 스트링 값 생성
-     */
-    public String makeDateString2(String dateValue) {
-        int position = dataHelper.getCurrentPageIndex();
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyyMM", Locale.getDefault());
-        String date = String.valueOf(Integer.parseInt(dateValue) < 10 ? "0" + dateValue : dateValue);
-        String yearMonth = formatter.format(position == 0 ? calendarPagerAdapter.getThisCal().getTimeInMillis()
-                 : new Date(calendarPagerAdapter.getNextCal().getTimeInMillis()));
-        return yearMonth + date;
-    }
-
-    /**
      * 저장소에 있는 모든 뷰중에 최단거리를 추출
      */
     public int findTheClosestView() {
@@ -375,7 +360,7 @@ public class CalendarHelper {
         String year = String.valueOf(calendarPagerAdapter.getBaseCal().get(Calendar.YEAR));
         int month = calendarPagerAdapter.getBaseCal().get(Calendar.MONTH);
         String baseCalMonthString = month < 10 ? "0" + month : String.valueOf(month);
-        String yearMonthKey = year + baseCalMonthString;
+        String yearMonthKey = DataHelper.dataHelper.makeDateString2(null, this);
         Log.d("getCalendarCellClickEvent yearMonthKey 체크", String.valueOf(yearMonthKey));
 
         if(isNodataInThisMonth(yearMonthKey)){

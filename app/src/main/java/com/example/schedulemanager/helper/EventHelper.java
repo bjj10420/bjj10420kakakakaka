@@ -447,7 +447,7 @@ public class EventHelper {
      */
     public void addScheduleForTheCalendarCell(String tagName) {
 //        String dateString = calendarHelper.makeDateString(dataHelper.getDateValue());
-        String dateString = calendarHelper.makeDateString2(dataHelper.getDateValue());
+        String dateString = calendarHelper.dataHelper.makeDateString2(dataHelper.getDateValue(), calendarHelper);
 
         Log.d("스케쥴 추가 체크", dateString + ", " + tagName);
         addScheduleForCalendarMode(dateString, tagName);
