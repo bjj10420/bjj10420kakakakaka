@@ -3,6 +3,7 @@ package com.example.schedulemanager.helper;
 import android.app.Activity;
 import android.content.ContentValues;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
@@ -39,6 +40,8 @@ public class DataHelper {
     private DBHelper dbHelper;
     private HashMap<String, String> iconNameMap;    // 해당하는 텍스트에 매칭시키는 아이콘명이 저장되는 맵
     private Typeface typeface;                      // 글꼴
+    private Context context;
+
     private HashMap<Integer, HashMap<Integer, Schedule>> scheduleMapByMonth;// 달력월값을 키로 갖는 스케쥴 저장소
     private HashMap<Integer, View> currentCalendarViewMap;// 현재 보고있는 달력의 각 칸을 저장해놓는 저장소
     private HashMap<Integer, View> arroundViewGroup; // 드래그중에 포인터주위의 뷰들
@@ -53,7 +56,8 @@ public class DataHelper {
     private HashMap<Integer, RectAndView> rectZoneWithView;   // 이벤트 구역을 나누는 rect존과 매칭하는 뷰를 담는 저장소
     private TreeMap<Integer, RectAndView> rectZoneWithViewSorted;   // 이벤트 구역을 나누는 rect존과 매칭하는 뷰를 담는 저장소
     private int currentPageIndex;
-    private Context context;
+
+
 
     public void initData(Context context) {
         dataHelper = this;
@@ -77,8 +81,40 @@ public class DataHelper {
         // 페이지 초기화
         currentPageIndex = 12;
 
-        saveImageIntoDB();
-        DBHelper.dbHelper.selectAllActivities();
+        // 첫 로딩인 경우는 베이직 데이터를 생성
+        if(isFirstLoading()) {
+            makeBasicData();
+            updateIsFirstLoadingValue();
+        }
+//        saveImageIntoDB();
+//        DBHelper.dbHelper.selectAllActivities();
+    }
+
+    private void updateIsFirstLoadingValue() {
+        SharedPreferences sp = context.getSharedPreferences("scheduleManager", Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = sp.edit();
+        editor.putBoolean("isFirstLoading", true);
+    }
+
+    private void makeBasicData() {
+        makeBasicCategoryData();
+        makeBasicActivityData();
+    }
+
+    private void makeBasicActivityData() {
+
+    }
+
+    private void makeBasicCategoryData() {
+
+    }
+
+    /**
+     * 앱 설치후 최초 로딩인지 판단
+     */
+    private boolean isFirstLoading() {
+        SharedPreferences sp = context.getSharedPreferences("scheduleManager", Context.MODE_PRIVATE);
+        return sp.getBoolean("isFirstLoading", false);
     }
 
     /**
