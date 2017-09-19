@@ -26,9 +26,21 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final int DB_VERSION_1 = 1;
     public static SQLiteDatabase DB;
     public static DBHelper dbHelper;
+    // 스케쥴 관리 테이블
     public String scheduleTableName = "schedule";
 
-    // 컬럼명
+    // 스케쥴 관리 테이블 컬럼명
+    String no_colum = "no";
+    String dateValue_colum = "dateValue";
+    String activityName_colum = "activityName";
+    String orderValue_colum = "orderValue";
+    String timeValue_colum = "timeValue";
+    String memoValue_colum = "memoValue";
+
+    // 스케쥴 관리 테이블
+    public String acTableName = "schedule";
+
+    // 스케쥴 관리 테이블 컬럼명
     String no_colum = "no";
     String dateValue_colum = "dateValue";
     String activityName_colum = "activityName";
