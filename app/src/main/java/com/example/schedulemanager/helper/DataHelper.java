@@ -1,12 +1,10 @@
 package com.example.schedulemanager.helper;
 
 import android.app.Activity;
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
@@ -15,8 +13,8 @@ import android.util.Log;
 import android.view.View;
 
 import com.example.schedulemanager.R;
-import com.example.schedulemanager.Util;
 import com.example.schedulemanager.calendar.CalendarPagerAdapter;
+import com.example.schedulemanager.vo.ActivityVO;
 import com.example.schedulemanager.vo.CalendarCellInfo;
 import com.example.schedulemanager.vo.RectAndView;
 import com.example.schedulemanager.vo.Schedule;
@@ -24,10 +22,10 @@ import com.github.mikephil.charting.data.PieDataSet;
 
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.Iterator;
+import java.util.List;
 import java.util.Locale;
 import java.util.TreeMap;
 
@@ -94,6 +92,7 @@ public class DataHelper {
         SharedPreferences sp = context.getSharedPreferences("scheduleManager", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
         editor.putBoolean("isFirstLoading", true);
+        editor.commit();
     }
 
     private void makeBasicData() {
@@ -102,7 +101,52 @@ public class DataHelper {
     }
 
     private void makeBasicActivityData() {
+        ActivityVO[] activityVoArray = makeBasicActivityVoArray();
+        insertActivityIntoDB(activityVoArray);
+    }
 
+    private ActivityVO[] makeBasicActivityVoArray() {
+        ActivityVO basicActivity12 = new ActivityVO("생활", "가기", false, getByteArrayFromDrawable(R.drawable.basic_go_to));
+        ActivityVO basicActivity13 = new ActivityVO("생활", "약속", false, getByteArrayFromDrawable(R.drawable.promise));
+        ActivityVO basicActivity14 = new ActivityVO("생활", "만남", false, getByteArrayFromDrawable(R.drawable.meet));
+        ActivityVO basicActivity15 = new ActivityVO("생활", "쇼핑", false, getByteArrayFromDrawable(R.drawable.shopping));
+        ActivityVO basicActivity16 = new ActivityVO("생활", "학교", false, getByteArrayFromDrawable(R.drawable.school));
+        ActivityVO basicActivity18 = new ActivityVO("생활", "들리기", false, getByteArrayFromDrawable(R.drawable.basic_drop_by));
+        ActivityVO basicActivity20 = new ActivityVO("생활", "청소", false, getByteArrayFromDrawable(R.drawable.basic_clean));
+        ActivityVO basicActivity23 = new ActivityVO("생활", "공부", false, getByteArrayFromDrawable(R.drawable.study));
+
+        ActivityVO basicActivity4 = new ActivityVO("사무", "서류 정리", false, getByteArrayFromDrawable(R.drawable.basic_arrage));
+        ActivityVO basicActivity5 = new ActivityVO("사무", "체크 리스트", false, getByteArrayFromDrawable(R.drawable.basic_check_list));
+        ActivityVO basicActivity6 = new ActivityVO("사무", "서류 준비", false, getByteArrayFromDrawable(R.drawable.basic_documentation));
+        ActivityVO basicActivity7 = new ActivityVO("사무", "보고서 작성", false, getByteArrayFromDrawable(R.drawable.basic_report));
+        ActivityVO basicActivity8 = new ActivityVO("사무", "메모", false, getByteArrayFromDrawable(R.drawable.basic_write));
+        ActivityVO basicActivity9 = new ActivityVO("사무", "이메일", false, getByteArrayFromDrawable(R.drawable.email));
+        ActivityVO basicActivity10 = new ActivityVO("사무", "회의", false, getByteArrayFromDrawable(R.drawable.community));
+        ActivityVO basicActivity11 = new ActivityVO("사무", "주식", false, getByteArrayFromDrawable(R.drawable.basic_check_stock));
+        ActivityVO basicActivity11_1 = new ActivityVO("사무", "전화", false, getByteArrayFromDrawable(R.drawable.basic_tel));
+
+        ActivityVO basicActivity1 = new ActivityVO("취미", "사진", false, getByteArrayFromDrawable(R.drawable.basic_photo));
+        ActivityVO basicActivity2 = new ActivityVO("취미", "음악", false, getByteArrayFromDrawable(R.drawable.leasure));
+        ActivityVO basicActivity3 = new ActivityVO("취미", "여행", false, getByteArrayFromDrawable(R.drawable.basic_travel));
+
+        ActivityVO basicActivity17 = new ActivityVO("기타", "메모", false, getByteArrayFromDrawable(R.drawable.basic_write));
+        ActivityVO basicActivity19 = new ActivityVO("기타", "확인", false, getByteArrayFromDrawable(R.drawable.check_icon8));
+        ActivityVO basicActivity21 = new ActivityVO("기타", "확인", false, getByteArrayFromDrawable(R.drawable.basic_drop_by));
+        ActivityVO basicActivity22 = new ActivityVO("기타", "정보", false, getByteArrayFromDrawable(R.drawable.basic_information));
+
+        ActivityVO[] activityVoArray = new ActivityVO[] {basicActivity12, basicActivity13,basicActivity14,basicActivity15,basicActivity16,
+                basicActivity18,basicActivity20,basicActivity23,basicActivity4,basicActivity5,basicActivity6,
+                basicActivity7,basicActivity8,basicActivity9,basicActivity10,basicActivity11,basicActivity11_1,
+                basicActivity1,basicActivity2,basicActivity3,basicActivity17,basicActivity19,
+                basicActivity21,basicActivity22};
+        return  activityVoArray;
+    }
+
+    private void insertActivityIntoDB(ActivityVO[] activityVOs) {
+
+        for(int i = 0; i < activityVOs.length; i++) {
+            DBHelper.dbHelper.insertActivityWithIcon(activityVOs[i]);
+        }
     }
 
     private void makeBasicCategoryData() {
@@ -552,18 +596,20 @@ public class DataHelper {
     /*
      * Drawable을 바이트로 변환
      */
-    public byte[] getByteArrayFromDrawable(Drawable d){
-        Bitmap bitmap = ((BitmapDrawable) d).getBitmap();
+    public byte[] getByteArrayFromDrawable(int drawableId){
+        Drawable drawable = ((Activity) context).getDrawable(drawableId);
+
+        Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
         ByteArrayOutputStream stream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
         byte[] data = stream.toByteArray();
         return data;
     }
 
-    public void saveImageIntoDB(){
-        Drawable drawable = ((Activity) context).getDrawable(R.drawable.email);
-        DBHelper.dbHelper.insertActivityWithIcon(getByteArrayFromDrawable(drawable));
-    }
+//    public void saveImageIntoDB(){
+//        Drawable drawable = ((Activity) context).getDrawable(R.drawable.email);
+//        DBHelper.dbHelper.insertActivityWithIcon(getByteArrayFromDrawable(drawable));
+//    }
 
     public Bitmap getAppIcon(byte[] byteData){
         Bitmap bitmap = BitmapFactory.decodeByteArray(byteData, 0, byteData.length);

@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.ImageView;
 
 import com.example.schedulemanager.R;
+import com.example.schedulemanager.vo.ActivityVO;
 import com.example.schedulemanager.vo.Schedule;
 import com.example.schedulemanager.Util;
 import com.github.mikephil.charting.data.Entry;
@@ -112,7 +113,6 @@ public class DBHelper extends SQLiteOpenHelper {
         values.clear();
         //TODO no에서 sqlite 에러가 나서 이쪽을 막고 나중에 같은 date값을 order로 표시하게
 //        values.put(no_colum, schedule.getNo());
-
         values.put(dateValue_colum, schedule.getDate());
         values.put(activityName_colum, schedule.getActivityName());
         values.put(orderValue_colum, schedule.getOrder());
@@ -123,20 +123,28 @@ public class DBHelper extends SQLiteOpenHelper {
         return result;
     }
 
-    // 스케쥴 1개 추가
-    public long insertActivityWithIcon(byte[] byteData){
+    // 아이콘과 함께 활동 1개 추가
+    public long insertActivityWithIcon(ActivityVO vo){
         ContentValues values = new ContentValues();
         values.clear();
-
-        values.put(activityTable_categoryName_colum, "테스트 카테고리");
-        values.put(activityTable_activityName_colum, "테스트 활동");
-        values.put(activityTable_isFavorite_colum, "테스트 T");
-        values.put(acitivytTable_icon_colum, byteData);
+        values.put(activityTable_categoryName_colum, vo.getCategoryName());
+        values.put(activityTable_activityName_colum, vo.getActivityName());
+        values.put(activityTable_isFavorite_colum, vo.isFavorite());
+        values.put(acitivytTable_icon_colum, vo.getImageData());
 
         long result = DB.insert(activityTableName, null, values);
         return result;
     }
 
+    // 카테고리 1개 추가
+    public long insertCategory(String categoryName){
+        ContentValues values = new ContentValues();
+        values.clear();
+        values.put(categoryTable_categoryName_colum, categoryName);
+
+        long result = DB.insert(categoryTableName, null, values);
+        return result;
+    }
 
     /**
      * 스케쥴 1개 삭제
