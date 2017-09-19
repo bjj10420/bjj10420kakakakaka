@@ -217,7 +217,26 @@ public class DBHelper extends SQLiteOpenHelper {
                 byte[] byteData = c.getBlob(c.getColumnIndex(acitivytTable_icon_colum));
                 Log.d("바이트 데이터 테스트", String.valueOf(DataHelper.dataHelper.getAppIcon(byteData)));
                 ImageView centerIcon = (ImageView) Util.getViewById(context, R.id.centerIcon);
-                centerIcon.setImageBitmap(DataHelper.dataHelper.getAppIcon(byteData));
+//                centerIcon.setImageBitmap(DataHelper.dataHelper.getAppIcon(byteData));
+            }
+        }
+    }
+
+    public void selectAllCategories(){
+        DB = getWritableDatabase();
+
+        String sql = String.format(Locale.getDefault(),
+                "SELECT * FROM %s",
+                categoryTableName
+        );
+
+        Cursor c = DB.rawQuery(sql, null);
+        if(c != null) {
+            while (c.moveToNext()) {
+//                byte[] byteData = c.getBlob(c.getColumnIndex(acitivytTable_icon_colum));
+//                Log.d("바이트 데이터 테스트", String.valueOf(DataHelper.dataHelper.getAppIcon(byteData)));
+//                ImageView centerIcon = (ImageView) Util.getViewById(context, R.id.centerIcon);
+//                centerIcon.setImageBitmap(DataHelper.dataHelper.getAppIcon(byteData));
             }
         }
     }
