@@ -50,6 +50,7 @@ public class UIHelper {
     private PieChart pieChart;                      // 데일리 스케쥴 챠트 화면
     private View copiedView;                        // 드래그를 시작할 때 임시로 저장 해놓는 뷰
     private View firstCalendarCell;                 // 캘린더가 랜더링된 후의 첫 셀뷰
+    private View etcLayout;                         // 기타 버튼을 눌렀을때 나오는 패널
 
     public void initUI(Context context, DataHelper dataHelper) {
         this.context = context;
@@ -76,6 +77,7 @@ public class UIHelper {
         centerIcon = Util.getViewById(context,R.id.centerIcon);
         calendarLayout = Util.getViewById(context,R.id.calendarLayout);
         scheduleLayout = Util.getViewById(context,R.id.scheduleLayout);
+        etcLayout = Util.getViewById(context, R.id.etcLayout);
         backBtn = (TextView) Util.getViewById(context,R.id.back_btn);
         backBtn.setTypeface(dataHelper.getTypeface());
         cancelBtn = Util.getViewById(context,R.id.cancel_btn);
@@ -421,6 +423,13 @@ public class UIHelper {
         v.setVisibility(View.GONE);
     }
 
+    public void setTotalLayoutVisible(boolean isVisible) {
+        totalLayout.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+    }
+
+    public void setEtcLayoutVisible(boolean isVisible) {
+        etcLayout.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+    }
     public View getFirstCalendarCell() {
         return firstCalendarCell;
     }
@@ -435,5 +444,24 @@ public class UIHelper {
 
     public void setSelectedCalendarCellView(View selectedCalendarCellView) {
         this.selectedCalendarCellView = selectedCalendarCellView;
+    }
+
+    /**
+     * 기타 버튼을 눌렀을 때 나오는 패널 초기화
+     */
+    public void initEtcLayout(){
+        makeCategoryList();
+        makeActivityList();
+        initEtcLayoutUI();
+    }
+
+    private void initEtcLayoutUI() {
+    }
+
+    private void makeActivityList() {
+    }
+
+    private void makeCategoryList() {
+
     }
 }
