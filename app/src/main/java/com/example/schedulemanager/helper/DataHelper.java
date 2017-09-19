@@ -1,8 +1,10 @@
 package com.example.schedulemanager.helper;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Context;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.Typeface;
@@ -75,6 +77,8 @@ public class DataHelper {
         // 페이지 초기화
         currentPageIndex = 12;
 
+        saveImageIntoDB();
+        DBHelper.dbHelper.selectAllActivities();
     }
 
     /**
@@ -522,7 +526,11 @@ public class DataHelper {
 
     public void saveImageIntoDB(){
         Drawable drawable = ((Activity) context).getDrawable(R.drawable.email);
-        getByteArrayFromDrawable(drawable);
+        DBHelper.dbHelper.insertActivityWithIcon(getByteArrayFromDrawable(drawable));
     }
 
+    public Bitmap getAppIcon(byte[] byteData){
+        Bitmap bitmap = BitmapFactory.decodeByteArray(byteData, 0, byteData.length);
+        return bitmap;
+    }
 }

@@ -6,7 +6,10 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.view.View;
+import android.widget.ImageView;
 
+import com.example.schedulemanager.R;
 import com.example.schedulemanager.vo.Schedule;
 import com.example.schedulemanager.Util;
 import com.github.mikephil.charting.data.Entry;
@@ -26,6 +29,7 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final int DB_VERSION_1 = 1;
     public static SQLiteDatabase DB;
     public static DBHelper dbHelper;
+    private final Context context;
 
     // 스케쥴 관리 테이블
     public String scheduleTableName = "schedule";
@@ -56,7 +60,7 @@ public class DBHelper extends SQLiteOpenHelper {
     {
         super(context, DATABASE_NAME, null, DB_VERSION_1);
         dbHelper = this;
-
+        this.context = context;
     }
 
     @Override
@@ -118,6 +122,21 @@ public class DBHelper extends SQLiteOpenHelper {
         long result = DB.insert(scheduleTableName, null, values);
         return result;
     }
+
+    // 스케쥴 1개 추가
+    public long insertActivityWithIcon(byte[] byteData){
+        ContentValues values = new ContentValues();
+        values.clear();
+
+        values.put(activityTable_categoryName_colum, "테스트 카테고리");
+        values.put(activityTable_activityName_colum, "테스트 활동");
+        values.put(activityTable_isFavorite_colum, "테스트 T");
+        values.put(acitivytTable_icon_colum, byteData);
+
+        long result = DB.insert(activityTableName, null, values);
+        return result;
+    }
+
 
     /**
      * 스케쥴 1개 삭제
@@ -183,6 +202,25 @@ public class DBHelper extends SQLiteOpenHelper {
             }
         }
      }
+
+    public void selectAllActivities(){
+        DB = getWritableDatabase();
+
+        String sql = String.format(Locale.getDefault(),
+                "SELECT * FROM %s",
+                activityTableName
+        );
+
+        Cursor c = DB.rawQuery(sql, null);
+        if(c != null) {
+            while (c.moveToNext()) {
+                byte[] byteData = c.getBlob(c.getColumnIndex(acitivytTable_icon_colum));
+                Log.d("바이트 데이터 테스트", String.valueOf(DataHelper.dataHelper.getAppIcon(byteData)));
+                ImageView centerIcon = (ImageView) Util.getViewById(context, R.id.centerIcon);
+                centerIcon.setImageBitmap(DataHelper.dataHelper.getAppIcon(byteData));
+            }
+        }
+    }
 
     /**
      * 날짜에 맞는 해쉬맵을 불러와 스케쥴추가
