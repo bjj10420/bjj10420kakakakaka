@@ -26,9 +26,9 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final int DB_VERSION_1 = 1;
     public static SQLiteDatabase DB;
     public static DBHelper dbHelper;
+
     // 스케쥴 관리 테이블
     public String scheduleTableName = "schedule";
-
     // 스케쥴 관리 테이블 컬럼명
     String no_colum = "no";
     String dateValue_colum = "dateValue";
@@ -37,17 +37,20 @@ public class DBHelper extends SQLiteOpenHelper {
     String timeValue_colum = "timeValue";
     String memoValue_colum = "memoValue";
 
-    // 스케쥴 관리 테이블
-    public String acTableName = "schedule";
+    // 카테고리 관리 테이블
+    public String categoryTableName = "category";
+    // 카테고리 관리 테이블 컬럼명(중복은 동일 컬럼명 사용)
+    String categoryTable_no_colum = "no";
+    String categoryTable_categoryName_colum = "categoryName";
 
-    // 스케쥴 관리 테이블 컬럼명
-    String no_colum = "no";
-    String dateValue_colum = "dateValue";
-    String activityName_colum = "activityName";
-    String orderValue_colum = "orderValue";
-    String timeValue_colum = "timeValue";
-    String memoValue_colum = "memoValue";
-
+    // 활동 관리 테이블
+    public String activityTableName = "activity";
+    // 활동 관리 테이블 컬럼명(중복은 동일 컬럼명 사용)
+    String activityTable_no_colum = "no";
+    String activityTable_categoryName_colum = "categoryName";
+    String activityTable_activityName_colum = "activityName";
+    String activityTable_isFavorite_colum = "isFavorite";
+    String acitivytTable_icon_colum = "icon";
 
     public DBHelper(Context context)
     {
@@ -71,12 +74,22 @@ public class DBHelper extends SQLiteOpenHelper {
                       .toString();
         db.execSQL(sql);
 
-        // 2번 쿼리: 즐겨찾기버튼 테이블 생성
-        String sql2 = new StringBuilder("CREATE TABLE favoriteButtons (").append("no")
-                .append(" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, ")
-                .append("activityName").append(" TEXT NOT NULL)")
+        // 2번 쿼리: 카테고리 관리 테이블 생성
+        String sql2 = new StringBuilder("CREATE TABLE ").append(categoryTableName).append(" (")
+                .append(categoryTable_no_colum).append(" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, ")
+                .append(categoryTable_categoryName_colum).append(" TEXT NOT NULL)")
                 .toString();
         db.execSQL(sql2);
+
+        // 3번 쿼리: 활동 관리 테이블 생성
+        String sql3 = new StringBuilder("CREATE TABLE ").append(activityTableName).append(" (")
+                .append(activityTable_no_colum).append(" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, ")
+                .append(activityTable_categoryName_colum).append(" TEXT NOT NULL, ")
+                .append(activityTable_activityName_colum).append(" TEXT NOT NULL, ")
+                .append(activityTable_isFavorite_colum).append(" TEXT NOT NULL, ")
+                .append(acitivytTable_icon_colum).append(" BLOB NOT NULL)")
+                .toString();
+        db.execSQL(sql3);
 
         // 트랜잭션 성공
         db.setTransactionSuccessful();
@@ -95,6 +108,7 @@ public class DBHelper extends SQLiteOpenHelper {
         values.clear();
         //TODO no에서 sqlite 에러가 나서 이쪽을 막고 나중에 같은 date값을 order로 표시하게
 //        values.put(no_colum, schedule.getNo());
+
         values.put(dateValue_colum, schedule.getDate());
         values.put(activityName_colum, schedule.getActivityName());
         values.put(orderValue_colum, schedule.getOrder());

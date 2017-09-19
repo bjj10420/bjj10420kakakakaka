@@ -1,18 +1,25 @@
 package com.example.schedulemanager.helper;
 
+import android.app.Activity;
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.View;
 
+import com.example.schedulemanager.R;
+import com.example.schedulemanager.Util;
 import com.example.schedulemanager.calendar.CalendarPagerAdapter;
 import com.example.schedulemanager.vo.CalendarCellInfo;
 import com.example.schedulemanager.vo.RectAndView;
 import com.example.schedulemanager.vo.Schedule;
 import com.github.mikephil.charting.data.PieDataSet;
 
+import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
@@ -44,9 +51,11 @@ public class DataHelper {
     private HashMap<Integer, RectAndView> rectZoneWithView;   // 이벤트 구역을 나누는 rect존과 매칭하는 뷰를 담는 저장소
     private TreeMap<Integer, RectAndView> rectZoneWithViewSorted;   // 이벤트 구역을 나누는 rect존과 매칭하는 뷰를 담는 저장소
     private int currentPageIndex;
+    private Context context;
 
     public void initData(Context context) {
         dataHelper = this;
+        this.context = context;
         dbHelper = new DBHelper(context);
         /**
          * 1. favorite테이블에서 메인에 등록된 버튼들의 정보를 로딩
@@ -65,6 +74,7 @@ public class DataHelper {
         arroundViewGroup = new HashMap<Integer, View>();
         // 페이지 초기화
         currentPageIndex = 12;
+
     }
 
     /**
@@ -498,4 +508,21 @@ public class DataHelper {
                  : new Date(calendarHelper.getCalendarPagerAdapter().getNextCal().getTimeInMillis()));
         return yearMonth + date;
     }
+
+    /*
+     * Drawable을 바이트로 변환
+     */
+    public byte[] getByteArrayFromDrawable(Drawable d){
+        Bitmap bitmap = ((BitmapDrawable) d).getBitmap();
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] data = stream.toByteArray();
+        return data;
+    }
+
+    public void saveImageIntoDB(){
+        Drawable drawable = ((Activity) context).getDrawable(R.drawable.email);
+        getByteArrayFromDrawable(drawable);
+    }
+
 }
