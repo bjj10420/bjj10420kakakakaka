@@ -96,6 +96,7 @@ public class DataHelper {
     }
 
     private void makeBasicData() {
+        Log.d("makeBasicData", "makeBasicData");
         makeBasicCategoryData();
         makeBasicActivityData();
     }
@@ -150,7 +151,11 @@ public class DataHelper {
     }
 
     private void makeBasicCategoryData() {
-
+        String[] categoryNames = {"취미", "여행", "사무", "생활", "기타"};
+        for(int i = 0; i < categoryNames.length; i++) {
+            String categoryName = categoryNames[i];
+            DBHelper.dbHelper.insertCategory(categoryName);
+        }
     }
 
     /**
@@ -158,7 +163,7 @@ public class DataHelper {
      */
     private boolean isFirstLoading() {
         SharedPreferences sp = context.getSharedPreferences("scheduleManager", Context.MODE_PRIVATE);
-        return sp.getBoolean("isFirstLoading", false);
+        return sp.getBoolean("isFirstLoading", true);
     }
 
     /**
