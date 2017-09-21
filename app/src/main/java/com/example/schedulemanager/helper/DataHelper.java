@@ -22,10 +22,8 @@ import com.github.mikephil.charting.data.PieDataSet;
 
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Locale;
 import java.util.TreeMap;
 
@@ -58,6 +56,33 @@ public class DataHelper {
 
 
     public void initData(Context context) {
+        initField(context);
+        if(isFirstLoading()) {
+            makeBasicData();
+            updateIsFirstLoadingValue();
+        }
+//        saveImageIntoDB();
+//        DBHelper.dbHelper.selectAllActivities();
+        loadBasicDatas();
+    }
+
+    /**
+     * 기본 카테고리 데이터, 활동 데이터를 불러온다
+     */
+    private void loadBasicDatas() {
+        loadBasicCategories();
+        loadBasicActivities();
+    }
+
+    private void loadBasicActivities() {
+
+    }
+
+    private void loadBasicCategories() {
+
+    }
+
+    private void initField(Context context) {
         dataHelper = this;
         this.context = context;
         dbHelper = new DBHelper(context);
@@ -78,20 +103,12 @@ public class DataHelper {
         arroundViewGroup = new HashMap<Integer, View>();
         // 페이지 초기화
         currentPageIndex = 12;
-
-        // 첫 로딩인 경우는 베이직 데이터를 생성
-        if(isFirstLoading()) {
-            makeBasicData();
-            updateIsFirstLoadingValue();
-        }
-//        saveImageIntoDB();
-//        DBHelper.dbHelper.selectAllActivities();
     }
 
     private void updateIsFirstLoadingValue() {
         SharedPreferences sp = context.getSharedPreferences("scheduleManager", Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = sp.edit();
-        editor.putBoolean("isFirstLoading", true);
+        editor.putBoolean("isFirstLoading", false);
         editor.commit();
     }
 
