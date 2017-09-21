@@ -524,6 +524,7 @@ public class UIHelper {
             attachTitle(category);
             View rowLayout = makeRowLayout(category);
             etcLayout.addView(rowLayout);
+            addBottomMargin(rowLayout, (int) Util.convertDpToPixel(10));
         }
     }
 
@@ -541,8 +542,12 @@ public class UIHelper {
     private void attachTitle(String category) {
         TextView textView = makeTitleTextView(category);
         etcLayout.addView(textView);
-        LinearLayout.LayoutParams textViewParams = (LinearLayout.LayoutParams) textView.getLayoutParams();
-        textViewParams.setMargins(0, 0, 0, (int) Util.convertDpToPixel(10));
+        addBottomMargin(textView, (int) Util.convertDpToPixel(10));
+    }
+
+    private void addBottomMargin(View view, int marginValue) {
+        LinearLayout.LayoutParams textViewParams = (LinearLayout.LayoutParams) view.getLayoutParams();
+        textViewParams.setMargins(0, 0, 0, marginValue);
     }
 
     private TextView makeTitleTextView(String category) {
