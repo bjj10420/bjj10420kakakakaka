@@ -73,9 +73,10 @@ public class EventHelper {
                 public boolean onTouch(View view, MotionEvent event) {
 
                     if(isEtcButton(view)) {
-                        Log.d("isEtcButton", "isEtcButton ");
+                        actionEtcButtonClicked();
                         return true;
                     }
+
                     switch (event.getActionMasked()) {
                         case MotionEvent.ACTION_DOWN:
                             actionDownEvent(view, event, buttonPanelId);
@@ -96,6 +97,12 @@ public class EventHelper {
                 }
             });
         }
+    }
+
+    private void actionEtcButtonClicked() {
+        Log.d("isEtcButton", "isEtcButton ");
+        uiHelper.setTotalLayoutVisible(false);
+        uiHelper.setEtcLayoutVisible(true);
     }
 
     /**
