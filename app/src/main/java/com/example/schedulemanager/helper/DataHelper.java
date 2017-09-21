@@ -35,27 +35,27 @@ public class DataHelper {
 
     public static DataHelper dataHelper;
     private DBHelper dbHelper;
-    private HashMap<String, String> iconNameMap;    // 해당하는 텍스트에 매칭시키는 아이콘명이 저장되는 맵
-    private Typeface typeface;                      // 글꼴
+    private HashMap<String, String> iconNameMap;                            // 해당하는 텍스트에 매칭시키는 아이콘명이 저장되는 맵
+    private Typeface typeface;                                              // 글꼴
     private Context context;
 
     private HashMap<Integer, HashMap<Integer, Schedule>> scheduleMapByMonth;// 달력월값을 키로 갖는 스케쥴 저장소
-    private HashMap<Integer, View> currentCalendarViewMap;// 현재 보고있는 달력의 각 칸을 저장해놓는 저장소
-    private HashMap<Integer, View> arroundViewGroup; // 드래그중에 포인터주위의 뷰들
-    private float dX;                               // 드래그 시의 X좌표
-    private float dY;                               // 드래그 시의 Y좌표
-    private PieDataSet dailyScheduleDataSet;        // 데일리 스케쥴 차트용 데이터 저장소
-    private String selectedDateData;                // 선택된 날짜(연월포함)
-    private String yearMonthKey;                    // 선택된 연월
-    private TreeMap<Integer, Schedule> dailyScheduleMap; // 선택된 일자의 하루 스케쥴 맵
-    private String dateValue;                       // 선택된 일
-    private String dateOfToday;                     // 오늘 일자
-    private HashMap<Integer, RectAndView> rectZoneWithView;   // 이벤트 구역을 나누는 rect존과 매칭하는 뷰를 담는 저장소
-    private TreeMap<Integer, RectAndView> rectZoneWithViewSorted;   // 이벤트 구역을 나누는 rect존과 매칭하는 뷰를 담는 저장소
+    private HashMap<Integer, View> currentCalendarViewMap;                  // 현재 보고있는 달력의 각 칸을 저장해놓는 저장소
+    private HashMap<Integer, View> arroundViewGroup;                        // 드래그중에 포인터주위의 뷰들
+    private float dX;                                                       // 드래그 시의 X좌표
+    private float dY;                                                       // 드래그 시의 Y좌표
+    private PieDataSet dailyScheduleDataSet;                                // 데일리 스케쥴 차트용 데이터 저장소
+    private String selectedDateData;                                        // 선택된 날짜(연월포함)
+    private String yearMonthKey;                                            // 선택된 연월
+    private TreeMap<Integer, Schedule> dailyScheduleMap;                    // 선택된 일자의 하루 스케쥴 맵
+    private String dateValue;                                               // 선택된 일
+    private String dateOfToday;                                             // 오늘 일자
+    private HashMap<Integer, RectAndView> rectZoneWithView;                 // 이벤트 구역을 나누는 rect존과 매칭하는 뷰를 담는 저장소
+    private TreeMap<Integer, RectAndView> rectZoneWithViewSorted;           // 이벤트 구역을 나누는 rect존과 매칭하는 뷰를 담는 저장소
     private int currentPageIndex;
 
-    private ArrayList<String> categories;           // 기타버튼 클릭시 활성화되는 패널의 카테고리들
-    private HashMap<String, ArrayList<ActivityVO>> activities;      // 기타버튼 클릭시 활성화되는 패널의 활동들
+    private ArrayList<String> categories;                                   // 기타버튼 클릭시 활성화되는 패널의 카테고리들
+    private HashMap<String, ArrayList<ActivityVO>> activities;              // 기타버튼 클릭시 활성화되는 패널의 활동들
 
 
     public void initData(Context context) {
