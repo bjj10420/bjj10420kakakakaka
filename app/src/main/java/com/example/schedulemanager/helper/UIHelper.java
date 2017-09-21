@@ -401,7 +401,6 @@ public class UIHelper {
         TextView dailyScheduleDateText = (TextView) Util.getViewById(context, R.id.dailyScheduleDateText);
 //        dailyScheduleDateText.setText(sb);
         setTextWithFont(dailyScheduleDateText, sb.toString());
-
     }
 
     public View getCopiedView() {
