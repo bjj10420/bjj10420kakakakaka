@@ -14,9 +14,11 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import com.example.schedulemanager.R;
 import com.example.schedulemanager.vo.ActivityVO;
@@ -225,9 +227,9 @@ public class UIHelper {
     private LinearLayout makePanelButtonView(ImageView iconView, TextView textView) {
         LinearLayout buttonView = new LinearLayout(context);
         // 각 버튼 뷰 레이아웃 파라메터
-        LinearLayout.LayoutParams buttonViewParams = new LinearLayout.LayoutParams(0,
+        LinearLayout.LayoutParams buttonViewParams = new LinearLayout.LayoutParams(      (int) Util.convertDpToPixel(80),
                 (int) Util.convertDpToPixel(65));
-        buttonViewParams.weight = 1;
+//        buttonViewParams.weight = 1;
         buttonView.setOrientation(LinearLayout.VERTICAL);
         buttonView.setGravity(Gravity.CENTER);
         buttonView.setLayoutParams(buttonViewParams);
@@ -522,9 +524,37 @@ public class UIHelper {
         for(String category : DataHelper.dataHelper.getCategories()){
             attachTitle(category);
             View rowLayout = makeRowLayout(category);
-            etcLayout.addView(rowLayout);
-            addBottomMargin(rowLayout, (int) Util.convertDpToPixel(10));
+            addExtraViewTo(rowLayout, category);
         }
+    }
+
+    private void addExtraViewTo(View rowLayout, String category) {
+        if(getActivityNumberAboutCategory(category) > 5)
+            addCoveredRowLayoutWithScrollView(rowLayout);
+        else
+            addRowLayout(rowLayout);
+    }
+
+    private void addCoveredRowLayoutWithScrollView(View rowLayout) {
+        Log.d("addCoveredRowLayoutWithScrollView", "addCoveredRowLayoutWithScrollView");
+        HorizontalScrollView scroll = makeScrollView(rowLayout);
+        etcLayout.addView(scroll);
+        addBottomMargin(scroll, (int) Util.convertDpToPixel(10));
+    }
+
+    private HorizontalScrollView makeScrollView(View rowLayout) {
+        HorizontalScrollView scroll = new HorizontalScrollView(context);
+        scroll.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT));
+
+        scroll.addView(rowLayout);
+        return scroll;
+    }
+
+    private void addRowLayout(View rowLayout) {
+        Log.d("addRowLayout", "addRowLayout");
+        etcLayout.addView(rowLayout);
+        addBottomMargin(rowLayout, (int) Util.convertDpToPixel(10));
     }
 
     private View makeRowLayout(String category) {
@@ -574,4 +604,8 @@ public class UIHelper {
         return rowLayout;
     }
 
+    private int getActivityNumberAboutCategory(String category){
+        ArrayList<ActivityVO> activities = DataHelper.dataHelper.getActivities().get(category);
+        return activities.size();
+    }
 }
