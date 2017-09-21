@@ -216,7 +216,7 @@ public class DBHelper extends SQLiteOpenHelper {
         DB = getWritableDatabase();
 
         String sql = String.format(Locale.getDefault(),
-                "SELECT * FROM %s where %s = %s",
+                "SELECT * FROM %s where %s = '%s'",
                 activityTableName, activityTable_categoryName_colum, categoryName
         );
 
