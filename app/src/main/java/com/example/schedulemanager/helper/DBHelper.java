@@ -216,15 +216,26 @@ public class DBHelper extends SQLiteOpenHelper {
         DB = getWritableDatabase();
 
         String sql = String.format(Locale.getDefault(),
-                "SELECT * FROM %s where " + activityTable_categoryName_colum + " = " + categoryName,
-                activityTableName
+                "SELECT * FROM %s where %s = %s",
+                activityTableName, activityTable_categoryName_colum, categoryName
         );
+
+//        String sql = String.format(Locale.getDefault(),
+//                "SELECT * FROM %s",
+//                activityTableName
+//        );
 
         Cursor c = DB.rawQuery(sql, null);
         if(c != null) {
             while (c.moveToNext()) {
+                ActivityVO activityVO = new ActivityVO();
+                activityVO.setCategoryName(c.getString(c.getColumnIndex(activityTable_categoryName_colum)));
+                activityVO.setActivityName(c.getString(c.getColumnIndex(activityTable_activityName_colum)));
+                activityVO.setFavorite(c.getString(c.getColumnIndex(activityTable_isFavorite_colum)));
                 byte[] byteData = c.getBlob(c.getColumnIndex(acitivytTable_icon_colum));
-                Log.d("바이트 데이터 테스트", String.valueOf(DataHelper.dataHelper.getAppIcon(byteData)));
+                activityVO.setImageData(byteData);
+                activities.add(activityVO);
+//                Log.d("바이트 데이터 테스트", String.valueOf(DataHelper.dataHelper.getAppIcon(byteData)));
                 ImageView centerIcon = (ImageView) Util.getViewById(context, R.id.centerIcon);
 //                centerIcon.setImageBitmap(DataHelper.dataHelper.getAppIcon(byteData));
             }

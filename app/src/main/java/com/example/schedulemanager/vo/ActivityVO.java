@@ -6,10 +6,13 @@ package com.example.schedulemanager.vo;
 public class ActivityVO {
     String categoryName;
     String activityName;
-    boolean isFavorite;
+    String isFavorite;
     byte[] imageData;
 
-    public ActivityVO(String categoryName, String activityName, boolean isFavorite, byte[] imageData) {
+    public ActivityVO() {
+    }
+
+    public ActivityVO(String categoryName, String activityName, String isFavorite, byte[] imageData) {
         this.categoryName = categoryName;
         this.activityName = activityName;
         this.isFavorite = isFavorite;
@@ -32,11 +35,11 @@ public class ActivityVO {
         this.activityName = activityName;
     }
 
-    public boolean isFavorite() {
+    public String isFavorite() {
         return isFavorite;
     }
 
-    public void setFavorite(boolean favorite) {
+    public void setFavorite(String favorite) {
         isFavorite = favorite;
     }
 
