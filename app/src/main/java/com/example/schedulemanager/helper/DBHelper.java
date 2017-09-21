@@ -16,6 +16,7 @@ import com.example.schedulemanager.Util;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieEntry;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Locale;
 
@@ -211,11 +212,11 @@ public class DBHelper extends SQLiteOpenHelper {
         }
      }
 
-    public void selectAllActivities(){
+    public void selectActivities(String categoryName, ArrayList<ActivityVO> activities){
         DB = getWritableDatabase();
 
         String sql = String.format(Locale.getDefault(),
-                "SELECT * FROM %s",
+                "SELECT * FROM %s where " + activityTable_categoryName_colum + " = " + categoryName,
                 activityTableName
         );
 
@@ -230,7 +231,7 @@ public class DBHelper extends SQLiteOpenHelper {
         }
     }
 
-    public void selectAllCategories(){
+    public void selectAllCategories(ArrayList<String> categories){
         DB = getWritableDatabase();
 
         String sql = String.format(Locale.getDefault(),
@@ -241,10 +242,7 @@ public class DBHelper extends SQLiteOpenHelper {
         Cursor c = DB.rawQuery(sql, null);
         if(c != null) {
             while (c.moveToNext()) {
-//                byte[] byteData = c.getBlob(c.getColumnIndex(acitivytTable_icon_colum));
-//                Log.d("바이트 데이터 테스트", String.valueOf(DataHelper.dataHelper.getAppIcon(byteData)));
-//                ImageView centerIcon = (ImageView) Util.getViewById(context, R.id.centerIcon);
-//                centerIcon.setImageBitmap(DataHelper.dataHelper.getAppIcon(byteData));
+                  categories.add(c.getString(c.getColumnIndex(categoryTable_categoryName_colum)));
             }
         }
     }

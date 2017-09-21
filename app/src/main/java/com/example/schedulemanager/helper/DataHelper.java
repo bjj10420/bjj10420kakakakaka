@@ -22,6 +22,7 @@ import com.github.mikephil.charting.data.PieDataSet;
 
 import java.io.ByteArrayOutputStream;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Locale;
@@ -53,6 +54,8 @@ public class DataHelper {
     private TreeMap<Integer, RectAndView> rectZoneWithViewSorted;   // 이벤트 구역을 나누는 rect존과 매칭하는 뷰를 담는 저장소
     private int currentPageIndex;
 
+    private ArrayList<String> categories;           // 기타버튼 클릭시 활성화되는 패널의 카테고리들
+    private HashMap<String, ArrayList<ActivityVO>> activities;      // 기타버튼 클릭시 활성화되는 패널의 활동들
 
 
     public void initData(Context context) {
@@ -79,7 +82,8 @@ public class DataHelper {
     }
 
     private void loadBasicCategories() {
-
+        DBHelper.dbHelper.selectAllCategories(categories);
+        Log.d("카테고리 불러오기체크", String.valueOf(categories));
     }
 
     private void initField(Context context) {
@@ -103,6 +107,9 @@ public class DataHelper {
         arroundViewGroup = new HashMap<Integer, View>();
         // 페이지 초기화
         currentPageIndex = 12;
+
+        categories = new ArrayList<String>();
+        activities = new HashMap<String, ArrayList<ActivityVO>>();
     }
 
     private void updateIsFirstLoadingValue() {
