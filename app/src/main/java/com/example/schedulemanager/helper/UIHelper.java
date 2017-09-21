@@ -539,19 +539,23 @@ public class UIHelper {
     }
 
     private void attachTitle(String category) {
+        TextView textView = makeTitleTextView(category);
+        etcLayout.addView(textView);
+        LinearLayout.LayoutParams textViewParams = (LinearLayout.LayoutParams) textView.getLayoutParams();
+        textViewParams.setMargins(0, 0, 0, (int) Util.convertDpToPixel(10));
+    }
+
+    private TextView makeTitleTextView(String category) {
+        TextView textView = new TextView(context);
         float textHeight = Util.convertDpToPixel(15);
         ViewGroup.LayoutParams textParams = new ViewGroup.LayoutParams((int) Util.convertDpToPixel(50),
                 (int) textHeight);
-        TextView textView = new TextView(context);
         String textData = category;
         setTextWithFont(textView, textData);
         textView.setGravity(Gravity.CENTER);
         textView.setLayoutParams(textParams);
-
         textView.setTextColor(Color.parseColor("#404040"));
-        etcLayout.addView(textView);
-        LinearLayout.LayoutParams textViewParams = (LinearLayout.LayoutParams) textView.getLayoutParams();
-        textViewParams.setMargins(0, 0, 0, (int) Util.convertDpToPixel(10));
+        return textView;
     }
 
     private LinearLayout makeRowLayout() {
