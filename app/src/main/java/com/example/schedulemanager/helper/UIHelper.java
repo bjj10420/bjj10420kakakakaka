@@ -181,6 +181,7 @@ public class UIHelper {
      * 이게 진짜
      */
     private void initRowLayout(LinearLayout rowLayout, ArrayList<ActivityVO> activityVOs) {
+
         for(ActivityVO activityVO : activityVOs){
             View buttonView = setButtonView(activityVO);
             rowLayout.addView(buttonView);
@@ -520,6 +521,7 @@ public class UIHelper {
      */
     public void initEtcLayout(){
         for(String category : DataHelper.dataHelper.getCategories()){
+            attachTitle(category);
             View rowLayout = makeRowLayout(category);
             etcLayout.addView(rowLayout);
         }
@@ -536,6 +538,19 @@ public class UIHelper {
         initRowLayout(rowLayout, activities);
     }
 
+    private void attachTitle(String category) {
+        float textHeight = Util.convertDpToPixel(15);
+        ViewGroup.LayoutParams textParams = new ViewGroup.LayoutParams((int) Util.convertDpToPixel(50),
+                (int) textHeight);
+        TextView textView = new TextView(context);
+        String textData = category;
+        setTextWithFont(textView, textData);
+        textView.setGravity(Gravity.CENTER);
+        textView.setLayoutParams(textParams);
+        textView.setTextColor(Color.parseColor("#404040"));
+        etcLayout.addView(textView);
+    }
+
     private LinearLayout makeRowLayout() {
         LinearLayout rowLayout = new LinearLayout(context);
         LinearLayout.LayoutParams rowLayoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
@@ -544,13 +559,4 @@ public class UIHelper {
         return rowLayout;
     }
 
-    private void initEtcLayoutUI() {
-    }
-
-    private void makeActivityList() {
-    }
-
-    private void makeCategoryList() {
-
-    }
 }
