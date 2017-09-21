@@ -547,8 +547,11 @@ public class UIHelper {
         setTextWithFont(textView, textData);
         textView.setGravity(Gravity.CENTER);
         textView.setLayoutParams(textParams);
+
         textView.setTextColor(Color.parseColor("#404040"));
         etcLayout.addView(textView);
+        LinearLayout.LayoutParams textViewParams = (LinearLayout.LayoutParams) textView.getLayoutParams();
+        textViewParams.setMargins(0, 0, 0, (int) Util.convertDpToPixel(10));
     }
 
     private LinearLayout makeRowLayout() {
