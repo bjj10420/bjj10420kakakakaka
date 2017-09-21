@@ -552,15 +552,19 @@ public class UIHelper {
 
     private TextView makeTitleTextView(String category) {
         TextView textView = new TextView(context);
+        String textData = category;
+        setTextWithFont(textView, textData);
+        setTextViewBaseOptions(textView);
+        return textView;
+    }
+
+    private void setTextViewBaseOptions(TextView textView) {
         float textHeight = Util.convertDpToPixel(15);
         ViewGroup.LayoutParams textParams = new ViewGroup.LayoutParams((int) Util.convertDpToPixel(50),
                 (int) textHeight);
-        String textData = category;
-        setTextWithFont(textView, textData);
         textView.setGravity(Gravity.CENTER);
         textView.setLayoutParams(textParams);
         textView.setTextColor(Color.parseColor("#404040"));
-        return textView;
     }
 
     private LinearLayout makeRowLayout() {
