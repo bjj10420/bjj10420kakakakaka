@@ -648,4 +648,12 @@ public class DataHelper {
         Bitmap bitmap = BitmapFactory.decodeByteArray(byteData, 0, byteData.length);
         return bitmap;
     }
+
+    public HashMap<String, ArrayList<ActivityVO>> getActivities() {
+        return activities;
+    }
+
+    public ArrayList<String> getCategories() {
+        return categories;
+    }
 }

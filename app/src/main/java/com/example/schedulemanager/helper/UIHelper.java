@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
@@ -13,14 +14,15 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.example.schedulemanager.R;
+import com.example.schedulemanager.vo.ActivityVO;
 import com.example.schedulemanager.vo.Schedule;
 import com.example.schedulemanager.Util;
 import com.github.mikephil.charting.charts.PieChart;
-import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
@@ -28,7 +30,6 @@ import com.github.mikephil.charting.utils.ColorTemplate;
 
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.TreeMap;
 
@@ -50,38 +51,47 @@ public class UIHelper {
     private PieChart pieChart;                      // 데일리 스케쥴 챠트 화면
     private View copiedView;                        // 드래그를 시작할 때 임시로 저장 해놓는 뷰
     private View firstCalendarCell;                 // 캘린더가 랜더링된 후의 첫 셀뷰
-    private View etcLayout;                         // 기타 버튼을 눌렀을때 나오는 패널
+    private LinearLayout etcLayout;                 // 기타 버튼을 눌렀을때 나오는 패널
 
     public void initUI(Context context, DataHelper dataHelper) {
-        this.context = context;
-        this.dataHelper = dataHelper;
-
+        initFields(context, dataHelper);
         //TODO 스트링 리스트 파라메터를 나중에 DB에서 읽어오게 해야 함
         //TODO 나중에 버튼 패널의 아이콘들에 weight를 줘야한다
-        ArrayList<String> testList = new ArrayList<String>();
-        ArrayList<String> testList2 = new ArrayList<String>();
+        initButtonPanel(R.id.buttonPanel, testCode());
+        initButtonPanel(R.id.buttonPanel2, testCode2());
+        initEtcLayout();
+    }
 
+    private ArrayList<String> testCode() {
+        ArrayList<String> testList = new ArrayList<String>();
         testList.add("교류");
         testList.add("이메일");
         testList.add("여가");
         testList.add("만남");
+        return testList;
+    }
+    private ArrayList<String> testCode2() {
+        ArrayList<String> testList2 = new ArrayList<String>();
         testList2.add("약속");
         testList2.add("독서");
         testList2.add("학교");
         testList2.add("기타");
+        return testList2;
+    }
 
-        initButtonPanel(R.id.buttonPanel, testList);
-        initButtonPanel(R.id.buttonPanel2, testList2);
+    private void initFields(Context context, DataHelper dataHelper) {
+        this.context = context;
+        this.dataHelper = dataHelper;
 
-        totalLayout = (RelativeLayout) Util.getViewById(context,R.id.totalLayout);
-        centerIcon = Util.getViewById(context,R.id.centerIcon);
-        calendarLayout = Util.getViewById(context,R.id.calendarLayout);
-        scheduleLayout = Util.getViewById(context,R.id.scheduleLayout);
-        etcLayout = Util.getViewById(context, R.id.etcLayout);
-        backBtn = (TextView) Util.getViewById(context,R.id.back_btn);
-        backBtn.setTypeface(dataHelper.getTypeface());
-        cancelBtn = Util.getViewById(context,R.id.cancel_btn);
-        pieChart = (PieChart) Util.getViewById(context,R.id.chart);
+        totalLayout = (RelativeLayout) Util.getViewById(this.context,R.id.totalLayout);
+        centerIcon = Util.getViewById(this.context,R.id.centerIcon);
+        calendarLayout = Util.getViewById(this.context,R.id.calendarLayout);
+        scheduleLayout = Util.getViewById(this.context,R.id.scheduleLayout);
+        etcLayout = (LinearLayout)Util.getViewById(this.context, R.id.etcLayout);
+        backBtn = (TextView) Util.getViewById(this.context,R.id.back_btn);
+        backBtn.setTypeface(this.dataHelper.getTypeface());
+        cancelBtn = Util.getViewById(this.context,R.id.cancel_btn);
+        pieChart = (PieChart) Util.getViewById(this.context,R.id.chart);
     }
 
     /**
@@ -168,12 +178,71 @@ public class UIHelper {
     }
 
     /**
+     * 이게 진짜
+     */
+    private void initRowLayout(LinearLayout rowLayout, ArrayList<ActivityVO> activityVOs) {
+        for(ActivityVO activityVO : activityVOs){
+            View buttonView = setButtonView(activityVO);
+            rowLayout.addView(buttonView);
+        }
+    }
+
+    private View setButtonView(ActivityVO activityVO) {
+        ImageView iconView = makePanelIconView(activityVO);
+        TextView textView = makeTextView(activityVO);
+        LinearLayout panelButtonView = makePanelButtonView(iconView, textView);
+        panelButtonView.setTag(activityVO.getActivityName());
+
+        return panelButtonView;
+    }
+
+    private TextView makeTextView(ActivityVO activityVO) {
+        float textHeight = Util.convertDpToPixel(15);
+        ViewGroup.LayoutParams textParams = new ViewGroup.LayoutParams((int) Util.convertDpToPixel(50),
+                (int) textHeight);
+        TextView textView = new TextView(context);
+        String textData = activityVO.getActivityName();
+        setTextWithFont(textView, textData);
+        textView.setGravity(Gravity.CENTER);
+        textView.setLayoutParams(textParams);
+        textView.setTextColor(Color.parseColor("#404040"));
+        return textView;
+    }
+
+    private ImageView makePanelIconView(ActivityVO activityVO) {
+        ImageView iconView = new ImageView(context);
+        float valueOf50DP = Util.convertDpToPixel(50);
+
+        // 각 버튼 레이아웃 파라메터
+        ViewGroup.LayoutParams iconParams = new ViewGroup.LayoutParams((int) valueOf50DP,
+                (int) valueOf50DP);
+        iconView.setImageBitmap(BitmapFactory.decodeByteArray(activityVO.getImageData(),0,activityVO.getImageData().length));
+        iconView.setLayoutParams(iconParams);
+        return iconView;
+    }
+
+    private LinearLayout makePanelButtonView(ImageView iconView, TextView textView) {
+        LinearLayout buttonView = new LinearLayout(context);
+        // 각 버튼 뷰 레이아웃 파라메터
+        LinearLayout.LayoutParams buttonViewParams = new LinearLayout.LayoutParams(0,
+                (int) Util.convertDpToPixel(65));
+        buttonViewParams.weight = 1;
+        buttonView.setOrientation(LinearLayout.VERTICAL);
+        buttonView.setGravity(Gravity.CENTER);
+        buttonView.setLayoutParams(buttonViewParams);
+        buttonView.addView(iconView);
+        buttonView.addView(textView);
+
+        return buttonView;
+    }
+
+    /**
      * 각 버튼뷰를 생성
      */
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private View makeButtonView(Drawable background, String textData, int width, int height) {
         // 각 버튼의 높이
-        float buttonHeight = Util.convertDpToPixel(50);
+        float valueOf50DP = Util.convertDpToPixel(50);
         // 각 텍스트의 높이
         float textHeight = Util.convertDpToPixel(15);
         // 각 버튼 뷰 레이아웃 파라메터
@@ -181,10 +250,10 @@ public class UIHelper {
                 height);
 
         // 각 버튼 레이아웃 파라메터
-        ViewGroup.LayoutParams iconParams = new ViewGroup.LayoutParams((int) buttonHeight,
-                (int) buttonHeight);
+        ViewGroup.LayoutParams iconParams = new ViewGroup.LayoutParams((int) valueOf50DP,
+                (int) valueOf50DP);
         // 각 텍스트 파라메터
-        ViewGroup.LayoutParams textParams = new ViewGroup.LayoutParams((int) buttonHeight,
+        ViewGroup.LayoutParams textParams = new ViewGroup.LayoutParams((int) valueOf50DP,
                 (int) textHeight);
 
         // 버튼뷰 설정
@@ -450,9 +519,29 @@ public class UIHelper {
      * 기타 버튼을 눌렀을 때 나오는 패널 초기화
      */
     public void initEtcLayout(){
-        makeCategoryList();
-        makeActivityList();
-        initEtcLayoutUI();
+        for(String category : DataHelper.dataHelper.getCategories()){
+            View rowLayout = makeRowLayout(category);
+            etcLayout.addView(rowLayout);
+        }
+    }
+
+    private View makeRowLayout(String category) {
+        LinearLayout rowLayout = makeRowLayout();
+        composeRowLayout(rowLayout, category);
+        return rowLayout;
+    }
+
+    private void composeRowLayout(LinearLayout rowLayout, String category) {
+        ArrayList<ActivityVO> activities = DataHelper.dataHelper.getActivities().get(category);
+        initRowLayout(rowLayout, activities);
+    }
+
+    private LinearLayout makeRowLayout() {
+        LinearLayout rowLayout = new LinearLayout(context);
+        LinearLayout.LayoutParams rowLayoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                LinearLayout.LayoutParams.WRAP_CONTENT);
+        rowLayout.setLayoutParams(rowLayoutParams);
+        return rowLayout;
     }
 
     private void initEtcLayoutUI() {
