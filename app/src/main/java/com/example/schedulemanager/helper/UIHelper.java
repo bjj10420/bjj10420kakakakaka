@@ -534,7 +534,7 @@ public class UIHelper {
         else
             addRowLayout(rowLayout);
     }
-
+//
     private void addCoveredRowLayoutWithScrollView(View rowLayout) {
         Log.d("addCoveredRowLayoutWithScrollView", "addCoveredRowLayoutWithScrollView");
         HorizontalScrollView scroll = makeScrollView(rowLayout);
