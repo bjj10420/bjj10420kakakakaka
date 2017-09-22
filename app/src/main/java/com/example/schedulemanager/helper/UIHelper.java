@@ -53,7 +53,8 @@ public class UIHelper {
     private PieChart pieChart;                      // 데일리 스케쥴 챠트 화면
     private View copiedView;                        // 드래그를 시작할 때 임시로 저장 해놓는 뷰
     private View firstCalendarCell;                 // 캘린더가 랜더링된 후의 첫 셀뷰
-    private LinearLayout etcLayout;                 // 기타 버튼을 눌렀을때 나오는 패널
+    private RelativeLayout etcLayout;               // 기타 버튼을 눌렀을때 나오는 패널
+    private LinearLayout etcContentsLayout;         // 기타 버튼 패널의 컨텐츠부분
 
     public void initUI(Context context, DataHelper dataHelper) {
         initFields(context, dataHelper);
@@ -89,7 +90,8 @@ public class UIHelper {
         centerIcon = Util.getViewById(this.context,R.id.centerIcon);
         calendarLayout = Util.getViewById(this.context,R.id.calendarLayout);
         scheduleLayout = Util.getViewById(this.context,R.id.scheduleLayout);
-        etcLayout = (LinearLayout)Util.getViewById(this.context, R.id.etcLayout);
+        etcLayout = (RelativeLayout)Util.getViewById(this.context, R.id.etcLayout);
+        etcContentsLayout = (LinearLayout)Util.getViewById(this.context, R.id.etcContentsLayout);
         backBtn = (TextView) Util.getViewById(this.context,R.id.back_btn);
         backBtn.setTypeface(this.dataHelper.getTypeface());
         cancelBtn = Util.getViewById(this.context,R.id.cancel_btn);
@@ -538,7 +540,7 @@ public class UIHelper {
     private void addCoveredRowLayoutWithScrollView(View rowLayout) {
         Log.d("addCoveredRowLayoutWithScrollView", "addCoveredRowLayoutWithScrollView");
         HorizontalScrollView scroll = makeScrollView(rowLayout);
-        etcLayout.addView(scroll);
+        etcContentsLayout.addView(scroll);
         addBottomMargin(scroll, (int) Util.convertDpToPixel(10));
     }
 
@@ -553,7 +555,7 @@ public class UIHelper {
 
     private void addRowLayout(View rowLayout) {
         Log.d("addRowLayout", "addRowLayout");
-        etcLayout.addView(rowLayout);
+        etcContentsLayout.addView(rowLayout);
         addBottomMargin(rowLayout, (int) Util.convertDpToPixel(10));
     }
 
@@ -570,7 +572,7 @@ public class UIHelper {
 
     private void attachTitle(String category) {
         TextView textView = makeTitleTextView(category);
-        etcLayout.addView(textView);
+        etcContentsLayout.addView(textView);
         addBottomMargin(textView, (int) Util.convertDpToPixel(10));
     }
 
