@@ -16,6 +16,7 @@
         android:paddingTop="10dp"></LinearLayout>
 
     <LinearLayout
+        android:id="@+id/etcBottomButtonLayout"
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:layout_alignParentBottom="true"
@@ -28,7 +29,7 @@
             android:layout_weight="1"
             android:background="@drawable/bottom_button_bg"
             android:text="추가"
-            android:textColor="#404040" />
+            android:textColor="#ffffff" />
 
         <Button
             android:layout_width="0dp"
@@ -36,7 +37,7 @@
             android:layout_weight="1"
             android:background="@drawable/bottom_button_bg"
             android:text="관리"
-            android:textColor="#404040" />
+            android:textColor="#ffffff" />
 
         <Button
             android:layout_width="0dp"
@@ -44,7 +45,7 @@
             android:layout_weight="1"
             android:background="@drawable/bottom_button_bg"
             android:text="닫기"
-            android:textColor="#404040" />
+            android:textColor="#ffffff" />
 
     </LinearLayout>
 

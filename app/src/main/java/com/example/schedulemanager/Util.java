@@ -4,9 +4,12 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Rect;
+import android.graphics.Typeface;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
 
 /**
  * 유틸리티 클래스
@@ -108,5 +111,26 @@ public class Util {
     public static View getViewById(Context context,int resourceId){
         View view = ((Activity) context).findViewById(resourceId);
         return view;
+    }
+
+    /**
+     * 부모뷰가 포함하는 모든 자식뷰들의 폰트를 설정해준다
+     */
+    public static void setFontAllChildView(Context context, final View parentView, Typeface typeface, boolean isBold) {
+        try {
+            if (parentView instanceof ViewGroup) {
+                ViewGroup vg = (ViewGroup) parentView;
+                for (int i = 0; i < vg.getChildCount(); i++) {
+                    View child = vg.getChildAt(i);
+                    setFontAllChildView(context, child, typeface, isBold);
+                }
+            } else if (parentView instanceof TextView ) {
+                if(isBold)
+                    ((TextView) parentView).setTypeface(typeface, Typeface.BOLD);
+                else
+                    ((TextView) parentView).setTypeface(typeface);
+            }
+        } catch (Exception e) {
+        }
     }
 }

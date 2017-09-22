@@ -55,6 +55,8 @@ public class UIHelper {
     private View firstCalendarCell;                 // 캘린더가 랜더링된 후의 첫 셀뷰
     private RelativeLayout etcLayout;               // 기타 버튼을 눌렀을때 나오는 패널
     private LinearLayout etcContentsLayout;         // 기타 버튼 패널의 컨텐츠부분
+    private LinearLayout etcBottomButtonLayout;     // 기타 버튼 패널의 바텀 버튼 부분
+
 
     public void initUI(Context context, DataHelper dataHelper) {
         initFields(context, dataHelper);
@@ -63,6 +65,15 @@ public class UIHelper {
         initButtonPanel(R.id.buttonPanel, testCode());
         initButtonPanel(R.id.buttonPanel2, testCode2());
         initEtcLayout();
+        adaptorFont();
+    }
+
+    private void adaptorFont() {
+        adaptorEtcBottomLayout();
+    }
+
+    private void adaptorEtcBottomLayout() {
+        Util.setFontAllChildView(context, etcBottomButtonLayout, dataHelper.getTypeface(), true);
     }
 
     private ArrayList<String> testCode() {
@@ -92,6 +103,7 @@ public class UIHelper {
         scheduleLayout = Util.getViewById(this.context,R.id.scheduleLayout);
         etcLayout = (RelativeLayout)Util.getViewById(this.context, R.id.etcLayout);
         etcContentsLayout = (LinearLayout)Util.getViewById(this.context, R.id.etcContentsLayout);
+        etcBottomButtonLayout = (LinearLayout)Util.getViewById(this.context, R.id.etcBottomButtonLayout);
         backBtn = (TextView) Util.getViewById(this.context,R.id.back_btn);
         backBtn.setTypeface(this.dataHelper.getTypeface());
         cancelBtn = Util.getViewById(this.context,R.id.cancel_btn);
