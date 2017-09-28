@@ -11,8 +11,6 @@ import com.example.schedulemanager.helper.UIHelper;
 public class ETCPanelEvent implements View.OnClickListener{
 
     ETCPanel etcPanel;
-    private int originalViewLeft;
-    private int originalViewTop;
     View copiedView;
     private int _xDelta;
     private int _yDelta;
@@ -44,16 +42,10 @@ public class ETCPanelEvent implements View.OnClickListener{
         getCopiedView();
         setCopiedViewTouchEvent();
         setCopiedViewPosition(originalViewLeft, originalViewTop);
-        saveOriginalValues(originalViewLeft, originalViewTop);
     }
 
     private void getCopiedView() {
         copiedView = UIHelper.uiHelper.getCopiedView();
-    }
-
-    private void saveOriginalValues(int originalViewLeft, int originalViewTop) {
-        this.originalViewLeft = originalViewLeft;
-        this.originalViewTop = originalViewTop;
     }
 
     private void setCopiedViewTouchEvent() {
@@ -88,14 +80,6 @@ public class ETCPanelEvent implements View.OnClickListener{
                 return true;
             }
         });
-    }
-
-    private void actionMoveEvent(MotionEvent event) {
-        Log.d("actionMoveEvent", "actionMoveEvent");
-
-
-        copiedView.setY(event.getRawY());
-        copiedView.setX(event.getRawX());
     }
 
     private int getPositionValue(int[] numberArray, int arrayIndex, View v){
