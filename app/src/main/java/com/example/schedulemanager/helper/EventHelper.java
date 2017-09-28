@@ -116,7 +116,7 @@ public class EventHelper {
     private void actionDownEvent(View view, MotionEvent event, int buttonPanelId) {
 
         uiHelper.getTotalLayout().removeView(uiHelper.getCopiedView());
-        uiHelper.hoverView(view);
+        uiHelper.hoverView(view, false);
 
         // dX설정
         dataHelper.setdX(view.getX() - event.getRawX());

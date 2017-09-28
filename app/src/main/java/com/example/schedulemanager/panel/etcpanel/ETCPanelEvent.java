@@ -21,6 +21,20 @@ public class ETCPanelEvent implements View.OnClickListener{
       }
 
     private void panelItemClickEVent(View v) {
+        panelLayoutOff();
+        hoverCopiedView(v);
+    }
+
+    // 뷰를 복사하여 클릭된 지점의 뷰와 같은 위치에 넣음
+    private void hoverCopiedView(View v) {
+        int[] numberArray = new int[2];
+        v.getLocationInWindow(numberArray);
+        int originalViewLeft = numberArray[0];
+        int originalViewTop = numberArray[1];
+        UIHelper.uiHelper.hoverView(v, true);
+    }
+
+    private void panelLayoutOff() {
         etcPanel.setEtcLayoutVisible(false);
         UIHelper.uiHelper.setTotalLayoutVisible(true);
     }
