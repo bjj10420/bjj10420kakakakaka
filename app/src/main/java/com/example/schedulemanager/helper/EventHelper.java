@@ -85,7 +85,7 @@ public class EventHelper {
                             break;
 
                         case MotionEvent.ACTION_MOVE:
-                            actionMoveEvent(view, event);
+                            actionMoveEvent(event);
                             break;
 
                         case MotionEvent.ACTION_UP:
@@ -136,10 +136,9 @@ public class EventHelper {
 
     /**
      * 아이콘 버튼 드래그 중 이벤트
-     * @param view
      * @param event
      */
-    private void actionMoveEvent(View view, MotionEvent event) {
+    public void actionMoveEvent(MotionEvent event) {
         View copiedView = uiHelper.getCopiedView();
         setCopiedViewVisible(copiedView, event);
         // 메인모드 처리

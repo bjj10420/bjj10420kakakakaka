@@ -1,15 +1,21 @@
 package com.example.schedulemanager.panel.etcpanel;
 
+import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.RelativeLayout;
 
+import com.example.schedulemanager.helper.EventHelper;
 import com.example.schedulemanager.helper.UIHelper;
 
-/**
- * Created by bjj on 2017-09-28.
- */
 public class ETCPanelEvent implements View.OnClickListener{
 
     ETCPanel etcPanel;
+    private int originalViewLeft;
+    private int originalViewTop;
+    View copiedView;
+    private int _xDelta;
+    private int _yDelta;
 
     public ETCPanelEvent(ETCPanel etcPanel) {
         this.etcPanel = etcPanel;
@@ -35,7 +41,61 @@ public class ETCPanelEvent implements View.OnClickListener{
         int[] numberArray = new int[2];
         int originalViewLeft = getPositionValue(numberArray, 0, v);
         int originalViewTop = getPositionValue(numberArray, 1, v);
+        getCopiedView();
+        setCopiedViewTouchEvent();
         setCopiedViewPosition(originalViewLeft, originalViewTop);
+        saveOriginalValues(originalViewLeft, originalViewTop);
+    }
+
+    private void getCopiedView() {
+        copiedView = UIHelper.uiHelper.getCopiedView();
+    }
+
+    private void saveOriginalValues(int originalViewLeft, int originalViewTop) {
+        this.originalViewLeft = originalViewLeft;
+        this.originalViewTop = originalViewTop;
+    }
+
+    private void setCopiedViewTouchEvent() {
+        copiedView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                final int X = (int) event.getRawX();
+                final int Y = (int) event.getRawY();
+                switch (event.getAction() & MotionEvent.ACTION_MASK) {
+                    case MotionEvent.ACTION_DOWN:
+                        RelativeLayout.LayoutParams lParams = (RelativeLayout.LayoutParams) copiedView.getLayoutParams();
+                        _xDelta = X - lParams.leftMargin;
+                        _yDelta = Y - lParams.topMargin;
+                        break;
+                    case MotionEvent.ACTION_UP:
+                        break;
+                    case MotionEvent.ACTION_POINTER_DOWN:
+                        break;
+                    case MotionEvent.ACTION_POINTER_UP:
+                        break;
+                    case MotionEvent.ACTION_MOVE:
+                        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) copiedView
+                                .getLayoutParams();
+                        layoutParams.leftMargin = X - _xDelta;
+                        layoutParams.topMargin = Y - _yDelta;
+                        layoutParams.rightMargin = -250;
+                        layoutParams.bottomMargin = -250;
+                        copiedView.setLayoutParams(layoutParams);
+                        break;
+                }
+                UIHelper.uiHelper.getTotalLayout().invalidate();
+                return true;
+            }
+        });
+    }
+
+    private void actionMoveEvent(MotionEvent event) {
+        Log.d("actionMoveEvent", "actionMoveEvent");
+
+
+        copiedView.setY(event.getRawY());
+        copiedView.setX(event.getRawX());
     }
 
     private int getPositionValue(int[] numberArray, int arrayIndex, View v){
@@ -44,7 +104,6 @@ public class ETCPanelEvent implements View.OnClickListener{
     }
 
     private void setCopiedViewPosition(int originalViewLeft, int originalViewTop) {
-        View copiedView = UIHelper.uiHelper.getCopiedView();
         copiedView.setX(originalViewLeft);
         copiedView.setY(originalViewTop);
     }
