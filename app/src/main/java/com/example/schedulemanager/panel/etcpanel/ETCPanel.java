@@ -84,7 +84,6 @@ public class ETCPanel {
         HorizontalScrollView scroll = new HorizontalScrollView(context);
         scroll.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT));
-
         scroll.addView(rowLayout);
         return scroll;
     }
@@ -110,7 +109,6 @@ public class ETCPanel {
      * 이게 진짜
      */
     private void initRowLayout(LinearLayout rowLayout, ArrayList<ActivityVO> activityVOs) {
-
         for(ActivityVO activityVO : activityVOs){
             View buttonView = setButtonView(activityVO);
             rowLayout.addView(buttonView);

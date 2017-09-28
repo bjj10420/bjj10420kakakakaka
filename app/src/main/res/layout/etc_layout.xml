@@ -29,7 +29,7 @@
             android:layout_weight="1"
             android:background="@drawable/bottom_button_bg"
             android:text="추가"
-            android:textColor="#ffffff" />
+            android:textColor="#404040" />
 
         <Button
             android:layout_width="0dp"
@@ -37,7 +37,7 @@
             android:layout_weight="1"
             android:background="@drawable/bottom_button_bg"
             android:text="관리"
-            android:textColor="#ffffff" />
+            android:textColor="#404040" />
 
         <Button
             android:layout_width="0dp"
@@ -45,7 +45,7 @@
             android:layout_weight="1"
             android:background="@drawable/bottom_button_bg"
             android:text="닫기"
-            android:textColor="#ffffff" />
+            android:textColor="#404040" />
 
     </LinearLayout>
 
