@@ -27,11 +27,26 @@ public class ETCPanelEvent implements View.OnClickListener{
 
     // 뷰를 복사하여 클릭된 지점의 뷰와 같은 위치에 넣음
     private void hoverCopiedView(View v) {
-        int[] numberArray = new int[2];
-        v.getLocationInWindow(numberArray);
-        int originalViewLeft = numberArray[0];
-        int originalViewTop = numberArray[1];
         UIHelper.uiHelper.hoverView(v, true);
+        setCopiedView(v);
+    }
+
+    private void setCopiedView(View v) {
+        int[] numberArray = new int[2];
+        int originalViewLeft = getPositionValue(numberArray, 0, v);
+        int originalViewTop = getPositionValue(numberArray, 1, v);
+        setCopiedViewPosition(originalViewLeft, originalViewTop);
+    }
+
+    private int getPositionValue(int[] numberArray, int arrayIndex, View v){
+        v.getLocationInWindow(numberArray);
+        return numberArray[arrayIndex];
+    }
+
+    private void setCopiedViewPosition(int originalViewLeft, int originalViewTop) {
+        View copiedView = UIHelper.uiHelper.getCopiedView();
+        copiedView.setX(originalViewLeft);
+        copiedView.setY(originalViewTop);
     }
 
     private void panelLayoutOff() {
