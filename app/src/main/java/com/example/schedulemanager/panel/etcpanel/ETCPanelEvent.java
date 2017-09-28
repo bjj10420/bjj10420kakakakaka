@@ -46,7 +46,7 @@ public class ETCPanelEvent implements View.OnClickListener{
 
     private void getCopiedView() {
         copiedView = UIHelper.uiHelper.getCopiedView();
-    }
+   }
 
     private void setCopiedViewTouchEvent() {
         copiedView.setOnTouchListener(new View.OnTouchListener() {

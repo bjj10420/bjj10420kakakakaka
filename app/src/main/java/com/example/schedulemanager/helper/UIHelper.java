@@ -13,6 +13,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -243,14 +244,16 @@ public class UIHelper {
      * 지정된 뷰의 복사본을 만들어 최상위 프레임레이아웃의 자식으로 보냄
      * @param view
      */
-    public void hoverView(View view, boolean isCopiedViewVisible) {
+    public void hoverView(View view, boolean isCopiedViewFromPanel) {
         // 뷰 복사본 생성
         LinearLayout viewLayout = (LinearLayout) view;
         View iconView = viewLayout.getChildAt(0);
         TextView textView = (TextView) viewLayout.getChildAt(1);
-        copiedView = makeButtonView(iconView.getBackground(), String.valueOf(textView.getText()),
+        copiedView = makeButtonView(iconView instanceof  ImageView ? ((ImageView)iconView).getDrawable() : iconView.getBackground(),
+                String.valueOf(textView.getText()),
                 viewLayout.getWidth(), viewLayout.getHeight());
-        copiedView.setVisibility(isCopiedViewVisible ? View.VISIBLE : View.GONE);
+        copiedView.setVisibility(isCopiedViewFromPanel ? View.VISIBLE : View.GONE);
+        copiedView.setAlpha(isCopiedViewFromPanel ? 0.7f : 1.0f);
         // 최상위 레이아웃으로 보냄
         totalLayout.addView(copiedView);
     }
