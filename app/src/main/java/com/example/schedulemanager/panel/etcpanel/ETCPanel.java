@@ -36,10 +36,8 @@ public class ETCPanel {
     }
 
     private void init(Context context) {
-
         initFields(context);
         adaptorFont();
-
     }
 
     private void initFields(Context context) {
