@@ -27,9 +27,10 @@ import java.util.ArrayList;
 public class ETCPanel {
 
     Context context;
-    private LinearLayout etcContentsLayout;
     private RelativeLayout etcLayout;               // 기타 버튼을 눌렀을때 나오는 패널
+    private LinearLayout etcContentsLayout;
     private LinearLayout etcBottomButtonLayout;     // 기타 버튼 패널의 바텀 버튼 부분
+    private ETCPanelEvent etcPanelEvent;
 
     public ETCPanel(Context context) {
         init(context);
@@ -45,6 +46,7 @@ public class ETCPanel {
         etcLayout = (RelativeLayout)Util.getViewById(this.context, R.id.etcLayout);
         etcContentsLayout = (LinearLayout) Util.getViewById(context, R.id.etcContentsLayout);
         etcBottomButtonLayout = (LinearLayout)Util.getViewById(this.context, R.id.etcBottomButtonLayout);
+        etcPanelEvent = new ETCPanelEvent(this);
     }
 
     private void adaptorFont() {
@@ -120,7 +122,7 @@ public class ETCPanel {
         TextView textView = makeTextView(activityVO);
         LinearLayout panelButtonView = makePanelButtonView(iconView, textView);
         panelButtonView.setTag(activityVO.getActivityName());
-
+        panelButtonView.setOnClickListener(etcPanelEvent);
         return panelButtonView;
     }
 

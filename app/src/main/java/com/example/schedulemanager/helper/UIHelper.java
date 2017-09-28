@@ -36,6 +36,7 @@ import java.util.TreeMap;
  */
 public class UIHelper {
 
+    public static UIHelper uiHelper;
     private Context context;
     private DataHelper dataHelper;
     private RelativeLayout totalLayout;             // 최상위 프레임 레이아웃
@@ -76,6 +77,7 @@ public class UIHelper {
     }
 
     private void initFields(Context context, DataHelper dataHelper) {
+        uiHelper = this;
         this.context = context;
         this.dataHelper = dataHelper;
 
