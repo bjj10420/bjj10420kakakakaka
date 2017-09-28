@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import com.example.schedulemanager.interface_.GeneralCallback;
 import com.example.schedulemanager.R;
 import com.example.schedulemanager.interface_.GeneralCallback2;
+import com.example.schedulemanager.panel.etcpanel.ETCPanel;
 import com.example.schedulemanager.vo.Schedule;
 import com.example.schedulemanager.Util;
 import com.example.schedulemanager.calendar.DialogHelper;
@@ -36,6 +37,7 @@ public class EventHelper {
     private DataHelper dataHelper;
     private UIHelper uiHelper;
     private CalendarHelper calendarHelper;
+    private ETCPanel etcPanel;
 
     public void initEvent(Context context, DataHelper dataHelper, UIHelper uiHelper, CalendarHelper calendarHelper) {
         this.context = context;
@@ -102,7 +104,7 @@ public class EventHelper {
     private void actionEtcButtonClicked() {
         Log.d("isEtcButton", "isEtcButton ");
         uiHelper.setTotalLayoutVisible(false);
-        uiHelper.setEtcLayoutVisible(true);
+        etcPanel.setEtcLayoutVisible(true);
     }
 
     /**
@@ -574,4 +576,9 @@ public class EventHelper {
     public UIHelper getUiHelper() {
         return uiHelper;
     }
+
+    public void setEtcPanel(ETCPanel etcPanel) {
+        this.etcPanel = etcPanel;
+    }
+
 }
