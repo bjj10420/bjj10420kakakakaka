@@ -598,13 +598,15 @@ public class DataHelper {
 
     public boolean isExistSchedule(String dateKey, HashMap<Integer, Schedule> scheduleMapForThisMonth){
         boolean isExistSchedule = false;
-
         for(Integer key : scheduleMapForThisMonth.keySet()) {
             Schedule schedule = scheduleMapForThisMonth.get(key);
             String scheduleDate = schedule.getDate().substring(6, 8);
-            if(scheduleDate.equals(dateKey))
+            Log.d("isExistSchedule 확인", "scheduleDate = " + scheduleDate + ", dateKey = " + dateKey);
+
+            if(scheduleDate.equals(dateKey)) {
                 isExistSchedule = true;
-            break;
+                break;
+            }
         }
         return isExistSchedule;
     }

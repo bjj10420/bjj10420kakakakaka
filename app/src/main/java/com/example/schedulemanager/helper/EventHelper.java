@@ -472,7 +472,7 @@ public class EventHelper {
         String dateString = calendarHelper.dataHelper.makeDateString2(dataHelper.getDateValue(), calendarHelper);
 
         Log.d("스케쥴 추가 체크", dateString + ", " + tagName);
-        addScheduleForCalendarMode(dateString, tagName);
+        addScheduleIntoDBForCalendarMode(dateString, tagName);
     }
 
     /**
@@ -503,7 +503,7 @@ public class EventHelper {
      * @param dateString
      * @param tagName
      */
-    private void addScheduleForCalendarMode(String dateString, String tagName) {
+    private void addScheduleIntoDBForCalendarMode(String dateString, String tagName) {
         // 이름
         String activityName = tagName;
 
