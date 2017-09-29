@@ -1,6 +1,5 @@
 package com.example.schedulemanager.panel.etcpanel;
 
-import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
@@ -61,6 +60,7 @@ public class ETCPanelEvent implements View.OnClickListener{
                         _yDelta = Y - lParams.topMargin;
                         break;
                     case MotionEvent.ACTION_UP:
+                        actionBasicUpEvent(copiedView);
                         break;
                     case MotionEvent.ACTION_POINTER_DOWN:
                         break;
@@ -68,7 +68,7 @@ public class ETCPanelEvent implements View.OnClickListener{
                         break;
                     case MotionEvent.ACTION_MOVE:
                         moveCopiedView(X, Y);
-                        actionBasicEvent();
+                        actionBasicMoveEvent();
                         break;
                 }
                 UIHelper.uiHelper.getTotalLayout().invalidate();
@@ -77,7 +77,11 @@ public class ETCPanelEvent implements View.OnClickListener{
         });
     }
 
-    private void actionBasicEvent() {
+    private void actionBasicUpEvent(View copiedView) {
+        EventHelper.eventHelper.actionUpEvent(copiedView);
+    }
+
+    private void actionBasicMoveEvent() {
         EventHelper.eventHelper.actionMoveBasicEvent(copiedView);
     }
 

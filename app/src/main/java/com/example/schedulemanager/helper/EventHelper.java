@@ -185,7 +185,7 @@ public class EventHelper {
      * 아이콘 버튼 드래그 중 업할때 이벤트
      * @param view
      */
-    private void actionUpEvent(View view) {
+    public void actionUpEvent(View view) {
         View centerIcon = uiHelper.getCenterIcon();
         View closestView = uiHelper.getClosestView();
         View copiedView = uiHelper.getCopiedView();
