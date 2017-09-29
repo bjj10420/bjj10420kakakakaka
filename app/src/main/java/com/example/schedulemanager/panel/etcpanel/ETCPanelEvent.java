@@ -4,6 +4,7 @@ import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
 
+import com.example.schedulemanager.R;
 import com.example.schedulemanager.helper.EventHelper;
 import com.example.schedulemanager.helper.UIHelper;
 
@@ -20,7 +21,13 @@ public class ETCPanelEvent implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        panelItemClickEVent(v);
+
+        switch (v.getId()) {
+            case R.id.etcCloseBtn : panelLayoutOff();
+                break;
+
+            default : panelItemClickEVent(v);
+        }
       }
 
     private void panelItemClickEVent(View v) {
@@ -105,8 +112,9 @@ public class ETCPanelEvent implements View.OnClickListener{
         copiedView.setY(originalViewTop);
     }
 
-    private void panelLayoutOff() {
+    public void panelLayoutOff() {
         etcPanel.setEtcLayoutVisible(false);
         UIHelper.uiHelper.setTotalLayoutVisible(true);
     }
+
 }

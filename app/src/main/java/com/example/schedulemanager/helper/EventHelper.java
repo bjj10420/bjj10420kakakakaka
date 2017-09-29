@@ -441,9 +441,15 @@ public class EventHelper {
     public void onBackPresssed(){
         View scheduleLayout = uiHelper.getScheduleLayout();
         View calendarLayout = uiHelper.getCalendarLayout();
+        View etcLayout = etcPanel.getEtcLayout();
 
+        // 기타버튼 패널화면이 ON이면 닫아준다
+        if(etcLayout.getVisibility() == View.VISIBLE) {
+            etcPanel.setEtcLayoutVisible(false);
+            uiHelper.setTotalLayoutVisible(true);
+        }
         // 하루 일정화면이 ON이면 닫아준다
-        if(scheduleLayout.getVisibility() == View.VISIBLE) {
+        else if(scheduleLayout.getVisibility() == View.VISIBLE) {
             scheduleLayout.setVisibility(View.GONE);
             calendarLayout.setVisibility(View.VISIBLE);
         }

@@ -8,6 +8,7 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
@@ -38,6 +39,7 @@ public class ETCPanel {
 
     private void init(Context context) {
         initFields(context);
+        initBottomButtonEvents();
         adaptorFont();
     }
 
@@ -47,6 +49,11 @@ public class ETCPanel {
         etcContentsLayout = (LinearLayout) Util.getViewById(context, R.id.etcContentsLayout);
         etcBottomButtonLayout = (LinearLayout)Util.getViewById(this.context, R.id.etcBottomButtonLayout);
         etcPanelEvent = new ETCPanelEvent(this);
+    }
+
+    private void initBottomButtonEvents() {
+        Button closeButton = (Button) Util.getViewById(context, R.id.etcCloseBtn);
+        closeButton.setOnClickListener(etcPanelEvent);
     }
 
     private void adaptorFont() {
@@ -217,5 +224,8 @@ public class ETCPanel {
         etcLayout.setVisibility(isVisible ? View.VISIBLE : View.GONE);
     }
 
+    public RelativeLayout getEtcLayout() {
+        return etcLayout;
+    }
 }
 
