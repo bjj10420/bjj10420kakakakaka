@@ -67,19 +67,28 @@ public class ETCPanelEvent implements View.OnClickListener{
                     case MotionEvent.ACTION_POINTER_UP:
                         break;
                     case MotionEvent.ACTION_MOVE:
-                        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) copiedView
-                                .getLayoutParams();
-                        layoutParams.leftMargin = X - _xDelta;
-                        layoutParams.topMargin = Y - _yDelta;
-                        layoutParams.rightMargin = -250;
-                        layoutParams.bottomMargin = -250;
-                        copiedView.setLayoutParams(layoutParams);
+                        moveCopiedView(X, Y);
+                        actionBasicEvent();
                         break;
                 }
                 UIHelper.uiHelper.getTotalLayout().invalidate();
                 return true;
             }
         });
+    }
+
+    private void actionBasicEvent() {
+        EventHelper.eventHelper.actionMoveBasicEvent(copiedView);
+    }
+
+    private void moveCopiedView(int X, int Y) {
+        RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) copiedView
+                .getLayoutParams();
+        layoutParams.leftMargin = X - _xDelta;
+        layoutParams.topMargin = Y - _yDelta;
+        layoutParams.rightMargin = -250;
+        layoutParams.bottomMargin = -250;
+        copiedView.setLayoutParams(layoutParams);
     }
 
     private int getPositionValue(int[] numberArray, int arrayIndex, View v){

@@ -141,6 +141,10 @@ public class EventHelper {
     public void actionMoveEvent(MotionEvent event) {
         View copiedView = uiHelper.getCopiedView();
         setCopiedViewVisible(copiedView, event);
+        actionMoveBasicEvent(copiedView);
+    }
+
+    public void actionMoveBasicEvent(View copiedView) {
         // 메인모드 처리
         if(uiHelper.getCenterIcon().getVisibility() == View.VISIBLE)
             changeCenterIconColorWhenCollided(copiedView);
