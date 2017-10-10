@@ -121,11 +121,15 @@ public class EventHelper {
         // dX설정
         dataHelper.setdX(view.getX() - event.getRawX());
         float dY = 0;
-        if(buttonPanelId == R.id.buttonPanel)
-            dY = view.getY() - event.getRawY();
-        else
-            //TODO 일단 Y값을 고정값으로 맞춰주었지만 수정해야함(원인 불명)
-            dY = view.getY() - event.getRawY() + 2000;
+//        if(buttonPanelId == R.id.buttonPanel)
+//            dY = view.getY() - event.getRawY();
+//        else
+//            //TODO 일단 Y값을 고정값으로 맞춰주었지만 수정해야함(원인 불명)
+//            dY = view.getY() - event.getRawY() + 2000;
+        // 이처음 dy만 잘 맞춰주면된다.
+        int[] numberArray = new int[2];
+        view.getLocationInWindow(numberArray);
+        dY = numberArray[1] - event.getRawY();
         // dY설정
         dataHelper.setdY(dY);
     }
