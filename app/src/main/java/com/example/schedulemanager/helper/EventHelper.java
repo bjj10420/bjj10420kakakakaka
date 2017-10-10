@@ -268,21 +268,17 @@ public class EventHelper {
         if(centerIcon.getVisibility() == View.GONE &&
                 uiHelper.getScheduleLayout().getVisibility() == View.GONE &&
                 closestView != null && !isCanceled) {
-            Log.d("메인 캘린더 셀 액션", "메인 캘린더 셀 액션");
-            closestView.setBackgroundColor(Color.parseColor("#ffffff"));
-
+            setClosetView(closestView);
             setDataHelperDateValue((String) closestView.getTag());
-//
-            // DB추가
-            addScheduleForTheCalendarCell(String.valueOf(view.getTag()));
-            // 자료구조에 추가
+            addScheduleDBForTheCalendarCell(String.valueOf(view.getTag()));
             addToDataStructrue((String) view.getTag());
-            // 캘린더 추가
             calendarHelper.setCheckMark(true, closestView);
-
-//            calendarHelper.refreshCalendar();
-            closestView = null;
         }
+    }
+
+    private void setClosetView(View closestView) {
+        Log.d("메인 캘린더 셀 액션", "메인 캘린더 셀 액션");
+        closestView.setBackgroundColor(Color.parseColor("#ffffff"));
     }
 
     private void setDataHelperDateValue(String closetViewTag) {
@@ -483,7 +479,7 @@ public class EventHelper {
      * 스케쥴 버튼을 드래그하여 메인 캘린더의 한칸으로 가져갔을때 추가
      * @param tagName
      */
-    public void addScheduleForTheCalendarCell(String tagName) {
+    public void addScheduleDBForTheCalendarCell(String tagName) {
 //        String dateString = calendarHelper.makeDateString(dataHelper.getDateValue());
         String dateString = calendarHelper.dataHelper.makeDateString2(dataHelper.getDateValue(), calendarHelper);
 
