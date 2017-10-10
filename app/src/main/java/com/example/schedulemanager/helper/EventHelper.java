@@ -277,7 +277,7 @@ public class EventHelper {
     }
 
     private void addToCalendar(View closestView) {
-        calendarHelper.setCheckMark(true, closestView);
+          calendarHelper.setCheckMark(true, closestView);
     }
 
     private void setClosestView(View closestView) {
@@ -570,34 +570,21 @@ public class EventHelper {
         Date dateOfToday = new Date();
         DateFormat dateFormatter = new SimpleDateFormat("yyyyMMdd");
         String dateString = dateFormatter.format(dateOfToday);
-        // 넘버
-//        int number = DBHelper.dbHelper.getScheduleCountForDate(dateString);
-        int number = 0;
-        if(dataHelper.getDailyScheduleMap() != null)
-            if(dataHelper.getDailyScheduleMap().size() != 0)
-                number = dataHelper.getMaxOrderAmongDailyScheduleMap();
+        int dateNumber = dateOfToday.getDate();
+        View viewOfToday = dataHelper.getCurrentCalendarViewMap().get(dateNumber);
 
-        String activityName = tagName;
-
-        // 삽입할 스케쥴 데이터 객체 생성
-        Schedule newSchedule = new Schedule();
-        newSchedule.setNo(number);
-        newSchedule.setDate(dateString);
-        newSchedule.setActivityName(activityName);
-        //TODO 나머지 order, time, memo는 일단 공란
-        newSchedule.setOrder(0);
-        newSchedule.setTime("");
-        newSchedule.setMemo("");
-
-        // DB에 삽입
-//        long resultNum = DBHelper.dbHelper.insertSchedule(newSchedule);
-
-        setDataHelperDateValue(String.valueOf(dateOfToday.getDate()));
-
+        setDataHelperDateValue(String.valueOf(dateNumber));
         addScheduleIntoDB(dateString, tagName);
-        addToDataStructrue(activityName, dateString);
-//        addToCalendar(closestView);
+        addToDataStructrue(tagName, dateString);
+        if(isCalendarExist())
+        addToCalendar(viewOfToday);
+    }
 
+    private boolean isCalendarExist() {
+        if(dataHelper.getCurrentCalendarViewMap().get(Integer.parseInt(dataHelper.getDateValue())) == null)
+            return false;
+        else
+            return true;
     }
 
     public UIHelper getUiHelper() {
