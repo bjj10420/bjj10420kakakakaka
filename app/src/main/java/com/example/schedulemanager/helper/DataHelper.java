@@ -198,7 +198,7 @@ public class DataHelper {
      * 스케쥴맵에 추가
      * @param newOrderValue
      */
-    public void addToDailyScheduleMapByMonth(int newOrderValue, String activityName) {
+    public void addToDataStructure(int newOrderValue, String activityName) {
         //TODO yearMonth키를 원래 그냥 필드로 썼었는데 달력추가에서도 이 메소드를 쓰게되어 생성함수로  대체해줌
         HashMap<Integer, Schedule> scheduleMapForThisMonth = scheduleMapByMonth.get(Integer.parseInt(makeYearMonthKey()));
         Schedule schedule = new Schedule();

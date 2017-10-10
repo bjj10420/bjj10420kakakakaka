@@ -228,7 +228,7 @@ public class EventHelper {
             if(dataHelper.getDailyScheduleMap() != null)
                 if(dataHelper.getDailyScheduleMap().size() != 0)
                     newOrder = dataHelper.getMaxOrderAmongDailyScheduleMap() + 1;
-            dataHelper.addToDailyScheduleMapByMonth(newOrder,activityName);
+            dataHelper.addToDataStructure(newOrder,activityName);
             uiHelper.resetPiechart(uiHelper.getPieChart());
 
             Log.d("actionAtDailyScheduleLayout 체크", "actionAtDailyScheduleLayout 체크 entryCount = " + entryCount);
@@ -268,31 +268,36 @@ public class EventHelper {
         if(centerIcon.getVisibility() == View.GONE &&
                 uiHelper.getScheduleLayout().getVisibility() == View.GONE &&
                 closestView != null && !isCanceled) {
-            setClosetView(closestView);
+            setClosestView(closestView);
             setDataHelperDateValue((String) closestView.getTag());
-            addScheduleDBForTheCalendarCell(String.valueOf(view.getTag()));
-            addToDataStructrue((String) view.getTag());
-            calendarHelper.setCheckMark(true, closestView);
+            addToDB(String.valueOf(view.getTag()), dataHelper.getDateValue());
+            addToDataStructrue((String) view.getTag(), dataHelper.getSelectedDateData());
+            addToCalendar(closestView);
         }
     }
 
-    private void setClosetView(View closestView) {
+    private void addToCalendar(View closestView) {
+        calendarHelper.setCheckMark(true, closestView);
+    }
+
+    private void setClosestView(View closestView) {
         Log.d("메인 캘린더 셀 액션", "메인 캘린더 셀 액션");
         closestView.setBackgroundColor(Color.parseColor("#ffffff"));
     }
 
-    private void setDataHelperDateValue(String closetViewTag) {
-        String dateValue = closetViewTag;
+    private void setDataHelperDateValue(String dataValueTag) {
+        String dateValue = dataValueTag;
         // TODO 처음 앱을 설치하고 일정을 스케쥴했을때 DATE값이 없으므로 여기서 저장
         dataHelper.setDateValue(dateValue);
         dataHelper.makeSelectedDateData(dateValue);
     }
 
-    private void addToDataStructrue(String dateTag) {
+    // 자료구조에 추가
+    private void addToDataStructrue(String activityName, String selectedDateData) {
         int newOrder = 0;
-        if(!dataHelper.isEmptyData(dataHelper.getSelectedDateData()))
-            newOrder = dataHelper.getMaxOrderAmongScheduleMapByThisMonth(dataHelper.getSelectedDateData()) + 1;
-        dataHelper.addToDailyScheduleMapByMonth(newOrder,dateTag);
+        if(!dataHelper.isEmptyData(selectedDateData))
+            newOrder = dataHelper.getMaxOrderAmongScheduleMapByThisMonth(selectedDateData) + 1;
+        dataHelper.addToDataStructure(newOrder,activityName);
         Log.d("페이징한뒤데이트벨류확인", String.valueOf(Integer.parseInt(dataHelper.getDateValue())));
     }
 
@@ -479,12 +484,12 @@ public class EventHelper {
      * 스케쥴 버튼을 드래그하여 메인 캘린더의 한칸으로 가져갔을때 추가
      * @param tagName
      */
-    public void addScheduleDBForTheCalendarCell(String tagName) {
+    public void addToDB(String tagName, String dateValue) {
 //        String dateString = calendarHelper.makeDateString(dataHelper.getDateValue());
-        String dateString = calendarHelper.dataHelper.makeDateString2(dataHelper.getDateValue(), calendarHelper);
+        String dateString = calendarHelper.dataHelper.makeDateString2(dateValue, calendarHelper);
 
         Log.d("스케쥴 추가 체크", dateString + ", " + tagName);
-        addScheduleIntoDBForCalendarMode(dateString, tagName);
+        addScheduleIntoDB(dateString, tagName);
     }
 
     /**
@@ -515,7 +520,7 @@ public class EventHelper {
      * @param dateString
      * @param tagName
      */
-    private void addScheduleIntoDBForCalendarMode(String dateString, String tagName) {
+    private void addScheduleIntoDB(String dateString, String tagName) {
         // 이름
         String activityName = tagName;
 
@@ -585,7 +590,14 @@ public class EventHelper {
         newSchedule.setMemo("");
 
         // DB에 삽입
-        long resultNum = DBHelper.dbHelper.insertSchedule(newSchedule);
+//        long resultNum = DBHelper.dbHelper.insertSchedule(newSchedule);
+
+        setDataHelperDateValue(String.valueOf(dateOfToday.getDate()));
+
+        addScheduleIntoDB(dateString, tagName);
+        addToDataStructrue(activityName, dateString);
+//        addToCalendar(closestView);
+
     }
 
     public UIHelper getUiHelper() {
