@@ -572,7 +572,7 @@ public class EventHelper {
         DateFormat dateFormatter = new SimpleDateFormat("yyyyMMdd");
         String dateString = dateFormatter.format(dateOfToday);
         int dateNumber = dateOfToday.getDate();
-        View viewOfToday = dataHelper.getCurrentCalendarViewMap().get(dateNumber);
+        View viewOfToday = UIHelper.uiHelper.getViewOfToday();
 
         setDataHelperDateValue(String.valueOf(dateNumber));
         addScheduleIntoDB(dateString, tagName);

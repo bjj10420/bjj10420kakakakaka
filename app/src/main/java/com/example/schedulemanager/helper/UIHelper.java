@@ -51,6 +51,7 @@ public class UIHelper {
     private PieChart pieChart;                      // 데일리 스케쥴 챠트 화면
     private View copiedView;                        // 드래그를 시작할 때 임시로 저장 해놓는 뷰
     private View firstCalendarCell;                 // 캘린더가 랜더링된 후의 첫 셀뷰
+    private View viewOfToday;                       // 오늘 뷰
 
     public void initUI(Context context, DataHelper dataHelper) {
         initFields(context, dataHelper);
@@ -453,4 +454,11 @@ public class UIHelper {
         this.selectedCalendarCellView = selectedCalendarCellView;
     }
 
+    public View getViewOfToday() {
+        return viewOfToday;
+    }
+
+    public void setViewOfToday(View viewOfToday) {
+        this.viewOfToday = viewOfToday;
+    }
 }

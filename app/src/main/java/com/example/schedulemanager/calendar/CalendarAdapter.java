@@ -17,6 +17,7 @@ import android.widget.TextView;
 import com.example.schedulemanager.R;
 import com.example.schedulemanager.helper.DataHelper;
 import com.example.schedulemanager.helper.EventHelper;
+import com.example.schedulemanager.helper.UIHelper;
 import com.example.schedulemanager.vo.Schedule;
 
 import java.util.HashMap;
@@ -256,6 +257,7 @@ public class CalendarAdapter extends BaseAdapter
 					// 이번달일때만
 					if(DataHelper.dataHelper.getCurrentPageIndex() == 12)
 					convertView.setBackgroundResource(R.drawable.calendar_item_selected_bg);
+                    UIHelper.uiHelper.setViewOfToday(convertView);
 					//TODO 시간표현은 필요없고 오늘날짜값을 저장
 //					Log.d("오늘 날짜를 저장하였습니다.", String.valueOf(item));
 					DataHelper.dataHelper.setDateOfToday(String.valueOf(item));
