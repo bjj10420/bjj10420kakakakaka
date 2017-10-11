@@ -150,7 +150,7 @@ public class EventHelper {
         // 메인모드 처리
         if(uiHelper.getCenterIcon().getVisibility() == View.VISIBLE) {
             if(isForEtcIcon) changeCenterIconColorWhenCollidedForEtcIcon(copiedView);
-            else changeCenterIconColorWhenCollided(copiedView);
+            else changeCenterIconColorWhenCollidedForEtcIcon(copiedView);
         }
         // 캘린더모드 처리
         if (uiHelper.getCenterIcon().getVisibility() == View.GONE
