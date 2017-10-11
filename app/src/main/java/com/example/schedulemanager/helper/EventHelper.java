@@ -142,14 +142,16 @@ public class EventHelper {
     public void actionMoveEvent(MotionEvent event) {
         View copiedView = uiHelper.getCopiedView();
         setCopiedViewVisible(copiedView, event);
-        actionMoveBasicEvent(copiedView);
+        actionMoveBasicEvent(copiedView, false);
         UIHelper.uiHelper.getTotalLayout().invalidate();
     }
 
-    public void actionMoveBasicEvent(View copiedView) {
+    public void actionMoveBasicEvent(View copiedView, boolean isForEtcIcon) {
         // 메인모드 처리
-        if(uiHelper.getCenterIcon().getVisibility() == View.VISIBLE)
-            changeCenterIconColorWhenCollided(copiedView);
+        if(uiHelper.getCenterIcon().getVisibility() == View.VISIBLE) {
+            if(isForEtcIcon) changeCenterIconColorWhenCollidedForEtcIcon(copiedView);
+            else changeCenterIconColorWhenCollided(copiedView);
+        }
         // 캘린더모드 처리
         if (uiHelper.getCenterIcon().getVisibility() == View.GONE
                 && calendarHelper.checkCollisionForCalendarCellByRectZone()
@@ -166,6 +168,13 @@ public class EventHelper {
 
     private void changeCenterIconColorWhenCollided(View copiedView) {
         boolean isCollided = Util.checkCollision(uiHelper.getCenterIcon(), copiedView);
+        Log.d("changeCenterIconColorWhenCollided 테스트", "changeCenterIconColorWhenCollided 테스트 isCollided = " + isCollided);
+        uiHelper.changeCenterIconColor(isCollided);
+    }
+
+    // 기타패널 아이콘 충돌시 사용
+    private void changeCenterIconColorWhenCollidedForEtcIcon(View copiedView) {
+        boolean isCollided = Util.checkCollisionForEtcIcon(uiHelper.getCenterIcon(), copiedView);
         Log.d("changeCenterIconColorWhenCollided 테스트", "changeCenterIconColorWhenCollided 테스트 isCollided = " + isCollided);
         uiHelper.changeCenterIconColor(isCollided);
     }

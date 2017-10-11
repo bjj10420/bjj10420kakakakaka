@@ -89,7 +89,7 @@ public class ETCPanelEvent implements View.OnClickListener{
     }
 
     private void actionBasicMoveEvent() {
-        EventHelper.eventHelper.actionMoveBasicEvent(copiedView);
+        EventHelper.eventHelper.actionMoveBasicEvent(copiedView, true);
     }
 
     private void moveCopiedView(int X, int Y) {
