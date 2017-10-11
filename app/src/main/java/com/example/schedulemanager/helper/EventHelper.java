@@ -491,6 +491,7 @@ public class EventHelper {
         Log.d("스케쥴 추가 체크", dateString + ", " + tagName);
         addScheduleIntoDB(dateString, tagName);
     }
+    //
 
     /**
      * 데이트 스트링과 태그네임으로 DB에 스케쥴 추가(스케쥴일정화면)
