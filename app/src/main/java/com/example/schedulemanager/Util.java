@@ -47,8 +47,10 @@ public class Util {
 
     // 기타패널아이콘을 중앙으로 할때 체크
     public static boolean checkCollisionForEtcIcon(View v1, View v2) {
+        int[] numberArray = new int[2];
+        v2.getLocationInWindow(numberArray);
         Rect R1=new Rect(v1.getLeft(), v1.getTop(), v1.getRight(), v1.getBottom());
-        Rect R2=new Rect((int)v2.getLeft(), (int)v2.getY(), (int)v2.getLeft() + v2.getWidth(), (int)v2.getY() + v2.getHeight());
+        Rect R2=new Rect(numberArray[0], numberArray[1], numberArray[0] + v2.getWidth(), numberArray[1] + v2.getHeight());
         Log.d("checkCollision 테스트", "checkCollision 테스트 R2 left = " + (int)v2.getLeft() + ", R2 top = " + (int)v2.getY()
                 + ", R2 right = " + ((int)v2.getTranslationX() + v2.getWidth()) + ", R2 bottom = " + ((int)v2.getTranslationY() + v2.getHeight()));
 
