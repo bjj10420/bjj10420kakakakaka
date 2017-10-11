@@ -145,7 +145,7 @@ public class EventHelper {
         actionMoveBasicEvent(copiedView, false);
         UIHelper.uiHelper.getTotalLayout().invalidate();
     }
-
+//
     public void actionMoveBasicEvent(View copiedView, boolean isForEtcIcon) {
         // 메인모드 처리
         if(uiHelper.getCenterIcon().getVisibility() == View.VISIBLE) {
