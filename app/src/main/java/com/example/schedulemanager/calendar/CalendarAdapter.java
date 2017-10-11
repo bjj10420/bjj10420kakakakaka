@@ -257,6 +257,8 @@ public class CalendarAdapter extends BaseAdapter
 					// 이번달일때만
 					if(DataHelper.dataHelper.getCurrentPageIndex() == 12)
 					convertView.setBackgroundResource(R.drawable.calendar_item_selected_bg);
+                    // 최초 한번만 오늘날짜의 달력 뷰 저장
+					if(UIHelper.uiHelper.getViewOfToday() == null)
                     UIHelper.uiHelper.setViewOfToday(convertView);
 					//TODO 시간표현은 필요없고 오늘날짜값을 저장
 //					Log.d("오늘 날짜를 저장하였습니다.", String.valueOf(item));

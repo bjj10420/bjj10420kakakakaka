@@ -301,6 +301,15 @@ public class EventHelper {
         Log.d("페이징한뒤데이트벨류확인", String.valueOf(Integer.parseInt(dataHelper.getDateValue())));
     }
 
+    // 오늘날짜 자료구조에 추가
+    private void addToTodayDataStructrue(String activityName, String selectedDateData, String yearMonthKey) {
+        int newOrder = 0;
+        if(!dataHelper.isTodayEmptyData(selectedDateData, yearMonthKey))
+            newOrder = dataHelper.getMaxOrderAmongScheduleMapByThisMonthForToday(selectedDateData, yearMonthKey) + 1;
+        dataHelper.addToTodayDataStructure(newOrder,activityName, yearMonthKey);
+        Log.d("페이징한뒤데이트벨류확인", String.valueOf(Integer.parseInt(dataHelper.getDateValue())));
+    }
+
     // 메인 달력 활성화 중 취소 버튼 위에서 마우스 업
     private boolean actionAtCancelBtnWhenCalendarActivated(View copiedView, View closestView) {
         boolean isCanceled = false;
@@ -576,7 +585,7 @@ public class EventHelper {
 
         setDataHelperDateValue(String.valueOf(dateNumber));
         addScheduleIntoDB(dateString, tagName);
-        addToDataStructrue(tagName, dateString);
+        addToTodayDataStructrue(tagName, dateString, dateString.substring(0, 6));
         if(isCalendarExist())
         addToCalendar(viewOfToday);
     }

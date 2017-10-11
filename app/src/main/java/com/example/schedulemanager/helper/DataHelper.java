@@ -201,6 +201,15 @@ public class DataHelper {
     public void addToDataStructure(int newOrderValue, String activityName) {
         //TODO yearMonth키를 원래 그냥 필드로 썼었는데 달력추가에서도 이 메소드를 쓰게되어 생성함수로  대체해줌
         HashMap<Integer, Schedule> scheduleMapForThisMonth = scheduleMapByMonth.get(Integer.parseInt(makeYearMonthKey()));
+        addDataToThisMonthMap(newOrderValue, activityName, scheduleMapForThisMonth);
+    }
+
+    public void addToTodayDataStructure(int newOrderValue, String activityName, String yearMonthKey) {
+        HashMap<Integer, Schedule> scheduleMapForThisMonth = scheduleMapByMonth.get(Integer.parseInt(yearMonthKey));
+        addDataToThisMonthMap(newOrderValue, activityName, scheduleMapForThisMonth);
+    }
+
+    private void addDataToThisMonthMap(int newOrderValue, String activityName, HashMap<Integer, Schedule> scheduleMapForThisMonth) {
         Schedule schedule = new Schedule();
         schedule.setDate(selectedDateData);
         schedule.setOrder(newOrderValue);
@@ -209,7 +218,7 @@ public class DataHelper {
         scheduleMapForThisMonth.put(Integer.parseInt(dateValue + "000" + newOrderValue), schedule);
         // 데일리 맵에도 추가
         if(EventHelper.eventHelper.getUiHelper().getScheduleLayout().getVisibility() == View.VISIBLE)
-        dailyScheduleMap.put(Integer.parseInt(dateValue + "000" + newOrderValue), schedule);
+            dailyScheduleMap.put(Integer.parseInt(dateValue + "000" + newOrderValue), schedule);
     }
 
     /**
@@ -419,6 +428,16 @@ public class DataHelper {
      */
     public int getMaxOrderAmongScheduleMapByThisMonth(String dateKey) {
         String yearMonthKey = makeYearMonthKey();
+        int maxValue = getMaxOrderForThisMonth(dateKey, yearMonthKey);
+        return maxValue;
+    }
+
+    public int getMaxOrderAmongScheduleMapByThisMonthForToday(String dateKey, String yearMonthKey) {
+        int maxValue = getMaxOrderForThisMonth(dateKey, yearMonthKey);
+        return maxValue;
+    }
+
+    private int getMaxOrderForThisMonth(String dateKey, String yearMonthKey) {
         HashMap<Integer, Schedule> scheduleMapForThisMonth = scheduleMapByMonth.get(Integer.parseInt(yearMonthKey));
         Log.d("getMaxOrderAmongScheduleMapByThisMonth", "getMaxOrderAmongScheduleMapByThisMonth");
         int temp = 0;
@@ -435,9 +454,6 @@ public class DataHelper {
      * @return
      */
     private String makeYearMonthKey() {
-//        CalendarPagerAdapter calendarPagerAdapter = EventHelper.eventHelper.getCalendarHelper().getCalendarPagerAdapter();
-//        String year = String.valueOf(calendarPagerAdapter.getBaseCal().get(Calendar.YEAR));
-//        int month = calendarPagerAdapter.getBaseCal().get(Calendar.MONTH);
         String yearMonthKey = makeDateString2(null, EventHelper.eventHelper.getCalendarHelper());
         return yearMonthKey;
     }//
@@ -445,6 +461,28 @@ public class DataHelper {
     public boolean isEmptyData(String dateKey){
         boolean isEmptyData = true;
         String yearMonthKey = makeYearMonthKey();
+        HashMap<Integer, Schedule> scheduleMapForThisMonth = scheduleMapByMonth.get(Integer.parseInt(yearMonthKey));
+
+        //TODO 만약 비어져있으면 여기서 한번 생성해준다 (초기화단계에서 해주도록 나중에 리팩토링)
+        if(scheduleMapForThisMonth == null) {
+            HashMap<Integer, Schedule> scheduleMap = new HashMap<Integer, Schedule>();
+            scheduleMapByMonth.put(Integer.valueOf(yearMonthKey), scheduleMap);
+            scheduleMapForThisMonth = scheduleMap;
+        }
+
+        Log.d("데이터가 비어있는지 체크", String.valueOf(dateKey));
+        Log.d("yearMonthKey 상세정보", String.valueOf(yearMonthKey));
+        Log.d("scheduleMapByMonth 상세정보", String.valueOf(scheduleMapByMonth));
+
+        Log.d("scheduleMapForThisMonth 상세정보", String.valueOf(scheduleMapForThisMonth));
+        if(isExistSchedule(dateKey.substring(6,8), scheduleMapForThisMonth))
+            isEmptyData = false;
+        Log.d("데이터가 비어있는지 체크", String.valueOf(isEmptyData));
+        return isEmptyData;
+    }
+
+    public boolean isTodayEmptyData(String dateKey, String yearMonthKey){
+        boolean isEmptyData = true;
         HashMap<Integer, Schedule> scheduleMapForThisMonth = scheduleMapByMonth.get(Integer.parseInt(yearMonthKey));
 
         //TODO 만약 비어져있으면 여기서 한번 생성해준다 (초기화단계에서 해주도록 나중에 리팩토링)
