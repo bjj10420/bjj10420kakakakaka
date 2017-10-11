@@ -143,6 +143,7 @@ public class EventHelper {
         View copiedView = uiHelper.getCopiedView();
         setCopiedViewVisible(copiedView, event);
         actionMoveBasicEvent(copiedView);
+        UIHelper.uiHelper.getTotalLayout().invalidate();
     }
 
     public void actionMoveBasicEvent(View copiedView) {
@@ -165,6 +166,7 @@ public class EventHelper {
 
     private void changeCenterIconColorWhenCollided(View copiedView) {
         boolean isCollided = Util.checkCollision(uiHelper.getCenterIcon(), copiedView);
+        Log.d("changeCenterIconColorWhenCollided 테스트", "changeCenterIconColorWhenCollided 테스트 isCollided = " + isCollided);
         uiHelper.changeCenterIconColor(isCollided);
     }
 
