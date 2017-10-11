@@ -339,7 +339,7 @@ public class EventHelper {
     // 중앙 아이콘 활성화인 경우
     private void actionWhenCenterIconActivated(View centerIcon, View copiedView, View view) {
         if(centerIcon.getVisibility() == View.VISIBLE &&
-                Util.checkCollision(centerIcon, copiedView)) {
+                Util.checkCollisionForEtcIcon(centerIcon, copiedView)) {
             addScheduleForToday(String.valueOf(view.getTag()));
         }
     }
