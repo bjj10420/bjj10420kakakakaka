@@ -42,7 +42,7 @@ public class ManagerPanel {
     }
 
     private void initBottomButtonEvents() {
-        Button closeButton = (Button) Util.getViewById(context, R.id.etcCloseBtn);
+        Button closeButton = (Button) Util.getViewById(context, R.id.managerCloseBtn);
         closeButton.setOnClickListener(managerPanelEvent);
     }
 

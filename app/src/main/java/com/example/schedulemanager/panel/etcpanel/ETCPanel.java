@@ -229,5 +229,7 @@ public class ETCPanel {
     public RelativeLayout getEtcLayout() {
         return etcLayout;
     }
+
+
 }
 

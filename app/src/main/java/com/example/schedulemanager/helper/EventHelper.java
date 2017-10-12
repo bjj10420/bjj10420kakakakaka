@@ -614,6 +614,10 @@ public class EventHelper {
         return uiHelper;
     }
 
+    public ETCPanel getEtcPanel() {
+        return etcPanel;
+    }
+
     public void setEtcPanel(ETCPanel etcPanel) {
         this.etcPanel = etcPanel;
     }
