@@ -65,10 +65,17 @@ public class ManagerPanel {
     private void composeContentsLayout() {
         for(String category : DataHelper.dataHelper.getCategories()){
             View menuBarView = makeMenuBar(category);
+            View detailView = makeDetailView();
             View emptyView = makeEmptyView();
             managerContentsLayout.addView(menuBarView);
+            managerContentsLayout.addView(detailView);
             managerContentsLayout.addView(emptyView);
         }
+    }
+
+    private View makeDetailView() {
+        View detailView = inflateDetailView();
+        return detailView;
     }
 
     private View makeEmptyView() {
@@ -91,6 +98,12 @@ public class ManagerPanel {
         View menuBarView = ((Activity) context).getLayoutInflater().inflate(R.layout.manager_menu_bar_item, null);
         menuBarView.setMinimumHeight((int) Util.convertDpToPixel(65));
         return menuBarView;
+    }
+
+    private View inflateDetailView() {
+        View detailView = ((Activity) context).getLayoutInflater().inflate(R.layout.manager_detail, null);
+        detailView.setMinimumHeight((int) Util.convertDpToPixel(65));
+        return detailView;
     }
 
     public void setTextWithBoldFont(TextView textView, String text){
