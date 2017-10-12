@@ -27,7 +27,6 @@
             android:id="@+id/managerCloseBtn"
             android:layout_width="200dp"
             android:layout_height="75dp"
-            android:layout_weight=""
             android:background="@drawable/bottom_button_bg"
             android:text="닫기"
             android:textColor="#404040" />

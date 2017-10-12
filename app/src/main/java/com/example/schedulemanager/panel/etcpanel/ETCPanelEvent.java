@@ -23,7 +23,9 @@ public class ETCPanelEvent implements View.OnClickListener{
     public void onClick(View v) {
 
         switch (v.getId()) {
-            case R.id.etcCloseBtn : panelLayoutOff();
+            case R.id.etcCloseBtn : panelLayoutOffForTotalLayout();
+                break;
+            case R.id.etcManagerBtn : panelLayoutOffForManagerPanel();
                 break;
 
             default : panelItemClickEVent(v);
@@ -31,7 +33,7 @@ public class ETCPanelEvent implements View.OnClickListener{
       }
 
     private void panelItemClickEVent(View v) {
-        panelLayoutOff();
+        panelLayoutOffForTotalLayout();
         hoverCopiedView(v);
     }
 
@@ -112,9 +114,14 @@ public class ETCPanelEvent implements View.OnClickListener{
         copiedView.setY(originalViewTop);
     }
 
-    public void panelLayoutOff() {
+    public void panelLayoutOffForTotalLayout() {
         etcPanel.setEtcLayoutVisible(false);
         UIHelper.uiHelper.setTotalLayoutVisible(true);
+    }
+
+    public void panelLayoutOffForManagerPanel() {
+        etcPanel.setEtcLayoutVisible(false);
+        EventHelper.eventHelper.getManagerPanel().setManagerLayoutVisible(true);
     }
 
 }

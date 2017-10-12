@@ -11,6 +11,7 @@ import com.example.schedulemanager.interface_.GeneralCallback;
 import com.example.schedulemanager.R;
 import com.example.schedulemanager.interface_.GeneralCallback2;
 import com.example.schedulemanager.panel.etcpanel.ETCPanel;
+import com.example.schedulemanager.panel.managerpanel.ManagerPanel;
 import com.example.schedulemanager.vo.Schedule;
 import com.example.schedulemanager.Util;
 import com.example.schedulemanager.calendar.DialogHelper;
@@ -38,6 +39,7 @@ public class EventHelper {
     private UIHelper uiHelper;
     private CalendarHelper calendarHelper;
     private ETCPanel etcPanel;
+    private ManagerPanel managerPanel;
 
     public void initEvent(Context context, DataHelper dataHelper, UIHelper uiHelper, CalendarHelper calendarHelper) {
         this.context = context;
@@ -616,4 +618,11 @@ public class EventHelper {
         this.etcPanel = etcPanel;
     }
 
+    public void setManagerPanel(ManagerPanel managerPanel) {
+        this.managerPanel = managerPanel;
+    }
+
+    public ManagerPanel getManagerPanel() {
+        return managerPanel;
+    }
 }

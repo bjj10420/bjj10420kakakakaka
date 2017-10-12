@@ -1,6 +1,7 @@
 package com.example.schedulemanager.panel.managerpanel;
 
 import android.content.Context;
+import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -48,7 +49,10 @@ public class ManagerPanel {
         Util.setFontAllChildView(context, managerBottomButtonLayout, DataHelper.dataHelper.getTypeface(), true);
     }
 
-    public void initPanel(){
+    public void setManagerLayoutVisible(boolean isVisible) {
+        managerLayout.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+    }
 
+    public void initManagerPanel() {
     }
 }

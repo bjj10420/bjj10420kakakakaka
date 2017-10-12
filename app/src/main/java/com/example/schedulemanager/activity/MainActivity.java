@@ -32,6 +32,7 @@ import com.example.schedulemanager.helper.DataHelper;
 import com.example.schedulemanager.helper.EventHelper;
 import com.example.schedulemanager.helper.UIHelper;
 import com.example.schedulemanager.panel.etcpanel.ETCPanel;
+import com.example.schedulemanager.panel.managerpanel.ManagerPanel;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieData;
@@ -76,6 +77,10 @@ public class MainActivity extends AppCompatActivity {
         ETCPanel etcPanel = new ETCPanel(this);
         etcPanel.initETCPanel();
         eventHelper.setEtcPanel(etcPanel);
+
+        ManagerPanel managerPanel = new ManagerPanel(this);
+        managerPanel.initManagerPanel();
+        eventHelper.setManagerPanel(managerPanel);
     }
 
     @Override
