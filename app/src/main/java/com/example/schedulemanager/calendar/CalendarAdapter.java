@@ -174,7 +174,7 @@ public class CalendarAdapter extends BaseAdapter
 			if(convertView == null)
 			{
 				holder = new ViewHolder();
-				convertView = mInlfater.inflate(R.layout.rail_adapter_calendar_item_view, null);
+				convertView = mInlfater.inflate(R.layout.rail_adapter_calendar_item, null);
 				holder.day = (TextView) convertView.findViewById(R.id.calendar_item_day);
 				holder.extra = (TextView) convertView.findViewById(R.id.calendar_item_extra);
 				holder.checkMark = convertView.findViewById(R.id.check_mark);

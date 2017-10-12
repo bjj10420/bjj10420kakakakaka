@@ -12,7 +12,7 @@
 
         <include
             android:id="@+id/calendarLayout"
-            layout="@layout/calendar_layout"
+            layout="@layout/calendar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="65dp"
@@ -21,7 +21,7 @@
 
         <include
             android:id="@+id/scheduleLayout"
-            layout="@layout/schedule_layout"
+            layout="@layout/schedule"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="65dp"
@@ -56,14 +56,14 @@
 
     <include
         android:id="@+id/managerLayout"
-        layout="@layout/manager_layout"
+        layout="@layout/manager"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"></include>
 
     <include
         android:id="@+id/etcLayout"
-        layout="@layout/etc_layout"
+        layout="@layout/etc"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:visibility="gone"></include>
