@@ -11,6 +11,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.schedulemanager.helper.DataHelper;
+
 /**
  * 유틸리티 클래스
  */
@@ -146,5 +148,11 @@ public class Util {
             }
         } catch (Exception e) {
         }
+    }
+
+    public static void setTextWithBoldFont(TextView textView, String text){
+        Typeface typeface = DataHelper.dataHelper.getTypeface();
+        textView.setTypeface(typeface, Typeface.BOLD);
+        textView.setText(text);
     }
 }

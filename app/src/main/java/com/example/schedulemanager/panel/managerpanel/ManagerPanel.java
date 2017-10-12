@@ -102,7 +102,7 @@ public class ManagerPanel {
     private View makeMenuBar(String menuTitle) {
         View menuBarView = makeMenuBarView();
         TextView menuBarTextView = (TextView) menuBarView.findViewById(R.id.menu_bar_text);
-        setTextWithBoldFont(menuBarTextView, menuTitle);
+        Util.setTextWithBoldFont(menuBarTextView, menuTitle);
         return menuBarView;
     }
 
@@ -118,9 +118,4 @@ public class ManagerPanel {
         return detailView;
     }
 
-    public void setTextWithBoldFont(TextView textView, String text){
-        Typeface typeface = DataHelper.dataHelper.getTypeface();
-        textView.setTypeface(typeface, Typeface.BOLD);
-        textView.setText(text);
-    }
 }
