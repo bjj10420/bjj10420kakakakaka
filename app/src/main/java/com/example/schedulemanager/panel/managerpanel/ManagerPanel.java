@@ -78,13 +78,15 @@ public class ManagerPanel {
     }
 
     private void addEmptyViewToContentsLayout() {
-        View emptyView = makeEmptyView();
+        View emptyView = makeEmptyView(5);
         managerContentsLayout.addView(emptyView);
     }
 
     private void addDetailViewToContentsLayout(String category) {
         View detailView = makeDetailView(category);
+        View emptyView = makeEmptyView(15);
         managerContentsLayout.addView(detailView);
+        managerContentsLayout.addView(emptyView);
     }
 
     private void addMenuBarViewToContentsLayout(String category) {
@@ -106,14 +108,14 @@ public class ManagerPanel {
     private View inflateDetailItemView() {
         View detailItemView = ((Activity) context).getLayoutInflater().inflate(R.layout.manager_detail_item, null);
         ViewGroup.LayoutParams detailViewParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT);
+                (int) Util.convertDpToPixel(35));
         detailItemView.setLayoutParams(detailViewParams);
         return detailItemView;
     }
 
-    private View makeEmptyView() {
+    private View makeEmptyView(int height) {
         View emptyView = new View(context);
-        int heightValue = (int) Util.convertDpToPixel(5);
+        int heightValue = (int) Util.convertDpToPixel(height);
         ViewGroup.LayoutParams emptyViewParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 heightValue);
         emptyView.setLayoutParams(emptyViewParams);
