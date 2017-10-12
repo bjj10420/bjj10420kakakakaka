@@ -159,7 +159,9 @@ public class ManagerPanel {
 
     private void setFavoriteCheck(View detailItemView, ActivityVO activityVO) {
         int id = Resources.getSystem().getIdentifier("btn_check_holo_light", "drawable", "android");
-        ((CheckBox) detailItemView.findViewById(R.id.favorite_check)).setButtonDrawable(id);
+        CheckBox checkBox =  ((CheckBox) detailItemView.findViewById(R.id.favorite_check));
+        checkBox.setButtonDrawable(id);
+        checkBox.setChecked(activityVO.isFavorite().equals("T") ? true : false);
     }
 
     private TextView makeTextView(ActivityVO activityVO) {

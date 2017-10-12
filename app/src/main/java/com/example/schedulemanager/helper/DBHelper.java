@@ -244,7 +244,6 @@ public class DBHelper extends SQLiteOpenHelper {
 
     public void selectAllCategories(ArrayList<String> categories){
         DB = getWritableDatabase();
-
         String sql = String.format(Locale.getDefault(),
                 "SELECT * FROM %s",
                 categoryTableName
