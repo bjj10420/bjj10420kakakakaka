@@ -103,6 +103,7 @@ public class ManagerPanel {
         View menuBarView = makeMenuBarView();
         TextView menuBarTextView = (TextView) menuBarView.findViewById(R.id.menu_bar_text);
         Util.setTextWithBoldFont(menuBarTextView, menuTitle);
+        menuBarView.setOnClickListener(managerPanelEvent);
         return menuBarView;
     }
 
