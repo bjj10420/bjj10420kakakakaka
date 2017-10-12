@@ -155,7 +155,7 @@ public class DataHelper {
         ActivityVO basicActivity11_1 = new ActivityVO("사무", "전화", "F", getByteArrayFromDrawable(R.drawable.basic_tel));
 
         ActivityVO basicActivity1 = new ActivityVO("취미", "사진", "F", getByteArrayFromDrawable(R.drawable.basic_photo));
-        ActivityVO basicActivity2 = new ActivityVO("취미", "음악", "F", getByteArrayFromDrawable(R.drawable.leasure));
+        ActivityVO basicActivity2 = new ActivityVO("취미", "음악", "T", getByteArrayFromDrawable(R.drawable.leasure));
         ActivityVO basicActivity3 = new ActivityVO("취미", "여행", "F", getByteArrayFromDrawable(R.drawable.basic_travel));
 
         ActivityVO basicActivity17 = new ActivityVO("기타", "메모", "T", getByteArrayFromDrawable(R.drawable.basic_write));
