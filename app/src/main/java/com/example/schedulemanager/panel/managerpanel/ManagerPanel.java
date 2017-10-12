@@ -37,7 +37,7 @@ public class ManagerPanel {
         this.context = context;
         managerLayout = (RelativeLayout) Util.getViewById(this.context, R.id.managerLayout);
         managerContentsLayout = (LinearLayout) Util.getViewById(context, R.id.managerContentsLayout);
-        managerBottomButtonLayout = (LinearLayout)Util.getViewById(this.context, R.id.managerBottomButtonLayout);
+        managerBottomButtonLayout = (LinearLayout) Util.getViewById(this.context, R.id.managerBottomButtonLayout);
         managerPanelEvent = new ManagerPanelEvent(this);
     }
 
@@ -63,7 +63,7 @@ public class ManagerPanel {
     }
 
     private void composeContentsLayout() {
-        for(String category : DataHelper.dataHelper.getCategories()){
+        for (String category : DataHelper.dataHelper.getCategories()) {
             addMenuBarViewToContentsLayout(category);
             addDetailViewToContentsLayout();
             addEmptyViewToContentsLayout();
@@ -114,7 +114,9 @@ public class ManagerPanel {
 
     private View inflateDetailView() {
         View detailView = ((Activity) context).getLayoutInflater().inflate(R.layout.manager_detail, null);
-        detailView.setMinimumHeight((int) Util.convertDpToPixel(65));
+        ViewGroup.LayoutParams detailViewParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+        detailView.setLayoutParams(detailViewParams);
         return detailView;
     }
 
