@@ -4,8 +4,11 @@ package com.example.schedulemanager.panel.managerpanel;
 import android.view.View;
 
 public class ManagerPanelEvent implements View.OnClickListener {
-    public ManagerPanelEvent(ManagerPanel managerPanel) {
 
+    ManagerPanel managerPanel;
+
+    public ManagerPanelEvent(ManagerPanel managerPanel) {
+        this.managerPanel = managerPanel;
     }
 
     @Override
