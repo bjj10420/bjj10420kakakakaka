@@ -2,10 +2,14 @@ package com.example.schedulemanager.panel.managerpanel;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.BitmapFactory;
+import android.graphics.Color;
 import android.graphics.Typeface;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
@@ -13,6 +17,9 @@ import android.widget.TextView;
 import com.example.schedulemanager.R;
 import com.example.schedulemanager.Util;
 import com.example.schedulemanager.helper.DataHelper;
+import com.example.schedulemanager.vo.ActivityVO;
+
+import java.util.ArrayList;
 
 // 기타버튼 => 관리 화면
 public class ManagerPanel {
@@ -65,7 +72,7 @@ public class ManagerPanel {
     private void composeContentsLayout() {
         for (String category : DataHelper.dataHelper.getCategories()) {
             addMenuBarViewToContentsLayout(category);
-            addDetailViewToContentsLayout();
+            addDetailViewToContentsLayout(category);
             addEmptyViewToContentsLayout();
         }
     }
@@ -75,8 +82,8 @@ public class ManagerPanel {
         managerContentsLayout.addView(emptyView);
     }
 
-    private void addDetailViewToContentsLayout() {
-        View detailView = makeDetailView();
+    private void addDetailViewToContentsLayout(String category) {
+        View detailView = makeDetailView(category);
         managerContentsLayout.addView(detailView);
     }
 
@@ -85,9 +92,23 @@ public class ManagerPanel {
         managerContentsLayout.addView(menuBarView);
     }
 
-    private View makeDetailView() {
-        View detailView = inflateDetailView();
+    private View makeDetailView(String category) {
+        LinearLayout detailView = (LinearLayout) inflateDetailView();
+        ArrayList<ActivityVO> activities = DataHelper.dataHelper.getActivities().get(category);
+        for(ActivityVO activityVO : activities){
+            View detailItemView = inflateDetailItemView();
+            setDetailView(detailItemView, activityVO);
+            detailView.addView(detailItemView);
+        }
         return detailView;
+    }
+
+    private View inflateDetailItemView() {
+        View detailItemView = ((Activity) context).getLayoutInflater().inflate(R.layout.manager_detail_item, null);
+        ViewGroup.LayoutParams detailViewParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                ViewGroup.LayoutParams.WRAP_CONTENT);
+        detailItemView.setLayoutParams(detailViewParams);
+        return detailItemView;
     }
 
     private View makeEmptyView() {
@@ -119,6 +140,39 @@ public class ManagerPanel {
                 ViewGroup.LayoutParams.WRAP_CONTENT);
         detailView.setLayoutParams(detailViewParams);
         return detailView;
+    }
+
+    private void setDetailView(View detailItemView, ActivityVO activityVO) {
+        setFavoriteCheck(detailItemView, activityVO);
+        setFavoriteIcon(detailItemView, activityVO);
+        setFavoriteName(detailItemView, activityVO);
+    }
+
+    private void setFavoriteName(View detailItemView, ActivityVO activityVO) {
+        TextView textView = (TextView) detailItemView.findViewById(R.id.favorite_name);
+        Util.setTextWithBoldFont(textView, activityVO.getActivityName());
+    }
+
+    private void setFavoriteCheck(View detailItemView, ActivityVO activityVO) {
+
+    }
+
+    private TextView makeTextView(ActivityVO activityVO) {
+        float textHeight = Util.convertDpToPixel(15);
+        ViewGroup.LayoutParams textParams = new ViewGroup.LayoutParams((int) Util.convertDpToPixel(50),
+                (int) textHeight);
+        TextView textView = new TextView(context);
+        String textData = activityVO.getActivityName();
+        Util.setTextWithBoldFont(textView, textData);
+        textView.setGravity(Gravity.CENTER);
+        textView.setLayoutParams(textParams);
+        textView.setTextColor(Color.parseColor("#404040"));
+        return textView;
+    }
+
+    private void setFavoriteIcon(View detailItemView, ActivityVO activityVO) {
+        ImageView iconView = (ImageView) detailItemView.findViewById(R.id.favorite_icon);
+        iconView.setImageBitmap(BitmapFactory.decodeByteArray(activityVO.getImageData(),0,activityVO.getImageData().length));
     }
 
 }
