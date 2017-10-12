@@ -2,7 +2,6 @@ package com.example.schedulemanager.calendar;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.support.v4.view.PagerAdapter;
 import android.support.v4.view.ViewPager;
@@ -18,7 +17,6 @@ import android.widget.GridView;
 import com.example.schedulemanager.R;
 import com.example.schedulemanager.helper.DataHelper;
 import com.example.schedulemanager.helper.EventHelper;
-import com.example.schedulemanager.vo.RectAndView;
 import com.example.schedulemanager.vo.Schedule;
 
 import java.text.SimpleDateFormat;
@@ -186,7 +184,7 @@ public class CalendarPagerAdapter extends PagerAdapter
 
 			if(convertView == null)
 			{
-				convertView = mInflater.inflate(R.layout.rail_adapter_calendar, null);
+				convertView = mInflater.inflate(R.layout.adapter_calendar, null);
 				holder = new ViewHolder();
 				
 				holder.calendarGridView = (GridView) convertView.findViewById(R.id.timetable_param_setter_calendar_gridview);
