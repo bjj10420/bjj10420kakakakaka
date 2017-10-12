@@ -4,6 +4,7 @@
     android:layout_height="50dp"
     android:background="@drawable/manager_menu_bar_bg"
     android:gravity="center"
+    android:layout_marginBottom="15dp"
     android:orientation="vertical">
 
     <TextView

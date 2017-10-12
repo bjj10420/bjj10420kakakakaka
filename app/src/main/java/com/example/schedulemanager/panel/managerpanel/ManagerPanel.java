@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.graphics.Typeface;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -62,8 +63,21 @@ public class ManagerPanel {
     }
 
     private void composeContentsLayout() {
-        View menuBarView = makeMenuBar("테스트");
-        managerContentsLayout.addView(menuBarView);
+        for(String category : DataHelper.dataHelper.getCategories()){
+            View menuBarView = makeMenuBar(category);
+            View emptyView = makeEmptyView();
+            managerContentsLayout.addView(menuBarView);
+            managerContentsLayout.addView(emptyView);
+        }
+    }
+
+    private View makeEmptyView() {
+        View emptyView = new View(context);
+        int heightValue = (int) Util.convertDpToPixel(5);
+        ViewGroup.LayoutParams emptyViewParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
+                heightValue);
+        emptyView.setLayoutParams(emptyViewParams);
+        return emptyView;
     }
 
     private View makeMenuBar(String menuTitle) {
@@ -75,7 +89,7 @@ public class ManagerPanel {
 
     private View makeMenuBarView() {
         View menuBarView = ((Activity) context).getLayoutInflater().inflate(R.layout.manager_menu_bar_item, null);
-        menuBarView.setMinimumHeight((int) Util.convertDpToPixel(50));
+        menuBarView.setMinimumHeight((int) Util.convertDpToPixel(65));
         return menuBarView;
     }
 
