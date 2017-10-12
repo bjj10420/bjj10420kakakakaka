@@ -55,10 +55,16 @@
     </RelativeLayout>
 
     <include
+        android:id="@+id/managerLayout"
+        layout="@layout/manager_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone"></include>
+
+    <include
         android:id="@+id/etcLayout"
         layout="@layout/etc_layout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-
         android:visibility="gone"></include>
 </FrameLayout>
