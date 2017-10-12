@@ -64,13 +64,25 @@ public class ManagerPanel {
 
     private void composeContentsLayout() {
         for(String category : DataHelper.dataHelper.getCategories()){
-            View menuBarView = makeMenuBar(category);
-            View detailView = makeDetailView();
-            View emptyView = makeEmptyView();
-            managerContentsLayout.addView(menuBarView);
-            managerContentsLayout.addView(detailView);
-            managerContentsLayout.addView(emptyView);
+            addMenuBarViewToContentsLayout(category);
+            addDetailViewToContentsLayout();
+            addEmptyViewToContentsLayout();
         }
+    }
+
+    private void addEmptyViewToContentsLayout() {
+        View emptyView = makeEmptyView();
+        managerContentsLayout.addView(emptyView);
+    }
+
+    private void addDetailViewToContentsLayout() {
+        View detailView = makeDetailView();
+        managerContentsLayout.addView(detailView);
+    }
+
+    private void addMenuBarViewToContentsLayout(String category) {
+        View menuBarView = makeMenuBar(category);
+        managerContentsLayout.addView(menuBarView);
     }
 
     private View makeDetailView() {
