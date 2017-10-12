@@ -67,10 +67,15 @@ public class ManagerPanel {
     }
 
     private View makeMenuBar(String menuTitle) {
-        View menuBarView = ((Activity) context).getLayoutInflater().inflate(R.layout.manager_menu_bar_item, null);
-        menuBarView.setMinimumHeight((int) Util.convertDpToPixel(50));
+        View menuBarView = makeMenuBarView();
         TextView menuBarTextView = (TextView) menuBarView.findViewById(R.id.menu_bar_text);
         setTextWithBoldFont(menuBarTextView, menuTitle);
+        return menuBarView;
+    }
+
+    private View makeMenuBarView() {
+        View menuBarView = ((Activity) context).getLayoutInflater().inflate(R.layout.manager_menu_bar_item, null);
+        menuBarView.setMinimumHeight((int) Util.convertDpToPixel(50));
         return menuBarView;
     }
 
