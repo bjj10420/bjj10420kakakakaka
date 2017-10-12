@@ -224,7 +224,7 @@ public class DBHelper extends SQLiteOpenHelper {
 //                "SELECT * FROM %s",
 //                activityTableName
 //        );
-
+//
         Cursor c = DB.rawQuery(sql, null);
         if(c != null) {
             while (c.moveToNext()) {
