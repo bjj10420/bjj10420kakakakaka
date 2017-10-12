@@ -1,10 +1,14 @@
 package com.example.schedulemanager.panel.managerpanel;
 
+import android.app.Activity;
 import android.content.Context;
+import android.graphics.Typeface;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
+
 import com.example.schedulemanager.R;
 import com.example.schedulemanager.Util;
 import com.example.schedulemanager.helper.DataHelper;
@@ -54,5 +58,25 @@ public class ManagerPanel {
     }
 
     public void initManagerPanel() {
+        composeContentsLayout();
+    }
+
+    private void composeContentsLayout() {
+        View menuBarView = makeMenuBar("테스트");
+        managerContentsLayout.addView(menuBarView);
+    }
+
+    private View makeMenuBar(String menuTitle) {
+        View menuBarView = ((Activity) context).getLayoutInflater().inflate(R.layout.manager_menu_bar_item, null);
+        menuBarView.setMinimumHeight((int) Util.convertDpToPixel(50));
+        TextView menuBarTextView = (TextView) menuBarView.findViewById(R.id.menu_bar_text);
+        setTextWithBoldFont(menuBarTextView, menuTitle);
+        return menuBarView;
+    }
+
+    public void setTextWithBoldFont(TextView textView, String text){
+        Typeface typeface = DataHelper.dataHelper.getTypeface();
+        textView.setTypeface(typeface, Typeface.BOLD);
+        textView.setText(text);
     }
 }
