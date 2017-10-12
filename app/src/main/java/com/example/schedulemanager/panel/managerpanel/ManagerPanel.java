@@ -2,6 +2,7 @@ package com.example.schedulemanager.panel.managerpanel;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -9,6 +10,7 @@ import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -156,7 +158,8 @@ public class ManagerPanel {
     }
 
     private void setFavoriteCheck(View detailItemView, ActivityVO activityVO) {
-
+        int id = Resources.getSystem().getIdentifier("btn_check_holo_light", "drawable", "android");
+        ((CheckBox) detailItemView.findViewById(R.id.favorite_check)).setButtonDrawable(id);
     }
 
     private TextView makeTextView(ActivityVO activityVO) {
