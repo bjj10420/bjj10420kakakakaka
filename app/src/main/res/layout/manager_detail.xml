@@ -13,6 +13,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:gravity="center"
             android:text="즐겨찾기"
             android:textColor="#404040"
             android:textSize="16dp" />
@@ -21,6 +22,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:gravity="center"
             android:text="아이콘"
             android:textColor="#404040"
             android:textSize="16dp" />
@@ -29,6 +31,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:gravity="center"
             android:text="이름"
             android:textColor="#404040"
             android:textSize="16dp" />
