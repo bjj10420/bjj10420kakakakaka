@@ -4,10 +4,12 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.util.Log;
@@ -29,6 +31,7 @@ import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
 
 
+import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -181,20 +184,35 @@ public class UIHelper {
     }
 
     private void newInitButtonPanel(HashMap<String, ArrayList<ActivityVO>> activities) {
+        int favoriteAcitivityCount = DataHelper.dataHelper.getAllFavoriteActivityCount();
         for(String categoryName : activities.keySet()){
             ArrayList<ActivityVO> activityList = activities.get(categoryName);
-            fillPanel(activityList);
+            fillPanel(activityList, favoriteAcitivityCount);
         }
+        addLastEtcButton(favoriteAcitivityCount);
     }
 
-    private void fillPanel(ArrayList<ActivityVO> activityList) {
+    private void fillPanel(ArrayList<ActivityVO> activityList, int favoriteAcitivityCount) {
         for (ActivityVO activityVO : activityList) {
             if(activityVO.isFavorite().equals("F"))
                 continue;
-            // 버튼뷰 설정
             LinearLayout buttonView = makeFavoriteButton(activityVO);
-            buttonViewAddToPanel(buttonView);
+            buttonViewAddToPanel(buttonView, favoriteAcitivityCount);
         }
+    }
+
+    private void addLastEtcButton(int favoriteAcitivityCount) {
+        ActivityVO activityVO = makeETCVO();
+        LinearLayout buttonView = makeFavoriteButton(activityVO);
+        buttonViewAddToPanel(buttonView, favoriteAcitivityCount);
+    }
+
+    private ActivityVO makeETCVO() {
+        ActivityVO vo = new ActivityVO();
+        vo.setFavorite("F");
+        vo.setActivityName("기타");
+        vo.setImageData(dataHelper.getByteArrayFromDrawable(R.drawable.etc));
+        return vo;
     }
 
     private LinearLayout makeFavoriteButton(ActivityVO activityVO) {
@@ -251,11 +269,10 @@ public class UIHelper {
         favoriteTextView.setTextColor(Color.parseColor("#404040"));
     }
 
-    private void buttonViewAddToPanel(LinearLayout buttonView) {
-        int mapSize = DataHelper.dataHelper.getActivities().size();
+    private void buttonViewAddToPanel(LinearLayout buttonView, int favoriteAcitivityCount) {
         LinearLayout mainTopFavoritePanel = (LinearLayout) Util.getViewById(context, R.id.buttonPanel);
         LinearLayout mainBottomFavoritePanel = (LinearLayout) Util.getViewById(context, R.id.buttonPanel2);
-        if(mainTopFavoritePanel.getChildCount() <= (mapSize / 2)){
+        if(mainTopFavoritePanel.getChildCount() <= (favoriteAcitivityCount / 2)){
             mainTopFavoritePanel.addView(buttonView);
         }
         else {

@@ -697,5 +697,20 @@ public class DataHelper {
         return categories;
     }
 
+    public int getAllFavoriteActivityCount(){
+        int count = 0;
+        for(String category : activities.keySet()) {
+            ArrayList<ActivityVO> activityList = activities.get(category);
+            count = countNumberOfFavorite(count, activityList);
+        }
+        return count;
+    }
+
+    private int countNumberOfFavorite(int count, ArrayList<ActivityVO> activityList) {
+        for(ActivityVO vo : activityList) {
+            if(vo.isFavorite().equals("T")) count++;
+        }
+        return count;
+    }
 
 }
