@@ -164,8 +164,6 @@ public class ManagerPanel {
         });
     }
 
-
-
     private void setFavoriteName(View detailItemView, ActivityVO activityVO) {
         TextView textView = (TextView) detailItemView.findViewById(R.id.favorite_name);
         Util.setTextWithBoldFont(textView, activityVO.getActivityName());
@@ -176,19 +174,6 @@ public class ManagerPanel {
         CheckBox checkBox =  ((CheckBox) detailItemView.findViewById(R.id.favorite_check));
         checkBox.setButtonDrawable(id);
         checkBox.setChecked(activityVO.isFavorite().equals("T") ? true : false);
-    }
-
-    private TextView makeTextView(ActivityVO activityVO) {
-        float textHeight = Util.convertDpToPixel(15);
-        ViewGroup.LayoutParams textParams = new ViewGroup.LayoutParams((int) Util.convertDpToPixel(50),
-                (int) textHeight);
-        TextView textView = new TextView(context);
-        String textData = activityVO.getActivityName();
-        Util.setTextWithBoldFont(textView, textData);
-        textView.setGravity(Gravity.CENTER);
-        textView.setLayoutParams(textParams);
-        textView.setTextColor(Color.parseColor("#404040"));
-        return textView;
     }
 
     private void setFavoriteIcon(View detailItemView, ActivityVO activityVO) {
