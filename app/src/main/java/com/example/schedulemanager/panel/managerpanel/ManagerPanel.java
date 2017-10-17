@@ -159,19 +159,12 @@ public class ManagerPanel {
         checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
             @Override
             public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
-                updateDBFavoriteData(b, activityVO.getActivityName());
-                updateActivitiesMap(b, activityVO);
+               managerPanelEvent.checkBoxEvent(b, activityVO);
             }
         });
     }
 
-    private void updateActivitiesMap(boolean isFaovriteChecked, ActivityVO activityVO) {
-        activityVO.setFavorite(isFaovriteChecked ? "T" : "F");
-    }
 
-    private void updateDBFavoriteData(boolean isFaovriteChecked, String activityName) {
-        DBHelper.dbHelper.updateFavoriteChecked(activityName, isFaovriteChecked ? "T" : "F");
-    }
 
     private void setFavoriteName(View detailItemView, ActivityVO activityVO) {
         TextView textView = (TextView) detailItemView.findViewById(R.id.favorite_name);

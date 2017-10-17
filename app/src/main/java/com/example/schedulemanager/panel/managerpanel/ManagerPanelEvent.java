@@ -3,11 +3,14 @@ package com.example.schedulemanager.panel.managerpanel;
 
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CompoundButton;
 
 import com.example.schedulemanager.R;
+import com.example.schedulemanager.helper.DBHelper;
 import com.example.schedulemanager.helper.EventHelper;
+import com.example.schedulemanager.vo.ActivityVO;
 
-public class ManagerPanelEvent implements View.OnClickListener {
+public class ManagerPanelEvent implements View.OnClickListener{
 
     ManagerPanel managerPanel;
 
@@ -40,5 +43,18 @@ public class ManagerPanelEvent implements View.OnClickListener {
         ViewGroup viewParent = (ViewGroup) view.getParent();
         View detailView = viewParent.getChildAt(viewParent.indexOfChild(view) + 1);
         detailView.setVisibility(detailView.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
+    }
+
+    private void updateActivitiesMap(boolean isFaovriteChecked, ActivityVO activityVO) {
+        activityVO.setFavorite(isFaovriteChecked ? "T" : "F");
+    }
+
+    private void updateDBFavoriteData(boolean isFaovriteChecked, String activityName) {
+        DBHelper.dbHelper.updateFavoriteChecked(activityName, isFaovriteChecked ? "T" : "F");
+    }
+
+    public void checkBoxEvent(boolean b, ActivityVO activityVO) {
+        updateDBFavoriteData(b, activityVO.getActivityName());
+        updateActivitiesMap(b, activityVO);
     }
 }
