@@ -5,12 +5,12 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.graphics.Typeface;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -18,6 +18,7 @@ import android.widget.TextView;
 
 import com.example.schedulemanager.R;
 import com.example.schedulemanager.Util;
+import com.example.schedulemanager.helper.DBHelper;
 import com.example.schedulemanager.helper.DataHelper;
 import com.example.schedulemanager.vo.ActivityVO;
 
@@ -101,7 +102,7 @@ public class ManagerPanel {
         ArrayList<ActivityVO> activities = DataHelper.dataHelper.getActivities().get(category);
         for(ActivityVO activityVO : activities){
             View detailItemView = inflateDetailItemView();
-            setDetailView(detailItemView, activityVO);
+            setDetailItemView(detailItemView, activityVO);
             detailView.addView(detailItemView);
         }
         return detailView;
@@ -146,10 +147,30 @@ public class ManagerPanel {
         return detailView;
     }
 
-    private void setDetailView(View detailItemView, ActivityVO activityVO) {
+    private void setDetailItemView(View detailItemView, ActivityVO activityVO) {
         setFavoriteCheck(detailItemView, activityVO);
         setFavoriteIcon(detailItemView, activityVO);
         setFavoriteName(detailItemView, activityVO);
+        setDetailItemViewEvent(detailItemView, activityVO);
+    }
+
+    private void setDetailItemViewEvent(View detailItemView, final ActivityVO activityVO) {
+        CheckBox checkBox = (CheckBox) detailItemView.findViewById(R.id.favorite_check);
+        checkBox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener(){
+            @Override
+            public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+                updateDB(b, activityVO.getActivityName());
+                updateActivitiesMap(b, activityVO);
+            }
+        });
+    }
+
+    private void updateActivitiesMap(boolean isFaovriteChecked, ActivityVO activityVO) {
+        activityVO.setFavorite(isFaovriteChecked ? "T" : "F");
+    }
+
+    private void updateDB(boolean isFaovriteChecked, String activityName) {
+        DBHelper.dbHelper.updateFavoriteChecked(activityName, isFaovriteChecked ? "T" : "F");
     }
 
     private void setFavoriteName(View detailItemView, ActivityVO activityVO) {

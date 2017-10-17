@@ -294,4 +294,17 @@ public class DBHelper extends SQLiteOpenHelper {
                         String.valueOf(orderValue)});
         return result;
     }
+
+    public int updateFavoriteChecked(String actvityName, String isFavoriteChecked) {
+        DB = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.clear();
+        values.put(activityTable_isFavorite_colum, isFavoriteChecked);
+
+        int result = DB.update(activityTableName, values,
+                activityTable_activityName_colum + " = ?",
+                new String[] {actvityName});
+        return result;
+    }
+
 }
