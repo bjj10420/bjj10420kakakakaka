@@ -205,7 +205,7 @@ public class UIHelper {
         // 아이콘 뷰 설정
         View iconView = new View(context);
 
-//           iconView.setBackgroundResource(findIdByFileName(iconNameMap.get(textData), this));
+//      iconView.setBackgroundResource(findIdByFileName(iconNameMap.get(textData), this));
 
         iconView.setBackground(background);
         iconView.setLayoutParams(iconParams);
