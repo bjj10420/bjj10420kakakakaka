@@ -49,7 +49,7 @@ public class ManagerPanel {
         managerBottomButtonLayout = (LinearLayout) Util.getViewById(this.context, R.id.managerBottomButtonLayout);
         managerPanelEvent = new ManagerPanelEvent(this);
     }
-
+//
     private void initBottomButtonEvents() {
         Button closeButton = (Button) Util.getViewById(context, R.id.managerCloseBtn);
         closeButton.setOnClickListener(managerPanelEvent);
