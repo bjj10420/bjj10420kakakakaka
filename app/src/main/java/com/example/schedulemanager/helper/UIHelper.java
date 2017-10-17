@@ -19,7 +19,6 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.example.schedulemanager.R;
-import com.example.schedulemanager.panel.etcpanel.ETCPanel;
 import com.example.schedulemanager.vo.ActivityVO;
 import com.example.schedulemanager.vo.Schedule;
 import com.example.schedulemanager.Util;
@@ -189,52 +188,67 @@ public class UIHelper {
     }
 
     private void fillPanel(ArrayList<ActivityVO> activityList) {
-        // 각 버튼의 높이
-        float buttonHeight = Util.convertDpToPixel(50);
-        // 각 텍스트의 높이
-        float textHeight = Util.convertDpToPixel(15);
-        // 각 버튼 뷰 레이아웃 파라메터
+        for (ActivityVO activityVO : activityList) {
+            if(activityVO.isFavorite().equals("F"))
+                continue;
+            // 버튼뷰 설정
+            LinearLayout buttonView = makeFavoriteButton(activityVO);
+            buttonViewAddToPanel(buttonView);
+        }
+    }
+
+    private LinearLayout makeFavoriteButton(ActivityVO activityVO) {
+        LinearLayout favoriteButtonView = new LinearLayout(context);
+        setFavoriteButtonBasicOption(favoriteButtonView);
+        addFavoriteContentToButtonView(favoriteButtonView, activityVO);
+        return favoriteButtonView;
+    }
+
+    private void addFavoriteContentToButtonView(LinearLayout favoriteButtonView, ActivityVO activityVO) {
+        ImageView iconView = makeFavoriteIconView(activityVO);
+        String textData = activityVO.getActivityName();
+        TextView textView = makeFavoriteTextView(textData);
+        favoriteButtonView.setTag(textData);
+        favoriteButtonView.addView(iconView);
+        favoriteButtonView.addView(textView);
+    }
+
+    private void setFavoriteButtonBasicOption(LinearLayout favoriteButtonView) {
         LinearLayout.LayoutParams buttonViewParams = new LinearLayout.LayoutParams(0, (int) Util.convertDpToPixel(65));
         buttonViewParams.weight = 1;
+        favoriteButtonView.setOrientation(LinearLayout.VERTICAL);
+        favoriteButtonView.setGravity(Gravity.CENTER);
+        favoriteButtonView.setLayoutParams(buttonViewParams);
+    }
+
+
+    private ImageView makeFavoriteIconView(ActivityVO activityVO) {
+        ImageView iconView = new ImageView(context);
+        // 각 버튼의 높이
+        float buttonHeight = Util.convertDpToPixel(50);
 
         // 각 버튼 레이아웃 파라메터
         ViewGroup.LayoutParams iconParams = new ViewGroup.LayoutParams((int) buttonHeight,
                 (int) buttonHeight);
-        // 각 텍스트 파라메터
-        ViewGroup.LayoutParams textParams = new ViewGroup.LayoutParams((int) buttonHeight,
-                (int) textHeight);
+        // iconView.setBackgroundResource(findIdByFileName(iconNameMap.get(textData), this));
+        iconView.setImageBitmap(BitmapFactory.decodeByteArray(activityVO.getImageData(),0,activityVO.getImageData().length));
+        iconView.setLayoutParams(iconParams);
+        return iconView;
+    }
 
-        for (ActivityVO activityVO : activityList) {
-            if(activityVO.isFavorite().equals("F"))
-                continue;
+    private TextView makeFavoriteTextView(String textData) {
+        TextView favoriteTextView = new TextView(context);
+        setFavoriteTextBasicOption(favoriteTextView, textData);
+        return favoriteTextView;
+    }
 
-            // 버튼뷰 설정
-            LinearLayout buttonView = new LinearLayout(context);
-            buttonView.setOrientation(LinearLayout.VERTICAL);
-            buttonView.setGravity(Gravity.CENTER);
-            buttonView.setLayoutParams(buttonViewParams);
-            // 아이콘 뷰 설정
-            ImageView iconView = new ImageView(context);
-            String textData = activityVO.getActivityName();
-
-            // iconView.setBackgroundResource(findIdByFileName(iconNameMap.get(textData), this));
-
-            iconView.setImageBitmap(BitmapFactory.decodeByteArray(activityVO.getImageData(),0,activityVO.getImageData().length));
-            iconView.setLayoutParams(iconParams);
-            // 텍스트 뷰 설정
-            TextView textView = new TextView(context);
-            setTextWithFont(textView, textData);
-            textView.setGravity(Gravity.CENTER);
-            textView.setLayoutParams(textParams);
-            textView.setTextColor(Color.parseColor("#404040"));
-            // 태그첨부
-            buttonView.setTag(textData);
-            // 추가
-            buttonView.addView(iconView);
-            buttonView.addView(textView);
-            buttonViewAddToPanel(buttonView);
-        }
-
+    private void setFavoriteTextBasicOption(TextView favoriteTextView, String textData) {
+        ViewGroup.LayoutParams textParams = new ViewGroup.LayoutParams((int) Util.convertDpToPixel(50),
+                (int) Util.convertDpToPixel(15));
+        setTextWithFont(favoriteTextView, textData);
+        favoriteTextView.setGravity(Gravity.CENTER);
+        favoriteTextView.setLayoutParams(textParams);
+        favoriteTextView.setTextColor(Color.parseColor("#404040"));
     }
 
     private void buttonViewAddToPanel(LinearLayout buttonView) {
