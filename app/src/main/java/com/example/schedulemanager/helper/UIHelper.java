@@ -289,7 +289,7 @@ public class UIHelper {
         buttonView.setGravity(Gravity.CENTER);
         buttonView.setLayoutParams(buttonViewParams);
         // 아이콘 뷰 설정
-        View iconView = new View(context);
+        ImageView iconView = new ImageView(context);
 
 //      iconView.setBackgroundResource(findIdByFileName(iconNameMap.get(textData), this));
 
