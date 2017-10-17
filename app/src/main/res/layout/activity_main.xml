@@ -36,21 +36,31 @@
             android:background="@drawable/schedule_icon"
             android:visibility="visible" />
 
-
-        <LinearLayout
-            android:id="@+id/buttonPanel"
+        <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="65dp"
-            android:layout_alignParentTop="true"
+            android:fillViewport="true">
 
-            android:orientation="horizontal"></LinearLayout>
+            <LinearLayout
+                android:id="@+id/buttonPanel"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:layout_alignParentTop="true"
+                android:orientation="horizontal"></LinearLayout>
+        </HorizontalScrollView>
 
-        <LinearLayout
-            android:id="@+id/buttonPanel2"
+        <HorizontalScrollView
             android:layout_width="match_parent"
             android:layout_height="65dp"
-            android:layout_alignParentBottom="true"
-            android:orientation="horizontal"></LinearLayout>
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:id="@+id/buttonPanel2"
+                android:layout_width="match_parent"
+                android:layout_height="65dp"
+                android:layout_alignParentBottom="true"
+                android:orientation="horizontal"></LinearLayout>
+        </HorizontalScrollView>
 
     </RelativeLayout>
 
