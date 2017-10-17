@@ -566,7 +566,7 @@ public class EventHelper {
         // DB에 삽입
         long resultNum = DBHelper.dbHelper.insertSchedule(newSchedule);
     }
-
+//
     private Schedule makeNewSchedule(int number, String dateString, String activityName) {
         // 삽입할 스케쥴 데이터 객체 생성
         Schedule newSchedule = new Schedule();
