@@ -8,7 +8,12 @@ import android.widget.CompoundButton;
 import com.example.schedulemanager.R;
 import com.example.schedulemanager.helper.DBHelper;
 import com.example.schedulemanager.helper.EventHelper;
+import com.example.schedulemanager.helper.UIHelper;
 import com.example.schedulemanager.vo.ActivityVO;
+
+import static com.example.schedulemanager.helper.DataHelper.dataHelper;
+import static com.example.schedulemanager.helper.EventHelper.eventHelper;
+import static com.example.schedulemanager.helper.UIHelper.uiHelper;
 
 public class ManagerPanelEvent implements View.OnClickListener{
 
@@ -22,8 +27,7 @@ public class ManagerPanelEvent implements View.OnClickListener{
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.managerCloseBtn:
-                managerPanelLayoutOff();
-                etcLayoutON();
+                managerCloseBtnEvent();
                 break;
 
             default:
@@ -31,8 +35,24 @@ public class ManagerPanelEvent implements View.OnClickListener{
         }
     }
 
+    private void managerCloseBtnEvent() {
+        managerPanelLayoutOff();
+        etcLayoutON();
+        redrawMainFavoritePanel();
+        resetMainFavoritePanelEvents();
+    }
+
+    private void resetMainFavoritePanelEvents() {
+        eventHelper.setDragEvents();
+    }
+
+    private void redrawMainFavoritePanel() {
+        uiHelper.clearButtonPanel();
+        uiHelper.newInitButtonPanel(dataHelper.getActivities());
+    }
+
     private void etcLayoutON() {
-        EventHelper.eventHelper.getEtcPanel().setEtcLayoutVisible(true);
+        eventHelper.getEtcPanel().setEtcLayoutVisible(true);
     }
 
     private void managerPanelLayoutOff() {

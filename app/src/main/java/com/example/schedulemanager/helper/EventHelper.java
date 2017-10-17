@@ -50,8 +50,7 @@ public class EventHelper {
         // 스테틱 저장
         eventHelper = this;
         // 드래그 이벤트 설정
-        setDragEvent(R.id.buttonPanel);
-        setDragEvent(R.id.buttonPanel2);
+        setDragEvents();
         // 중앙 아이콘 클릭 이벤트 설정
         setCenterIconClickEvent();
         // 뒤로가기 버튼 클릭 이벤트 설정
@@ -61,6 +60,11 @@ public class EventHelper {
         setCalendarBtnEvent(R.id.timetable_param_setter_calendar_next);
         // 파이 챠트 탭(클릭) 이벤트 설정
         setDailyScheduleClickEvent();
+    }
+
+    public void setDragEvents() {
+        setDragEvent(R.id.buttonPanel);
+        setDragEvent(R.id.buttonPanel2);
     }
 
     /**

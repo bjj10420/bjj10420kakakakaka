@@ -183,7 +183,7 @@ public class UIHelper {
         }
     }
 
-    private void newInitButtonPanel(HashMap<String, ArrayList<ActivityVO>> activities) {
+    public void newInitButtonPanel(HashMap<String, ArrayList<ActivityVO>> activities) {
         int favoriteAcitivityCount = DataHelper.dataHelper.getAllFavoriteActivityCount();
         for(String categoryName : activities.keySet()){
             ArrayList<ActivityVO> activityList = activities.get(categoryName);
@@ -565,5 +565,12 @@ public class UIHelper {
 
     public void setViewOfToday(View viewOfToday) {
         this.viewOfToday = viewOfToday;
+    }
+
+    public void clearButtonPanel() {
+        LinearLayout panel1 = (LinearLayout) Util.getViewById(context, R.id.buttonPanel);
+        LinearLayout panel2 = (LinearLayout) Util.getViewById(context, R.id.buttonPanel2);
+        panel1.removeAllViews();
+        panel2.removeAllViews();
     }
 }
