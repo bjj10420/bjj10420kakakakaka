@@ -219,13 +219,11 @@ public class CalendarHelper {
      */
     public boolean checkCollisionForCalendarCellByRectZone(){
         HashMap<Integer, View> arroundViewGroup = dataHelper.getArroundViewGroup();
-        HashMap<Integer, View> currentCalendarViewMap = dataHelper.getCurrentCalendarViewMap();
         View copiedView = uiHelepr.getCopiedView();
         int[] numberArray = new int[2];
         copiedView.getLocationInWindow(numberArray);
         Rect copiedViewRect = new Rect(numberArray[0], numberArray[1],
                 numberArray[0] + copiedView.getWidth(), numberArray[1] + copiedView.getHeight());
-
 
         // 저장소의 뷰들은 먼저 클리어
         arroundViewGroup.clear();
@@ -237,14 +235,10 @@ public class CalendarHelper {
 
             if(calendarCellView != null && Util.checkCollisionByRect(rect, copiedViewRect)) {
                 isCellCollided = true;
-
                 // 후보군 저장
                 arroundViewGroup.put((int) Util.getDistanceFromTwoPoints(
                         rect.left + rect.width() / 2, rect.top + rect.height() / 2, copiedView.getX() + copiedView.getWidth() / 2, copiedView.getY() + copiedView.getHeight() / 2),
                         calendarCellView);
-//                arroundViewGroup.put((int) Util.getDistanceFromTwoPoints(
-//                        rect.left , rect.top, copiedView.getX(), copiedView.getY()),
-//                        calendarCellView);
             }
         }
 

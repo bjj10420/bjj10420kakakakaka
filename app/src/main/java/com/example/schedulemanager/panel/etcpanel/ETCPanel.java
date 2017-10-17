@@ -4,6 +4,7 @@ import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -127,7 +128,7 @@ public class ETCPanel {
     }
 
     private View setButtonView(ActivityVO activityVO) {
-        ImageView iconView = makePanelIconView(activityVO);
+        View iconView = makePanelIconView(activityVO);
         TextView textView = makeTextView(activityVO);
         LinearLayout panelButtonView = makePanelButtonView(iconView, textView);
         panelButtonView.setTag(activityVO.getActivityName());
@@ -148,19 +149,19 @@ public class ETCPanel {
         return textView;
     }
 
-    private ImageView makePanelIconView(ActivityVO activityVO) {
-        ImageView iconView = new ImageView(context);
+    private View makePanelIconView(ActivityVO activityVO) {
+        View iconView = new View(context);
         float valueOf50DP = Util.convertDpToPixel(50);
 
         // 각 버튼 레이아웃 파라메터
         ViewGroup.LayoutParams iconParams = new ViewGroup.LayoutParams((int) valueOf50DP,
                 (int) valueOf50DP);
-        iconView.setImageBitmap(BitmapFactory.decodeByteArray(activityVO.getImageData(),0,activityVO.getImageData().length));
+        iconView.setBackground(new BitmapDrawable(context.getResources(), BitmapFactory.decodeByteArray(activityVO.getImageData(),0,activityVO.getImageData().length)));
         iconView.setLayoutParams(iconParams);
         return iconView;
     }
 
-    private LinearLayout makePanelButtonView(ImageView iconView, TextView textView) {
+    private LinearLayout makePanelButtonView(View iconView, TextView textView) {
         LinearLayout buttonView = new LinearLayout(context);
         // 각 버튼 뷰 레이아웃 파라메터
         LinearLayout.LayoutParams buttonViewParams = new LinearLayout.LayoutParams(      (int) Util.convertDpToPixel(80),

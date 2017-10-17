@@ -223,7 +223,7 @@ public class UIHelper {
     }
 
     private void addFavoriteContentToButtonView(LinearLayout favoriteButtonView, ActivityVO activityVO) {
-        ImageView iconView = makeFavoriteIconView(activityVO);
+        View iconView = makeFavoriteIconView(activityVO);
         String textData = activityVO.getActivityName();
         TextView textView = makeFavoriteTextView(textData);
         favoriteButtonView.setTag(textData);
@@ -240,8 +240,8 @@ public class UIHelper {
     }
 
 
-    private ImageView makeFavoriteIconView(ActivityVO activityVO) {
-        ImageView iconView = new ImageView(context);
+    private View makeFavoriteIconView(ActivityVO activityVO) {
+        View iconView = new View(context);
         // 각 버튼의 높이
         float buttonHeight = Util.convertDpToPixel(50);
 
@@ -249,7 +249,7 @@ public class UIHelper {
         ViewGroup.LayoutParams iconParams = new ViewGroup.LayoutParams((int) buttonHeight,
                 (int) buttonHeight);
         // iconView.setBackgroundResource(findIdByFileName(iconNameMap.get(textData), this));
-        iconView.setImageBitmap(BitmapFactory.decodeByteArray(activityVO.getImageData(),0,activityVO.getImageData().length));
+        iconView.setBackground(new BitmapDrawable(context.getResources(), BitmapFactory.decodeByteArray(activityVO.getImageData(),0,activityVO.getImageData().length)));
         iconView.setLayoutParams(iconParams);
         return iconView;
     }
@@ -285,6 +285,7 @@ public class UIHelper {
      */
     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
     private View makeButtonView(Drawable background, String textData, int width, int height) {
+
         // 각 버튼의 높이
         float valueOf50DP = Util.convertDpToPixel(50);
         // 각 텍스트의 높이
@@ -353,6 +354,7 @@ public class UIHelper {
         LinearLayout viewLayout = (LinearLayout) view;
         View iconView = viewLayout.getChildAt(0);
         TextView textView = (TextView) viewLayout.getChildAt(1);
+        Log.d("hoverView 테스트", "hoverView테스트 iconView instanceof  ImageView" + (iconView instanceof  ImageView));
         copiedView = makeButtonView(iconView instanceof  ImageView ? ((ImageView)iconView).getDrawable() : iconView.getBackground(),
                 String.valueOf(textView.getText()),
                 viewLayout.getWidth(), viewLayout.getHeight());
