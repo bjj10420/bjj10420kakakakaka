@@ -363,7 +363,7 @@ public class UIHelper {
         // 최상위 레이아웃으로 보냄
         totalLayout.addView(copiedView);
     }
-
+//
     /**
      * 아이콘 버튼 드래그시 바텀버튼 전환
      */
