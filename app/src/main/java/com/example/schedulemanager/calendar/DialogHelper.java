@@ -72,4 +72,36 @@ public class DialogHelper {
         // Icon for AlertDialog
         alert.show();
     }
+
+    /**
+     * 활동 관리 창에서 아이템 클릭시나타나는 아이템정보표시 다이얼로그
+     */
+    public void showActivityItemDialog(Context context, final GeneralCallback2 callback1, final GeneralCallback callback2){
+        AlertDialog.Builder alt_bld = new AlertDialog.Builder(context, 3);
+        final EditText et = new EditText(context);
+
+        alt_bld.setMessage("메모 입력").setView(et).setCancelable(
+                true).setPositiveButton("입력",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Log.d("메모입력테스트", et.getText().toString());
+                        if(callback1 != null)
+                            callback1.onCallBack(et.getText().toString());
+                    }
+                }).setNegativeButton("취소",
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // Action for 'NO' Button
+//                        dialog.cancel();
+                        if(callback2 != null)
+                            callback2.onCallBack();
+
+                    }
+                });
+
+        AlertDialog alert = alt_bld.create();
+
+        // Icon for AlertDialog
+        alert.show();
+    }
 }
