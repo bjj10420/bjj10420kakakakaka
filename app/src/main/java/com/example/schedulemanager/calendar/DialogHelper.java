@@ -5,8 +5,10 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.EditText;
 
+import com.example.schedulemanager.Util;
 import com.example.schedulemanager.interface_.GeneralCallback;
 import com.example.schedulemanager.interface_.GeneralCallback2;
 import com.example.schedulemanager.panel.managerpanel.ManagerPanelItemInfo;
@@ -82,8 +84,13 @@ public class DialogHelper {
         ManagerPanelItemInfo itemInfo =  new ManagerPanelItemInfo();
         View dialogView = itemInfo.init(context, view);
         alt_bld.setView(dialogView);
+        setAlertDialog(alt_bld, itemInfo);
+    }
+
+    private void setAlertDialog(AlertDialog.Builder alt_bld, ManagerPanelItemInfo itemInfo) {
         AlertDialog alert = alt_bld.create();
         itemInfo.setAlert(alert);
+        alert.getWindow().setLayout((int) Util.convertDpToPixel(100), (int) Util.convertDpToPixel(100));
         alert.show();
     }
 }

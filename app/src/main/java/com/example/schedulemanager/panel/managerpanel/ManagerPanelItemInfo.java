@@ -18,7 +18,7 @@ public class ManagerPanelItemInfo {
     private AlertDialog alert;
     private Context context;
 
-    public View init(Context context, View view){
+    public View init(Context context, View view) {
         this.context = context;
         infoView = initPanelItemInfoView(context, (ActivityVO) view.getTag());
         setInfoViewEvent(infoView);
@@ -42,7 +42,6 @@ public class ManagerPanelItemInfo {
     private View initPanelItemInfoView(Context context, ActivityVO activityVO) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View itemInfoView = inflater.inflate(R.layout.manager_item_info, null);
-        itemInfoView.setMinimumHeight((int) Util.convertDpToPixel(500));
         setItemInfoView(itemInfoView, activityVO);
         return itemInfoView;
     }
@@ -54,7 +53,7 @@ public class ManagerPanelItemInfo {
 
     private void setActivityIcon(View itemInfoView, ActivityVO activityVO) {
         View activityIconView = itemInfoView.findViewById(R.id.itemInfoIcon);
-        activityIconView.setBackground(new BitmapDrawable(context.getResources(), BitmapFactory.decodeByteArray(activityVO.getImageData(),0,activityVO.getImageData().length)));
+        activityIconView.setBackground(new BitmapDrawable(context.getResources(), BitmapFactory.decodeByteArray(activityVO.getImageData(), 0, activityVO.getImageData().length)));
     }
 
     private void setActivityName(View itemInfoView, ActivityVO activityVO) {
