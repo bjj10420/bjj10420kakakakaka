@@ -4,12 +4,12 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.util.Log;
+import android.view.View;
 import android.widget.EditText;
 
-import com.example.schedulemanager.R;
-import com.example.schedulemanager.activity.MainActivity;
 import com.example.schedulemanager.interface_.GeneralCallback;
 import com.example.schedulemanager.interface_.GeneralCallback2;
+import com.example.schedulemanager.panel.managerpanel.ManagerPanelItemInfo;
 
 /**
  * 여러가지 용도의 다이얼로그 박스를 생성
@@ -79,14 +79,12 @@ public class DialogHelper {
      */
     public void showActivityItemDialog(Context context, final GeneralCallback2 callback1, final GeneralCallback callback2){
         AlertDialog.Builder alt_bld = new AlertDialog.Builder(context, 3);
-        final EditText et = new EditText(context);
-//
-        alt_bld.setMessage("메모 입력").setView(R.layout.manager_item_info);
-
+        ManagerPanelItemInfo itemInfo =  new ManagerPanelItemInfo();
+        View dialogView = itemInfo.init(context);
+        alt_bld.setMessage("메모 입력").setView(dialogView);
 
         AlertDialog alert = alt_bld.create();
-
-        // Icon for AlertDialog
+        itemInfo.setAlert(alert);
         alert.show();
     }
 }
