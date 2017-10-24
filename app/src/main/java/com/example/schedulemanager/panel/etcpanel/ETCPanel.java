@@ -231,6 +231,9 @@ public class ETCPanel {
         return etcLayout;
     }
 
+    public void clearEtcContentsLayout(){
+        etcContentsLayout.removeAllViews();
+    }
 
 }
 

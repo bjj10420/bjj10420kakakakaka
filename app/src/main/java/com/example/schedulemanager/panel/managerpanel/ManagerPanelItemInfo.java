@@ -1,11 +1,9 @@
 package com.example.schedulemanager.panel.managerpanel;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -14,7 +12,6 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.schedulemanager.R;
-import com.example.schedulemanager.Util;
 import com.example.schedulemanager.vo.ActivityVO;
 
 import static com.example.schedulemanager.helper.DataHelper.dataHelper;
@@ -32,7 +29,7 @@ public class ManagerPanelItemInfo {
         setInfoViewEvent();
         return infoView;
     }
-//
+
     private void initField(Context context, View rowViewClicked) {
         this.context = context;
         managerListItemView = rowViewClicked;
@@ -107,10 +104,10 @@ public class ManagerPanelItemInfo {
     private void setItemInfoView(View itemInfoView, ActivityVO activityVO) {
         setActivityName(itemInfoView, activityVO);
         setActivityIcon(itemInfoView, activityVO);
-        setItemInfoViewFocus(itemInfoView);
+        clearItemInfoViewFocus(itemInfoView);
     }
 
-    private void setItemInfoViewFocus(View itemInfoView) {
+    private void clearItemInfoViewFocus(View itemInfoView) {
         EditText activityNameEditText = (EditText) itemInfoView.findViewById(R.id.itemInfoActivity);
         activityNameEditText.clearFocus();
     }
@@ -128,6 +125,5 @@ public class ManagerPanelItemInfo {
     public void setAlert(Dialog alert) {
         this.alert = alert;
     }
-
 
 }

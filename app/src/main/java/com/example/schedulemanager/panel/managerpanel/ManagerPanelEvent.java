@@ -11,6 +11,7 @@ import com.example.schedulemanager.calendar.DialogHelper;
 import com.example.schedulemanager.helper.DBHelper;
 import com.example.schedulemanager.helper.EventHelper;
 import com.example.schedulemanager.helper.UIHelper;
+import com.example.schedulemanager.panel.etcpanel.ETCPanel;
 import com.example.schedulemanager.vo.ActivityVO;
 
 import static com.example.schedulemanager.helper.DataHelper.dataHelper;
@@ -41,10 +42,25 @@ public class ManagerPanelEvent implements View.OnClickListener{
     }
 //
     private void managerCloseBtnEvent() {
+        switchLayout();
+        redraw();
+        resetMainFavoritePanelEvents();
+    }
+
+    private void switchLayout() {
         managerPanelLayoutOff();
         etcLayoutON();
+    }
+
+    private void redraw() {
         redrawMainFavoritePanel();
-        resetMainFavoritePanelEvents();
+        redrawETCPanel();
+    }
+
+    private void redrawETCPanel() {
+        ETCPanel etcPanel = eventHelper.getEtcPanel();
+        etcPanel.clearEtcContentsLayout();
+        etcPanel.initETCPanel();
     }
 
     private void resetMainFavoritePanelEvents() {
