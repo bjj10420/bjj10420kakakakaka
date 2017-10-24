@@ -25,10 +25,10 @@
                 android:text="아이콘 : "
                 android:textColor="#404040" />
 
-            <ImageView
+            <View
                 android:id="@+id/itemInfoIcon"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content" />
+                android:layout_width="50dp"
+                android:layout_height="50dp" />
 
             <Button
                 android:layout_width="wrap_content"

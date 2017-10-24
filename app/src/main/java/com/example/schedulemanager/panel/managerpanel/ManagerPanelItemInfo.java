@@ -2,6 +2,8 @@ package com.example.schedulemanager.panel.managerpanel;
 
 import android.app.AlertDialog;
 import android.content.Context;
+import android.graphics.BitmapFactory;
+import android.graphics.drawable.BitmapDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.TextView;
@@ -10,10 +12,13 @@ import com.example.schedulemanager.R;
 import com.example.schedulemanager.vo.ActivityVO;
 
 public class ManagerPanelItemInfo {
+
     View infoView;
     private AlertDialog alert;
+    private Context context;
 
     public View init(Context context, View view){
+        this.context = context;
         infoView = initPanelItemInfoView(context, (ActivityVO) view.getTag());
         setInfoViewEvent(infoView);
         return infoView;
@@ -37,6 +42,16 @@ public class ManagerPanelItemInfo {
     }
 
     private void setItemInfoView(View itemInfoView, ActivityVO activityVO) {
+        setActivityName(itemInfoView, activityVO);
+        setActivityIcon(itemInfoView, activityVO);
+    }
+
+    private void setActivityIcon(View itemInfoView, ActivityVO activityVO) {
+        View activityIconView = itemInfoView.findViewById(R.id.itemInfoIcon);
+        activityIconView.setBackground(new BitmapDrawable(context.getResources(), BitmapFactory.decodeByteArray(activityVO.getImageData(),0,activityVO.getImageData().length)));
+    }
+
+    private void setActivityName(View itemInfoView, ActivityVO activityVO) {
         TextView activityName = (TextView) itemInfoView.findViewById(R.id.itemInfoActivity);
         activityName.setText(activityVO.getActivityName());
     }
