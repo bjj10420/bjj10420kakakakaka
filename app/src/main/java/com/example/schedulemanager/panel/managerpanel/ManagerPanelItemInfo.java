@@ -5,6 +5,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -64,11 +65,15 @@ public class ManagerPanelItemInfo {
     private void saveActivityIcon() {
         View activityIcon = infoView.findViewById(R.id.itemInfoIcon);
         activityVO.setImageData(dataHelper.getByteArrayFromDrawable(activityIcon.getBackground()));
+        String categoryKey = activityVO.getCategoryName();
+        Log.d("해당 액티비티 VO의 인덱스는", dataHelper.getActivities().get(categoryKey).indexOf(activityVO) + "입니다");
     }
 
     private void saveActivityName() {
         EditText activityEdit = (EditText) infoView.findViewById(R.id.itemInfoActivity);
         activityVO.setActivityName(activityEdit.getText().toString());
+        String categoryKey = activityVO.getCategoryName();
+        Log.d("바뀐 액티비티 VO의 활동이름은", dataHelper.getActivities().get(categoryKey).get(dataHelper.getActivities().get(categoryKey).indexOf(activityVO)).getActivityName() + "입니다");
     }
 
     private void setCloseBtnClickEvent() {
