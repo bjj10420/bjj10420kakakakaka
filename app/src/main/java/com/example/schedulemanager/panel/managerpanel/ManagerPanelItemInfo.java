@@ -9,30 +9,70 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.schedulemanager.R;
 import com.example.schedulemanager.Util;
 import com.example.schedulemanager.vo.ActivityVO;
 
+import static com.example.schedulemanager.helper.DataHelper.dataHelper;
+
 public class ManagerPanelItemInfo {
 
     View infoView;
+    ActivityVO activityVO;
     private Dialog alert;
     private Context context;
 
     public View init(Context context, View view) {
         this.context = context;
-        infoView = initPanelItemInfoView(context, (ActivityVO) view.getTag());
-        setInfoViewEvent(infoView);
+        activityVO = (ActivityVO) view.getTag();
+        infoView = initPanelItemInfoView(context, activityVO);
+        setInfoViewEvent();
         return infoView;
     }
 
-    private void setInfoViewEvent(final View infoView) {
-        View closeBtn = infoView.findViewById(R.id.itemInfoCloseBtn);
-        setCloseBtnClickEvent(closeBtn);
+    private void setInfoViewEvent() {
+        setChangeBtnClickEvent();
+        setCloseBtnClickEvent();
     }
 
-    private void setCloseBtnClickEvent(View closeBtn) {
+    private void setChangeBtnClickEvent() {
+        View changeBtn = infoView.findViewById(R.id.itemInfoChangeBtn);
+        changeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                actionChangeBtn();
+            }
+        });
+    }
+
+    private void actionChangeBtn() {
+        saveInfoVO();
+        showToast();
+    }
+
+    private void showToast() {
+        Toast.makeText(context, "변경되었습니다.", Toast.LENGTH_SHORT).show();
+    }
+
+    private void saveInfoVO() {
+        saveActivityName();
+        saveActivityIcon();
+    }
+
+    private void saveActivityIcon() {
+        View activityIcon = infoView.findViewById(R.id.itemInfoIcon);
+        activityVO.setImageData(dataHelper.getByteArrayFromDrawable(activityIcon.getBackground()));
+    }
+
+    private void saveActivityName() {
+        EditText activityEdit = (EditText) infoView.findViewById(R.id.itemInfoActivity);
+        activityVO.setActivityName(activityEdit.getText().toString());
+    }
+
+    private void setCloseBtnClickEvent() {
+        View closeBtn = infoView.findViewById(R.id.itemInfoCloseBtn);
         closeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

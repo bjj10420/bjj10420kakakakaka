@@ -679,6 +679,17 @@ public class DataHelper {
         return data;
     }
 
+    /*
+ * Drawable을 바이트로 변환
+ */
+    public byte[] getByteArrayFromDrawable(Drawable drawable){
+
+        Bitmap bitmap = ((BitmapDrawable) drawable).getBitmap();
+        ByteArrayOutputStream stream = new ByteArrayOutputStream();
+        bitmap.compress(Bitmap.CompressFormat.PNG, 100, stream);
+        byte[] data = stream.toByteArray();
+        return data;
+    }
 //    public void saveImageIntoDB(){
 //        Drawable drawable = ((Activity) context).getDrawable(R.drawable.email);
 //        DBHelper.dbHelper.insertActivityWithIcon(getByteArrayFromDrawable(drawable));
