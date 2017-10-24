@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.example.schedulemanager.R;
+import com.example.schedulemanager.Util;
 import com.example.schedulemanager.vo.ActivityVO;
 
 public class ManagerPanelItemInfo {
@@ -41,6 +42,7 @@ public class ManagerPanelItemInfo {
     private View initPanelItemInfoView(Context context, ActivityVO activityVO) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View itemInfoView = inflater.inflate(R.layout.manager_item_info, null);
+        itemInfoView.setMinimumHeight((int) Util.convertDpToPixel(500));
         setItemInfoView(itemInfoView, activityVO);
         return itemInfoView;
     }

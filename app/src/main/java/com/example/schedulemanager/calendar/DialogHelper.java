@@ -81,7 +81,7 @@ public class DialogHelper {
         AlertDialog.Builder alt_bld = new AlertDialog.Builder(context, 3);
         ManagerPanelItemInfo itemInfo =  new ManagerPanelItemInfo();
         View dialogView = itemInfo.init(context, view);
-        alt_bld.setMessage("활동 정보").setView(dialogView);
+        alt_bld.setView(dialogView);
         AlertDialog alert = alt_bld.create();
         itemInfo.setAlert(alert);
         alert.show();
