@@ -307,4 +307,16 @@ public class DBHelper extends SQLiteOpenHelper {
         return result;
     }
 
+    public int updateActivityNameAndIcon(ActivityVO activityVO, String originalActivityName) {
+        DB = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.clear();
+        values.put(activityTable_activityName_colum, activityVO.getActivityName());
+        values.put(acitivytTable_icon_colum, activityVO.getImageData());
+
+        int result = DB.update(activityTableName, values,
+                activityTable_activityName_colum + " = ?",
+                new String[] {originalActivityName});
+        return result;
+    }
 }

@@ -12,15 +12,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.schedulemanager.R;
+import com.example.schedulemanager.helper.DBHelper;
 import com.example.schedulemanager.vo.ActivityVO;
 
 import static com.example.schedulemanager.helper.DataHelper.dataHelper;
 
 public class ManagerPanelItemInfo {
 
-    View infoView;
-    View managerListItemView;
-    ActivityVO activityVO;
+    private View infoView;
+    private View managerListItemView;
+    private ActivityVO activityVO;
+    private String originalActivityName;
     private Dialog alert;
     private Context context;
 
@@ -35,6 +37,7 @@ public class ManagerPanelItemInfo {
         managerListItemView = rowViewClicked;
         activityVO = (ActivityVO) rowViewClicked.getTag();
         infoView = initPanelItemInfoView(context, activityVO);
+        originalActivityName = activityVO.getActivityName();
     }
 
     private void setInfoViewEvent() {
@@ -54,8 +57,13 @@ public class ManagerPanelItemInfo {
 
     private void actionChangeBtn() {
         saveInfoVO();
+        updateMangerPanelItemInfoDB();
         showToast();
         refreshManagerPanel();
+    }
+
+    private void updateMangerPanelItemInfoDB() {
+        DBHelper.dbHelper.updateActivityNameAndIcon(activityVO, originalActivityName);
     }
 
     private void refreshManagerPanel() {
