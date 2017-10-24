@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -21,16 +22,22 @@ import static com.example.schedulemanager.helper.DataHelper.dataHelper;
 public class ManagerPanelItemInfo {
 
     View infoView;
+    View managerListItemView;
     ActivityVO activityVO;
     private Dialog alert;
     private Context context;
 
-    public View init(Context context, View view) {
-        this.context = context;
-        activityVO = (ActivityVO) view.getTag();
-        infoView = initPanelItemInfoView(context, activityVO);
+    public View init(Context context, View rowViewClicked) {
+        initField(context, rowViewClicked);
         setInfoViewEvent();
         return infoView;
+    }
+
+    private void initField(Context context, View rowViewClicked) {
+        this.context = context;
+        managerListItemView = rowViewClicked;
+        activityVO = (ActivityVO) rowViewClicked.getTag();
+        infoView = initPanelItemInfoView(context, activityVO);
     }
 
     private void setInfoViewEvent() {
@@ -51,6 +58,14 @@ public class ManagerPanelItemInfo {
     private void actionChangeBtn() {
         saveInfoVO();
         showToast();
+        refreshManagerPanel();
+    }
+
+    private void refreshManagerPanel() {
+        TextView managerDetailItemText = (TextView) managerListItemView.findViewById(R.id.favorite_name);
+        ImageView managerDetailItemIcon = (ImageView) managerListItemView.findViewById(R.id.favorite_icon);
+        managerDetailItemText.setText(activityVO.getActivityName());
+        managerDetailItemIcon.setImageBitmap(BitmapFactory.decodeByteArray(activityVO.getImageData(),0,activityVO.getImageData().length));
     }
 
     private void showToast() {
