@@ -39,7 +39,7 @@ public class ManagerPanelEvent implements View.OnClickListener{
                 itemClickEvent(view);
         }
     }
-
+//
     private void managerCloseBtnEvent() {
         managerPanelLayoutOff();
         etcLayoutON();
