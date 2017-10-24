@@ -79,7 +79,7 @@ public class DialogHelper {
     public void showActivityItemDialog(Context context, final GeneralCallback2 callback1, final GeneralCallback callback2){
         AlertDialog.Builder alt_bld = new AlertDialog.Builder(context, 3);
         final EditText et = new EditText(context);
-
+//
         alt_bld.setMessage("메모 입력").setView(et).setCancelable(
                 true).setPositiveButton("입력",
                 new DialogInterface.OnClickListener() {
