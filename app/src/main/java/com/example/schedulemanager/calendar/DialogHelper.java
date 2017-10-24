@@ -77,10 +77,10 @@ public class DialogHelper {
     /**
      * 활동 관리 창에서 아이템 클릭시나타나는 아이템정보표시 다이얼로그
      */
-    public void showActivityItemDialog(Context context, final GeneralCallback2 callback1, final GeneralCallback callback2){
+    public void showActivityItemDialog(Context context, final GeneralCallback2 callback1, final GeneralCallback callback2, View view){
         AlertDialog.Builder alt_bld = new AlertDialog.Builder(context, 3);
         ManagerPanelItemInfo itemInfo =  new ManagerPanelItemInfo();
-        View dialogView = itemInfo.init(context);
+        View dialogView = itemInfo.init(context, view);
         alt_bld.setMessage("메모 입력").setView(dialogView);
 
         AlertDialog alert = alt_bld.create();

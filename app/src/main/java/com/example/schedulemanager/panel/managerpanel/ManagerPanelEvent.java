@@ -66,13 +66,13 @@ public class ManagerPanelEvent implements View.OnClickListener{
 
     private void itemClickEvent(View view){
         if(view.getTag() instanceof ActivityVO)
-            listItemClickEvent();
+            listItemClickEvent(view);
         else
             menubarTitleItemClickEvent(view);
     }
 
-    private void listItemClickEvent() {
-        new DialogHelper().showActivityItemDialog(context, null, null);
+    private void listItemClickEvent(View view) {
+        new DialogHelper().showActivityItemDialog(context, null, null, view);
     }
 
     private void menubarTitleItemClickEvent(View view) {
