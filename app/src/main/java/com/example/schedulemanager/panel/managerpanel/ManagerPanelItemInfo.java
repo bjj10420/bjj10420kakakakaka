@@ -26,6 +26,10 @@ public class ManagerPanelItemInfo {
 
     private void setInfoViewEvent(final View infoView) {
         View closeBtn = infoView.findViewById(R.id.itemInfoCloseBtn);
+        setCloseBtnClickEvent(closeBtn);
+    }
+
+    private void setCloseBtnClickEvent(View closeBtn) {
         closeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
