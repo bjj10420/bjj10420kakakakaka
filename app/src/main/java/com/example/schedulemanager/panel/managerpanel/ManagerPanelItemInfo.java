@@ -1,6 +1,7 @@
 package com.example.schedulemanager.panel.managerpanel;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
@@ -15,7 +16,7 @@ import com.example.schedulemanager.vo.ActivityVO;
 public class ManagerPanelItemInfo {
 
     View infoView;
-    private AlertDialog alert;
+    private Dialog alert;
     private Context context;
 
     public View init(Context context, View view) {
@@ -61,7 +62,7 @@ public class ManagerPanelItemInfo {
         activityName.setText(activityVO.getActivityName());
     }
 
-    public void setAlert(AlertDialog alert) {
+    public void setAlert(Dialog alert) {
         this.alert = alert;
     }
 

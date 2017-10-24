@@ -1,6 +1,7 @@
 package com.example.schedulemanager.calendar;
 
 import android.app.AlertDialog;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.util.Log;
@@ -80,17 +81,28 @@ public class DialogHelper {
      * 활동 관리 창에서 아이템 클릭시나타나는 아이템정보표시 다이얼로그
      */
     public void showActivityItemDialog(Context context, final GeneralCallback2 callback1, final GeneralCallback callback2, View view){
-        AlertDialog.Builder alt_bld = new AlertDialog.Builder(context, 3);
         ManagerPanelItemInfo itemInfo =  new ManagerPanelItemInfo();
         View dialogView = itemInfo.init(context, view);
-        alt_bld.setView(dialogView);
-        setAlertDialog(alt_bld, itemInfo);
+        setAlertDialog(context, itemInfo, dialogView);
     }
 
-    private void setAlertDialog(AlertDialog.Builder alt_bld, ManagerPanelItemInfo itemInfo) {
-        AlertDialog alert = alt_bld.create();
-        itemInfo.setAlert(alert);
-        alert.getWindow().setLayout((int) Util.convertDpToPixel(100), (int) Util.convertDpToPixel(100));
-        alert.show();
+    private void setAlertDialog(Context context, ManagerPanelItemInfo itemInfo, View dialogView) {
+        Dialog dialog = new Dialog(context);
+        setDialogBasicOptions(dialog, dialogView);
+        itemInfo.setAlert(dialog);
+    }
+
+    private void setDialogBasicOptions(Dialog dialog, View dialogView) {
+        dialog.setContentView(dialogView);
+        WindowManager.LayoutParams params = makeDialogParams(dialog);
+        dialog.getWindow().setAttributes((android.view.WindowManager.LayoutParams) params);
+        dialog.show();
+    }
+
+    private WindowManager.LayoutParams makeDialogParams(Dialog dialog) {
+        WindowManager.LayoutParams params =  dialog.getWindow().getAttributes();
+        params.width = (int) Util.convertDpToPixel(300);
+        params.height = (int) Util.convertDpToPixel(300);
+        return  params;
     }
 }
