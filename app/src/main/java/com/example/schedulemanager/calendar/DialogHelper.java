@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -96,13 +97,14 @@ public class DialogHelper {
         dialog.setContentView(dialogView);
         WindowManager.LayoutParams params = makeDialogParams(dialog);
         dialog.getWindow().setAttributes((android.view.WindowManager.LayoutParams) params);
+//        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.show();
     }
 
     private WindowManager.LayoutParams makeDialogParams(Dialog dialog) {
         WindowManager.LayoutParams params =  dialog.getWindow().getAttributes();
         params.width = (int) Util.convertDpToPixel(300);
-        params.height = (int) Util.convertDpToPixel(300);
+        params.height = (int) Util.convertDpToPixel(250);
         return  params;
     }
 }
