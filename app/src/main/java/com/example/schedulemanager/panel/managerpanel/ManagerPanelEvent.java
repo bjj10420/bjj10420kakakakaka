@@ -1,11 +1,13 @@
 package com.example.schedulemanager.panel.managerpanel;
 
 
+import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CompoundButton;
 
 import com.example.schedulemanager.R;
+import com.example.schedulemanager.calendar.DialogHelper;
 import com.example.schedulemanager.helper.DBHelper;
 import com.example.schedulemanager.helper.EventHelper;
 import com.example.schedulemanager.helper.UIHelper;
@@ -17,21 +19,24 @@ import static com.example.schedulemanager.helper.UIHelper.uiHelper;
 
 public class ManagerPanelEvent implements View.OnClickListener{
 
+    private Context context;
     ManagerPanel managerPanel;
 
-    public ManagerPanelEvent(ManagerPanel managerPanel) {
+    public ManagerPanelEvent(ManagerPanel managerPanel, Context context) {
         this.managerPanel = managerPanel;
+        this.context = context;
     }
 
     @Override
     public void onClick(View view) {
+
         switch (view.getId()) {
             case R.id.managerCloseBtn:
                 managerCloseBtnEvent();
                 break;
 
             default:
-                menubarTitleItemClickEvent(view);
+                itemClickEvent(view);
         }
     }
 
@@ -57,6 +62,17 @@ public class ManagerPanelEvent implements View.OnClickListener{
 
     private void managerPanelLayoutOff() {
         managerPanel.setManagerLayoutVisible(false);
+    }
+
+    private void itemClickEvent(View view){
+        if(view.getTag() instanceof ActivityVO)
+            listItemClickEvent();
+        else
+            menubarTitleItemClickEvent(view);
+    }
+
+    private void listItemClickEvent() {
+        new DialogHelper().showActivityItemDialog(context, null, null);
     }
 
     private void menubarTitleItemClickEvent(View view) {

@@ -4,7 +4,7 @@
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:id="@+id/etcContentsLayout"
+        android:id="@+id/itemInfoContentsLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="75dp"
@@ -16,7 +16,7 @@
         android:paddingTop="10dp"></LinearLayout>
 
     <LinearLayout
-        android:id="@+id/etcBottomButtonLayout"
+        android:id="@+id/itemInfoBottomButtonLayout"
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:layout_alignParentBottom="true"
@@ -24,24 +24,25 @@
         android:gravity="center">
 
         <Button
+            android:id="@+id/itemInfoChangeBtn"
             android:layout_width="0dp"
             android:layout_height="75dp"
             android:layout_weight="1"
             android:background="@drawable/bottom_button_bg"
-            android:text="추가"
+            android:text="변경"
             android:textColor="#404040" />
 
         <Button
-            android:id="@+id/etcManagerBtn"
+            android:id="@+id/itemInfoDelBtn"
             android:layout_width="0dp"
             android:layout_height="75dp"
             android:layout_weight="1"
             android:background="@drawable/bottom_button_bg"
-            android:text="관리"
+            android:text="삭제"
             android:textColor="#404040" />
 
         <Button
-            android:id="@+id/etcCloseBtn"
+            android:id="@+id/itemInfoCloseBtn"
             android:layout_width="0dp"
             android:layout_height="75dp"
             android:layout_weight="1"

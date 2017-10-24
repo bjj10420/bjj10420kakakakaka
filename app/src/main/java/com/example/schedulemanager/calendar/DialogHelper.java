@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.util.Log;
 import android.widget.EditText;
 
+import com.example.schedulemanager.R;
 import com.example.schedulemanager.activity.MainActivity;
 import com.example.schedulemanager.interface_.GeneralCallback;
 import com.example.schedulemanager.interface_.GeneralCallback2;
@@ -80,24 +81,8 @@ public class DialogHelper {
         AlertDialog.Builder alt_bld = new AlertDialog.Builder(context, 3);
         final EditText et = new EditText(context);
 //
-        alt_bld.setMessage("메모 입력").setView(et).setCancelable(
-                true).setPositiveButton("입력",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        Log.d("메모입력테스트", et.getText().toString());
-                        if(callback1 != null)
-                            callback1.onCallBack(et.getText().toString());
-                    }
-                }).setNegativeButton("취소",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        // Action for 'NO' Button
-//                        dialog.cancel();
-                        if(callback2 != null)
-                            callback2.onCallBack();
+        alt_bld.setMessage("메모 입력").setView(R.layout.manager_item_info);
 
-                    }
-                });
 
         AlertDialog alert = alt_bld.create();
 

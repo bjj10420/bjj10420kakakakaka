@@ -48,7 +48,7 @@ public class ManagerPanel {
         managerLayout = (RelativeLayout) Util.getViewById(this.context, R.id.managerLayout);
         managerContentsLayout = (LinearLayout) Util.getViewById(context, R.id.managerContentsLayout);
         managerBottomButtonLayout = (LinearLayout) Util.getViewById(this.context, R.id.managerBottomButtonLayout);
-        managerPanelEvent = new ManagerPanelEvent(this);
+        managerPanelEvent = new ManagerPanelEvent(this, context);
     }
 //
     private void initBottomButtonEvents() {
@@ -162,6 +162,9 @@ public class ManagerPanel {
                managerPanelEvent.checkBoxEvent(b, activityVO);
             }
         });
+        detailItemView.setOnClickListener(managerPanelEvent);
+        // 태그첨부
+        detailItemView.setTag(activityVO);
     }
 
     private void setFavoriteName(View detailItemView, ActivityVO activityVO) {
