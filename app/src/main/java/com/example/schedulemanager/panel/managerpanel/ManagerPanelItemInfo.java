@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.TextView;
 
 import com.example.schedulemanager.R;
@@ -50,6 +51,12 @@ public class ManagerPanelItemInfo {
     private void setItemInfoView(View itemInfoView, ActivityVO activityVO) {
         setActivityName(itemInfoView, activityVO);
         setActivityIcon(itemInfoView, activityVO);
+        setItemInfoViewFocus(itemInfoView);
+    }
+
+    private void setItemInfoViewFocus(View itemInfoView) {
+        EditText activityNameEditText = (EditText) itemInfoView.findViewById(R.id.itemInfoActivity);
+        activityNameEditText.clearFocus();
     }
 
     private void setActivityIcon(View itemInfoView, ActivityVO activityVO) {
