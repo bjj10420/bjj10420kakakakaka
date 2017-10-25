@@ -3,121 +3,134 @@
     android:layout_width="wrap_content"
     android:layout_height="150dp">
 
-    <LinearLayout
-        android:id="@+id/itemInfoContentsLayout"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="75dp"
-        android:background="#ffffff"
-        android:orientation="vertical"
-        android:paddingBottom="10dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="10dp">
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="활동 정보"
-            android:textColor="#404040"
-            android:textSize="16dp" />
+    <RelativeLayout
+        android:id="@+id/itemInfoMainPanel"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/itemInfoContentsLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:focusable="true"
-            android:focusableInTouchMode="true"
-            android:gravity="center">
+            android:layout_height="match_parent"
+            android:layout_marginBottom="75dp"
+            android:background="#ffffff"
+            android:orientation="vertical"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp">
 
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="아이콘 : "
-                android:textColor="#404040" />
+                android:text="활동 정보"
+                android:textColor="#404040"
+                android:textSize="16dp" />
 
             <LinearLayout
-                android:layout_width="0dp"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:focusable="true"
+                android:focusableInTouchMode="true"
                 android:gravity="center">
 
-                <View
-                    android:id="@+id/itemInfoIcon"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp" />
-
-            </LinearLayout>
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:gravity="center">
-
-            <TextView
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center"
-                android:text="활동 : "
-                android:textColor="#404040" />
-
-            <LinearLayout
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:gravity="center">
-
-                <EditText
-                    android:id="@+id/itemInfoActivity"
-                    android:layout_width="wrap_content"
+                <TextView
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="아이콘 : "
                     android:textColor="#404040" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <View
+                        android:id="@+id/itemInfoIcon"
+                        android:layout_width="50dp"
+                        android:layout_height="50dp" />
+
+                </LinearLayout>
             </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center">
+
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:text="활동 : "
+                    android:textColor="#404040" />
+
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:gravity="center">
+
+                    <EditText
+                        android:id="@+id/itemInfoActivity"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="#404040" />
+                </LinearLayout>
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"></LinearLayout>
         </LinearLayout>
 
         <LinearLayout
+            android:id="@+id/itemInfoBottomButtonLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"></LinearLayout>
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/itemInfoBottomButtonLayout"
-        android:layout_width="match_parent"
-        android:layout_height="75dp"
-        android:layout_alignParentBottom="true"
-        android:background="#ffffff"
-        android:gravity="center">
-
-        <Button
-            android:id="@+id/itemInfoChangeBtn"
-            android:layout_width="0dp"
             android:layout_height="75dp"
-            android:layout_weight="1"
-            android:background="@drawable/bottom_button_bg"
-            android:text="변경"
-            android:textColor="#404040" />
+            android:layout_alignParentBottom="true"
+            android:background="#ffffff"
+            android:gravity="center">
 
-        <Button
-            android:id="@+id/itemInfoRemoveBtn"
-            android:layout_width="0dp"
-            android:layout_height="75dp"
-            android:layout_weight="1"
-            android:background="@drawable/bottom_button_bg"
-            android:text="삭제"
-            android:textColor="#404040" />
+            <Button
+                android:id="@+id/itemInfoChangeBtn"
+                android:layout_width="0dp"
+                android:layout_height="75dp"
+                android:layout_weight="1"
+                android:background="@drawable/bottom_button_bg"
+                android:text="변경"
+                android:textColor="#404040" />
 
-        <Button
-            android:id="@+id/itemInfoCloseBtn"
-            android:layout_width="0dp"
-            android:layout_height="75dp"
-            android:layout_weight="1"
-            android:background="@drawable/bottom_button_bg"
-            android:text="닫기"
-            android:textColor="#404040" />
+            <Button
+                android:id="@+id/itemInfoRemoveBtn"
+                android:layout_width="0dp"
+                android:layout_height="75dp"
+                android:layout_weight="1"
+                android:background="@drawable/bottom_button_bg"
+                android:text="삭제"
+                android:textColor="#404040" />
 
-    </LinearLayout>
+            <Button
+                android:id="@+id/itemInfoCloseBtn"
+                android:layout_width="0dp"
+                android:layout_height="75dp"
+                android:layout_weight="1"
+                android:background="@drawable/bottom_button_bg"
+                android:text="닫기"
+                android:textColor="#404040" />
 
+        </LinearLayout>
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/itemInfoIconPanel"
+        android:layout_width="wrap_content"
+        android:layout_height="150dp"
+        android:visibility="gone">
+
+    </RelativeLayout>
 </RelativeLayout>
