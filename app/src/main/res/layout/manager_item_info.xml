@@ -126,11 +126,10 @@
         </LinearLayout>
     </RelativeLayout>
 
-    <RelativeLayout
-        android:id="@+id/itemInfoIconPanel"
+    <LinearLayout
+        android:id="@+id/itemInfoIconBoxPanel"
         android:layout_width="wrap_content"
         android:layout_height="150dp"
-        android:visibility="gone">
-
-    </RelativeLayout>
+        android:orientation="vertical"
+        android:visibility="gone"></LinearLayout>
 </RelativeLayout>
