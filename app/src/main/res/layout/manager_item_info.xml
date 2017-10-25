@@ -6,7 +6,8 @@
     <RelativeLayout
         android:id="@+id/itemInfoMainPanel"
         android:layout_width="wrap_content"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:visibility="gone">
 
         <LinearLayout
             android:id="@+id/itemInfoContentsLayout"
@@ -126,10 +127,15 @@
         </LinearLayout>
     </RelativeLayout>
 
-    <LinearLayout
-        android:id="@+id/itemInfoIconBoxPanel"
+    <ScrollView
         android:layout_width="wrap_content"
-        android:layout_height="150dp"
-        android:orientation="vertical"
-        android:visibility="gone"></LinearLayout>
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/itemInfoIconBoxPanel"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:background="#ffffff"
+            android:visibility="visible"></LinearLayout>
+    </ScrollView>
 </RelativeLayout>

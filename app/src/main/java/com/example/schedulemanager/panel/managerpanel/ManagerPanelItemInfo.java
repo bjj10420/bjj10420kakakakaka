@@ -4,19 +4,22 @@ import android.app.Dialog;
 import android.content.Context;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewManager;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.schedulemanager.R;
+import com.example.schedulemanager.Util;
 import com.example.schedulemanager.helper.DBHelper;
 import com.example.schedulemanager.helper.DialogHelper;
 import com.example.schedulemanager.interface_.GeneralCallback;
-import com.example.schedulemanager.interface_.GeneralCallback2;
 import com.example.schedulemanager.vo.ActivityVO;
 
 import static com.example.schedulemanager.helper.DataHelper.dataHelper;
@@ -32,10 +35,48 @@ public class ManagerPanelItemInfo {
 
     public View init(Context context, View rowViewClicked) {
         initField(context, rowViewClicked);
+        initInfoIconBoxPanel();
         setInfoViewEvent();
         return infoView;
     }
-//
+
+    private void initInfoIconBoxPanel() {
+        LinearLayout itemInfoIconBoxPanel = (LinearLayout) infoView.findViewById(R.id.itemInfoIconBoxPanel);
+        LinearLayout rowLayout = null;
+        for(Drawable drawable : dataHelper.getDrawableList()) {
+                rowLayout = decideRowLayoutByChildCount(rowLayout);
+                addBoxPanelItemViewToPanel(drawable, rowLayout, itemInfoIconBoxPanel);
+             }
+    }
+
+    private LinearLayout decideRowLayoutByChildCount(LinearLayout rowLayout) {
+        if(rowLayout != null && rowLayout.getChildCount() < 5) return rowLayout;
+        else {
+            LinearLayout newRowLayout = new LinearLayout(context);
+            LinearLayout.LayoutParams params = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
+                    LinearLayout.LayoutParams.WRAP_CONTENT);
+            newRowLayout.setLayoutParams(params);
+            return newRowLayout;
+        }
+        }
+
+    private void addBoxPanelItemViewToPanel(Drawable drawable, LinearLayout rowLayout, LinearLayout itemInfoIconBoxPanel) {
+        View iconBoxPanelItemView = makeBoxPanelItemView(drawable);
+        rowLayout.addView(iconBoxPanelItemView);
+        Log.d("addBoxPanelItemViewToPanel 체크", String.valueOf(itemInfoIconBoxPanel));
+        if(rowLayout.getChildCount() == 4) itemInfoIconBoxPanel.addView(rowLayout);
+    }
+
+    private View makeBoxPanelItemView(Drawable drawable) {
+        View boxPanelItemView = new View(context);
+        boxPanelItemView.setBackground(drawable);
+        LinearLayout.LayoutParams viewParams = new LinearLayout.LayoutParams(0,
+                (int) Util.convertDpToPixel(50));
+        viewParams.weight = 1;
+        boxPanelItemView.setLayoutParams(viewParams);
+        return  boxPanelItemView;
+    }
+
     private void initField(Context context, View rowViewClicked) {
         this.context = context;
         managerListItemView = rowViewClicked;

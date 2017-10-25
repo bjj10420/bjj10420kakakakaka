@@ -737,4 +737,7 @@ public class DataHelper {
         return count;
     }
 
+    public ArrayList<Drawable> getDrawableList() {
+        return drawableList;
+    }
 }
