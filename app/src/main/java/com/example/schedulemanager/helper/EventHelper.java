@@ -407,7 +407,7 @@ public class EventHelper {
                             }
                         }, null);
                     }
-                });
+                }, "메모 첨부", "삭제");
             }
 
             @Override

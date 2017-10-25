@@ -23,15 +23,15 @@ public class DialogHelper {
     /**
      * 선택형 다이얼 로그 생성
      */
-    public void setChoiceStyleDialog(Context context, final GeneralCallback callback1, final GeneralCallback callback2){
+    public void setChoiceStyleDialog(Context context, final GeneralCallback callback1, final GeneralCallback callback2, String leftBtnString, String rightBtnString){
         AlertDialog.Builder alt_bld = new AlertDialog.Builder(context, 3);
         alt_bld.setCancelable(
-                true).setPositiveButton("삭제",
+                true).setPositiveButton(rightBtnString,
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         callback1.onCallBack();
                     }
-                }).setNegativeButton("메모 첨부",
+                }).setNegativeButton(leftBtnString,
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
                         // Action for 'NO' Button
