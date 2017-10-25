@@ -6,6 +6,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewManager;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -42,6 +43,7 @@ public class ManagerPanelItemInfo {
 
     private void setInfoViewEvent() {
         setChangeBtnClickEvent();
+        setRemoveBtnClcikEvent();
         setCloseBtnClickEvent();
     }
 
@@ -55,26 +57,58 @@ public class ManagerPanelItemInfo {
         });
     }
 
+    private void setRemoveBtnClcikEvent() {
+        View removeBtn = infoView.findViewById(R.id.itemInfoRemoveBtn);
+        removeBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                actionRemoveBtn();
+            }
+        });
+    }
+
+    private void actionRemoveBtn() {
+        removeInfoVO();
+        removeManagerPanelItemInfoDB();
+        showRemoveToast();
+        refreshRemoveManagerPanel();
+    }
+
     private void actionChangeBtn() {
         saveInfoVO();
         updateMangerPanelItemInfoDB();
-        showToast();
-        refreshManagerPanel();
+        showChangeToast();
+        refreshChangeManagerPanel();
     }
 
     private void updateMangerPanelItemInfoDB() {
         DBHelper.dbHelper.updateActivityNameAndIcon(activityVO, originalActivityName);
     }
 
-    private void refreshManagerPanel() {
+    private void refreshChangeManagerPanel() {
         TextView managerDetailItemText = (TextView) managerListItemView.findViewById(R.id.favorite_name);
         ImageView managerDetailItemIcon = (ImageView) managerListItemView.findViewById(R.id.favorite_icon);
         managerDetailItemText.setText(activityVO.getActivityName());
         managerDetailItemIcon.setImageBitmap(BitmapFactory.decodeByteArray(activityVO.getImageData(),0,activityVO.getImageData().length));
     }
 
-    private void showToast() {
+    private void showChangeToast() {
         Toast.makeText(context, "변경되었습니다.", Toast.LENGTH_SHORT).show();
+    }
+
+    private void removeInfoVO() {
+        dataHelper.getActivities().get(activityVO.getCategoryName()).remove(activityVO);
+    }
+
+    private void removeManagerPanelItemInfoDB() {
+    }
+
+    private void showRemoveToast() {
+        Toast.makeText(context, "제거되었습니다.", Toast.LENGTH_SHORT).show();
+    }
+
+    private void refreshRemoveManagerPanel() {
+         ((ViewManager)managerListItemView.getParent()).removeView(managerListItemView);
     }
 
     private void saveInfoVO() {
