@@ -70,11 +70,33 @@ public class ManagerPanelItemInfo {
     private View makeBoxPanelItemView(Drawable drawable) {
         View boxPanelItemView = new View(context);
         boxPanelItemView.setBackground(drawable);
+        LinearLayout.LayoutParams viewParams = makeViewParams();
+        boxPanelItemView.setLayoutParams(viewParams);
+        boxPanelItemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                actionBoxPanelItemViewClicked(view);
+            }
+        });
+        return  boxPanelItemView;
+    }
+
+    private void actionBoxPanelItemViewClicked(View view) {
+        setInfoViewIcon(view);
+        setItemInfoIconBoxPanelVisible(false);
+        setItemInfoMainPanel(true);
+    }
+
+    private void setInfoViewIcon(View view) {
+        View activityIconView = infoView.findViewById(R.id.itemInfoIcon);
+        activityIconView.setBackground(view.getBackground());
+    }
+
+    private LinearLayout.LayoutParams makeViewParams() {
         LinearLayout.LayoutParams viewParams = new LinearLayout.LayoutParams(0,
                 (int) Util.convertDpToPixel(50));
         viewParams.weight = 1;
-        boxPanelItemView.setLayoutParams(viewParams);
-        return  boxPanelItemView;
+        return viewParams;
     }
 
     private void initField(Context context, View rowViewClicked) {
