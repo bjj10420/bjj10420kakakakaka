@@ -137,7 +137,7 @@ public class ManagerPanelItemInfo {
         closeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                alert.dismiss();
+                infoViewOff();
             }
         });
     }
