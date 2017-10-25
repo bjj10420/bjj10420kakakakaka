@@ -86,9 +86,57 @@ public class ManagerPanelItemInfo {
     }
 
     private void setInfoViewEvent() {
+        setBtnClickEvents();
+        setIconBoxPanelCloseEvent();
+    }
+
+    private void setInfoIconClickEvent() {
+        View activityIconView = infoView.findViewById(R.id.itemInfoIcon);
+        activityIconView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                actionActivityIconView();
+            }
+        });
+    }
+
+    private void actionActivityIconView() {
+        setItemInfoIconBoxPanelVisible(true);
+        setItemInfoMainPanel(false);
+    }
+
+
+    private void setBtnClickEvents() {
         setChangeBtnClickEvent();
         setRemoveBtnClcikEvent();
         setCloseBtnClickEvent();
+        setInfoIconClickEvent();
+    }
+
+    private void setIconBoxPanelCloseEvent() {
+        View iconBoxPanelCloseBtn = infoView.findViewById(R.id.itemInfoIconBoxPanelClose);
+        iconBoxPanelCloseBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                actionIconBoxPanelCloseBtn();
+            }
+        });
+
+    }
+
+    private void actionIconBoxPanelCloseBtn() {
+        setItemInfoIconBoxPanelVisible(false);
+        setItemInfoMainPanel(true);
+    }
+
+    private void setItemInfoMainPanel(boolean isVisible) {
+        View itemInfoIconMainPanel = infoView.findViewById(R.id.itemInfoMainPanel);
+        itemInfoIconMainPanel.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+    }
+
+    private void setItemInfoIconBoxPanelVisible(boolean isVisible) {
+        View itemInfoIconBoxPanel = infoView.findViewById(R.id.itemInfoIconBoxPanel);
+        itemInfoIconBoxPanel.setVisibility(isVisible ? View.VISIBLE : View.GONE);
     }
 
     private void setChangeBtnClickEvent() {
