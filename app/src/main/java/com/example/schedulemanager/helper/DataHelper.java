@@ -72,7 +72,7 @@ public class DataHelper {
     }
 
     /**
-     * 기본 카테고리 데이터, 활동 데이터를 불러온다
+     * 기본 카테고리 데이터, 활동 데이터, 프로젝트 내 이미지 데이터를 불러온다
      */
     private void loadBasicDatas() {
         loadBasicCategories();
@@ -84,16 +84,11 @@ public class DataHelper {
         Field[] drawables = com.example.schedulemanager.R.drawable.class.getFields();
         for (Field f : drawables) {
             try {
-                System.out.println("R.drawable." + f.getName());
-                System.out.println("R.drawable." + f.getInt(null));
-                System.out.println("R.drawable." + context.getDrawable(f.getInt(null)));
-                Log.d("R.drawable." , String.valueOf(context.getDrawable(f.getInt(null))));
                 drawableList.add(context.getDrawable(f.getInt(null)));
             } catch (Exception e) {
                 e.printStackTrace();
             }
         }
-        Log.d("drawableList" , String.valueOf(drawableList));
     }
 
     private void loadBasicActivities() {
