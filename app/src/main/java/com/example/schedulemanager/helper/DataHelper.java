@@ -21,6 +21,7 @@ import com.example.schedulemanager.vo.Schedule;
 import com.github.mikephil.charting.data.PieDataSet;
 
 import java.io.ByteArrayOutputStream;
+import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
@@ -56,6 +57,7 @@ public class DataHelper {
 
     private ArrayList<String> categories;                                   // 기타버튼 클릭시 활성화되는 패널의 카테고리들
     private HashMap<String, ArrayList<ActivityVO>> activities;              // 기타버튼 클릭시 활성화되는 패널의 활동들
+    private ArrayList<Drawable> drawableList;                               // 프로젝트내의 drawable을 모두 로드하여 담는 저장소
 
 
     public void initData(Context context) {
@@ -75,6 +77,23 @@ public class DataHelper {
     private void loadBasicDatas() {
         loadBasicCategories();
         loadBasicActivities();
+        loadBasicDrawables();
+    }
+
+    private void loadBasicDrawables() {
+        Field[] drawables = com.example.schedulemanager.R.drawable.class.getFields();
+        for (Field f : drawables) {
+            try {
+                System.out.println("R.drawable." + f.getName());
+                System.out.println("R.drawable." + f.getInt(null));
+                System.out.println("R.drawable." + context.getDrawable(f.getInt(null)));
+                Log.d("R.drawable." , String.valueOf(context.getDrawable(f.getInt(null))));
+                drawableList.add(context.getDrawable(f.getInt(null)));
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        Log.d("drawableList" , String.valueOf(drawableList));
     }
 
     private void loadBasicActivities() {
@@ -113,6 +132,7 @@ public class DataHelper {
 
         categories = new ArrayList<String>();
         activities = new HashMap<String, ArrayList<ActivityVO>>();
+        drawableList = new ArrayList<Drawable>();
     }
 
     private void updateIsFirstLoadingValue() {
@@ -171,7 +191,6 @@ public class DataHelper {
     }
 
     private void insertActivityIntoDB(ActivityVO[] activityVOs) {
-
         for(int i = 0; i < activityVOs.length; i++) {
             DBHelper.dbHelper.insertActivityWithIcon(activityVOs[i]);
         }
