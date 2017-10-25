@@ -319,4 +319,10 @@ public class DBHelper extends SQLiteOpenHelper {
                 new String[] {originalActivityName});
         return result;
     }
+
+    public void deleteActivity(String activityName) {
+        DB = getWritableDatabase();
+        int resultNumber = DB.delete(activityTableName, activityTable_activityName_colum + " = ?",
+                new String[]{activityName});
+    }
 }

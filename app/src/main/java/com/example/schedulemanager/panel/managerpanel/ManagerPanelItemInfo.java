@@ -72,6 +72,11 @@ public class ManagerPanelItemInfo {
         removeManagerPanelItemInfoDB();
         showRemoveToast();
         refreshRemoveManagerPanel();
+        infoViewOff();
+    }
+
+    private void infoViewOff() {
+        alert.dismiss();
     }
 
     private void actionChangeBtn() {
@@ -101,6 +106,7 @@ public class ManagerPanelItemInfo {
     }
 
     private void removeManagerPanelItemInfoDB() {
+        DBHelper.dbHelper.deleteActivity(activityVO.getActivityName());
     }
 
     private void showRemoveToast() {
