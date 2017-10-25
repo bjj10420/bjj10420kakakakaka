@@ -83,7 +83,7 @@ public class DataHelper {
             DBHelper.dbHelper.selectActivities(category, activities.get(category));
         }
     }
-
+//
     private void loadBasicCategories() {
         DBHelper.dbHelper.selectAllCategories(categories);
         Log.d("카테고리 불러오기체크", String.valueOf(categories));
