@@ -14,6 +14,9 @@ import android.widget.Toast;
 
 import com.example.schedulemanager.R;
 import com.example.schedulemanager.helper.DBHelper;
+import com.example.schedulemanager.helper.DialogHelper;
+import com.example.schedulemanager.interface_.GeneralCallback;
+import com.example.schedulemanager.interface_.GeneralCallback2;
 import com.example.schedulemanager.vo.ActivityVO;
 
 import static com.example.schedulemanager.helper.DataHelper.dataHelper;
@@ -68,6 +71,21 @@ public class ManagerPanelItemInfo {
     }
 
     private void actionRemoveBtn() {
+        showConfirmMessage();
+    }
+
+    private void showConfirmMessage() {
+        // 삭제 버튼 클릭
+        new DialogHelper().setChoiceStyleDialogWithMessage(context, null, new GeneralCallback() {
+            @Override
+            public void onCallBack() {
+                actionRemoveConfirmBtn();
+            }
+
+        }, "삭제", "취소", "삭제하시겠습니까?");
+    }
+
+    private void actionRemoveConfirmBtn() {
         removeInfoVO();
         removeManagerPanelItemInfoDB();
         showRemoveToast();

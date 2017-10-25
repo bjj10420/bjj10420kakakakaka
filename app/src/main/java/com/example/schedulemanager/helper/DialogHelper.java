@@ -20,6 +20,8 @@ import com.example.schedulemanager.panel.managerpanel.ManagerPanelItemInfo;
  */
 public class DialogHelper {
 
+    private AlertDialog alert;
+
     /**
      * 선택형 다이얼 로그 생성
      */
@@ -106,5 +108,34 @@ public class DialogHelper {
         params.width = (int) Util.convertDpToPixel(300);
         params.height = (int) Util.convertDpToPixel(250);
         return  params;
+    }
+
+    /**
+     * 선택형 다이얼 로그 생성
+     */
+    public void setChoiceStyleDialogWithMessage(Context context, final GeneralCallback callback1, final GeneralCallback callback2, String leftBtnString, String rightBtnString, String message){
+        final AlertDialog.Builder alt_bld = new AlertDialog.Builder(context, 3);
+        alt_bld.setMessage(message).setCancelable(
+                true).setPositiveButton(rightBtnString,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        if(callback1 != null)
+                            callback1.onCallBack();
+                        else
+                            alert.dismiss();
+                    }
+                }).setNegativeButton(leftBtnString,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        // Action for 'NO' Button
+//                        dialog.cancel();
+                        callback2.onCallBack();
+
+                    }
+                });
+        alert = alt_bld.create();
+
+        // Icon for AlertDialog
+        alert.show();
     }
 }
