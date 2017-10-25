@@ -31,7 +31,7 @@ public class ManagerPanelItemInfo {
         setInfoViewEvent();
         return infoView;
     }
-
+//
     private void initField(Context context, View rowViewClicked) {
         this.context = context;
         managerListItemView = rowViewClicked;
