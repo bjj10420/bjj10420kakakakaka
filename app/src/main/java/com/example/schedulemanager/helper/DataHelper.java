@@ -81,7 +81,6 @@ public class DataHelper {
         for(String category : categories){
             if(activities.get(category) == null) activities.put(category, new ArrayList<ActivityVO>());
             DBHelper.dbHelper.selectActivities(category, activities.get(category));
-            Log.d("액티비티 불러오기체크", String.valueOf(activities.get(category).get(0).getActivityName()));
         }
     }
 
