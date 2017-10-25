@@ -1,4 +1,4 @@
-package com.example.schedulemanager.calendar;
+package com.example.schedulemanager.helper;
 
 import android.app.AlertDialog;
 import android.app.Dialog;

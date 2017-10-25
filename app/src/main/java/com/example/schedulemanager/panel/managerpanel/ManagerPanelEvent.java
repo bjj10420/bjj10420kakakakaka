@@ -4,13 +4,10 @@ package com.example.schedulemanager.panel.managerpanel;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CompoundButton;
 
 import com.example.schedulemanager.R;
-import com.example.schedulemanager.calendar.DialogHelper;
+import com.example.schedulemanager.helper.DialogHelper;
 import com.example.schedulemanager.helper.DBHelper;
-import com.example.schedulemanager.helper.EventHelper;
-import com.example.schedulemanager.helper.UIHelper;
 import com.example.schedulemanager.panel.etcpanel.ETCPanel;
 import com.example.schedulemanager.vo.ActivityVO;
 

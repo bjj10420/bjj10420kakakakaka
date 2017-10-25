@@ -14,7 +14,6 @@ import com.example.schedulemanager.panel.etcpanel.ETCPanel;
 import com.example.schedulemanager.panel.managerpanel.ManagerPanel;
 import com.example.schedulemanager.vo.Schedule;
 import com.example.schedulemanager.Util;
-import com.example.schedulemanager.calendar.DialogHelper;
 import com.github.mikephil.charting.charts.PieChart;
 import com.github.mikephil.charting.data.Entry;
 import com.github.mikephil.charting.data.PieDataSet;
