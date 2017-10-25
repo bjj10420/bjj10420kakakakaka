@@ -253,7 +253,7 @@ public class ManagerPanelItemInfo {
 
     private void saveActivityIcon() {
         View activityIcon = infoView.findViewById(R.id.itemInfoIcon);
-        activityVO.setImageData(dataHelper.getByteArrayFromDrawable(activityIcon.getBackground()));
+        activityVO.setImageData(dataHelper.getByteArrayFromDrawable((BitmapDrawable)activityIcon.getBackground()));
     }
 
     private void saveActivityName() {
