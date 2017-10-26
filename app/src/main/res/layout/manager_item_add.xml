@@ -82,9 +82,9 @@
                         android:id="@+id/itemAddActivity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:textColorHint="#33404040"
                         android:hint="활동명 입력"
-                        android:textColor="#404040" />
+                        android:textColor="#404040"
+                        android:textColorHint="#33404040" />
                 </LinearLayout>
             </LinearLayout>
 
