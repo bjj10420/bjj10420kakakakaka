@@ -1,8 +1,10 @@
 package com.example.schedulemanager.panel.managerpanel;
 
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
@@ -27,7 +29,7 @@ public class ManagerPanelItemAdd {
     public View init(Context context) {
         initField(context);
         initInfoIconBoxPanel();
-        setInfoViewEvent();
+        setAddViewEvent();
         return addView;
     }
 
@@ -95,10 +97,37 @@ public class ManagerPanelItemAdd {
         addView = initPanelItemInfoView(context);
     }
 
-    private void setInfoViewEvent() {
+    private void setAddViewEvent() {
         setBtnClickEvents();
         setIconBoxPanelEvents();
         setInfoIconClickEvent();
+        setCategorySelectBtnEvent();
+    }
+
+    private void setCategorySelectBtnEvent() {
+        View categorySelectBtn = addView.findViewById(R.id.itemAddCategorySelect);
+        categorySelectBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                actionCategorySelectBtn();
+            }
+        });
+
+    }
+
+    private void actionCategorySelectBtn() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setTitle("Choose Image Source");
+
+        builder.setItems(dataHelper.getCategoryArray(),
+                new DialogInterface.OnClickListener() {
+
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                });
+        builder.show();
     }
 
     private void setIconBoxPanelEvents() {

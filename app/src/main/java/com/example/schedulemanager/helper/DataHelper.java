@@ -59,6 +59,7 @@ public class DataHelper {
     private int currentPageIndex;
 
     private ArrayList<String> categories;                                   // 기타버튼 클릭시 활성화되는 패널의 카테고리들
+    private CharSequence[] categoryArray;                                   // 아이템 추가시 나오는 옵션메뉴 리스트용
     private HashMap<String, ArrayList<ActivityVO>> activities;              // 기타버튼 클릭시 활성화되는 패널의 활동들
     private ArrayList<Drawable> drawableList;                               // 프로젝트내의 drawable을 모두 로드하여 담는 저장소
 
@@ -104,6 +105,14 @@ public class DataHelper {
     private void loadBasicCategories() {
         DBHelper.dbHelper.selectAllCategories(categories);
         Log.d("카테고리 불러오기체크", String.valueOf(categories));
+        makeCategoryArray();
+    }
+
+    private void makeCategoryArray() {
+        categoryArray = new CharSequence[categories.size()];
+        for(int i = 0 ; i < categories.size() ; i++) {
+            categoryArray[i] = categories.get(i);
+        }
     }
 
     private void initField(Context context) {
@@ -742,5 +751,9 @@ public class DataHelper {
 
     public ArrayList<Drawable> getDrawableList() {
         return drawableList;
+    }
+
+    public CharSequence[] getCategoryArray() {
+        return categoryArray;
     }
 }
