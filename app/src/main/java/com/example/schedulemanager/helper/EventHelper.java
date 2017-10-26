@@ -1,8 +1,11 @@
 package com.example.schedulemanager.helper;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
+import android.net.Uri;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -26,6 +29,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
+
+import static com.example.schedulemanager.helper.DataHelper.PICK_FROM_GALLARY;
 
 /**
  * 모든 이벤트를 처리, 관리
@@ -631,5 +636,17 @@ public class EventHelper {
 
     public ManagerPanel getManagerPanel() {
         return managerPanel;
+    }
+
+    public void onActivityResult(int requestCode, int resultCode, Intent data) {
+        switch (requestCode) {
+
+            case PICK_FROM_GALLARY:
+                if (resultCode == Activity.RESULT_OK) {
+                    Uri mImageCaptureUri = data.getData();
+                    Log.d("uri", String.valueOf(mImageCaptureUri));
+                }
+                break;
+        }
     }
 }

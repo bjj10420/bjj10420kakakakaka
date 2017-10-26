@@ -34,6 +34,9 @@ import java.util.TreeMap;
  */
 public class DataHelper {
 
+    public static final int PICK_FROM_GALLARY = 10;                               // 갤러리 액티비티 요청값
+
+
     public static DataHelper dataHelper;
     private DBHelper dbHelper;
     private HashMap<String, String> iconNameMap;                            // 해당하는 텍스트에 매칭시키는 아이콘명이 저장되는 맵
@@ -58,7 +61,6 @@ public class DataHelper {
     private ArrayList<String> categories;                                   // 기타버튼 클릭시 활성화되는 패널의 카테고리들
     private HashMap<String, ArrayList<ActivityVO>> activities;              // 기타버튼 클릭시 활성화되는 패널의 활동들
     private ArrayList<Drawable> drawableList;                               // 프로젝트내의 drawable을 모두 로드하여 담는 저장소
-
 
     public void initData(Context context) {
         initField(context);

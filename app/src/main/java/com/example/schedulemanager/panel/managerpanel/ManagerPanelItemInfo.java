@@ -1,10 +1,17 @@
 package com.example.schedulemanager.panel.managerpanel;
 
+import android.app.Activity;
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.net.Uri;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +32,10 @@ import com.example.schedulemanager.vo.ActivityVO;
 import com.obsez.android.lib.filechooser.ChooserDialog;
 
 import java.io.File;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
+import static com.example.schedulemanager.helper.DataHelper.PICK_FROM_GALLARY;
 import static com.example.schedulemanager.helper.DataHelper.dataHelper;
 
 public class ManagerPanelItemInfo {
@@ -36,6 +46,7 @@ public class ManagerPanelItemInfo {
     private String originalActivityName;
     private Dialog alert;
     private Context context;
+    private Uri initialURI;
 
     public View init(Context context, View rowViewClicked) {
         initField(context, rowViewClicked);
@@ -133,19 +144,28 @@ public class ManagerPanelItemInfo {
     }
 
     private void actionIconBoxPanelFileBtn() {
-        File cwd = new File("./");
-        String currentPath = cwd.getAbsolutePath();
+//        String storageDirPath = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_PICTURES).getAbsolutePath();
+//        Log.d("absolutePath : ", storageDirPath);
+//        File cwd = new File("./");
+//        String currentPath = cwd.getAbsolutePath();
+//        new ChooserDialog().with(context)
+//                .withStartFile(storageDirPath)
+////                .withFilter(false, false, "jpg", "jpeg", "png")
+//                .withChosenListener(new ChooserDialog.Result() {
+//                    @Override
+//                    public void onChoosePath(String path, File pathFile) {
+//                        Toast.makeText(context, "FILE: " + path, Toast.LENGTH_SHORT).show();
+//                    }
+//                })
+//                .build()
+//                .show();
+        // GET IMAGE FROM THE GALLERY
+        Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
+        intent.setType("image/*");
 
-        new ChooserDialog().with(context)
-                .withStartFile(currentPath)
-                .withChosenListener(new ChooserDialog.Result() {
-                    @Override
-                    public void onChoosePath(String path, File pathFile) {
-                        Toast.makeText(context, "FILE: " + path, Toast.LENGTH_SHORT).show();
-                    }
-                })
-                .build()
-                .show();
+        Intent chooser = Intent.createChooser(intent, "Choose a Picture");
+        ((Activity)context).startActivityForResult(chooser, PICK_FROM_GALLARY);
+
     }
 
     private void setInfoIconClickEvent() {
