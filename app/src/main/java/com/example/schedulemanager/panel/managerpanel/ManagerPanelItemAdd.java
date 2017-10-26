@@ -129,7 +129,7 @@ public class ManagerPanelItemAdd {
                 });
         builder.show();
     }
-
+//
     private void setIconBoxPanelEvents() {
         setIconBoxPanelCloseEvent();
         setIconBoxPanelFileEvent();
