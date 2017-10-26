@@ -86,6 +86,7 @@ public class DataHelper {
         Field[] drawables = com.example.schedulemanager.R.drawable.class.getFields();
         for (Field f : drawables) {
             try {
+                if(f.getName().contains("icon"))
                 drawableList.add(context.getDrawable(f.getInt(null)));
             } catch (Exception e) {
                 e.printStackTrace();
@@ -151,33 +152,33 @@ public class DataHelper {
     }
 
     private ActivityVO[] makeBasicActivityVoArray() {
-        ActivityVO basicActivity12 = new ActivityVO("생활", "가기", "F", getByteArrayFromDrawable(R.drawable.basic_go_to));
-        ActivityVO basicActivity13 = new ActivityVO("생활", "약속", "T", getByteArrayFromDrawable(R.drawable.promise));
-        ActivityVO basicActivity14 = new ActivityVO("생활", "만남", "F", getByteArrayFromDrawable(R.drawable.meet));
-        ActivityVO basicActivity15 = new ActivityVO("생활", "쇼핑", "F", getByteArrayFromDrawable(R.drawable.shopping));
-        ActivityVO basicActivity16 = new ActivityVO("생활", "학교", "F", getByteArrayFromDrawable(R.drawable.school));
-        ActivityVO basicActivity18 = new ActivityVO("생활", "들리기", "F", getByteArrayFromDrawable(R.drawable.basic_drop_by));
-        ActivityVO basicActivity20 = new ActivityVO("생활", "청소", "F", getByteArrayFromDrawable(R.drawable.basic_clean));
-        ActivityVO basicActivity23 = new ActivityVO("생활", "공부", "T", getByteArrayFromDrawable(R.drawable.study));
+        ActivityVO basicActivity12 = new ActivityVO("생활", "가기", "F", getByteArrayFromDrawable(R.drawable.basic_go_to_icon));
+        ActivityVO basicActivity13 = new ActivityVO("생활", "약속", "T", getByteArrayFromDrawable(R.drawable.promise_icon));
+        ActivityVO basicActivity14 = new ActivityVO("생활", "만남", "F", getByteArrayFromDrawable(R.drawable.meet_icon));
+        ActivityVO basicActivity15 = new ActivityVO("생활", "쇼핑", "F", getByteArrayFromDrawable(R.drawable.shopping_icon));
+        ActivityVO basicActivity16 = new ActivityVO("생활", "학교", "F", getByteArrayFromDrawable(R.drawable.school_icon));
+        ActivityVO basicActivity18 = new ActivityVO("생활", "들리기", "F", getByteArrayFromDrawable(R.drawable.basic_drop_by_icon));
+        ActivityVO basicActivity20 = new ActivityVO("생활", "청소", "F", getByteArrayFromDrawable(R.drawable.basic_clean_icon));
+        ActivityVO basicActivity23 = new ActivityVO("생활", "공부", "T", getByteArrayFromDrawable(R.drawable.study_icon));
 
-        ActivityVO basicActivity4 = new ActivityVO("사무", "서류 정리", "T", getByteArrayFromDrawable(R.drawable.basic_arrage));
-        ActivityVO basicActivity5 = new ActivityVO("사무", "체크 리스트", "F", getByteArrayFromDrawable(R.drawable.basic_check_list));
-        ActivityVO basicActivity6 = new ActivityVO("사무", "서류 준비", "F", getByteArrayFromDrawable(R.drawable.basic_documentation));
-        ActivityVO basicActivity7 = new ActivityVO("사무", "보고서 작성", "T", getByteArrayFromDrawable(R.drawable.basic_report));
-        ActivityVO basicActivity8 = new ActivityVO("사무", "메모", "T", getByteArrayFromDrawable(R.drawable.basic_write));
-        ActivityVO basicActivity9 = new ActivityVO("사무", "이메일", "T", getByteArrayFromDrawable(R.drawable.email));
-        ActivityVO basicActivity10 = new ActivityVO("사무", "회의", "F", getByteArrayFromDrawable(R.drawable.community));
-        ActivityVO basicActivity11 = new ActivityVO("사무", "주식", "F", getByteArrayFromDrawable(R.drawable.basic_check_stock));
-        ActivityVO basicActivity11_1 = new ActivityVO("사무", "전화", "F", getByteArrayFromDrawable(R.drawable.basic_tel));
+        ActivityVO basicActivity4 = new ActivityVO("사무", "서류 정리", "T", getByteArrayFromDrawable(R.drawable.basic_arrage_icon));
+        ActivityVO basicActivity5 = new ActivityVO("사무", "체크 리스트", "F", getByteArrayFromDrawable(R.drawable.basic_check_list_icon));
+        ActivityVO basicActivity6 = new ActivityVO("사무", "서류 준비", "F", getByteArrayFromDrawable(R.drawable.basic_documentation_icon));
+        ActivityVO basicActivity7 = new ActivityVO("사무", "보고서 작성", "T", getByteArrayFromDrawable(R.drawable.basic_report_icon));
+        ActivityVO basicActivity8 = new ActivityVO("사무", "메모", "T", getByteArrayFromDrawable(R.drawable.basic_write_icon));
+        ActivityVO basicActivity9 = new ActivityVO("사무", "이메일", "T", getByteArrayFromDrawable(R.drawable.email_icon));
+        ActivityVO basicActivity10 = new ActivityVO("사무", "회의", "F", getByteArrayFromDrawable(R.drawable.community_icon));
+        ActivityVO basicActivity11 = new ActivityVO("사무", "주식", "F", getByteArrayFromDrawable(R.drawable.basic_check_stock_icon));
+        ActivityVO basicActivity11_1 = new ActivityVO("사무", "전화", "F", getByteArrayFromDrawable(R.drawable.basic_tel_icon));
 
-        ActivityVO basicActivity1 = new ActivityVO("취미", "사진", "F", getByteArrayFromDrawable(R.drawable.basic_photo));
-        ActivityVO basicActivity2 = new ActivityVO("취미", "음악", "T", getByteArrayFromDrawable(R.drawable.leasure));
-        ActivityVO basicActivity3 = new ActivityVO("취미", "여행", "F", getByteArrayFromDrawable(R.drawable.basic_travel));
+        ActivityVO basicActivity1 = new ActivityVO("취미", "사진", "F", getByteArrayFromDrawable(R.drawable.basic_photo_icon));
+        ActivityVO basicActivity2 = new ActivityVO("취미", "음악", "T", getByteArrayFromDrawable(R.drawable.leasure_icon));
+        ActivityVO basicActivity3 = new ActivityVO("취미", "여행", "F", getByteArrayFromDrawable(R.drawable.basic_travel_icon));
 
-        ActivityVO basicActivity17 = new ActivityVO("기타", "메모", "T", getByteArrayFromDrawable(R.drawable.basic_write));
-        ActivityVO basicActivity19 = new ActivityVO("기타", "확인", "F", getByteArrayFromDrawable(R.drawable.check_icon8));
-        ActivityVO basicActivity21 = new ActivityVO("기타", "확인", "F", getByteArrayFromDrawable(R.drawable.basic_drop_by));
-        ActivityVO basicActivity22 = new ActivityVO("기타", "정보", "F", getByteArrayFromDrawable(R.drawable.basic_information));
+        ActivityVO basicActivity17 = new ActivityVO("기타", "메모", "T", getByteArrayFromDrawable(R.drawable.basic_write_icon));
+        ActivityVO basicActivity19 = new ActivityVO("기타", "확인", "F", getByteArrayFromDrawable(R.drawable.check_icon8_icon));
+        ActivityVO basicActivity21 = new ActivityVO("기타", "확인", "F", getByteArrayFromDrawable(R.drawable.basic_drop_by_icon));
+        ActivityVO basicActivity22 = new ActivityVO("기타", "정보", "F", getByteArrayFromDrawable(R.drawable.basic_information_icon));
 
         ActivityVO[] activityVoArray = new ActivityVO[] {basicActivity12, basicActivity13,basicActivity14,basicActivity15,basicActivity16,
                 basicActivity18,basicActivity20,basicActivity23,basicActivity4,basicActivity5,basicActivity6,

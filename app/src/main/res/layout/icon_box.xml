@@ -30,7 +30,7 @@
             android:layout_height="30dp"
             android:layout_alignParentRight="true"
             android:layout_centerVertical="true"
-            android:background="@drawable/cancel2" />
+            android:background="@drawable/cancel2_icon" />
 
         <View
             android:id="@+id/itemInfoIconBoxPanelFile"
@@ -38,7 +38,7 @@
             android:layout_height="30dp"
             android:layout_centerVertical="true"
             android:layout_toLeftOf="@id/itemInfoIconBoxPanelClose"
-            android:background="@drawable/basic_documentation" />
+            android:background="@drawable/basic_documentation_icon" />
 
 
     </RelativeLayout>

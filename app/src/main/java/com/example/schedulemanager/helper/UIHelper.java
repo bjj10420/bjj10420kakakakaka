@@ -100,89 +100,6 @@ public class UIHelper {
         pieChart = (PieChart) Util.getViewById(this.context,R.id.chart);
     }
 
-    /**
-     * 모서리의 버튼 패널 초기화
-     * 1. 넘겨받은 스트링 리스트데이터를 for 문으로 순환
-     * 2. 데이터 하나에 뷰를 생성해서 해당 아이콘 코드값(아이콘명)으로 이미지뷰를 지정, 스트링 데이터로 텍스트 뷰 지정
-     * 3. 해당 패널에 생성한 뷰 추가
-     * @param panelId
-     * @param stringArrayList
-     */
-    private void initButtonPanel(int panelId, ArrayList<String> stringArrayList) {
-        // 추가되는 패널 뷰
-        LinearLayout buttonPanel = (LinearLayout) Util.getViewById(context,panelId);
-        // 각 버튼의 높이
-        float buttonHeight = Util.convertDpToPixel(50);
-        // 각 텍스트의 높이
-        float textHeight = Util.convertDpToPixel(15);
-        // 각 버튼 뷰 레이아웃 파라메터
-        LinearLayout.LayoutParams buttonViewParams = new LinearLayout.LayoutParams(0,
-                (int) Util.convertDpToPixel(65));
-        buttonViewParams.weight = 1;
-
-        // 각 버튼 레이아웃 파라메터
-        ViewGroup.LayoutParams iconParams = new ViewGroup.LayoutParams((int) buttonHeight,
-                (int) buttonHeight);
-        // 각 텍스트 파라메터
-        ViewGroup.LayoutParams textParams = new ViewGroup.LayoutParams((int) buttonHeight,
-                (int) textHeight);
-        //TODO 테스트용 코드
-        int count = 0;
-        if(panelId == R.id.buttonPanel2) count = 4;
-
-        for(String textData : stringArrayList){
-            // 버튼뷰 설정
-            LinearLayout buttonView = new LinearLayout(context);
-            buttonView.setOrientation(LinearLayout.VERTICAL);
-            buttonView.setGravity(Gravity.CENTER);
-            buttonView.setLayoutParams(buttonViewParams);
-            // 아이콘 뷰 설정
-            View iconView = new View(context);
-
-            // iconView.setBackgroundResource(findIdByFileName(iconNameMap.get(textData), this));
-
-            //TODO 테스트용 코드
-            switch(count) {
-                case 0 : iconView.setBackgroundResource(R.drawable.community);
-                    break;
-                case 1 : iconView.setBackgroundResource(R.drawable.email);
-                    break;
-                case 2 : iconView.setBackgroundResource(R.drawable.leasure);
-                    break;
-                case 3 : iconView.setBackgroundResource(R.drawable.meet);
-                    break;
-                case 4 : iconView.setBackgroundResource(R.drawable.promise);
-                    break;
-                case 5 : iconView.setBackgroundResource(R.drawable.read);
-                    break;
-                case 6 : iconView.setBackgroundResource(R.drawable.school);
-                    break;
-                case 7 : iconView.setBackgroundResource(R.drawable.etc);
-                    break;
-                case 8 : iconView.setBackgroundResource(R.drawable.shopping);
-                    break;
-            }
-
-            iconView.setLayoutParams(iconParams);
-            // 텍스트 뷰 설정
-            TextView textView = new TextView(context);
-//            textView.setText(textData);
-            setTextWithFont(textView, textData);
-            textView.setGravity(Gravity.CENTER);
-            textView.setLayoutParams(textParams);
-            textView.setTextColor(Color.parseColor("#404040"));
-            // 태그첨부
-            buttonView.setTag(textData);
-            // 추가
-            buttonView.addView(iconView);
-            buttonView.addView(textView);
-            buttonPanel.addView(buttonView);
-
-            //TODO 테스트용 코드
-            count++;
-        }
-    }
-
     public void newInitButtonPanel(HashMap<String, ArrayList<ActivityVO>> activities) {
         int favoriteAcitivityCount = DataHelper.dataHelper.getAllFavoriteActivityCount();
         for(String categoryName : activities.keySet()){
@@ -211,7 +128,7 @@ public class UIHelper {
         ActivityVO vo = new ActivityVO();
         vo.setFavorite("F");
         vo.setActivityName("기타");
-        vo.setImageData(dataHelper.getByteArrayFromDrawable(R.drawable.etc));
+        vo.setImageData(dataHelper.getByteArrayFromDrawable(R.drawable.etc_icon));
         return vo;
     }
 
