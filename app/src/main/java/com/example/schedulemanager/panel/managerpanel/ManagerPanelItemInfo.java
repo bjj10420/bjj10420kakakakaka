@@ -110,6 +110,7 @@ public class ManagerPanelItemInfo {
     private void setInfoViewEvent() {
         setBtnClickEvents();
         setIconBoxPanelCloseEvent();
+        setInfoIconClickEvent();
     }
 
     private void setInfoIconClickEvent() {
@@ -132,7 +133,6 @@ public class ManagerPanelItemInfo {
         setChangeBtnClickEvent();
         setRemoveBtnClcikEvent();
         setCloseBtnClickEvent();
-        setInfoIconClickEvent();
     }
 
     private void setIconBoxPanelCloseEvent() {
