@@ -53,7 +53,9 @@
                     <View
                         android:id="@+id/itemAddIcon"
                         android:layout_width="50dp"
-                        android:layout_height="50dp" />
+                        android:layout_height="50dp"
+                        android:background="@drawable/manager_menu_bar_bg"
+                        />
 
                 </LinearLayout>
             </LinearLayout>
@@ -81,6 +83,7 @@
                         android:id="@+id/itemAddActivity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
+                        android:text="활동명 입력"
                         android:textColor="#404040" />
                 </LinearLayout>
             </LinearLayout>
