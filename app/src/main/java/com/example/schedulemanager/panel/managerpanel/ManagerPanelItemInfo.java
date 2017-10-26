@@ -17,10 +17,14 @@ import android.widget.Toast;
 
 import com.example.schedulemanager.R;
 import com.example.schedulemanager.Util;
+import com.example.schedulemanager.activity.MainActivity;
 import com.example.schedulemanager.helper.DBHelper;
 import com.example.schedulemanager.helper.DialogHelper;
 import com.example.schedulemanager.interface_.GeneralCallback;
 import com.example.schedulemanager.vo.ActivityVO;
+import com.obsez.android.lib.filechooser.ChooserDialog;
+
+import java.io.File;
 
 import static com.example.schedulemanager.helper.DataHelper.dataHelper;
 
@@ -109,8 +113,39 @@ public class ManagerPanelItemInfo {
 
     private void setInfoViewEvent() {
         setBtnClickEvents();
-        setIconBoxPanelCloseEvent();
+        setIconBoxPanelEvents();
         setInfoIconClickEvent();
+    }
+
+    private void setIconBoxPanelEvents() {
+        setIconBoxPanelCloseEvent();
+        setIconBoxPanelFileEvent();
+    }
+
+    private void setIconBoxPanelFileEvent() {
+        View iconBoxPanelFileBtn = infoView.findViewById(R.id.itemInfoIconBoxPanelFile);
+        iconBoxPanelFileBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                actionIconBoxPanelFileBtn();
+            }
+        });
+    }
+
+    private void actionIconBoxPanelFileBtn() {
+        File cwd = new File("./");
+        String currentPath = cwd.getAbsolutePath();
+
+        new ChooserDialog().with(context)
+                .withStartFile(currentPath)
+                .withChosenListener(new ChooserDialog.Result() {
+                    @Override
+                    public void onChoosePath(String path, File pathFile) {
+                        Toast.makeText(context, "FILE: " + path, Toast.LENGTH_SHORT).show();
+                    }
+                })
+                .build()
+                .show();
     }
 
     private void setInfoIconClickEvent() {
