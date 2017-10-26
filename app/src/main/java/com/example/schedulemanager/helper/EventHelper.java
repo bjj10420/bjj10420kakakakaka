@@ -644,7 +644,10 @@ public class EventHelper {
             case PICK_FROM_GALLARY:
                 if (resultCode == Activity.RESULT_OK) {
                     Uri mImageCaptureUri = data.getData();
+                    boolean isSuccess = Util.copyFileFromUri(context, mImageCaptureUri);
                     Log.d("uri", String.valueOf(mImageCaptureUri));
+                    Log.d("copyFileFromUri", String.valueOf("isSuccess = " + isSuccess));
+
                 }
                 break;
         }

@@ -1,10 +1,12 @@
 package com.example.schedulemanager;
 
 import android.app.Activity;
+import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.net.Uri;
 import android.os.Environment;
 import android.util.DisplayMetrics;
 import android.util.Log;
@@ -17,6 +19,8 @@ import com.example.schedulemanager.helper.DataHelper;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
+import java.io.InputStream;
+import java.io.OutputStream;
 import java.nio.channels.FileChannel;
 
 /**
@@ -183,5 +187,42 @@ public class Util {
         } catch (Exception e) {
             return false;
         }
+    }
+
+    public static boolean copyFileFromUri(Context context, Uri fileUri)
+    {
+        InputStream inputStream = null;
+        OutputStream outputStream = null;
+
+        try {
+            ContentResolver content = context.getContentResolver();
+            inputStream = content.openInputStream(fileUri);
+
+            File root = Environment.getExternalStorageDirectory();
+            if (root == null) {
+                Log.d("TAG", "Failed to get root");
+            }
+
+            // create a directory
+            File saveDirectory = new File(Environment.getExternalStorageDirectory() + File.separator + "directory_name" + File.separator);
+            // create direcotory if it doesn't exists
+            saveDirectory.mkdirs();
+
+            outputStream = new FileOutputStream(saveDirectory + "filename.extension"); // filename.png, .mp3, .mp4 ...
+            if (outputStream != null) {
+                Log.e("TAG", "Output Stream Opened successfully");
+            }
+
+            byte[] buffer = new byte[1000];
+            int bytesRead = 0;
+            while ((bytesRead = inputStream.read(buffer, 0, buffer.length)) >= 0) {
+                outputStream.write(buffer, 0, buffer.length);
+            }
+        } catch (Exception e) {
+            Log.e("TAG", "Exception occurred " + e.getMessage());
+        } finally {
+
+        }
+        return true;
     }
 }

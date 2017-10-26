@@ -198,7 +198,6 @@ public class ManagerPanelItemInfo {
                 actionIconBoxPanelCloseBtn();
             }
         });
-
     }
 
     private void actionIconBoxPanelCloseBtn() {
