@@ -1,17 +1,13 @@
 package com.example.schedulemanager.panel.managerpanel;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -21,27 +17,24 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.example.schedulemanager.R;
 import com.example.schedulemanager.Util;
 import com.example.schedulemanager.helper.DBHelper;
 import com.example.schedulemanager.helper.DialogHelper;
 import com.example.schedulemanager.interface_.GeneralCallback;
 import com.example.schedulemanager.vo.ActivityVO;
+
 import static com.example.schedulemanager.helper.DataHelper.PICK_FROM_GALLARY;
 import static com.example.schedulemanager.helper.DataHelper.dataHelper;
 
-public class ManagerPanelItemInfo {
-
+public class ManagerPanelItemAdd {
     private View infoView;
-    private View managerListItemView;
-    private ActivityVO activityVO;
-    private String originalActivityName;
     private Dialog alert;
     private Context context;
-    private Uri initialURI;
 
-    public View init(Context context, View rowViewClicked) {
-        initField(context, rowViewClicked);
+    public View init(Context context) {
+        initField(context);
         initInfoIconBoxPanel();
         setInfoViewEvent();
         return infoView;
@@ -51,9 +44,9 @@ public class ManagerPanelItemInfo {
         LinearLayout itemInfoIconBoxPanel = (LinearLayout) infoView.findViewById(R.id.itemInfoIconBoxPanel);
         LinearLayout rowLayout = null;
         for(Drawable drawable : dataHelper.getDrawableList()) {
-                rowLayout = decideRowLayoutByChildCount(rowLayout);
-                addBoxPanelItemViewToPanel(drawable, rowLayout, itemInfoIconBoxPanel);
-             }
+            rowLayout = decideRowLayoutByChildCount(rowLayout);
+            addBoxPanelItemViewToPanel(drawable, rowLayout, itemInfoIconBoxPanel);
+        }
     }
 
     private LinearLayout decideRowLayoutByChildCount(LinearLayout rowLayout) {
@@ -65,7 +58,7 @@ public class ManagerPanelItemInfo {
             newRowLayout.setLayoutParams(params);
             return newRowLayout;
         }
-        }
+    }
 
     private void addBoxPanelItemViewToPanel(Drawable drawable, LinearLayout rowLayout, LinearLayout itemInfoIconBoxPanel) {
         View iconBoxPanelItemView = makeBoxPanelItemView(drawable);
@@ -106,12 +99,9 @@ public class ManagerPanelItemInfo {
         return viewParams;
     }
 
-    private void initField(Context context, View rowViewClicked) {
+    private void initField(Context context) {
         this.context = context;
-        managerListItemView = rowViewClicked;
-        activityVO = (ActivityVO) rowViewClicked.getTag();
-        infoView = initPanelItemInfoView(context, activityVO);
-        originalActivityName = activityVO.getActivityName();
+        infoView = initPanelItemInfoView(context);
     }
 
     private void setInfoViewEvent() {
@@ -163,8 +153,7 @@ public class ManagerPanelItemInfo {
 
     private void setBtnClickEvents() {
         setChangeBtnClickEvent();
-        setRemoveBtnClcikEvent();
-        setCloseBtnClickEvent();
+         setCloseBtnClickEvent();
     }
 
     private void setIconBoxPanelCloseEvent() {
@@ -231,7 +220,6 @@ public class ManagerPanelItemInfo {
         removeInfoVO();
         removeManagerPanelItemInfoDB();
         showRemoveToast();
-        refreshRemoveManagerPanel();
         infoViewOff();
     }
 
@@ -240,21 +228,12 @@ public class ManagerPanelItemInfo {
     }
 
     private void actionChangeBtn() {
-        saveInfoVO();
         updateMangerPanelItemInfoDB();
         showChangeToast();
-        refreshChangeManagerPanel();
     }
 
     private void updateMangerPanelItemInfoDB() {
-        DBHelper.dbHelper.updateActivityNameAndIcon(activityVO, originalActivityName);
-    }
-
-    private void refreshChangeManagerPanel() {
-        TextView managerDetailItemText = (TextView) managerListItemView.findViewById(R.id.favorite_name);
-        ImageView managerDetailItemIcon = (ImageView) managerListItemView.findViewById(R.id.favorite_icon);
-        managerDetailItemText.setText(activityVO.getActivityName());
-        managerDetailItemIcon.setImageBitmap(BitmapFactory.decodeByteArray(activityVO.getImageData(),0,activityVO.getImageData().length));
+//        DBHelper.dbHelper.updateActivityNameAndIcon(activityVO, originalActivityName);
     }
 
     private void showChangeToast() {
@@ -262,34 +241,15 @@ public class ManagerPanelItemInfo {
     }
 
     private void removeInfoVO() {
-        dataHelper.getActivities().get(activityVO.getCategoryName()).remove(activityVO);
+//        dataHelper.getActivities().get(activityVO.getCategoryName()).remove(activityVO);
     }
 
     private void removeManagerPanelItemInfoDB() {
-        DBHelper.dbHelper.deleteActivity(activityVO.getActivityName());
+//        DBHelper.dbHelper.deleteActivity(activityVO.getActivityName());
     }
 
     private void showRemoveToast() {
         Toast.makeText(context, "제거되었습니다.", Toast.LENGTH_SHORT).show();
-    }
-
-    private void refreshRemoveManagerPanel() {
-         ((ViewManager)managerListItemView.getParent()).removeView(managerListItemView);
-    }
-
-    private void saveInfoVO() {
-        saveActivityName();
-        saveActivityIcon();
-    }
-
-    private void saveActivityIcon() {
-        View activityIcon = infoView.findViewById(R.id.itemInfoIcon);
-        activityVO.setImageData(dataHelper.getByteArrayFromDrawable((BitmapDrawable)activityIcon.getBackground()));
-    }
-
-    private void saveActivityName() {
-        EditText activityEdit = (EditText) infoView.findViewById(R.id.itemInfoActivity);
-        activityVO.setActivityName(activityEdit.getText().toString());
     }
 
     private void setCloseBtnClickEvent() {
@@ -302,10 +262,10 @@ public class ManagerPanelItemInfo {
         });
     }
 
-    private View initPanelItemInfoView(Context context, ActivityVO activityVO) {
+    private View initPanelItemInfoView(Context context) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View itemInfoView = inflater.inflate(R.layout.manager_item_info, null);
-        setItemInfoView(itemInfoView, activityVO);
+//        setItemInfoView(itemInfoView, activityVO);
         return itemInfoView;
     }
 

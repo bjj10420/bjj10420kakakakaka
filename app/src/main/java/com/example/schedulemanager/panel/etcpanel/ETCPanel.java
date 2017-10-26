@@ -49,14 +49,16 @@ public class ETCPanel {
         etcLayout = (RelativeLayout)Util.getViewById(this.context, R.id.etcLayout);
         etcContentsLayout = (LinearLayout) Util.getViewById(context, R.id.etcContentsLayout);
         etcBottomButtonLayout = (LinearLayout)Util.getViewById(this.context, R.id.etcBottomButtonLayout);
-        etcPanelEvent = new ETCPanelEvent(this);
+        etcPanelEvent = new ETCPanelEvent(this, context);
     }
 
     private void initBottomButtonEvents() {
-        Button closeButton = (Button) Util.getViewById(context, R.id.etcCloseBtn);
-        closeButton.setOnClickListener(etcPanelEvent);
+        Button addButton = (Button) Util.getViewById(context, R.id.etcAddBtn);
+        addButton.setOnClickListener(etcPanelEvent);
         Button managerButton = (Button) Util.getViewById(context, R.id.etcManagerBtn);
         managerButton.setOnClickListener(etcPanelEvent);
+        Button closeButton = (Button) Util.getViewById(context, R.id.etcCloseBtn);
+        closeButton.setOnClickListener(etcPanelEvent);
     }
 
     private void adaptorFont() {

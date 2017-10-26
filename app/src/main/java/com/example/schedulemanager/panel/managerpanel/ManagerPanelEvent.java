@@ -85,7 +85,7 @@ public class ManagerPanelEvent implements View.OnClickListener{
     }
 
     private void listItemClickEvent(View view) {
-        new DialogHelper().showActivityItemDialog(context, null, null, view);
+        new DialogHelper().showActivityItemInfoDialog(context, view);
     }
 
     private void menubarTitleItemClickEvent(View view) {

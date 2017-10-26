@@ -4,7 +4,6 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.graphics.drawable.ColorDrawable;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -13,6 +12,7 @@ import android.widget.EditText;
 import com.example.schedulemanager.Util;
 import com.example.schedulemanager.interface_.GeneralCallback;
 import com.example.schedulemanager.interface_.GeneralCallback2;
+import com.example.schedulemanager.panel.managerpanel.ManagerPanelItemAdd;
 import com.example.schedulemanager.panel.managerpanel.ManagerPanelItemInfo;
 
 /**
@@ -83,16 +83,31 @@ public class DialogHelper {
     /**
      * 활동 관리 창에서 아이템 클릭시나타나는 아이템정보표시 다이얼로그
      */
-    public void showActivityItemDialog(Context context, final GeneralCallback2 callback1, final GeneralCallback callback2, View view){
+    public void showActivityItemInfoDialog(Context context, View view){
         ManagerPanelItemInfo itemInfo =  new ManagerPanelItemInfo();
         View dialogView = itemInfo.init(context, view);
-        setAlertDialog(context, itemInfo, dialogView);
+        setItemInfoAlertDialog(context, itemInfo, dialogView);
     }
 
-    private void setAlertDialog(Context context, ManagerPanelItemInfo itemInfo, View dialogView) {
+    /**
+     * 기타 패널에서 추가 버튼 클릭시나타나는 아이템정보표시 다이얼로그
+     */
+    public void showActivityItemAddDialog(Context context){
+        ManagerPanelItemAdd itemAdd =  new ManagerPanelItemAdd();
+        View dialogView = itemAdd.init(context);
+        setItemAddAlertDialog(context, itemAdd, dialogView);
+    }
+
+    private void setItemInfoAlertDialog(Context context, ManagerPanelItemInfo itemInfo, View dialogView) {
         Dialog dialog = new Dialog(context);
         setDialogBasicOptions(dialog, dialogView);
         itemInfo.setAlert(dialog);
+    }
+
+    private void setItemAddAlertDialog(Context context, ManagerPanelItemAdd itemAdd, View dialogView) {
+        Dialog dialog = new Dialog(context);
+        setDialogBasicOptions(dialog, dialogView);
+        itemAdd.setAlert(dialog);
     }
 
     private void setDialogBasicOptions(Dialog dialog, View dialogView) {

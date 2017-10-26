@@ -1,21 +1,25 @@
 package com.example.schedulemanager.panel.etcpanel;
 
+import android.content.Context;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.example.schedulemanager.R;
+import com.example.schedulemanager.helper.DialogHelper;
 import com.example.schedulemanager.helper.EventHelper;
 import com.example.schedulemanager.helper.UIHelper;
 
 public class ETCPanelEvent implements View.OnClickListener{
 
+    Context context;
     ETCPanel etcPanel;
     View copiedView;
     private int _xDelta;
     private int _yDelta;
 
-    public ETCPanelEvent(ETCPanel etcPanel) {
+    public ETCPanelEvent(ETCPanel etcPanel, Context context) {
+        this.context = context;
         this.etcPanel = etcPanel;
     }
 
@@ -27,7 +31,8 @@ public class ETCPanelEvent implements View.OnClickListener{
                 break;
             case R.id.etcManagerBtn : panelLayoutOffForManagerPanel();
                 break;
-
+            case R.id.etcAddBtn : addItemClickEvent();
+                break;
             default : panelItemClickEVent(v);
         }
       }
@@ -122,6 +127,10 @@ public class ETCPanelEvent implements View.OnClickListener{
     public void panelLayoutOffForManagerPanel() {
         etcPanel.setEtcLayoutVisible(false);
         EventHelper.eventHelper.getManagerPanel().setManagerLayoutVisible(true);
+    }
+
+    private void addItemClickEvent() {
+        new DialogHelper().showActivityItemAddDialog(context);
     }
 
 }
