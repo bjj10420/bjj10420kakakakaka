@@ -1,17 +1,13 @@
 package com.example.schedulemanager.panel.managerpanel;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -48,7 +44,7 @@ public class ManagerPanelItemInfo {
     }
 
     private void initInfoIconBoxPanel() {
-        LinearLayout itemInfoIconBoxPanel = (LinearLayout) infoView.findViewById(R.id.itemInfoIconBoxPanel);
+        LinearLayout itemInfoIconBoxPanel = (LinearLayout) infoView.findViewById(R.id.itemIconBoxPanel);
         LinearLayout rowLayout = null;
         for(Drawable drawable : dataHelper.getDrawableList()) {
                 rowLayout = decideRowLayoutByChildCount(rowLayout);
@@ -188,7 +184,7 @@ public class ManagerPanelItemInfo {
     }
 
     private void setItemInfoIconBoxPanelVisible(boolean isVisible) {
-        View itemInfoIconBoxPanel = infoView.findViewById(R.id.itemInfoIconBoxPanel);
+        View itemInfoIconBoxPanel = infoView.findViewById(R.id.itemIconBoxPanel);
         itemInfoIconBoxPanel.setVisibility(isVisible ? View.VISIBLE : View.GONE);
     }
 

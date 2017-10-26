@@ -25,7 +25,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="활동 정보"
+                android:text="활동 추가"
                 android:textColor="#404040"
                 android:textSize="16dp" />
 
@@ -54,8 +54,7 @@
                         android:id="@+id/itemAddIcon"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:background="@drawable/manager_menu_bar_bg"
-                        />
+                        android:background="@drawable/basic_travel_icon" />
 
                 </LinearLayout>
             </LinearLayout>

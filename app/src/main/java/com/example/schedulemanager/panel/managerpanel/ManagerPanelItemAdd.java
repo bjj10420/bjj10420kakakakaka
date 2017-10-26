@@ -4,22 +4,17 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.BitmapFactory;
-import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.schedulemanager.R;
 import com.example.schedulemanager.Util;
 import com.example.schedulemanager.helper.DialogHelper;
 import com.example.schedulemanager.interface_.GeneralCallback;
-import com.example.schedulemanager.vo.ActivityVO;
 
 import static com.example.schedulemanager.helper.DataHelper.PICK_FROM_GALLARY;
 import static com.example.schedulemanager.helper.DataHelper.dataHelper;
@@ -37,7 +32,7 @@ public class ManagerPanelItemAdd {
     }
 
     private void initInfoIconBoxPanel() {
-        LinearLayout itemInfoIconBoxPanel = (LinearLayout) addView.findViewById(R.id.itemInfoIconBoxPanel);
+        LinearLayout itemInfoIconBoxPanel = (LinearLayout) addView.findViewById(R.id.itemIconBoxPanel);
         LinearLayout rowLayout = null;
         for(Drawable drawable : dataHelper.getDrawableList()) {
             rowLayout = decideRowLayoutByChildCount(rowLayout);
@@ -84,7 +79,7 @@ public class ManagerPanelItemAdd {
     }
 
     private void setInfoViewIcon(View view) {
-        View activityIconView = addView.findViewById(R.id.itemInfoIcon);
+        View activityIconView = addView.findViewById(R.id.itemAddIcon);
         activityIconView.setBackground(view.getBackground());
     }
 
@@ -149,7 +144,7 @@ public class ManagerPanelItemAdd {
 
     private void setBtnClickEvents() {
         setAddBtnClickEvent();
-         setCloseBtnClickEvent();
+        setCloseBtnClickEvent();
     }
 
     private void setIconBoxPanelCloseEvent() {
@@ -168,12 +163,12 @@ public class ManagerPanelItemAdd {
     }
 
     private void setItemInfoMainPanel(boolean isVisible) {
-        View itemInfoIconMainPanel = addView.findViewById(R.id.itemInfoMainPanel);
-        itemInfoIconMainPanel.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+        View itemAddIconMainPanel = addView.findViewById(R.id.itemAddMainPanel);
+        itemAddIconMainPanel.setVisibility(isVisible ? View.VISIBLE : View.GONE);
     }
 
     private void setItemInfoIconBoxPanelVisible(boolean isVisible) {
-        View itemInfoIconBoxPanel = addView.findViewById(R.id.itemInfoIconBoxPanel);
+        View itemInfoIconBoxPanel = addView.findViewById(R.id.itemIconBoxPanel);
         itemInfoIconBoxPanel.setVisibility(isVisible ? View.VISIBLE : View.GONE);
     }
 
