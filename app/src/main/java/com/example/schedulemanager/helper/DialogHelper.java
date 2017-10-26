@@ -100,28 +100,28 @@ public class DialogHelper {
 
     private void setItemInfoAlertDialog(Context context, ManagerPanelItemInfo itemInfo, View dialogView) {
         Dialog dialog = new Dialog(context);
-        setDialogBasicOptions(dialog, dialogView);
+        setDialogBasicOptions(dialog, dialogView, 300, 250);
         itemInfo.setAlert(dialog);
     }
 
     private void setItemAddAlertDialog(Context context, ManagerPanelItemAdd itemAdd, View dialogView) {
         Dialog dialog = new Dialog(context);
-        setDialogBasicOptions(dialog, dialogView);
+        setDialogBasicOptions(dialog, dialogView, 300, 300);
         itemAdd.setAlert(dialog);
     }
 
-    private void setDialogBasicOptions(Dialog dialog, View dialogView) {
+    private void setDialogBasicOptions(Dialog dialog, View dialogView, int width, int height) {
         dialog.setContentView(dialogView);
-        WindowManager.LayoutParams params = makeDialogParams(dialog);
+        WindowManager.LayoutParams params = makeDialogParams(dialog, width, height);
         dialog.getWindow().setAttributes((android.view.WindowManager.LayoutParams) params);
 //        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.show();
     }
 
-    private WindowManager.LayoutParams makeDialogParams(Dialog dialog) {
+    private WindowManager.LayoutParams makeDialogParams(Dialog dialog, int width, int height) {
         WindowManager.LayoutParams params =  dialog.getWindow().getAttributes();
-        params.width = (int) Util.convertDpToPixel(300);
-        params.height = (int) Util.convertDpToPixel(250);
+        params.width = (int) Util.convertDpToPixel(width);
+        params.height = (int) Util.convertDpToPixel(height);
         return  params;
     }
 //
