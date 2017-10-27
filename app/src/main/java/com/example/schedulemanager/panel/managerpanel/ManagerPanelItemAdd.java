@@ -107,7 +107,21 @@ public class ManagerPanelItemAdd {
         setBtnClickEvents();
         setIconBoxPanelEvents();
         setInfoIconClickEvent();
+        setCategoryEvents();
+    }
+
+    private void setCategoryEvents() {
         setCategorySelectBtnEvent();
+        setCategoryTextEvent();
+    }
+
+    private void setCategoryTextEvent() {
+        categoryText.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                actionCategorySelectBtn();
+            }
+        });
     }
 
     private void setCategorySelectBtnEvent() {
@@ -118,12 +132,11 @@ public class ManagerPanelItemAdd {
                 actionCategorySelectBtn();
             }
         });
-
     }
 
     private void actionCategorySelectBtn() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context);
-        builder.setTitle("Choose Image Source");
+        AlertDialog.Builder builder = new AlertDialog.Builder(context, 3);
+        builder.setTitle("카테고리 선택");
         final CharSequence[] categoryArray = dataHelper.getCategoryArray();
         builder.setItems(categoryArray,
                 new DialogInterface.OnClickListener() {
