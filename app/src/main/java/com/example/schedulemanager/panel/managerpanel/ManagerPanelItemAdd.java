@@ -10,7 +10,9 @@ import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.widget.Button;
 import android.widget.LinearLayout;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.schedulemanager.R;
@@ -25,6 +27,8 @@ public class ManagerPanelItemAdd {
     private View addView;
     private Dialog alert;
     private Context context;
+    private TextView categoryText;
+    private Button categorySelectBtn;
 
     public View init(Context context) {
         initField(context);
@@ -95,6 +99,8 @@ public class ManagerPanelItemAdd {
     private void initField(Context context) {
         this.context = context;
         addView = initPanelItemInfoView(context);
+        categoryText = (TextView) addView.findViewById(R.id.itemAddCategoryText);
+        categorySelectBtn = (Button) addView.findViewById(R.id.itemAddCategorySelect);
     }
 
     private void setAddViewEvent() {
@@ -118,18 +124,29 @@ public class ManagerPanelItemAdd {
     private void actionCategorySelectBtn() {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setTitle("Choose Image Source");
-
-        builder.setItems(dataHelper.getCategoryArray(),
+        final CharSequence[] categoryArray = dataHelper.getCategoryArray();
+        builder.setItems(categoryArray,
                 new DialogInterface.OnClickListener() {
-
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
-
+                        setCategoryText(categoryArray, which);
                     }
                 });
         builder.show();
     }
-//
+
+    private void setCategoryText(CharSequence[] categoryArray, int which) {
+        if(categorySelectBtn.getVisibility() == View.VISIBLE){
+            switchCategoryBtnAndText();
+        }
+        categoryText.setText(categoryArray[which]);
+    }
+
+    private void switchCategoryBtnAndText() {
+        categorySelectBtn.setVisibility(View.GONE);
+        categoryText.setVisibility(View.VISIBLE);
+    }
+
     private void setIconBoxPanelEvents() {
         setIconBoxPanelCloseEvent();
         setIconBoxPanelFileEvent();
@@ -152,7 +169,6 @@ public class ManagerPanelItemAdd {
 
         Intent chooser = Intent.createChooser(intent, "Choose a Picture");
         ((Activity)context).startActivityForResult(chooser, PICK_FROM_GALLARY);
-//
     }
 
     private void setInfoIconClickEvent() {
@@ -210,6 +226,7 @@ public class ManagerPanelItemAdd {
             }
         });
     }
+
     private void showConfirmMessage() {
         // 삭제 버튼 클릭
         new DialogHelper().setChoiceStyleDialogWithMessage(context, null, new GeneralCallback() {
