@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,6 +30,7 @@ public class ManagerPanelItemAdd {
     private Context context;
     private TextView categoryText;
     private Button categorySelectBtn;
+    private EditText activityName;
 
     public View init(Context context) {
         initField(context);
@@ -101,6 +103,7 @@ public class ManagerPanelItemAdd {
         addView = initPanelItemInfoView(context);
         categoryText = (TextView) addView.findViewById(R.id.itemAddCategoryText);
         categorySelectBtn = (Button) addView.findViewById(R.id.itemAddCategorySelect);
+        activityName = (EditText) addView.findViewById(R.id.itemAddActivity);
     }
 
     private void setAddViewEvent() {
@@ -263,16 +266,40 @@ public class ManagerPanelItemAdd {
     }
 
     private void actionAddBtn() {
-        updateMangerPanelItemInfoDB();
-        showChangeToast();
+        checkInvalidateData();
+//        updateMangerPanelItemInfoDB();
+//        showAddToast();
+    }
+
+    private void checkInvalidateData() {
+        if(isCategorySelected() && isActivityNameEntered()){
+            actionValidateAdd();
+        }
+        else
+            showReCheckToast();
+    }
+
+    private void actionValidateAdd() {
+    }
+
+    private boolean isActivityNameEntered() {
+        return activityName.getText().toString().equals("") ? false : true;
+    }
+
+    private boolean isCategorySelected() {
+        return categoryText.getVisibility() == View.VISIBLE ? true : false;
     }
 
     private void updateMangerPanelItemInfoDB() {
 //        DBHelper.dbHelper.updateActivityNameAndIcon(activityVO, originalActivityName);
     }
 
-    private void showChangeToast() {
-        Toast.makeText(context, "변경되었습니다.", Toast.LENGTH_SHORT).show();
+    private void showAddToast() {
+        Toast.makeText(context, "추가되었습니다.", Toast.LENGTH_SHORT).show();
+    }
+
+    private void showReCheckToast() {
+        Toast.makeText(context, "모든 정보를 입력하세요", Toast.LENGTH_SHORT).show();
     }
 
     private void removeInfoVO() {
