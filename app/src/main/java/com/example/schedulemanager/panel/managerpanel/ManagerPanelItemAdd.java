@@ -152,7 +152,7 @@ public class ManagerPanelItemAdd {
 
         Intent chooser = Intent.createChooser(intent, "Choose a Picture");
         ((Activity)context).startActivityForResult(chooser, PICK_FROM_GALLARY);
-
+//
     }
 
     private void setInfoIconClickEvent() {
