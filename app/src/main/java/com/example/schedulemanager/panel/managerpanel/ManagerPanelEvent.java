@@ -14,6 +14,9 @@ import com.example.schedulemanager.interface_.GeneralCallback2;
 import com.example.schedulemanager.panel.etcpanel.ETCPanel;
 import com.example.schedulemanager.vo.ActivityVO;
 
+import java.util.ArrayList;
+
+import static com.example.schedulemanager.helper.DBHelper.dbHelper;
 import static com.example.schedulemanager.helper.DataHelper.dataHelper;
 import static com.example.schedulemanager.helper.EventHelper.eventHelper;
 import static com.example.schedulemanager.helper.UIHelper.uiHelper;
@@ -93,9 +96,30 @@ public class ManagerPanelEvent implements View.OnClickListener{
         new DialogHelper().setOneBtnStyleWithTextDialog(context, "추가할 카테고리 이름을 입력하세요", new GeneralCallback2() {
             @Override
             public void onCallBack(Object parameter) {
-
+                String category = (String) parameter;
+                addCategory(category);
             }
         }, "추가");
+    }
+
+    private void addCategory(String category) {
+        addCategoryToDB(category);
+        addCategoryToMap(category);
+        addCateogryToUI(category);
+    }
+
+    private void addCateogryToUI(String category) {
+        managerPanel.redrawManagerPanel();
+        redrawETCPanel();
+    }
+
+    private void addCategoryToMap(String category) {
+        dataHelper.getCategories().add(category);
+        dataHelper.getActivities().put(category, new ArrayList<ActivityVO>());
+    }
+
+    private void addCategoryToDB(String category) {
+        dbHelper.insertCategory(category);
     }
 
     private boolean isAddCategoryBar(View view) {
@@ -117,7 +141,7 @@ public class ManagerPanelEvent implements View.OnClickListener{
     }
 
     private void updateDBFavoriteData(boolean isFaovriteChecked, String activityName) {
-        DBHelper.dbHelper.updateFavoriteChecked(activityName, isFaovriteChecked ? "T" : "F");
+        dbHelper.updateFavoriteChecked(activityName, isFaovriteChecked ? "T" : "F");
     }
 
     public void checkBoxEvent(boolean b, ActivityVO activityVO) {

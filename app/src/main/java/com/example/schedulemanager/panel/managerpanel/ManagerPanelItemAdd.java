@@ -285,10 +285,9 @@ public class ManagerPanelItemAdd {
     //
     }
 
-    private void redrawManagerPanel() {
+    public void redrawManagerPanel() {
         ManagerPanel managerPanel = eventHelper.getManagerPanel();
-        managerPanel.clearContentsLayout();
-        managerPanel.initManagerPanel();
+        managerPanel.redrawManagerPanel();
     }
 
     private void redrawETCPanel() {

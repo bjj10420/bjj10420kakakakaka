@@ -123,9 +123,11 @@ public class ETCPanel {
      * 이게 진짜
      */
     private void initRowLayout(LinearLayout rowLayout, ArrayList<ActivityVO> activityVOs) {
-        for(ActivityVO activityVO : activityVOs){
-            View buttonView = setButtonView(activityVO);
-            rowLayout.addView(buttonView);
+        if(activityVOs != null) {
+            for (ActivityVO activityVO : activityVOs) {
+                View buttonView = setButtonView(activityVO);
+                rowLayout.addView(buttonView);
+            }
         }
     }
 

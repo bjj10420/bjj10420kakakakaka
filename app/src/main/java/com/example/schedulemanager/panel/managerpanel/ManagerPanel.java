@@ -105,10 +105,12 @@ public class ManagerPanel {
     private View makeDetailView(String category) {
         LinearLayout detailView = (LinearLayout) inflateDetailView();
         ArrayList<ActivityVO> activities = DataHelper.dataHelper.getActivities().get(category);
-        for(ActivityVO activityVO : activities){
-            View detailItemView = inflateDetailItemView();
-            setDetailItemView(detailItemView, activityVO);
-            detailView.addView(detailItemView);
+        if(activities != null) {
+            for (ActivityVO activityVO : activities) {
+                View detailItemView = inflateDetailItemView();
+                setDetailItemView(detailItemView, activityVO);
+                detailView.addView(detailItemView);
+            }
         }
         return detailView;
     }
@@ -193,4 +195,8 @@ public class ManagerPanel {
         managerContentsLayout.removeAllViews();
     }
 
+    public void redrawManagerPanel(){
+        clearContentsLayout();
+        initManagerPanel();
+    }
 }
