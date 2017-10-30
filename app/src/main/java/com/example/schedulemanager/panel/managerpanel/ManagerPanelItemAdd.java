@@ -260,7 +260,7 @@ public class ManagerPanelItemAdd {
         showRemoveToast();
         infoViewOff();
     }
-
+//
     private void infoViewOff() {
         alert.dismiss();
     }
