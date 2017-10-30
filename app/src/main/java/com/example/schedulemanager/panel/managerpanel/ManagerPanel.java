@@ -78,11 +78,16 @@ public class ManagerPanel {
             addDetailViewToContentsLayout(category);
             addEmptyViewToContentsLayout();
         }
+        addLastRowViewToContentsLayout();
     }
 
     private void addEmptyViewToContentsLayout() {
         View emptyView = makeEmptyView(5);
         managerContentsLayout.addView(emptyView);
+    }
+
+    private void addLastRowViewToContentsLayout() {
+        addMenuBarViewToContentsLayout("카테고리 +");
     }
 
     private void addDetailViewToContentsLayout(String category) {
