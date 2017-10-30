@@ -6,6 +6,7 @@ import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -20,6 +21,7 @@ import com.example.schedulemanager.R;
 import com.example.schedulemanager.Util;
 import com.example.schedulemanager.helper.DialogHelper;
 import com.example.schedulemanager.interface_.GeneralCallback;
+import com.example.schedulemanager.vo.ActivityVO;
 
 import static com.example.schedulemanager.helper.DataHelper.PICK_FROM_GALLARY;
 import static com.example.schedulemanager.helper.DataHelper.dataHelper;
@@ -280,6 +282,35 @@ public class ManagerPanelItemAdd {
     }
 
     private void actionValidateAdd() {
+        addActivityToActivities();
+        addItemIntoDB();
+        redrawManagerPanel();
+    }
+
+    private void redrawManagerPanel() {
+
+    }
+
+    private void addItemIntoDB() {
+
+    }
+
+    private void addActivityToActivities() {
+        ActivityVO activityVO = makeNewActivityVO();
+        addToActivitiesMap(activityVO);
+    }
+
+    private void addToActivitiesMap(ActivityVO activityVO) {
+        dataHelper.getActivities().get(activityVO.getCategoryName()).add(activityVO);
+    }
+
+    private ActivityVO makeNewActivityVO() {
+        ActivityVO activityVo = new ActivityVO();
+        activityVo.setCategoryName(categoryText.getText().toString());
+        activityVo.setActivityName(activityName.getText().toString());
+        activityVo.setImageData(dataHelper.getByteArrayFromDrawable((BitmapDrawable)addView.findViewById(R.id.itemAddIcon).getBackground()));
+        activityVo.setFavorite("F");
+        return activityVo;
     }
 
     private boolean isActivityNameEntered() {
