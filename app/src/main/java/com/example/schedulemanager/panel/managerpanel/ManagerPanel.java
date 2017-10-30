@@ -184,4 +184,8 @@ public class ManagerPanel {
         iconView.setImageBitmap(BitmapFactory.decodeByteArray(activityVO.getImageData(),0,activityVO.getImageData().length));
     }
 
+    public void clearContentsLayout(){
+        managerContentsLayout.removeAllViews();
+    }
+
 }

@@ -248,24 +248,6 @@ public class ManagerPanelItemAdd {
         });
     }
 
-    private void showConfirmMessage() {
-        // 삭제 버튼 클릭
-        new DialogHelper().setChoiceStyleDialogWithMessage(context, null, new GeneralCallback() {
-            @Override
-            public void onCallBack() {
-                actionRemoveConfirmBtn();
-            }
-
-        }, "삭제", "취소", "삭제하시겠습니까?");
-    }
-
-    private void actionRemoveConfirmBtn() {
-        removeInfoVO();
-        removeManagerPanelItemInfoDB();
-        showRemoveToast();
-        addViewOff();
-    }
-//
     private void addViewOff() {
         alert.dismiss();
     }
@@ -286,9 +268,14 @@ public class ManagerPanelItemAdd {
 
     private void actionValidateAdd() {
         addNewActivityVO();
-        redrawManagerPanel();
+        redrawPanel();
         addViewOff();
         showAddToast();
+    }
+
+    private void redrawPanel() {
+        redrawETCPanel();
+        redrawManagerPanel();
     }
 
     private void addNewActivityVO() {
@@ -298,9 +285,16 @@ public class ManagerPanelItemAdd {
     }
 
     private void redrawManagerPanel() {
+        ManagerPanel managerPanel = eventHelper.getManagerPanel();
+        managerPanel.clearContentsLayout();
+        managerPanel.initManagerPanel();
+    }
+
+    private void redrawETCPanel() {
         ETCPanel etcPanel = eventHelper.getEtcPanel();
         etcPanel.clearEtcContentsLayout();
         etcPanel.initETCPanel();
+
     }
 
     private void addItemIntoDB(ActivityVO activityVO) {
@@ -332,28 +326,12 @@ public class ManagerPanelItemAdd {
         return categoryText.getVisibility() == View.VISIBLE ? true : false;
     }
 
-    private void updateMangerPanelItemInfoDB() {
-//        dbHelper.updateActivityNameAndIcon(activityVO, originalActivityName);
-    }
-
     private void showAddToast() {
         Toast.makeText(context, "추가되었습니다.", Toast.LENGTH_SHORT).show();
     }
 
     private void showReCheckToast() {
         Toast.makeText(context, "모든 정보를 입력하세요", Toast.LENGTH_SHORT).show();
-    }
-
-    private void removeInfoVO() {
-//        dataHelper.getActivities().get(activityVO.getCategoryName()).remove(activityVO);
-    }
-
-    private void removeManagerPanelItemInfoDB() {
-//        DBHelper.dbHelper.deleteActivity(activityVO.getActivityName());
-    }
-
-    private void showRemoveToast() {
-        Toast.makeText(context, "제거되었습니다.", Toast.LENGTH_SHORT).show();
     }
 
     private void setCloseBtnClickEvent() {
