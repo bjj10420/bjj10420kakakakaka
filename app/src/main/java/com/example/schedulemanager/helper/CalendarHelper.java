@@ -413,11 +413,11 @@ public class CalendarHelper {
     private void clearSelectedDateSchedule(View v) {
         clearFromScheduleMap(v);
         clearFromDB(v);
-        clearFromCalendarUI();
+        clearFromCalendarUI(v);
     }
 
-    private void clearFromCalendarUI() {
-
+    private void clearFromCalendarUI(View v) {
+        setCheckMark(false, v);
     }
 
     private void clearFromDB(View v) {
