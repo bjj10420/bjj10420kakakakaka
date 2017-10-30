@@ -57,7 +57,7 @@ public class ETCPanel {
         addButton.setOnClickListener(etcPanelEvent);
         Button managerButton = (Button) Util.getViewById(context, R.id.etcManagerBtn);
         managerButton.setOnClickListener(etcPanelEvent);
-        Button closeButton = (Button) Util.getViewById(context, R.id.etcCloseBtn);
+        View closeButton = Util.getViewById(context, R.id.etcCloseBtn);
         closeButton.setOnClickListener(etcPanelEvent);
     }
 
