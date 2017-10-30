@@ -10,6 +10,7 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.GridView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.schedulemanager.R;
 import com.example.schedulemanager.activity.MainActivity;
@@ -398,5 +399,9 @@ public class CalendarHelper {
 
     public ViewPager getCalendarPager() {
         return calendarPager;
+    }
+
+    public void getCalendarCellLongClickEvent(View v) {
+        Log.d("롱 클릭 이벤트", "롱 클릭 이벤트");
     }
 }

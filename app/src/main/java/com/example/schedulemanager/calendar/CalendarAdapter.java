@@ -212,6 +212,15 @@ public class CalendarAdapter extends BaseAdapter
 								actionClicked(v);
 							}
 				});
+				// 롱 클릭 이벤트 설정
+				convertView.setOnLongClickListener(new View.OnLongClickListener() {
+					@Override
+					public boolean onLongClick(View v) {
+						actionLongClicked(v);
+						return true;
+					}
+				});
+
 				// 메인 저장소에 뷰 저장( 전달이나 다음달 제외 )
 				if(!(position < firstItemIdx || position > lastItemIdx)) {
 					DataHelper.dataHelper.getCurrentCalendarViewMap().put(item, convertView);
@@ -362,6 +371,10 @@ public class CalendarAdapter extends BaseAdapter
 		}
 
 			return convertView;
+	}
+
+	private void actionLongClicked(View v) {
+		EventHelper.eventHelper.getCalendarHelper().getCalendarCellLongClickEvent(v);
 	}
 
 	public boolean isExistSchedule(Integer dateKey){
