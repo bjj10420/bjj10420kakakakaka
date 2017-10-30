@@ -192,4 +192,5 @@ public class ManagerPanelEvent implements View.OnClickListener{
         updateDBFavoriteData(b, activityVO.getActivityName());
         updateActivitiesMap(b, activityVO);
     }
+    //
 }
