@@ -402,6 +402,7 @@ public class CalendarHelper {
     }
 
     public void getCalendarCellLongClickEvent(View v) {
+
         Log.d("롱 클릭 이벤트", "롱 클릭 이벤트");
     }
 }

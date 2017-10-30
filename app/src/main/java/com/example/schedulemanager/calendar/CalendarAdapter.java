@@ -374,6 +374,7 @@ public class CalendarAdapter extends BaseAdapter
 	}
 
 	private void actionLongClicked(View v) {
+		if(isExistSchedule(Integer.parseInt((String) v.getTag())))
 		EventHelper.eventHelper.getCalendarHelper().getCalendarCellLongClickEvent(v);
 	}
 
