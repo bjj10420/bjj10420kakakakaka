@@ -140,11 +140,13 @@ public class ManagerPanelEvent implements View.OnClickListener{
 
     private void addCategoryToMap(String category) {
         dataHelper.getCategories().add(category);
+        dataHelper.makeCategoryArray();
         dataHelper.getActivities().put(category, new ArrayList<ActivityVO>());
     }
 
     private void removeCategoryFromMap(String category) {
         dataHelper.getCategories().remove(category);
+        dataHelper.makeCategoryArray();
         dataHelper.getActivities().remove(category);
     }
 

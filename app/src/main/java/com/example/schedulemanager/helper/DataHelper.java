@@ -110,7 +110,7 @@ public class DataHelper {
         makeCategoryArray();
     }
 
-    private void makeCategoryArray() {
+    public void makeCategoryArray() {
         categoryArray = new CharSequence[categories.size()];
         for(int i = 0 ; i < categories.size() ; i++) {
             categoryArray[i] = categories.get(i);
