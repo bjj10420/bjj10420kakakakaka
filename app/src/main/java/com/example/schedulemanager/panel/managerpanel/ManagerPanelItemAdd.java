@@ -19,12 +19,15 @@ import android.widget.Toast;
 
 import com.example.schedulemanager.R;
 import com.example.schedulemanager.Util;
+import com.example.schedulemanager.helper.DBHelper;
 import com.example.schedulemanager.helper.DialogHelper;
 import com.example.schedulemanager.interface_.GeneralCallback;
+import com.example.schedulemanager.panel.etcpanel.ETCPanel;
 import com.example.schedulemanager.vo.ActivityVO;
 
 import static com.example.schedulemanager.helper.DataHelper.PICK_FROM_GALLARY;
 import static com.example.schedulemanager.helper.DataHelper.dataHelper;
+import static com.example.schedulemanager.helper.EventHelper.eventHelper;
 
 public class ManagerPanelItemAdd {
     private View addView;
@@ -260,10 +263,10 @@ public class ManagerPanelItemAdd {
         removeInfoVO();
         removeManagerPanelItemInfoDB();
         showRemoveToast();
-        infoViewOff();
+        addViewOff();
     }
 //
-    private void infoViewOff() {
+    private void addViewOff() {
         alert.dismiss();
     }
 
@@ -282,21 +285,29 @@ public class ManagerPanelItemAdd {
     }
 
     private void actionValidateAdd() {
-        addActivityToActivities();
-        addItemIntoDB();
+        addNewActivityVO();
         redrawManagerPanel();
+        addViewOff();
+        showAddToast();
+    }
+
+    private void addNewActivityVO() {
+        ActivityVO activityVO = makeNewActivityVO();
+        addActivityToActivities(activityVO);
+        addItemIntoDB(activityVO);
     }
 
     private void redrawManagerPanel() {
-
+        ETCPanel etcPanel = eventHelper.getEtcPanel();
+        etcPanel.clearEtcContentsLayout();
+        etcPanel.initETCPanel();
     }
 
-    private void addItemIntoDB() {
-
+    private void addItemIntoDB(ActivityVO activityVO) {
+        DBHelper.dbHelper.insertActivityWithIcon(activityVO);
     }
 
-    private void addActivityToActivities() {
-        ActivityVO activityVO = makeNewActivityVO();
+    private void addActivityToActivities(ActivityVO activityVO) {
         addToActivitiesMap(activityVO);
     }
 
@@ -322,7 +333,7 @@ public class ManagerPanelItemAdd {
     }
 
     private void updateMangerPanelItemInfoDB() {
-//        DBHelper.dbHelper.updateActivityNameAndIcon(activityVO, originalActivityName);
+//        dbHelper.updateActivityNameAndIcon(activityVO, originalActivityName);
     }
 
     private void showAddToast() {
@@ -350,7 +361,7 @@ public class ManagerPanelItemAdd {
         closeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                infoViewOff();
+                addViewOff();
             }
         });
     }
