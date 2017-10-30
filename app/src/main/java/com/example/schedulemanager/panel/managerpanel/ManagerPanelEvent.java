@@ -4,6 +4,8 @@ package com.example.schedulemanager.panel.managerpanel;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.schedulemanager.R;
 import com.example.schedulemanager.helper.DialogHelper;
@@ -78,10 +80,21 @@ public class ManagerPanelEvent implements View.OnClickListener{
     }
 
     private void itemClickEvent(View view){
-        if(view.getTag() instanceof ActivityVO)
+
+        if(isAddCategoryBar(view))
+            addCategoryEvent(view);
+        else if(view.getTag() instanceof ActivityVO)
             listItemClickEvent(view);
         else
             menubarTitleItemClickEvent(view);
+    }
+
+    private void addCategoryEvent(View view) {
+
+    }
+
+    private boolean isAddCategoryBar(View view) {
+        return ((TextView)((LinearLayout) view).getChildAt(0)).getText().toString().equals("카테고리 +");
     }
 
     private void listItemClickEvent(View view) {
