@@ -5,6 +5,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.schedulemanager.R;
@@ -123,7 +124,7 @@ public class ManagerPanelEvent implements View.OnClickListener{
     }
 
     private boolean isAddCategoryBar(View view) {
-        return ((TextView)((LinearLayout) view).getChildAt(0)).getText().toString().equals("카테고리 +");
+        return ((TextView)((RelativeLayout) view).getChildAt(0)).getText().toString().equals("카테고리 +");
     }
 
     private void listItemClickEvent(View view) {
@@ -132,6 +133,16 @@ public class ManagerPanelEvent implements View.OnClickListener{
 
     private void menubarTitleItemClickEvent(View view) {
         ViewGroup viewParent = (ViewGroup) view.getParent();
+        setDetailView(viewParent, view);
+        setCancelView(view);
+       }
+
+    private void setCancelView(View view) {
+        View menuBarTextView = view.findViewById(R.id.menu_bar_cancel);
+        menuBarTextView.setVisibility(menuBarTextView.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
+    }
+
+    private void setDetailView(ViewGroup viewParent, View view) {
         View detailView = viewParent.getChildAt(viewParent.indexOfChild(view) + 1);
         detailView.setVisibility(detailView.getVisibility() == View.VISIBLE ? View.GONE : View.VISIBLE);
     }

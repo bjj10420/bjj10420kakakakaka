@@ -131,13 +131,24 @@ public class ManagerPanel {
         emptyView.setLayoutParams(emptyViewParams);
         return emptyView;
     }
-//
+
     private View makeMenuBar(String menuTitle) {
         View menuBarView = makeMenuBarView();
-        TextView menuBarTextView = (TextView) menuBarView.findViewById(R.id.menu_bar_text);
-        Util.setTextWithBoldFont(menuBarTextView, menuTitle);
+        setMenuBarText(menuBarView, menuTitle);
+        setMenuBarCancel(menuBarView);
         menuBarView.setOnClickListener(managerPanelEvent);
         return menuBarView;
+    }
+
+    private void setMenuBarCancel(View menuBarView) {
+        View menuBarTextView = menuBarView.findViewById(R.id.menu_bar_cancel);
+        menuBarTextView.setOnClickListener(managerPanelEvent);
+    }
+
+    private void setMenuBarText(View menuBarView, String menuTitle) {
+        TextView menuBarTextView = (TextView) menuBarView.findViewById(R.id.menu_bar_text);
+        Util.setTextWithBoldFont(menuBarTextView, menuTitle);
+
     }
 
     private View makeMenuBarView() {
