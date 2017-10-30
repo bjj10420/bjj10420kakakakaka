@@ -131,7 +131,7 @@ public class ManagerPanel {
         emptyView.setLayoutParams(emptyViewParams);
         return emptyView;
     }
-
+//
     private View makeMenuBar(String menuTitle) {
         View menuBarView = makeMenuBarView();
         TextView menuBarTextView = (TextView) menuBarView.findViewById(R.id.menu_bar_text);
