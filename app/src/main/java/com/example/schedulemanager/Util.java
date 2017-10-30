@@ -22,6 +22,9 @@ import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.nio.channels.FileChannel;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
 
 /**
  * 유틸리티 클래스
@@ -225,4 +228,14 @@ public class Util {
         }
         return true;
     }
+
+//    public static void removeItemFromMap(HashMap<?, ?> map){
+//        Iterator<? extends Map.Entry<?, ?>> iter = map.entrySet().iterator();
+//        while (iter.hasNext()) {
+//            Map.Entry<?, ?> entry = iter.next();
+//            if("Sample".equalsIgnoreCase(entry.getValue())){
+//                iter.remove();
+//            }
+//        }
+//    }
 }

@@ -26,7 +26,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Locale;
+import java.util.Map;
 import java.util.TreeMap;
 
 /**
@@ -755,5 +757,20 @@ public class DataHelper {
 
     public CharSequence[] getCategoryArray() {
         return categoryArray;
+    }
+
+    public void clearDateSchedules(String date) {
+        HashMap<Integer, Schedule> scheduleMapForThisMonth = scheduleMapByMonth.get(Integer.parseInt(makeYearMonthKey()));
+
+        Iterator<Map.Entry<Integer,Schedule>> iter = scheduleMapForThisMonth.entrySet().iterator();
+        while (iter.hasNext()) {
+            Map.Entry<Integer,Schedule> entry = iter.next();
+            String keyString = String.valueOf(entry.getKey());
+            String dateKey = keyString.split("000")[0];
+
+            if(dateKey.equals(date)){
+                iter.remove();
+            }
+        }
     }
 }

@@ -10,10 +10,8 @@ import android.view.View;
 import android.view.ViewTreeObserver;
 import android.widget.GridView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.schedulemanager.R;
-import com.example.schedulemanager.activity.MainActivity;
 import com.example.schedulemanager.interface_.GeneralCallback;
 import com.example.schedulemanager.vo.RectAndView;
 import com.example.schedulemanager.vo.Schedule;
@@ -402,13 +400,31 @@ public class CalendarHelper {
         return calendarPager;
     }
 
-    public void getCalendarCellLongClickEvent(View v) {
+    public void getCalendarCellLongClickEvent(final View v) {
         Log.d("롱 클릭 이벤트", "롱 클릭 이벤트");
         new DialogHelper().setOneBtnStyleDialog(context, new GeneralCallback() {
             @Override
             public void onCallBack() {
-
+                clearSelectedDateSchedule(v);
             }
         }, "선택된 날짜 스케쥴 비우기");
+    }
+
+    private void clearSelectedDateSchedule(View v) {
+        clearFromScheduleMap(v);
+        clearFromDB();
+        clearFromCalendarUI();
+    }
+
+    private void clearFromCalendarUI() {
+
+    }
+
+    private void clearFromDB() {
+
+    }
+
+    private void clearFromScheduleMap(View v) {
+        dataHelper.clearDateSchedules((String) v.getTag());
     }
 }
