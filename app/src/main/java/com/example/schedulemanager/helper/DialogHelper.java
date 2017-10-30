@@ -22,6 +22,22 @@ public class DialogHelper {
 
     private AlertDialog alert;
 
+    public void setOneBtnStyleDialog(Context context, final GeneralCallback callback1, String btnString){
+        AlertDialog.Builder alt_bld = new AlertDialog.Builder(context, 3);
+        alt_bld.setCancelable(
+                true).setPositiveButton(btnString,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        callback1.onCallBack();
+                    }
+                });
+        AlertDialog alert = alt_bld.create();
+
+        // Icon for AlertDialog
+        alert.show();
+    }
+
+
     /**
      * 선택형 다이얼 로그 생성
      */
@@ -36,15 +52,11 @@ public class DialogHelper {
                 }).setNegativeButton(leftBtnString,
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        // Action for 'NO' Button
-//                        dialog.cancel();
                         callback2.onCallBack();
 
                     }
                 });
         AlertDialog alert = alt_bld.create();
-
-        // Icon for AlertDialog
         alert.show();
     }
 
@@ -124,9 +136,9 @@ public class DialogHelper {
         params.height = (int) Util.convertDpToPixel(height);
         return  params;
     }
-//
+
     /**
-     * 선택형 다이얼 로그 생성
+     * 메세지를 설정한 선택형 다이얼 로그 생성
      */
     public void setChoiceStyleDialogWithMessage(Context context, final GeneralCallback callback1, final GeneralCallback callback2, String leftBtnString, String rightBtnString, String message){
         final AlertDialog.Builder alt_bld = new AlertDialog.Builder(context, 3);

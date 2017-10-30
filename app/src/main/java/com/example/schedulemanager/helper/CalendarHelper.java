@@ -14,6 +14,7 @@ import android.widget.Toast;
 
 import com.example.schedulemanager.R;
 import com.example.schedulemanager.activity.MainActivity;
+import com.example.schedulemanager.interface_.GeneralCallback;
 import com.example.schedulemanager.vo.RectAndView;
 import com.example.schedulemanager.vo.Schedule;
 import com.example.schedulemanager.Util;
@@ -402,7 +403,12 @@ public class CalendarHelper {
     }
 
     public void getCalendarCellLongClickEvent(View v) {
-
         Log.d("롱 클릭 이벤트", "롱 클릭 이벤트");
+        new DialogHelper().setOneBtnStyleDialog(context, new GeneralCallback() {
+            @Override
+            public void onCallBack() {
+
+            }
+        }, "선택된 날짜 스케쥴 비우기");
     }
 }
