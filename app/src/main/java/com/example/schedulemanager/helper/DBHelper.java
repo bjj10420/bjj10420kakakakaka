@@ -335,4 +335,10 @@ public class DBHelper extends SQLiteOpenHelper {
         int resultNumber = DB.delete(activityTableName, activityTable_activityName_colum + " = ?",
                 new String[]{activityName});
     }
+
+    public void deleteCategory(String categoryName) {
+        DB = getWritableDatabase();
+        int resultNumber = DB.delete(categoryTableName, categoryTable_categoryName_colum + " = ?",
+                new String[]{categoryName});
+    }
 }

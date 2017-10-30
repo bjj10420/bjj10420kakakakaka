@@ -4,13 +4,12 @@ package com.example.schedulemanager.panel.managerpanel;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.schedulemanager.R;
 import com.example.schedulemanager.helper.DialogHelper;
-import com.example.schedulemanager.helper.DBHelper;
+import com.example.schedulemanager.interface_.GeneralCallback;
 import com.example.schedulemanager.interface_.GeneralCallback2;
 import com.example.schedulemanager.panel.etcpanel.ETCPanel;
 import com.example.schedulemanager.vo.ActivityVO;
@@ -85,12 +84,37 @@ public class ManagerPanelEvent implements View.OnClickListener{
     }
 
     private void itemClickEvent(View view){
-        if(isAddCategoryBar(view))
+        if(isListItemCancelBtn(view))
+            removeCategoryEvent(view);
+        else if(isAddCategoryBar(view))
             addCategoryEvent(view);
         else if(view.getTag() instanceof ActivityVO)
             listItemClickEvent(view);
         else
             menubarTitleItemClickEvent(view);
+    }
+
+    private void removeCategoryEvent(View view) {
+        // 삭제 버튼 클릭
+        final String categoryName = ((TextView)((RelativeLayout) view.getParent()).getChildAt(0)).getText().toString();
+        new DialogHelper().setChoiceStyleDialogWithMessage(context, null, new GeneralCallback() {
+            @Override
+            public void onCallBack() {
+                removeCategory(categoryName);
+            }
+
+        }, "삭제", "취소",  categoryName + "카테고리를 삭제하시겠습니까?");
+
+    }
+
+    private void removeCategory(String categoryName) {
+        removeCategoryFromDB(categoryName);
+        removeCategoryFromMap(categoryName);
+        redrawManagerAndETCPanel();
+    }
+
+    private boolean isListItemCancelBtn(View view) {
+        return view.getId() == R.id.menu_bar_cancel;
     }
 
     private void addCategoryEvent(View view) {
@@ -106,10 +130,10 @@ public class ManagerPanelEvent implements View.OnClickListener{
     private void addCategory(String category) {
         addCategoryToDB(category);
         addCategoryToMap(category);
-        addCateogryToUI(category);
+        redrawManagerAndETCPanel();
     }
 
-    private void addCateogryToUI(String category) {
+    private void redrawManagerAndETCPanel() {
         managerPanel.redrawManagerPanel();
         redrawETCPanel();
     }
@@ -119,8 +143,17 @@ public class ManagerPanelEvent implements View.OnClickListener{
         dataHelper.getActivities().put(category, new ArrayList<ActivityVO>());
     }
 
+    private void removeCategoryFromMap(String category) {
+        dataHelper.getCategories().remove(category);
+        dataHelper.getActivities().remove(category);
+    }
+
     private void addCategoryToDB(String category) {
         dbHelper.insertCategory(category);
+    }
+
+    private void removeCategoryFromDB(String category) {
+        dbHelper.deleteCategory(category);
     }
 
     private boolean isAddCategoryBar(View view) {
