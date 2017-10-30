@@ -386,7 +386,7 @@ public class CalendarAdapter extends BaseAdapter
 				String scheduleDate = schedule.getDate().substring(6, 8);
 				Log.d("key 확인", "key =" + key);
 				Log.d("dateKey 확인", "dateKey =" + dateKey);
-
+//
 				if(scheduleDate.equals(dateKey < 10 ? "0" + dateKey : String.valueOf(dateKey))){
 						isExistSchedule = true;
 						break;
