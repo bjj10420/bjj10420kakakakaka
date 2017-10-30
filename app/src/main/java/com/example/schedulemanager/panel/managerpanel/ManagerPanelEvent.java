@@ -86,10 +86,10 @@ public class ManagerPanelEvent implements View.OnClickListener{
     private void itemClickEvent(View view){
         if(isListItemCancelBtn(view))
             removeCategoryEvent(view);
-        else if(isAddCategoryBar(view))
-            addCategoryEvent(view);
         else if(view.getTag() instanceof ActivityVO)
             listItemClickEvent(view);
+        else if(isAddCategoryBar(view))
+            addCategoryEvent(view);
         else
             menubarTitleItemClickEvent(view);
     }
