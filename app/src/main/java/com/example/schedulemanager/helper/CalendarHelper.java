@@ -412,7 +412,7 @@ public class CalendarHelper {
 
     private void clearSelectedDateSchedule(View v) {
         clearFromScheduleMap(v);
-        clearFromDB();
+        clearFromDB(v);
         clearFromCalendarUI();
     }
 
@@ -420,8 +420,9 @@ public class CalendarHelper {
 
     }
 
-    private void clearFromDB() {
-
+    private void clearFromDB(View v) {
+        // DB에서 삭제
+        new DBHelper(context).deleteSchedule(dataHelper.makeDateString2((String) v.getTag(), this));
     }
 
     private void clearFromScheduleMap(View v) {

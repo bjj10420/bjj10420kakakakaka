@@ -483,7 +483,7 @@ public class DataHelper {
     private String makeYearMonthKey() {
         String yearMonthKey = makeDateString2(null, EventHelper.eventHelper.getCalendarHelper());
         return yearMonthKey;
-    }//
+    }
 
     public boolean isEmptyData(String dateKey){
         boolean isEmptyData = true;
