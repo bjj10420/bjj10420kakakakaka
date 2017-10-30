@@ -282,6 +282,7 @@ public class ManagerPanelItemAdd {
         ActivityVO activityVO = makeNewActivityVO();
         addActivityToActivities(activityVO);
         addItemIntoDB(activityVO);
+    //
     }
 
     private void redrawManagerPanel() {
