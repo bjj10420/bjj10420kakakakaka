@@ -132,7 +132,7 @@ public class ManagerPanelEvent implements View.OnClickListener{
         addCategoryToMap(category);
         redrawManagerAndETCPanel();
     }
-
+//
     private void redrawManagerAndETCPanel() {
         managerPanel.redrawManagerPanel();
         redrawETCPanel();
