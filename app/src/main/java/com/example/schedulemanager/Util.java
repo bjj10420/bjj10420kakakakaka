@@ -15,6 +15,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import com.example.schedulemanager.helper.DataHelper;
+import com.example.schedulemanager.interface_.CustomCondition;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -229,13 +230,13 @@ public class Util {
         return true;
     }
 
-//    public static void removeItemFromMap(HashMap<?, ?> map){
-//        Iterator<? extends Map.Entry<?, ?>> iter = map.entrySet().iterator();
-//        while (iter.hasNext()) {
-//            Map.Entry<?, ?> entry = iter.next();
-//            if("Sample".equalsIgnoreCase(entry.getValue())){
-//                iter.remove();
-//            }
-//        }
-//    }
+    public static void removeItemFromMap(HashMap<?, ?> map, CustomCondition customCondition){
+        Iterator<? extends Map.Entry<?, ?>> iter = map.entrySet().iterator();
+        while (iter.hasNext()) {
+            Map.Entry<?, ?> entry = iter.next();
+            if(customCondition.customCondition()){
+                iter.remove();
+            }
+        }
+    }
 }

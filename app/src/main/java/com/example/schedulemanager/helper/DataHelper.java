@@ -761,7 +761,6 @@ public class DataHelper {
 
     public void clearDateSchedules(String date) {
         HashMap<Integer, Schedule> scheduleMapForThisMonth = scheduleMapByMonth.get(Integer.parseInt(makeYearMonthKey()));
-
         Iterator<Map.Entry<Integer,Schedule>> iter = scheduleMapForThisMonth.entrySet().iterator();
         while (iter.hasNext()) {
             Map.Entry<Integer,Schedule> entry = iter.next();
