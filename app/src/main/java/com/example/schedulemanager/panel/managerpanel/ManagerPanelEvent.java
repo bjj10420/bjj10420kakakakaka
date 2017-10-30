@@ -10,6 +10,7 @@ import android.widget.TextView;
 import com.example.schedulemanager.R;
 import com.example.schedulemanager.helper.DialogHelper;
 import com.example.schedulemanager.helper.DBHelper;
+import com.example.schedulemanager.interface_.GeneralCallback2;
 import com.example.schedulemanager.panel.etcpanel.ETCPanel;
 import com.example.schedulemanager.vo.ActivityVO;
 
@@ -80,7 +81,6 @@ public class ManagerPanelEvent implements View.OnClickListener{
     }
 
     private void itemClickEvent(View view){
-
         if(isAddCategoryBar(view))
             addCategoryEvent(view);
         else if(view.getTag() instanceof ActivityVO)
@@ -90,7 +90,12 @@ public class ManagerPanelEvent implements View.OnClickListener{
     }
 
     private void addCategoryEvent(View view) {
+        new DialogHelper().setOneBtnStyleWithTextDialog(context, "추가할 카테고리 이름을 입력하세요", new GeneralCallback2() {
+            @Override
+            public void onCallBack(Object parameter) {
 
+            }
+        }, "추가");
     }
 
     private boolean isAddCategoryBar(View view) {

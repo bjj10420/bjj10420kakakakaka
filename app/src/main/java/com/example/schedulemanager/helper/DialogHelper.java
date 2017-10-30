@@ -22,6 +22,25 @@ public class DialogHelper {
 
     private AlertDialog alert;
 
+
+    public void setOneBtnStyleWithTextDialog(Context context, String message, final GeneralCallback2 callback1, String btnString){
+        AlertDialog.Builder alt_bld = new AlertDialog.Builder(context, 3);
+        final EditText et = new EditText(context);
+
+        alt_bld.setMessage(message).setView(et).setCancelable(
+                true).setPositiveButton(btnString,
+                new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        callback1.onCallBack(et.getText().toString());
+                    }
+                });
+        AlertDialog alert = alt_bld.create();
+
+        // Icon for AlertDialog
+        alert.show();
+    }
+
+
     public void setOneBtnStyleDialog(Context context, final GeneralCallback callback1, String btnString){
         AlertDialog.Builder alt_bld = new AlertDialog.Builder(context, 3);
         alt_bld.setCancelable(
