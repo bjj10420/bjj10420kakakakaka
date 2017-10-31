@@ -684,7 +684,7 @@ public class DataHelper {
     public String makeDateString2(String dateValue, CalendarHelper calendarHelper) {
         int position = getCurrentPageIndex();
         String date = "";
-
+//
         SimpleDateFormat formatter = new SimpleDateFormat("yyyyMM", Locale.getDefault());
         if(dateValue != null)
             date = String.valueOf(Integer.parseInt(dateValue) < 10 ? "0" + dateValue : dateValue);
