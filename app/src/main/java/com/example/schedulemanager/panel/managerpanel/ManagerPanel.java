@@ -150,7 +150,7 @@ public class ManagerPanel {
         Util.setTextWithBoldFont(menuBarTextView, menuTitle);
 
     }
-
+//
     private View makeMenuBarView() {
         View menuBarView = ((Activity) context).getLayoutInflater().inflate(R.layout.manager_menu_bar_item, null);
         menuBarView.setMinimumHeight((int) Util.convertDpToPixel(65));
