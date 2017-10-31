@@ -242,5 +242,8 @@ public class ETCPanel {
         etcContentsLayout.removeAllViews();
     }
 
+    public ETCPanelEvent getEtcPanelEvent() {
+        return etcPanelEvent;
+    }
 }
 

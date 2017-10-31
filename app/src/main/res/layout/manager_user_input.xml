@@ -145,7 +145,7 @@
                 android:layout_height="75dp"
                 android:layout_weight="1"
                 android:background="@drawable/bottom_button_bg"
-                android:text="추가"
+                android:text="입력"
                 android:textColor="#404040" />
 
             <Button

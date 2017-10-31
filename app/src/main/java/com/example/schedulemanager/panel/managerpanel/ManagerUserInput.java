@@ -17,7 +17,7 @@ import android.widget.Toast;
 import com.example.schedulemanager.R;
 import com.example.schedulemanager.Util;
 import com.example.schedulemanager.helper.DBHelper;
-import com.example.schedulemanager.panel.etcpanel.ETCPanel;
+import com.example.schedulemanager.helper.UIHelper;
 import com.example.schedulemanager.vo.ActivityVO;
 
 import static com.example.schedulemanager.helper.DataHelper.PICK_FROM_GALLARY;
@@ -81,8 +81,8 @@ public class ManagerUserInput {
 
     private void actionBoxPanelItemViewClicked(View view) {
         setInfoViewIcon(view);
-        setItemInfoIconBoxPanelVisible(false);
-        setItemInfoMainPanel(true);
+        setUserInputIconBoxPanelVisible(false);
+        setUserInputMainPanel(true);
     }
 
     private void setInfoViewIcon(View view) {
@@ -107,7 +107,7 @@ public class ManagerUserInput {
     private void setUserInputViewEvent() {
         setBtnClickEvents();
         setIconBoxPanelEvents();
-        setInfoIconClickEvent();
+        setUserInputIconClickEvent();
     }
 
     private void setIconBoxPanelEvents() {
@@ -134,7 +134,7 @@ public class ManagerUserInput {
         ((Activity)context).startActivityForResult(chooser, PICK_FROM_GALLARY);
     }
 
-    private void setInfoIconClickEvent() {
+    private void setUserInputIconClickEvent() {
         View activityIconView = userInputView.findViewById(R.id.userInputIcon);
         activityIconView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -145,13 +145,13 @@ public class ManagerUserInput {
     }
 
     private void actionActivityIconView() {
-        setItemInfoIconBoxPanelVisible(true);
-        setItemInfoMainPanel(false);
+        setUserInputIconBoxPanelVisible(true);
+        setUserInputMainPanel(false);
     }
 
 
     private void setBtnClickEvents() {
-        setAddBtnClickEvent();
+        setInputBtnClickEvent();
         setCloseBtnClickEvent();
     }
 
@@ -166,26 +166,26 @@ public class ManagerUserInput {
     }
 
     private void actionIconBoxPanelCloseBtn() {
-        setItemInfoIconBoxPanelVisible(false);
-        setItemInfoMainPanel(true);
+        setUserInputIconBoxPanelVisible(false);
+        setUserInputMainPanel(true);
     }
 
-    private void setItemInfoMainPanel(boolean isVisible) {
+    private void setUserInputMainPanel(boolean isVisible) {
         View userInputIconMainPanel = userInputView.findViewById(R.id.userInputMainPanel);
         userInputIconMainPanel.setVisibility(isVisible ? View.VISIBLE : View.GONE);
     }
 
-    private void setItemInfoIconBoxPanelVisible(boolean isVisible) {
+    private void setUserInputIconBoxPanelVisible(boolean isVisible) {
         View itemInfoIconBoxPanel = userInputView.findViewById(R.id.itemIconBoxPanel);
         itemInfoIconBoxPanel.setVisibility(isVisible ? View.VISIBLE : View.GONE);
     }
 
-    private void setAddBtnClickEvent() {
-        View addBtn = userInputView.findViewById(R.id.userInputBtn);
-        addBtn.setOnClickListener(new View.OnClickListener() {
+    private void setInputBtnClickEvent() {
+        View inputBtn = userInputView.findViewById(R.id.userInputBtn);
+        inputBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                actionAddBtn();
+                inputAddBtn();
             }
         });
     }
@@ -194,7 +194,7 @@ public class ManagerUserInput {
         alert.dismiss();
     }
 
-    private void actionAddBtn() {
+    private void inputAddBtn() {
         checkInvalidateData();
 //        updateMangerPanelItemInfoDB();
 //        showAddToast();
@@ -202,41 +202,27 @@ public class ManagerUserInput {
 
     private void checkInvalidateData() {
         if(isCategorySelected() && isActivityNameEntered()){
-            actionValidateAdd();
+            actionValidateInput();
         }
         else
             showReCheckToast();
     }
 
-    private void actionValidateAdd() {
-        addNewActivityVO();
-        redrawPanel();
-        addViewOff();
-        showAddToast();
+    private void actionValidateInput() {
+        ActivityVO activityVO = makeNewActivityVO();
+        View userInputView = makeUserInputView(activityVO);
+        eventHelper.getEtcPanel().getEtcPanelEvent().panelItemClickEVent(userInputView);
     }
 
-    private void redrawPanel() {
-        redrawETCPanel();
-        redrawManagerPanel();
+    private View makeUserInputView(ActivityVO activityVO) {
+        View userInputView = UIHelper.uiHelper.makeFavoriteButton(activityVO);
+        return userInputView;
     }
 
     private void addNewActivityVO() {
         ActivityVO activityVO = makeNewActivityVO();
         addActivityToActivities(activityVO);
         addItemIntoDB(activityVO);
-    //
-    }
-
-    public void redrawManagerPanel() {
-        ManagerPanel managerPanel = eventHelper.getManagerPanel();
-        managerPanel.redrawManagerPanel();
-    }
-
-    private void redrawETCPanel() {
-        ETCPanel etcPanel = eventHelper.getEtcPanel();
-        etcPanel.clearEtcContentsLayout();
-        etcPanel.initETCPanel();
-
     }
 
     private void addItemIntoDB(ActivityVO activityVO) {
@@ -268,10 +254,6 @@ public class ManagerUserInput {
         return categoryText.getVisibility() == View.VISIBLE ? true : false;
     }
 
-    private void showAddToast() {
-        Toast.makeText(context, "추가되었습니다.", Toast.LENGTH_SHORT).show();
-    }
-
     private void showReCheckToast() {
         Toast.makeText(context, "모든 정보를 입력하세요", Toast.LENGTH_SHORT).show();
     }
@@ -288,9 +270,8 @@ public class ManagerUserInput {
 
     private View initPanelUserInputView(Context context) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View itemInfoView = inflater.inflate(R.layout.manager_user_input, null);
-//        setItemInfoView(itemInfoView, activityVO);
-        return itemInfoView;
+        View userInputView = inflater.inflate(R.layout.manager_user_input, null);
+        return userInputView;
     }
 
     public void setAlert(Dialog alert) {

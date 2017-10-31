@@ -44,7 +44,7 @@ public class ETCPanelEvent implements View.OnClickListener{
         new DialogHelper().showUserInputDialog(context);
     }
 
-    private void panelItemClickEVent(View v) {
+    public void panelItemClickEVent(View v) {
         panelLayoutOffForTotalLayout();
         hoverCopiedView(v);
     }

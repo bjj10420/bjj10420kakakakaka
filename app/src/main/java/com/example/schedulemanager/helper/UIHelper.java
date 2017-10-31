@@ -132,7 +132,7 @@ public class UIHelper {
         return vo;
     }
 
-    private LinearLayout makeFavoriteButton(ActivityVO activityVO) {
+    public LinearLayout makeFavoriteButton(ActivityVO activityVO) {
         LinearLayout favoriteButtonView = new LinearLayout(context);
         setFavoriteButtonBasicOption(favoriteButtonView);
         addFavoriteContentToButtonView(favoriteButtonView, activityVO);
