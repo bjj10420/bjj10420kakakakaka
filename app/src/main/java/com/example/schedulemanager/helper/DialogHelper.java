@@ -14,6 +14,7 @@ import com.example.schedulemanager.interface_.GeneralCallback;
 import com.example.schedulemanager.interface_.GeneralCallback2;
 import com.example.schedulemanager.panel.managerpanel.ManagerPanelItemAdd;
 import com.example.schedulemanager.panel.managerpanel.ManagerPanelItemInfo;
+import com.example.schedulemanager.panel.managerpanel.ManagerUserInput;
 
 /**
  * 여러가지 용도의 다이얼로그 박스를 생성
@@ -129,6 +130,12 @@ public class DialogHelper {
         setItemAddAlertDialog(context, itemAdd, dialogView);
     }
 
+    public void showUserInputDialog(Context context){
+        ManagerUserInput uesrInput =  new ManagerUserInput();
+        View dialogView = uesrInput.init(context);
+        setUserInputAlertDialog(context, uesrInput, dialogView);
+    }
+
     private void setItemInfoAlertDialog(Context context, ManagerPanelItemInfo itemInfo, View dialogView) {
         Dialog dialog = new Dialog(context);
         setDialogBasicOptions(dialog, dialogView, 300, 250);
@@ -139,6 +146,12 @@ public class DialogHelper {
         Dialog dialog = new Dialog(context);
         setDialogBasicOptions(dialog, dialogView, 300, 300);
         itemAdd.setAlert(dialog);
+    }
+
+    private void setUserInputAlertDialog(Context context, ManagerUserInput userInput, View dialogView) {
+        Dialog dialog = new Dialog(context);
+        setDialogBasicOptions(dialog, dialogView, 300, 300);
+        userInput.setAlert(dialog);
     }
 
     private void setDialogBasicOptions(Dialog dialog, View dialogView, int width, int height) {

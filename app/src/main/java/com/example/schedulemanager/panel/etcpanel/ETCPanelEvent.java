@@ -41,7 +41,7 @@ public class ETCPanelEvent implements View.OnClickListener{
       }
 
     private void userInputEvent() {
-
+        new DialogHelper().showUserInputDialog(context);
     }
 
     private void panelItemClickEVent(View v) {

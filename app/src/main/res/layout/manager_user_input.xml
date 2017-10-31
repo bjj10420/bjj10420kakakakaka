@@ -5,13 +5,13 @@
     android:orientation="vertical">
 
     <RelativeLayout
-        android:id="@+id/uesrInputMainPanel"
+        android:id="@+id/userInputMainPanel"
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:visibility="visible">
 
         <LinearLayout
-            android:id="@+id/uesrInputContentsLayout"
+            android:id="@+id/userInputContentsLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="75dp"
@@ -26,7 +26,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="10dp"
-                android:text="활동 추가"
+                android:text="사용자 입력"
                 android:textColor="#404040"
                 android:textSize="16dp" />
 
@@ -50,19 +50,13 @@
                     android:layout_weight="1"
                     android:gravity="center">
 
-                    <Button
-                        android:id="@+id/uesrInputCategorySelect"
-                        android:layout_width="50dp"
-                        android:layout_height="wrap_content"
-                        android:text="선택" />
-
                     <TextView
-                        android:id="@+id/uesrInputCategoryText"
+                        android:id="@+id/userInputCategoryText"
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
                         android:gravity="center"
-                        android:textColor="#404040"
-                        android:visibility="gone" />
+                        android:text="기타"
+                        android:textColor="#404040" />
 
 
                 </LinearLayout>
@@ -94,10 +88,10 @@
                     android:gravity="center">
 
                     <View
-                        android:id="@+id/uesrInputIcon"
+                        android:id="@+id/userInputIcon"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:background="@drawable/basic_travel_icon" />
+                        android:background="@drawable/basic_write_icon" />
 
                 </LinearLayout>
             </LinearLayout>
@@ -123,7 +117,7 @@
                     android:gravity="center">
 
                     <EditText
-                        android:id="@+id/uesrInputActivity"
+                        android:id="@+id/userInputActivity"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:hint="활동명 입력"
@@ -138,7 +132,7 @@
         </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/uesrInputBottomButtonLayout"
+            android:id="@+id/userInputBottomButtonLayout"
             android:layout_width="match_parent"
             android:layout_height="75dp"
             android:layout_alignParentBottom="true"
@@ -146,7 +140,7 @@
             android:gravity="center">
 
             <Button
-                android:id="@+id/uesrInputBtn"
+                android:id="@+id/userInputBtn"
                 android:layout_width="0dp"
                 android:layout_height="75dp"
                 android:layout_weight="1"
@@ -155,7 +149,7 @@
                 android:textColor="#404040" />
 
             <Button
-                android:id="@+id/uesrInputCloseBtn"
+                android:id="@+id/userInputCloseBtn"
                 android:layout_width="0dp"
                 android:layout_height="75dp"
                 android:layout_weight="1"
