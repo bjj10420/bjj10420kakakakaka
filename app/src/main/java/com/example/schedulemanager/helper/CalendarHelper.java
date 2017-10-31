@@ -109,7 +109,7 @@ public class CalendarHelper {
 //                    calendarAdapter.getThisCal().get(Calendar.MONTH) + position + 2,
 //                    calendarAdapter.getThisCal().get(Calendar.DATE)
 //            );
-        calendarDateText.setText(calendarAdapter.getDateString(position));
+        calendarDateText.setText(calendarPagerAdapter.getDateString2(position));
     }
 
     /**

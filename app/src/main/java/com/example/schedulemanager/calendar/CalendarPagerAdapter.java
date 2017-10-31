@@ -519,6 +519,14 @@ public class CalendarPagerAdapter extends PagerAdapter
 		return formatter.format(new Date(nextCal.getTimeInMillis()));
 	}
 
+	public String getDateString2(int position)
+	{
+		Calendar thisCal2 = Calendar.getInstance(Locale.getDefault());
+		thisCal2.add(Calendar.YEAR, -1);
+		thisCal2.add(Calendar.MONTH, position);
+		return formatter.format(new Date(thisCal2.getTimeInMillis()));
+	}
+
 	public int getSelectedYear()
 	{
 		return selectedYear;
