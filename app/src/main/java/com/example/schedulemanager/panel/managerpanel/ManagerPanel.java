@@ -162,6 +162,7 @@ public class ManagerPanel {
         ViewGroup.LayoutParams detailViewParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT);
         detailView.setLayoutParams(detailViewParams);
+        Util.setFontAllChildView(context, detailView, DataHelper.dataHelper.getTypeface(), false);
         return detailView;
     }
 
