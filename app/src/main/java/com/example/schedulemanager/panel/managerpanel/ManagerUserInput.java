@@ -9,8 +9,10 @@ import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -216,9 +218,13 @@ public class ManagerUserInput {
     private View makeUserInputView() {
         ActivityVO activityVO = makeNewActivityVO();
         View userInputView = UIHelper.uiHelper.makeFavoriteButton(activityVO);
-        userInputView.setLeft(300);
-        userInputView.setTop(500);
+        setUserInputViewPosition(userInputView);
         return userInputView;
+    }
+
+    private void setUserInputViewPosition(View userInputView) {
+        userInputView.setLeft(300);
+        userInputView.setTop(300);
     }
 
     private ActivityVO makeNewActivityVO() {
