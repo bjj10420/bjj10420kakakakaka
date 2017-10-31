@@ -36,7 +36,7 @@ public class ETCPanelEvent implements View.OnClickListener{
             case R.id.etcUserInputBtn : userInputEvent();
                 break;
 
-            default : panelItemClickEVent(v);
+            default : panelItemClickEvent(v);
         }
       }
 
@@ -44,7 +44,7 @@ public class ETCPanelEvent implements View.OnClickListener{
         new DialogHelper().showUserInputDialog(context);
     }
 
-    public void panelItemClickEVent(View v) {
+    public void panelItemClickEvent(View v) {
         panelLayoutOffForTotalLayout();
         hoverCopiedView(v);
     }

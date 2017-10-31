@@ -16,7 +16,6 @@ import android.widget.Toast;
 
 import com.example.schedulemanager.R;
 import com.example.schedulemanager.Util;
-import com.example.schedulemanager.helper.DBHelper;
 import com.example.schedulemanager.helper.UIHelper;
 import com.example.schedulemanager.vo.ActivityVO;
 
@@ -126,10 +125,8 @@ public class ManagerUserInput {
     }
 
     private void actionIconBoxPanelFileBtn() {
-        // GET IMAGE FROM THE GALLERY
         Intent intent = new Intent(Intent.ACTION_GET_CONTENT);
         intent.setType("image/*");
-
         Intent chooser = Intent.createChooser(intent, "Choose a Picture");
         ((Activity)context).startActivityForResult(chooser, PICK_FROM_GALLARY);
     }
@@ -185,19 +182,17 @@ public class ManagerUserInput {
         inputBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                inputAddBtn();
+                userInputBtn();
             }
         });
     }
 
-    private void addViewOff() {
+    private void userInputViewOff() {
         alert.dismiss();
     }
 
-    private void inputAddBtn() {
+    private void userInputBtn() {
         checkInvalidateData();
-//        updateMangerPanelItemInfoDB();
-//        showAddToast();
     }
 
     private void checkInvalidateData() {
@@ -209,32 +204,21 @@ public class ManagerUserInput {
     }
 
     private void actionValidateInput() {
-        ActivityVO activityVO = makeNewActivityVO();
-        View userInputView = makeUserInputView(activityVO);
-        eventHelper.getEtcPanel().getEtcPanelEvent().panelItemClickEVent(userInputView);
+        showUserInputView();
+        userInputViewOff();
     }
 
-    private View makeUserInputView(ActivityVO activityVO) {
+    private void showUserInputView() {
+        View userInputView = makeUserInputView();
+        eventHelper.getEtcPanel().getEtcPanelEvent().panelItemClickEvent(userInputView);
+    }
+
+    private View makeUserInputView() {
+        ActivityVO activityVO = makeNewActivityVO();
         View userInputView = UIHelper.uiHelper.makeFavoriteButton(activityVO);
+        userInputView.setLeft(300);
+        userInputView.setTop(500);
         return userInputView;
-    }
-
-    private void addNewActivityVO() {
-        ActivityVO activityVO = makeNewActivityVO();
-        addActivityToActivities(activityVO);
-        addItemIntoDB(activityVO);
-    }
-
-    private void addItemIntoDB(ActivityVO activityVO) {
-        DBHelper.dbHelper.insertActivityWithIcon(activityVO);
-    }
-
-    private void addActivityToActivities(ActivityVO activityVO) {
-        addToActivitiesMap(activityVO);
-    }
-
-    private void addToActivitiesMap(ActivityVO activityVO) {
-        dataHelper.getActivities().get(activityVO.getCategoryName()).add(activityVO);
     }
 
     private ActivityVO makeNewActivityVO() {
@@ -263,7 +247,7 @@ public class ManagerUserInput {
         closeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                addViewOff();
+                userInputViewOff();
             }
         });
     }
