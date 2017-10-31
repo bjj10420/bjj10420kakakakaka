@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.schedulemanager.R;
 import com.example.schedulemanager.Util;
+import com.example.schedulemanager.helper.DataHelper;
 import com.example.schedulemanager.helper.UIHelper;
 import com.example.schedulemanager.vo.ActivityVO;
 
@@ -267,6 +268,7 @@ public class ManagerUserInput {
     private View initPanelUserInputView(Context context) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View userInputView = inflater.inflate(R.layout.manager_user_input, null);
+        Util.setFontAllChildView(context, userInputView, DataHelper.dataHelper.getTypeface(), true);
         return userInputView;
     }
 

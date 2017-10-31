@@ -20,6 +20,7 @@ import android.widget.Toast;
 import com.example.schedulemanager.R;
 import com.example.schedulemanager.Util;
 import com.example.schedulemanager.helper.DBHelper;
+import com.example.schedulemanager.helper.DataHelper;
 import com.example.schedulemanager.helper.DialogHelper;
 import com.example.schedulemanager.interface_.GeneralCallback;
 import com.example.schedulemanager.vo.ActivityVO;
@@ -302,6 +303,7 @@ public class ManagerPanelItemInfo {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View itemInfoView = inflater.inflate(R.layout.manager_item_info, null);
         setItemInfoView(itemInfoView, activityVO);
+        Util.setFontAllChildView(context, itemInfoView, DataHelper.dataHelper.getTypeface(), true);
         return itemInfoView;
     }
 
