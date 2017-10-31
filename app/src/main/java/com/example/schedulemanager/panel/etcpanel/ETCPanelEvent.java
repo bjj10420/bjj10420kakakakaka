@@ -33,9 +33,16 @@ public class ETCPanelEvent implements View.OnClickListener{
                 break;
             case R.id.etcAddBtn : addItemClickEvent();
                 break;
+            case R.id.etcUserInputBtn : userInputEvent();
+                break;
+
             default : panelItemClickEVent(v);
         }
       }
+
+    private void userInputEvent() {
+
+    }
 
     private void panelItemClickEVent(View v) {
         panelLayoutOffForTotalLayout();

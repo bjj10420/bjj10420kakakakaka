@@ -57,8 +57,11 @@ public class ETCPanel {
         addButton.setOnClickListener(etcPanelEvent);
         Button managerButton = (Button) Util.getViewById(context, R.id.etcManagerBtn);
         managerButton.setOnClickListener(etcPanelEvent);
+        Button userInputButton = (Button) Util.getViewById(context, R.id.etcUserInputBtn);
+        userInputButton.setOnClickListener(etcPanelEvent);
         View closeButton = Util.getViewById(context, R.id.etcCloseBtn);
         closeButton.setOnClickListener(etcPanelEvent);
+
     }
 
     private void adaptorFont() {
