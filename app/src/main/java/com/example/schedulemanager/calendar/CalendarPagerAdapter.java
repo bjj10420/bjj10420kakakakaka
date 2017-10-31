@@ -59,6 +59,8 @@ public class CalendarPagerAdapter extends PagerAdapter
 	private OnCalendarItemClickListener		onCalendarItemClickListener;
 
 	private HashMap<Integer, HashMap<Integer, Schedule>> scheduleMapByMonth;
+	private String selectedCalendarTitle;
+	private Calendar thisCal2;
 
 	public CalendarPagerAdapter(Context context, Typeface typeface)
 	{
@@ -521,10 +523,11 @@ public class CalendarPagerAdapter extends PagerAdapter
 
 	public String getDateString2(int position)
 	{
-		Calendar thisCal2 = Calendar.getInstance(Locale.getDefault());
+		thisCal2 = Calendar.getInstance(Locale.getDefault());
 		thisCal2.add(Calendar.YEAR, -1);
 		thisCal2.add(Calendar.MONTH, position);
-		return formatter.format(new Date(thisCal2.getTimeInMillis()));
+		selectedCalendarTitle = formatter.format(new Date(thisCal2.getTimeInMillis()));
+		return selectedCalendarTitle;
 	}
 
 	public int getSelectedYear()
@@ -713,5 +716,9 @@ public class CalendarPagerAdapter extends PagerAdapter
 
 	public boolean isFirstInit() {
 		return isFirstInit;
+	}
+
+	public Calendar getThisCal2() {
+		return thisCal2;
 	}
 }

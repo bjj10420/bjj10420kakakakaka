@@ -688,8 +688,7 @@ public class DataHelper {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyyMM", Locale.getDefault());
         if(dateValue != null)
             date = String.valueOf(Integer.parseInt(dateValue) < 10 ? "0" + dateValue : dateValue);
-        String yearMonth = formatter.format(position == 0 ? calendarHelper.getCalendarPagerAdapter().getThisCal().getTimeInMillis()
-                 : new Date(calendarHelper.getCalendarPagerAdapter().getNextCal().getTimeInMillis()));
+        String yearMonth = formatter.format(calendarHelper.getCalendarPagerAdapter().getThisCal2().getTimeInMillis());
         return yearMonth + date;
     }
 
