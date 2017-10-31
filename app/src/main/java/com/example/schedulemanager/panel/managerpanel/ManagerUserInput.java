@@ -4,12 +4,14 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Point;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -225,6 +227,10 @@ public class ManagerUserInput {
     private void setUserInputViewPosition(View userInputView) {
         userInputView.setLeft(300);
         userInputView.setTop(300);
+//          int x = UIHelper.uiHelper.getTotalLayout().getMeasuredWidth() / 2;
+//          int y = UIHelper.uiHelper.getTotalLayout().getMeasuredWidth() / 2;
+//        userInputView.setTranslationX(300);
+//        userInputView.setTranslationY(800);
     }
 
     private ActivityVO makeNewActivityVO() {
