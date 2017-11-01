@@ -7,6 +7,7 @@ import android.content.DialogInterface;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.schedulemanager.Util;
@@ -202,6 +203,7 @@ public class DialogHelper {
 //        WindowManager.LayoutParams params = makeDialogParams(dialog, width, height);
 //        dialog.getWindow().setAttributes((android.view.WindowManager.LayoutParams) params);
 //        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
+
         dialog.show();
     }
 
