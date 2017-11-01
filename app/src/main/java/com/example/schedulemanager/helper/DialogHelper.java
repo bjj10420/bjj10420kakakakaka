@@ -111,7 +111,7 @@ public class DialogHelper {
         // Icon for AlertDialog
         alert.show();
     }
-
+//
     /**
      * 활동 관리 창에서 아이템 클릭시나타나는 아이템정보표시 다이얼로그
      */
