@@ -557,7 +557,7 @@ public class DataHelper {
     }
 
     private void makeRectToPut(CalendarCellInfo calendarCellInfo) {
-        for(int i = 0; i < 35; i++) {
+        for(int i = 0; i <= 35; i++) {
 
             if(i != 0 && (i % 7) == 0 ) {
                 calendarCellInfo.setLeft(calendarCellInfo.getOriginalLeft());
