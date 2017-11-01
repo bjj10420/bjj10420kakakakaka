@@ -152,19 +152,12 @@ public class DialogHelper {
     }
 
     private void setAddAlertDialogButton(final MaterialDialog dialog, final ManagerPanelItemAdd itemAdd) {
-        dialog
-                .setPositiveButton("추가", new View.OnClickListener() {
-                   @Override
-                    public void onClick(View v) {
-                    itemAdd.actionAddBtn();
-                    }
-                })
-                .setNegativeButton("닫기", new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        dialog.dismiss();
-                    }
-                });
+        dialog.setPositiveButton("추가", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                itemAdd.actionAddBtn();
+            }
+        });
     }
 
     private void setUserInputAlertDialog(Context context, ManagerUserInput userInput, View dialogView) {
@@ -175,6 +168,7 @@ public class DialogHelper {
 
     private void setDialogBasicOptions(Context context, String title, final MaterialDialog dialog, View dialogView, int width, int height) {
         Util.setFontAllChildView(context, dialogView, DataHelper.dataHelper.getTypeface(), true);
+        dialog.setCanceledOnTouchOutside(true);
         dialog.setContentView(dialogView);
         dialog.setTitle(title);
 
