@@ -24,13 +24,15 @@ import com.example.schedulemanager.helper.DataHelper;
 import com.example.schedulemanager.helper.UIHelper;
 import com.example.schedulemanager.vo.ActivityVO;
 
+import me.drakeet.materialdialog.MaterialDialog;
+
 import static com.example.schedulemanager.helper.DataHelper.PICK_FROM_GALLARY;
 import static com.example.schedulemanager.helper.DataHelper.dataHelper;
 import static com.example.schedulemanager.helper.EventHelper.eventHelper;
 
 public class ManagerUserInput {
     private View userInputView;
-    private Dialog alert;
+    private MaterialDialog alert;
     private Context context;
     private TextView categoryText;
     private EditText activityName;
@@ -272,7 +274,7 @@ public class ManagerUserInput {
         return userInputView;
     }
 
-    public void setAlert(Dialog alert) {
+    public void setAlert(MaterialDialog alert) {
         this.alert = alert;
     }
 

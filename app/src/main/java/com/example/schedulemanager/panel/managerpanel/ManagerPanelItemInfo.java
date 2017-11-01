@@ -24,6 +24,9 @@ import com.example.schedulemanager.helper.DataHelper;
 import com.example.schedulemanager.helper.DialogHelper;
 import com.example.schedulemanager.interface_.GeneralCallback;
 import com.example.schedulemanager.vo.ActivityVO;
+
+import me.drakeet.materialdialog.MaterialDialog;
+
 import static com.example.schedulemanager.helper.DataHelper.PICK_FROM_GALLARY;
 import static com.example.schedulemanager.helper.DataHelper.dataHelper;
 
@@ -33,7 +36,7 @@ public class ManagerPanelItemInfo {
     private View managerListItemView;
     private ActivityVO activityVO;
     private String originalActivityName;
-    private Dialog alert;
+    private MaterialDialog alert;
     private Context context;
     private Uri initialURI;
 
@@ -328,7 +331,7 @@ public class ManagerPanelItemInfo {
         activityName.setText(activityVO.getActivityName());
     }
 
-    public void setAlert(Dialog alert) {
+    public void setAlert(MaterialDialog alert) {
         this.alert = alert;
     }
 

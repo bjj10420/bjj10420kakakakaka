@@ -16,6 +16,8 @@ import com.example.schedulemanager.panel.managerpanel.ManagerPanelItemAdd;
 import com.example.schedulemanager.panel.managerpanel.ManagerPanelItemInfo;
 import com.example.schedulemanager.panel.managerpanel.ManagerUserInput;
 
+import me.drakeet.materialdialog.MaterialDialog;
+
 /**
  * 여러가지 용도의 다이얼로그 박스를 생성
  */
@@ -137,37 +139,57 @@ public class DialogHelper {
     }
 
     private void setItemInfoAlertDialog(Context context, ManagerPanelItemInfo itemInfo, View dialogView) {
-        Dialog dialog = new Dialog(context);
-        setDialogBasicOptions(dialog, dialogView, 300, 250);
+        MaterialDialog dialog = new MaterialDialog(context);
+        setDialogBasicOptions(context, "활동 정보", dialog, dialogView, 300, 250);
         itemInfo.setAlert(dialog);
     }
 
     private void setItemAddAlertDialog(Context context, ManagerPanelItemAdd itemAdd, View dialogView) {
-        Dialog dialog = new Dialog(context);
-        setDialogBasicOptions(dialog, dialogView, 300, 300);
+        MaterialDialog dialog = new MaterialDialog(context);
+        setAddAlertDialogButton(dialog, itemAdd);
+        setDialogBasicOptions(context, "활동 추가", dialog, dialogView, 300, 300);
         itemAdd.setAlert(dialog);
     }
 
+    private void setAddAlertDialogButton(final MaterialDialog dialog, final ManagerPanelItemAdd itemAdd) {
+        dialog
+                .setPositiveButton("추가", new View.OnClickListener() {
+                   @Override
+                    public void onClick(View v) {
+                    itemAdd.actionAddBtn();
+                    }
+                })
+                .setNegativeButton("닫기", new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        dialog.dismiss();
+                    }
+                });
+    }
+
     private void setUserInputAlertDialog(Context context, ManagerUserInput userInput, View dialogView) {
-        Dialog dialog = new Dialog(context);
-        setDialogBasicOptions(dialog, dialogView, 300, 300);
+        MaterialDialog dialog = new MaterialDialog(context);
+        setDialogBasicOptions(context, "사용자 입력", dialog, dialogView, 300, 300);
         userInput.setAlert(dialog);
     }
 
-    private void setDialogBasicOptions(Dialog dialog, View dialogView, int width, int height) {
+    private void setDialogBasicOptions(Context context, String title, final MaterialDialog dialog, View dialogView, int width, int height) {
+        Util.setFontAllChildView(context, dialogView, DataHelper.dataHelper.getTypeface(), true);
         dialog.setContentView(dialogView);
-        WindowManager.LayoutParams params = makeDialogParams(dialog, width, height);
-        dialog.getWindow().setAttributes((android.view.WindowManager.LayoutParams) params);
+        dialog.setTitle(title);
+
+//        WindowManager.LayoutParams params = makeDialogParams(dialog, width, height);
+//        dialog.getWindow().setAttributes((android.view.WindowManager.LayoutParams) params);
 //        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
         dialog.show();
     }
 
-    private WindowManager.LayoutParams makeDialogParams(Dialog dialog, int width, int height) {
-        WindowManager.LayoutParams params =  dialog.getWindow().getAttributes();
-        params.width = (int) Util.convertDpToPixel(width);
-        params.height = (int) Util.convertDpToPixel(height);
-        return  params;
-    }
+//    private WindowManager.LayoutParams makeDialogParams(MaterialDialog dialog, int width, int height) {
+//        WindowManager.LayoutParams params =  dialog.getWindow().getAttributes();
+//        params.width = (int) Util.convertDpToPixel(width);
+//        params.height = (int) Util.convertDpToPixel(height);
+//        return  params;
+//    }
 
     /**
      * 메세지를 설정한 선택형 다이얼 로그 생성

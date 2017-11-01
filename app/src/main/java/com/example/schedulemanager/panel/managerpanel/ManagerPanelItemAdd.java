@@ -26,13 +26,15 @@ import com.example.schedulemanager.interface_.GeneralCallback;
 import com.example.schedulemanager.panel.etcpanel.ETCPanel;
 import com.example.schedulemanager.vo.ActivityVO;
 
+import me.drakeet.materialdialog.MaterialDialog;
+
 import static com.example.schedulemanager.helper.DataHelper.PICK_FROM_GALLARY;
 import static com.example.schedulemanager.helper.DataHelper.dataHelper;
 import static com.example.schedulemanager.helper.EventHelper.eventHelper;
 
 public class ManagerPanelItemAdd {
     private View addView;
-    private Dialog alert;
+    private MaterialDialog alert;
     private Context context;
     private TextView categoryText;
     private Button categorySelectBtn;
@@ -253,7 +255,7 @@ public class ManagerPanelItemAdd {
         alert.dismiss();
     }
 
-    private void actionAddBtn() {
+    public void actionAddBtn() {
         checkInvalidateData();
 //        updateMangerPanelItemInfoDB();
 //        showAddToast();
@@ -349,11 +351,10 @@ public class ManagerPanelItemAdd {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View itemInfoView = inflater.inflate(R.layout.manager_item_add, null);
 //        setItemInfoView(itemInfoView, activityVO);
-        Util.setFontAllChildView(context, itemInfoView, DataHelper.dataHelper.getTypeface(), true);
         return itemInfoView;
     }
 
-    public void setAlert(Dialog alert) {
+    public void setAlert(MaterialDialog alert) {
         this.alert = alert;
     }
 
