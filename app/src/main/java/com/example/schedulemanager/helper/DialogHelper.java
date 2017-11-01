@@ -138,6 +138,7 @@ public class DialogHelper {
         setUserInputAlertDialog(context, uesrInput, dialogView);
     }
 
+
     private void setItemInfoAlertDialog(Context context, ManagerPanelItemInfo itemInfo, View dialogView) {
         MaterialDialog dialog = new MaterialDialog(context);
         setDialogBasicOptions(context, "활동 정보", dialog, dialogView, 300, 250);
@@ -160,8 +161,18 @@ public class DialogHelper {
         });
     }
 
+    private void setUserInputAlertDialogButton(final MaterialDialog dialog, final ManagerUserInput userInput) {
+        dialog.setPositiveButton("입력", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                userInput.userInputBtn();
+            }
+        });
+    }
+
     private void setUserInputAlertDialog(Context context, ManagerUserInput userInput, View dialogView) {
         MaterialDialog dialog = new MaterialDialog(context);
+        setUserInputAlertDialogButton(dialog, userInput);
         setDialogBasicOptions(context, "사용자 입력", dialog, dialogView, 300, 300);
         userInput.setAlert(dialog);
     }

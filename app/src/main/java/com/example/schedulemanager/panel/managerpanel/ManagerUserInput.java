@@ -31,6 +31,7 @@ import static com.example.schedulemanager.helper.DataHelper.dataHelper;
 import static com.example.schedulemanager.helper.EventHelper.eventHelper;
 
 public class ManagerUserInput {
+
     private View userInputView;
     private MaterialDialog alert;
     private Context context;
@@ -198,7 +199,7 @@ public class ManagerUserInput {
         alert.dismiss();
     }
 
-    private void userInputBtn() {
+    public void userInputBtn() {
         checkInvalidateData();
     }
 
@@ -270,7 +271,6 @@ public class ManagerUserInput {
     private View initPanelUserInputView(Context context) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View userInputView = inflater.inflate(R.layout.manager_user_input, null);
-        Util.setFontAllChildView(context, userInputView, DataHelper.dataHelper.getTypeface(), true);
         return userInputView;
     }
 
