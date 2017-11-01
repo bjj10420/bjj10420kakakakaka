@@ -212,7 +212,7 @@ public class ManagerPanelItemInfo {
         });
     }
 
-    private void actionRemoveBtn() {
+    public void actionRemoveBtn() {
         showConfirmMessage();
     }
 
@@ -239,7 +239,7 @@ public class ManagerPanelItemInfo {
         alert.dismiss();
     }
 
-    private void actionChangeBtn() {
+    public void actionChangeBtn() {
         saveInfoVO();
         updateMangerPanelItemInfoDB();
         showChangeToast();

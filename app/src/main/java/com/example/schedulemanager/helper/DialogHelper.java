@@ -141,6 +141,7 @@ public class DialogHelper {
 
     private void setItemInfoAlertDialog(Context context, ManagerPanelItemInfo itemInfo, View dialogView) {
         MaterialDialog dialog = new MaterialDialog(context);
+        setItemInfoAlertDialogButton(dialog, itemInfo);
         setDialogBasicOptions(context, "활동 정보", dialog, dialogView, 300, 250);
         itemInfo.setAlert(dialog);
     }
@@ -166,6 +167,21 @@ public class DialogHelper {
             @Override
             public void onClick(View v) {
                 userInput.userInputBtn();
+            }
+        });
+    }
+
+    private void setItemInfoAlertDialogButton(final MaterialDialog dialog, final ManagerPanelItemInfo itemInfo) {
+        dialog.setNegativeButton("변경", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                itemInfo.actionChangeBtn();
+            }
+        });
+        dialog.setPositiveButton("삭제", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                itemInfo.actionRemoveBtn();
             }
         });
     }

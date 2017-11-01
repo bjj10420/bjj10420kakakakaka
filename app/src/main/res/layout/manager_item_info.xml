@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="wrap_content"
-    android:layout_height="150dp">
+    android:layout_height="wrap_content"
+    android:minHeight="100dp">
 
     <RelativeLayout
         android:id="@+id/itemInfoMainPanel"
@@ -13,20 +14,8 @@
             android:id="@+id/itemInfoContentsLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="75dp"
             android:background="#ffffff"
-            android:orientation="vertical"
-            android:paddingBottom="10dp"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:paddingTop="10dp">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="활동 정보"
-                android:textColor="#404040"
-                android:textSize="16dp" />
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -95,7 +84,8 @@
             android:layout_height="75dp"
             android:layout_alignParentBottom="true"
             android:background="#ffffff"
-            android:gravity="center">
+            android:gravity="center"
+            android:visibility="gone">
 
             <Button
                 android:id="@+id/itemInfoChangeBtn"
@@ -130,6 +120,7 @@
     <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="match_parent">
+
         <include
             layout="@layout/icon_box"
             android:layout_width="wrap_content"
