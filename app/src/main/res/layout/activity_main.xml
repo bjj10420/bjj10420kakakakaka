@@ -15,8 +15,8 @@
             layout="@layout/calendar"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:layout_marginBottom="65dp"
-            android:layout_marginTop="65dp"
+            android:layout_marginBottom="75dp"
+            android:layout_marginTop="75dp"
             android:visibility="gone"></include>
 
         <include
@@ -39,16 +39,18 @@
         <LinearLayout
             android:id="@+id/buttonPanel"
             android:layout_width="match_parent"
-            android:layout_height="65dp"
+            android:layout_height="75dp"
             android:layout_alignParentTop="true"
+            android:gravity="center_vertical"
             android:orientation="horizontal"></LinearLayout>
 
 
         <LinearLayout
             android:id="@+id/buttonPanel2"
             android:layout_width="match_parent"
-            android:layout_height="65dp"
+            android:layout_height="75dp"
             android:layout_alignParentBottom="true"
+            android:gravity="center_vertical"
             android:orientation="horizontal"></LinearLayout>
 
     </RelativeLayout>
