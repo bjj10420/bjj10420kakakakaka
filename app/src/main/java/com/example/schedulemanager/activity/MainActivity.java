@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.schedulemanager.R;
+import com.example.schedulemanager.helper.AnimationHelper;
 import com.example.schedulemanager.helper.CalendarHelper;
 import com.example.schedulemanager.helper.DataHelper;
 import com.example.schedulemanager.helper.EventHelper;
@@ -50,6 +51,9 @@ public class MainActivity extends AppCompatActivity {
         ManagerPanel managerPanel = new ManagerPanel(this);
         managerPanel.initManagerPanel();
         eventHelper.setManagerPanel(managerPanel);
+
+        AnimationHelper animationHelper = new AnimationHelper();
+        animationHelper.init();
     }
 
     @Override
