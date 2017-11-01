@@ -57,6 +57,7 @@ public class UIHelper {
     private View copiedView;                        // 드래그를 시작할 때 임시로 저장 해놓는 뷰
     private View firstCalendarCell;                 // 캘린더가 랜더링된 후의 첫 셀뷰
     private View viewOfToday;                       // 오늘 뷰
+    private View bottomBtnLayout;                   // 캘린더 내의 바텀 레이아웃
 
     public void initUI(Context context, DataHelper dataHelper) {
         initFields(context, dataHelper);
@@ -94,6 +95,7 @@ public class UIHelper {
         calendarLayout = Util.getViewById(this.context,R.id.calendarLayout);
         scheduleLayout = Util.getViewById(this.context,R.id.scheduleLayout);
 
+        bottomBtnLayout = Util.getViewById(this.context,R.id.btn_layout);
         backBtn = (TextView) Util.getViewById(this.context,R.id.back_btn);
         backBtn.setTypeface(this.dataHelper.getTypeface());
         cancelBtn = Util.getViewById(this.context,R.id.cancel_btn);
@@ -285,6 +287,7 @@ public class UIHelper {
      * 아이콘 버튼 드래그시 바텀버튼 전환
      */
     public void changeBottomButton(boolean isBackBtnVisible) {
+        bottomBtnLayout.setVisibility(isBackBtnVisible ? View.VISIBLE : View.GONE);
         backBtn.setVisibility(isBackBtnVisible ? View.GONE : View.VISIBLE);
         cancelBtn.setVisibility(isBackBtnVisible ? View.VISIBLE : View.GONE);
     }
@@ -489,5 +492,9 @@ public class UIHelper {
         LinearLayout panel2 = (LinearLayout) Util.getViewById(context, R.id.buttonPanel2);
         panel1.removeAllViews();
         panel2.removeAllViews();
+    }
+
+    public View getBottomBtnLayout() {
+        return bottomBtnLayout;
     }
 }
