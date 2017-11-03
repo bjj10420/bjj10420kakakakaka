@@ -3,6 +3,9 @@
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
     <color name="colorAccent">#FF4081</color>
+    <color name="whilte">#ffffff</color>
+    <color name="backgroundYellow">#f4e698</color>
+    <color name="strokeBrown">#8d4720</color>
     <color name="rail_train_type_ok_btn_pressed">#b4b4b4</color>
     <color name="rail_train_type_ok_btn_normal">#c8c8c8</color>
     <color name="rail_timetable_train_type_ok_btn_text_normal">#e6e6e6</color>

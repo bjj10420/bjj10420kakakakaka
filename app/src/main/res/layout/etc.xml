@@ -38,32 +38,30 @@
         android:background="#ffffff"
         android:gravity="center">
 
-        <Button
+        <com.rey.material.widget.Button
             android:id="@+id/etcAddBtn"
             android:layout_width="0dp"
             android:layout_height="75dp"
             android:layout_weight="1"
-            android:background="@drawable/bottom_button_bg"
             android:text="추가"
-            android:textColor="#404040" />
+            android:theme="@style/AppTheme.Button" />
 
-        <Button
+        <com.rey.material.widget.Button
             android:id="@+id/etcManagerBtn"
             android:layout_width="0dp"
             android:layout_height="75dp"
             android:layout_weight="1"
-            android:background="@drawable/bottom_button_bg"
             android:text="관리"
-            android:textColor="#404040" />
+            android:theme="@style/AppTheme.Button" />
 
-        <Button
+        <com.rey.material.widget.Button
             android:id="@+id/etcUserInputBtn"
             android:layout_width="0dp"
             android:layout_height="75dp"
             android:layout_weight="1"
-            android:background="@drawable/bottom_button_bg"
             android:text="사용자 입력"
-            android:textColor="#404040" />
+            android:theme="@style/AppTheme.Button"
+            />
 
     </LinearLayout>
 
