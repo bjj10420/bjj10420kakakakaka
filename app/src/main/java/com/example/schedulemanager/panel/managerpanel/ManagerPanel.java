@@ -21,6 +21,7 @@ import com.example.schedulemanager.Util;
 import com.example.schedulemanager.helper.DBHelper;
 import com.example.schedulemanager.helper.DataHelper;
 import com.example.schedulemanager.vo.ActivityVO;
+import com.takeiteasy.materialexpansionpanel.panel.MaterialExpansionPanelView;
 
 import java.util.ArrayList;
 
@@ -63,9 +64,10 @@ public class ManagerPanel {
 
     private void composeContentsLayout() {
         for (String category : DataHelper.dataHelper.getCategories()) {
-            addMenuBarViewToContentsLayout(category);
-            addDetailViewToContentsLayout(category);
-            addEmptyViewToContentsLayout();
+//            addMenuBarViewToContentsLayout(category);
+//            addDetailViewToContentsLayout(category);
+//            addEmptyViewToContentsLayout();
+            addExpansionPanel(category);
         }
         addLastRowViewToContentsLayout();
     }
@@ -89,6 +91,15 @@ public class ManagerPanel {
     private void addMenuBarViewToContentsLayout(String category) {
         View menuBarView = makeMenuBar(category);
         managerContentsLayout.addView(menuBarView);
+    }
+
+    public void addExpansionPanel(String category) {
+        MaterialExpansionPanelView panelView = new MaterialExpansionPanelView(context);
+        View detailView = makeDetailView(category);
+        detailView.setVisibility(View.VISIBLE);
+        panelView.setTitle(category);
+        panelView.setContentView(detailView);
+        managerContentsLayout.addView(panelView);
     }
 
     private View makeDetailView(String category) {
@@ -139,7 +150,7 @@ public class ManagerPanel {
         Util.setTextWithBoldFont(menuBarTextView, menuTitle);
 
     }
-//
+
     private View makeMenuBarView() {
         View menuBarView = ((Activity) context).getLayoutInflater().inflate(R.layout.manager_menu_bar_item, null);
         menuBarView.setMinimumHeight((int) Util.convertDpToPixel(65));
