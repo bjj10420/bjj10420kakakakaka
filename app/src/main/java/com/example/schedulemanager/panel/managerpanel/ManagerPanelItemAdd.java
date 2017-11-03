@@ -146,13 +146,15 @@ public class ManagerPanelItemAdd {
     }
 
     private void actionCategorySelectBtn() {
-        AlertDialog.Builder builder = new AlertDialog.Builder(context, 3);
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context, 5);
         builder.setTitle("카테고리 선택");
+
         final CharSequence[] categoryArray = dataHelper.getCategoryArray();
-        builder.setItems(categoryArray,
+        builder.setSingleChoiceItems(categoryArray, 0,
                 new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
                         setCategoryText(categoryArray, which);
                     }
                 });
