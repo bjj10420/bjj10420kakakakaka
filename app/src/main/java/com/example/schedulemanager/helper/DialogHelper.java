@@ -211,8 +211,9 @@ public class DialogHelper {
     private void setDialogButtonsBasicOptions(MaterialDialog dialog) {
         Button positiveButton = dialog.getPositiveButton();
         Button negativeButton = dialog.getNegativeButton();
-        positiveButton.setTextColor(R.color.strokeBrown);
-        negativeButton.setTextColor(R.color.strokeBrown);
+        positiveButton.setTextColor(Color.parseColor("#404040"));
+        negativeButton.setTextColor(Color.parseColor("#404040"));
+
         positiveButton.setTypeface(DataHelper.dataHelper.getTypeface(), Typeface.BOLD);
         if(negativeButton != null)
             negativeButton.setTypeface(DataHelper.dataHelper.getTypeface(), Typeface.BOLD);
