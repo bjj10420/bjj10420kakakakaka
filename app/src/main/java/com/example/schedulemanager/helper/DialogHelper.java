@@ -213,7 +213,7 @@ public class DialogHelper {
         Button negativeButton = dialog.getNegativeButton();
         positiveButton.setTextColor(Color.parseColor("#404040"));
         negativeButton.setTextColor(Color.parseColor("#404040"));
-
+//
         positiveButton.setTypeface(DataHelper.dataHelper.getTypeface(), Typeface.BOLD);
         if(negativeButton != null)
             negativeButton.setTypeface(DataHelper.dataHelper.getTypeface(), Typeface.BOLD);
