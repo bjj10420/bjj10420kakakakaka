@@ -97,8 +97,16 @@ public class ManagerPanel {
         MaterialExpansionPanelView panelView = new MaterialExpansionPanelView(context);
         View detailView = makeDetailView(category);
         detailView.setVisibility(View.VISIBLE);
+        panelView.setDrawingCacheBackgroundColor(R.color.strokeBrown);
+        panelView.setBackgroundColor(Color.parseColor("#ffffff"));
         panelView.setTitle(category);
         panelView.setContentView(detailView);
+        panelView.setSubtitle("");
+        View positiveButton = panelView.findViewById(R.id.panel_button_positive);
+        View negativeButton = panelView.findViewById(R.id.panel_button_negative);
+        positiveButton.setVisibility(View.GONE);
+        negativeButton.setVisibility(View.GONE);
+
         managerContentsLayout.addView(panelView);
     }
 
