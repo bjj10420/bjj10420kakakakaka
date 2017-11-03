@@ -30,13 +30,12 @@
         android:background="#ffffff"
         android:gravity="center">
 
-        <Button
+        <com.rey.material.widget.Button
             android:id="@+id/managerCloseBtn"
             android:layout_width="200dp"
             android:layout_height="75dp"
-            android:background="@drawable/bottom_button_bg"
             android:text="닫기"
-            android:textColor="#404040" />
+            android:theme="@style/AppTheme.Button" />
 
     </LinearLayout>
 
