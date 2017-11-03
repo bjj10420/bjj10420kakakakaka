@@ -15,18 +15,24 @@
         android:alpha="0.3"
         android:background="@drawable/cancel2_icon" />
 
-    <LinearLayout
-        android:id="@+id/etcContentsLayout"
+    <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="75dp"
-        android:layout_marginTop="22dp"
-        android:background="#ffffff"
-        android:orientation="vertical"
-        android:paddingBottom="10dp"
-        android:paddingLeft="10dp"
-        android:paddingRight="10dp"
-        android:paddingTop="10dp"></LinearLayout>
+        android:layout_marginTop="22dp">
+
+        <LinearLayout
+            android:id="@+id/etcContentsLayout"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+  
+            android:background="#ffffff"
+            android:orientation="vertical"
+            android:paddingBottom="10dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="10dp"></LinearLayout>
+    </ScrollView>
 
     <LinearLayout
         android:id="@+id/etcBottomButtonLayout"
