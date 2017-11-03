@@ -4,12 +4,15 @@ import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
+import android.graphics.Color;
+import android.graphics.Typeface;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.example.schedulemanager.R;
 import com.example.schedulemanager.Util;
 import com.example.schedulemanager.interface_.GeneralCallback;
 import com.example.schedulemanager.interface_.GeneralCallback2;
@@ -148,7 +151,9 @@ public class DialogHelper {
     }
 
     private void setItemAddAlertDialog(Context context, ManagerPanelItemAdd itemAdd, View dialogView) {
+//        MaterialDialog dialog = new MaterialDialog(context);
         MaterialDialog dialog = new MaterialDialog(context);
+
         setAddAlertDialogButton(dialog, itemAdd);
         setDialogBasicOptions(context, "활동 추가", dialog, dialogView, 300, 300);
         itemAdd.setAlert(dialog);
@@ -199,20 +204,19 @@ public class DialogHelper {
         dialog.setCanceledOnTouchOutside(true);
         dialog.setContentView(dialogView);
         dialog.setTitle(title);
-
-//        WindowManager.LayoutParams params = makeDialogParams(dialog, width, height);
-//        dialog.getWindow().setAttributes((android.view.WindowManager.LayoutParams) params);
-//        dialog.getWindow().setBackgroundDrawable(new ColorDrawable(android.graphics.Color.TRANSPARENT));
-
         dialog.show();
+        setDialogButtonsBasicOptions(dialog);
     }
 
-//    private WindowManager.LayoutParams makeDialogParams(MaterialDialog dialog, int width, int height) {
-//        WindowManager.LayoutParams params =  dialog.getWindow().getAttributes();
-//        params.width = (int) Util.convertDpToPixel(width);
-//        params.height = (int) Util.convertDpToPixel(height);
-//        return  params;
-//    }
+    private void setDialogButtonsBasicOptions(MaterialDialog dialog) {
+        Button positiveButton = dialog.getPositiveButton();
+        Button negativeButton = dialog.getNegativeButton();
+        positiveButton.setTextColor(R.color.strokeBrown);
+        negativeButton.setTextColor(R.color.strokeBrown);
+        positiveButton.setTypeface(DataHelper.dataHelper.getTypeface(), Typeface.BOLD);
+        if(negativeButton != null)
+            negativeButton.setTypeface(DataHelper.dataHelper.getTypeface(), Typeface.BOLD);
+    }
 
     /**
      * 메세지를 설정한 선택형 다이얼 로그 생성
