@@ -129,7 +129,14 @@ public class ETCPanelEvent implements View.OnClickListener{
     }
 
     public void panelLayoutOffForTotalLayout() {
-        etcPanel.setEtcLayoutVisible(false);
+        etcPanel.getEtcLayout().animate().alpha(0.0f).withEndAction(new Runnable() {
+            @Override
+            public void run() {
+                etcPanel.setEtcLayoutVisible(false);
+                etcPanel.getEtcLayout().animate().alpha(1.0f);
+
+            }
+        });
         UIHelper.uiHelper.setTotalLayoutVisible(true);
     }
 
