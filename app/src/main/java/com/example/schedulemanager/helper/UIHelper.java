@@ -530,7 +530,31 @@ public class UIHelper {
 
             }
         });
+    }
 
+    public void slideDownManagerPanel(final ManagerPanel managerPanel) {
+        managerPanel.getManagerLayout().bringToFront();
+        managerPanel.getManagerLayout().animate().translationY(2000).setListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animator) {
+                managerPanel.setManagerLayoutVisible(false);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animator) {
+
+            }
+        });
     }
 
 

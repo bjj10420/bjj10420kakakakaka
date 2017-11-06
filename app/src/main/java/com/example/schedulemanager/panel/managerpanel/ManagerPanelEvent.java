@@ -80,7 +80,9 @@ public class ManagerPanelEvent implements View.OnClickListener{
     }
 
     private void managerPanelLayoutOff() {
-        managerPanel.setManagerLayoutVisible(false);
+        uiHelper.slideDownManagerPanel(managerPanel);
+//        managerPanel.setManagerLayoutVisible(false);
+
     }
 
     private void itemClickEvent(View view){
