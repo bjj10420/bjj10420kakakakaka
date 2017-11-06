@@ -357,6 +357,7 @@ public class UIHelper {
         pieChart.getDescription().setEnabled(false);
         pieChart.setEntryLabelColor(Color.parseColor("#404040"));
         pieChart.setEntryLabelTypeface(dataHelper.getTypeface());
+        pieChart.setEntryLabelTextSize(16);
         pieChart.setRotationEnabled(false);
         pieChart.invalidate(); // refresh
     }

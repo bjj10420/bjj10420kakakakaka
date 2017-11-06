@@ -9,10 +9,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginLeft="15dp"
-
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="35dp"
         android:text="2017.08.18"
-        android:textColor="#c8c8c8"
+        android:textColor="@color/strokeBrown"
         android:textSize="15dp" />
 
     <TextView
@@ -28,7 +27,9 @@
     <com.github.mikephil.charting.charts.PieChart
         android:id="@+id/chart"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="match_parent"
+        android:layout_marginBottom="35dp"
+        />
 
 
 </LinearLayout>
