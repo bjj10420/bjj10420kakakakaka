@@ -1,6 +1,5 @@
 package com.example.schedulemanager.panel.etcpanel;
 
-import android.animation.Animator;
 import android.content.Context;
 import android.view.MotionEvent;
 import android.view.View;
@@ -29,7 +28,7 @@ public class ETCPanelEvent implements View.OnClickListener{
     public void onClick(View v) {
 
         switch (v.getId()) {
-            case R.id.etcCloseBtn : panelLayoutOffForTotalLayout();
+            case R.id.etcCloseBtn : etcPanelFadeOutForTotalLayout();
                 break;
             case R.id.etcManagerBtn : panelLayoutOffForManagerPanel();
                 break;
@@ -47,7 +46,7 @@ public class ETCPanelEvent implements View.OnClickListener{
     }
 
     public void panelItemClickEvent(View v) {
-        panelLayoutOffForTotalLayout();
+        etcPanelOffForTotalLayout();
         hoverCopiedView(v);
     }
 
@@ -128,7 +127,7 @@ public class ETCPanelEvent implements View.OnClickListener{
         copiedView.setY(originalViewTop);
     }
 
-    public void panelLayoutOffForTotalLayout() {
+    public void etcPanelFadeOutForTotalLayout() {
         etcPanel.getEtcLayout().animate().alpha(0.0f).withEndAction(new Runnable() {
             @Override
             public void run() {
@@ -137,6 +136,11 @@ public class ETCPanelEvent implements View.OnClickListener{
 
             }
         });
+        UIHelper.uiHelper.setTotalLayoutVisible(true);
+    }
+
+    public void etcPanelOffForTotalLayout() {
+        etcPanel.setEtcLayoutVisible(false);
         UIHelper.uiHelper.setTotalLayoutVisible(true);
     }
 
