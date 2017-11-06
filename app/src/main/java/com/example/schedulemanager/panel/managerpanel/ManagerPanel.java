@@ -108,6 +108,7 @@ public class ManagerPanel {
         negativeButton.setVisibility(View.GONE);
 
         managerContentsLayout.addView(panelView);
+        panelView.expand();
     }
 
     private View makeDetailView(String category) {
