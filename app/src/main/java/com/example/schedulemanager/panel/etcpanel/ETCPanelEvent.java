@@ -10,6 +10,7 @@ import com.example.schedulemanager.R;
 import com.example.schedulemanager.helper.DialogHelper;
 import com.example.schedulemanager.helper.EventHelper;
 import com.example.schedulemanager.helper.UIHelper;
+import com.example.schedulemanager.panel.managerpanel.ManagerPanel;
 
 public class ETCPanelEvent implements View.OnClickListener{
 
@@ -133,32 +134,10 @@ public class ETCPanelEvent implements View.OnClickListener{
     }
 
     public void panelLayoutOffForManagerPanel() {
-        EventHelper.eventHelper.getManagerPanel().setManagerLayoutVisible(true);
-        EventHelper.eventHelper.getManagerPanel().getManagerLayout().bringToFront();
-        EventHelper.eventHelper.getManagerPanel().getManagerLayout().setY(2000);
-//        EventHelper.eventHelper.getManagerPanel().getManagerLayout().setAlpha(0.0f);
-        EventHelper.eventHelper.getManagerPanel().getManagerLayout().animate().translationY(0).setListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animator) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animator) {
-                etcPanel.setEtcLayoutVisible(false);
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animator) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animator) {
-
-            }
-        });
+        ManagerPanel managerPanel = EventHelper.eventHelper.getManagerPanel();
+        UIHelper.uiHelper.slideUpManagerPanel(managerPanel, etcPanel);
     }
+
 
     private void addItemClickEvent() {
         new DialogHelper().showActivityItemAddDialog(context);

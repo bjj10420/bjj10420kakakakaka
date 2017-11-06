@@ -1,5 +1,6 @@
 package com.example.schedulemanager.helper;
 
+import android.animation.Animator;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -21,6 +22,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import com.example.schedulemanager.R;
+import com.example.schedulemanager.panel.etcpanel.ETCPanel;
+import com.example.schedulemanager.panel.managerpanel.ManagerPanel;
 import com.example.schedulemanager.vo.ActivityVO;
 import com.example.schedulemanager.vo.Schedule;
 import com.example.schedulemanager.Util;
@@ -497,8 +500,38 @@ public class UIHelper {
         panel1.removeAllViews();
         panel2.removeAllViews();
     }
-
+//
     public View getBottomBtnLayout() {
         return bottomBtnLayout;
     }
+
+    public void slideUpManagerPanel(ManagerPanel managerPanel, final ETCPanel etcPanel) {
+        managerPanel.setManagerLayoutVisible(true);
+        managerPanel.getManagerLayout().bringToFront();
+        managerPanel.getManagerLayout().setY(2000);
+        managerPanel.getManagerLayout().animate().translationY(0).setListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animator) {
+                etcPanel.setEtcLayoutVisible(false);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animator) {
+
+            }
+        });
+
+    }
+
+
 }
