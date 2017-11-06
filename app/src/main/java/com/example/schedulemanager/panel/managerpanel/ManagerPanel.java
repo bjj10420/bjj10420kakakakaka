@@ -89,6 +89,7 @@ public class ManagerPanel {
     }
 
     private void addMenuBarViewToContentsLayout(String category) {
+        //
         View menuBarView = makeMenuBar(category);
         managerContentsLayout.addView(menuBarView);
     }
