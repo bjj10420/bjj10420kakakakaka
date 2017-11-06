@@ -24,7 +24,6 @@ public class AnimationHelper {
         animator.setDuration(2500);
         animator.setRepeatCount(Animation.INFINITE);
         animator.start();
-
     }
 
 

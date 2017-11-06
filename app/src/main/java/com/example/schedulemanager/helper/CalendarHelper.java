@@ -180,11 +180,15 @@ public class CalendarHelper {
     public void changeToScheduleLayout(TreeMap<Integer, Schedule> dailySchedule) {
         if(dailySchedule.size() > 0) {
             uiHelepr.setNoDateText(false);
-            uiHelepr.getCalendarLayout().setVisibility(View.GONE);
-            new AnimationHelper().fadeAnimation(context,  uiHelepr.getScheduleLayout(), false);
+            fadeIn();
             uiHelepr.getScheduleLayout().setVisibility(View.VISIBLE);
             uiHelepr.setDailyScheduleDisplay(dailySchedule);
         }
+    }
+
+    private void fadeIn() {
+        uiHelepr.getCalendarLayout().setVisibility(View.GONE);
+        new AnimationHelper().fadeAnimation(context,  uiHelepr.getScheduleLayout(), false);
     }
 
     /**

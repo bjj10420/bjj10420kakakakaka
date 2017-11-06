@@ -1,5 +1,6 @@
 package com.example.schedulemanager.panel.etcpanel;
 
+import android.animation.Animator;
 import android.content.Context;
 import android.view.MotionEvent;
 import android.view.View;
@@ -132,8 +133,31 @@ public class ETCPanelEvent implements View.OnClickListener{
     }
 
     public void panelLayoutOffForManagerPanel() {
-        etcPanel.setEtcLayoutVisible(false);
         EventHelper.eventHelper.getManagerPanel().setManagerLayoutVisible(true);
+        EventHelper.eventHelper.getManagerPanel().getManagerLayout().bringToFront();
+        EventHelper.eventHelper.getManagerPanel().getManagerLayout().setY(2000);
+//        EventHelper.eventHelper.getManagerPanel().getManagerLayout().setAlpha(0.0f);
+        EventHelper.eventHelper.getManagerPanel().getManagerLayout().animate().translationY(0).setListener(new Animator.AnimatorListener() {
+            @Override
+            public void onAnimationStart(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationEnd(Animator animator) {
+                etcPanel.setEtcLayoutVisible(false);
+            }
+
+            @Override
+            public void onAnimationCancel(Animator animator) {
+
+            }
+
+            @Override
+            public void onAnimationRepeat(Animator animator) {
+
+            }
+        });
     }
 
     private void addItemClickEvent() {

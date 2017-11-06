@@ -221,4 +221,8 @@ public class ManagerPanel {
         clearContentsLayout();
         initManagerPanel();
     }
+
+    public RelativeLayout getManagerLayout() {
+        return managerLayout;
+    }
 }
