@@ -13,6 +13,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -193,6 +194,8 @@ public class UIHelper {
         favoriteTextView.setGravity(Gravity.CENTER);
         favoriteTextView.setLayoutParams(textParams);
         favoriteTextView.setTextColor(Color.parseColor("#404040"));
+        favoriteTextView.setSingleLine(true);
+        favoriteTextView.setEllipsize(TextUtils.TruncateAt.END);
     }
 
     private void buttonViewAddToPanel(LinearLayout buttonView, int favoriteAcitivityCount) {
@@ -246,6 +249,8 @@ public class UIHelper {
         textView.setGravity(Gravity.CENTER);
         textView.setLayoutParams(textParams);
         textView.setTextColor(Color.parseColor("#404040"));
+        textView.setSingleLine(true);
+        textView.setEllipsize(TextUtils.TruncateAt.END);
 
         // 태그첨부
         buttonView.setTag(textData);

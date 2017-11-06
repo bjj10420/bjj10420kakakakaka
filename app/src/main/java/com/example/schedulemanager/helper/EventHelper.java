@@ -467,7 +467,7 @@ public class EventHelper {
         int index = dailyScheduleDataSet.getEntryIndex((PieEntry) e);
         int orderValue = dataHelper.getOrderValueFromSchedule(index);
         PieChart pieChart = uiHelper.getPieChart();
-//
+
         // DB에서 삭제
         new DBHelper(context).deleteSchedule(dataHelper.getSelectedDateData(), orderValue);
         // 현재 보는 스케쥴 챠트에서 삭제
