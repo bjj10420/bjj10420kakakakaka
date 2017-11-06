@@ -33,7 +33,7 @@ public class DialogHelper {
     public void setOneBtnStyleWithTextDialog(Context context, String message, final GeneralCallback2 callback1, String btnString){
         AlertDialog.Builder alt_bld = new AlertDialog.Builder(context, 3);
         final EditText et = new EditText(context);
-
+        et.setTextColor(R.color.strokeBrown);
         alt_bld.setMessage(message).setView(et).setCancelable(
                 true).setPositiveButton(btnString,
                 new DialogInterface.OnClickListener() {
@@ -45,6 +45,7 @@ public class DialogHelper {
 
         // Icon for AlertDialog
         alert.show();
+//        alert.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(R.color.strokeBrown);
     }
 
 
