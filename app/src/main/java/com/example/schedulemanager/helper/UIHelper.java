@@ -196,7 +196,7 @@ public class UIHelper {
         favoriteTextView.setTextColor(Color.parseColor("#404040"));
         favoriteTextView.setSingleLine(true);
         favoriteTextView.setEllipsize(TextUtils.TruncateAt.END);
-        favoriteTextView.setTextSize(14);
+//        favoriteTextView.setTextSize(15);
     }
 
     private void buttonViewAddToPanel(LinearLayout buttonView, int favoriteAcitivityCount) {
@@ -248,7 +248,7 @@ public class UIHelper {
         textView.setTextColor(Color.parseColor("#404040"));
         textView.setSingleLine(true);
         textView.setEllipsize(TextUtils.TruncateAt.END);
-        textView.setTextSize(14);
+//        textView.setTextSize(15);
         // 태그첨부
         buttonView.setTag(textData);
         // 추가

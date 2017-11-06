@@ -154,7 +154,7 @@ public class ETCPanel {
         textView.setGravity(Gravity.CENTER);
         textView.setLayoutParams(textParams);
         textView.setTextColor(Color.parseColor("#404040"));
-        textView.setTextSize(14);
+//        textView.setTextSize(15);
         textView.setSingleLine(true);
         textView.setEllipsize(TextUtils.TruncateAt.END);
         return textView;
