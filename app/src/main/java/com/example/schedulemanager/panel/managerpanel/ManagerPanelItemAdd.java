@@ -2,7 +2,6 @@ package com.example.schedulemanager.panel.managerpanel;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -20,9 +19,6 @@ import android.widget.Toast;
 import com.example.schedulemanager.R;
 import com.example.schedulemanager.Util;
 import com.example.schedulemanager.helper.DBHelper;
-import com.example.schedulemanager.helper.DataHelper;
-import com.example.schedulemanager.helper.DialogHelper;
-import com.example.schedulemanager.interface_.GeneralCallback;
 import com.example.schedulemanager.panel.etcpanel.ETCPanel;
 import com.example.schedulemanager.vo.ActivityVO;
 
@@ -108,7 +104,7 @@ public class ManagerPanelItemAdd {
 
     private void initField(Context context) {
         this.context = context;
-        addView = initPanelItemInfoView(context);
+        addView = initPanelItemAddView(context);
         categoryText = (TextView) addView.findViewById(R.id.itemAddCategoryText);
         categorySelectBtn = (Button) addView.findViewById(R.id.itemAddCategorySelect);
         activityName = (EditText) addView.findViewById(R.id.itemAddActivity);
@@ -349,7 +345,7 @@ public class ManagerPanelItemAdd {
         });
     }
 
-    private View initPanelItemInfoView(Context context) {
+    private View initPanelItemAddView(Context context) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View itemInfoView = inflater.inflate(R.layout.manager_item_add, null);
 //        setItemInfoView(itemInfoView, activityVO);
