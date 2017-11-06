@@ -265,11 +265,10 @@ public class UIHelper {
         Drawable tickedIconDrawable = null;
         Resources res = context.getResources();
         tickedIconDrawable = res.getDrawable(R.drawable.schedule_icon);
-        if(isTicked)
-            tickedIconDrawable.setColorFilter(Color.parseColor("#4bf442"), PorterDuff.Mode.SRC_IN);
-        else
-            tickedIconDrawable.clearColorFilter();
+
         this.centerIcon.setBackground(tickedIconDrawable);
+        if(isTicked) centerIcon.setAlpha(0.7f);
+        else centerIcon.setAlpha(1.0f);
     }
 
     /**
@@ -357,7 +356,7 @@ public class UIHelper {
         pieChart.getDescription().setEnabled(false);
         pieChart.setEntryLabelColor(Color.parseColor("#404040"));
         pieChart.setEntryLabelTypeface(dataHelper.getTypeface());
-        pieChart.setEntryLabelTextSize(16);
+        pieChart.setEntryLabelTextSize(14);
         pieChart.setRotationEnabled(false);
         pieChart.invalidate(); // refresh
     }
