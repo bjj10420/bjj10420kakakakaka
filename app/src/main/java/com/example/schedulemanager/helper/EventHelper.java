@@ -33,6 +33,7 @@ import java.util.Iterator;
 import java.util.List;
 
 import static com.example.schedulemanager.helper.DataHelper.PICK_FROM_GALLARY;
+import static com.example.schedulemanager.helper.UIHelper.uiHelper;
 
 /**
  * 모든 이벤트를 처리, 관리
@@ -485,18 +486,19 @@ public class EventHelper {
         View scheduleLayout = uiHelper.getScheduleLayout();
         View calendarLayout = uiHelper.getCalendarLayout();
         View etcLayout = etcPanel.getEtcLayout();
+        View managerLayout = managerPanel.getManagerLayout();
 
-        // 기타버튼 패널화면이 ON이면 닫아준다
-        if(etcLayout.getVisibility() == View.VISIBLE) {
+        if(managerLayout.getVisibility() == View.VISIBLE) {
+            managerPanel.getManagerPanelEvent().managerCloseBtnEvent();
+        }
+        else if(etcLayout.getVisibility() == View.VISIBLE) {
             etcPanel.setEtcLayoutVisible(false);
             uiHelper.setTotalLayoutVisible(true);
         }
-        // 하루 일정화면이 ON이면 닫아준다
         else if(scheduleLayout.getVisibility() == View.VISIBLE) {
             scheduleLayout.setVisibility(View.GONE);
             calendarLayout.setVisibility(View.VISIBLE);
         }
-        // 캘린더화면이 ON이면 닫아준다
         else if(calendarLayout.getVisibility() == View.VISIBLE) {
             calendarLayout.setVisibility(View.GONE);
             uiHelper.getCenterIcon().setVisibility(View.VISIBLE);

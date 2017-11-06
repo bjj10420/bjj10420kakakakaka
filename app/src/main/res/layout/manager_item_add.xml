@@ -142,21 +142,21 @@
                 android:layout_weight="1"
                 android:background="@drawable/bottom_button_bg"
                 android:text="추가"
-                android:textColor="#404040" />
+        android:textColor="#404040" />
 
-            <Button
-                android:id="@+id/itemAddCloseBtn"
-                android:layout_width="0dp"
-                android:layout_height="75dp"
-                android:layout_weight="1"
-                android:background="@drawable/bottom_button_bg"
-                android:text="닫기"
-                android:textColor="#404040" />
+    <Button
+        android:id="@+id/itemAddCloseBtn"
+        android:layout_width="0dp"
+        android:layout_height="75dp"
+        android:layout_weight="1"
+        android:background="@drawable/bottom_button_bg"
+        android:text="닫기"
+        android:textColor="#404040" />
 
-        </LinearLayout>
+</LinearLayout>
     </RelativeLayout>
 
-    <ScrollView
+<ScrollView
         android:layout_width="wrap_content"
         android:layout_height="match_parent">
 

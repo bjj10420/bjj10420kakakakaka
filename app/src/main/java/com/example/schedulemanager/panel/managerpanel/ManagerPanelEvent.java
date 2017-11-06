@@ -43,8 +43,8 @@ public class ManagerPanelEvent implements View.OnClickListener{
                 itemClickEvent(view);
         }
     }
-//
-    private void managerCloseBtnEvent() {
+
+    public void managerCloseBtnEvent() {
         switchLayout();
         redraw();
         resetMainFavoritePanelEvents();
@@ -79,7 +79,7 @@ public class ManagerPanelEvent implements View.OnClickListener{
         eventHelper.getEtcPanel().setEtcLayoutVisible(true);
     }
 
-    private void managerPanelLayoutOff() {
+    public void managerPanelLayoutOff() {
         uiHelper.slideDownManagerPanel(managerPanel);
 //        managerPanel.setManagerLayoutVisible(false);
 

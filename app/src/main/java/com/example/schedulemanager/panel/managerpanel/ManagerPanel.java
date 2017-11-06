@@ -225,4 +225,8 @@ public class ManagerPanel {
     public RelativeLayout getManagerLayout() {
         return managerLayout;
     }
+
+    public ManagerPanelEvent getManagerPanelEvent() {
+        return managerPanelEvent;
+    }
 }
