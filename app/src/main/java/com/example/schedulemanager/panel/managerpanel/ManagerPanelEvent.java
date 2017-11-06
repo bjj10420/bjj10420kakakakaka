@@ -161,7 +161,7 @@ public class ManagerPanelEvent implements View.OnClickListener{
     }
 
     private boolean isAddCategoryBar(View view) {
-        return ((TextView)((RelativeLayout) view).getChildAt(0)).getText().toString().equals("카테고리 +");
+        return view.getId() == R.id.addCategoryBtn;
     }
 
     private void listItemClickEvent(View view) {
@@ -196,5 +196,4 @@ public class ManagerPanelEvent implements View.OnClickListener{
         updateDBFavoriteData(b, activityVO.getActivityName());
         updateActivitiesMap(b, activityVO);
     }
-    //
 }

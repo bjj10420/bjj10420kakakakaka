@@ -5,10 +5,8 @@ import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
-import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -18,7 +16,6 @@ import android.widget.TextView;
 
 import com.example.schedulemanager.R;
 import com.example.schedulemanager.Util;
-import com.example.schedulemanager.helper.DBHelper;
 import com.example.schedulemanager.helper.DataHelper;
 import com.example.schedulemanager.vo.ActivityVO;
 import com.takeiteasy.materialexpansionpanel.panel.MaterialExpansionPanelView;
@@ -64,33 +61,17 @@ public class ManagerPanel {
 
     private void composeContentsLayout() {
         for (String category : DataHelper.dataHelper.getCategories()) {
-//            addMenuBarViewToContentsLayout(category);
-//            addDetailViewToContentsLayout(category);
-//            addEmptyViewToContentsLayout();
             addExpansionPanel(category);
         }
         addLastRowViewToContentsLayout();
     }
 
-    private void addEmptyViewToContentsLayout() {
-        View emptyView = makeEmptyView(5);
-        managerContentsLayout.addView(emptyView);
-    }
-
     private void addLastRowViewToContentsLayout() {
-        addMenuBarViewToContentsLayout("카테고리 +");
+        addMenuBarViewToContentsLayout();
     }
 
-    private void addDetailViewToContentsLayout(String category) {
-        View detailView = makeDetailView(category);
-        View emptyView = makeEmptyView(15);
-        managerContentsLayout.addView(detailView);
-        managerContentsLayout.addView(emptyView);
-    }
-
-    private void addMenuBarViewToContentsLayout(String category) {
-        //
-        View menuBarView = makeMenuBar(category);
+    private void addMenuBarViewToContentsLayout() {
+        View menuBarView = makeLastBar();
         managerContentsLayout.addView(menuBarView);
     }
 
@@ -133,20 +114,9 @@ public class ManagerPanel {
         return detailItemView;
     }
 
-    private View makeEmptyView(int height) {
-        View emptyView = new View(context);
-        int heightValue = (int) Util.convertDpToPixel(height);
-        ViewGroup.LayoutParams emptyViewParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
-                heightValue);
-        emptyView.setLayoutParams(emptyViewParams);
-        return emptyView;
-    }
-
-    private View makeMenuBar(String menuTitle) {
+    private View makeLastBar() {
         View menuBarView = makeMenuBarView();
-        setMenuBarText(menuBarView, menuTitle);
         setMenuBarCancel(menuBarView);
-        menuBarView.setOnClickListener(managerPanelEvent);
         return menuBarView;
     }
 
@@ -155,15 +125,10 @@ public class ManagerPanel {
         menuBarTextView.setOnClickListener(managerPanelEvent);
     }
 
-    private void setMenuBarText(View menuBarView, String menuTitle) {
-        TextView menuBarTextView = (TextView) menuBarView.findViewById(R.id.menu_bar_text);
-        Util.setTextWithBoldFont(menuBarTextView, menuTitle);
-
-    }
-
     private View makeMenuBarView() {
         View menuBarView = ((Activity) context).getLayoutInflater().inflate(R.layout.manager_menu_bar_item, null);
         menuBarView.setMinimumHeight((int) Util.convertDpToPixel(65));
+        menuBarView.findViewById(R.id.addCategoryBtn).setOnClickListener(managerPanelEvent);
         return menuBarView;
     }
 

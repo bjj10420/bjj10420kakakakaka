@@ -1,18 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="50dp"
-    android:layout_marginBottom="15dp"
-    android:background="@drawable/manager_menu_bar_bg">
-
-    <TextView
-        android:id="@+id/menu_bar_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:text="TEST TEXT"
-        android:textColor="#404040"
-        android:textSize="16dp" />
+    android:layout_height="65dp">
 
     <View
         android:id="@+id/menu_bar_cancel"
@@ -24,6 +13,12 @@
         android:layout_marginTop="5dp"
         android:alpha="0.3"
         android:background="@drawable/cancel2_icon"
-        android:visibility="gone"
-        />
+        android:visibility="gone" />
+
+    <com.rey.material.widget.Button
+        android:id="@+id/addCategoryBtn"
+        android:layout_width="match_parent"
+        android:layout_height="65dp"
+        android:text="카테고리 +"
+        android:theme="@style/AppTheme.Button" />
 </RelativeLayout>
