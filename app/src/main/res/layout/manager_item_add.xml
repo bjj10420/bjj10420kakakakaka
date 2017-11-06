@@ -39,11 +39,12 @@
                     android:layout_weight="1"
                     android:gravity="center">
 
-                    <Button
+                    <com.rey.material.widget.Button
                         android:id="@+id/itemAddCategorySelect"
                         android:layout_width="50dp"
                         android:layout_height="wrap_content"
-                        android:text="선택" />
+                        android:text="선택"
+                        android:theme="@style/AppTheme.Button" />
 
                     <TextView
                         android:id="@+id/itemAddCategoryText"
@@ -142,21 +143,21 @@
                 android:layout_weight="1"
                 android:background="@drawable/bottom_button_bg"
                 android:text="추가"
-        android:textColor="#404040" />
+                android:textColor="#404040" />
 
-    <Button
-        android:id="@+id/itemAddCloseBtn"
-        android:layout_width="0dp"
-        android:layout_height="75dp"
-        android:layout_weight="1"
-        android:background="@drawable/bottom_button_bg"
-        android:text="닫기"
-        android:textColor="#404040" />
+            <Button
+                android:id="@+id/itemAddCloseBtn"
+                android:layout_width="0dp"
+                android:layout_height="75dp"
+                android:layout_weight="1"
+                android:background="@drawable/bottom_button_bg"
+                android:text="닫기"
+                android:textColor="#404040" />
 
-</LinearLayout>
+        </LinearLayout>
     </RelativeLayout>
 
-<ScrollView
+    <ScrollView
         android:layout_width="wrap_content"
         android:layout_height="match_parent">
 
