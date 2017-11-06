@@ -355,7 +355,7 @@ public class CalendarHelper {
     }
 
     public void getCalendarCellClickEvent(View v) {
-        Log.d("getCalendarCellClickEvent 체크", String.valueOf(v));
+        Log.d("getCalendarCellClickEvent 체크", String.valueOf(v.getTag()));
         String dateValue = String.valueOf(v.getTag());
         String yearMonthKey = DataHelper.dataHelper.makeDateString2(null, this);
         Log.d("getCalendarCellClickEvent yearMonthKey 체크", String.valueOf(yearMonthKey));

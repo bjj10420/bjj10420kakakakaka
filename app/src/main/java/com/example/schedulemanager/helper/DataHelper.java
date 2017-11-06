@@ -334,19 +334,20 @@ public class DataHelper {
 
         for(Integer dateKey : thisMonthSchedules.keySet()) {
             Schedule schedule = thisMonthSchedules.get(dateKey);
+            int orderValue = Integer.parseInt(String.valueOf(dateKey).split("000")[1]);
 
             if(String.valueOf(dateKey).length() == 6 && String.valueOf(dateKey).substring(0, 2).equals(dateValue)
-             || String.valueOf(dateKey).length() == 6 && String.valueOf(dateKey).substring(0, 1).equals(dateValue)
+             || String.valueOf(dateKey).length() == 6 && String.valueOf(dateKey).substring(0, 1).equals(dateValue) && orderValue > 9
                     ){dailySchedules.put(dateKey, schedule);
-                Log.d("데일리스케쥴맵 생성 체크 dateKey ", String.valueOf(dateKey));
-                Log.d("데일리스케쥴맵 생성 체크 order ", String.valueOf(schedule.getOrder()));
-                Log.d("데일리스케쥴맵 생성 체크 activityName ", String.valueOf(schedule.getActivityName()));
+                Log.d("데일리스케쥴맵 생성 체크1 dateKey ", String.valueOf(dateKey));
+                Log.d("데일리스케쥴맵 생성 체크1 order ", String.valueOf(schedule.getOrder()));
+                Log.d("데일리스케쥴맵 생성 체크1 activityName ", String.valueOf(schedule.getActivityName()));
             }
             else if(String.valueOf(dateKey).length() == 5 && String.valueOf(dateKey).substring(0, 1).equals(dateValue)){
                 dailySchedules.put(dateKey, schedule);
-                Log.d("데일리스케쥴맵 생성 체크 dateKey ", String.valueOf(dateKey));
-                Log.d("데일리스케쥴맵 생성 체크 order ", String.valueOf(schedule.getOrder()));
-                Log.d("데일리스케쥴맵 생성 체크 activityName ", String.valueOf(schedule.getActivityName()));
+                Log.d("데일리스케쥴맵 생성 체크2 dateKey ", String.valueOf(dateKey));
+                Log.d("데일리스케쥴맵 생성 체크2 order ", String.valueOf(schedule.getOrder()));
+                Log.d("데일리스케쥴맵 생성 체크2 activityName ", String.valueOf(schedule.getActivityName()));
                 }}
         return dailySchedules;
     }
