@@ -233,6 +233,7 @@ public class EventHelper {
         uiHelper.changeBottomButton(false);
         // 카피된 아이콘 제거
         uiHelper.getTotalLayout().removeView(uiHelper.getCopiedView());
+        //
     }
 
     // 데일리 스케쥴 위에서 마우스 업
