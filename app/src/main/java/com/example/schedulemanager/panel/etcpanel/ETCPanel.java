@@ -5,6 +5,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
@@ -145,7 +146,7 @@ public class ETCPanel {
 
     private TextView makeTextView(ActivityVO activityVO) {
         float textHeight = Util.convertDpToPixel(15);
-        ViewGroup.LayoutParams textParams = new ViewGroup.LayoutParams((int) Util.convertDpToPixel(50),
+        ViewGroup.LayoutParams textParams = new ViewGroup.LayoutParams((int) Util.convertDpToPixel(60),
                 (int) textHeight);
         TextView textView = new TextView(context);
         String textData = activityVO.getActivityName();
@@ -153,6 +154,9 @@ public class ETCPanel {
         textView.setGravity(Gravity.CENTER);
         textView.setLayoutParams(textParams);
         textView.setTextColor(Color.parseColor("#404040"));
+        textView.setTextSize(14);
+        textView.setSingleLine(true);
+        textView.setEllipsize(TextUtils.TruncateAt.END);
         return textView;
     }
 

@@ -188,7 +188,7 @@ public class UIHelper {
     }
 
     private void setFavoriteTextBasicOption(TextView favoriteTextView, String textData) {
-        ViewGroup.LayoutParams textParams = new ViewGroup.LayoutParams((int) Util.convertDpToPixel(50),
+        ViewGroup.LayoutParams textParams = new ViewGroup.LayoutParams((int) Util.convertDpToPixel(60),
                 (int) Util.convertDpToPixel(15));
         setTextWithFont(favoriteTextView, textData);
         favoriteTextView.setGravity(Gravity.CENTER);
@@ -196,6 +196,7 @@ public class UIHelper {
         favoriteTextView.setTextColor(Color.parseColor("#404040"));
         favoriteTextView.setSingleLine(true);
         favoriteTextView.setEllipsize(TextUtils.TruncateAt.END);
+        favoriteTextView.setTextSize(14);
     }
 
     private void buttonViewAddToPanel(LinearLayout buttonView, int favoriteAcitivityCount) {
@@ -227,7 +228,7 @@ public class UIHelper {
         ViewGroup.LayoutParams iconParams = new ViewGroup.LayoutParams((int) valueOf50DP,
                 (int) valueOf50DP);
         // 각 텍스트 파라메터
-        ViewGroup.LayoutParams textParams = new ViewGroup.LayoutParams((int) valueOf50DP,
+        ViewGroup.LayoutParams textParams = new ViewGroup.LayoutParams((int) Util.convertDpToPixel(60),
                 (int) textHeight);
 
         // 버튼뷰 설정
@@ -237,27 +238,22 @@ public class UIHelper {
         buttonView.setLayoutParams(buttonViewParams);
         // 아이콘 뷰 설정
         ImageView iconView = new ImageView(context);
-
-//      iconView.setBackgroundResource(findIdByFileName(iconNameMap.get(textData), this));
-
         iconView.setBackground(background);
         iconView.setLayoutParams(iconParams);
         // 텍스트 뷰 설정
         TextView textView = new TextView(context);
-//        textView.setText(textData);
         setTextWithFont(textView, textData);
         textView.setGravity(Gravity.CENTER);
         textView.setLayoutParams(textParams);
         textView.setTextColor(Color.parseColor("#404040"));
         textView.setSingleLine(true);
         textView.setEllipsize(TextUtils.TruncateAt.END);
-
+        textView.setTextSize(14);
         // 태그첨부
         buttonView.setTag(textData);
         // 추가
         buttonView.addView(iconView);
         buttonView.addView(textView);
-
         return buttonView;
     }
 
