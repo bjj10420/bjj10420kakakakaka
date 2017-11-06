@@ -181,6 +181,7 @@ public class CalendarHelper {
         if(dailySchedule.size() > 0) {
             uiHelepr.setNoDateText(false);
             uiHelepr.getCalendarLayout().setVisibility(View.GONE);
+            new AnimationHelper().fadeAnimation(context,  uiHelepr.getScheduleLayout(), false);
             uiHelepr.getScheduleLayout().setVisibility(View.VISIBLE);
             uiHelepr.setDailyScheduleDisplay(dailySchedule);
         }

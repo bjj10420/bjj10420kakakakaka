@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="BorderlessButton" parent="Widget.AppCompat.Button.Borderless">
+        <item name="android:minHeight">36dp</item>
+        <item name="android:minWidth">64dp</item>
+        <item name="android:textColor">@color/mep_text_color</item>
+    </style>
+
+    <style name="BorderlessButton.Colored" parent="Widget.AppCompat.Button.Borderless.Colored">
+        <item name="android:minHeight">36dp</item>
+        <item name="android:minWidth">64dp</item>
+    </style>
+</resources>

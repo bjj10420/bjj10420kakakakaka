@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <LinearLayout
+        android:id="@+id/mep_header_container"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/button_borderless"
+        android:clickable="true"
+        android:gravity="center_vertical"
+        android:minHeight="@dimen/mep_collapsed_header_height"
+        android:orientation="horizontal"
+        android:paddingLeft="@dimen/mep_header_horizontal_padding"
+        android:paddingRight="@dimen/mep_header_horizontal_padding">
+
+        <TextView
+            android:id="@+id/mep_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/mep_dummy_title"
+            android:textColor="@color/mep_header_titleColor" />
+
+        <TextView
+            android:id="@+id/mep_subtitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="@dimen/mep_subtitle_horizontal_margin"
+            android:layout_marginRight="@dimen/mep_subtitle_horizontal_margin"
+            android:layout_weight="2"
+            android:text="@string/mep_dummy_subtitle" />
+
+        <ProgressBar
+            android:id="@+id/mep_progress"
+            style="?android:attr/progressBarStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/mep_expand_button"
+            android:layout_width="@dimen/mep_expand_button_size"
+            android:layout_height="@dimen/mep_expand_button_size"
+            android:contentDescription="@string/mep_content_description_arrow_icon"
+            android:src="@drawable/ic_arrow" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/mep_expandable_content"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/mep_header_container"
+        android:orientation="vertical">
+
+        <com.takeiteasy.materialexpansionpanel.container.MaxHeightNestedScrollView
+            android:id="@+id/mep_content_container"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="@dimen/mep_content_bottom_padding"
+            android:paddingLeft="@dimen/mep_content_horizontal_padding"
+            android:paddingRight="@dimen/mep_content_horizontal_padding"
+            app:maxHeight="@dimen/mep_content_max_height">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="300dp"
+                android:text="This is the dummy content.\nWill be removed after you set your own content view.\nEnhanced nested scroll view is used as container for holding the content." />
+
+        </com.takeiteasy.materialexpansionpanel.container.MaxHeightNestedScrollView>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="end"
+            android:orientation="horizontal"
+            android:paddingBottom="@dimen/mep_control_buttons_holder_horizontal_padding"
+            android:paddingLeft="@dimen/mep_control_buttons_holder_vertical_padding"
+            android:paddingRight="@dimen/mep_control_buttons_holder_vertical_padding"
+            android:paddingTop="@dimen/mep_control_buttons_holder_horizontal_padding">
+
+            <Button
+                android:id="@+id/panel_button_negative"
+                style="@style/BorderlessButton"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/panel_button_cancel" />
+
+            <Button
+                android:id="@+id/panel_button_positive"
+                style="@style/BorderlessButton.Colored"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/mep_positive_button_horizontal_margin"
+                android:layout_marginRight="@dimen/mep_positive_button_horizontal_margin"
+                android:text="@string/panel_button_save" />
+
+        </LinearLayout>
+
+        <!--<include layout="@layout/view_divider" />-->
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -1,0 +1,8 @@
+<resources>
+    <string name="app_name">MaterialExpansionPanel</string>
+    <string name="panel_button_cancel">cancel</string>
+    <string name="panel_button_save">save</string>
+    <string name="mep_content_description_arrow_icon">ArrowIcon</string>
+    <string name="mep_dummy_title">Title</string>
+    <string name="mep_dummy_subtitle">Subtitle</string>
+</resources>

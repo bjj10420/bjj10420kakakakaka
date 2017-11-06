@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="mep_collapsed_header_height">48dp</dimen>
+    <dimen name="mep_header_horizontal_padding">24dp</dimen>
+    <dimen name="mep_expand_button_size">24dp</dimen>
+    <dimen name="mep_content_max_height">200dp</dimen>
+    <dimen name="mep_content_horizontal_padding">24dp</dimen>
+    <dimen name="mep_content_bottom_padding">16dp</dimen>
+    <dimen name="mep_control_buttons_holder_horizontal_padding">8dp</dimen>
+    <dimen name="mep_control_buttons_holder_vertical_padding">4dp</dimen>
+    <dimen name="mep_positive_button_horizontal_margin">4dp</dimen>
+    <dimen name="mep_subtitle_horizontal_margin">16dp</dimen>
+</resources>

@@ -12,6 +12,7 @@ import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+
 import android.widget.TextView;
 
 import com.example.schedulemanager.helper.DataHelper;
@@ -239,4 +240,6 @@ public class Util {
             }
         }
     }
+
+
 }
