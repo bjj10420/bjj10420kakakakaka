@@ -309,6 +309,13 @@ public class EventHelper {
         dataHelper.makeSelectedDateData(dateValue);
     }
 
+    private void setDataHelperTodayDateValue(String dataValueTag, String yearMonthKey) {
+        String dateValue = dataValueTag;
+        // TODO 처음 앱을 설치하고 일정을 스케쥴했을때 DATE값이 없으므로 여기서 저장
+        dataHelper.setDateValue(dateValue);
+        dataHelper.makeSelectedTodayDateData(dateValue, yearMonthKey);
+    }
+
     // 자료구조에 추가
     private void addToDataStructrue(String activityName, String selectedDateData) {
         int newOrder = 0;
@@ -607,7 +614,7 @@ public class EventHelper {
         int dateNumber = dateOfToday.getDate();
         View viewOfToday = UIHelper.uiHelper.getViewOfToday();
 
-        setDataHelperDateValue(String.valueOf(dateNumber));
+        setDataHelperTodayDateValue(String.valueOf(dateNumber), dateString.substring(0,6));
         addScheduleIntoTodayDB(dateString, tagName);
         addToTodayDataStructrue(tagName, dateString, dateString.substring(0, 6));
         if(isCalendarExist())

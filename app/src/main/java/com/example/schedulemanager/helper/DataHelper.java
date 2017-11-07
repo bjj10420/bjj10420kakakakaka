@@ -418,6 +418,10 @@ public class DataHelper {
         setSelectedDateData(yearMonthKey + (Integer.parseInt(dateValue) < 10 ? "0" + dateValue : dateValue));
     }
 
+    public void makeSelectedTodayDateData(String dateValue, String yearMonthKey){
+        setSelectedDateData(yearMonthKey + (Integer.parseInt(dateValue) < 10 ? "0" + dateValue : dateValue));
+    }
+
     public void setDailyScheduleMap(TreeMap<Integer, Schedule> dailyScheduleMap) {
         this.dailyScheduleMap = dailyScheduleMap;
     }
