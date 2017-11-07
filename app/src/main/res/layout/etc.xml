@@ -6,8 +6,8 @@
 
     <View
         android:id="@+id/etcCloseBtn"
-        android:layout_width="15dp"
-        android:layout_height="15dp"
+        android:layout_width="25dp"
+        android:layout_height="25dp"
         android:layout_alignParentRight="true"
         android:layout_alignParentTop="true"
         android:layout_marginRight="5dp"
@@ -19,13 +19,13 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_marginBottom="75dp"
-        android:layout_marginTop="22dp">
+        android:layout_marginTop="32dp">
 
         <LinearLayout
             android:id="@+id/etcContentsLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-  
+
             android:background="#ffffff"
             android:orientation="vertical"
             android:paddingBottom="10dp"

@@ -206,7 +206,6 @@ public class EventHelper {
 
         actionWhenCenterIconActivated(centerIcon, copiedView, view);
         isCanceled = actionAtCancelBtnWhenCalendarActivated(copiedView, closestView);
-
         isCanceled = checkPosition(copiedView);
         actionAtCalendarCellWhenCalendarActivated(centerIcon, closestView, copiedView, view, isCanceled);
         actionAtDailyScheduleLayout(centerIcon, closestView, copiedView, view);
