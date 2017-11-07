@@ -280,7 +280,7 @@ public class UIHelper {
         LinearLayout viewLayout = (LinearLayout) view;
         View iconView = viewLayout.getChildAt(0);
         TextView textView = (TextView) viewLayout.getChildAt(1);
-        Log.d("hoverView 테스트", "hoverView테스트 iconView instanceof  ImageView" + (iconView instanceof  ImageView));
+
         copiedView = makeButtonView(iconView instanceof  ImageView ? ((ImageView)iconView).getDrawable() : iconView.getBackground(),
                 String.valueOf(textView.getText()),
                 viewLayout.getWidth(), viewLayout.getHeight());

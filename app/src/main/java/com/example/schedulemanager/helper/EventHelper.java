@@ -176,19 +176,11 @@ public class EventHelper {
 
     private void changeCalendarCellColorWhenCollided() {
         calendarHelper.changeCalendarCellColor(dataHelper.getArroundViewGroup().get(calendarHelper.findTheClosestView()));
-//        dataHelper.setDateValue(String.valueOf(uiHelper.getClosestView().getTag()));
-    }
-
-    private void changeCenterIconColorWhenCollided(View copiedView) {
-        boolean isCollided = Util.checkCollision(uiHelper.getCenterIcon(), copiedView);
-        Log.d("changeCenterIconColorWhenCollided 테스트", "changeCenterIconColorWhenCollided 테스트 isCollided = " + isCollided);
-        uiHelper.changeCenterIconColor(isCollided);
     }
 
     // 기타패널 아이콘 충돌시 사용
     private void changeCenterIconColorWhenCollidedForEtcIcon(View copiedView) {
         boolean isCollided = Util.checkCollisionForEtcIcon(uiHelper.getCenterIcon(), copiedView);
-        Log.d("changeCenterIconColorWhenCollided 테스트", "changeCenterIconColorWhenCollided 테스트 isCollided = " + isCollided);
         uiHelper.changeCenterIconColor(isCollided);
     }
 
@@ -328,6 +320,7 @@ public class EventHelper {
 
     // 오늘날짜 자료구조에 추가
     private void addToTodayDataStructrue(String activityName, String selectedDateData, String yearMonthKey) {
+        Log.d("EventHelper addoTdayDataStructure", "yearMonthKey = " + yearMonthKey);
         int newOrder = 0;
         if(!dataHelper.isTodayEmptyData(selectedDateData, yearMonthKey))
             newOrder = dataHelper.getMaxOrderAmongScheduleMapByThisMonthForToday(selectedDateData, yearMonthKey) + 1;
@@ -560,14 +553,6 @@ public class EventHelper {
         // 이름
         String activityName = tagName;
 
-//        HashMap<Integer, Schedule> dailySchedule = dataHelper.makeDailyScheduleMap(yearMonthKey, dateValue);
-//        //정렬
-//        TreeMap<Integer,Schedule> tm = new TreeMap<Integer,Schedule>(dailySchedule);
-//
-//        dataHelper.setDailyScheduleMap(tm);
-
-        // 넘버
-//        int number = DBHelper.dbHelper.getScheduleCountForDate(dateString);
         int number = 0;
         Log.d("스케쥴DB에추가 체크", "dateString = " + dateString);
         if(!dataHelper.isEmptyData(dateString))
@@ -579,7 +564,20 @@ public class EventHelper {
         // DB에 삽입
         long resultNum = DBHelper.dbHelper.insertSchedule(newSchedule);
     }
-//
+
+    private void addScheduleIntoTodayDB(String dateString, String tagName) {
+        // 이름
+        String activityName = tagName;
+
+        int number = 0;
+        Log.d("스케쥴DB에추가 체크", "dateString = " + dateString);
+        if(!dataHelper.isTodayEmptyData(dateString, dateString.substring(0,6)))
+            number = dataHelper.getMaxOrderAmongScheduleMapByThisMonthForToday(dateString, dateString.substring(0,6)) + 1;
+
+        Schedule newSchedule = makeNewSchedule(number, dateString, activityName);
+        long resultNum = DBHelper.dbHelper.insertSchedule(newSchedule);
+    }
+
     private Schedule makeNewSchedule(int number, String dateString, String activityName) {
         // 삽입할 스케쥴 데이터 객체 생성
         Schedule newSchedule = new Schedule();
@@ -610,7 +608,7 @@ public class EventHelper {
         View viewOfToday = UIHelper.uiHelper.getViewOfToday();
 
         setDataHelperDateValue(String.valueOf(dateNumber));
-        addScheduleIntoDB(dateString, tagName);
+        addScheduleIntoTodayDB(dateString, tagName);
         addToTodayDataStructrue(tagName, dateString, dateString.substring(0, 6));
         if(isCalendarExist())
         addToCalendar(viewOfToday);

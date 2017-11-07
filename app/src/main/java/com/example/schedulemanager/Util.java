@@ -56,8 +56,6 @@ public class Util {
     public static boolean checkCollision(View v1, View v2) {
         Rect R1=new Rect(v1.getLeft(), v1.getTop(), v1.getRight(), v1.getBottom());
         Rect R2=new Rect((int)v2.getTranslationX(), (int)v2.getTranslationY(), (int)v2.getTranslationX() + v2.getWidth(), (int)v2.getTranslationY() + v2.getHeight());
-        Log.d("checkCollision 테스트", "checkCollision 테스트 R2 left = " + (int)v2.getLeft() + ", R2 top = " + (int)v2.getY()
-                + ", R2 right = " + ((int)v2.getTranslationX() + v2.getWidth()) + ", R2 bottom = " + ((int)v2.getTranslationY() + v2.getHeight()));
 
         return R1.intersect(R2);
     }
@@ -68,8 +66,7 @@ public class Util {
         v2.getLocationInWindow(numberArray);
         Rect R1=new Rect(v1.getLeft(), v1.getTop(), v1.getRight(), v1.getBottom());
         Rect R2=new Rect(numberArray[0], numberArray[1], numberArray[0] + v2.getWidth(), numberArray[1] + v2.getHeight());
-        Log.d("checkCollision 테스트", "checkCollision 테스트 R2 left = " + (int)v2.getLeft() + ", R2 top = " + (int)v2.getY()
-                + ", R2 right = " + ((int)v2.getTranslationX() + v2.getWidth()) + ", R2 bottom = " + ((int)v2.getTranslationY() + v2.getHeight()));
+
         return R1.intersect(R2);
     }
 

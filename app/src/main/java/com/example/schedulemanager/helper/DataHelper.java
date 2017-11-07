@@ -467,7 +467,7 @@ public class DataHelper {
 
     private int getMaxOrderForThisMonth(String dateKey, String yearMonthKey) {
         HashMap<Integer, Schedule> scheduleMapForThisMonth = scheduleMapByMonth.get(Integer.parseInt(yearMonthKey));
-        Log.d("getMaxOrderAmongScheduleMapByThisMonth", "getMaxOrderAmongScheduleMapByThisMonth");
+        Log.d("getMaxOrderAmongScheduleMapByThisMonth", "getMaxOrderAmongScheduleMapByThisMonth" + ", dateKey = " + dateKey + ", yearMonthKey = " + yearMonthKey);
         int temp = 0;
         for(int key : scheduleMapForThisMonth.keySet()) {
             Schedule schedule = scheduleMapForThisMonth.get(key);
@@ -499,7 +499,7 @@ public class DataHelper {
         }
 
         Log.d("데이터가 비어있는지 체크", String.valueOf(dateKey));
-        Log.d("yearMonthKey 상세정보", String.valueOf(yearMonthKey));
+        Log.d("DataHelper isEmptyData yearMonthKey 상세정보", String.valueOf(yearMonthKey));
         Log.d("scheduleMapByMonth 상세정보", String.valueOf(scheduleMapByMonth));
 
         Log.d("scheduleMapForThisMonth 상세정보", String.valueOf(scheduleMapForThisMonth));
@@ -521,7 +521,7 @@ public class DataHelper {
         }
 
         Log.d("데이터가 비어있는지 체크", String.valueOf(dateKey));
-        Log.d("yearMonthKey 상세정보", String.valueOf(yearMonthKey));
+        Log.d("DataHelper isTodayEmptyData yearMonthKey 상세정보", String.valueOf(yearMonthKey));
         Log.d("scheduleMapByMonth 상세정보", String.valueOf(scheduleMapByMonth));
 
         Log.d("scheduleMapForThisMonth 상세정보", String.valueOf(scheduleMapForThisMonth));
@@ -667,7 +667,6 @@ public class DataHelper {
         for(Integer key : scheduleMapForThisMonth.keySet()) {
             Schedule schedule = scheduleMapForThisMonth.get(key);
             String scheduleDate = schedule.getDate().substring(6, 8);
-            Log.d("isExistSchedule 확인", "scheduleDate = " + scheduleDate + ", dateKey = " + dateKey);
 
             if(scheduleDate.equals(dateKey)) {
                 isExistSchedule = true;
