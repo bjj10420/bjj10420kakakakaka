@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity {
         EventHelper eventHelper = new EventHelper();
         eventHelper.initEvent(this, dataHelper, uiHelper, calendarHelper);
         calendarHelper.setEventHelper(eventHelper);
-        //        initScheduleDisplay();
 
         ETCPanel etcPanel = new ETCPanel(this);
         etcPanel.initETCPanel();
