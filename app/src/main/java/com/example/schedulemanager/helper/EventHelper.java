@@ -206,6 +206,7 @@ public class EventHelper {
 
         actionWhenCenterIconActivated(centerIcon, copiedView, view);
         isCanceled = actionAtCancelBtnWhenCalendarActivated(copiedView, closestView);
+
         isCanceled = checkPosition(copiedView);
         actionAtCalendarCellWhenCalendarActivated(centerIcon, closestView, copiedView, view, isCanceled);
         actionAtDailyScheduleLayout(centerIcon, closestView, copiedView, view);
@@ -215,6 +216,7 @@ public class EventHelper {
     private boolean checkPosition(View copiedView) {
         boolean isInCalendarViewMap = false;
         TreeMap<Integer, RectAndView> currentMap = dataHelper.getRectZoneWithViewSorted();
+        if(currentMap == null) return false;
         for(Integer key : currentMap.keySet()){
             if(currentMap.get(key).getView() != null &&
                     Util.checkCollisionForChildView2(copiedView, currentMap.get(key).getView())){
