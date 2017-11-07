@@ -17,6 +17,7 @@ import com.example.schedulemanager.R;
 import com.example.schedulemanager.interface_.GeneralCallback2;
 import com.example.schedulemanager.panel.etcpanel.ETCPanel;
 import com.example.schedulemanager.panel.managerpanel.ManagerPanel;
+import com.example.schedulemanager.vo.RectAndView;
 import com.example.schedulemanager.vo.Schedule;
 import com.example.schedulemanager.Util;
 import com.github.mikephil.charting.charts.PieChart;
@@ -32,6 +33,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.TreeMap;
 
 import static com.example.schedulemanager.helper.DataHelper.PICK_FROM_GALLARY;
 import static com.example.schedulemanager.helper.UIHelper.uiHelper;
@@ -212,9 +214,10 @@ public class EventHelper {
 
     private boolean checkPosition(View copiedView) {
         boolean isInCalendarViewMap = false;
-        HashMap<Integer, View> currentMap = dataHelper.getCurrentCalendarViewMap();
+        TreeMap<Integer, RectAndView> currentMap = dataHelper.getRectZoneWithViewSorted();
         for(Integer key : currentMap.keySet()){
-            if(Util.checkCollisionForChildView2(copiedView, currentMap.get(key))){
+            if(currentMap.get(key).getView() != null &&
+                    Util.checkCollisionForChildView2(copiedView, currentMap.get(key).getView())){
                 isInCalendarViewMap = true;
                 break;
             }
