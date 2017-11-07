@@ -172,6 +172,7 @@ public class UIHelper {
         ViewGroup.LayoutParams iconParams = new ViewGroup.LayoutParams((int) buttonHeight,
                 (int) buttonHeight);
         // iconView.setBackgroundResource(findIdByFileName(iconNameMap.get(textData), this));
+        //
             Drawable drawable = new BitmapDrawable(context.getResources(), BitmapFactory.decodeByteArray(activityVO.getImageData(),0,activityVO.getImageData().length));
         if(activityVO.getActivityName().equals("기타")){
             drawable.setColorFilter(Color.parseColor("#8d4a24"), PorterDuff.Mode.SRC_IN);
