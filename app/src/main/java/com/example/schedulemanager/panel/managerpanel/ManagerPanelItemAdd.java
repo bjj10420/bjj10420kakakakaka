@@ -97,8 +97,9 @@ public class ManagerPanelItemAdd {
 
     private LinearLayout.LayoutParams makeViewParams() {
         LinearLayout.LayoutParams viewParams = new LinearLayout.LayoutParams(0,
-                (int) Util.convertDpToPixel(50));
+                (int) Util.convertDpToPixel(40));
         viewParams.weight = 1;
+        viewParams.setMargins(20,20,20,20);
         return viewParams;
     }
 

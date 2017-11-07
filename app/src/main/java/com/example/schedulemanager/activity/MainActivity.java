@@ -24,6 +24,7 @@ public class MainActivity extends AppCompatActivity {
    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // 아이콘 컨텐츠 전부 하기 전
         setContentView(R.layout.activity_main);
         init();
     }
