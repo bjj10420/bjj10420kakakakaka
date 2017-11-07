@@ -78,14 +78,9 @@ public class Util {
      */
     public static boolean checkCollisionForChildView(View v1, View v2) {
         int[] numberArray = new int[2];
-
         v1.getLocationInWindow(numberArray);
-
         Rect R1=new Rect(numberArray[0], numberArray[1], numberArray[0] + v1.getWidth(), numberArray[1] + v1.getHeight());
         Rect R2=new Rect((int)v2.getTranslationX(), (int)v2.getTranslationY(), (int)v2.getTranslationX() + v2.getWidth(), (int)v2.getTranslationY() + v2.getHeight());
-//        Log.d("충돌체크 함수 rect값 검사 R1 ", numberArray[0] +  " , " + numberArray[1]);
-//        Log.d("충돌체크 함수 rect값 검사 R2 ", (int)v2.getTranslationX() +  " , " + (int)v2.getTranslationY());
-
         return R1.intersect(R2);
     }
 
@@ -93,25 +88,13 @@ public class Util {
         return rect1.intersect(rect2);
     }
 
-    /**
-     * 두 뷰의 충돌 판정을 체크 (v1이 다른레이아웃의 자식인 경우)
-     * @param v1
-     * @param v2
-     * @return
-     */
     public static boolean checkCollisionForChildView2(View v1, View v2) {
-        int r1Left = (int)v1.getLeft() - 50;
-        int r1Top = (int)v1.getTop() + 570;
-
-        Rect R1 = new Rect(r1Left, r1Top, r1Left + v1.getWidth(), r1Top + v1.getHeight());
-        Rect R2 = new Rect((int)v2.getTranslationX(), (int)v2.getTranslationY(), (int)v2.getTranslationX() + v2.getWidth(), (int)v2.getTranslationY() + v2.getHeight());
-
-//      if(v1.getTag() != null)
-        Log.d("충돌체크 함수 rect값 검사 v1 태그 ", (String) v1.getTag() + "일");
-//      Log.d("충돌체크 함수 rect값 검사 R1 ", numberArray[0] +  " , " + numberArray[1]);
-        Log.d("충돌체크 함수 rect값 검사 R1 ", r1Left +  " , " + r1Top);
-        Log.d("충돌체크 함수 rect값 검사 R2 ", (int)v2.getTranslationX() +  " , " + (int)v2.getTranslationY());
-
+        int[] numberArray = new int[2];
+        int[] numberArray2 = new int[2];
+        v1.getLocationInWindow(numberArray);
+        v2.getLocationInWindow(numberArray2);
+        Rect R1=new Rect(numberArray[0], numberArray[1], numberArray[0] + v1.getWidth(), numberArray[1] + v1.getHeight());
+        Rect R2=new Rect(numberArray2[0], numberArray2[1], numberArray2[0] + v2.getWidth(), numberArray2[1] + v2.getHeight());
         return R1.intersect(R2);
     }
 

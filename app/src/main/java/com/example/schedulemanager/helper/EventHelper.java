@@ -29,6 +29,7 @@ import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 
@@ -184,11 +185,6 @@ public class EventHelper {
         uiHelper.changeCenterIconColor(isCollided);
     }
 
-    /**
-     * 복사된 뷰 표시
-     * @param copiedView
-     * @param event
-     */
     private void setCopiedViewVisible(View copiedView, MotionEvent event) {
         if(copiedView.getVisibility() == View.GONE){
             copiedView.setAlpha(0.7f);
@@ -210,9 +206,22 @@ public class EventHelper {
 
         actionWhenCenterIconActivated(centerIcon, copiedView, view);
         isCanceled = actionAtCancelBtnWhenCalendarActivated(copiedView, closestView);
+        isCanceled = checkPosition(copiedView);
         actionAtCalendarCellWhenCalendarActivated(centerIcon, closestView, copiedView, view, isCanceled);
         actionAtDailyScheduleLayout(centerIcon, closestView, copiedView, view);
         resetAfterMouseUp();
+    }
+
+    private boolean checkPosition(View copiedView) {
+        boolean isInCalendarViewMap = false;
+        HashMap<Integer, View> currentMap = dataHelper.getCurrentCalendarViewMap();
+        for(Integer key : currentMap.keySet()){
+            if(Util.checkCollisionForChildView2(copiedView, currentMap.get(key))){
+                isInCalendarViewMap = true;
+                break;
+            }
+        }
+        return  isInCalendarViewMap ? false : true;
     }
 
     /**
