@@ -302,9 +302,32 @@ public class EventHelper {
         if(centerIcon.getVisibility() == View.GONE &&
                 uiHelper.getScheduleLayout().getVisibility() == View.GONE &&
                 closestView != null && !isCanceled) {
-            restoreClosestViewColor(closestView);
-            addTransition(closestView, touchedView);
+            if(isMultimode() == false)
+                singleModeUp(closestView, touchedView);
+            else
+                multiModeUp(closestView, touchedView);
         }
+    }
+
+    private void multiModeUp(View closestView, View touchedView) {
+        resotreMultiModeView(closestView, touchedView);
+        restoreModeVar();
+     }
+
+    private void restoreModeVar() {
+        dataHelper.setMode(1);
+    }
+
+    private void resotreMultiModeView(View closestView, View touchedView) {
+        singleModeUp(closestView, touchedView);
+        for(View multiModeView : dataHelper.getMultiModeViews()){
+            singleModeUp(multiModeView, touchedView);
+        }
+    }
+
+    private void singleModeUp(View closestView, View touchedView) {
+        restoreClosestViewColor(closestView);
+        addTransition(closestView, touchedView);
     }
 
     private void addTransition(View closestView, View touchedView) {
