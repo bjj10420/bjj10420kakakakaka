@@ -196,19 +196,19 @@ public class EventHelper {
 
     /**
      * 아이콘 버튼 드래그 중 업할때 이벤트
-     * @param view
+     * @param touchedView
      */
-    public void actionUpEvent(View view) {
+    public void actionUpEvent(View touchedView) {
         View centerIcon = uiHelper.getCenterIcon();
         View closestView = uiHelper.getClosestView();
         View copiedView = uiHelper.getCopiedView();
         boolean isCanceled = false;
 
-        actionWhenCenterIconActivated(centerIcon, copiedView, view);
+        actionWhenCenterIconActivated(centerIcon, copiedView, touchedView);
         isCanceled = actionAtCancelBtnWhenCalendarActivated(copiedView, closestView);
         isCanceled = checkPosition(copiedView);
-        actionAtCalendarCellWhenCalendarActivated(centerIcon, closestView, copiedView, view, isCanceled);
-        actionAtDailyScheduleLayout(centerIcon, closestView, copiedView, view);
+        actionAtCalendarCellWhenCalendarActivated(centerIcon, closestView, touchedView, isCanceled);
+        actionAtDailyScheduleLayout(centerIcon, closestView, copiedView, touchedView);
         resetAfterMouseUp();
     }
 
@@ -292,14 +292,14 @@ public class EventHelper {
     }
 
     // 메인 달력 활성화 중 캘린더 칸 위에서 마우스 업
-    private void actionAtCalendarCellWhenCalendarActivated(View centerIcon, View closestView, View copiedView, View view, boolean isCanceled) {
+    private void actionAtCalendarCellWhenCalendarActivated(View centerIcon, View closestView, View touchedView, boolean isCanceled) {
         if(centerIcon.getVisibility() == View.GONE &&
                 uiHelper.getScheduleLayout().getVisibility() == View.GONE &&
                 closestView != null && !isCanceled) {
             setClosestView(closestView);
             setDataHelperDateValue((String) closestView.getTag());
-            addToDB(String.valueOf(view.getTag()), dataHelper.getDateValue());
-            addToDataStructrue((String) view.getTag(), dataHelper.getSelectedDateData());
+            addToDB(String.valueOf(touchedView.getTag()), dataHelper.getDateValue());
+            addToDataStructrue((String) touchedView.getTag(), dataHelper.getSelectedDateData());
             addToCalendar(closestView);
         }
     }
