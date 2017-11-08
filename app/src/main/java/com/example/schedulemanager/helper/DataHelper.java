@@ -140,7 +140,7 @@ public class DataHelper {
         activities = new HashMap<String, ArrayList<ActivityVO>>();
         drawableList = new ArrayList<Drawable>();
 
-        mode = 5;
+        mode = 1;
         multiModeViews = new ArrayList<View>();
     }
 
