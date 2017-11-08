@@ -42,6 +42,7 @@ public class CalendarHelper {
 
         initCaledarPagerAndPagerAdapter(typeface);
         initCaledarDateTextAndPagingEvent(typeface);
+
     }
 
     private void initCaledarDateTextAndPagingEvent(Typeface typeface) {
