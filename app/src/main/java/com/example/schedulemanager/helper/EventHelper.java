@@ -232,7 +232,6 @@ public class EventHelper {
         uiHelper.changeBottomButton(false);
         // 카피된 아이콘 제거
         uiHelper.getTotalLayout().removeView(uiHelper.getCopiedView());
-        //
     }
 
     // 데일리 스케쥴 위에서 마우스 업
@@ -254,8 +253,6 @@ public class EventHelper {
                     newOrder = dataHelper.getMaxOrderAmongDailyScheduleMap() + 1;
             dataHelper.addToDataStructure(newOrder,activityName);
             uiHelper.resetPiechart(uiHelper.getPieChart());
-
-            Log.d("actionAtDailyScheduleLayout 체크", "actionAtDailyScheduleLayout 체크 entryCount = " + entryCount);
 
             // 전환이 필요한경우 (추가가 된후 달력뷰에서도 체크마크표시를 해줘야한다)
             if(entryCount == 0) {
@@ -316,14 +313,12 @@ public class EventHelper {
 
     private void setDataHelperDateValue(String dataValueTag) {
         String dateValue = dataValueTag;
-        // TODO 처음 앱을 설치하고 일정을 스케쥴했을때 DATE값이 없으므로 여기서 저장
         dataHelper.setDateValue(dateValue);
         dataHelper.makeSelectedDateData(dateValue);
     }
 
     private void setDataHelperTodayDateValue(String dataValueTag, String yearMonthKey) {
         String dateValue = dataValueTag;
-        // TODO 처음 앱을 설치하고 일정을 스케쥴했을때 DATE값이 없으므로 여기서 저장
         dataHelper.setDateValue(dateValue);
         dataHelper.makeSelectedTodayDateData(dateValue, yearMonthKey);
     }
@@ -334,17 +329,14 @@ public class EventHelper {
         if(!dataHelper.isEmptyData(selectedDateData))
             newOrder = dataHelper.getMaxOrderAmongScheduleMapByThisMonth(selectedDateData) + 1;
         dataHelper.addToDataStructure(newOrder,activityName);
-        Log.d("페이징한뒤데이트벨류확인", String.valueOf(Integer.parseInt(dataHelper.getDateValue())));
     }
 
     // 오늘날짜 자료구조에 추가
     private void addToTodayDataStructrue(String activityName, String selectedDateData, String yearMonthKey) {
-        Log.d("EventHelper addoTdayDataStructure", "yearMonthKey = " + yearMonthKey);
         int newOrder = 0;
         if(!dataHelper.isTodayEmptyData(selectedDateData, yearMonthKey))
             newOrder = dataHelper.getMaxOrderAmongScheduleMapByThisMonthForToday(selectedDateData, yearMonthKey) + 1;
         dataHelper.addToTodayDataStructure(newOrder,activityName, yearMonthKey);
-        Log.d("페이징한뒤데이트벨류확인", String.valueOf(Integer.parseInt(dataHelper.getDateValue())));
     }
 
     // 메인 달력 활성화 중 취소 버튼 위에서 마우스 업
@@ -447,9 +439,6 @@ public class EventHelper {
         Schedule originalSchedule = dataHelper.getScheduleFromDailyScheduleMapByMonth2(index);
         String originalScheduleMemo = originalSchedule != null ? originalSchedule.getMemo() : "";
 
-        Log.d("인덱스벨류 체크", String.valueOf(index));
-        Log.d("오더벨류 체크", String.valueOf(orderValue));
-
         // 원본이 있는경우
         if(originalScheduleMemo != null && !originalScheduleMemo.equals(""))
             memoContent = originalScheduleMemo + ", " + memo;
@@ -527,13 +516,10 @@ public class EventHelper {
      * @param tagName
      */
     public void addToDB(String tagName, String dateValue) {
-//        String dateString = calendarHelper.makeDateString(dataHelper.getDateValue());
         String dateString = calendarHelper.dataHelper.makeDateString2(dateValue, calendarHelper);
-
         Log.d("스케쥴 추가 체크", dateString + ", " + tagName);
         addScheduleIntoDB(dateString, tagName);
     }
-    //
 
     /**
      * 데이트 스트링과 태그네임으로 DB에 스케쥴 추가(스케쥴일정화면)
@@ -543,17 +529,13 @@ public class EventHelper {
     private void addScheduleForDiailyScheduleMode(String dateString, String tagName) {
         // 이름
         String activityName = tagName;
-
         // 넘버
-//        int number = DBHelper.dbHelper.getScheduleCountForDate(dateString);
         int number = 0;
         if(dataHelper.getDailyScheduleMap() != null)
             if(dataHelper.getDailyScheduleMap().size() != 0)
                 number = dataHelper.getMaxOrderAmongDailyScheduleMap() + 1;
-
         // 삽입할 스케쥴 데이터 객체 생성
         Schedule newSchedule = makeNewSchedule(number, dateString, activityName);
-
         // DB에 삽입
         long resultNum = DBHelper.dbHelper.insertSchedule(newSchedule);
     }
@@ -571,10 +553,8 @@ public class EventHelper {
         Log.d("스케쥴DB에추가 체크", "dateString = " + dateString);
         if(!dataHelper.isEmptyData(dateString))
         number = dataHelper.getMaxOrderAmongScheduleMapByThisMonth(dateString) + 1;
-
         // 삽입할 스케쥴 데이터 객체 생성
         Schedule newSchedule = makeNewSchedule(number, dateString, activityName);
-
         // DB에 삽입
         long resultNum = DBHelper.dbHelper.insertSchedule(newSchedule);
     }
@@ -587,7 +567,6 @@ public class EventHelper {
         Log.d("스케쥴DB에추가 체크", "dateString = " + dateString);
         if(!dataHelper.isTodayEmptyData(dateString, dateString.substring(0,6)))
             number = dataHelper.getMaxOrderAmongScheduleMapByThisMonthForToday(dateString, dateString.substring(0,6)) + 1;
-
         Schedule newSchedule = makeNewSchedule(number, dateString, activityName);
         long resultNum = DBHelper.dbHelper.insertSchedule(newSchedule);
     }
