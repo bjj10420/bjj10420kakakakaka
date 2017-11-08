@@ -5,9 +5,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
-import android.graphics.drawable.Drawable;
 import android.net.Uri;
-import android.os.Environment;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -30,13 +28,11 @@ import com.github.mikephil.charting.listener.OnChartValueSelectedListener;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
 import java.util.TreeMap;
 
 import static com.example.schedulemanager.helper.DataHelper.PICK_FROM_GALLARY;
-import static com.example.schedulemanager.helper.UIHelper.uiHelper;
 
 /**
  * 모든 이벤트를 처리, 관리
@@ -281,11 +277,9 @@ public class EventHelper {
 
     private int addScheduleToPieChart(String s) {
         PieDataSet pieDataSet = dataHelper.getDailyScheduleDataSet();
-
         int entryCount = dataHelper.getDailyScheduleDataSet().getEntryCount();
         int fillValue = 100 / (entryCount != -1 ? entryCount + 1 : 100);
         pieDataSet.addEntry(new PieEntry(fillValue, s));
-
         // 데이터 값 재정의
         resetPieChartDataSet(pieDataSet, fillValue);
         return entryCount;
@@ -296,21 +290,28 @@ public class EventHelper {
         if(centerIcon.getVisibility() == View.GONE &&
                 uiHelper.getScheduleLayout().getVisibility() == View.GONE &&
                 closestView != null && !isCanceled) {
-            setClosestView(closestView);
-            setDataHelperDateValue((String) closestView.getTag());
-            addToDB(String.valueOf(touchedView.getTag()), dataHelper.getDateValue());
-            addToDataStructrue((String) touchedView.getTag(), dataHelper.getSelectedDateData());
-            addToCalendar(closestView);
+            restoreClosestViewColor(closestView);
+            addTransition(closestView, touchedView);
         }
+    }
+
+    private void addTransition(View closestView, View touchedView) {
+        setDataHelperDateValue((String) closestView.getTag());
+        addToDB(String.valueOf(touchedView.getTag()), dataHelper.getDateValue());
+        addToDataStructrue((String) touchedView.getTag(), dataHelper.getSelectedDateData());
+        addToCalendar(closestView);
     }
 
     private void addToCalendar(View closestView) {
           calendarHelper.setCheckMark(true, closestView);
     }
 
-    private void setClosestView(View closestView) {
-        Log.d("메인 캘린더 셀 액션", "메인 캘린더 셀 액션");
-        closestView.setBackgroundColor(Color.parseColor("#ffffff"));
+    private void restoreClosestViewColor(View closestView) {
+        Log.d("restoreClosestViewColor 체크", "restoreClosetViewColor 체크");
+        if(calendarHelper.isToday(closestView))
+            closestView.setBackgroundResource(R.drawable.calendar_item_selected_bg);
+        else
+            closestView.setBackgroundColor(Color.parseColor("#ffffff"));
     }
 
     private void setDataHelperDateValue(String dataValueTag) {
@@ -352,12 +353,8 @@ public class EventHelper {
 
         if(Util.checkCollisionForChildView(uiHelper.getCancelBtn(), copiedView)){
             isCanceled = true;
-            if(calendarHelper.isToday(closestView))
-                closestView.setBackgroundResource(R.drawable.calendar_item_selected_bg);
-            else
-                closestView.setBackgroundColor(Color.parseColor("#ffffff"));
-        }
-
+            restoreClosestViewColor(closestView);
+         }
         return isCanceled;
     }
 
@@ -374,7 +371,6 @@ public class EventHelper {
             @Override
             public void onClick(View v) {
                 uiHelper.setCalendarLayoutVisible(v);
-//                Log.d("dastaHelper.getCurrentCalendarViewMap()", String.valueOf(dataHelper.getCurrentCalendarViewMap()));
             }
         });
     }

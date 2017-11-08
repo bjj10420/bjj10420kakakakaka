@@ -298,7 +298,6 @@ public class CalendarHelper {
             else
                 closestView.setBackgroundColor(Color.parseColor("#ffffff"));
 
-
             calendarCellView.setBackgroundResource(R.drawable.calendar_hover_bg);
          }
         // 2. 첫 변화
