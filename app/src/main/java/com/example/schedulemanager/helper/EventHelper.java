@@ -311,7 +311,7 @@ public class EventHelper {
 
     private void multiModeUp(View closestView, View touchedView) {
         resotreMultiModeView(closestView, touchedView);
-        restoreModeVar();
+//        restoreModeVar();
      }
 
     private void restoreModeVar() {
