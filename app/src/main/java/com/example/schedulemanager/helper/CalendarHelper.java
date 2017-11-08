@@ -18,6 +18,7 @@ import com.example.schedulemanager.vo.Schedule;
 import com.example.schedulemanager.Util;
 import com.example.schedulemanager.calendar.CalendarPagerAdapter;
 
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.TreeMap;
@@ -296,8 +297,28 @@ public class CalendarHelper {
 
     public void changeCalendarMultiCellColor(View calendarCellView) {
         changeCalendarCellColor(calendarCellView);
+        restoreMultiModeViews();
         extractViewsForMultiMode();
+        changeExtractViewsColor();
+    }
 
+    private void restoreMultiModeViews() {
+        ArrayList<View> multiModeViews = dataHelper.getMultiModeViews();
+        if(multiModeViews.isEmpty() == false){
+            for(View view : multiModeViews) {
+                restoreClosestColor(view);
+            }
+        }
+        multiModeViews.clear();
+    }
+
+    private void changeExtractViewsColor() {
+        ArrayList<View> multiModeViews = dataHelper.getMultiModeViews();
+        if(multiModeViews.isEmpty() == false){
+            for(View view : multiModeViews) {
+                view.setBackgroundResource(R.drawable.calendar_hover_bg);
+            }
+        }
     }
 
     private void extractViewsForMultiMode() {
@@ -306,14 +327,10 @@ public class CalendarHelper {
         int mode = dataHelper.getMode();
 
         for(int i = 1 ; i < mode ; i++){
-            View extentionalView = getViewFromRectZoneByTag(rectZone, closestView, i);
-            if(extentionalView != null)
-                dataHelper.getMultiModeViews().add(extentionalView);
+            View extraView = getViewFromRectZoneByTag(rectZone, closestView, i);
+            if(extraView != null)
+                dataHelper.getMultiModeViews().add(extraView);
         }
-        for(View view : dataHelper.getMultiModeViews()){
-            Log.d("dataHelper.getMultiModeViews() = ", String.valueOf(view.getTag()) + "일");
-        }
-
     }
 
     private View getViewFromRectZoneByTag(TreeMap<Integer, RectAndView> rectZone, View closestView, int i) {
