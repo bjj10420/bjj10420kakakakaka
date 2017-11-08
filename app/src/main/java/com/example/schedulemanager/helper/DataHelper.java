@@ -65,6 +65,9 @@ public class DataHelper {
     private HashMap<String, ArrayList<ActivityVO>> activities;              // 기타버튼 클릭시 활성화되는 패널의 활동들
     private ArrayList<Drawable> drawableList;                               // 프로젝트내의 drawable을 모두 로드하여 담는 저장소
 
+    private int mode;                                                       // 드래그시의 입력모드
+    private ArrayList<View> multiModeViews;                                 // 멀티모드시의 저장소
+
     public void initData(Context context) {
         initField(context);
         if(isFirstLoading()) {
@@ -121,14 +124,8 @@ public class DataHelper {
         dataHelper = this;
         this.context = context;
         dbHelper = new DBHelper(context);
-        /**
-         * 1. favorite테이블에서 메인에 등록된 버튼들의 정보를 로딩
-         * 2. hashMap에다 해당 text를 키로 하여 데이터에 아이콘명을 추가
-         */
         iconNameMap = new HashMap<String, String>();
-        //TODO DB를 구축하면 아이콘 네임맵으로 저장 시켜줘야 함
-        // TEST용으로
-//        iconNameMap.put("")
+
         // 글꼴 로딩
         typeface = getApplicationFont(context);
         // 모든 스케쥴 데이터 로딩
@@ -142,6 +139,9 @@ public class DataHelper {
         categories = new ArrayList<String>();
         activities = new HashMap<String, ArrayList<ActivityVO>>();
         drawableList = new ArrayList<Drawable>();
+
+        mode = 5;
+        multiModeViews = new ArrayList<View>();
     }
 
     private void updateIsFirstLoadingValue() {
