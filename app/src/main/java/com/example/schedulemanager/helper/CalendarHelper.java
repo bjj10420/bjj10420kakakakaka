@@ -288,25 +288,62 @@ public class CalendarHelper {
      * @param calendarCellView
      */
     public void changeCalendarCellColor(View calendarCellView) {
-//        Log.d("포인트에 가장 가까운 뷰", String.valueOf(calendarCellView.getTag()));
         View closestView = uiHelepr.getClosestView();
+        changeViewClolors(closestView, calendarCellView);
+        if(calendarCellView != null)
+        uiHelepr.setClosestView(calendarCellView);
+    }
 
+    public void changeCalendarMultiCellColor(View calendarCellView) {
+        changeCalendarCellColor(calendarCellView);
+        extractViewsForMultiMode();
+
+    }
+
+    private void extractViewsForMultiMode() {
+        TreeMap<Integer, RectAndView> rectZone = dataHelper.getRectZoneWithViewSorted();
+        View closestView = uiHelepr.getClosestView();
+        int mode = dataHelper.getMode();
+
+        for(int i = 1 ; i < mode ; i++){
+            View extentionalView = getViewFromRectZoneByTag(rectZone, closestView, i);
+            if(extentionalView != null)
+                dataHelper.getMultiModeViews().add(extentionalView);
+        }
+        for(View view : dataHelper.getMultiModeViews()){
+            Log.d("dataHelper.getMultiModeViews() = ", String.valueOf(view.getTag()) + "일");
+        }
+
+    }
+
+    private View getViewFromRectZoneByTag(TreeMap<Integer, RectAndView> rectZone, View closestView, int i) {
+        View theRightView = null;
+        int index = (Integer.parseInt((String) closestView.getTag()) + i);
+        for(Integer key : rectZone.keySet()) {
+            View view = rectZone.get(key).getView();
+            if (view != null && view.getTag().toString().equals(String.valueOf(index)))
+                theRightView = view;
+        }
+        return  theRightView;
+    }
+
+    private void changeViewClolors(View closestView, View calendarCellView) {
         // 1. 원래 있는 경우 기존셀을 원복, 새로운 곳에는 색을 + 저장
         if(closestView != null) {
-            if(isToday(closestView))
-                closestView.setBackgroundResource(R.drawable.calendar_item_selected_bg);
-            else
-                closestView.setBackgroundColor(Color.parseColor("#ffffff"));
-
+            restoreClosestColor(closestView);
             calendarCellView.setBackgroundResource(R.drawable.calendar_hover_bg);
-         }
+        }
         // 2. 첫 변화
         else {
             calendarCellView.setBackgroundResource(R.drawable.calendar_hover_bg);
-         }
+        }
+    }
 
-        if(calendarCellView != null)
-        uiHelepr.setClosestView(calendarCellView);
+    private void restoreClosestColor(View closestView) {
+        if(isToday(closestView))
+            closestView.setBackgroundResource(R.drawable.calendar_item_selected_bg);
+        else
+            closestView.setBackgroundColor(Color.parseColor("#ffffff"));
     }
 
     /**

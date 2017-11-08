@@ -172,6 +172,21 @@ public class EventHelper {
     }
 
     private void changeCalendarCellColorWhenCollided() {
+        if(isMultimode() == false)
+            singleMode();
+        else
+            multiMode();
+    }
+
+    private void multiMode() {
+        calendarHelper.changeCalendarMultiCellColor(dataHelper.getArroundViewGroup().get(calendarHelper.findTheClosestView()));
+    }
+
+    private boolean isMultimode() {
+        return  dataHelper.getMode() != 1;
+    }
+
+    private void singleMode() {
         calendarHelper.changeCalendarCellColor(dataHelper.getArroundViewGroup().get(calendarHelper.findTheClosestView()));
     }
 

@@ -775,4 +775,20 @@ public class DataHelper {
             }
         }
     }
+
+    public int getMode() {
+        return mode;
+    }
+
+    public void setMode(int mode) {
+        this.mode = mode;
+    }
+
+    public ArrayList<View> getMultiModeViews() {
+        return multiModeViews;
+    }
+
+    public void setMultiModeViews(ArrayList<View> multiModeViews) {
+        this.multiModeViews = multiModeViews;
+    }
 }

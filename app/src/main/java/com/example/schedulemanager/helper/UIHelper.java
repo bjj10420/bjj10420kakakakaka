@@ -413,7 +413,7 @@ public class UIHelper {
     }
 
     public void setClosestView(View closestView) {
-        Log.d("setClosestView 체크", "setClosestView 체크");
+//        Log.d("setClosestView 체크", "setClosestView 체크");
         this.closestView = closestView;
     }
 
