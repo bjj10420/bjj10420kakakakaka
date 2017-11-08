@@ -55,8 +55,8 @@ public class EventHelper {
 
         // 스테틱 저장
         eventHelper = this;
-        // 드래그 이벤트 설정
-        setDragEvents();
+        // 패널 이벤트 설정
+        setPanelEvents();
         // 중앙 아이콘 클릭 이벤트 설정
         setCenterIconClickEvent();
         // 뒤로가기 버튼 클릭 이벤트 설정
@@ -66,6 +66,24 @@ public class EventHelper {
         setCalendarBtnEvent(R.id.timetable_param_setter_calendar_next);
         // 파이 챠트 탭(클릭) 이벤트 설정
         setDailyScheduleClickEvent();
+    }
+
+    private void setPanelEvents() {
+        setDragEvents();
+        setLongClickEvents();
+    }
+
+    private void setLongClickEvents() {
+        setPanelLongClickEvent(R.id.buttonPanel);
+        setPanelLongClickEvent(R.id.buttonPanel2);
+    }
+
+    private void setPanelLongClickEvent(int buttonPanelId) {
+        LinearLayout buttonPanel = (LinearLayout) Util.getViewById(context, buttonPanelId);
+        for(int i = 0; i < buttonPanel.getChildCount(); i++){
+            View buttonView = buttonPanel.getChildAt(i);
+            buttonView.setOnLongClickListener(getLongClickListener());
+        }
     }
 
     public void setDragEvents() {
@@ -88,7 +106,7 @@ public class EventHelper {
 
                     if(isEtcButton(view)) {
                         actionEtcButtonClicked();
-                        return true;
+                        return false;
                     }
 
                     switch (event.getActionMasked()) {
@@ -107,7 +125,7 @@ public class EventHelper {
                         default:
                             return false;
                     }
-                    return true;
+                    return false;
                 }
             });
         }
@@ -685,5 +703,15 @@ public class EventHelper {
                 }
                 break;
         }
+    }
+
+    public View.OnLongClickListener getLongClickListener() {
+        return new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                Log.d("하이염", "하이염");
+                return false;
+            }
+        };
     }
 }

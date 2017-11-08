@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity {
         ManagerPanel managerPanel = new ManagerPanel(this);
         managerPanel.initManagerPanel();
         eventHelper.setManagerPanel(managerPanel);
-//
+
         AnimationHelper animationHelper = new AnimationHelper();
         animationHelper.init();
     }
