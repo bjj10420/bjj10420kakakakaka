@@ -2,7 +2,9 @@ package com.example.schedulemanager.helper;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
@@ -33,6 +35,7 @@ import java.util.List;
 import java.util.TreeMap;
 
 import static com.example.schedulemanager.helper.DataHelper.PICK_FROM_GALLARY;
+import static com.example.schedulemanager.helper.DataHelper.dataHelper;
 
 /**
  * 모든 이벤트를 처리, 관리
@@ -709,7 +712,30 @@ public class EventHelper {
         return new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                Log.d("하이염", "하이염");
+                final AlertDialog.Builder builder = new AlertDialog.Builder(context, 5);
+                builder.setTitle("기간 지정");
+
+                final CharSequence[] modeArray = {"1일", "3일", "5일", "7일", "10일"};
+                builder.setSingleChoiceItems(modeArray, 0,
+                        new DialogInterface.OnClickListener() {
+                            @Override
+                            public void onClick(DialogInterface dialog, int which) {
+                                dialog.dismiss();
+                                switch (which){
+                                    case 0 : dataHelper.setMode(1);
+                                        break;
+                                    case 1 : dataHelper.setMode(3);
+                                        break;
+                                    case 2 : dataHelper.setMode(5);
+                                        break;
+                                    case 3 : dataHelper.setMode(7);
+                                        break;
+                                    case 4 : dataHelper.setMode(10);
+                                        break;
+                                }
+                            }
+                        });
+                builder.show();
                 return false;
             }
         };
