@@ -22,34 +22,34 @@ public class BasicDataHelper {
     }
 
     private void makeTravel(ArrayList<ActivityVO> basicDataList) {
-            ActivityVO basicActivity12 = new ActivityVO("여행", "비행기 탑승", "T", dataHelper.getByteArrayFromDrawable(R.drawable.icon_88));
-            ActivityVO basicActivity13 = new ActivityVO("여행", "환승", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_89));
-            ActivityVO basicActivity14 = new ActivityVO("여행", "시간확인", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_90));
-            ActivityVO basicActivity15 = new ActivityVO("여행", "칵테일 한잔", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_91));
-            ActivityVO basicActivity16 = new ActivityVO("여행", "코코넛 칵테일 한잔", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_92));
-            ActivityVO basicActivity17 = new ActivityVO("여행", "방향설정", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_93));
-            ActivityVO basicActivity18 = new ActivityVO("여행", "크루즈쉽 탑승", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_94));
-            ActivityVO basicActivity19 = new ActivityVO("여행", "방문", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_95));
-            ActivityVO basicActivity20 = new ActivityVO("여행", "KTX로 가기", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_96));
-            ActivityVO basicActivity22 = new ActivityVO("여행", "섬으로", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_97));
-            ActivityVO basicActivity24 = new ActivityVO("여행", "로비에서", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_98));
-            ActivityVO basicActivity25 = new ActivityVO("여행", "바다로", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_100));
-            ActivityVO basicActivity26 = new ActivityVO("여행", "지도확인", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_99));
-            ActivityVO basicActivity29 = new ActivityVO("여행", "산으로", "T", dataHelper.getByteArrayFromDrawable(R.drawable.icon_101));
-            ActivityVO basicActivity30 = new ActivityVO("여행", "체크인", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_102));
-            ActivityVO basicActivity31 = new ActivityVO("여행", "호텔에서 휴식", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_103));
-            ActivityVO basicActivity32 = new ActivityVO("여행", "숙박", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_104));
-            ActivityVO basicActivity322 = new ActivityVO("여행", "야외활동", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_105));
-            ActivityVO basicActivity33 = new ActivityVO("여행", "태그달기", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_107));
-            ActivityVO basicActivity34 = new ActivityVO("여행", "텐트숙박", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_108));
-            ActivityVO basicActivity35 = new ActivityVO("여행", "티켓예매", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_109));
-            ActivityVO basicActivity37 = new ActivityVO("여행", "화장실 미리가기", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_110));
-            ActivityVO basicActivity38 = new ActivityVO("여행", "온천", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_111));
-            ActivityVO basicActivity39 = new ActivityVO("여행", "기차로 가기", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_112));
-            ActivityVO basicActivity40 = new ActivityVO("여행", "여행준비", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_113));
-            ActivityVO basicActivity41 = new ActivityVO("여행", "여행가방 찾기", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_114));
-            ActivityVO basicActivity42 = new ActivityVO("여행", "외식", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_115));
-            ActivityVO basicActivity43 = new ActivityVO("여행", "모래사장에서", "T", dataHelper.getByteArrayFromDrawable(R.drawable.icon_115));
+            ActivityVO basicActivity12 = new ActivityVO("여행", "비행기 탑승", "T", dataHelper.getByteArrayFromDrawable(R.drawable.icon_116));
+            ActivityVO basicActivity13 = new ActivityVO("여행", "환승", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_117));
+            ActivityVO basicActivity14 = new ActivityVO("여행", "시간확인", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_118));
+            ActivityVO basicActivity15 = new ActivityVO("여행", "칵테일 한잔", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_119));
+            ActivityVO basicActivity16 = new ActivityVO("여행", "코코넛 칵테일 한잔", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_120));
+            ActivityVO basicActivity17 = new ActivityVO("여행", "방향설정", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_121));
+            ActivityVO basicActivity18 = new ActivityVO("여행", "크루즈쉽 탑승", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_122));
+            ActivityVO basicActivity19 = new ActivityVO("여행", "방문", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_124));
+            ActivityVO basicActivity20 = new ActivityVO("여행", "KTX로 가기", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_125));
+            ActivityVO basicActivity22 = new ActivityVO("여행", "섬으로", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_126));
+            ActivityVO basicActivity24 = new ActivityVO("여행", "로비에서", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_127));
+            ActivityVO basicActivity25 = new ActivityVO("여행", "바다로", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_128));
+            ActivityVO basicActivity26 = new ActivityVO("여행", "지도확인", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_129));
+            ActivityVO basicActivity29 = new ActivityVO("여행", "산으로", "T", dataHelper.getByteArrayFromDrawable(R.drawable.icon_130));
+            ActivityVO basicActivity30 = new ActivityVO("여행", "체크인", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_131));
+            ActivityVO basicActivity31 = new ActivityVO("여행", "호텔에서 휴식", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_132));
+            ActivityVO basicActivity32 = new ActivityVO("여행", "숙박", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_133));
+            ActivityVO basicActivity322 = new ActivityVO("여행", "야외활동", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_134));
+            ActivityVO basicActivity33 = new ActivityVO("여행", "태그달기", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_135));
+            ActivityVO basicActivity34 = new ActivityVO("여행", "텐트숙박", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_136));
+            ActivityVO basicActivity35 = new ActivityVO("여행", "티켓예매", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_137));
+            ActivityVO basicActivity37 = new ActivityVO("여행", "화장실 미리가기", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_138));
+            ActivityVO basicActivity38 = new ActivityVO("여행", "온천", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_139));
+            ActivityVO basicActivity39 = new ActivityVO("여행", "기차로 가기", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_140));
+            ActivityVO basicActivity40 = new ActivityVO("여행", "여행준비", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_141));
+            ActivityVO basicActivity41 = new ActivityVO("여행", "여행가방 찾기", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_142));
+            ActivityVO basicActivity42 = new ActivityVO("여행", "외식", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_143));
+            ActivityVO basicActivity43 = new ActivityVO("여행", "모래사장으로", "T", dataHelper.getByteArrayFromDrawable(R.drawable.icon_144));
 
             basicDataList.add(basicActivity12);
             basicDataList.add(basicActivity13);
@@ -78,6 +78,7 @@ public class BasicDataHelper {
             basicDataList.add(basicActivity40);
             basicDataList.add(basicActivity41);
             basicDataList.add(basicActivity42);
+            basicDataList.add(basicActivity43);
         }
 
 
