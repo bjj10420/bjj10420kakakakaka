@@ -71,7 +71,7 @@ public class EventHelper {
         setDailyScheduleClickEvent();
     }
 
-    private void setPanelEvents() {
+    public void setPanelEvents() {
         setDragEvents();
         setLongClickEvents();
     }

@@ -67,7 +67,7 @@ public class ManagerPanelEvent implements View.OnClickListener{
     }
 
     private void resetMainFavoritePanelEvents() {
-        eventHelper.setDragEvents();
+        eventHelper.setPanelEvents();
     }
 
     private void redrawMainFavoritePanel() {
@@ -81,8 +81,6 @@ public class ManagerPanelEvent implements View.OnClickListener{
 
     public void managerPanelLayoutOff() {
         uiHelper.slideDownManagerPanel(managerPanel);
-//        managerPanel.setManagerLayoutVisible(false);
-
     }
 
     private void itemClickEvent(View view){
@@ -134,7 +132,7 @@ public class ManagerPanelEvent implements View.OnClickListener{
         addCategoryToMap(category);
         redrawManagerAndETCPanel();
     }
-//
+
     private void redrawManagerAndETCPanel() {
         managerPanel.redrawManagerPanel();
         redrawETCPanel();
