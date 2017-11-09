@@ -20,29 +20,29 @@ public class BasicDataHelper {
     }
 
     private void makeMedical(ArrayList<ActivityVO> basicDataList) {
-        ActivityVO basicActivity12 = new ActivityVO("의료", "구급차 타기", "T", dataHelper.getByteArrayFromDrawable(R.drawable.icon_59));
+        ActivityVO basicActivity12 = new ActivityVO("의료", "구급차 타기", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_59));
         ActivityVO basicActivity13 = new ActivityVO("의료", "의약통 준비", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_60));
         ActivityVO basicActivity14 = new ActivityVO("의료", "심장 강화 운동", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_61));
-        ActivityVO basicActivity15 = new ActivityVO("의료", "수액맞기", "T", dataHelper.getByteArrayFromDrawable(R.drawable.icon_62));
+        ActivityVO basicActivity15 = new ActivityVO("의료", "수액맞기", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_62));
         ActivityVO basicActivity16 = new ActivityVO("의료", "혈압측정", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_63));
         ActivityVO basicActivity17 = new ActivityVO("의료", "관장", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_64));
         ActivityVO basicActivity18 = new ActivityVO("의료", "시력검사", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_65));
-        ActivityVO basicActivity19 = new ActivityVO("의료", "심박수 측정", "T", dataHelper.getByteArrayFromDrawable(R.drawable.icon_67));
+        ActivityVO basicActivity19 = new ActivityVO("의료", "심박수 측정", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_67));
         ActivityVO basicActivity20 = new ActivityVO("의료", "의료 헬리콥터 타기", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_68));
-        ActivityVO basicActivity22 = new ActivityVO("의료", "병원위치 확인", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_69));
+        ActivityVO basicActivity22 = new ActivityVO("의료", "병원위치 확인", "T", dataHelper.getByteArrayFromDrawable(R.drawable.icon_69));
         ActivityVO basicActivity24 = new ActivityVO("의료", "의료기록 확인", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_70));
         ActivityVO basicActivity25 = new ActivityVO("의료", "입원", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_71));
         ActivityVO basicActivity26 = new ActivityVO("의료", "현미경 사용", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_72));
         ActivityVO basicActivity29 = new ActivityVO("의료", "산소 공급기 사용", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_73));
         ActivityVO basicActivity30 = new ActivityVO("의료", "간호사 상담", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_74));
         ActivityVO basicActivity31 = new ActivityVO("의료", "약준비", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_75));
-        ActivityVO basicActivity32 = new ActivityVO("의료", "밴드 사용", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_76));
+        ActivityVO basicActivity32 = new ActivityVO("의료", "밴드 사용", "T", dataHelper.getByteArrayFromDrawable(R.drawable.icon_76));
         ActivityVO basicActivity322 = new ActivityVO("의료", "양수기 사용", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_77));
         ActivityVO basicActivity33 = new ActivityVO("의료", "X레이", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_78));
         ActivityVO basicActivity34 = new ActivityVO("의료", "치과진료", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_79));
         ActivityVO basicActivity35 = new ActivityVO("의료", "진찰받기", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_81));
         ActivityVO basicActivity37 = new ActivityVO("의료", "주사맞기", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_82));
-        ActivityVO basicActivity38 = new ActivityVO("의료", "처방전 받기", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_83));
+        ActivityVO basicActivity38 = new ActivityVO("의료", "처방전 받기", "T", dataHelper.getByteArrayFromDrawable(R.drawable.icon_83));
         ActivityVO basicActivity39 = new ActivityVO("의료", "시험관 사용", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_84));
         ActivityVO basicActivity40 = new ActivityVO("의료", "체온측정", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_85));
 
