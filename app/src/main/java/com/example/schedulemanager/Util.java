@@ -223,11 +223,11 @@ public class Util {
         }
     }
 
-    public static void setCustomToast(Context context, String msg) {
+    public static void customToast(Context context, String msg) {
         TextView tvToastMsg = new TextView(context);
         tvToastMsg.setText(msg);
-        tvToastMsg.setBackgroundResource(R.drawable.bt_tag);
-        tvToastMsg.setTextColor(Color.RED);
+        tvToastMsg.setBackgroundResource(R.drawable.toast_bg);
+        tvToastMsg.setTextColor(Color.WHITE);
         tvToastMsg.setTextSize(16);
         Toast toastMsg = Toast.makeText(context, "", Toast.LENGTH_SHORT);
         toastMsg.setView(tvToastMsg);

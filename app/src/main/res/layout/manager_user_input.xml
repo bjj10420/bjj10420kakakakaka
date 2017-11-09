@@ -133,7 +133,7 @@
                 android:layout_width="0dp"
                 android:layout_height="75dp"
                 android:layout_weight="1"
-                android:background="@drawable/bottom_button_bg"
+                android:background="@drawable/toast_bg"
                 android:text="입력"
                 android:textColor="#404040" />
 
@@ -142,7 +142,7 @@
                 android:layout_width="0dp"
                 android:layout_height="75dp"
                 android:layout_weight="1"
-                android:background="@drawable/bottom_button_bg"
+                android:background="@drawable/toast_bg"
                 android:text="닫기"
                 android:textColor="#404040" />
 
