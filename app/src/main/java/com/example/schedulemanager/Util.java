@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.ContentResolver;
 import android.content.Context;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.graphics.Rect;
 import android.graphics.Typeface;
 import android.net.Uri;
@@ -14,6 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.schedulemanager.helper.DataHelper;
 import com.example.schedulemanager.interface_.CustomCondition;
@@ -221,5 +223,15 @@ public class Util {
         }
     }
 
+    public static void setCustomToast(Context context, String msg) {
+        TextView tvToastMsg = new TextView(context);
+        tvToastMsg.setText(msg);
+        tvToastMsg.setBackgroundResource(R.drawable.bt_tag);
+        tvToastMsg.setTextColor(Color.RED);
+        tvToastMsg.setTextSize(16);
+        Toast toastMsg = Toast.makeText(context, "", Toast.LENGTH_SHORT);
+        toastMsg.setView(tvToastMsg);
+        toastMsg.show();
+    }
 
 }

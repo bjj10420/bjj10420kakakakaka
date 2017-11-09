@@ -147,7 +147,7 @@
                 android:id="@+id/cancel_btn"
                 android:layout_width="30dp"
                 android:layout_height="30dp"
-                android:background="@drawable/cancel_icon"
+
                 android:gravity="center"
                 android:textColor="#FFC000"
                 android:textSize="14dp"

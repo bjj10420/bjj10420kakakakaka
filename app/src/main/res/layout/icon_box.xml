@@ -43,7 +43,7 @@
             android:layout_centerVertical="true"
             android:layout_marginTop="30dp"
             android:layout_toLeftOf="@id/itemInfoIconBoxPanelClose"
-            android:background="@drawable/basic_documentation_icon"
+
             android:visibility="gone" />
 
 
