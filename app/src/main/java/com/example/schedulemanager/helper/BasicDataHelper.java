@@ -12,6 +12,7 @@ public class BasicDataHelper {
 
     public ArrayList<ActivityVO> init(){
         ArrayList<ActivityVO> basicDataList = new ArrayList<ActivityVO>();
+        makeLife(basicDataList);
         makeBusiness(basicDataList);
         makeIT(basicDataList);
         makeMedical(basicDataList);
@@ -19,31 +20,45 @@ public class BasicDataHelper {
         makeTravel(basicDataList);
         makeSports(basicDataList);
         makeCommorce(basicDataList);
-        makeLife(basicDataList);
         return basicDataList;
     }
 
     private void makeLife(ArrayList<ActivityVO> basicDataList) {
-        ActivityVO basicActivity12 = new ActivityVO("거래활동", "24시간내 환불", "T", dataHelper.getByteArrayFromDrawable(R.drawable.icon_176));
-        ActivityVO basicActivity13 = new ActivityVO("거래활동", "구매", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_178));
-        ActivityVO basicActivity14 = new ActivityVO("거래활동", "온라인 쇼핑", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_179));
-        ActivityVO basicActivity15 = new ActivityVO("거래활동", "쿠폰받기", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_181));
-        ActivityVO basicActivity16 = new ActivityVO("거래활동", "신용카드 확인", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_182));
-        ActivityVO basicActivity17 = new ActivityVO("거래활동", "택배", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_183));
-        ActivityVO basicActivity18 = new ActivityVO("거래활동", "할인체크", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_184));
-        ActivityVO basicActivity19 = new ActivityVO("거래활동", "선물사기", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_186));
-        ActivityVO basicActivity20 = new ActivityVO("거래활동", "컴퓨터 구매", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_187));
-        ActivityVO basicActivity22 = new ActivityVO("거래활동", "카드로 구매", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_188));
-        ActivityVO basicActivity24 = new ActivityVO("거래활동", "물건 확인", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_189));
-        ActivityVO basicActivity25 = new ActivityVO("거래활동", "상품문의", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_190));
-        ActivityVO basicActivity26 = new ActivityVO("거래활동", "포장", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_191));
-        ActivityVO basicActivity29 = new ActivityVO("거래활동", "택배 보내기", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_192));
-        ActivityVO basicActivity30 = new ActivityVO("거래활동", "저축", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_193));
-        ActivityVO basicActivity31 = new ActivityVO("거래활동", "출금", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_194));
-        ActivityVO basicActivity32 = new ActivityVO("거래활동", "세일", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_195));
-        ActivityVO basicActivity322 = new ActivityVO("거래활동", "입금", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_197));
-        ActivityVO basicActivity33 = new ActivityVO("거래활동", "탑세일", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_198));
-        ActivityVO basicActivity34 = new ActivityVO("거래활동", "지출", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_199));
+        ActivityVO basicActivity12 = new ActivityVO("일상/생활", "연락", "T", dataHelper.getByteArrayFromDrawable(R.drawable.icon_233));
+        ActivityVO basicActivity13 = new ActivityVO("일상/생활", "연락처 관리", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_201));
+        ActivityVO basicActivity14 = new ActivityVO("일상/생활", "알람설정", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_202));
+        ActivityVO basicActivity15 = new ActivityVO("일상/생활", "샤워", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_203));
+        ActivityVO basicActivity16 = new ActivityVO("일상/생활", "술", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_204));
+        ActivityVO basicActivity17 = new ActivityVO("일상/생활", "쓰레기 버리기", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_205));
+        ActivityVO basicActivity18 = new ActivityVO("일상/생활", "점심식사", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_206));
+        ActivityVO basicActivity19 = new ActivityVO("일상/생활", "병원가기", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_207));
+        ActivityVO basicActivity20 = new ActivityVO("일상/생활", "클라우드 사용", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_208));
+        ActivityVO basicActivity22 = new ActivityVO("일상/생활", "커피타임", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_209));
+        ActivityVO basicActivity24 = new ActivityVO("일상/생활", "컴퓨터 작업", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_210));
+        ActivityVO basicActivity25 = new ActivityVO("일상/생활", "주차", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_211));
+        ActivityVO basicActivity26 = new ActivityVO("일상/생활", "챗팅", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_212));
+        ActivityVO basicActivity29 = new ActivityVO("일상/생활", "보드게임", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_213));
+        ActivityVO basicActivity30 = new ActivityVO("일상/생활", "게임", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_214));
+        ActivityVO basicActivity31 = new ActivityVO("일상/생활", "음악감상", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_215));
+        ActivityVO basicActivity32 = new ActivityVO("일상/생활", "간식", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_216));
+        ActivityVO basicActivity322 = new ActivityVO("일상/생활", "인터넷", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_217));
+        ActivityVO basicActivity33 = new ActivityVO("일상/생활", "위치파악", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_218));
+        ActivityVO basicActivity34 = new ActivityVO("일상/생활", "뉴스확인", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_219));
+        ActivityVO basicActivity35 = new ActivityVO("일상/생활", "영화감상", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_220));
+        ActivityVO basicActivity36 = new ActivityVO("일상/생활", "메세지", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_221));
+        ActivityVO basicActivity37 = new ActivityVO("일상/생활", "약먹기", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_222));
+        ActivityVO basicActivity38 = new ActivityVO("일상/생활", "저녁식사", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_223));
+        ActivityVO basicActivity39 = new ActivityVO("일상/생활", "검색", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_224));
+        ActivityVO basicActivity40 = new ActivityVO("일상/생활", "수리", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_225));
+        ActivityVO basicActivity41 = new ActivityVO("일상/생활", "쇼핑", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_226));
+        ActivityVO basicActivity42 = new ActivityVO("일상/생활", "취미활동", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_227));
+        ActivityVO basicActivity43 = new ActivityVO("일상/생활", "가게가기", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_228));
+        ActivityVO basicActivity44 = new ActivityVO("일상/생활", "티타임", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_229));
+        ActivityVO basicActivity45 = new ActivityVO("일상/생활", "TV", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_230));
+        ActivityVO basicActivity46 = new ActivityVO("일상/생활", "와인한잔", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_231));
+        ActivityVO basicActivity47 = new ActivityVO("일상/생활", "온라인 게임", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_232));
+        ActivityVO basicActivity48 = new ActivityVO("일상/생활", "VR", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_200));
+
 
         basicDataList.add(basicActivity12);
         basicDataList.add(basicActivity13);
@@ -65,7 +80,20 @@ public class BasicDataHelper {
         basicDataList.add(basicActivity322);
         basicDataList.add(basicActivity33);
         basicDataList.add(basicActivity34);
-
+        basicDataList.add(basicActivity35);
+        basicDataList.add(basicActivity36);
+        basicDataList.add(basicActivity37);
+        basicDataList.add(basicActivity38);
+        basicDataList.add(basicActivity39);
+        basicDataList.add(basicActivity40);
+        basicDataList.add(basicActivity41);
+        basicDataList.add(basicActivity42);
+        basicDataList.add(basicActivity43);
+        basicDataList.add(basicActivity44);
+        basicDataList.add(basicActivity45);
+        basicDataList.add(basicActivity46);
+        basicDataList.add(basicActivity47);
+        basicDataList.add(basicActivity48);
     }
 
     private void makeCommorce(ArrayList<ActivityVO> basicDataList) {
