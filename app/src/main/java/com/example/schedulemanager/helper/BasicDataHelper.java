@@ -17,9 +17,61 @@ public class BasicDataHelper {
         makeMedical(basicDataList);
         makeSchool(basicDataList);
         makeTravel(basicDataList);
-
+        makeSports(basicDataList);
 
         return basicDataList;
+    }
+
+    private void makeSports(ArrayList<ActivityVO> basicDataList) {
+        ActivityVO basicActivity12 = new ActivityVO("오락/스포츠", "야구", "T", dataHelper.getByteArrayFromDrawable(R.drawable.icon_145));
+        ActivityVO basicActivity13 = new ActivityVO("오락/스포츠", "농구", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_146));
+        ActivityVO basicActivity14 = new ActivityVO("오락/스포츠", "자전거", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_147));
+        ActivityVO basicActivity15 = new ActivityVO("오락/스포츠", "당구", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_148));
+        ActivityVO basicActivity16 = new ActivityVO("오락/스포츠", "볼링", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_149));
+        ActivityVO basicActivity17 = new ActivityVO("오락/스포츠", "포커", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_150));
+        ActivityVO basicActivity18 = new ActivityVO("오락/스포츠", "체스", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_152));
+        ActivityVO basicActivity19 = new ActivityVO("오락/스포츠", "다이빙", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_154));
+        ActivityVO basicActivity20 = new ActivityVO("오락/스포츠", "덤벨", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_155));
+        ActivityVO basicActivity22 = new ActivityVO("오락/스포츠", "골프", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_158));
+        ActivityVO basicActivity24 = new ActivityVO("오락/스포츠", "라이딩", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_159));
+        ActivityVO basicActivity25 = new ActivityVO("오락/스포츠", "하키", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_160));
+        ActivityVO basicActivity26 = new ActivityVO("오락/스포츠", "탁구", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_163));
+        ActivityVO basicActivity29 = new ActivityVO("오락/스포츠", "레이싱", "T", dataHelper.getByteArrayFromDrawable(R.drawable.icon_164));
+        ActivityVO basicActivity30 = new ActivityVO("오락/스포츠", "미식축구", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_165));
+        ActivityVO basicActivity31 = new ActivityVO("오락/스포츠", "요트", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_166));
+        ActivityVO basicActivity32 = new ActivityVO("오락/스포츠", "스케이트", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_168));
+        ActivityVO basicActivity322 = new ActivityVO("오락/스포츠", "줄넘기", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_169));
+        ActivityVO basicActivity33 = new ActivityVO("오락/스포츠", "축구", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_170));
+        ActivityVO basicActivity34 = new ActivityVO("오락/스포츠", "월드컵", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_171));
+        ActivityVO basicActivity35 = new ActivityVO("오락/스포츠", "기록재기", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_172));
+        ActivityVO basicActivity37 = new ActivityVO("오락/스포츠", "테니스", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_173));
+        ActivityVO basicActivity38 = new ActivityVO("오락/스포츠", "올림픽", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_174));
+        ActivityVO basicActivity39 = new ActivityVO("오락/스포츠", "웨이트", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_175));
+
+        basicDataList.add(basicActivity12);
+        basicDataList.add(basicActivity13);
+        basicDataList.add(basicActivity14);
+        basicDataList.add(basicActivity15);
+        basicDataList.add(basicActivity16);
+        basicDataList.add(basicActivity17);
+        basicDataList.add(basicActivity18);
+        basicDataList.add(basicActivity19);
+        basicDataList.add(basicActivity20);
+        basicDataList.add(basicActivity22);
+        basicDataList.add(basicActivity24);
+        basicDataList.add(basicActivity25);
+        basicDataList.add(basicActivity26);
+        basicDataList.add(basicActivity29);
+        basicDataList.add(basicActivity30);
+        basicDataList.add(basicActivity31);
+        basicDataList.add(basicActivity32);
+        basicDataList.add(basicActivity322);
+        basicDataList.add(basicActivity33);
+        basicDataList.add(basicActivity34);
+        basicDataList.add(basicActivity35);
+        basicDataList.add(basicActivity37);
+        basicDataList.add(basicActivity38);
+        basicDataList.add(basicActivity39);
     }
 
     private void makeTravel(ArrayList<ActivityVO> basicDataList) {
