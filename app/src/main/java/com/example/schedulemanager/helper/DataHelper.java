@@ -12,7 +12,6 @@ import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.View;
 
-import com.example.schedulemanager.R;
 import com.example.schedulemanager.calendar.CalendarPagerAdapter;
 import com.example.schedulemanager.vo.ActivityVO;
 import com.example.schedulemanager.vo.CalendarCellInfo;
@@ -24,7 +23,6 @@ import java.io.ByteArrayOutputStream;
 import java.lang.reflect.Field;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Locale;
@@ -156,25 +154,23 @@ public class DataHelper {
     }
 
     private void makeBasicActivityData() {
-        ActivityVO[] activityVoArray = makeBasicActivityVoArray();
-        insertActivityIntoDB(activityVoArray);
+        ArrayList<ActivityVO> activityVos = makeBasicActivityVos();
+        insertActivityIntoDB(activityVos);
     }
 
-    private ActivityVO[] makeBasicActivityVoArray() {
-        ActivityVO basicActivity11 = new ActivityVO("사무", "주식", "F", getByteArrayFromDrawable(R.drawable.basic_check_stock_icon));
-
-        ActivityVO[] activityVoArray = new ActivityVO[] {basicActivity11};
-        return  activityVoArray;
+    private ArrayList<ActivityVO> makeBasicActivityVos() {
+        ArrayList<ActivityVO> basicActivityList = new BasicDataHelper().init();
+        return  basicActivityList;
     }
 
-    private void insertActivityIntoDB(ActivityVO[] activityVOs) {
-        for(int i = 0; i < activityVOs.length; i++) {
-            DBHelper.dbHelper.insertActivityWithIcon(activityVOs[i]);
+    private void insertActivityIntoDB(ArrayList<ActivityVO> activityVOs) {
+        for(int i = 0; i < activityVOs.size(); i++) {
+            DBHelper.dbHelper.insertActivityWithIcon(activityVOs.get(i));
         }
     }
 
     private void makeBasicCategoryData() {
-        String[] categoryNames = {"생활", "사무", "취미", "기타"};
+        String[] categoryNames = {"비지니스", "사무", "취미", "기타"};
         for(int i = 0; i < categoryNames.length; i++) {
             String categoryName = categoryNames[i];
             DBHelper.dbHelper.insertCategory(categoryName);
