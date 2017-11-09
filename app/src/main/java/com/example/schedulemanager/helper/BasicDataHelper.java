@@ -15,8 +15,67 @@ public class BasicDataHelper {
         makeBusiness(basicDataList);
         makeIT(basicDataList);
         makeMedical(basicDataList);
+        makeSchool(basicDataList);
 
         return basicDataList;
+    }
+
+    private void makeSchool(ArrayList<ActivityVO> basicDataList) {
+        ActivityVO basicActivity12 = new ActivityVO("학교", "화학수업", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_88));
+        ActivityVO basicActivity13 = new ActivityVO("학교", "학교준비", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_89));
+        ActivityVO basicActivity14 = new ActivityVO("학교", "수업끝", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_90));
+        ActivityVO basicActivity15 = new ActivityVO("학교", "과제", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_91));
+        ActivityVO basicActivity16 = new ActivityVO("학교", "미술수업", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_92));
+        ActivityVO basicActivity17 = new ActivityVO("학교", "역사수업", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_93));
+        ActivityVO basicActivity18 = new ActivityVO("학교", "수료", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_94));
+        ActivityVO basicActivity19 = new ActivityVO("학교", "수학수업", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_95));
+        ActivityVO basicActivity20 = new ActivityVO("학교", "미술수업", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_96));
+        ActivityVO basicActivity22 = new ActivityVO("학교", "학교기관", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_97));
+        ActivityVO basicActivity24 = new ActivityVO("학교", "기하학", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_98));
+        ActivityVO basicActivity25 = new ActivityVO("학교", "성적확인", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_100));
+        ActivityVO basicActivity26 = new ActivityVO("학교", "해외탐방", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_99));
+        ActivityVO basicActivity29 = new ActivityVO("학교", "시험공부", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_101));
+        ActivityVO basicActivity30 = new ActivityVO("학교", "시험", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_102));
+        ActivityVO basicActivity31 = new ActivityVO("학교", "수업등록", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_103));
+        ActivityVO basicActivity32 = new ActivityVO("학교", "레포트 작성", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_104));
+        ActivityVO basicActivity322 = new ActivityVO("학교", "레포트 제출", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_105));
+        ActivityVO basicActivity33 = new ActivityVO("학교", "발표", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_107));
+        ActivityVO basicActivity34 = new ActivityVO("학교", "학교끝", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_108));
+        ActivityVO basicActivity35 = new ActivityVO("학교", "스쿨버스", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_109));
+        ActivityVO basicActivity37 = new ActivityVO("학교", "과학수업", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_110));
+        ActivityVO basicActivity38 = new ActivityVO("학교", "논문 작성", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_111));
+        ActivityVO basicActivity39 = new ActivityVO("학교", "우주과학 수업", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_112));
+        ActivityVO basicActivity40 = new ActivityVO("학교", "도서관", "T", dataHelper.getByteArrayFromDrawable(R.drawable.icon_113));
+        ActivityVO basicActivity41 = new ActivityVO("학교", "강당", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_114));
+        ActivityVO basicActivity42 = new ActivityVO("학교", "졸업", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_115));
+
+        basicDataList.add(basicActivity12);
+        basicDataList.add(basicActivity13);
+        basicDataList.add(basicActivity14);
+        basicDataList.add(basicActivity15);
+        basicDataList.add(basicActivity16);
+        basicDataList.add(basicActivity17);
+        basicDataList.add(basicActivity18);
+        basicDataList.add(basicActivity19);
+        basicDataList.add(basicActivity20);
+        basicDataList.add(basicActivity22);
+        basicDataList.add(basicActivity24);
+        basicDataList.add(basicActivity25);
+        basicDataList.add(basicActivity26);
+        basicDataList.add(basicActivity29);
+        basicDataList.add(basicActivity30);
+        basicDataList.add(basicActivity31);
+        basicDataList.add(basicActivity32);
+        basicDataList.add(basicActivity322);
+        basicDataList.add(basicActivity33);
+        basicDataList.add(basicActivity34);
+        basicDataList.add(basicActivity35);
+        basicDataList.add(basicActivity37);
+        basicDataList.add(basicActivity38);
+        basicDataList.add(basicActivity39);
+        basicDataList.add(basicActivity40);
+        basicDataList.add(basicActivity41);
+        basicDataList.add(basicActivity42);
     }
 
     private void makeMedical(ArrayList<ActivityVO> basicDataList) {
@@ -69,6 +128,8 @@ public class BasicDataHelper {
         basicDataList.add(basicActivity35);
         basicDataList.add(basicActivity37);
         basicDataList.add(basicActivity38);
+        basicDataList.add(basicActivity39);
+        basicDataList.add(basicActivity40);
     }
 
     private void makeIT(ArrayList<ActivityVO> basicDataList) {
