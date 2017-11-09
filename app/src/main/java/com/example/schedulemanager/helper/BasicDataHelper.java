@@ -255,7 +255,7 @@ public class BasicDataHelper {
         ActivityVO basicActivity16 = new ActivityVO("IT", "e북사용", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_35));
         ActivityVO basicActivity17 = new ActivityVO("IT", "음향조절", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_36));
         ActivityVO basicActivity18 = new ActivityVO("IT", "지문스캔", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_37));
-        ActivityVO basicActivity19 = new ActivityVO("IT", "USB 저장", "T", dataHelper.getByteArrayFromDrawable(R.drawable.icon_38));
+        ActivityVO basicActivity19 = new ActivityVO("IT", "USB 저장", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_38));
         ActivityVO basicActivity20 = new ActivityVO("IT", "동영상 제작", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_39));
         ActivityVO basicActivity22 = new ActivityVO("IT", "타블렛 사용", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_41));
         ActivityVO basicActivity24 = new ActivityVO("IT", "마이크 테스트", "F", dataHelper.getByteArrayFromDrawable(R.drawable.icon_43));
