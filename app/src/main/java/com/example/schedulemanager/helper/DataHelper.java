@@ -170,7 +170,7 @@ public class DataHelper {
     }
 
     private void makeBasicCategoryData() {
-        String[] categoryNames = {"비지니스", "IT", "의료", "학교", "여행", "오락/스포츠", "기타"};
+        String[] categoryNames = {"비지니스", "IT", "의료", "학교", "여행", "오락/스포츠", "거래활동", "기타"};
         for(int i = 0; i < categoryNames.length; i++) {
             String categoryName = categoryNames[i];
             DBHelper.dbHelper.insertCategory(categoryName);
