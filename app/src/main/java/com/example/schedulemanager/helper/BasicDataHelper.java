@@ -18,6 +18,7 @@ public class BasicDataHelper {
         makeSchool(basicDataList);
         makeTravel(basicDataList);
 
+
         return basicDataList;
     }
 
