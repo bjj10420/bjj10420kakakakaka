@@ -36,7 +36,9 @@
         android:layout_width="0dp"
         android:layout_height="25dp"
         android:layout_weight="1"
+        android:ellipsize="end"
         android:gravity="center"
+        android:singleLine="true"
         android:text="이름"
         android:textColor="#404040"
         android:textSize="16dp" />
