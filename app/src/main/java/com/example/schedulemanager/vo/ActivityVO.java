@@ -1,5 +1,7 @@
 package com.example.schedulemanager.vo;
 
+import java.util.ArrayList;
+
 /**
  * 하나의 활동을 나타내는 단위 VO
  */
@@ -17,6 +19,14 @@ public class ActivityVO {
         this.activityName = activityName;
         this.isFavorite = isFavorite;
         this.imageData = imageData;
+    }
+
+    public ActivityVO(String categoryName, String activityName, String isFavorite, byte[] imageData, ArrayList<ActivityVO> voArrayList) {
+        this.categoryName = categoryName;
+        this.activityName = activityName;
+        this.isFavorite = isFavorite;
+        this.imageData = imageData;
+        voArrayList.add(this);
     }
 
     public String getCategoryName() {
