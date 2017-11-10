@@ -5,4 +5,6 @@ package com.example.schedulemanager.interface_;
  */
 public interface GeneralCallback {
     public void onCallBack();
+
+
 }

@@ -115,7 +115,7 @@ public class ManagerPanel {
     }
 
     private View makeLastBar() {
-        View menuBarView = makeMenuBarView();
+        View menuBarView = makeLastMenuBarView();
         setMenuBarCancel(menuBarView);
         return menuBarView;
     }
@@ -125,10 +125,11 @@ public class ManagerPanel {
         menuBarTextView.setOnClickListener(managerPanelEvent);
     }
 
-    private View makeMenuBarView() {
+    private View makeLastMenuBarView() {
         View menuBarView = ((Activity) context).getLayoutInflater().inflate(R.layout.manager_menu_bar_item, null);
         menuBarView.setMinimumHeight((int) Util.convertDpToPixel(65));
         menuBarView.findViewById(R.id.addCategoryBtn).setOnClickListener(managerPanelEvent);
+        menuBarView.findViewById(R.id.removeCategoryBtn).setOnClickListener(managerPanelEvent);
         return menuBarView;
     }
 

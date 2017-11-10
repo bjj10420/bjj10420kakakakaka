@@ -224,6 +224,8 @@ public class DialogHelper {
      * 메세지를 설정한 선택형 다이얼 로그 생성
      */
     public void setChoiceStyleDialogWithMessage(Context context, final GeneralCallback callback1, final GeneralCallback callback2, String leftBtnString, String rightBtnString, String message){
+
+
         final AlertDialog.Builder alt_bld = new AlertDialog.Builder(context, 3);
         alt_bld.setMessage(message).setCancelable(
                 true).setPositiveButton(rightBtnString,
@@ -247,5 +249,22 @@ public class DialogHelper {
 
         // Icon for AlertDialog
         alert.show();
+
+    }
+
+    public void showCategorySelect(Context context, String title, CharSequence[] array, final GeneralCallback2 generalCallback) {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context, 5);
+        builder.setTitle(title);
+        builder.setCancelable(true);
+        builder.setSingleChoiceItems(array, 0,
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        dialog.dismiss();
+                        generalCallback.onCallBack(which);
+                        }
+                });
+        builder.show();
+
     }
 }

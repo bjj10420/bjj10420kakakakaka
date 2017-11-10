@@ -19,6 +19,9 @@ import android.widget.Toast;
 import com.example.schedulemanager.R;
 import com.example.schedulemanager.Util;
 import com.example.schedulemanager.helper.DBHelper;
+import com.example.schedulemanager.helper.DialogHelper;
+import com.example.schedulemanager.interface_.GeneralCallback;
+import com.example.schedulemanager.interface_.GeneralCallback2;
 import com.example.schedulemanager.panel.etcpanel.ETCPanel;
 import com.example.schedulemanager.vo.ActivityVO;
 
@@ -143,20 +146,14 @@ public class ManagerPanelItemAdd {
     }
 
     private void actionCategorySelectBtn() {
-        final AlertDialog.Builder builder = new AlertDialog.Builder(context, 5);
-        builder.setTitle("카테고리 선택");
         final CharSequence[] categoryArray = dataHelper.getCategoryArray();
 
-        builder.setSingleChoiceItems(categoryArray, 0,
-                new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        dialog.dismiss();
-                        setCategoryText(categoryArray, which);
-                    }
-                });
-        builder.show();
-
+        new DialogHelper().showCategorySelect(context, "카테고리 선택", categoryArray, new GeneralCallback2() {
+            @Override
+            public void onCallBack(Object parameter) {
+                setCategoryText(categoryArray, (Integer) parameter);
+            }
+        });
     }
 
     private void setCategoryText(CharSequence[] categoryArray, int which) {

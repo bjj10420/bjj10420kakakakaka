@@ -4,12 +4,9 @@ package com.example.schedulemanager.panel.managerpanel;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.example.schedulemanager.R;
 import com.example.schedulemanager.helper.DialogHelper;
-import com.example.schedulemanager.interface_.GeneralCallback;
 import com.example.schedulemanager.interface_.GeneralCallback2;
 import com.example.schedulemanager.panel.etcpanel.ETCPanel;
 import com.example.schedulemanager.vo.ActivityVO;
@@ -84,7 +81,7 @@ public class ManagerPanelEvent implements View.OnClickListener{
     }
 
     private void itemClickEvent(View view){
-        if(isListItemCancelBtn(view))
+        if(isRemoveCategoryBtn(view))
             removeCategoryEvent(view);
         else if(view.getTag() instanceof ActivityVO)
             listItemClickEvent(view);
@@ -95,15 +92,15 @@ public class ManagerPanelEvent implements View.OnClickListener{
     }
 
     private void removeCategoryEvent(View view) {
-        // 삭제 버튼 클릭
-        final String categoryName = ((TextView)((RelativeLayout) view.getParent()).getChildAt(0)).getText().toString();
-        new DialogHelper().setChoiceStyleDialogWithMessage(context, null, new GeneralCallback() {
-            @Override
-            public void onCallBack() {
-                removeCategory(categoryName);
-            }
+        final CharSequence[] categoryArray = dataHelper.getCategoryArray();
 
-        }, "삭제", "취소",  categoryName + "카테고리를 삭제하시겠습니까?");
+        new DialogHelper().showCategorySelect(context, "카테고리 삭제", categoryArray, new GeneralCallback2() {
+            @Override
+            public void onCallBack(Object parameter) {
+                removeCategory(categoryArray[(Integer) parameter].toString());
+            }
+        });
+
 
     }
 
@@ -113,8 +110,8 @@ public class ManagerPanelEvent implements View.OnClickListener{
         redrawManagerAndETCPanel();
     }
 
-    private boolean isListItemCancelBtn(View view) {
-        return view.getId() == R.id.menu_bar_cancel;
+    private boolean isRemoveCategoryBtn(View view) {
+        return view.getId() == R.id.removeCategoryBtn;
     }
 
     private void addCategoryEvent(View view) {
