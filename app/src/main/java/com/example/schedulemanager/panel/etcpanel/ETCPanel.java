@@ -109,12 +109,12 @@ public class ETCPanel {
     private void addRowLayout(View rowLayout) {
         Log.d("addRowLayout", "addRowLayout");
         etcContentsLayout.addView(rowLayout);
-        addBottomMargin(rowLayout, (int) Util.convertDpToPixel(10));
     }
 
     private View makeRowLayout(String category) {
         LinearLayout rowLayout = makeRowLayout();
         composeRowLayout(rowLayout, category);
+        addBottomMargin(rowLayout, (int) Util.convertDpToPixel(50));
         return rowLayout;
     }
 
@@ -208,9 +208,9 @@ public class ETCPanel {
 
     private void setTextViewBaseOptions(TextView textView) {
         float textHeight = Util.convertDpToPixel(15);
-        ViewGroup.LayoutParams textParams = new ViewGroup.LayoutParams((int) Util.convertDpToPixel(50),
+        ViewGroup.LayoutParams textParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 (int) textHeight);
-        textView.setGravity(Gravity.CENTER);
+        textView.setGravity(Gravity.CENTER_VERTICAL);
         textView.setLayoutParams(textParams);
         textView.setTextColor(Color.parseColor("#404040"));
     }
