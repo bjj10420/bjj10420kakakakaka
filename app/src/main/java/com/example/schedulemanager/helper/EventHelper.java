@@ -726,7 +726,7 @@ public class EventHelper {
             @Override
             public boolean onLongClick(View view) {
                 final int defaultIndex = setDefaultIndex();
-                final AlertDialog.Builder builder = new AlertDialog.Builder(context, defaultIndex);
+                final AlertDialog.Builder builder = new AlertDialog.Builder(context, 5);
                 builder.setTitle("기간 지정");
 
                 final CharSequence[] modeArray = {"1일", "3일", "5일", "7일", "10일"};

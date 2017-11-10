@@ -4,34 +4,39 @@
     android:layout_height="match_parent"
     android:background="#ffffff">
 
-    <View
-        android:id="@+id/etcCloseBtn"
-        android:layout_width="25dp"
-        android:layout_height="25dp"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentTop="true"
-        android:layout_marginRight="5dp"
-        android:layout_marginTop="5dp"
-        android:alpha="0.3"
-        android:background="@drawable/cancel2_icon" />
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="75dp"
-        android:layout_marginTop="32dp">
+        android:layout_marginBottom="75dp">
 
         <LinearLayout
             android:id="@+id/etcContentsLayout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-
             android:background="#ffffff"
             android:orientation="vertical"
             android:paddingBottom="10dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:paddingTop="10dp"></LinearLayout>
+            android:paddingTop="10dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <View
+                    android:id="@+id/etcCloseBtn"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginTop="5dp"
+                    android:alpha="0.3"
+                    android:background="@drawable/cancel2_icon" />
+            </RelativeLayout>
+
+        </LinearLayout>
     </ScrollView>
 
     <LinearLayout
