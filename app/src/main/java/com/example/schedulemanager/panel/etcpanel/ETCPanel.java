@@ -169,8 +169,8 @@ public class ETCPanel {
         ViewGroup.LayoutParams iconParams = new ViewGroup.LayoutParams((int) valueOf50DP,
                 (int) valueOf50DP);
         BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inSampleSize = 4;
-        iconView.setBackground(new BitmapDrawable(context.getResources(), BitmapFactory.decodeByteArray(activityVO.getImageData(),0,activityVO.getImageData().length,options)));
+        options.inSampleSize = 2;
+        iconView.setBackground(new BitmapDrawable(context.getResources(), BitmapFactory.decodeByteArray(activityVO.getImageData(),0,activityVO.getImageData().length, options)));
         iconView.setLayoutParams(iconParams);
         return iconView;
     }

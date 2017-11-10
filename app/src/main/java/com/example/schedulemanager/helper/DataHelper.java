@@ -69,6 +69,7 @@ public class DataHelper {
     public void initData(Context context) {
         initField(context);
         if(isFirstLoading()) {
+            Log.d("처음 로딩 확인", "처음 로딩 확인");
             makeBasicData();
             updateIsFirstLoadingValue();
         }
