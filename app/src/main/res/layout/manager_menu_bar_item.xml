@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="65dp">
+    android:layout_height="65dp"
+    android:orientation="horizontal">
 
     <View
         android:id="@+id/menu_bar_cancel"
@@ -15,10 +16,31 @@
         android:background="@drawable/cancel2_icon"
         android:visibility="gone" />
 
-    <com.rey.material.widget.Button
-        android:id="@+id/addCategoryBtn"
-        android:layout_width="match_parent"
-        android:layout_height="65dp"
-        android:text="카테고리 +"
-        android:theme="@style/AppTheme.Button" />
-</RelativeLayout>
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <com.rey.material.widget.Button
+            android:id="@+id/addCategoryBtn"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:text="카테고리 +"
+            android:theme="@style/AppTheme.Button" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:gravity="center">
+
+        <com.rey.material.widget.Button
+            android:id="@+id/removeCategoryBtn"
+            android:layout_width="match_parent"
+            android:layout_height="65dp"
+            android:text="카테고리 -"
+            android:theme="@style/AppTheme.Button" />
+    </RelativeLayout>
+</LinearLayout>
