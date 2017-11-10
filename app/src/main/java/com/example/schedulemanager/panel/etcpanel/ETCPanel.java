@@ -1,6 +1,7 @@
 package com.example.schedulemanager.panel.etcpanel;
 
 import android.content.Context;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -167,7 +168,9 @@ public class ETCPanel {
         // 각 버튼 레이아웃 파라메터
         ViewGroup.LayoutParams iconParams = new ViewGroup.LayoutParams((int) valueOf50DP,
                 (int) valueOf50DP);
-        iconView.setBackground(new BitmapDrawable(context.getResources(), BitmapFactory.decodeByteArray(activityVO.getImageData(),0,activityVO.getImageData().length)));
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inSampleSize = 4;
+        iconView.setBackground(new BitmapDrawable(context.getResources(), BitmapFactory.decodeByteArray(activityVO.getImageData(),0,activityVO.getImageData().length,options)));
         iconView.setLayoutParams(iconParams);
         return iconView;
     }

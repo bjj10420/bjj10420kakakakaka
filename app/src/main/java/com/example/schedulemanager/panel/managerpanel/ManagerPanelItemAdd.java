@@ -5,6 +5,7 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.util.Log;
@@ -49,9 +50,9 @@ public class ManagerPanelItemAdd {
     private void initInfoIconBoxPanel() {
         LinearLayout itemInfoIconBoxPanel = (LinearLayout) addView.findViewById(R.id.itemIconBoxPanel);
         LinearLayout rowLayout = null;
-        for(Drawable drawable : dataHelper.getDrawableList()) {
+        for(Bitmap bitmap : dataHelper.getDrawableList()) {
             rowLayout = decideRowLayoutByChildCount(rowLayout);
-            addBoxPanelItemViewToPanel(drawable, rowLayout, itemInfoIconBoxPanel);
+            addBoxPanelItemViewToPanel(bitmap, rowLayout, itemInfoIconBoxPanel);
         }
     }
 
@@ -66,16 +67,16 @@ public class ManagerPanelItemAdd {
         }
     }
 
-    private void addBoxPanelItemViewToPanel(Drawable drawable, LinearLayout rowLayout, LinearLayout itemInfoIconBoxPanel) {
-        View iconBoxPanelItemView = makeBoxPanelItemView(drawable);
+    private void addBoxPanelItemViewToPanel(Bitmap bitmap, LinearLayout rowLayout, LinearLayout itemInfoIconBoxPanel) {
+        View iconBoxPanelItemView = makeBoxPanelItemView(bitmap);
         rowLayout.addView(iconBoxPanelItemView);
         Log.d("addBoxPanelItemViewToPanel 체크", String.valueOf(itemInfoIconBoxPanel));
         if(rowLayout.getChildCount() == 4) itemInfoIconBoxPanel.addView(rowLayout);
     }
 
-    private View makeBoxPanelItemView(Drawable drawable) {
+    private View makeBoxPanelItemView(Bitmap bitmap) {
         View boxPanelItemView = new View(context);
-        boxPanelItemView.setBackground(drawable);
+        boxPanelItemView.setBackgroundDrawable(new BitmapDrawable(context.getResources(), bitmap));
         LinearLayout.LayoutParams viewParams = makeViewParams();
         boxPanelItemView.setLayoutParams(viewParams);
         boxPanelItemView.setOnClickListener(new View.OnClickListener() {
@@ -282,7 +283,7 @@ public class ManagerPanelItemAdd {
         ActivityVO activityVO = makeNewActivityVO();
         addActivityToActivities(activityVO);
         addItemIntoDB(activityVO);
-    //
+
     }
 
     public void redrawManagerPanel() {
@@ -294,7 +295,6 @@ public class ManagerPanelItemAdd {
         ETCPanel etcPanel = eventHelper.getEtcPanel();
         etcPanel.clearEtcContentsLayout();
         etcPanel.initETCPanel();
-
     }
 
     private void addItemIntoDB(ActivityVO activityVO) {

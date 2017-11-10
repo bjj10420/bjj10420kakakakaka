@@ -61,7 +61,7 @@ public class DataHelper {
     private ArrayList<String> categories;                                   // 기타버튼 클릭시 활성화되는 패널의 카테고리들
     private CharSequence[] categoryArray;                                   // 아이템 추가시 나오는 옵션메뉴 리스트용
     private HashMap<String, ArrayList<ActivityVO>> activities;              // 기타버튼 클릭시 활성화되는 패널의 활동들
-    private ArrayList<Drawable> drawableList;                               // 프로젝트내의 drawable을 모두 로드하여 담는 저장소
+    private ArrayList<Bitmap> drawableList;                               // 프로젝트내의 drawable을 모두 로드하여 담는 저장소
 
     private int mode;                                                       // 드래그시의 입력모드
     private ArrayList<View> multiModeViews;                                 // 멀티모드시의 저장소
@@ -86,16 +86,20 @@ public class DataHelper {
 
     private void loadBasicDrawables() {
         Field[] drawables = com.example.schedulemanager.R.drawable.class.getFields();
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inSampleSize = 2;
         for (Field f : drawables) {
             try {
-                if(f.getName().contains("icon"))
-                drawableList.add(context.getDrawable(f.getInt(null)));
+                if (f.getName().contains("icon")){
+                Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), f.getInt(null), options);
+                drawableList.add(bitmap);
+                }
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
         }
     }
-
     private void loadBasicActivities() {
         for(String category : categories){
             if(activities.get(category) == null) activities.put(category, new ArrayList<ActivityVO>());
@@ -134,7 +138,7 @@ public class DataHelper {
 
         categories = new ArrayList<String>();
         activities = new HashMap<String, ArrayList<ActivityVO>>();
-        drawableList = new ArrayList<Drawable>();
+        drawableList = new ArrayList<Bitmap>();
 
         mode = 1;
         multiModeViews = new ArrayList<View>();
@@ -718,7 +722,7 @@ public class DataHelper {
         return count;
     }
 
-    public ArrayList<Drawable> getDrawableList() {
+    public ArrayList<Bitmap> getDrawableList() {
         return drawableList;
     }
 

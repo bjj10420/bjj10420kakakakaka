@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -50,9 +51,9 @@ public class ManagerPanelItemInfo {
     private void initInfoIconBoxPanel() {
         LinearLayout itemInfoIconBoxPanel = (LinearLayout) infoView.findViewById(R.id.itemIconBoxPanel);
         LinearLayout rowLayout = null;
-        for(Drawable drawable : dataHelper.getDrawableList()) {
+        for(Bitmap bitmap : dataHelper.getDrawableList()) {
                 rowLayout = decideRowLayoutByChildCount(rowLayout);
-                addBoxPanelItemViewToPanel(drawable, rowLayout, itemInfoIconBoxPanel);
+                addBoxPanelItemViewToPanel(bitmap, rowLayout, itemInfoIconBoxPanel);
              }
     }
 
@@ -67,16 +68,16 @@ public class ManagerPanelItemInfo {
         }
         }
 
-    private void addBoxPanelItemViewToPanel(Drawable drawable, LinearLayout rowLayout, LinearLayout itemInfoIconBoxPanel) {
-        View iconBoxPanelItemView = makeBoxPanelItemView(drawable);
+    private void addBoxPanelItemViewToPanel(Bitmap bitmap, LinearLayout rowLayout, LinearLayout itemInfoIconBoxPanel) {
+        View iconBoxPanelItemView = makeBoxPanelItemView(bitmap);
         rowLayout.addView(iconBoxPanelItemView);
         Log.d("addBoxPanelItemViewToPanel 체크", String.valueOf(itemInfoIconBoxPanel));
         if(rowLayout.getChildCount() == 4) itemInfoIconBoxPanel.addView(rowLayout);
     }
 
-    private View makeBoxPanelItemView(Drawable drawable) {
+    private View makeBoxPanelItemView(Bitmap bitmap) {
         View boxPanelItemView = new View(context);
-        boxPanelItemView.setBackground(drawable);
+        boxPanelItemView.setBackgroundDrawable(new BitmapDrawable(context.getResources(), bitmap));
         LinearLayout.LayoutParams viewParams = makeViewParams();
         boxPanelItemView.setLayoutParams(viewParams);
         boxPanelItemView.setOnClickListener(new View.OnClickListener() {
