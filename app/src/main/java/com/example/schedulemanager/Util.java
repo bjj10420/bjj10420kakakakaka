@@ -14,6 +14,7 @@ import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -147,6 +148,12 @@ public class Util {
         }
     }
 
+    public static void setTextWithFont(TextView textView, String text){
+        Typeface typeface = DataHelper.dataHelper.getTypeface();
+        textView.setTypeface(typeface);
+        textView.setText(text);
+    }
+
     public static void setTextWithBoldFont(TextView textView, String text){
         Typeface typeface = DataHelper.dataHelper.getTypeface();
         textView.setTypeface(typeface, Typeface.BOLD);
@@ -224,14 +231,16 @@ public class Util {
     }
 
     public static void customToast(Context context, String msg) {
+        LinearLayout layout = new LinearLayout(context);
+        layout.setBackgroundResource(R.drawable.toast_bg);
+        layout.setPadding(35,35,35,35);
         TextView tvToastMsg = new TextView(context);
-        tvToastMsg.setText(msg);
-        tvToastMsg.setBackgroundResource(R.drawable.toast_bg);
+        setTextWithFont(tvToastMsg, msg);
         tvToastMsg.setTextColor(Color.WHITE);
         tvToastMsg.setTextSize(16);
+        layout.addView(tvToastMsg);
         Toast toastMsg = Toast.makeText(context, "", Toast.LENGTH_SHORT);
-        toastMsg.setView(tvToastMsg);
+        toastMsg.setView(layout);
         toastMsg.show();
     }
-
 }

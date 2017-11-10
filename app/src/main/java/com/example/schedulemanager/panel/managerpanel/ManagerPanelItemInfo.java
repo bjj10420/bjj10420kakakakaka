@@ -259,7 +259,7 @@ public class ManagerPanelItemInfo {
     }
 
     private void showChangeToast() {
-        Toast.makeText(context, "변경되었습니다.", Toast.LENGTH_SHORT).show();
+        Util.customToast(context, "변경되었습니다");
     }
 
     private void removeInfoVO() {
@@ -271,7 +271,7 @@ public class ManagerPanelItemInfo {
     }
 
     private void showRemoveToast() {
-        Toast.makeText(context, "제거되었습니다.", Toast.LENGTH_SHORT).show();
+        Util.customToast(context, "제거되었습니다");
     }
 
     private void refreshRemoveManagerPanel() {

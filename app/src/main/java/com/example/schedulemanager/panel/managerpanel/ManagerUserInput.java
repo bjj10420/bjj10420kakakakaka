@@ -255,7 +255,7 @@ public class ManagerUserInput {
     }
 
     private void showReCheckToast() {
-        Toast.makeText(context, "모든 정보를 입력하세요", Toast.LENGTH_SHORT).show();
+        Util.customToast(context, "모든 정보를 입력하세요");
     }
 
     private void setCloseBtnClickEvent() {
