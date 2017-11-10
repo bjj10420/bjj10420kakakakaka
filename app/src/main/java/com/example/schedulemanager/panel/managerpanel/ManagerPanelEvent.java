@@ -57,8 +57,7 @@ public class ManagerPanelEvent implements View.OnClickListener{
 
     private void redraw() {
         redrawMainFavoritePanel();
-        redrawETCPanel();
-
+//        redrawETCPanel();
     }
 
     private void redrawETCPanel() {
