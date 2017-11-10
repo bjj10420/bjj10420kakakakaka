@@ -559,6 +559,11 @@ public class EventHelper {
             calendarLayout.setVisibility(View.GONE);
             uiHelper.getCenterIcon().setVisibility(View.VISIBLE);
         }
+        finishActivity();
+    }
+
+    private void finishActivity() {
+        ((Activity)context).finish();
     }
 
     /**
