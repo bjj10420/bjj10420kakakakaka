@@ -1,9 +1,13 @@
 package com.example.schedulemanager.helper;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.graphics.Rect;
 import android.graphics.Typeface;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.support.v4.view.ViewPager;
 import android.util.Log;
 import android.view.View;
@@ -42,7 +46,20 @@ public class CalendarHelper {
 
         initCaledarPagerAndPagerAdapter(typeface);
         initCaledarDateTextAndPagingEvent(typeface);
+//        initCalendarArrows();
+    }
 
+    private void initCalendarArrows() {
+        View prevBtn = Util.getViewById(context, R.id.timetable_param_setter_calendar_prev);
+        View nextBtn = Util.getViewById(context, R.id.timetable_param_setter_calendar_next);
+        setColorFilter(prevBtn,R.drawable.left_arrow);
+        setColorFilter(nextBtn, R.drawable.right_arrow);
+    }
+
+    private void setColorFilter(View view, int drawableId) {
+        Drawable drawable = context.getResources().getDrawable(drawableId);
+        drawable.setColorFilter(Color.parseColor("#8d4720"), PorterDuff.Mode.SRC_IN);
+        view.setBackground(drawable);
     }
 
     private void initCaledarDateTextAndPagingEvent(Typeface typeface) {

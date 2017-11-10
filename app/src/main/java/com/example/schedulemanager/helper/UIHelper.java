@@ -80,6 +80,7 @@ public class UIHelper {
         testList.add("만남");
         return testList;
     }
+
     private ArrayList<String> testCode2() {
         ArrayList<String> testList2 = new ArrayList<String>();
         testList2.add("약속");
