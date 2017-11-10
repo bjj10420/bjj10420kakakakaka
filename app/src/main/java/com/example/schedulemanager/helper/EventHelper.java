@@ -708,15 +708,29 @@ public class EventHelper {
         }
     }
 
+    private int setDefaultIndex() {
+        int defaultIndex = 0;
+        int mode = dataHelper.getMode();
+        switch (mode) {
+            case 1 : defaultIndex = 0; break;
+            case 3 : defaultIndex = 1; break;
+            case 5 : defaultIndex = 2; break;
+            case 7 : defaultIndex = 3; break;
+            case 10 : defaultIndex = 4; break;
+        }
+        return defaultIndex;
+    }
+
     public View.OnLongClickListener getLongClickListener() {
         return new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                final AlertDialog.Builder builder = new AlertDialog.Builder(context, 5);
+                final int defaultIndex = setDefaultIndex();
+                final AlertDialog.Builder builder = new AlertDialog.Builder(context, defaultIndex);
                 builder.setTitle("기간 지정");
 
                 final CharSequence[] modeArray = {"1일", "3일", "5일", "7일", "10일"};
-                builder.setSingleChoiceItems(modeArray, 0,
+                builder.setSingleChoiceItems(modeArray, defaultIndex,
                         new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {

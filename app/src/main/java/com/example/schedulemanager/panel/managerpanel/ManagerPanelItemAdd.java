@@ -145,8 +145,8 @@ public class ManagerPanelItemAdd {
     private void actionCategorySelectBtn() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(context, 5);
         builder.setTitle("카테고리 선택");
-
         final CharSequence[] categoryArray = dataHelper.getCategoryArray();
+
         builder.setSingleChoiceItems(categoryArray, 0,
                 new DialogInterface.OnClickListener() {
                     @Override
@@ -156,6 +156,7 @@ public class ManagerPanelItemAdd {
                     }
                 });
         builder.show();
+
     }
 
     private void setCategoryText(CharSequence[] categoryArray, int which) {
