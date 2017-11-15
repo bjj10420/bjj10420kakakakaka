@@ -136,7 +136,7 @@ public class ETCPanel {
         }
     }
 
-    private View setButtonView(ActivityVO activityVO) {
+    public View setButtonView(ActivityVO activityVO) {
         View iconView = makePanelIconView(activityVO);
         TextView textView = makeTextView(activityVO);
         LinearLayout panelButtonView = makePanelButtonView(iconView, textView);
@@ -251,6 +251,10 @@ public class ETCPanel {
 
     public ETCPanelEvent getEtcPanelEvent() {
         return etcPanelEvent;
+    }
+
+    public LinearLayout getEtcContentsLayout() {
+        return etcContentsLayout;
     }
 }
 

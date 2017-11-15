@@ -1,27 +1,23 @@
 package com.example.schedulemanager.panel.managerpanel;
 
 import android.app.Activity;
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.schedulemanager.R;
 import com.example.schedulemanager.Util;
 import com.example.schedulemanager.helper.DBHelper;
 import com.example.schedulemanager.helper.DialogHelper;
-import com.example.schedulemanager.interface_.GeneralCallback;
 import com.example.schedulemanager.interface_.GeneralCallback2;
 import com.example.schedulemanager.panel.etcpanel.ETCPanel;
 import com.example.schedulemanager.vo.ActivityVO;
@@ -268,15 +264,15 @@ public class ManagerPanelItemAdd {
     }
 
     private void actionValidateAdd() {
-        addNewActivityVO();
+        ActivityVO activityVO = addNewActivityVO();
 //        redrawPanel();
-        refreshPanel();
+        refreshPanel(activityVO);
         addViewOff();
         showAddToast();
     }
 
-    private void refreshPanel() {
-        refreshETCPanel();
+    private void refreshPanel(ActivityVO activityVO) {
+        refreshETCPanel(activityVO);
         refreshManagerPanel();
     }
 
@@ -284,11 +280,30 @@ public class ManagerPanelItemAdd {
 
     }
 
-    private void refreshETCPanel() {
-        String categoryName = categoryText.getText().toString();
-        Log.d("indexOf", String.valueOf(dataHelper.getCategories().indexOf(categoryName)));
+    private void refreshETCPanel(ActivityVO activityVO) {
+        int categoryIndex = getCategoryIndex();
         ETCPanel etcPanel = eventHelper.getEtcPanel();
-//        etcPanel.
+            if(etcPanel.getEtcContentsLayout().getChildAt(categoryIndex) instanceof HorizontalScrollView)
+                addButtonToHorizontalScrollView(etcPanel, activityVO, categoryIndex);
+            else
+                makeHorizontalScrollAndAdd(etcPanel, activityVO);
+    }
+
+    private void makeHorizontalScrollAndAdd(ETCPanel etcPanel, ActivityVO activityVO) {
+        Log.d("makeHorizontalScrollAndAdd!", "makeHorizontalScrollAndAdd!");
+    }
+
+    private void addButtonToHorizontalScrollView(ETCPanel etcPanel, ActivityVO activityVO, int categoryIndex) {
+        HorizontalScrollView scrollView = (HorizontalScrollView) etcPanel.getEtcContentsLayout().getChildAt(categoryIndex);
+        LinearLayout rowLayout = ((LinearLayout) scrollView.getChildAt(0));
+        View buttonView = etcPanel.setButtonView(activityVO);
+        rowLayout.addView(buttonView);
+    }
+
+    private int getCategoryIndex() {
+        String categoryName = categoryText.getText().toString();
+        int categoryIndex = (dataHelper.getCategories().indexOf(categoryName) * 2) + 2;
+        return categoryIndex;
     }
 
     private void redrawPanel() {
@@ -296,11 +311,11 @@ public class ManagerPanelItemAdd {
         redrawManagerPanel();
     }
 
-    private void addNewActivityVO() {
+    private ActivityVO addNewActivityVO() {
         ActivityVO activityVO = makeNewActivityVO();
         addActivityToActivities(activityVO);
         addItemIntoDB(activityVO);
-
+        return activityVO;
     }
 
     public void redrawManagerPanel() {
