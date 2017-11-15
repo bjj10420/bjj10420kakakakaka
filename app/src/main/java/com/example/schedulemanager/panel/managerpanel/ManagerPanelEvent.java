@@ -5,6 +5,8 @@ import android.content.Context;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.example.schedulemanager.R;
 import com.example.schedulemanager.helper.DialogHelper;
@@ -108,8 +110,45 @@ public class ManagerPanelEvent implements View.OnClickListener{
     private void removeCategory(String categoryName) {
         removeCategoryFromDB(categoryName);
         removeCategoryFromMap(categoryName);
-        redrawManagerAndETCPanel();
+//        redrawManagerAndETCPanel();
+        removeRefreshManagerAndETCPanel(categoryName);
     }
+
+    private void removeRefreshManagerAndETCPanel(String categoryName) {
+        removeRefreshETCPanel(categoryName);
+//        removeRefreshManagerPanel(categoryName);
+    }
+
+    private void removeRefreshETCPanel(String category) {
+        int categoryIndex = findCategoryIndex(category);
+        Log.d("챠일드카운트체크", String.valueOf(categoryIndex));
+        eventHelper.getEtcPanel().getEtcContentsLayout().removeViewAt(categoryIndex);
+        eventHelper.getEtcPanel().getEtcContentsLayout().removeViewAt(categoryIndex);
+    }
+
+    private int findCategoryIndex(String category) {
+        int theCategoryIndex = 0;
+        LinearLayout etcContentsLayout = eventHelper.getEtcPanel().getEtcContentsLayout();
+        for(int i = 0 ; i < etcContentsLayout.getChildCount() ; i++){
+            View view = etcContentsLayout.getChildAt(i);
+            if(view instanceof TextView &&
+              ((TextView)view).getText().toString().equals(category)
+               ){
+                theCategoryIndex = i;
+                break;
+            }
+        }
+        return theCategoryIndex;
+    }
+
+    private void removeRefreshManagerPanel(String category) {
+        int categoryIndex = eventHelper.getManagerPanel().getManagerContentsLayout().getChildCount();
+        managerPanel.addExpansionPanelWithIndex(category, categoryIndex - 1);
+//        View detailItemView = eventHelper.getManagerPanel().makeDetailItemView(activityVO);
+//        addNewItemToManagerPanel(detailItemView, categoryIndex);
+    }
+
+
 
     private boolean isRemoveCategoryBtn(View view) {
         return view.getId() == R.id.removeCategoryBtn;
