@@ -246,6 +246,7 @@ public class ManagerPanelItemInfo {
         updateMangerPanelItemInfoDB();
         showChangeToast();
         refreshChangeManagerPanel();
+        //
     }
 
     private void updateMangerPanelItemInfoDB() {
