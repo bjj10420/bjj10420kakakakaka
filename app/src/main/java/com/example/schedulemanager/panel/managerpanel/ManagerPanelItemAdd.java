@@ -269,9 +269,26 @@ public class ManagerPanelItemAdd {
 
     private void actionValidateAdd() {
         addNewActivityVO();
-        redrawPanel();
+//        redrawPanel();
+        refreshPanel();
         addViewOff();
         showAddToast();
+    }
+
+    private void refreshPanel() {
+        refreshETCPanel();
+        refreshManagerPanel();
+    }
+
+    private void refreshManagerPanel() {
+
+    }
+
+    private void refreshETCPanel() {
+        String categoryName = categoryText.getText().toString();
+        Log.d("indexOf", String.valueOf(dataHelper.getCategories().indexOf(categoryName)));
+        ETCPanel etcPanel = eventHelper.getEtcPanel();
+//        etcPanel.
     }
 
     private void redrawPanel() {
