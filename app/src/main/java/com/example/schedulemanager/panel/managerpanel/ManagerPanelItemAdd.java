@@ -283,14 +283,7 @@ public class ManagerPanelItemAdd {
     private void refreshETCPanel(ActivityVO activityVO) {
         int categoryIndex = getCategoryIndex();
         ETCPanel etcPanel = eventHelper.getEtcPanel();
-            if(etcPanel.getEtcContentsLayout().getChildAt(categoryIndex) instanceof HorizontalScrollView)
-                addButtonToHorizontalScrollView(etcPanel, activityVO, categoryIndex);
-            else
-                makeHorizontalScrollAndAdd(etcPanel, activityVO);
-    }
-
-    private void makeHorizontalScrollAndAdd(ETCPanel etcPanel, ActivityVO activityVO) {
-        Log.d("makeHorizontalScrollAndAdd!", "makeHorizontalScrollAndAdd!");
+        addButtonToHorizontalScrollView(etcPanel, activityVO, categoryIndex);
     }
 
     private void addButtonToHorizontalScrollView(ETCPanel etcPanel, ActivityVO activityVO, int categoryIndex) {

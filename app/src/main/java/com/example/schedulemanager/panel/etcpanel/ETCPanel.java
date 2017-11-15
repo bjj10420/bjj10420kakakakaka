@@ -85,11 +85,11 @@ public class ETCPanel {
         }
     }
 
-    private void addExtraViewTo(View rowLayout, String category) {
-        if(getActivityNumberAboutCategory(category) > 5)
+    public void addExtraViewTo(View rowLayout, String category) {
+//        if(getActivityNumberAboutCategory(category) > 5)
             addCoveredRowLayoutWithScrollView(rowLayout);
-        else
-            addRowLayout(rowLayout);
+//        else
+//            addRowLayout(rowLayout);
     }
 
     private void addCoveredRowLayoutWithScrollView(View rowLayout) {
@@ -113,7 +113,7 @@ public class ETCPanel {
         addBottomMargin(rowLayout, (int) Util.convertDpToPixel(10));
     }
 
-    private View makeRowLayout(String category) {
+    public View makeRowLayout(String category) {
         LinearLayout rowLayout = makeRowLayout();
         composeRowLayout(rowLayout, category);
         return rowLayout;
