@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.HorizontalScrollView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.schedulemanager.R;
@@ -21,6 +22,7 @@ import com.example.schedulemanager.helper.DialogHelper;
 import com.example.schedulemanager.interface_.GeneralCallback2;
 import com.example.schedulemanager.panel.etcpanel.ETCPanel;
 import com.example.schedulemanager.vo.ActivityVO;
+import com.takeiteasy.materialexpansionpanel.container.MaxHeightNestedScrollView;
 import com.takeiteasy.materialexpansionpanel.panel.MaterialExpansionPanelView;
 
 import me.drakeet.materialdialog.MaterialDialog;
@@ -283,7 +285,15 @@ public class ManagerPanelItemAdd {
         int categoryIndex = (dataHelper.getCategories().indexOf(categoryName));
         Log.d("매니져리플래쉬확인", String.valueOf(eventHelper.getManagerPanel().getManagerContentsLayout().getChildAt(categoryIndex)));
         View detailItemView = eventHelper.getManagerPanel().makeDetailItemView(activityVO);
-        ((MaterialExpansionPanelView)eventHelper.getManagerPanel().getManagerContentsLayout().getChildAt(categoryIndex + 1)).collapse();
+//        Log.d("리플래쉬테스트",
+//                String.valueOf(
+//                )
+//
+//        );
+        ((LinearLayout)
+        ((MaxHeightNestedScrollView)
+                ((LinearLayout)((RelativeLayout)((MaterialExpansionPanelView)eventHelper.getManagerPanel().getManagerContentsLayout()
+                        .getChildAt(categoryIndex + 1)).getChildAt(0)).getChildAt(1)).getChildAt(0)).getChildAt(0)).addView(detailItemView);
     }
 
     private void refreshETCPanel(int categoryIndex, ActivityVO activityVO) {
