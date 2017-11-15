@@ -275,8 +275,7 @@ public class ManagerPanelItemAdd {
     }
 
     private void refreshPanel(ActivityVO activityVO) {
-        int categoryIndex = getCategoryIndex();
-        refreshETCPanel(categoryIndex, activityVO);
+        refreshETCPanel(activityVO);
         refreshManagerPanel(activityVO);
     }
 
@@ -285,19 +284,18 @@ public class ManagerPanelItemAdd {
         int categoryIndex = (dataHelper.getCategories().indexOf(categoryName));
         Log.d("매니져리플래쉬확인", String.valueOf(eventHelper.getManagerPanel().getManagerContentsLayout().getChildAt(categoryIndex)));
         View detailItemView = eventHelper.getManagerPanel().makeDetailItemView(activityVO);
-//        Log.d("리플래쉬테스트",
-//                String.valueOf(
-//                )
-//
-//        );
-        ((LinearLayout)
-        ((MaxHeightNestedScrollView)
-                ((LinearLayout)((RelativeLayout)((MaterialExpansionPanelView)eventHelper.getManagerPanel().getManagerContentsLayout()
-                        .getChildAt(categoryIndex + 1)).getChildAt(0)).getChildAt(1)).getChildAt(0)).getChildAt(0)).addView(detailItemView);
+        addNewItemToManagerPanel(detailItemView, categoryIndex);
     }
 
-    private void refreshETCPanel(int categoryIndex, ActivityVO activityVO) {
+    private void addNewItemToManagerPanel(View detailItemView, int categoryIndex) {
+        ((LinearLayout)
+                ((MaxHeightNestedScrollView)
+                        ((LinearLayout)((RelativeLayout)((MaterialExpansionPanelView)eventHelper.getManagerPanel().getManagerContentsLayout()
+                                .getChildAt(categoryIndex + 1)).getChildAt(0)).getChildAt(1)).getChildAt(0)).getChildAt(0)).addView(detailItemView);
+    }
 
+    private void refreshETCPanel(ActivityVO activityVO) {
+        int categoryIndex = getCategoryIndex();
         ETCPanel etcPanel = eventHelper.getEtcPanel();
         addButtonToHorizontalScrollView(etcPanel, activityVO, categoryIndex);
     }
