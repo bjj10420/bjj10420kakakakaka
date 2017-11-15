@@ -115,12 +115,13 @@ public class ManagerPanelEvent implements View.OnClickListener{
     }
 
     private void removeRefreshManagerAndETCPanel(String categoryName, Object parameter) {
-        removeRefreshETCPanel(categoryName);
-        removeRefreshManagerPanel(categoryName, (int) parameter);
+        removeRefreshETCPanel(categoryName, (int) parameter);
+        removeRefreshManagerPanel((int) parameter);
     }
 
-    private void removeRefreshETCPanel(String category) {
-        int categoryIndex = findCategoryIndex(category);
+    private void removeRefreshETCPanel(String category, int parameter) {
+//        int categoryIndex = findCategoryIndex(category);
+        int categoryIndex = (parameter * 2) + 1;
         Log.d("챠일드카운트체크", String.valueOf(categoryIndex));
         eventHelper.getEtcPanel().getEtcContentsLayout().removeViewAt(categoryIndex);
         eventHelper.getEtcPanel().getEtcContentsLayout().removeViewAt(categoryIndex);
@@ -141,10 +142,8 @@ public class ManagerPanelEvent implements View.OnClickListener{
         return theCategoryIndex;
     }
 
-    private void removeRefreshManagerPanel(String category, int selectedIndex) {
+    private void removeRefreshManagerPanel(int selectedIndex) {
           managerPanel.getManagerContentsLayout().removeViewAt(selectedIndex + 1);
-//        View detailItemView = eventHelper.getManagerPanel().makeDetailItemView(activityVO);
-//        addNewItemToManagerPanel(detailItemView, categoryIndex);
     }
 
 
