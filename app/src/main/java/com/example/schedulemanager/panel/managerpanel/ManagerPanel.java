@@ -76,6 +76,18 @@ public class ManagerPanel {
     }
 
     public void addExpansionPanel(String category) {
+        MaterialExpansionPanelView panelView = makePanelView(category);
+        managerContentsLayout.addView(panelView);
+        panelView.expand();
+    }
+
+    public void addExpansionPanelWithIndex(String category, int index) {
+        MaterialExpansionPanelView panelView = makePanelView(category);
+        managerContentsLayout.addView(panelView, index);
+        panelView.expand();
+    }
+
+    private MaterialExpansionPanelView makePanelView(String category) {
         MaterialExpansionPanelView panelView = new MaterialExpansionPanelView(context);
         View detailView = makeDetailView(category);
         detailView.setVisibility(View.VISIBLE);
@@ -88,9 +100,7 @@ public class ManagerPanel {
         View negativeButton = panelView.findViewById(R.id.panel_button_negative);
         positiveButton.setVisibility(View.GONE);
         negativeButton.setVisibility(View.GONE);
-
-        managerContentsLayout.addView(panelView);
-        panelView.expand();
+        return  panelView;
     }
 
     private View makeDetailView(String category) {

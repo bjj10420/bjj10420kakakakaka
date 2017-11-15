@@ -79,17 +79,26 @@ public class ETCPanel {
      */
     public void initETCPanel(){
         for(String category : DataHelper.dataHelper.getCategories()){
-            attachTitle(category);
-            View rowLayout = makeRowLayout(category);
-            addExtraViewTo(rowLayout, category);
+            makeOneRow(category);
         }
     }
 
+    public void makeOneRow(String category) {
+        attachTitle(category);
+        View rowLayout = makeRowLayout(category);
+        addExtraViewTo(rowLayout, category);
+    }
+
+    public void makeOneRowWithIndex(String category, int index) {
+        TextView textView = makeTitleTextView(category);
+        etcContentsLayout.addView(textView, index);
+        addBottomMargin(textView, (int) Util.convertDpToPixel(10));
+        View rowLayout = makeRowLayout(category);
+        addExtraViewTo(rowLayout, category);
+    }
+
     public void addExtraViewTo(View rowLayout, String category) {
-//        if(getActivityNumberAboutCategory(category) > 5)
             addCoveredRowLayoutWithScrollView(rowLayout);
-//        else
-//            addRowLayout(rowLayout);
     }
 
     private void addCoveredRowLayoutWithScrollView(View rowLayout) {
