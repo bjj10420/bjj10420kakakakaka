@@ -98,15 +98,20 @@ public class ManagerPanel {
         ArrayList<ActivityVO> activities = DataHelper.dataHelper.getActivities().get(category);
         if(activities != null) {
             for (ActivityVO activityVO : activities) {
-                View detailItemView = inflateDetailItemView();
-                setDetailItemView(detailItemView, activityVO);
+                View detailItemView = makeDetailItemView(activityVO);
                 detailView.addView(detailItemView);
             }
         }
         return detailView;
     }
 
-    private View inflateDetailItemView() {
+    public View makeDetailItemView(ActivityVO activityVO) {
+        View detailItemView = inflateDetailItemView();
+        setDetailItemView(detailItemView, activityVO);
+        return  detailItemView;
+    }
+
+    public View inflateDetailItemView() {
         View detailItemView = ((Activity) context).getLayoutInflater().inflate(R.layout.manager_detail_item, null);
         ViewGroup.LayoutParams detailViewParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
                 (int) Util.convertDpToPixel(35));
@@ -142,7 +147,7 @@ public class ManagerPanel {
         return detailView;
     }
 
-    private void setDetailItemView(View detailItemView, ActivityVO activityVO) {
+    public void setDetailItemView(View detailItemView, ActivityVO activityVO) {
         setFavoriteCheck(detailItemView, activityVO);
         setFavoriteIcon(detailItemView, activityVO);
         setFavoriteName(detailItemView, activityVO);
@@ -196,5 +201,9 @@ public class ManagerPanel {
 
     public ManagerPanelEvent getManagerPanelEvent() {
         return managerPanelEvent;
+    }
+
+    public LinearLayout getManagerContentsLayout() {
+        return managerContentsLayout;
     }
 }

@@ -21,6 +21,7 @@ import com.example.schedulemanager.helper.DialogHelper;
 import com.example.schedulemanager.interface_.GeneralCallback2;
 import com.example.schedulemanager.panel.etcpanel.ETCPanel;
 import com.example.schedulemanager.vo.ActivityVO;
+import com.takeiteasy.materialexpansionpanel.panel.MaterialExpansionPanelView;
 
 import me.drakeet.materialdialog.MaterialDialog;
 
@@ -272,16 +273,21 @@ public class ManagerPanelItemAdd {
     }
 
     private void refreshPanel(ActivityVO activityVO) {
-        refreshETCPanel(activityVO);
-        refreshManagerPanel();
-    }
-
-    private void refreshManagerPanel() {
-
-    }
-
-    private void refreshETCPanel(ActivityVO activityVO) {
         int categoryIndex = getCategoryIndex();
+        refreshETCPanel(categoryIndex, activityVO);
+        refreshManagerPanel(activityVO);
+    }
+
+    private void refreshManagerPanel(ActivityVO activityVO) {
+        String categoryName = categoryText.getText().toString();
+        int categoryIndex = (dataHelper.getCategories().indexOf(categoryName));
+        Log.d("매니져리플래쉬확인", String.valueOf(eventHelper.getManagerPanel().getManagerContentsLayout().getChildAt(categoryIndex)));
+        View detailItemView = eventHelper.getManagerPanel().makeDetailItemView(activityVO);
+        ((MaterialExpansionPanelView)eventHelper.getManagerPanel().getManagerContentsLayout().getChildAt(categoryIndex + 1)).collapse();
+    }
+
+    private void refreshETCPanel(int categoryIndex, ActivityVO activityVO) {
+
         ETCPanel etcPanel = eventHelper.getEtcPanel();
         addButtonToHorizontalScrollView(etcPanel, activityVO, categoryIndex);
     }
