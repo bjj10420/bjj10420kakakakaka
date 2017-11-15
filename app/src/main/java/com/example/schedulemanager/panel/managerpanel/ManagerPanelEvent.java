@@ -127,7 +127,7 @@ public class ManagerPanelEvent implements View.OnClickListener{
     private void addCategory(String category) {
         addCategoryToDB(category);
         addCategoryToMap(category);
-        redrawManagerAndETCPanel();
+//        redrawManagerAndETCPanel();
     }
 
     private void redrawManagerAndETCPanel() {
