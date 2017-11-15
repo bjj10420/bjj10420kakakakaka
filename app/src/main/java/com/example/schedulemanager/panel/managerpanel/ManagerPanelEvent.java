@@ -100,23 +100,23 @@ public class ManagerPanelEvent implements View.OnClickListener{
         new DialogHelper().showCategorySelect(context, "카테고리 삭제", categoryArray, new GeneralCallback2() {
             @Override
             public void onCallBack(Object parameter) {
-                removeCategory(categoryArray[(Integer) parameter].toString());
+                removeCategory(categoryArray[(Integer) parameter].toString(), parameter);
             }
         });
 
 
     }
 
-    private void removeCategory(String categoryName) {
+    private void removeCategory(String categoryName, Object parameter) {
         removeCategoryFromDB(categoryName);
         removeCategoryFromMap(categoryName);
 //        redrawManagerAndETCPanel();
-        removeRefreshManagerAndETCPanel(categoryName);
+        removeRefreshManagerAndETCPanel(categoryName, parameter);
     }
 
-    private void removeRefreshManagerAndETCPanel(String categoryName) {
+    private void removeRefreshManagerAndETCPanel(String categoryName, Object parameter) {
         removeRefreshETCPanel(categoryName);
-//        removeRefreshManagerPanel(categoryName);
+        removeRefreshManagerPanel(categoryName, (int) parameter);
     }
 
     private void removeRefreshETCPanel(String category) {
@@ -141,9 +141,8 @@ public class ManagerPanelEvent implements View.OnClickListener{
         return theCategoryIndex;
     }
 
-    private void removeRefreshManagerPanel(String category) {
-        int categoryIndex = eventHelper.getManagerPanel().getManagerContentsLayout().getChildCount();
-        managerPanel.addExpansionPanelWithIndex(category, categoryIndex - 1);
+    private void removeRefreshManagerPanel(String category, int selectedIndex) {
+          managerPanel.getManagerContentsLayout().removeViewAt(selectedIndex + 1);
 //        View detailItemView = eventHelper.getManagerPanel().makeDetailItemView(activityVO);
 //        addNewItemToManagerPanel(detailItemView, categoryIndex);
     }
