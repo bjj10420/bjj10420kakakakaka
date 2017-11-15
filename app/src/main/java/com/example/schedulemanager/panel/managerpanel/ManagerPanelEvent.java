@@ -96,21 +96,17 @@ public class ManagerPanelEvent implements View.OnClickListener{
 
     private void removeCategoryEvent(View view) {
         final CharSequence[] categoryArray = dataHelper.getCategoryArray();
-
         new DialogHelper().showCategorySelect(context, "카테고리 삭제", categoryArray, new GeneralCallback2() {
             @Override
             public void onCallBack(Object parameter) {
                 removeCategory(categoryArray[(Integer) parameter].toString(), parameter);
             }
         });
-
-
     }
 
     private void removeCategory(String categoryName, Object parameter) {
         removeCategoryFromDB(categoryName);
         removeCategoryFromMap(categoryName);
-//        redrawManagerAndETCPanel();
         removeRefreshManagerAndETCPanel(categoryName, parameter);
     }
 
