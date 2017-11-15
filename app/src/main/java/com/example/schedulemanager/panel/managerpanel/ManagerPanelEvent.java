@@ -5,8 +5,6 @@ import android.content.Context;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.HorizontalScrollView;
-import android.widget.LinearLayout;
 
 import com.example.schedulemanager.R;
 import com.example.schedulemanager.helper.DialogHelper;
@@ -131,21 +129,21 @@ public class ManagerPanelEvent implements View.OnClickListener{
         addCategoryToDB(category);
         addCategoryToMap(category);
 //        redrawManagerAndETCPanel();
-        refreshManagerAndETCPanel(category);
+        addRefreshManagerAndETCPanel(category);
     }
 
-    private void refreshManagerAndETCPanel(String category) {
-        refreshETCPanel(category);
-        refreshManagerPanel(category);
+    private void addRefreshManagerAndETCPanel(String category) {
+        addRefreshETCPanel(category);
+        addRefreshManagerPanel(category);
     }
 
-    private void refreshETCPanel(String category) {
+    private void addRefreshETCPanel(String category) {
         int categoryIndex = eventHelper.getEtcPanel().getEtcContentsLayout().getChildCount();
         Log.d("챠일드카운트체크", String.valueOf(categoryIndex));
         eventHelper.getEtcPanel().makeOneRowWithIndex(category, categoryIndex);
     }
 
-    private void refreshManagerPanel(String category) {
+    private void addRefreshManagerPanel(String category) {
         int categoryIndex = eventHelper.getManagerPanel().getManagerContentsLayout().getChildCount();
           managerPanel.addExpansionPanelWithIndex(category, categoryIndex - 1);
 //        View detailItemView = eventHelper.getManagerPanel().makeDetailItemView(activityVO);
