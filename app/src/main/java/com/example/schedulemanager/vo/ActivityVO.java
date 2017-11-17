@@ -10,6 +10,7 @@ public class ActivityVO {
     String activityName;
     String isFavorite;
     byte[] imageData;
+    int managerIndex;
 
     public ActivityVO() {
     }
@@ -59,5 +60,13 @@ public class ActivityVO {
 
     public void setImageData(byte[] imageData) {
         this.imageData = imageData;
+    }
+
+    public int getManagerIndex() {
+        return managerIndex;
+    }
+
+    public void setManagerIndex(int managerIndex) {
+        this.managerIndex = managerIndex;
     }
 }

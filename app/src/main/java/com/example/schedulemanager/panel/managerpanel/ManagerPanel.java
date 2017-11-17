@@ -107,9 +107,12 @@ public class ManagerPanel {
         LinearLayout detailView = (LinearLayout) inflateDetailView();
         ArrayList<ActivityVO> activities = DataHelper.dataHelper.getActivities().get(category);
         if(activities != null) {
+            int i = 0;
             for (ActivityVO activityVO : activities) {
                 View detailItemView = makeDetailItemView(activityVO);
+                activityVO.setManagerIndex(i);
                 detailView.addView(detailItemView);
+                i++;
             }
         }
         return detailView;

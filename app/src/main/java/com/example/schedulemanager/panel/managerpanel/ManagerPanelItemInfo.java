@@ -14,6 +14,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewManager;
 import android.widget.EditText;
+import android.widget.HorizontalScrollView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
@@ -26,10 +27,13 @@ import com.example.schedulemanager.helper.DialogHelper;
 import com.example.schedulemanager.interface_.GeneralCallback;
 import com.example.schedulemanager.vo.ActivityVO;
 
+import org.w3c.dom.Text;
+
 import me.drakeet.materialdialog.MaterialDialog;
 
 import static com.example.schedulemanager.helper.DataHelper.PICK_FROM_GALLARY;
 import static com.example.schedulemanager.helper.DataHelper.dataHelper;
+import static com.example.schedulemanager.helper.EventHelper.eventHelper;
 
 public class ManagerPanelItemInfo {
 
@@ -251,7 +255,19 @@ public class ManagerPanelItemInfo {
     }
 
     private void refreshChangeEtcPanel() {
-
+        String category = activityVO.getCategoryName();
+        int categoryIndex = (dataHelper.getCategories().indexOf(category) * 2) + 2;
+        int itemIndex = activityVO.getManagerIndex();
+        HorizontalScrollView scrollView = (HorizontalScrollView) eventHelper.getEtcPanel().getEtcContentsLayout().getChildAt(categoryIndex);
+        LinearLayout rowLayout = ((LinearLayout) scrollView.getChildAt(0));
+        LinearLayout buttonView = (LinearLayout) rowLayout.getChildAt(itemIndex);
+        TextView etcItemText = (TextView)buttonView.getChildAt(1);
+        View etcItemIcon = buttonView.getChildAt(0);
+        etcItemText.setText(activityVO.getActivityName());
+        BitmapFactory.Options options = new BitmapFactory.Options();
+        options.inSampleSize = 2;
+        etcItemIcon.setBackground(new BitmapDrawable(context.getResources(), BitmapFactory.decodeByteArray(activityVO.getImageData(),0,activityVO.getImageData().length, options)));
+        Log.d("해당 아이템 체크", ((TextView)buttonView.getChildAt(1)).getText().toString());
     }
 
     private void updateMangerPanelItemInfoDB() {
