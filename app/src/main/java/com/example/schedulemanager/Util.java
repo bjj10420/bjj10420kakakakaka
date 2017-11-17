@@ -26,6 +26,7 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.OutputStream;
+import java.lang.reflect.Field;
 import java.nio.channels.FileChannel;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -244,4 +245,16 @@ public class Util {
         toastMsg.show();
     }
 
+    public static int getDrawableId(String name){
+        Class res = R.drawable.class;
+        Field field = null;
+        int drawableId= 0;
+        try {
+            field = res.getField(name);
+            drawableId = field.getInt(null);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return  drawableId;
+    }
 }

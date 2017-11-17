@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 
 import com.example.schedulemanager.R;
+import com.example.schedulemanager.Util;
 import com.example.schedulemanager.helper.AnimationHelper;
 import com.example.schedulemanager.helper.CalendarHelper;
 import com.example.schedulemanager.helper.DataHelper;
@@ -52,6 +53,7 @@ public class MainActivity extends AppCompatActivity {
 
         AnimationHelper animationHelper = new AnimationHelper();
         animationHelper.init();
+
     }
 
     @Override
