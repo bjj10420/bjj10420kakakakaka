@@ -242,11 +242,16 @@ public class ManagerPanelItemInfo {
     }
 
     public void actionChangeBtn() {
+        Log.d("액션체인지버튼체크", "액션체인지버튼체크");
         saveInfoVO();
         updateMangerPanelItemInfoDB();
         showChangeToast();
         refreshChangeManagerPanel();
-        //
+        refreshChangeEtcPanel();
+    }
+
+    private void refreshChangeEtcPanel() {
+
     }
 
     private void updateMangerPanelItemInfoDB() {
