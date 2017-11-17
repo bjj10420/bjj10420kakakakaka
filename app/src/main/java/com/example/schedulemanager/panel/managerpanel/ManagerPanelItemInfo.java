@@ -255,19 +255,33 @@ public class ManagerPanelItemInfo {
     }
 
     private void refreshChangeEtcPanel() {
-        String category = activityVO.getCategoryName();
-        int categoryIndex = (dataHelper.getCategories().indexOf(category) * 2) + 2;
+        LinearLayout buttonView = findButtonView();
+        changeButtonView(buttonView);
+        Log.d("해당 아이템 체크", ((TextView)buttonView.getChildAt(1)).getText().toString());
+    }
+
+    private LinearLayout findButtonView() {
         int itemIndex = activityVO.getManagerIndex();
-        HorizontalScrollView scrollView = (HorizontalScrollView) eventHelper.getEtcPanel().getEtcContentsLayout().getChildAt(categoryIndex);
+        HorizontalScrollView scrollView = findScrollView();
         LinearLayout rowLayout = ((LinearLayout) scrollView.getChildAt(0));
         LinearLayout buttonView = (LinearLayout) rowLayout.getChildAt(itemIndex);
+        return  buttonView;
+    }
+
+    private HorizontalScrollView findScrollView() {
+        String category = activityVO.getCategoryName();
+        int categoryIndex = (dataHelper.getCategories().indexOf(category) * 2) + 2;
+        HorizontalScrollView scrollView = (HorizontalScrollView) eventHelper.getEtcPanel().getEtcContentsLayout().getChildAt(categoryIndex);
+        return  scrollView;
+    }
+
+    private void changeButtonView(LinearLayout buttonView) {
         TextView etcItemText = (TextView)buttonView.getChildAt(1);
         View etcItemIcon = buttonView.getChildAt(0);
         etcItemText.setText(activityVO.getActivityName());
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inSampleSize = 2;
         etcItemIcon.setBackground(new BitmapDrawable(context.getResources(), BitmapFactory.decodeByteArray(activityVO.getImageData(),0,activityVO.getImageData().length, options)));
-        Log.d("해당 아이템 체크", ((TextView)buttonView.getChildAt(1)).getText().toString());
     }
 
     private void updateMangerPanelItemInfoDB() {
