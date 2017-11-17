@@ -238,7 +238,12 @@ public class ManagerPanelItemInfo {
         removeManagerPanelItemInfoDB();
         showRemoveToast();
         refreshRemoveManagerPanel();
+        refreshRemoveEtcPanel();
         infoViewOff();
+    }
+
+    private void refreshRemoveEtcPanel() {
+        findAndRemoveETCButtonView();
     }
 
     private void infoViewOff() {
@@ -266,6 +271,13 @@ public class ManagerPanelItemInfo {
         LinearLayout rowLayout = ((LinearLayout) scrollView.getChildAt(0));
         LinearLayout buttonView = (LinearLayout) rowLayout.getChildAt(itemIndex);
         return  buttonView;
+    }
+
+    private void findAndRemoveETCButtonView() {
+        int itemIndex = activityVO.getManagerIndex();
+        HorizontalScrollView scrollView = findScrollView();
+        LinearLayout rowLayout = ((LinearLayout) scrollView.getChildAt(0));
+        rowLayout.removeViewAt(itemIndex);
     }
 
     private HorizontalScrollView findScrollView() {
