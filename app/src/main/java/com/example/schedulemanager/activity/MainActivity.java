@@ -53,7 +53,6 @@ public class MainActivity extends AppCompatActivity {
 
         AnimationHelper animationHelper = new AnimationHelper();
         animationHelper.init();
-
     }
 
     @Override
