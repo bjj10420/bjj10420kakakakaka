@@ -9,20 +9,20 @@ public class ActivityVO {
     String categoryName;
     String activityName;
     String isFavorite;
-    byte[] imageData;
+    String imageData;
     int managerIndex;
 
     public ActivityVO() {
     }
 
-    public ActivityVO(String categoryName, String activityName, String isFavorite, byte[] imageData) {
+    public ActivityVO(String categoryName, String activityName, String isFavorite, String imageData) {
         this.categoryName = categoryName;
         this.activityName = activityName;
         this.isFavorite = isFavorite;
         this.imageData = imageData;
     }
 
-    public ActivityVO(String categoryName, String activityName, String isFavorite, byte[] imageData, ArrayList<ActivityVO> voArrayList) {
+    public ActivityVO(String categoryName, String activityName, String isFavorite, String imageData, ArrayList<ActivityVO> voArrayList) {
         this.categoryName = categoryName;
         this.activityName = activityName;
         this.isFavorite = isFavorite;
@@ -54,11 +54,11 @@ public class ActivityVO {
         isFavorite = favorite;
     }
 
-    public byte[] getImageData() {
+    public String getImageData() {
         return imageData;
     }
 
-    public void setImageData(byte[] imageData) {
+    public void setImageData(String imageData) {
         this.imageData = imageData;
     }
 
