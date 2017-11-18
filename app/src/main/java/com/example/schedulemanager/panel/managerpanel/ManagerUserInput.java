@@ -24,6 +24,7 @@ import com.example.schedulemanager.Util;
 import com.example.schedulemanager.helper.DataHelper;
 import com.example.schedulemanager.helper.UIHelper;
 import com.example.schedulemanager.vo.ActivityVO;
+import com.example.schedulemanager.vo.DrawableItem;
 
 import me.drakeet.materialdialog.MaterialDialog;
 
@@ -49,9 +50,9 @@ public class ManagerUserInput {
     private void initUserInputIconBoxPanel() {
         LinearLayout userInputIconBoxPanel = (LinearLayout) userInputView.findViewById(R.id.itemIconBoxPanel);
         LinearLayout rowLayout = null;
-        for(Bitmap bitmap : dataHelper.getDrawableList()) {
+        for(DrawableItem drawableItem : dataHelper.getDrawableList()) {
             rowLayout = decideRowLayoutByChildCount(rowLayout);
-            addBoxPanelItemViewToPanel(bitmap, rowLayout, userInputIconBoxPanel);
+            addBoxPanelItemViewToPanel(drawableItem, rowLayout, userInputIconBoxPanel);
         }
     }
 
@@ -66,17 +67,18 @@ public class ManagerUserInput {
         }
     }
 
-    private void addBoxPanelItemViewToPanel(Bitmap bitmap, LinearLayout rowLayout, LinearLayout itemInfoIconBoxPanel) {
-        View iconBoxPanelItemView = makeBoxPanelItemView(bitmap);
+    private void addBoxPanelItemViewToPanel(DrawableItem drawableItem, LinearLayout rowLayout, LinearLayout itemInfoIconBoxPanel) {
+        View iconBoxPanelItemView = makeBoxPanelItemView(drawableItem);
         rowLayout.addView(iconBoxPanelItemView);
         Log.d("addBoxPanelItemViewToPanel 체크", String.valueOf(itemInfoIconBoxPanel));
         if(rowLayout.getChildCount() == 4) itemInfoIconBoxPanel.addView(rowLayout);
     }
 
-    private View makeBoxPanelItemView(Bitmap bitmap) {
+    private View makeBoxPanelItemView(DrawableItem drawableItem) {
         View boxPanelItemView = new View(context);
-        boxPanelItemView.setBackgroundDrawable(new BitmapDrawable(context.getResources(), bitmap));
+        boxPanelItemView.setBackgroundDrawable(new BitmapDrawable(context.getResources(), drawableItem.getBitmap()));
         LinearLayout.LayoutParams viewParams = makeViewParams();
+        boxPanelItemView.setTag(drawableItem.getDrawableName());
         boxPanelItemView.setLayoutParams(viewParams);
         boxPanelItemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -242,7 +244,7 @@ public class ManagerUserInput {
         ActivityVO activityVo = new ActivityVO();
         activityVo.setCategoryName(categoryText.getText().toString());
         activityVo.setActivityName(activityName.getText().toString());
-        activityVo.setImageData(dataHelper.getByteArrayFromDrawable((BitmapDrawable) userInputView.findViewById(R.id.userInputIcon).getBackground()));
+        activityVo.setImageData((String) userInputView.findViewById(R.id.userInputIcon).getTag());
         activityVo.setFavorite("F");
         return activityVo;
     }

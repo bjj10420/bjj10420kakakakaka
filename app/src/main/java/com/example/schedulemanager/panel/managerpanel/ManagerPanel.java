@@ -196,7 +196,9 @@ public class ManagerPanel {
         ImageView iconView = (ImageView) detailItemView.findViewById(R.id.favorite_icon);
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inSampleSize = 8;
-        iconView.setImageBitmap(BitmapFactory.decodeByteArray(activityVO.getImageData(),0,activityVO.getImageData().length, options));
+
+        iconView.setImageBitmap(BitmapFactory.decodeResource(
+                context.getResources(), Util.getDrawableId(activityVO.getImageData()) , options));
     }
 
     public void clearContentsLayout(){

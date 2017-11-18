@@ -22,6 +22,7 @@ import com.example.schedulemanager.helper.DialogHelper;
 import com.example.schedulemanager.interface_.GeneralCallback2;
 import com.example.schedulemanager.panel.etcpanel.ETCPanel;
 import com.example.schedulemanager.vo.ActivityVO;
+import com.example.schedulemanager.vo.DrawableItem;
 import com.takeiteasy.materialexpansionpanel.container.MaxHeightNestedScrollView;
 import com.takeiteasy.materialexpansionpanel.panel.MaterialExpansionPanelView;
 
@@ -49,9 +50,9 @@ public class ManagerPanelItemAdd {
     private void initInfoIconBoxPanel() {
         LinearLayout itemInfoIconBoxPanel = (LinearLayout) addView.findViewById(R.id.itemIconBoxPanel);
         LinearLayout rowLayout = null;
-        for(Bitmap bitmap : dataHelper.getDrawableList()) {
+        for(DrawableItem drawableItem : dataHelper.getDrawableList()) {
             rowLayout = decideRowLayoutByChildCount(rowLayout);
-            addBoxPanelItemViewToPanel(bitmap, rowLayout, itemInfoIconBoxPanel);
+            addBoxPanelItemViewToPanel(drawableItem, rowLayout, itemInfoIconBoxPanel);
         }
     }
 
@@ -66,17 +67,18 @@ public class ManagerPanelItemAdd {
         }
     }
 
-    private void addBoxPanelItemViewToPanel(Bitmap bitmap, LinearLayout rowLayout, LinearLayout itemInfoIconBoxPanel) {
-        View iconBoxPanelItemView = makeBoxPanelItemView(bitmap);
+    private void addBoxPanelItemViewToPanel(DrawableItem drawableItem, LinearLayout rowLayout, LinearLayout itemInfoIconBoxPanel) {
+        View iconBoxPanelItemView = makeBoxPanelItemView(drawableItem);
         rowLayout.addView(iconBoxPanelItemView);
         Log.d("addBoxPanelItemViewToPanel 체크", String.valueOf(itemInfoIconBoxPanel));
         if(rowLayout.getChildCount() == 4) itemInfoIconBoxPanel.addView(rowLayout);
     }
 
-    private View makeBoxPanelItemView(Bitmap bitmap) {
+    private View makeBoxPanelItemView(DrawableItem drawableItem) {
         View boxPanelItemView = new View(context);
-        boxPanelItemView.setBackgroundDrawable(new BitmapDrawable(context.getResources(), bitmap));
+        boxPanelItemView.setBackgroundDrawable(new BitmapDrawable(context.getResources(), drawableItem.getBitmap()));
         LinearLayout.LayoutParams viewParams = makeViewParams();
+        boxPanelItemView.setTag(drawableItem.getDrawableName());
         boxPanelItemView.setLayoutParams(viewParams);
         boxPanelItemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -352,7 +354,7 @@ public class ManagerPanelItemAdd {
         ActivityVO activityVo = new ActivityVO();
         activityVo.setCategoryName(categoryText.getText().toString());
         activityVo.setActivityName(activityName.getText().toString());
-        activityVo.setImageData(dataHelper.getByteArrayFromDrawable((BitmapDrawable)addView.findViewById(R.id.itemAddIcon).getBackground()));
+        activityVo.setImageData(addView.findViewById(R.id.itemAddIcon).getTag().toString());
         activityVo.setFavorite("F");
         return activityVo;
     }

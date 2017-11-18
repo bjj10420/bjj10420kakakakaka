@@ -26,6 +26,7 @@ import com.example.schedulemanager.helper.DataHelper;
 import com.example.schedulemanager.helper.DialogHelper;
 import com.example.schedulemanager.interface_.GeneralCallback;
 import com.example.schedulemanager.vo.ActivityVO;
+import com.example.schedulemanager.vo.DrawableItem;
 
 import org.w3c.dom.Text;
 
@@ -55,9 +56,9 @@ public class ManagerPanelItemInfo {
     private void initInfoIconBoxPanel() {
         LinearLayout itemInfoIconBoxPanel = (LinearLayout) infoView.findViewById(R.id.itemIconBoxPanel);
         LinearLayout rowLayout = null;
-        for(Bitmap bitmap : dataHelper.getDrawableList()) {
+        for(DrawableItem drawableItem : dataHelper.getDrawableList()) {
                 rowLayout = decideRowLayoutByChildCount(rowLayout);
-                addBoxPanelItemViewToPanel(bitmap, rowLayout, itemInfoIconBoxPanel);
+                addBoxPanelItemViewToPanel(drawableItem, rowLayout, itemInfoIconBoxPanel);
              }
     }
 
@@ -72,17 +73,18 @@ public class ManagerPanelItemInfo {
         }
         }
 
-    private void addBoxPanelItemViewToPanel(Bitmap bitmap, LinearLayout rowLayout, LinearLayout itemInfoIconBoxPanel) {
-        View iconBoxPanelItemView = makeBoxPanelItemView(bitmap);
+    private void addBoxPanelItemViewToPanel(DrawableItem drawableItem, LinearLayout rowLayout, LinearLayout itemInfoIconBoxPanel) {
+        View iconBoxPanelItemView = makeBoxPanelItemView(drawableItem);
         rowLayout.addView(iconBoxPanelItemView);
         Log.d("addBoxPanelItemViewToPanel 체크", String.valueOf(itemInfoIconBoxPanel));
         if(rowLayout.getChildCount() == 4) itemInfoIconBoxPanel.addView(rowLayout);
     }
 
-    private View makeBoxPanelItemView(Bitmap bitmap) {
+    private View makeBoxPanelItemView(DrawableItem drawableItem) {
         View boxPanelItemView = new View(context);
-        boxPanelItemView.setBackgroundDrawable(new BitmapDrawable(context.getResources(), bitmap));
+        boxPanelItemView.setBackgroundDrawable(new BitmapDrawable(context.getResources(), drawableItem.getBitmap()));
         LinearLayout.LayoutParams viewParams = makeViewParams();
+        boxPanelItemView.setTag(drawableItem.getDrawableName());
         boxPanelItemView.setLayoutParams(viewParams);
         boxPanelItemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -102,6 +104,7 @@ public class ManagerPanelItemInfo {
     private void setInfoViewIcon(View view) {
         View activityIconView = infoView.findViewById(R.id.itemInfoIcon);
         activityIconView.setBackground(view.getBackground());
+        activityIconView.setTag(view.getTag());
     }
 
     private LinearLayout.LayoutParams makeViewParams() {
@@ -293,7 +296,8 @@ public class ManagerPanelItemInfo {
         etcItemText.setText(activityVO.getActivityName());
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inSampleSize = 2;
-        etcItemIcon.setBackground(new BitmapDrawable(context.getResources(), BitmapFactory.decodeByteArray(activityVO.getImageData(),0,activityVO.getImageData().length, options)));
+        etcItemIcon.setBackground(new BitmapDrawable(context.getResources(), BitmapFactory.decodeResource(
+                context.getResources(), Util.getDrawableId(activityVO.getImageData()) , options)));
     }
 
     private void updateMangerPanelItemInfoDB() {
@@ -304,7 +308,8 @@ public class ManagerPanelItemInfo {
         TextView managerDetailItemText = (TextView) managerListItemView.findViewById(R.id.favorite_name);
         ImageView managerDetailItemIcon = (ImageView) managerListItemView.findViewById(R.id.favorite_icon);
         managerDetailItemText.setText(activityVO.getActivityName());
-        managerDetailItemIcon.setImageBitmap(BitmapFactory.decodeByteArray(activityVO.getImageData(),0,activityVO.getImageData().length));
+        managerDetailItemIcon.setImageBitmap(BitmapFactory.decodeResource(
+                context.getResources(), Util.getDrawableId(activityVO.getImageData())));
     }
 
     private void showChangeToast() {
@@ -334,7 +339,7 @@ public class ManagerPanelItemInfo {
 
     private void saveActivityIcon() {
         View activityIcon = infoView.findViewById(R.id.itemInfoIcon);
-        activityVO.setImageData(dataHelper.getByteArrayFromDrawable((BitmapDrawable)activityIcon.getBackground()));
+        activityVO.setImageData((String) activityIcon.getTag());
     }
 
     private void saveActivityName() {
@@ -373,7 +378,8 @@ public class ManagerPanelItemInfo {
 
     private void setActivityIcon(View itemInfoView, ActivityVO activityVO) {
         View activityIconView = itemInfoView.findViewById(R.id.itemInfoIcon);
-        activityIconView.setBackground(new BitmapDrawable(context.getResources(), BitmapFactory.decodeByteArray(activityVO.getImageData(), 0, activityVO.getImageData().length)));
+        activityIconView.setBackground(new BitmapDrawable(context.getResources(), BitmapFactory.decodeResource(
+                context.getResources(), Util.getDrawableId(activityVO.getImageData()))));
     }
 
     private void setActivityName(View itemInfoView, ActivityVO activityVO) {

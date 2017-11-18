@@ -179,7 +179,8 @@ public class ETCPanel {
                 (int) valueOf50DP);
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inSampleSize = 2;
-        iconView.setBackground(new BitmapDrawable(context.getResources(), BitmapFactory.decodeByteArray(activityVO.getImageData(),0,activityVO.getImageData().length, options)));
+        iconView.setBackground(new BitmapDrawable(context.getResources(), BitmapFactory.decodeResource(context.getResources(), Util.getDrawableId(activityVO.getImageData()),
+                options)));
         iconView.setLayoutParams(iconParams);
         return iconView;
     }

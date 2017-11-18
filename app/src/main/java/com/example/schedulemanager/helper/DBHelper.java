@@ -230,11 +230,6 @@ public class DBHelper extends SQLiteOpenHelper {
                 activityTableName, activityTable_categoryName_colum, categoryName
         );
 
-//        String sql = String.format(Locale.getDefault(),
-//                "SELECT * FROM %s",
-//                activityTableName
-//        );
-//
         Cursor c = DB.rawQuery(sql, null);
         if(c != null) {
             while (c.moveToNext()) {

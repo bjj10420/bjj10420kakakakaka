@@ -135,7 +135,7 @@ public class UIHelper {
         ActivityVO vo = new ActivityVO();
         vo.setFavorite("F");
         vo.setActivityName("기타");
-        vo.setImageData(dataHelper.getByteArrayFromDrawable(R.drawable.etc_icon));
+        vo.setImageData("etc_icon");
         return vo;
     }
 
@@ -174,7 +174,8 @@ public class UIHelper {
                 (int) buttonHeight);
         // iconView.setBackgroundResource(findIdByFileName(iconNameMap.get(textData), this));
         //
-            Drawable drawable = new BitmapDrawable(context.getResources(), BitmapFactory.decodeByteArray(activityVO.getImageData(),0,activityVO.getImageData().length));
+            Drawable drawable = new BitmapDrawable(context.getResources(), BitmapFactory.decodeResource(
+                    context.getResources(), Util.getDrawableId(activityVO.getImageData())));
         if(activityVO.getActivityName().equals("기타")){
             drawable.setColorFilter(Color.parseColor("#8d4a24"), PorterDuff.Mode.SRC_IN);
         }
