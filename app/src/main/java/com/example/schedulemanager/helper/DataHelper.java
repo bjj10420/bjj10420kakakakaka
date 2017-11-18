@@ -83,7 +83,7 @@ public class DataHelper {
     private void loadBasicDatas() {
         loadBasicCategories();
         loadBasicActivities();
-        loadBasicDrawables();
+//        loadBasicDrawables();
     }
 
     private void loadBasicDrawables() {
