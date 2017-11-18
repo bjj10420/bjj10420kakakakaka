@@ -93,7 +93,7 @@ public class DBHelper extends SQLiteOpenHelper {
                 .append(activityTable_categoryName_colum).append(" TEXT NOT NULL, ")
                 .append(activityTable_activityName_colum).append(" TEXT NOT NULL, ")
                 .append(activityTable_isFavorite_colum).append(" TEXT NOT NULL, ")
-                .append(acitivytTable_icon_colum).append(" BLOB NOT NULL)")
+                .append(acitivytTable_icon_colum).append(" TEXT NOT NULL)")
                 .toString();
         db.execSQL(sql3);
 
@@ -242,12 +242,8 @@ public class DBHelper extends SQLiteOpenHelper {
                 activityVO.setCategoryName(c.getString(c.getColumnIndex(activityTable_categoryName_colum)));
                 activityVO.setActivityName(c.getString(c.getColumnIndex(activityTable_activityName_colum)));
                 activityVO.setFavorite(c.getString(c.getColumnIndex(activityTable_isFavorite_colum)));
-                byte[] byteData = c.getBlob(c.getColumnIndex(acitivytTable_icon_colum));
-                activityVO.setImageData(byteData);
+                activityVO.setImageData(c.getString(c.getColumnIndex(acitivytTable_icon_colum)));
                 activities.add(activityVO);
-//                Log.d("바이트 데이터 테스트", String.valueOf(DataHelper.dataHelper.getAppIcon(byteData)));
-                ImageView centerIcon = (ImageView) Util.getViewById(context, R.id.centerIcon);
-//                centerIcon.setImageBitmap(DataHelper.dataHelper.getAppIcon(byteData));
             }
         }
     }
@@ -280,7 +276,7 @@ public class DBHelper extends SQLiteOpenHelper {
             scheduleMap = new HashMap<Integer, Schedule>();
             allScheduleMap.put(scheduleYearMonth, scheduleMap);
         }
-//        Log.d("addScheduleToMapByMonth" , String.valueOf(Integer.parseInt(schedule.getDate().substring(6,8))));
+
         scheduleMap.put(Integer.parseInt(schedule.getDate().substring(6,8) + "000" + schedule.getOrder()), schedule);
         Log.d("해당 월의 스케쥴맵에 추가할 때 키값 체크", String.valueOf(Integer.parseInt(schedule.getDate().substring(6,8) + "000" + schedule.getOrder())));
     }
