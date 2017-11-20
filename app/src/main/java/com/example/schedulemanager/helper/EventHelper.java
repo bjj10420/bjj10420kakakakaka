@@ -136,6 +136,11 @@ public class EventHelper {
 
     private void actionEtcButtonClicked() {
         Log.d("isEtcButton", "isEtcButton ");
+        if(etcPanel == null){
+            ETCPanel etcPanel = new ETCPanel(context);
+            etcPanel.initETCPanel();
+            setEtcPanel(etcPanel);
+        }
         uiHelper.setTotalLayoutVisible(false);
         etcPanel.setEtcLayoutVisible(true);
     }
@@ -541,13 +546,18 @@ public class EventHelper {
     public void onBackPresssed(){
         View scheduleLayout = uiHelper.getScheduleLayout();
         View calendarLayout = uiHelper.getCalendarLayout();
-        View etcLayout = etcPanel.getEtcLayout();
-        View managerLayout = managerPanel.getManagerLayout();
+        View etcLayout = null;
+        View managerLayout = null;
 
-        if(managerLayout.getVisibility() == View.VISIBLE) {
+        if(etcPanel != null)
+        etcLayout = etcPanel.getEtcLayout();
+        if(managerPanel != null)
+        managerLayout = managerPanel.getManagerLayout();
+
+        if(managerLayout != null && managerLayout.getVisibility() == View.VISIBLE) {
             managerPanel.getManagerPanelEvent().managerCloseBtnEvent();
         }
-        else if(etcLayout.getVisibility() == View.VISIBLE) {
+        else if(etcLayout != null && etcLayout.getVisibility() == View.VISIBLE) {
             etcPanel.setEtcLayoutVisible(false);
             uiHelper.setTotalLayoutVisible(true);
         }

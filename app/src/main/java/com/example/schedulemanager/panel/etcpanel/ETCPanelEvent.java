@@ -11,6 +11,8 @@ import com.example.schedulemanager.helper.EventHelper;
 import com.example.schedulemanager.helper.UIHelper;
 import com.example.schedulemanager.panel.managerpanel.ManagerPanel;
 
+import static com.example.schedulemanager.helper.EventHelper.eventHelper;
+
 public class ETCPanelEvent implements View.OnClickListener{
 
     Context context;
@@ -100,11 +102,11 @@ public class ETCPanelEvent implements View.OnClickListener{
     }
 
     private void actionBasicUpEvent(View copiedView) {
-        EventHelper.eventHelper.actionUpEvent(copiedView);
+        eventHelper.actionUpEvent(copiedView);
     }
 
     private void actionBasicMoveEvent() {
-        EventHelper.eventHelper.actionMoveBasicEvent(copiedView, true);
+        eventHelper.actionMoveBasicEvent(copiedView, true);
     }
 
     private void moveCopiedView(int X, int Y) {
@@ -145,7 +147,12 @@ public class ETCPanelEvent implements View.OnClickListener{
     }
 
     public void panelLayoutOffForManagerPanel() {
-        ManagerPanel managerPanel = EventHelper.eventHelper.getManagerPanel();
+        ManagerPanel managerPanel = eventHelper.getManagerPanel();
+        if(managerPanel == null) {
+            managerPanel = new ManagerPanel(context);
+            managerPanel.initManagerPanel();
+            eventHelper.setManagerPanel(managerPanel);
+        }
         UIHelper.uiHelper.slideUpManagerPanel(managerPanel, etcPanel);
     }
 
