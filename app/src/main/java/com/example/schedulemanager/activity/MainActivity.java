@@ -43,13 +43,13 @@ public class MainActivity extends AppCompatActivity {
         eventHelper.initEvent(this, dataHelper, uiHelper, calendarHelper);
         calendarHelper.setEventHelper(eventHelper);
 
-        ETCPanel etcPanel = new ETCPanel(this);
-        etcPanel.initETCPanel();
-        eventHelper.setEtcPanel(etcPanel);
+//        ETCPanel etcPanel = new ETCPanel(this);
+//        etcPanel.initETCPanel();
+//        eventHelper.setEtcPanel(etcPanel);
 
-        ManagerPanel managerPanel = new ManagerPanel(this);
-        managerPanel.initManagerPanel();
-        eventHelper.setManagerPanel(managerPanel);
+//        ManagerPanel managerPanel = new ManagerPanel(this);
+//        managerPanel.initManagerPanel();
+//        eventHelper.setManagerPanel(managerPanel);
 
         AnimationHelper animationHelper = new AnimationHelper();
         animationHelper.init();
