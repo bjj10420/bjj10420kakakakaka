@@ -17,6 +17,7 @@ import com.example.schedulemanager.R;
 import com.example.schedulemanager.interface_.GeneralCallback2;
 import com.example.schedulemanager.panel.etcpanel.ETCPanel;
 import com.example.schedulemanager.panel.managerpanel.ManagerPanel;
+import com.example.schedulemanager.task.ETCTask;
 import com.example.schedulemanager.vo.RectAndView;
 import com.example.schedulemanager.vo.Schedule;
 import com.example.schedulemanager.Util;
@@ -137,12 +138,12 @@ public class EventHelper {
     private void actionEtcButtonClicked() {
         Log.d("isEtcButton", "isEtcButton ");
         if(etcPanel == null){
-            ETCPanel etcPanel = new ETCPanel(context);
-            etcPanel.initETCPanel();
-            setEtcPanel(etcPanel);
+            ETCTask etcTask = new ETCTask(context);
+            etcTask.execute();
         }
-        uiHelper.setTotalLayoutVisible(false);
-        etcPanel.setEtcLayoutVisible(true);
+        else {
+            etcPanel.setEtcLayoutVisible(true);
+        }
     }
 
     /**
@@ -156,7 +157,6 @@ public class EventHelper {
         uiHelper.hoverView(view, false);
 
         // dX설정
-//        dataHelper.setdX(view.getX() - event.getRawX());
         float dY = 0;
         float dX = 0;
 

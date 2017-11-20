@@ -33,6 +33,7 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
+import com.rey.material.widget.ProgressView;
 
 
 import java.io.ByteArrayOutputStream;
@@ -62,32 +63,11 @@ public class UIHelper {
     private View firstCalendarCell;                 // 캘린더가 랜더링된 후의 첫 셀뷰
     private View viewOfToday;                       // 오늘 뷰
     private View bottomBtnLayout;                   // 캘린더 내의 바텀 레이아웃
+    private ProgressView progressView;              // 프로그레스바
 
     public void initUI(Context context, DataHelper dataHelper) {
         initFields(context, dataHelper);
-//        //TODO 스트링 리스트 파라메터를 나중에 DB에서 읽어오게 해야 함
-//        //TODO 나중에 버튼 패널의 아이콘들에 weight를 줘야한다
-//        initButtonPanel(R.id.buttonPanel, testCode());
-//        initButtonPanel(R.id.buttonPanel2, testCode2());
         newInitButtonPanel(dataHelper.getActivities());
-    }
-
-    private ArrayList<String> testCode() {
-        ArrayList<String> testList = new ArrayList<String>();
-        testList.add("교류");
-        testList.add("이메일");
-        testList.add("여가");
-        testList.add("만남");
-        return testList;
-    }
-
-    private ArrayList<String> testCode2() {
-        ArrayList<String> testList2 = new ArrayList<String>();
-        testList2.add("약속");
-        testList2.add("독서");
-        testList2.add("학교");
-        testList2.add("기타");
-        return testList2;
     }
 
     private void initFields(Context context, DataHelper dataHelper) {
@@ -99,12 +79,11 @@ public class UIHelper {
         centerIcon = Util.getViewById(this.context,R.id.centerIcon);
         calendarLayout = Util.getViewById(this.context,R.id.calendarLayout);
         scheduleLayout = Util.getViewById(this.context,R.id.scheduleLayout);
-
-        bottomBtnLayout = Util.getViewById(this.context,R.id.btn_layout);
         backBtn = (TextView) Util.getViewById(this.context,R.id.back_btn);
         backBtn.setTypeface(this.dataHelper.getTypeface());
         cancelBtn = Util.getViewById(this.context,R.id.cancel_btn);
         pieChart = (PieChart) Util.getViewById(this.context,R.id.chart);
+        progressView = (ProgressView) Util.getViewById(context, R.id.progressView);
     }
 
     public void newInitButtonPanel(HashMap<String, ArrayList<ActivityVO>> activities) {
@@ -558,5 +537,7 @@ public class UIHelper {
         });
     }
 
-
+    public void setProgressViewVisible(boolean isVisible){
+        progressView.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+    }
 }
