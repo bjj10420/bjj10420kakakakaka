@@ -18,7 +18,8 @@ public class ETCTask extends AsyncTask<Integer, Integer, Void>{
 
     @Override
     protected Void doInBackground(Integer... integers) {
-
+        etcPanel = new ETCPanel(context);
+        publishProgress();
         return null;
     }
 
@@ -32,11 +33,6 @@ public class ETCTask extends AsyncTask<Integer, Integer, Void>{
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
-
-        etcPanel = new ETCPanel(context);
-        etcPanel.initETCPanel();
-        eventHelper.setEtcPanel(etcPanel);
-
         uiHelper.setProgressViewVisible(false);
         etcPanel.setEtcLayoutVisible(true);
     }
@@ -44,5 +40,7 @@ public class ETCTask extends AsyncTask<Integer, Integer, Void>{
     @Override
     protected void onProgressUpdate(Integer... values) {
         super.onProgressUpdate(values);
+        etcPanel.initETCPanel();
+        eventHelper.setEtcPanel(etcPanel);
    }
 }
