@@ -17,6 +17,8 @@ import com.example.schedulemanager.helper.UIHelper;
 import com.example.schedulemanager.panel.etcpanel.ETCPanel;
 import com.example.schedulemanager.panel.managerpanel.ManagerPanel;
 import com.example.schedulemanager.task.ETCTask;
+import com.example.schedulemanager.task.IconBoxTask;
+import com.example.schedulemanager.task.ManagerTask;
 
 import static com.example.schedulemanager.helper.DataHelper.PICK_FROM_GALLARY;
 import static com.example.schedulemanager.helper.EventHelper.eventHelper;
@@ -46,13 +48,22 @@ public class MainActivity extends AppCompatActivity {
 
         AnimationHelper animationHelper = new AnimationHelper();
         animationHelper.init();
-
-        extraTask();
     }
+
 
     private void extraTask() {
         ETCTask etcTask = new ETCTask(this);
         etcTask.execute();
+//        ManagerTask managerTask = new ManagerTask(this);
+//        managerTask.execute();
+//        IconBoxTask iconBoxTask = new IconBoxTask(this);
+//        iconBoxTask.execute();
+    }
+
+    @Override
+    public void onWindowFocusChanged(boolean hasFocus) {
+        super.onWindowFocusChanged(hasFocus);
+        extraTask();
     }
 
     @Override

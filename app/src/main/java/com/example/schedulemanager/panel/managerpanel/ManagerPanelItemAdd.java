@@ -315,27 +315,11 @@ public class ManagerPanelItemAdd {
         return categoryIndex;
     }
 
-    private void redrawPanel() {
-        redrawETCPanel();
-        redrawManagerPanel();
-    }
-
     private ActivityVO addNewActivityVO() {
         ActivityVO activityVO = makeNewActivityVO();
         addActivityToActivities(activityVO);
         addItemIntoDB(activityVO);
         return activityVO;
-    }
-
-    public void redrawManagerPanel() {
-        ManagerPanel managerPanel = eventHelper.getManagerPanel();
-        managerPanel.redrawManagerPanel();
-    }
-
-    private void redrawETCPanel() {
-        ETCPanel etcPanel = eventHelper.getEtcPanel();
-        etcPanel.clearEtcContentsLayout();
-        etcPanel.initETCPanel();
     }
 
     private void addItemIntoDB(ActivityVO activityVO) {

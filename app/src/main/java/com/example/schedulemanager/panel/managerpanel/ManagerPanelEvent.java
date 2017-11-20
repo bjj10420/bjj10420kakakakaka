@@ -183,11 +183,6 @@ public class ManagerPanelEvent implements View.OnClickListener{
 //        addNewItemToManagerPanel(detailItemView, categoryIndex);
     }
 
-    private void redrawManagerAndETCPanel() {
-        managerPanel.redrawManagerPanel();
-        redrawETCPanel();
-    }
-
     private void addCategoryToMap(String category) {
         dataHelper.getCategories().add(category);
         dataHelper.makeCategoryArray();

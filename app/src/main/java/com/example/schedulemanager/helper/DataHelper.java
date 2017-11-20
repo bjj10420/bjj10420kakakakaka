@@ -83,10 +83,10 @@ public class DataHelper {
     private void loadBasicDatas() {
         loadBasicCategories();
         loadBasicActivities();
-        loadBasicDrawables();
+//        loadBasicDrawables();
     }
 
-    private void loadBasicDrawables() {
+    public void loadBasicDrawables() {
         Field[] drawables = com.example.schedulemanager.R.drawable.class.getFields();
         BitmapFactory.Options options = new BitmapFactory.Options();
         options.inSampleSize = 2;
