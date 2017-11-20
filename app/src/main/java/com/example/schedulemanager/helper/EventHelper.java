@@ -138,10 +138,10 @@ public class EventHelper {
     private void actionEtcButtonClicked() {
         Log.d("isEtcButton", "isEtcButton ");
         if(etcPanel == null){
-            ETCTask etcTask = new ETCTask(context);
-            etcTask.execute();
+            Util.customToast(context, "아이콘을 로딩 중입니다. 잠시만 기다려주심시오");
         }
         else {
+            uiHelper.setTotalLayoutVisible(false);
             etcPanel.setEtcLayoutVisible(true);
         }
     }

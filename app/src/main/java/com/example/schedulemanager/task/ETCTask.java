@@ -26,15 +26,11 @@ public class ETCTask extends AsyncTask<Integer, Integer, Void>{
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        uiHelper.setTotalLayoutVisible(false);
-        uiHelper.setProgressViewVisible(true);
     }
 
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
-        uiHelper.setProgressViewVisible(false);
-        etcPanel.setEtcLayoutVisible(true);
     }
 
     @Override

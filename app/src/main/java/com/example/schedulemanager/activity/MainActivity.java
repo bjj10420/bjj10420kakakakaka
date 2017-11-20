@@ -16,6 +16,7 @@ import com.example.schedulemanager.helper.EventHelper;
 import com.example.schedulemanager.helper.UIHelper;
 import com.example.schedulemanager.panel.etcpanel.ETCPanel;
 import com.example.schedulemanager.panel.managerpanel.ManagerPanel;
+import com.example.schedulemanager.task.ETCTask;
 
 import static com.example.schedulemanager.helper.DataHelper.PICK_FROM_GALLARY;
 import static com.example.schedulemanager.helper.EventHelper.eventHelper;
@@ -43,16 +44,15 @@ public class MainActivity extends AppCompatActivity {
         eventHelper.initEvent(this, dataHelper, uiHelper, calendarHelper);
         calendarHelper.setEventHelper(eventHelper);
 
-//        ETCPanel etcPanel = new ETCPanel(this);
-//        etcPanel.initETCPanel();
-//        eventHelper.setEtcPanel(etcPanel);
-
-//        ManagerPanel managerPanel = new ManagerPanel(this);
-//        managerPanel.initManagerPanel();
-//        eventHelper.setManagerPanel(managerPanel);
-
         AnimationHelper animationHelper = new AnimationHelper();
         animationHelper.init();
+
+        extraTask();
+    }
+
+    private void extraTask() {
+        ETCTask etcTask = new ETCTask(this);
+        etcTask.execute();
     }
 
     @Override

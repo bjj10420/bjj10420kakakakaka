@@ -62,8 +62,8 @@ public class UIHelper {
     private View copiedView;                        // 드래그를 시작할 때 임시로 저장 해놓는 뷰
     private View firstCalendarCell;                 // 캘린더가 랜더링된 후의 첫 셀뷰
     private View viewOfToday;                       // 오늘 뷰
-    private View bottomBtnLayout;                   // 캘린더 내의 바텀 레이아웃
-    private ProgressView progressView;              // 프로그레스바
+
+    private TextView progressView;              // 프로그레스바
 
     public void initUI(Context context, DataHelper dataHelper) {
         initFields(context, dataHelper);
@@ -83,7 +83,8 @@ public class UIHelper {
         backBtn.setTypeface(this.dataHelper.getTypeface());
         cancelBtn = Util.getViewById(this.context,R.id.cancel_btn);
         pieChart = (PieChart) Util.getViewById(this.context,R.id.chart);
-        progressView = (ProgressView) Util.getViewById(context, R.id.progressView);
+        progressView = (TextView) Util.getViewById(context, R.id.progressView);
+        Util.setTextWithBoldFont(progressView, "로딩중...");
     }
 
     public void newInitButtonPanel(HashMap<String, ArrayList<ActivityVO>> activities) {
@@ -273,7 +274,7 @@ public class UIHelper {
     }
 
     public void changeBottomButton(boolean isBackBtnVisible) {
-        bottomBtnLayout.setVisibility(isBackBtnVisible ? View.VISIBLE : View.GONE);
+
         backBtn.setVisibility(isBackBtnVisible ? View.GONE : View.VISIBLE);
         cancelBtn.setVisibility(isBackBtnVisible ? View.VISIBLE : View.GONE);
     }
@@ -479,10 +480,6 @@ public class UIHelper {
         LinearLayout panel2 = (LinearLayout) Util.getViewById(context, R.id.buttonPanel2);
         panel1.removeAllViews();
         panel2.removeAllViews();
-    }
-//
-    public View getBottomBtnLayout() {
-        return bottomBtnLayout;
     }
 
     public void slideUpManagerPanel(ManagerPanel managerPanel, final ETCPanel etcPanel) {
