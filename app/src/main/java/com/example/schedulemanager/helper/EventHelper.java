@@ -17,7 +17,6 @@ import com.example.schedulemanager.R;
 import com.example.schedulemanager.interface_.GeneralCallback2;
 import com.example.schedulemanager.panel.etcpanel.ETCPanel;
 import com.example.schedulemanager.panel.managerpanel.ManagerPanel;
-import com.example.schedulemanager.task.IconBoxTask;
 import com.example.schedulemanager.vo.RectAndView;
 import com.example.schedulemanager.vo.Schedule;
 import com.example.schedulemanager.Util;

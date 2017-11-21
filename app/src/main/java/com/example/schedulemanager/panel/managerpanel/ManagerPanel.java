@@ -195,7 +195,7 @@ public class ManagerPanel {
     private void setFavoriteIcon(View detailItemView, ActivityVO activityVO) {
         ImageView iconView = (ImageView) detailItemView.findViewById(R.id.favorite_icon);
         BitmapFactory.Options options = new BitmapFactory.Options();
-        options.inSampleSize = 8;
+        options.inSampleSize = 2;
 
         iconView.setImageBitmap(BitmapFactory.decodeResource(
                 context.getResources(), Util.getDrawableId(activityVO.getImageData()) , options));

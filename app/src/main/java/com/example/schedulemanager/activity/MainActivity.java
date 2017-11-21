@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         Log.d("메인화면 랜더링이 완료되었습니다", "완료 OK");
-        new TaskHelper(this).loadETCAndManagerPanel();
+        new TaskHelper(this).loadETCPanel();
     }
 
     @Override
