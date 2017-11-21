@@ -54,15 +54,12 @@ public class MainActivity extends AppCompatActivity {
     private void extraTask() {
         ETCTask etcTask = new ETCTask(this);
         etcTask.execute();
-//        ManagerTask managerTask = new ManagerTask(this);
-//        managerTask.execute();
-//        IconBoxTask iconBoxTask = new IconBoxTask(this);
-//        iconBoxTask.execute();
     }
 
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
+        Log.d("메인화면 랜더링이 완료되었습니다", "완료 OK");
         extraTask();
     }
 

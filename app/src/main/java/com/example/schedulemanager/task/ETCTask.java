@@ -8,6 +8,7 @@ import com.example.schedulemanager.Util;
 import com.example.schedulemanager.panel.etcpanel.ETCPanel;
 import com.example.schedulemanager.panel.managerpanel.ManagerPanel;
 
+import static com.example.schedulemanager.helper.DataHelper.dataHelper;
 import static com.example.schedulemanager.helper.EventHelper.eventHelper;
 import static com.example.schedulemanager.helper.UIHelper.uiHelper;
 
@@ -47,6 +48,6 @@ public class ETCTask extends AsyncTask<Integer, Integer, Void>{
         eventHelper.setEtcPanel(etcPanel);
         managerPanel.initManagerPanel();
         eventHelper.setManagerPanel(managerPanel);
-
+        dataHelper.loadBasicDrawables();
     }
 }
