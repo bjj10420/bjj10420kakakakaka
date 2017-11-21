@@ -54,22 +54,14 @@
             android:layout_width="0dp"
             android:layout_height="75dp"
             android:layout_weight="1"
-
             android:text="활동 추가"
             fbutton:buttonColor="@color/strokeBrown"
             fbutton:cornerRadius="5dp"
-            fbutton:shadowColor="@color/black_de"
+            fbutton:shadowColor="#404040"
             fbutton:shadowEnabled="true"
             fbutton:shadowHeight="5dp"
-
             />
-        <!--<com.rey.material.widget.Button-->
-        <!--android:id="@+id/etcAddBtn"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="75dp"-->
-        <!--android:layout_weight="1"-->
-        <!--android:text="활동 추가"-->
-        <!--android:theme="@style/AppTheme.Button" />-->
+
         <info.hoang8f.widget.FButton
             android:id="@+id/etcManagerBtn"
             android:layout_width="0dp"
@@ -78,18 +70,10 @@
             android:text="관리"
             fbutton:buttonColor="@color/strokeBrown"
             fbutton:cornerRadius="5dp"
-            fbutton:shadowColor="@color/black_de"
+            fbutton:shadowColor="#404040"
             fbutton:shadowEnabled="true"
             fbutton:shadowHeight="5dp" />
 
-
-        <!--<com.rey.material.widget.Button-->
-        <!--android:id="@+id/etcManagerBtn"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="75dp"-->
-        <!--android:layout_weight="1"-->
-        <!--android:text="관리"-->
-        <!--android:theme="@style/AppTheme.Button" />-->
 
         <info.hoang8f.widget.FButton
             android:id="@+id/etcUserInputBtn"
@@ -99,18 +83,9 @@
             android:text="사용자 입력"
             fbutton:buttonColor="@color/strokeBrown"
             fbutton:cornerRadius="5dp"
-            fbutton:shadowColor="@color/black_de"
+            fbutton:shadowColor="#404040"
             fbutton:shadowEnabled="true"
             fbutton:shadowHeight="5dp" />
-
-        <!--<com.rey.material.widget.Button-->
-        <!--android:id="@+id/etcUserInputBtn"-->
-        <!--android:layout_width="0dp"-->
-        <!--android:layout_height="75dp"-->
-        <!--android:layout_weight="1"-->
-        <!--android:text="사용자 입력"-->
-        <!--android:theme="@style/AppTheme.Button" />-->
-
     </LinearLayout>
 
 </RelativeLayout>

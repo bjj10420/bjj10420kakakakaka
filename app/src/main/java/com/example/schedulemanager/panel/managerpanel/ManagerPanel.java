@@ -7,6 +7,7 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -22,6 +23,8 @@ import com.takeiteasy.materialexpansionpanel.panel.MaterialExpansionPanelView;
 
 import java.util.ArrayList;
 
+import static com.example.schedulemanager.helper.DataHelper.dataHelper;
+
 // 기타버튼 => 관리 화면
 public class ManagerPanel {
 
@@ -36,7 +39,7 @@ public class ManagerPanel {
 
     public void init(Context context) {
         initFields(context);
-        initBottomButtonEvents();
+        initBottomButton();
     }
 
     private void initFields(Context context) {
@@ -46,7 +49,7 @@ public class ManagerPanel {
         managerPanelEvent = new ManagerPanelEvent(this, context);
     }
 
-    private void initBottomButtonEvents() {
+    private void initBottomButton() {
         View closeButton = Util.getViewById(context, R.id.managerCloseBtn);
         closeButton.setOnClickListener(managerPanelEvent);
     }
@@ -146,9 +149,17 @@ public class ManagerPanel {
     private View makeLastMenuBarView() {
         View menuBarView = ((Activity) context).getLayoutInflater().inflate(R.layout.manager_menu_bar_item, null);
         menuBarView.setMinimumHeight((int) Util.convertDpToPixel(65));
-        menuBarView.findViewById(R.id.addCategoryBtn).setOnClickListener(managerPanelEvent);
-        menuBarView.findViewById(R.id.removeCategoryBtn).setOnClickListener(managerPanelEvent);
+        setCategoryButtons(menuBarView);
         return menuBarView;
+    }
+
+    private void setCategoryButtons(View menuBarView) {
+        Button addCategoryBtn = (Button) menuBarView.findViewById(R.id.addCategoryBtn);
+        addCategoryBtn.setOnClickListener(managerPanelEvent);
+        addCategoryBtn.setTypeface(dataHelper.getTypeface());
+        Button removeCategoryBtn = (Button) menuBarView.findViewById(R.id.removeCategoryBtn);
+        removeCategoryBtn.setOnClickListener(managerPanelEvent);
+        removeCategoryBtn.setTypeface(dataHelper.getTypeface());
     }
 
     private View inflateDetailView() {

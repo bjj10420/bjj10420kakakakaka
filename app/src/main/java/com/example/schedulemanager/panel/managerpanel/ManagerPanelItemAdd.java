@@ -124,6 +124,7 @@ public class ManagerPanelItemAdd {
         addView = initPanelItemAddView(context);
         categoryText = (TextView) addView.findViewById(R.id.itemAddCategoryText);
         categorySelectBtn = (Button) addView.findViewById(R.id.itemAddCategorySelect);
+        categorySelectBtn.setTypeface(dataHelper.getTypeface());
         activityName = (EditText) addView.findViewById(R.id.itemAddActivity);
     }
 
