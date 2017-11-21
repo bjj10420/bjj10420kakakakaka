@@ -24,7 +24,7 @@
         <activity android:name=".activity.MainActivity"></activity>
         <activity
             android:name=".activity.ProgressActivity"
-            android:theme="@style/SplashTheme"></activity>
+            android:theme="@style/ProgessTheme"></activity>
     </application>
 
 </manifest>

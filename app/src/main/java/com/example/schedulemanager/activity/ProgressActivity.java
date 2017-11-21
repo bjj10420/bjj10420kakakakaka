@@ -23,24 +23,24 @@ public class ProgressActivity extends Activity {
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_progress);
-//        progressActivity = this;
-//        TimerTask mTask = new TimerTask() {
-//            @Override
-//            public void run() {
-//                finish();
-//                overridePendingTransition(0, 0);
-//            }
-//        };
-//
-//        Timer mTimer = new Timer();
-//        mTimer.schedule(mTask, 3000);
-//        new TaskHelper(MainActivity.mainActivity).loadManagerPanel(new GeneralCallback2() {
-//            @Override
-//            public void onCallBack(Object parameter) {
-//                UIHelper.uiHelper.slideUpManagerPanel((ManagerPanel) parameter, eventHelper.getEtcPanel());
-//            }
-//        });
+        setContentView(R.layout.activity_progress);
+        progressActivity = this;
+        TimerTask mTask = new TimerTask() {
+            @Override
+            public void run() {
+                new TaskHelper(MainActivity.mainActivity).loadManagerPanel(new GeneralCallback2() {
+                    @Override
+                    public void onCallBack(Object parameter) {
+                        UIHelper.uiHelper.slideUpManagerPanel((ManagerPanel) parameter, eventHelper.getEtcPanel());
+                        finish();
+                        overridePendingTransition(0, 0);
+                    }
+                });
 
+            }
+        };
+
+        Timer mTimer = new Timer();
+        mTimer.schedule(mTask, 1000);
     }
 }
