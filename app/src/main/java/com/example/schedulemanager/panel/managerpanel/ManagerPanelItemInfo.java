@@ -380,7 +380,7 @@ public class ManagerPanelItemInfo {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View itemInfoView = inflater.inflate(R.layout.manager_item_info, null);
         setItemInfoView(itemInfoView, activityVO);
-        Util.setFontAllChildView(context, itemInfoView, DataHelper.dataHelper.getTypeface(), true);
+//        Util.setFontAllChildView(context, itemInfoView, DataHelper.dataHelper.getTypeface(), true);
         return itemInfoView;
     }
 
