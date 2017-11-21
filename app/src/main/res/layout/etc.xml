@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:fbutton="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff">
@@ -44,32 +45,71 @@
         android:layout_width="match_parent"
         android:layout_height="75dp"
         android:layout_alignParentBottom="true"
-        android:background="#ffffff"
+        android:background="@android:color/transparent"
         android:gravity="center">
 
-        <com.rey.material.widget.Button
+
+        <info.hoang8f.widget.FButton
             android:id="@+id/etcAddBtn"
             android:layout_width="0dp"
             android:layout_height="75dp"
             android:layout_weight="1"
-            android:text="활동 추가"
-            android:theme="@style/AppTheme.Button" />
 
-        <com.rey.material.widget.Button
+            android:text="활동 추가"
+            fbutton:buttonColor="@color/strokeBrown"
+            fbutton:cornerRadius="5dp"
+            fbutton:shadowColor="@color/black_de"
+            fbutton:shadowEnabled="true"
+            fbutton:shadowHeight="5dp"
+
+            />
+        <!--<com.rey.material.widget.Button-->
+        <!--android:id="@+id/etcAddBtn"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="75dp"-->
+        <!--android:layout_weight="1"-->
+        <!--android:text="활동 추가"-->
+        <!--android:theme="@style/AppTheme.Button" />-->
+        <info.hoang8f.widget.FButton
             android:id="@+id/etcManagerBtn"
             android:layout_width="0dp"
             android:layout_height="75dp"
             android:layout_weight="1"
             android:text="관리"
-            android:theme="@style/AppTheme.Button" />
+            fbutton:buttonColor="@color/strokeBrown"
+            fbutton:cornerRadius="5dp"
+            fbutton:shadowColor="@color/black_de"
+            fbutton:shadowEnabled="true"
+            fbutton:shadowHeight="5dp" />
 
-        <com.rey.material.widget.Button
+
+        <!--<com.rey.material.widget.Button-->
+        <!--android:id="@+id/etcManagerBtn"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="75dp"-->
+        <!--android:layout_weight="1"-->
+        <!--android:text="관리"-->
+        <!--android:theme="@style/AppTheme.Button" />-->
+
+        <info.hoang8f.widget.FButton
             android:id="@+id/etcUserInputBtn"
             android:layout_width="0dp"
             android:layout_height="75dp"
             android:layout_weight="1"
             android:text="사용자 입력"
-            android:theme="@style/AppTheme.Button" />
+            fbutton:buttonColor="@color/strokeBrown"
+            fbutton:cornerRadius="5dp"
+            fbutton:shadowColor="@color/black_de"
+            fbutton:shadowEnabled="true"
+            fbutton:shadowHeight="5dp" />
+
+        <!--<com.rey.material.widget.Button-->
+        <!--android:id="@+id/etcUserInputBtn"-->
+        <!--android:layout_width="0dp"-->
+        <!--android:layout_height="75dp"-->
+        <!--android:layout_weight="1"-->
+        <!--android:text="사용자 입력"-->
+        <!--android:theme="@style/AppTheme.Button" />-->
 
     </LinearLayout>
 

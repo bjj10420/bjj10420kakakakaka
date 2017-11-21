@@ -25,6 +25,8 @@ import com.example.schedulemanager.vo.ActivityVO;
 
 import java.util.ArrayList;
 
+import static com.example.schedulemanager.helper.DataHelper.dataHelper;
+
 /**
  * 기타 버튼을 눌렀을때 띄워지는 창
  */
@@ -56,10 +58,13 @@ public class ETCPanel {
 
     private void initBottomButtonEvents() {
         Button addButton = (Button) Util.getViewById(context, R.id.etcAddBtn);
+        addButton.setTypeface(dataHelper.getTypeface());
         addButton.setOnClickListener(etcPanelEvent);
         Button managerButton = (Button) Util.getViewById(context, R.id.etcManagerBtn);
+        managerButton.setTypeface(dataHelper.getTypeface());
         managerButton.setOnClickListener(etcPanelEvent);
         Button userInputButton = (Button) Util.getViewById(context, R.id.etcUserInputBtn);
+        userInputButton.setTypeface(dataHelper.getTypeface());
         userInputButton.setOnClickListener(etcPanelEvent);
         View closeButton = Util.getViewById(context, R.id.etcCloseBtn);
         closeButton.setOnClickListener(etcPanelEvent);
@@ -71,14 +76,14 @@ public class ETCPanel {
     }
 
     private void adaptorEtcBottomLayout() {
-        Util.setFontAllChildView(context, etcBottomButtonLayout, DataHelper.dataHelper.getTypeface(), true);
+        Util.setFontAllChildView(context, etcBottomButtonLayout, dataHelper.getTypeface(), true);
     }
 
     /**
      * 기타 버튼을 눌렀을 때 나오는 패널 초기화
      */
     public void initETCPanel(){
-        for(String category : DataHelper.dataHelper.getCategories()){
+        for(String category : dataHelper.getCategories()){
             makeOneRow(category);
         }
     }
@@ -129,7 +134,7 @@ public class ETCPanel {
     }
 
     private void composeRowLayout(LinearLayout rowLayout, String category) {
-        ArrayList<ActivityVO> activities = DataHelper.dataHelper.getActivities().get(category);
+        ArrayList<ActivityVO> activities = dataHelper.getActivities().get(category);
         initRowLayout(rowLayout, activities);
     }
 
@@ -237,12 +242,12 @@ public class ETCPanel {
     }
 
     private int getActivityNumberAboutCategory(String category){
-        ArrayList<ActivityVO> activities = DataHelper.dataHelper.getActivities().get(category);
+        ArrayList<ActivityVO> activities = dataHelper.getActivities().get(category);
         return activities.size();
     }
 
     public void setTextWithBoldFont(TextView textView, String text){
-        Typeface typeface = DataHelper.dataHelper.getTypeface();
+        Typeface typeface = dataHelper.getTypeface();
         textView.setTypeface(typeface, Typeface.BOLD);
         textView.setText(text);
     }
