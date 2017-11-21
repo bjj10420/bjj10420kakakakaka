@@ -22,7 +22,9 @@ import android.widget.Toast;
 import com.example.schedulemanager.R;
 import com.example.schedulemanager.Util;
 import com.example.schedulemanager.helper.DataHelper;
+import com.example.schedulemanager.helper.TaskHelper;
 import com.example.schedulemanager.helper.UIHelper;
+import com.example.schedulemanager.interface_.GeneralCallback;
 import com.example.schedulemanager.vo.ActivityVO;
 import com.example.schedulemanager.vo.DrawableItem;
 
@@ -53,6 +55,15 @@ public class ManagerUserInput {
         for(DrawableItem drawableItem : dataHelper.getDrawableList()) {
             rowLayout = decideRowLayoutByChildCount(rowLayout);
             addBoxPanelItemViewToPanel(drawableItem, rowLayout, userInputIconBoxPanel);
+        }
+        setIconBoxLoadingText(userInputIconBoxPanel);
+    }
+
+    private void setIconBoxLoadingText(LinearLayout userInputIconBoxPanel) {
+        TextView iconBoxLoadingText = (TextView) userInputIconBoxPanel.findViewById(R.id.iconBoxLoadingText);
+        Util.setTextWithFont(iconBoxLoadingText, "아이콘을 로딩중...");
+        if(!dataHelper.getDrawableList().isEmpty()) {
+            iconBoxLoadingText.setVisibility(View.GONE);
         }
     }
 
@@ -154,6 +165,13 @@ public class ManagerUserInput {
 
     private void actionActivityIconView() {
         setUserInputIconBoxPanelVisible(true);
+        if(dataHelper.getDrawableList().isEmpty())
+            new TaskHelper(context).loadIconBox(new GeneralCallback(){
+                @Override
+                public void onCallBack() {
+                    initUserInputIconBoxPanel();
+                }
+            });
         setUserInputMainPanel(false);
     }
 

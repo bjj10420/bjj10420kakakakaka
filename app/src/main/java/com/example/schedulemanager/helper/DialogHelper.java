@@ -157,13 +157,7 @@ public class DialogHelper {
         MaterialDialog dialog = new MaterialDialog(context);
         setAddAlertDialogButton(dialog, itemAdd);
         setDialogBasicOptions(context, "활동 추가", dialog, dialogView, 300, 300);
-        loadIconBoxIfEmpty(context);
         itemAdd.setAlert(dialog);
-    }
-
-    private void loadIconBoxIfEmpty(Context context) {
-        if(dataHelper.getDrawableList().isEmpty())
-            new TaskHelper(context).loadIconBox();
     }
 
     private void setAddAlertDialogButton(final MaterialDialog dialog, final ManagerPanelItemAdd itemAdd) {
@@ -204,7 +198,6 @@ public class DialogHelper {
         setUserInputAlertDialogButton(dialog, userInput);
         setDialogBasicOptions(context, "사용자 입력", dialog, dialogView, 300, 300);
         userInput.setAlert(dialog);
-        loadIconBoxIfEmpty(context);
     }
 
     private void setDialogBasicOptions(Context context, String title, final MaterialDialog dialog, View dialogView, int width, int height) {

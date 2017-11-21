@@ -3,6 +3,7 @@ package com.example.schedulemanager.helper;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import com.example.schedulemanager.interface_.GeneralCallback;
 import com.example.schedulemanager.task.IconBoxLoadingTask;
 import com.example.schedulemanager.task.ETCPanelLoadingTask;
 import com.example.schedulemanager.task.ManagerPanelLoadingTask;
@@ -24,9 +25,9 @@ public class TaskHelper {
         }
     }
 
-    public void loadIconBox(){
+    public void loadIconBox(GeneralCallback generalCallback){
         if(dataHelper.getDrawableList().isEmpty())
-        new IconBoxLoadingTask(context).execute();
+        new IconBoxLoadingTask(context, generalCallback).execute();
     }
 
     public AsyncTask<Integer, Integer, Void> loadManagerPanel(){

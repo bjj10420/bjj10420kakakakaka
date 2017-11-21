@@ -12,6 +12,7 @@ import com.example.schedulemanager.helper.DataHelper;
 import com.example.schedulemanager.helper.EventHelper;
 import com.example.schedulemanager.helper.TaskHelper;
 import com.example.schedulemanager.helper.UIHelper;
+import com.example.schedulemanager.panel.managerpanel.ManagerPanel;
 
 import static com.example.schedulemanager.helper.EventHelper.eventHelper;
 
@@ -37,6 +38,11 @@ public class MainActivity extends AppCompatActivity {
         EventHelper eventHelper = new EventHelper();
         eventHelper.initEvent(this, dataHelper, uiHelper, calendarHelper);
         calendarHelper.setEventHelper(eventHelper);
+
+        ManagerPanel managerPanel = new ManagerPanel(this);
+        managerPanel.initManagerPanel();
+        eventHelper.setManagerPanel(managerPanel);
+//        new TaskHelper(this).loadManagerPanel();
     }
 
     @Override

@@ -143,8 +143,8 @@ public class EventHelper {
         else {
             uiHelper.setTotalLayoutVisible(false);
             etcPanel.setEtcLayoutVisible(true);
-            if(loadManagerPanelTask == null)
-            loadManagerPanelTask = new TaskHelper(context).loadManagerPanel();
+//            if(loadManagerPanelTask == null)
+//            loadManagerPanelTask = new TaskHelper(context).loadManagerPanel();
         }
     }
 

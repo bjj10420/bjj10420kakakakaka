@@ -484,57 +484,11 @@ public class UIHelper {
 
     public void slideUpManagerPanel(ManagerPanel managerPanel, final ETCPanel etcPanel) {
         managerPanel.setManagerLayoutVisible(true);
-        managerPanel.getManagerLayout().bringToFront();
-        managerPanel.getManagerLayout().setY(3000);
-
-        managerPanel.getManagerLayout().animate().translationY(0).setListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animator) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animator) {
-                etcPanel.setEtcLayoutVisible(false);
-                if(dataHelper.getDrawableList().isEmpty())
-                    new TaskHelper(context).loadIconBox();
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animator) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animator) {
-
-            }
-        });
+        etcPanel.setEtcLayoutVisible(false);
     }
 
     public void slideDownManagerPanel(final ManagerPanel managerPanel) {
-        managerPanel.getManagerLayout().bringToFront();
-        managerPanel.getManagerLayout().animate().translationY(2000).setListener(new Animator.AnimatorListener() {
-            @Override
-            public void onAnimationStart(Animator animator) {
-
-            }
-
-            @Override
-            public void onAnimationEnd(Animator animator) {
-                managerPanel.setManagerLayoutVisible(false);
-            }
-
-            @Override
-            public void onAnimationCancel(Animator animator) {
-
-            }
-
-            @Override
-            public void onAnimationRepeat(Animator animator) {
-
-            }
-        });
+        managerPanel.setManagerLayoutVisible(false);
     }
 
 }

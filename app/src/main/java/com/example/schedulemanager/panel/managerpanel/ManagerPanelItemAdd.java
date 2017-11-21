@@ -19,6 +19,8 @@ import com.example.schedulemanager.R;
 import com.example.schedulemanager.Util;
 import com.example.schedulemanager.helper.DBHelper;
 import com.example.schedulemanager.helper.DialogHelper;
+import com.example.schedulemanager.helper.TaskHelper;
+import com.example.schedulemanager.interface_.GeneralCallback;
 import com.example.schedulemanager.interface_.GeneralCallback2;
 import com.example.schedulemanager.panel.etcpanel.ETCPanel;
 import com.example.schedulemanager.vo.ActivityVO;
@@ -53,6 +55,15 @@ public class ManagerPanelItemAdd {
         for(DrawableItem drawableItem : dataHelper.getDrawableList()) {
             rowLayout = decideRowLayoutByChildCount(rowLayout);
             addBoxPanelItemViewToPanel(drawableItem, rowLayout, itemInfoIconBoxPanel);
+        }
+        setIconBoxLoadingText(itemInfoIconBoxPanel);
+    }
+
+    private void setIconBoxLoadingText(LinearLayout itemInfoIconBoxPanel) {
+        TextView iconBoxLoadingText = (TextView) itemInfoIconBoxPanel.findViewById(R.id.iconBoxLoadingText);
+        Util.setTextWithFont(iconBoxLoadingText, "아이콘을 로딩중...");
+        if(!dataHelper.getDrawableList().isEmpty()) {
+            iconBoxLoadingText.setVisibility(View.GONE);
         }
     }
 
@@ -206,6 +217,13 @@ public class ManagerPanelItemAdd {
 
     private void actionActivityIconView() {
         setItemInfoIconBoxPanelVisible(true);
+        if(dataHelper.getDrawableList().isEmpty())
+            new TaskHelper(context).loadIconBox(new GeneralCallback(){
+                @Override
+                public void onCallBack() {
+                    initInfoIconBoxPanel();
+                }
+            });
         setItemInfoMainPanel(false);
     }
 
