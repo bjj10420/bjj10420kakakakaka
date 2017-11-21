@@ -23,11 +23,12 @@ public class ProgressActivity extends Activity {
             @Override
             public void run() {
                 finish();
+                overridePendingTransition(0, 0);
             }
         };
 
         Timer mTimer = new Timer();
 
-        mTimer.schedule(mTask, 3000);
+        mTimer.schedule(mTask, 4000);
     }
 }

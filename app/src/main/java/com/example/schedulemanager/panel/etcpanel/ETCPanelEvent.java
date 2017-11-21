@@ -16,6 +16,8 @@ import com.example.schedulemanager.helper.DialogHelper;
 import com.example.schedulemanager.helper.EventHelper;
 import com.example.schedulemanager.helper.TaskHelper;
 import com.example.schedulemanager.helper.UIHelper;
+import com.example.schedulemanager.interface_.GeneralCallback;
+import com.example.schedulemanager.interface_.GeneralCallback2;
 import com.example.schedulemanager.panel.managerpanel.ManagerPanel;
 
 import static com.example.schedulemanager.helper.EventHelper.eventHelper;
@@ -154,22 +156,26 @@ public class ETCPanelEvent implements View.OnClickListener{
     }
 
     public void panelLayoutOffForManagerPanel() {
-        ManagerPanel managerPanel = eventHelper.getManagerPanel();
+        final ManagerPanel managerPanel = eventHelper.getManagerPanel();
 
-        UIHelper.uiHelper.slideUpManagerPanel(managerPanel, etcPanel);
-        Intent intent = new Intent(context, ProgressActivity.class);
-        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-        context.startActivity(intent);
-        ((Activity) context).overridePendingTransition(0, 0);
 
 
         if(managerPanel == null){
-            new TaskHelper(context).loadManagerPanel();
+            Intent intent = new Intent(context, ProgressActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            context.startActivity(intent);
+            ((Activity) context).overridePendingTransition(0, 0);
+
+            new TaskHelper(context).loadManagerPanel(new GeneralCallback2() {
+                @Override
+                public void onCallBack(Object parameter) {
+                    UIHelper.uiHelper.slideUpManagerPanel((ManagerPanel) parameter, etcPanel);
+                }
+            });
 
         }
         else
             UIHelper.uiHelper.slideUpManagerPanel(managerPanel, etcPanel);
-
 
     }
 

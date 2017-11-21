@@ -8,6 +8,8 @@ import android.util.Log;
 
 import com.example.schedulemanager.Util;
 import com.example.schedulemanager.activity.ProgressActivity;
+import com.example.schedulemanager.interface_.GeneralCallback;
+import com.example.schedulemanager.interface_.GeneralCallback2;
 import com.example.schedulemanager.panel.managerpanel.ManagerPanel;
 
 import static com.example.schedulemanager.helper.DataHelper.dataHelper;
@@ -17,9 +19,11 @@ public class ManagerPanelLoadingTask extends AsyncTask<Integer, Integer, Void>{
 
     Context context;
     ManagerPanel managerPanel;
+    GeneralCallback2 callback;
 
-    public ManagerPanelLoadingTask(Context context) {
+    public ManagerPanelLoadingTask(Context context, GeneralCallback2 generalCallback) {
         this.context = context;
+        this.callback = generalCallback;
     }
 
     @Override
@@ -38,6 +42,7 @@ public class ManagerPanelLoadingTask extends AsyncTask<Integer, Integer, Void>{
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
         eventHelper.setManagerPanel(managerPanel);
+        callback.onCallBack(managerPanel);
         Util.customToast(context, "매니저 패널 로딩 완료");
         Log.d("매니저 패널 로딩 완료", "매니저 패널 로딩 완료");
     }

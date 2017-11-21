@@ -483,8 +483,8 @@ public class UIHelper {
     }
 
     public void slideUpManagerPanel(ManagerPanel managerPanel, ETCPanel etcPanel) {
-//        managerPanel.setManagerLayoutVisible(true);
-//        etcPanel.setEtcLayoutVisible(false);
+        managerPanel.setManagerLayoutVisible(true);
+        etcPanel.setEtcLayoutVisible(false);
     }
 
     public void slideDownManagerPanel(final ManagerPanel managerPanel) {
