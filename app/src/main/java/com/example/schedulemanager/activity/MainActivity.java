@@ -39,9 +39,6 @@ public class MainActivity extends AppCompatActivity {
         eventHelper.initEvent(this, dataHelper, uiHelper, calendarHelper);
         calendarHelper.setEventHelper(eventHelper);
 
-        ManagerPanel managerPanel = new ManagerPanel(this);
-        managerPanel.initManagerPanel();
-        eventHelper.setManagerPanel(managerPanel);
 //        new TaskHelper(this).loadManagerPanel();
     }
 

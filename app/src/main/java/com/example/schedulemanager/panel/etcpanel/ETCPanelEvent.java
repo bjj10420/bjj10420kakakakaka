@@ -1,5 +1,6 @@
 package com.example.schedulemanager.panel.etcpanel;
 
+import android.app.Activity;
 import android.content.Context;
 import android.view.MotionEvent;
 import android.view.View;
@@ -148,7 +149,23 @@ public class ETCPanelEvent implements View.OnClickListener{
 
     public void panelLayoutOffForManagerPanel() {
         ManagerPanel managerPanel = eventHelper.getManagerPanel();
-        UIHelper.uiHelper.slideUpManagerPanel(managerPanel, etcPanel);
+        if(managerPanel == null){
+            managerPanel = new ManagerPanel(context);
+            eventHelper.setManagerPanel(managerPanel);
+            final ManagerPanel finalManagerPanel = managerPanel;
+            ((Activity)context).runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    UIHelper.uiHelper.slideUpManagerPanel(finalManagerPanel, etcPanel);
+                    finalManagerPanel.initManagerPanel();
+                }
+            });
+
+        }
+        else
+            UIHelper.uiHelper.slideUpManagerPanel(managerPanel, etcPanel);
+
+
     }
 
 
