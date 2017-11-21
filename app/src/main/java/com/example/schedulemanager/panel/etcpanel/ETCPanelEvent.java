@@ -1,14 +1,20 @@
 package com.example.schedulemanager.panel.etcpanel;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.RelativeLayout;
 
 import com.example.schedulemanager.R;
+import com.example.schedulemanager.activity.ProgressActivity;
 import com.example.schedulemanager.helper.DialogHelper;
 import com.example.schedulemanager.helper.EventHelper;
+import com.example.schedulemanager.helper.TaskHelper;
 import com.example.schedulemanager.helper.UIHelper;
 import com.example.schedulemanager.panel.managerpanel.ManagerPanel;
 
@@ -149,17 +155,15 @@ public class ETCPanelEvent implements View.OnClickListener{
 
     public void panelLayoutOffForManagerPanel() {
         ManagerPanel managerPanel = eventHelper.getManagerPanel();
+
+
         if(managerPanel == null){
-            managerPanel = new ManagerPanel(context);
-            eventHelper.setManagerPanel(managerPanel);
-            final ManagerPanel finalManagerPanel = managerPanel;
-            ((Activity)context).runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    UIHelper.uiHelper.slideUpManagerPanel(finalManagerPanel, etcPanel);
-                    finalManagerPanel.initManagerPanel();
-                }
-            });
+            UIHelper.uiHelper.slideUpManagerPanel(managerPanel, etcPanel);
+            Intent intent = new Intent(context, ProgressActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            context.startActivity(intent);
+            ((Activity) context).overridePendingTransition(0, 0);
+            new TaskHelper(context).loadManagerPanel();
 
         }
         else

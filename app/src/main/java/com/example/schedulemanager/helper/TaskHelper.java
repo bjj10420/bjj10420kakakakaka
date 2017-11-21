@@ -2,12 +2,10 @@ package com.example.schedulemanager.helper;
 
 import android.content.Context;
 import android.os.AsyncTask;
-
 import com.example.schedulemanager.interface_.GeneralCallback;
 import com.example.schedulemanager.task.IconBoxLoadingTask;
 import com.example.schedulemanager.task.ETCPanelLoadingTask;
 import com.example.schedulemanager.task.ManagerPanelLoadingTask;
-
 import static com.example.schedulemanager.helper.DataHelper.dataHelper;
 import static com.example.schedulemanager.helper.EventHelper.eventHelper;
 

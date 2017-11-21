@@ -38,8 +38,6 @@ public class MainActivity extends AppCompatActivity {
         EventHelper eventHelper = new EventHelper();
         eventHelper.initEvent(this, dataHelper, uiHelper, calendarHelper);
         calendarHelper.setEventHelper(eventHelper);
-
-//        new TaskHelper(this).loadManagerPanel();
     }
 
     @Override
