@@ -4,6 +4,7 @@ package com.example.schedulemanager.task;
 import android.content.Context;
 import android.os.AsyncTask;
 
+import com.example.schedulemanager.Util;
 import com.example.schedulemanager.panel.managerpanel.ManagerPanel;
 
 import static com.example.schedulemanager.helper.DataHelper.dataHelper;
@@ -31,6 +32,7 @@ public class IconBoxTask extends AsyncTask<Integer, Integer, Void>{
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
+        Util.customToast(context, "아이콘 박스 로딩 완료");
     }
 
     @Override

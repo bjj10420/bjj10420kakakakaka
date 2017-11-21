@@ -48,6 +48,5 @@ public class ETCTask extends AsyncTask<Integer, Integer, Void>{
         eventHelper.setEtcPanel(etcPanel);
         managerPanel.initManagerPanel();
         eventHelper.setManagerPanel(managerPanel);
-        dataHelper.loadBasicDrawables();
     }
 }
