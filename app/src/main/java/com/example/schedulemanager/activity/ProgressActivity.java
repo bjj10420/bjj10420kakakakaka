@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.widget.TextView;
 
 import com.example.schedulemanager.R;
+import com.example.schedulemanager.Util;
 import com.example.schedulemanager.helper.TaskHelper;
 import com.example.schedulemanager.helper.UIHelper;
 import com.example.schedulemanager.interface_.GeneralCallback2;
@@ -14,6 +16,7 @@ import com.example.schedulemanager.panel.managerpanel.ManagerPanel;
 import java.util.Timer;
 import java.util.TimerTask;
 
+import static com.example.schedulemanager.helper.DataHelper.dataHelper;
 import static com.example.schedulemanager.helper.EventHelper.eventHelper;
 
 public class ProgressActivity extends Activity {
@@ -25,6 +28,9 @@ public class ProgressActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_progress);
         progressActivity = this;
+        TextView progressText = (TextView) Util.getViewById(this, R.id.iconBoxLoadingText);
+        progressText.setTypeface(dataHelper.getTypeface());
+
         TimerTask mTask = new TimerTask() {
             @Override
             public void run() {
