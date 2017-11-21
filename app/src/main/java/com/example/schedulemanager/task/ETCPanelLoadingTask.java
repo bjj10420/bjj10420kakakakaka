@@ -38,7 +38,7 @@ public class ETCPanelLoadingTask extends AsyncTask<Integer, Integer, Void>{
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
-        Util.customToast(context, "기타 패널 로딩을 완료했습니다");
+        Util.customToast(context, "로딩을 완료했습니다");
         new AnimationHelper().doBounceAnimation(UIHelper.uiHelper.getCenterIcon());
     }
 

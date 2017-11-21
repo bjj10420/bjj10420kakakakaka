@@ -42,6 +42,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.TreeMap;
 
+import static com.example.schedulemanager.helper.DataHelper.dataHelper;
+
 /**
  * 모든 UI처리 담당
  */
@@ -494,7 +496,8 @@ public class UIHelper {
             @Override
             public void onAnimationEnd(Animator animator) {
                 etcPanel.setEtcLayoutVisible(false);
-                new TaskHelper(context).loadIconBox();
+                if(dataHelper.getDrawableList().isEmpty())
+                    new TaskHelper(context).loadIconBox();
             }
 
             @Override

@@ -22,6 +22,8 @@ import com.example.schedulemanager.panel.managerpanel.ManagerUserInput;
 
 import me.drakeet.materialdialog.MaterialDialog;
 
+import static com.example.schedulemanager.helper.DataHelper.dataHelper;
+
 /**
  * 여러가지 용도의 다이얼로그 박스를 생성
  */
@@ -155,8 +157,13 @@ public class DialogHelper {
         MaterialDialog dialog = new MaterialDialog(context);
         setAddAlertDialogButton(dialog, itemAdd);
         setDialogBasicOptions(context, "활동 추가", dialog, dialogView, 300, 300);
-        new TaskHelper(context).loadIconBox();
+        loadIconBoxIfEmpty(context);
         itemAdd.setAlert(dialog);
+    }
+
+    private void loadIconBoxIfEmpty(Context context) {
+        if(dataHelper.getDrawableList().isEmpty())
+            new TaskHelper(context).loadIconBox();
     }
 
     private void setAddAlertDialogButton(final MaterialDialog dialog, final ManagerPanelItemAdd itemAdd) {
@@ -197,7 +204,7 @@ public class DialogHelper {
         setUserInputAlertDialogButton(dialog, userInput);
         setDialogBasicOptions(context, "사용자 입력", dialog, dialogView, 300, 300);
         userInput.setAlert(dialog);
-        new TaskHelper(context).loadIconBox();
+        loadIconBoxIfEmpty(context);
     }
 
     private void setDialogBasicOptions(Context context, String title, final MaterialDialog dialog, View dialogView, int width, int height) {
