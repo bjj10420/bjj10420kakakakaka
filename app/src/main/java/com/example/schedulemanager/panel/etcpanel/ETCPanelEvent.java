@@ -12,6 +12,7 @@ import android.widget.RelativeLayout;
 
 import com.example.schedulemanager.R;
 import com.example.schedulemanager.activity.ProgressActivity;
+import com.example.schedulemanager.activity.SplashActivity;
 import com.example.schedulemanager.helper.DialogHelper;
 import com.example.schedulemanager.helper.EventHelper;
 import com.example.schedulemanager.helper.TaskHelper;

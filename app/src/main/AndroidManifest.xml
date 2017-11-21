@@ -6,8 +6,8 @@
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
-        android:supportsRtl="true"
         android:largeHeap="true"
+        android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
         <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
         <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
@@ -17,15 +17,14 @@
             android:theme="@style/SplashTheme">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity android:name=".activity.MainActivity">
-        </activity>
-        <activity android:name=".activity.ProgressActivity">
-        </activity>
+        <activity android:name=".activity.MainActivity"></activity>
+        <activity
+            android:name=".activity.ProgressActivity"
+            android:theme="@style/SplashTheme"></activity>
     </application>
 
 </manifest>
