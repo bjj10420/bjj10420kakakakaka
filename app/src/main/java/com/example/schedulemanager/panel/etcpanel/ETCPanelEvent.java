@@ -166,13 +166,6 @@ public class ETCPanelEvent implements View.OnClickListener{
             context.startActivity(intent);
             ((Activity) context).overridePendingTransition(0, 0);
 
-            new TaskHelper(context).loadManagerPanel(new GeneralCallback2() {
-                @Override
-                public void onCallBack(Object parameter) {
-                    UIHelper.uiHelper.slideUpManagerPanel((ManagerPanel) parameter, etcPanel);
-                }
-            });
-
         }
         else
             UIHelper.uiHelper.slideUpManagerPanel(managerPanel, etcPanel);

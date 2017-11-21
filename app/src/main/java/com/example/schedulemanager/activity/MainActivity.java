@@ -18,10 +18,13 @@ import static com.example.schedulemanager.helper.EventHelper.eventHelper;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static MainActivity mainActivity;
+
    @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        mainActivity = this;
         init();
     }
 
