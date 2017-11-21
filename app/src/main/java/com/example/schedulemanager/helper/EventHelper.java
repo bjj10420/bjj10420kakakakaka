@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.graphics.Color;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
@@ -48,6 +49,7 @@ public class EventHelper {
     private CalendarHelper calendarHelper;
     private ETCPanel etcPanel;
     private ManagerPanel managerPanel;
+    private AsyncTask<Integer, Integer, Void> loadManagerPanelTask;
 
     public void initEvent(Context context, DataHelper dataHelper, UIHelper uiHelper, CalendarHelper calendarHelper) {
         this.context = context;
@@ -141,7 +143,8 @@ public class EventHelper {
         else {
             uiHelper.setTotalLayoutVisible(false);
             etcPanel.setEtcLayoutVisible(true);
-            new TaskHelper(context).loadIconBox();
+            if(loadManagerPanelTask == null)
+            loadManagerPanelTask = new TaskHelper(context).loadManagerPanel();
         }
     }
 

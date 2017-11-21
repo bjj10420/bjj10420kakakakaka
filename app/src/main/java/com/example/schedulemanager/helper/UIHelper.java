@@ -485,7 +485,7 @@ public class UIHelper {
     public void slideUpManagerPanel(ManagerPanel managerPanel, final ETCPanel etcPanel) {
         managerPanel.setManagerLayoutVisible(true);
         managerPanel.getManagerLayout().bringToFront();
-        managerPanel.getManagerLayout().setY(2000);
+        managerPanel.getManagerLayout().setY(1000);
         managerPanel.getManagerLayout().animate().translationY(0).setListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animator) {
@@ -495,6 +495,7 @@ public class UIHelper {
             @Override
             public void onAnimationEnd(Animator animator) {
                 etcPanel.setEtcLayoutVisible(false);
+                new TaskHelper(context).loadIconBox();
             }
 
             @Override

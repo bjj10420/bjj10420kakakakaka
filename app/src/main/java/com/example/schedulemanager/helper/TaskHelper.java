@@ -1,8 +1,12 @@
 package com.example.schedulemanager.helper;
 
 import android.content.Context;
-import com.example.schedulemanager.task.SecondLoadingTask;
-import com.example.schedulemanager.task.FirstLoadigTask;
+import android.os.AsyncTask;
+
+import com.example.schedulemanager.task.IconBoxLoadingTask;
+import com.example.schedulemanager.task.ETCPanelLoadingTask;
+import com.example.schedulemanager.task.ManagerPanelLoadingTask;
+
 import static com.example.schedulemanager.helper.DataHelper.dataHelper;
 import static com.example.schedulemanager.helper.EventHelper.eventHelper;
 
@@ -16,14 +20,19 @@ public class TaskHelper {
 
     public void loadETCPanel() {
         if (eventHelper.getEtcPanel() == null) {
-            FirstLoadigTask firstLoadigTask = new FirstLoadigTask(context);
-            firstLoadigTask.execute();
+            new ETCPanelLoadingTask(context).execute();
         }
     }
 
     public void loadIconBox(){
-        if(dataHelper.getDrawableList().isEmpty() && eventHelper.getManagerPanel() == null)
-        new SecondLoadingTask(context).execute();
+        if(dataHelper.getDrawableList().isEmpty())
+        new IconBoxLoadingTask(context).execute();
+    }
+
+    public AsyncTask<Integer, Integer, Void> loadManagerPanel(){
+        if(eventHelper.getManagerPanel() == null)
+            return new ManagerPanelLoadingTask(context).execute();
+        return null;
     }
 
 }

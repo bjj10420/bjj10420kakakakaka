@@ -152,11 +152,10 @@ public class DialogHelper {
     }
 
     private void setItemAddAlertDialog(Context context, ManagerPanelItemAdd itemAdd, View dialogView) {
-//        MaterialDialog dialog = new MaterialDialog(context);
         MaterialDialog dialog = new MaterialDialog(context);
-
         setAddAlertDialogButton(dialog, itemAdd);
         setDialogBasicOptions(context, "활동 추가", dialog, dialogView, 300, 300);
+        new TaskHelper(context).loadIconBox();
         itemAdd.setAlert(dialog);
     }
 
@@ -198,6 +197,7 @@ public class DialogHelper {
         setUserInputAlertDialogButton(dialog, userInput);
         setDialogBasicOptions(context, "사용자 입력", dialog, dialogView, 300, 300);
         userInput.setAlert(dialog);
+        new TaskHelper(context).loadIconBox();
     }
 
     private void setDialogBasicOptions(Context context, String title, final MaterialDialog dialog, View dialogView, int width, int height) {

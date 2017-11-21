@@ -148,11 +148,6 @@ public class ETCPanelEvent implements View.OnClickListener{
 
     public void panelLayoutOffForManagerPanel() {
         ManagerPanel managerPanel = eventHelper.getManagerPanel();
-        if(managerPanel == null) {
-//            managerPanel = new ManagerPanel(context);
-//            managerPanel.initManagerPanel();
-//            eventHelper.setManagerPanel(managerPanel);
-        }
         UIHelper.uiHelper.slideUpManagerPanel(managerPanel, etcPanel);
     }
 
