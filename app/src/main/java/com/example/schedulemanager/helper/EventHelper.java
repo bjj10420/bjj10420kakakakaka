@@ -17,7 +17,6 @@ import com.example.schedulemanager.R;
 import com.example.schedulemanager.interface_.GeneralCallback2;
 import com.example.schedulemanager.panel.etcpanel.ETCPanel;
 import com.example.schedulemanager.panel.managerpanel.ManagerPanel;
-import com.example.schedulemanager.task.ETCTask;
 import com.example.schedulemanager.task.IconBoxTask;
 import com.example.schedulemanager.vo.RectAndView;
 import com.example.schedulemanager.vo.Schedule;
@@ -37,7 +36,6 @@ import java.util.List;
 import java.util.TreeMap;
 
 import static com.example.schedulemanager.helper.DataHelper.PICK_FROM_GALLARY;
-import static com.example.schedulemanager.helper.DataHelper.dataHelper;
 
 /**
  * 모든 이벤트를 처리, 관리
@@ -144,7 +142,7 @@ public class EventHelper {
         else {
             uiHelper.setTotalLayoutVisible(false);
             etcPanel.setEtcLayoutVisible(true);
-            new IconBoxTask(context).execute();
+            new TaskHelper(context).loadIconBox();
         }
     }
 

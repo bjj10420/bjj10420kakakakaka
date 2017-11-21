@@ -12,13 +12,13 @@ import static com.example.schedulemanager.helper.DataHelper.dataHelper;
 import static com.example.schedulemanager.helper.EventHelper.eventHelper;
 import static com.example.schedulemanager.helper.UIHelper.uiHelper;
 
-public class ETCTask extends AsyncTask<Integer, Integer, Void>{
+public class PanelLoadigTask extends AsyncTask<Integer, Integer, Void>{
 
     Context context;
     ETCPanel etcPanel;
     ManagerPanel managerPanel;
 
-    public ETCTask(Context context) {
+    public PanelLoadigTask(Context context) {
         this.context = context;
     }
 

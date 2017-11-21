@@ -1,26 +1,18 @@
 package com.example.schedulemanager.activity;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 
 import com.example.schedulemanager.R;
-import com.example.schedulemanager.Util;
 import com.example.schedulemanager.helper.AnimationHelper;
 import com.example.schedulemanager.helper.CalendarHelper;
 import com.example.schedulemanager.helper.DataHelper;
 import com.example.schedulemanager.helper.EventHelper;
+import com.example.schedulemanager.helper.TaskHelper;
 import com.example.schedulemanager.helper.UIHelper;
-import com.example.schedulemanager.panel.etcpanel.ETCPanel;
-import com.example.schedulemanager.panel.managerpanel.ManagerPanel;
-import com.example.schedulemanager.task.ETCTask;
-import com.example.schedulemanager.task.IconBoxTask;
-import com.example.schedulemanager.task.ManagerTask;
 
-import static com.example.schedulemanager.helper.DataHelper.PICK_FROM_GALLARY;
 import static com.example.schedulemanager.helper.EventHelper.eventHelper;
 
 public class MainActivity extends AppCompatActivity {
@@ -50,17 +42,11 @@ public class MainActivity extends AppCompatActivity {
         animationHelper.init();
     }
 
-
-    private void extraTask() {
-        ETCTask etcTask = new ETCTask(this);
-        etcTask.execute();
-    }
-
     @Override
     public void onWindowFocusChanged(boolean hasFocus) {
         super.onWindowFocusChanged(hasFocus);
         Log.d("메인화면 랜더링이 완료되었습니다", "완료 OK");
-        extraTask();
+        new TaskHelper(this).loadETCAndManagerPanel();
     }
 
     @Override
