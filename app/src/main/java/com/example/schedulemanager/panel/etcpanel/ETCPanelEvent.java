@@ -156,13 +156,14 @@ public class ETCPanelEvent implements View.OnClickListener{
     public void panelLayoutOffForManagerPanel() {
         ManagerPanel managerPanel = eventHelper.getManagerPanel();
 
+        UIHelper.uiHelper.slideUpManagerPanel(managerPanel, etcPanel);
+        Intent intent = new Intent(context, ProgressActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        context.startActivity(intent);
+        ((Activity) context).overridePendingTransition(0, 0);
+
 
         if(managerPanel == null){
-            UIHelper.uiHelper.slideUpManagerPanel(managerPanel, etcPanel);
-            Intent intent = new Intent(context, ProgressActivity.class);
-            intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
-            context.startActivity(intent);
-            ((Activity) context).overridePendingTransition(0, 0);
             new TaskHelper(context).loadManagerPanel();
 
         }

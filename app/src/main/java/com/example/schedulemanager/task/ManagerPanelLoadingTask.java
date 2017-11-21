@@ -32,8 +32,6 @@ public class ManagerPanelLoadingTask extends AsyncTask<Integer, Integer, Void>{
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        Intent intent = new Intent(context, ProgressActivity.class);
-        context.startActivity(intent);
     }
 
     @Override
