@@ -83,8 +83,6 @@ public class UIHelper {
         backBtn.setTypeface(this.dataHelper.getTypeface());
         cancelBtn = Util.getViewById(this.context,R.id.cancel_btn);
         pieChart = (PieChart) Util.getViewById(this.context,R.id.chart);
-        progressView = (TextView) Util.getViewById(context, R.id.progressView);
-        Util.setTextWithBoldFont(progressView, "로딩중...");
     }
 
     public void newInitButtonPanel(HashMap<String, ArrayList<ActivityVO>> activities) {
@@ -485,7 +483,8 @@ public class UIHelper {
     public void slideUpManagerPanel(ManagerPanel managerPanel, final ETCPanel etcPanel) {
         managerPanel.setManagerLayoutVisible(true);
         managerPanel.getManagerLayout().bringToFront();
-        managerPanel.getManagerLayout().setY(1000);
+        managerPanel.getManagerLayout().setY(3000);
+
         managerPanel.getManagerLayout().animate().translationY(0).setListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationStart(Animator animator) {
@@ -535,7 +534,4 @@ public class UIHelper {
         });
     }
 
-    public void setProgressViewVisible(boolean isVisible){
-        progressView.setVisibility(isVisible ? View.VISIBLE : View.GONE);
-    }
 }

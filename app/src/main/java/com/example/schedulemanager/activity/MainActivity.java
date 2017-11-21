@@ -37,9 +37,6 @@ public class MainActivity extends AppCompatActivity {
         EventHelper eventHelper = new EventHelper();
         eventHelper.initEvent(this, dataHelper, uiHelper, calendarHelper);
         calendarHelper.setEventHelper(eventHelper);
-
-        AnimationHelper animationHelper = new AnimationHelper();
-        animationHelper.init();
     }
 
     @Override

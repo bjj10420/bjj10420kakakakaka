@@ -5,6 +5,8 @@ import android.content.Context;
 import android.os.AsyncTask;
 
 import com.example.schedulemanager.Util;
+import com.example.schedulemanager.helper.AnimationHelper;
+import com.example.schedulemanager.helper.UIHelper;
 import com.example.schedulemanager.panel.etcpanel.ETCPanel;
 import com.example.schedulemanager.panel.managerpanel.ManagerPanel;
 
@@ -31,12 +33,13 @@ public class ETCPanelLoadingTask extends AsyncTask<Integer, Integer, Void>{
     @Override
     protected void onPreExecute() {
         super.onPreExecute();
-        Util.customToast(context, "기타 패널 로딩을 완료했습니다");
     }
 
     @Override
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
+        Util.customToast(context, "기타 패널 로딩을 완료했습니다");
+        new AnimationHelper().doBounceAnimation(UIHelper.uiHelper.getCenterIcon());
     }
 
     @Override

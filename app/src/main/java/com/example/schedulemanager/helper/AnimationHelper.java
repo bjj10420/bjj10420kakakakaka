@@ -14,10 +14,10 @@ import com.example.schedulemanager.R;
 public class AnimationHelper {
 
     public void init(){
-        doBounceAnimation(UIHelper.uiHelper.getCenterIcon());
+//        doBounceAnimation(UIHelper.uiHelper.getCenterIcon());
     }
 
-    private void doBounceAnimation(View targetView) {
+    public void doBounceAnimation(View targetView) {
         ObjectAnimator animator = ObjectAnimator.ofFloat(targetView, "translationY", 0, -50, 0);
         animator.setInterpolator(new EasingInterpolator(Ease.QUAD_IN_OUT));
         animator.setStartDelay(50);
