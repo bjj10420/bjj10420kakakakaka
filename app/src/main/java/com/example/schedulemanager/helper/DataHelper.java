@@ -207,9 +207,9 @@ public class DataHelper {
         HashMap<Integer, Schedule> scheduleMapForThisMonth = scheduleMapByMonth.get(Integer.parseInt(makeYearMonthKey()));
         addDataToThisMonthMap(newOrderValue, activityName, scheduleMapForThisMonth);
         // 캘린더의 currentScheduleMap에도 추가
-        Log.d("현재 페이지 인덱스", String.valueOf(currentPageIndex));
+        int currentPageIndex = eventHelper.getCalendarHelper().getCalendarPager().getCurrentItem();
         addDataToThisMonthMap(newOrderValue, activityName,
-                eventHelper.getCalendarHelper().getCalendarPagerAdapter().getAdapters()[currentPageIndex].getScheduleMapForCurrentPage());
+        eventHelper.getCalendarHelper().getCalendarPagerAdapter().getAdapters()[currentPageIndex].getScheduleMapForCurrentPage());
     }
 
     public void addToTodayDataStructure(int newOrderValue, String activityName, String yearMonthKey) {
