@@ -427,4 +427,7 @@ public class CalendarAdapter extends BaseAdapter
 		this.scheduleMapForCurrentPage = scheduleMapForCurrentPage;
 	}
 
+	public HashMap<Integer, Schedule> getScheduleMapForCurrentPage() {
+		return scheduleMapForCurrentPage;
+	}
 }

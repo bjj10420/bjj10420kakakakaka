@@ -30,6 +30,8 @@ import java.util.Locale;
 import java.util.Map;
 import java.util.TreeMap;
 
+import static com.example.schedulemanager.helper.EventHelper.eventHelper;
+
 /**
  * 모든 데이터 처리 담당
  */
@@ -204,6 +206,10 @@ public class DataHelper {
         //TODO yearMonth키를 원래 그냥 필드로 썼었는데 달력추가에서도 이 메소드를 쓰게되어 생성함수로  대체해줌
         HashMap<Integer, Schedule> scheduleMapForThisMonth = scheduleMapByMonth.get(Integer.parseInt(makeYearMonthKey()));
         addDataToThisMonthMap(newOrderValue, activityName, scheduleMapForThisMonth);
+        // 캘린더의 currentScheduleMap에도 추가
+        Log.d("현재 페이지 인덱스", String.valueOf(currentPageIndex));
+        addDataToThisMonthMap(newOrderValue, activityName,
+                eventHelper.getCalendarHelper().getCalendarPagerAdapter().getAdapters()[currentPageIndex].getScheduleMapForCurrentPage());
     }
 
     public void addToTodayDataStructure(int newOrderValue, String activityName, String yearMonthKey) {
@@ -219,7 +225,7 @@ public class DataHelper {
         Log.d("스케쥴맵에 스케쥴추가", schedule.getOrder() + ", " + activityName + ", " + dateValue + ", newOrderValue = " + newOrderValue);
         scheduleMapForThisMonth.put(Integer.parseInt(dateValue + "000" + newOrderValue), schedule);
         // 데일리 맵에도 추가
-        if(EventHelper.eventHelper.getUiHelper().getScheduleLayout().getVisibility() == View.VISIBLE)
+        if(eventHelper.getUiHelper().getScheduleLayout().getVisibility() == View.VISIBLE)
             dailyScheduleMap.put(Integer.parseInt(dateValue + "000" + newOrderValue), schedule);
     }
 
@@ -461,7 +467,7 @@ public class DataHelper {
      * @return
      */
     private String makeYearMonthKey() {
-        String yearMonthKey = makeDateString2(null, EventHelper.eventHelper.getCalendarHelper());
+        String yearMonthKey = makeDateString2(null, eventHelper.getCalendarHelper());
         return yearMonthKey;
     }
 
@@ -582,7 +588,7 @@ public class DataHelper {
     }
 
     private View getFirstCellView() {
-        View firstCell = EventHelper.eventHelper.getUiHelper().getFirstCalendarCell();
+        View firstCell = eventHelper.getUiHelper().getFirstCalendarCell();
         return firstCell;
     }
 //
