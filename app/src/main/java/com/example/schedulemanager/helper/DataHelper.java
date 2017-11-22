@@ -206,15 +206,20 @@ public class DataHelper {
         //TODO yearMonth키를 원래 그냥 필드로 썼었는데 달력추가에서도 이 메소드를 쓰게되어 생성함수로  대체해줌
         HashMap<Integer, Schedule> scheduleMapForThisMonth = scheduleMapByMonth.get(Integer.parseInt(makeYearMonthKey()));
         addDataToThisMonthMap(newOrderValue, activityName, scheduleMapForThisMonth);
-        addDataToCalendarPagerAdapter(newOrderValue, activityName);
+        addDataToCalendarPagerAdapter(newOrderValue, activityName, scheduleMapForThisMonth);
       }
 
-    private void addDataToCalendarPagerAdapter(int newOrderValue, String activityName) {
+    private void addDataToCalendarPagerAdapter(int newOrderValue, String activityName, HashMap<Integer, Schedule> scheduleMapForThisMonth) {
         int currentPageIndex = eventHelper.getCalendarHelper().getCalendarPager().getCurrentItem();
         Log.d("인덱스 체크", String.valueOf(currentPageIndex));
         Log.d("해쉬맵 체크", String.valueOf(eventHelper.getCalendarHelper().getCalendarPagerAdapter().getAdapters()[currentPageIndex].getScheduleMapForCurrentPage()));
-        addDataToThisMonthMap(newOrderValue, activityName,
-        eventHelper.getCalendarHelper().getCalendarPagerAdapter().getAdapters()[currentPageIndex].getScheduleMapForCurrentPage());
+        HashMap<Integer, Schedule> adapterCurrentMap = eventHelper.getCalendarHelper().getCalendarPagerAdapter().getAdapters()[currentPageIndex].getScheduleMapForCurrentPage();
+        if(adapterCurrentMap == null){
+            adapterCurrentMap = scheduleMapForThisMonth;
+            eventHelper.getCalendarHelper().getCalendarPagerAdapter().getAdapters()[currentPageIndex].setScheduleMapForCurrentPage(adapterCurrentMap);
+        }
+        addDataToThisMonthMap(newOrderValue, activityName, adapterCurrentMap
+        );
     }
 
     public void addToTodayDataStructure(int newOrderValue, String activityName, String yearMonthKey) {
