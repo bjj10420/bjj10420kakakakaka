@@ -374,7 +374,7 @@ public class CalendarAdapter extends BaseAdapter
 	}
 
 	private void actionLongClicked(View v) {
-		if(scheduleMapForCurrentPage != null && isExistSchedule(Integer.parseInt((String) v.getTag())))
+		if(isExistSchedule(Integer.parseInt((String) v.getTag())))
 		EventHelper.eventHelper.getCalendarHelper().getCalendarCellLongClickEvent(v);
 	}
 
