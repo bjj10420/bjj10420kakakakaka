@@ -51,7 +51,6 @@ public class CalendarAdapter extends BaseAdapter
 			this.mContext = context;
 			this.mTypeface = typeface;
 			this.mInlfater = LayoutInflater.from(mContext);
-			scheduleMapForCurrentPage = new HashMap<Integer, Schedule> ();
 		}
 		catch (Exception e)
 		{
