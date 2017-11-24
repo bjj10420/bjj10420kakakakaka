@@ -43,7 +43,11 @@ public class DialogHelper {
                         callback1.onCallBack(et.getText().toString());
                     }
                 });
+
         AlertDialog alert = alt_bld.create();
+//        Button confirmButton = alert.getButton(0);
+//        confirmButton.setTypeface(dataHelper.getTypeface());
+//        confirmButton.setBackgroundColor(R.color.strokeBrown);
 
         // Icon for AlertDialog
         alert.show();

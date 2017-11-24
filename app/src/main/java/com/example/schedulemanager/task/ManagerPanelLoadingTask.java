@@ -43,8 +43,6 @@ public class ManagerPanelLoadingTask extends AsyncTask<Integer, Integer, Void>{
         super.onPostExecute(aVoid);
         eventHelper.setManagerPanel(managerPanel);
         callback.onCallBack(managerPanel);
-        Util.customToast(context, "매니저 패널 로딩 완료");
-        Log.d("매니저 패널 로딩 완료", "매니저 패널 로딩 완료");
     }
 
     @Override
