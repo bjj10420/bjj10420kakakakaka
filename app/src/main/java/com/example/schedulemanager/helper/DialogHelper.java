@@ -33,7 +33,7 @@ public class DialogHelper {
 
 
     public void setOneBtnStyleWithTextDialog(Context context, String message, final GeneralCallback2 callback1, String btnString){
-        AlertDialog.Builder alt_bld = new AlertDialog.Builder(context, 3);
+        AlertDialog.Builder alt_bld = new AlertDialog.Builder(context, R.style.DialogCustomTheme);
         final EditText et = new EditText(context);
         et.setTextColor(R.color.strokeBrown);
         alt_bld.setMessage(message).setView(et).setCancelable(
@@ -45,9 +45,6 @@ public class DialogHelper {
                 });
 
         AlertDialog alert = alt_bld.create();
-//        Button confirmButton = alert.getButton(0);
-//        confirmButton.setTypeface(dataHelper.getTypeface());
-//        confirmButton.setBackgroundColor(R.color.strokeBrown);
 
         // Icon for AlertDialog
         alert.show();
