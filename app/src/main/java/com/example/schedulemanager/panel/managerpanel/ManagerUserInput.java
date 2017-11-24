@@ -292,6 +292,7 @@ public class ManagerUserInput {
     private View initPanelUserInputView(Context context) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View userInputView = inflater.inflate(R.layout.manager_user_input, null);
+//        Util.setFontAllChildView(context, userInputView, DataHelper.dataHelper.getTypeface(), true);
         return userInputView;
     }
 
