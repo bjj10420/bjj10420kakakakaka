@@ -109,6 +109,7 @@ public class ManagerPanelItemAdd {
     private void setInfoViewIcon(View view) {
         View activityIconView = addView.findViewById(R.id.itemAddIcon);
         activityIconView.setBackground(view.getBackground());
+        activityIconView.setTag(view.getTag());
     }
 
     private LinearLayout.LayoutParams makeViewParams() {
@@ -301,9 +302,10 @@ public class ManagerPanelItemAdd {
     }
 
     private void refreshManagerPanel(ActivityVO activityVO) {
+        if(eventHelper.getManagerPanel() == null) return;
+
         String categoryName = categoryText.getText().toString();
         int categoryIndex = (dataHelper.getCategories().indexOf(categoryName));
-        Log.d("매니져리플래쉬확인", String.valueOf(eventHelper.getManagerPanel().getManagerContentsLayout().getChildAt(categoryIndex)));
         View detailItemView = eventHelper.getManagerPanel().makeDetailItemView(activityVO);
         addNewItemToManagerPanel(detailItemView, categoryIndex);
     }
