@@ -85,7 +85,6 @@ public class DataHelper {
     private void loadBasicDatas() {
         loadBasicCategories();
         loadBasicActivities();
-//        loadBasicDrawables();
     }
 
     public void loadBasicDrawables() {
@@ -94,7 +93,7 @@ public class DataHelper {
         options.inSampleSize = 2;
         for (Field f : drawables) {
             try {
-                    if (f.getName().contains("icon")){
+                    if (f.getName().contains("icon_")){
                         Bitmap bitmap = BitmapFactory.decodeResource(context.getResources(), f.getInt(null), options);
                         String drawableName = f.getName();
                         DrawableItem di = new DrawableItem();

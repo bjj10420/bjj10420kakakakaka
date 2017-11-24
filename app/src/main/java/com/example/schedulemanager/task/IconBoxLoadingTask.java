@@ -37,8 +37,8 @@ public class IconBoxLoadingTask extends AsyncTask<Integer, Integer, Void>{
     protected void onPostExecute(Void aVoid) {
         super.onPostExecute(aVoid);
         if(callback != null) callback.onCallBack();
-        Util.customToast(context, "아이콘 박스 로딩 완료");
-        Log.d("아이콘 박스 로딩 완료", "아이콘 박스 로딩 완료");
+//        Util.customToast(context, "아이콘 박스 로딩 완료");
+//        Log.d("아이콘 박스 로딩 완료", "아이콘 박스 로딩 완료");
     }
 
     @Override
