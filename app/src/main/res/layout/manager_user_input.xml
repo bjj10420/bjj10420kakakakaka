@@ -79,7 +79,7 @@
                         android:id="@+id/userInputIcon"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:background="@drawable/icon_22" />
+                        android:background="@drawable/icon_29" />
 
                 </LinearLayout>
             </LinearLayout>

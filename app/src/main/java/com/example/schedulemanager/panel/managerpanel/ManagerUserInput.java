@@ -44,9 +44,15 @@ public class ManagerUserInput {
 
     public View init(Context context) {
         initField(context);
+        initBaseIconTag();
         initUserInputIconBoxPanel();
         setUserInputViewEvent();
         return userInputView;
+    }
+
+    private void initBaseIconTag() {
+        View iconView = userInputView.findViewById(R.id.userInputIcon);
+        iconView.setTag("icon_29");
     }
 
     private void initUserInputIconBoxPanel() {
@@ -108,6 +114,7 @@ public class ManagerUserInput {
 
     private void setInfoViewIcon(View view) {
         View activityIconView = userInputView.findViewById(R.id.userInputIcon);
+        activityIconView.setTag(view.getTag());
         activityIconView.setBackground(view.getBackground());
     }
 
@@ -123,6 +130,7 @@ public class ManagerUserInput {
         userInputView = initPanelUserInputView(context);
         categoryText = (TextView) userInputView.findViewById(R.id.userInputCategoryText);
         activityName = (EditText) userInputView.findViewById(R.id.userInputActivity);
+
     }
 
     private void setUserInputViewEvent() {
@@ -254,7 +262,7 @@ public class ManagerUserInput {
         userInputView.setTop(300);
 //          int x = UIHelper.uiHelper.getTotalLayout().getMeasuredWidth() / 2;
 //          int y = UIHelper.uiHelper.getTotalLayout().getMeasuredWidth() / 2;
-//        userInputView.setTranslationX(300);
+//        userInputView.setTranslationX(800);
 //        userInputView.setTranslationY(800);
     }
 
