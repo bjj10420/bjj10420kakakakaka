@@ -247,7 +247,7 @@ public class ManagerUserInput {
 
     private void showUserInputView() {
         View userInputView = makeUserInputView();
-        eventHelper.getEtcPanel().getEtcPanelEvent().panelItemClickEvent(userInputView);
+        eventHelper.getEtcPanel().getEtcPanelEvent().panelItemClickEvent(userInputView, true);
     }
 
     private View makeUserInputView() {

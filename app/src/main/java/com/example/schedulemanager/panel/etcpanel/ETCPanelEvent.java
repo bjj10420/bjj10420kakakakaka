@@ -49,7 +49,7 @@ public class ETCPanelEvent implements View.OnClickListener{
             case R.id.etcUserInputBtn : userInputEvent();
                 break;
 
-            default : panelItemClickEvent(v);
+            default : panelItemClickEvent(v, false);
         }
       }
 
@@ -57,26 +57,24 @@ public class ETCPanelEvent implements View.OnClickListener{
         new DialogHelper().showUserInputDialog(context);
     }
 
-    public void panelItemClickEvent(View v) {
+    public void panelItemClickEvent(View v, boolean isFromUserInput) {
         etcPanelOffForTotalLayout();
-        hoverCopiedView(v);
+        hoverCopiedView(v, isFromUserInput);
     }
 
     // 뷰를 복사하여 클릭된 지점의 뷰와 같은 위치에 넣음
-    private void hoverCopiedView(View v) {
+    private void hoverCopiedView(View v, boolean isFromUserInput) {
         UIHelper.uiHelper.hoverView(v, true);
-        setCopiedView(v);
+        setCopiedView(v, isFromUserInput);
     }
 
-    private void setCopiedView(View v) {
+    private void setCopiedView(View v, boolean isFromUserInput) {
         int[] numberArray = new int[2];
         int originalViewLeft = getPositionValue(numberArray, 0, v);
         int originalViewTop = getPositionValue(numberArray, 1, v);
         getCopiedView();
         setCopiedViewTouchEvent();
-        originalViewLeft = 500;
-        originalViewTop = 500;
-        setCopiedViewPosition(originalViewLeft, originalViewTop);
+        setCopiedViewPosition(originalViewLeft, originalViewTop, isFromUserInput);
     }
 
     private void getCopiedView() {
@@ -136,9 +134,9 @@ public class ETCPanelEvent implements View.OnClickListener{
         return numberArray[arrayIndex];
     }
 
-    private void setCopiedViewPosition(int originalViewLeft, int originalViewTop) {
-        copiedView.setX(originalViewLeft);
-        copiedView.setY(originalViewTop);
+    private void setCopiedViewPosition(int originalViewLeft, int originalViewTop, boolean isFromUserInput) {
+        copiedView.setX(isFromUserInput ? 500 : originalViewLeft);
+        copiedView.setY(isFromUserInput ? 500 : originalViewTop);
     }
 
     public void etcPanelFadeOutForTotalLayout() {
