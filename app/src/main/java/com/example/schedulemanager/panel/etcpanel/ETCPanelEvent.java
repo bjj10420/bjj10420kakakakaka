@@ -135,8 +135,11 @@ public class ETCPanelEvent implements View.OnClickListener{
     }
 
     private void setCopiedViewPosition(int originalViewLeft, int originalViewTop, boolean isFromUserInput) {
-        copiedView.setX(isFromUserInput ? 500 : originalViewLeft);
-        copiedView.setY(isFromUserInput ? 500 : originalViewTop);
+        int x = UIHelper.uiHelper.getTotalLayout().getMeasuredWidth() / 2;
+        int y = UIHelper.uiHelper.getTotalLayout().getMeasuredHeight() / 2;
+
+        copiedView.setX(isFromUserInput ? x : originalViewLeft);
+        copiedView.setY(isFromUserInput ? y : originalViewTop);
     }
 
     public void etcPanelFadeOutForTotalLayout() {
