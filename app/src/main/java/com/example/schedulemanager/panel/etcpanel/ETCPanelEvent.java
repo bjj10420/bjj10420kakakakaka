@@ -74,6 +74,8 @@ public class ETCPanelEvent implements View.OnClickListener{
         int originalViewTop = getPositionValue(numberArray, 1, v);
         getCopiedView();
         setCopiedViewTouchEvent();
+        originalViewLeft = 500;
+        originalViewTop = 500;
         setCopiedViewPosition(originalViewLeft, originalViewTop);
     }
 
