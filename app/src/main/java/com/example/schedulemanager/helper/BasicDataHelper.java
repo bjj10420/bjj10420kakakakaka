@@ -20,7 +20,24 @@ public class BasicDataHelper {
         makeTravel(basicDataList);
         makeSports(basicDataList);
         makeCommorce(basicDataList);
+        makeDev(basicDataList);
         return basicDataList;
+    }
+
+    private void makeDev(ArrayList<ActivityVO> basicDataList) {
+        ActivityVO basicActivity12 = new ActivityVO("개발", "프로그래밍", "F", "icon_234", basicDataList);
+        ActivityVO basicActivity13 = new ActivityVO("개발", "맥 프로그래밍", "F", "icon_235", basicDataList);
+        ActivityVO basicActivity14 = new ActivityVO("개발", "디버깅", "F", "icon_236", basicDataList);
+        ActivityVO basicActivity15 = new ActivityVO("개발", "서버 설정", "F", "icon_238", basicDataList);
+        ActivityVO basicActivity16 = new ActivityVO("개발", "CSS3 작업", "F", "icon_239", basicDataList);
+        ActivityVO basicActivity17 = new ActivityVO("개발", "설계", "F", "icon_241", basicDataList);
+        ActivityVO basicActivity18 = new ActivityVO("개발", "HTML5", "F", "icon_242", basicDataList);
+        ActivityVO basicActivity19 = new ActivityVO("개발", "키값 저장", "F", "icon_243", basicDataList);
+        ActivityVO basicActivity20 = new ActivityVO("개발", "컨펌", "F", "icon_244", basicDataList);
+        ActivityVO basicActivity21 = new ActivityVO("개발", "보안 설정", "F", "icon_245", basicDataList);
+        ActivityVO basicActivity22 = new ActivityVO("개발", "TODO", "F", "icon_248", basicDataList);
+        ActivityVO basicActivity23 = new ActivityVO("개발", "릴리즈", "F", "icon_249", basicDataList);
+        ActivityVO basicActivity24 = new ActivityVO("개발", "공지", "F", "icon_250", basicDataList);
     }
 
     private void makeLife(ArrayList<ActivityVO> basicDataList) {
