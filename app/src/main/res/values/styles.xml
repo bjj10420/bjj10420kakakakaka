@@ -2,7 +2,7 @@
 
     <style name="AppTheme.Button" parent="Widget.AppCompat.Button.Colored">
         <item name="colorButtonNormal">@color/strokeBrown</item>
-        <item name="android:textColor">@color/cancelGrey</item>
+        <item name="android:textColor">@color/whilte</item>
         <!--<item name="android:strokeColor">@color/strokeBrown</item>-->
     </style>
 
