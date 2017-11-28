@@ -24,7 +24,7 @@ public class BasicDataHelper {
     }
 
     private void makeLife(ArrayList<ActivityVO> basicDataList) {
-        ActivityVO basicActivity12 = new ActivityVO("일상/생활", "연락", "T", "icon_233", basicDataList);
+        ActivityVO basicActivity12 = new ActivityVO("일상/생활", "연락", "F", "icon_233", basicDataList);
         ActivityVO basicActivity13 = new ActivityVO("일상/생활", "연락처 관리", "F", "icon_201", basicDataList);
         ActivityVO basicActivity14 = new ActivityVO("일상/생활", "알람설정", "F", "icon_202", basicDataList);
         ActivityVO basicActivity15 = new ActivityVO("일상/생활", "샤워", "F", "icon_203", basicDataList);
@@ -43,7 +43,7 @@ public class BasicDataHelper {
         ActivityVO basicActivity32 = new ActivityVO("일상/생활", "간식", "F", "icon_216", basicDataList);
         ActivityVO basicActivity322 = new ActivityVO("일상/생활", "인터넷", "F", "icon_217", basicDataList);
         ActivityVO basicActivity33 = new ActivityVO("일상/생활", "위치파악", "F", "icon_218", basicDataList);
-        ActivityVO basicActivity34 = new ActivityVO("일상/생활", "뉴스확인", "F", "icon_219", basicDataList);
+        ActivityVO basicActivity34 = new ActivityVO("일상/생활", "뉴스확인", "T", "icon_219", basicDataList);
         ActivityVO basicActivity35 = new ActivityVO("일상/생활", "영화감상", "F", "icon_220", basicDataList);
         ActivityVO basicActivity36 = new ActivityVO("일상/생활", "메세지", "F", "icon_221", basicDataList);
         ActivityVO basicActivity37 = new ActivityVO("일상/생활", "약먹기", "F", "icon_222", basicDataList);
@@ -53,7 +53,7 @@ public class BasicDataHelper {
         ActivityVO basicActivity41 = new ActivityVO("일상/생활", "쇼핑", "F", "icon_226", basicDataList);
         ActivityVO basicActivity42 = new ActivityVO("일상/생활", "취미활동", "F", "icon_227", basicDataList);
         ActivityVO basicActivity43 = new ActivityVO("일상/생활", "가게가기", "F", "icon_228", basicDataList);
-        ActivityVO basicActivity44 = new ActivityVO("일상/생활", "티타임", "F", "icon_229", basicDataList);
+        ActivityVO basicActivity44 = new ActivityVO("일상/생활", "티타임", "T", "icon_229", basicDataList);
         ActivityVO basicActivity45 = new ActivityVO("일상/생활", "TV", "F", "icon_230", basicDataList);
         ActivityVO basicActivity46 = new ActivityVO("일상/생활", "와인한잔", "F", "icon_231", basicDataList);
         ActivityVO basicActivity47 = new ActivityVO("일상/생활", "온라인 게임", "F", "icon_232", basicDataList);
@@ -61,14 +61,14 @@ public class BasicDataHelper {
     }
 
     private void makeCommorce(ArrayList<ActivityVO> basicDataList) {
-        ActivityVO basicActivity12 = new ActivityVO("거래활동", "24시간내 환불", "T", "icon_176");
+        ActivityVO basicActivity12 = new ActivityVO("거래활동", "24시간내 환불", "F", "icon_176");
         ActivityVO basicActivity13 = new ActivityVO("거래활동", "구매", "F", "icon_178");
         ActivityVO basicActivity14 = new ActivityVO("거래활동", "온라인 쇼핑", "F", "icon_179");
         ActivityVO basicActivity15 = new ActivityVO("거래활동", "쿠폰받기", "F", "icon_181");
         ActivityVO basicActivity16 = new ActivityVO("거래활동", "신용카드 확인", "F", "icon_182");
         ActivityVO basicActivity17 = new ActivityVO("거래활동", "택배", "F", "icon_183");
         ActivityVO basicActivity18 = new ActivityVO("거래활동", "할인체크", "F", "icon_184");
-        ActivityVO basicActivity19 = new ActivityVO("거래활동", "선물사기", "F", "icon_186");
+        ActivityVO basicActivity19 = new ActivityVO("거래활동", "선물사기", "T", "icon_186");
         ActivityVO basicActivity20 = new ActivityVO("거래활동", "컴퓨터 구매", "F", "icon_187");
         ActivityVO basicActivity22 = new ActivityVO("거래활동", "카드로 구매", "F", "icon_188");
         ActivityVO basicActivity24 = new ActivityVO("거래활동", "물건 확인", "F", "icon_189");
@@ -157,7 +157,7 @@ public class BasicDataHelper {
     }
 
     private void makeTravel(ArrayList<ActivityVO> basicDataList) {
-            ActivityVO basicActivity12 = new ActivityVO("여행", "비행기 탑승", "T", "icon_116");
+            ActivityVO basicActivity12 = new ActivityVO("여행", "비행기 탑승", "F", "icon_116");
             ActivityVO basicActivity13 = new ActivityVO("여행", "환승", "F", "icon_117");
             ActivityVO basicActivity14 = new ActivityVO("여행", "시간확인", "F", "icon_118");
             ActivityVO basicActivity15 = new ActivityVO("여행", "칵테일 한잔", "F", "icon_119");
@@ -184,7 +184,7 @@ public class BasicDataHelper {
             ActivityVO basicActivity40 = new ActivityVO("여행", "여행준비", "F", "icon_141");
             ActivityVO basicActivity41 = new ActivityVO("여행", "여행가방 찾기", "F", "icon_142");
             ActivityVO basicActivity42 = new ActivityVO("여행", "외식", "F", "icon_143");
-            ActivityVO basicActivity43 = new ActivityVO("여행", "모래사장으로", "T", "icon_144");
+            ActivityVO basicActivity43 = new ActivityVO("여행", "모래사장으로", "F", "icon_144");
 
             basicDataList.add(basicActivity12);
             basicDataList.add(basicActivity13);
@@ -238,11 +238,11 @@ public class BasicDataHelper {
         ActivityVO basicActivity322 = new ActivityVO("학교", "레포트 제출", "F", "icon_105");
         ActivityVO basicActivity33 = new ActivityVO("학교", "발표", "F", "icon_107");
         ActivityVO basicActivity34 = new ActivityVO("학교", "학교끝", "F", "icon_108");
-        ActivityVO basicActivity35 = new ActivityVO("학교", "스쿨버스", "F", "icon_109");
+        ActivityVO basicActivity35 = new ActivityVO("학교", "스쿨버스", "T", "icon_109");
         ActivityVO basicActivity37 = new ActivityVO("학교", "과학수업", "F", "icon_110");
         ActivityVO basicActivity38 = new ActivityVO("학교", "논문 작성", "F", "icon_111");
         ActivityVO basicActivity39 = new ActivityVO("학교", "우주과학 수업", "F", "icon_112");
-        ActivityVO basicActivity40 = new ActivityVO("학교", "도서관", "T", "icon_113");
+        ActivityVO basicActivity40 = new ActivityVO("학교", "도서관", "F", "icon_113");
         ActivityVO basicActivity41 = new ActivityVO("학교", "강당", "F", "icon_114");
         ActivityVO basicActivity42 = new ActivityVO("학교", "졸업", "F", "icon_115");
 
@@ -292,7 +292,7 @@ public class BasicDataHelper {
         ActivityVO basicActivity29 = new ActivityVO("의료", "산소 공급기 사용", "F", "icon_73");
         ActivityVO basicActivity30 = new ActivityVO("의료", "간호사 상담", "F", "icon_74");
         ActivityVO basicActivity31 = new ActivityVO("의료", "약준비", "F", "icon_75");
-        ActivityVO basicActivity32 = new ActivityVO("의료", "밴드 사용", "T", "icon_76");
+        ActivityVO basicActivity32 = new ActivityVO("의료", "밴드 사용", "F", "icon_76");
         ActivityVO basicActivity322 = new ActivityVO("의료", "양수기 사용", "F", "icon_77");
         ActivityVO basicActivity33 = new ActivityVO("의료", "X레이", "F", "icon_78");
         ActivityVO basicActivity34 = new ActivityVO("의료", "치과진료", "F", "icon_79");
@@ -337,7 +337,7 @@ public class BasicDataHelper {
         ActivityVO basicActivity16 = new ActivityVO("IT", "e북사용", "F", "icon_35");
         ActivityVO basicActivity17 = new ActivityVO("IT", "음향조절", "F", "icon_36");
         ActivityVO basicActivity18 = new ActivityVO("IT", "지문스캔", "F", "icon_37");
-        ActivityVO basicActivity19 = new ActivityVO("IT", "USB 저장", "T", "icon_38");
+        ActivityVO basicActivity19 = new ActivityVO("IT", "USB 저장", "F", "icon_38");
         ActivityVO basicActivity20 = new ActivityVO("IT", "동영상 제작", "F", "icon_39");
         ActivityVO basicActivity22 = new ActivityVO("IT", "타블렛 사용", "F", "icon_41");
         ActivityVO basicActivity24 = new ActivityVO("IT", "마이크 테스트", "F", "icon_43");
@@ -381,7 +381,7 @@ public class BasicDataHelper {
 
     private void makeBusiness(ArrayList<ActivityVO> basicDataList) {
         ActivityVO basicActivity11 = new ActivityVO("비지니스", "은행", "F", "icon_1");
-        ActivityVO basicActivity12 = new ActivityVO("비지니스", "발표", "T", "icon_12");
+        ActivityVO basicActivity12 = new ActivityVO("비지니스", "발표", "F", "icon_12");
         ActivityVO basicActivity13 = new ActivityVO("비지니스", "출장", "T", "icon_22");
         ActivityVO basicActivity14 = new ActivityVO("비지니스", "부동산", "F", "icon_23");
         ActivityVO basicActivity15 = new ActivityVO("비지니스", "회의", "F", "icon_24");
@@ -405,7 +405,7 @@ public class BasicDataHelper {
         ActivityVO basicActivity33 = new ActivityVO("비지니스", "인쇄", "F", "icon_17");
         ActivityVO basicActivity34 = new ActivityVO("비지니스", "보안", "F", "icon_18");
         ActivityVO basicActivity35 = new ActivityVO("비지니스", "미션", "F", "icon_19");
-        ActivityVO basicActivity36 = new ActivityVO("비지니스", "계획", "F", "icon_29");
+        ActivityVO basicActivity36 = new ActivityVO("비지니스", "계획", "T", "icon_29");
         ActivityVO basicActivity37 = new ActivityVO("비지니스", "배치", "F", "icon_20");
         ActivityVO basicActivity38 = new ActivityVO("비지니스", "지불", "F", "icon_21");
 
