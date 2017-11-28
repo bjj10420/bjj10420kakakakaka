@@ -2,6 +2,7 @@ package com.example.schedulemanager.activity;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.widget.TextView;
@@ -12,6 +13,7 @@ import com.example.schedulemanager.helper.TaskHelper;
 import com.example.schedulemanager.helper.UIHelper;
 import com.example.schedulemanager.interface_.GeneralCallback2;
 import com.example.schedulemanager.panel.managerpanel.ManagerPanel;
+import com.rey.material.widget.ProgressView;
 
 import java.util.Timer;
 import java.util.TimerTask;

@@ -45,9 +45,15 @@ public class ManagerPanelItemAdd {
 
     public View init(Context context) {
         initField(context);
+        initBaseIconTag();
         initInfoIconBoxPanel();
         setAddViewEvent();
         return addView;
+    }
+
+    private void initBaseIconTag() {
+        View iconView = addView.findViewById(R.id.itemAddIcon);
+        iconView.setTag("icon_227");
     }
 
     private void initInfoIconBoxPanel() {

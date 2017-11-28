@@ -101,7 +101,7 @@
                         android:id="@+id/itemAddIcon"
                         android:layout_width="50dp"
                         android:layout_height="50dp"
-                        android:background="@drawable/basic_travel_icon" />
+                        android:background="@drawable/icon_227" />
 
                 </LinearLayout>
             </LinearLayout>
