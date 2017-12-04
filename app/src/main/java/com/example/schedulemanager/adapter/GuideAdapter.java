@@ -44,7 +44,7 @@ public class GuideAdapter extends PagerAdapter {
             case 2 : convertView = layoutInflater.inflate(R.layout.guide_page2, null);
                 break;
         }
-        Util.setFontAllChildView(context, convertView, typeface, false);
+        Util.setFontAllChildView(context, convertView, typeface, true);
         container.addView(convertView);
         return  convertView;
     }
