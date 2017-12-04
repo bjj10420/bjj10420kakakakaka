@@ -29,4 +29,5 @@ dependencies {
     compile 'com.github.rey5137:material:1.2.4'
     compile project(':materialexpansionpanel')
     compile 'info.hoang8f:fbutton:1.0.5'
+    compile 'com.github.ronaldsmartin:Material-ViewPagerIndicator:1.0.4'
 }
