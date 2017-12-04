@@ -27,16 +27,9 @@ public class GuideActivity extends Activity {
         closeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                updateIsFirstLoadingValue();
                 finish();
             }
         });
     }
 
-    private void updateIsFirstLoadingValue() {
-        SharedPreferences sp = getSharedPreferences("scheduleManager", Context.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sp.edit();
-        editor.putBoolean("needGuide", false);
-        editor.commit();
-    }
 }
