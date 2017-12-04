@@ -1,6 +1,7 @@
 package com.example.schedulemanager.activity;
 
 import android.app.Activity;
+import android.graphics.Typeface;
 import android.os.Bundle;
 import android.support.v4.view.ViewPager;
 
@@ -21,7 +22,7 @@ public class GuideActivity extends Activity {
 
     private void init() {
         ViewPager vp = (ViewPager) findViewById(R.id.view_pager);
-        vp.setAdapter(new GuideAdapter(this));
+        vp.setAdapter(new GuideAdapter(this, Typeface.createFromAsset(this.getAssets(), "nanumgothic.ttf")));
     }
 
 }

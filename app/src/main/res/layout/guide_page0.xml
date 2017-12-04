@@ -25,7 +25,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="15dp"
+            android:layout_marginBottom="35dp"
             android:text="뒤로가기 버튼 : \n\n 기기의 뒤로가기 버튼 사용"
             android:textColor="#404040"
             android:textSize="16dp"
@@ -36,7 +36,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_centerInParent="true"
-            android:layout_marginBottom="15dp"
+            android:layout_marginBottom="35dp"
             android:text="스케쥴 추가 : \n\n 초기화면(메인모드) 에서 달력 아이콘에 활동을 드래그 앤 드롭 => 오늘날짜로 추가
             \n\n 캘린더화면에서 해당 날짜에 드래그 앤 드롭 => 해당 날짜에 추가 \n\n 일정화면(날짜 클릭시)에서 중앙으로 드래그 앤 드롭 => 해당 날짜에 추가"
             android:textColor="#404040"

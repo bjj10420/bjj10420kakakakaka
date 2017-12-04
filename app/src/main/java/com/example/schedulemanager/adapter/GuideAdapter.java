@@ -1,21 +1,25 @@
 package com.example.schedulemanager.adapter;
 
 import android.content.Context;
+import android.graphics.Typeface;
 import android.support.v4.view.PagerAdapter;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import com.example.schedulemanager.R;
+import com.example.schedulemanager.Util;
 
 public class GuideAdapter extends PagerAdapter {
 
     private final LayoutInflater layoutInflater;
+    private final Typeface typeface;
     Context context;
 
-    public GuideAdapter(Context context) {
+    public GuideAdapter(Context context, Typeface typeface) {
         this.context = context;
         layoutInflater = LayoutInflater.from(context);
+        this.typeface = typeface;
     }
 
     @Override
@@ -37,6 +41,7 @@ public class GuideAdapter extends PagerAdapter {
             case 1 : convertView = layoutInflater.inflate(R.layout.guide_page1, null);
                 break;
         }
+        Util.setFontAllChildView(context, convertView, typeface, false);
         container.addView(convertView);
         return  convertView;
     }
