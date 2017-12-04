@@ -9,10 +9,6 @@ import android.view.ViewGroup;
 
 import com.example.schedulemanager.R;
 
-/**
- * Created by bjj10 on 2017-12-04.
- */
-
 public class GuideAdapter extends PagerAdapter {
 
     private final LayoutInflater layoutInflater;
@@ -30,13 +26,13 @@ public class GuideAdapter extends PagerAdapter {
 
     @Override
     public boolean isViewFromObject(View view, Object object) {
-        return false;
+        return view == object;
     }
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
         View convertView = layoutInflater.inflate(R.layout.guide_page, null);
-        ((ViewPager) container).addView(convertView, 0);
+        container.addView(convertView);
         return  convertView;
     }
 }
