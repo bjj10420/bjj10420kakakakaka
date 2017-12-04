@@ -2,7 +2,6 @@ package com.example.schedulemanager.adapter;
 
 import android.content.Context;
 import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,7 +30,13 @@ public class GuideAdapter extends PagerAdapter {
 
     @Override
     public Object instantiateItem(ViewGroup container, int position) {
-        View convertView = layoutInflater.inflate(R.layout.guide_page, null);
+        View convertView = null;
+        switch (position) {
+            case 0 : convertView = layoutInflater.inflate(R.layout.guide_page0, null);
+                break;
+            case 1 : convertView = layoutInflater.inflate(R.layout.guide_page1, null);
+                break;
+        }
         container.addView(convertView);
         return  convertView;
     }

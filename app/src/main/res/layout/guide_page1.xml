@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:text="사용 가이드"
+        android:textColor="#404040"
+        android:textSize="30dp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="15dp"
+            android:text="메모추가 : \n\n 일정화면에서 중앙의 해당 일정 부분을 클릭 => 메모버튼 클릭"
+            android:textColor="#404040"
+            android:textSize="16dp"
+
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginBottom="15dp"
+            android:text="스케쥴 삭제 : \n\n 캘린더화면에서 스케쥴이 들어있는 해당 날짜를 롱클릭 => 선택된 날짜 스케쥴 비우기
+            \n\n 일정화면(날짜 클릭시)에서 해당 스케쥴 클릭 후 삭제버튼 => 해당 스케쥴 삭제
+            "
+            android:textColor="#404040"
+            android:textSize="16dp" />
+    </LinearLayout>
+
+
+</RelativeLayout>

@@ -26,7 +26,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="15dp"
-            android:text="뒤로가기 버튼 : 기기의 뒤로가기 버튼 사용"
+            android:text="뒤로가기 버튼 : \n\n 기기의 뒤로가기 버튼 사용"
             android:textColor="#404040"
             android:textSize="16dp"
 
