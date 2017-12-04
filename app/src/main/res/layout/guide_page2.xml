@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="30dp"
+        android:text="사용 가이드"
+        android:textColor="#404040"
+        android:textSize="30dp"
+        android:textStyle="bold" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:layout_marginLeft="20dp"
+        android:layout_marginRight="20dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="35dp"
+            android:text="입력 기간 정하기 : \n\n 캘린더화면에서 상,하단중에 있는 즐겨찾기 활동 아이콘을 롱클릭 => 기간 선택"
+            android:textColor="#404040"
+            android:textSize="16dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="35dp"
+            android:text="활동 데이터 초기화 : \n\n 화면 우측하단 ... 아이콘 선택 후 관리 화면 => 초기화 버튼"
+            android:textColor="#404040"
+            android:textSize="16dp"
+            />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="35dp"
+            android:text="활동 데이터 추가, 삭제, 수정, 즐겨찾기 관리 : \n\n 화면 우측하단 ... 아이콘 선택 => 관리 버튼"
+            android:textColor="#404040"
+            android:textSize="16dp"
+            />
+    </LinearLayout>
+
+
+</RelativeLayout>
