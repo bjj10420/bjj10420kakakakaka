@@ -36,6 +36,14 @@
             android:text="활동 데이터 추가, 삭제, 수정, 즐겨찾기 관리 : \n\n 화면 우측하단 ... 아이콘 선택 => 관리 버튼"
             android:textColor="#404040"
             android:textSize="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="35dp"
+            android:text="가이드 다시보기 : \n\n 화면 우측하단 ... 아이콘  => 가이드 버튼"
+            android:textColor="#404040"
+            android:textSize="16dp" />
     </LinearLayout>
 
 

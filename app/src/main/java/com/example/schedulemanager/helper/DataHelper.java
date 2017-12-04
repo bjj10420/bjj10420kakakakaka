@@ -2,6 +2,7 @@ package com.example.schedulemanager.helper;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -12,6 +13,8 @@ import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.View;
 
+import com.example.schedulemanager.activity.GuideActivity;
+import com.example.schedulemanager.activity.ProgressActivity;
 import com.example.schedulemanager.calendar.CalendarPagerAdapter;
 import com.example.schedulemanager.vo.ActivityVO;
 import com.example.schedulemanager.vo.CalendarCellInfo;
@@ -73,10 +76,18 @@ public class DataHelper {
         initField(context);
         if(isFirstLoading()) {
             Log.d("처음 로딩 확인", "처음 로딩 확인");
+            startGuide();
             makeBasicData();
             updateIsFirstLoadingValue();
         }
         loadBasicDatas();
+    }
+
+    private void startGuide() {
+        Intent intent = new Intent(context, GuideActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        context.startActivity(intent);
+        ((Activity) context).overridePendingTransition(0, 0);
     }
 
     /**
@@ -195,6 +206,11 @@ public class DataHelper {
     private boolean isFirstLoading() {
         SharedPreferences sp = context.getSharedPreferences("scheduleManager", Context.MODE_PRIVATE);
         return sp.getBoolean("isFirstLoading", true);
+    }
+
+    public boolean needGuide() {
+        SharedPreferences sp = context.getSharedPreferences("scheduleManager", Context.MODE_PRIVATE);
+        return sp.getBoolean("needGuide", true);
     }
 
     /**
