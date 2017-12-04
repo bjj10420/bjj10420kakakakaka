@@ -22,7 +22,7 @@ public class GuideActivity extends Activity {
     private void init() {
         ViewPager vp = (ViewPager) findViewById(R.id.view_pager);
         vp.setAdapter(new GuideAdapter(this, Typeface.createFromAsset(this.getAssets(), "nanumgothic.ttf")));
-
+// 버튼들을 카톡처럼 바꾸기전 커밋
         View closeBtn = findViewById(R.id.guideCloseBtn);
         closeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
