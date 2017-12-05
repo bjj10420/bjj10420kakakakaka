@@ -176,8 +176,8 @@ public class ETCPanelEvent implements View.OnClickListener, View.OnTouchListener
         switch (motionEvent.getActionMasked()){
             case MotionEvent.ACTION_DOWN :
                 Log.d("액션다운 확인", "액션다운 확인");
-                excuteByButtonId(view);
                 changeButtonColorWhenDown(view);
+                excuteByButtonId(view);
                 break;
             case MotionEvent.ACTION_UP :
             case MotionEvent.ACTION_MOVE :
@@ -190,7 +190,9 @@ public class ETCPanelEvent implements View.OnClickListener, View.OnTouchListener
 
     private void excuteByButtonId(View view) {
         switch (view.getId()){
-            case R.id.etcManagerBtn : panelLayoutOffForManagerPanel();
+            case R.id.etcManagerBtn :
+                restoreButtonColorWhenUp(view);
+                panelLayoutOffForManagerPanel();
                 break;
             case R.id.etcAddBtn : addItemClickEvent();
                 break;
@@ -204,7 +206,7 @@ public class ETCPanelEvent implements View.OnClickListener, View.OnTouchListener
         setTextViewColorFilter(view, false);
     }
 
-    private void changeButtonColorWhenDown(View view) {
+    private void changeButtonColorWhenDown(final View view) {
         setIconViewColorFilter(view, true);
         setTextViewColorFilter(view, true);
     }
