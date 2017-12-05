@@ -2,7 +2,10 @@ package com.example.schedulemanager.panel.managerpanel;
 
 
 import android.content.Context;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
@@ -21,7 +24,7 @@ import static com.example.schedulemanager.helper.DataHelper.dataHelper;
 import static com.example.schedulemanager.helper.EventHelper.eventHelper;
 import static com.example.schedulemanager.helper.UIHelper.uiHelper;
 
-public class ManagerPanelEvent implements View.OnClickListener{
+public class ManagerPanelEvent implements View.OnClickListener, View.OnTouchListener {
 
     private Context context;
     ManagerPanel managerPanel;
@@ -57,13 +60,6 @@ public class ManagerPanelEvent implements View.OnClickListener{
 
     private void redraw() {
         redrawMainFavoritePanel();
-//        redrawETCPanel();
-    }
-
-    private void redrawETCPanel() {
-        ETCPanel etcPanel = eventHelper.getEtcPanel();
-        etcPanel.clearEtcContentsLayout();
-        etcPanel.initETCPanel();
     }
 
     private void resetMainFavoritePanelEvents() {
@@ -84,6 +80,7 @@ public class ManagerPanelEvent implements View.OnClickListener{
     }
 
     private void itemClickEvent(View view){
+        Log.d("아이템 클릭이벤트 확인", "아이템 클릭이벤트 확인");
         if(isRemoveCategoryBtn(view))
             removeCategoryEvent(view);
         else if(view.getTag() instanceof ActivityVO)
@@ -116,26 +113,10 @@ public class ManagerPanelEvent implements View.OnClickListener{
     }
 
     private void removeRefreshETCPanel(String category, int parameter) {
-//        int categoryIndex = findCategoryIndex(category);
         int categoryIndex = (parameter * 2) + 1;
         Log.d("챠일드카운트체크", String.valueOf(categoryIndex));
         eventHelper.getEtcPanel().getEtcContentsLayout().removeViewAt(categoryIndex);
         eventHelper.getEtcPanel().getEtcContentsLayout().removeViewAt(categoryIndex);
-    }
-
-    private int findCategoryIndex(String category) {
-        int theCategoryIndex = 0;
-        LinearLayout etcContentsLayout = eventHelper.getEtcPanel().getEtcContentsLayout();
-        for(int i = 0 ; i < etcContentsLayout.getChildCount() ; i++){
-            View view = etcContentsLayout.getChildAt(i);
-            if(view instanceof TextView &&
-              ((TextView)view).getText().toString().equals(category)
-               ){
-                theCategoryIndex = i;
-                break;
-            }
-        }
-        return theCategoryIndex;
     }
 
     private void removeRefreshManagerPanel(int selectedIndex) {
@@ -161,7 +142,6 @@ public class ManagerPanelEvent implements View.OnClickListener{
     private void addCategory(String category) {
         addCategoryToDB(category);
         addCategoryToMap(category);
-//        redrawManagerAndETCPanel();
         addRefreshManagerAndETCPanel(category);
     }
 
@@ -179,8 +159,6 @@ public class ManagerPanelEvent implements View.OnClickListener{
     private void addRefreshManagerPanel(String category) {
         int categoryIndex = eventHelper.getManagerPanel().getManagerContentsLayout().getChildCount();
           managerPanel.addExpansionPanelWithIndex(category, categoryIndex - 1);
-//        View detailItemView = eventHelper.getManagerPanel().makeDetailItemView(activityVO);
-//        addNewItemToManagerPanel(detailItemView, categoryIndex);
     }
 
     private void addCategoryToMap(String category) {
@@ -238,5 +216,62 @@ public class ManagerPanelEvent implements View.OnClickListener{
     public void checkBoxEvent(boolean b, ActivityVO activityVO) {
         updateDBFavoriteData(b, activityVO.getActivityName());
         updateActivitiesMap(b, activityVO);
+    }
+
+    private void restoreButtonColorWhenUp(View view) {
+        setIconViewColorFilter(view, false);
+        setTextViewColorFilter(view, false);
+    }
+
+    private void changeButtonColorWhenDown(final View view) {
+        setIconViewColorFilter(view, true);
+        setTextViewColorFilter(view, true);
+    }
+
+    private void setIconViewColorFilter(View view, boolean isFilter) {
+        View icon = ((LinearLayout) view).getChildAt(0);
+        if(isFilter)
+            icon.getBackground().setColorFilter(Color.parseColor("#8b461f"), PorterDuff.Mode.SRC_IN);
+        else
+            icon.getBackground().clearColorFilter();
+    }
+
+    private void setTextViewColorFilter(View view, boolean isFilter) {
+        TextView text = (TextView) ((LinearLayout) view).getChildAt(1);
+        if(isFilter)
+            text.setTextColor(Color.parseColor("#8b461f"));
+        else
+            text.setTextColor(Color.parseColor("#b9b9b9"));
+    }
+
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        switch (motionEvent.getActionMasked()){
+            case MotionEvent.ACTION_DOWN :
+                changeButtonColorWhenDown(view);
+                break;
+            case MotionEvent.ACTION_UP :
+                restoreButtonColorWhenUp(view);
+                excuteByButtonId(view);
+
+                break;
+            case MotionEvent.ACTION_MOVE :
+                restoreButtonColorWhenUp(view);
+                break;
+        }
+        return true;
+    }
+
+    private void excuteByButtonId(View view) {
+        switch (view.getId()){
+            case R.id.addCategoryBtn :
+                addCategoryEvent(view);
+                break;
+            case R.id.removeCategoryBtn :
+                removeCategoryEvent(view);
+                break;
+            case R.id.resetBtn :
+                break;
+        }
     }
 }

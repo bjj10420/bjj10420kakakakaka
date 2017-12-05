@@ -174,7 +174,6 @@ public class ETCPanelEvent implements View.OnClickListener, View.OnTouchListener
     public boolean onTouch(View view, MotionEvent motionEvent) {
         switch (motionEvent.getActionMasked()){
             case MotionEvent.ACTION_DOWN :
-                Log.d("액션다운 확인", "액션다운 확인");
                 changeButtonColorWhenDown(view);
                 break;
             case MotionEvent.ACTION_UP :
@@ -183,7 +182,6 @@ public class ETCPanelEvent implements View.OnClickListener, View.OnTouchListener
 
                 break;
             case MotionEvent.ACTION_MOVE :
-                Log.d("액션업 확인", "액션업 확인");
                 restoreButtonColorWhenUp(view);
                 break;
         }

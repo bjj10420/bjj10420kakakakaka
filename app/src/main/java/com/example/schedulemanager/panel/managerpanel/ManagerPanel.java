@@ -7,7 +7,6 @@ import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.ImageView;
@@ -23,8 +22,6 @@ import com.takeiteasy.materialexpansionpanel.panel.MaterialExpansionPanelView;
 
 import java.util.ArrayList;
 
-import static com.example.schedulemanager.helper.DataHelper.dataHelper;
-
 // 기타버튼 => 관리 화면
 public class ManagerPanel {
 
@@ -39,7 +36,7 @@ public class ManagerPanel {
 
     public void init(Context context) {
         initFields(context);
-        initBottomButton();
+        initTopButton();
     }
 
     private void initFields(Context context) {
@@ -49,9 +46,16 @@ public class ManagerPanel {
         managerPanelEvent = new ManagerPanelEvent(this, context);
     }
 
-    private void initBottomButton() {
+    private void initTopButton() {
         View closeButton = Util.getViewById(context, R.id.managerCloseBtn);
         closeButton.setOnClickListener(managerPanelEvent);
+        View categoryAddButton = Util.getViewById(context, R.id.addCategoryBtn);
+        categoryAddButton.setOnTouchListener(managerPanelEvent);
+        View categoryRemoveButton = Util.getViewById(context, R.id.removeCategoryBtn);
+        categoryRemoveButton.setOnTouchListener(managerPanelEvent);
+        View resetButton = Util.getViewById(context, R.id.resetBtn);
+        resetButton.setOnTouchListener(managerPanelEvent);
+
     }
 
     public void setManagerLayoutVisible(boolean isVisible) {
@@ -66,16 +70,6 @@ public class ManagerPanel {
         for (String category : DataHelper.dataHelper.getCategories()) {
             addExpansionPanel(category);
         }
-//        addLastRowViewToContentsLayout();
-    }
-
-    private void addLastRowViewToContentsLayout() {
-        addMenuBarViewToContentsLayout();
-    }
-
-    private void addMenuBarViewToContentsLayout() {
-        View menuBarView = makeLastBar();
-        managerContentsLayout.addView(menuBarView);
     }
 
     public void addExpansionPanel(String category) {
@@ -136,33 +130,6 @@ public class ManagerPanel {
         return detailItemView;
     }
 
-    private View makeLastBar() {
-        View menuBarView = makeLastMenuBarView();
-        setMenuBarCancel(menuBarView);
-        return menuBarView;
-    }
-
-    private void setMenuBarCancel(View menuBarView) {
-        View menuBarTextView = menuBarView.findViewById(R.id.menu_bar_cancel);
-        menuBarTextView.setOnClickListener(managerPanelEvent);
-    }
-
-    private View makeLastMenuBarView() {
-        View menuBarView = ((Activity) context).getLayoutInflater().inflate(R.layout.manager_menu_bar_item, null);
-        menuBarView.setMinimumHeight((int) Util.convertDpToPixel(65));
-        setCategoryButtons(menuBarView);
-        return menuBarView;
-    }
-
-    private void setCategoryButtons(View menuBarView) {
-        Button addCategoryBtn = (Button) menuBarView.findViewById(R.id.addCategoryBtn);
-        addCategoryBtn.setOnClickListener(managerPanelEvent);
-        addCategoryBtn.setTypeface(dataHelper.getTypeface());
-        Button removeCategoryBtn = (Button) menuBarView.findViewById(R.id.removeCategoryBtn);
-        removeCategoryBtn.setOnClickListener(managerPanelEvent);
-        removeCategoryBtn.setTypeface(dataHelper.getTypeface());
-    }
-
     private View inflateDetailView() {
         View detailView = ((Activity) context).getLayoutInflater().inflate(R.layout.manager_detail, null);
         ViewGroup.LayoutParams detailViewParams = new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT,
@@ -211,15 +178,6 @@ public class ManagerPanel {
 
         iconView.setImageBitmap(BitmapFactory.decodeResource(
                 context.getResources(), Util.getDrawableId(activityVO.getImageData()) , options));
-    }
-
-    public void clearContentsLayout(){
-        managerContentsLayout.removeAllViews();
-    }
-
-    public void redrawManagerPanel(){
-        clearContentsLayout();
-        initManagerPanel();
     }
 
     public RelativeLayout getManagerLayout() {

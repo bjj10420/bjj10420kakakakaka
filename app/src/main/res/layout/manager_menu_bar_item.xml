@@ -23,7 +23,6 @@
         android:gravity="center">
 
         <com.rey.material.widget.Button
-            android:id="@+id/addCategoryBtn"
             android:layout_width="match_parent"
             android:layout_height="65dp"
             android:text="카테고리 +"
@@ -37,7 +36,6 @@
         android:gravity="center">
 
         <com.rey.material.widget.Button
-            android:id="@+id/removeCategoryBtn"
             android:layout_width="match_parent"
             android:layout_height="65dp"
             android:text="카테고리 -"
