@@ -399,6 +399,7 @@ public class ManagerPanelItemInfo {
         View activityIconView = itemInfoView.findViewById(R.id.itemInfoIcon);
         activityIconView.setBackground(new BitmapDrawable(context.getResources(), BitmapFactory.decodeResource(
                 context.getResources(), Util.getDrawableId(activityVO.getImageData()))));
+        activityIconView.setTag(activityVO.getImageData());
     }
 
     private void setActivityName(View itemInfoView, ActivityVO activityVO) {
