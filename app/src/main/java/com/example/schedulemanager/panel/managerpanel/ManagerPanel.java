@@ -81,7 +81,8 @@ public class ManagerPanel {
     public void addExpansionPanel(String category) {
         MaterialExpansionPanelView panelView = makePanelView(category);
         managerContentsLayout.addView(panelView);
-        panelView.expand();
+        panelView.collapse();
+//        panelView.expand();
     }
 
     public void addExpansionPanelWithIndex(String category, int index) {
