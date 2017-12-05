@@ -54,18 +54,18 @@ public class ETCPanel {
 
     private void initBottomButtonEvents() {
         View addButton =  Util.getViewById(context, R.id.etcAddBtn);
-        addButton.setOnClickListener(etcPanelEvent);
+        addButton.setOnTouchListener(etcPanelEvent);
         View managerButton =  Util.getViewById(context, R.id.etcManagerBtn);
-        managerButton.setOnClickListener(etcPanelEvent);
+        managerButton.setOnTouchListener(etcPanelEvent);
         View userInputButton =  Util.getViewById(context, R.id.etcUserInputBtn);
-        userInputButton.setOnClickListener(etcPanelEvent);
+        userInputButton.setOnTouchListener(etcPanelEvent);
         View closeButton = Util.getViewById(context, R.id.etcCloseBtn);
         closeButton.bringToFront();
         closeButton.setOnClickListener(etcPanelEvent);
-        setButtonBasicOptions(addButton, managerButton, userInputButton);
+        setButtonTypeface(addButton, managerButton, userInputButton);
     }
 
-    private void setButtonBasicOptions(View addButton, View managerButton, View userInputButton) {
+    private void setButtonTypeface(View addButton, View managerButton, View userInputButton) {
         TextView addText = (TextView) ((LinearLayout)addButton).getChildAt(1);
         TextView managerText = (TextView) ((LinearLayout)managerButton).getChildAt(1);
         TextView userInputText = (TextView) ((LinearLayout)userInputButton).getChildAt(1);

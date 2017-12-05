@@ -1,24 +1,21 @@
 package com.example.schedulemanager.panel.etcpanel;
 
 import android.app.Activity;
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
+import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.example.schedulemanager.R;
 import com.example.schedulemanager.activity.ProgressActivity;
-import com.example.schedulemanager.activity.SplashActivity;
 import com.example.schedulemanager.helper.DialogHelper;
-import com.example.schedulemanager.helper.EventHelper;
-import com.example.schedulemanager.helper.TaskHelper;
 import com.example.schedulemanager.helper.UIHelper;
-import com.example.schedulemanager.interface_.GeneralCallback;
-import com.example.schedulemanager.interface_.GeneralCallback2;
 import com.example.schedulemanager.panel.managerpanel.ManagerPanel;
 
 import static com.example.schedulemanager.helper.EventHelper.eventHelper;
@@ -42,12 +39,7 @@ public class ETCPanelEvent implements View.OnClickListener, View.OnTouchListener
         switch (v.getId()) {
             case R.id.etcCloseBtn : etcPanelFadeOutForTotalLayout();
                 break;
-            case R.id.etcManagerBtn : panelLayoutOffForManagerPanel();
-                break;
-            case R.id.etcAddBtn : addItemClickEvent();
-                break;
-            case R.id.etcUserInputBtn : userInputEvent();
-                break;
+
 
             default : panelItemClickEvent(v, false);
         }
@@ -181,23 +173,57 @@ public class ETCPanelEvent implements View.OnClickListener, View.OnTouchListener
 
     @Override
     public boolean onTouch(View view, MotionEvent motionEvent) {
-        switch (motionEvent.getAction()){
+        switch (motionEvent.getActionMasked()){
             case MotionEvent.ACTION_DOWN :
-                    changeButtonColorWhenDown(view);
+                Log.d("액션다운 확인", "액션다운 확인");
+                excuteByButtonId(view);
+                changeButtonColorWhenDown(view);
                 break;
             case MotionEvent.ACTION_UP :
-                    restoreButtonColorWhenUp(view);
+            case MotionEvent.ACTION_MOVE :
+                Log.d("액션업 확인", "액션업 확인");
+                restoreButtonColorWhenUp(view);
                 break;
         }
-        return false;
+        return true;
+    }
+
+    private void excuteByButtonId(View view) {
+        switch (view.getId()){
+            case R.id.etcManagerBtn : panelLayoutOffForManagerPanel();
+                break;
+            case R.id.etcAddBtn : addItemClickEvent();
+                break;
+            case R.id.etcUserInputBtn : userInputEvent();
+                break;
+        }
     }
 
     private void restoreButtonColorWhenUp(View view) {
-
+        setIconViewColorFilter(view, false);
+        setTextViewColorFilter(view, false);
     }
 
     private void changeButtonColorWhenDown(View view) {
-
+        setIconViewColorFilter(view, true);
+        setTextViewColorFilter(view, true);
     }
+
+    private void setIconViewColorFilter(View view, boolean isFilter) {
+        View icon = ((LinearLayout) view).getChildAt(0);
+        if(isFilter)
+            icon.getBackground().setColorFilter(Color.parseColor("#8b461f"), PorterDuff.Mode.SRC_IN);
+        else
+            icon.getBackground().clearColorFilter();
+    }
+
+    private void setTextViewColorFilter(View view, boolean isFilter) {
+        TextView text = (TextView) ((LinearLayout) view).getChildAt(1);
+        if(isFilter)
+            text.setTextColor(Color.parseColor("#8b461f"));
+        else
+            text.setTextColor(Color.parseColor("#b9b9b9"));
+    }
+
 
 }
