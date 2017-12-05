@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.example.schedulemanager.R;
+import com.example.schedulemanager.Util;
 import com.example.schedulemanager.helper.DialogHelper;
 import com.example.schedulemanager.interface_.GeneralCallback2;
 import com.example.schedulemanager.panel.etcpanel.ETCPanel;
@@ -252,7 +253,7 @@ public class ManagerPanelEvent implements View.OnClickListener, View.OnTouchList
                 break;
             case MotionEvent.ACTION_UP :
                 restoreButtonColorWhenUp(view);
-                excuteByButtonId(view);
+                excuteByButtonId(view, motionEvent);
 
                 break;
             case MotionEvent.ACTION_MOVE :
@@ -262,16 +263,18 @@ public class ManagerPanelEvent implements View.OnClickListener, View.OnTouchList
         return true;
     }
 
-    private void excuteByButtonId(View view) {
-        switch (view.getId()){
-            case R.id.addCategoryBtn :
-                addCategoryEvent(view);
-                break;
-            case R.id.removeCategoryBtn :
-                removeCategoryEvent(view);
-                break;
-            case R.id.resetBtn :
-                break;
-        }
+    private void excuteByButtonId(View view, MotionEvent motionEvent) {
+//        if(Util.checkIsIn(view, motionEvent)) {
+            switch (view.getId()) {
+                case R.id.addCategoryBtn:
+                    addCategoryEvent(view);
+                    break;
+                case R.id.removeCategoryBtn:
+                    removeCategoryEvent(view);
+                    break;
+                case R.id.resetBtn:
+                    break;
+            }
+//        }
     }
 }

@@ -11,6 +11,7 @@ import android.net.Uri;
 import android.os.Environment;
 import android.util.DisplayMetrics;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 
@@ -256,5 +257,16 @@ public class Util {
             e.printStackTrace();
         }
         return  drawableId;
+    }
+
+    public static boolean checkIsIn(View targetView, MotionEvent motionEvent){
+        Rect viewRect = new Rect();
+        targetView.getHitRect(viewRect);
+
+        if (viewRect.contains((int)motionEvent.getRawX(), (int)motionEvent.getRawX())) {
+            return true;
+        }
+        else
+            return false;
     }
 }
