@@ -247,11 +247,6 @@ public class ETCPanel {
         return rowLayout;
     }
 
-    private int getActivityNumberAboutCategory(String category){
-        ArrayList<ActivityVO> activities = dataHelper.getActivities().get(category);
-        return activities.size();
-    }
-
     public void setTextWithBoldFont(TextView textView, String text){
         Typeface typeface = dataHelper.getTypeface();
         textView.setTypeface(typeface, Typeface.BOLD);
