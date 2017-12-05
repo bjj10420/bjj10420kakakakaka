@@ -176,9 +176,12 @@ public class ETCPanelEvent implements View.OnClickListener, View.OnTouchListener
             case MotionEvent.ACTION_DOWN :
                 Log.d("액션다운 확인", "액션다운 확인");
                 changeButtonColorWhenDown(view);
-                excuteByButtonId(view);
                 break;
             case MotionEvent.ACTION_UP :
+                restoreButtonColorWhenUp(view);
+                excuteByButtonId(view);
+
+                break;
             case MotionEvent.ACTION_MOVE :
                 Log.d("액션업 확인", "액션업 확인");
                 restoreButtonColorWhenUp(view);
