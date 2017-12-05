@@ -1,7 +1,6 @@
 package com.example.schedulemanager.panel.etcpanel;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.Typeface;
@@ -11,16 +10,13 @@ import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
 import android.widget.HorizontalScrollView;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.schedulemanager.R;
 import com.example.schedulemanager.Util;
-import com.example.schedulemanager.helper.DataHelper;
 import com.example.schedulemanager.vo.ActivityVO;
 
 import java.util.ArrayList;
@@ -57,24 +53,25 @@ public class ETCPanel {
     }
 
     private void initBottomButtonEvents() {
-        Button addButton = (Button) Util.getViewById(context, R.id.etcAddBtn);
-        addButton.setTypeface(dataHelper.getTypeface());
+        View addButton =  Util.getViewById(context, R.id.etcAddBtn);
         addButton.setOnClickListener(etcPanelEvent);
-        Button managerButton = (Button) Util.getViewById(context, R.id.etcManagerBtn);
-        managerButton.setTypeface(dataHelper.getTypeface());
+        View managerButton =  Util.getViewById(context, R.id.etcManagerBtn);
         managerButton.setOnClickListener(etcPanelEvent);
-        Button userInputButton = (Button) Util.getViewById(context, R.id.etcUserInputBtn);
-        userInputButton.setTypeface(dataHelper.getTypeface());
+        View userInputButton =  Util.getViewById(context, R.id.etcUserInputBtn);
         userInputButton.setOnClickListener(etcPanelEvent);
         View closeButton = Util.getViewById(context, R.id.etcCloseBtn);
         closeButton.bringToFront();
         closeButton.setOnClickListener(etcPanelEvent);
-        setColorColorFilter(addButton, managerButton, userInputButton);
-
+        setButtonBasicOptions(addButton, managerButton, userInputButton);
     }
 
-    private void setColorColorFilter(Button addButton, Button managerButton, Button userInputButton) {
-
+    private void setButtonBasicOptions(View addButton, View managerButton, View userInputButton) {
+        TextView addText = (TextView) ((LinearLayout)addButton).getChildAt(1);
+        TextView managerText = (TextView) ((LinearLayout)managerButton).getChildAt(1);
+        TextView userInputText = (TextView) ((LinearLayout)userInputButton).getChildAt(1);
+        addText.setTypeface(dataHelper.getTypeface());
+        managerText.setTypeface(dataHelper.getTypeface());
+        userInputText.setTypeface(dataHelper.getTypeface());
     }
 
     private void adaptorFont() {

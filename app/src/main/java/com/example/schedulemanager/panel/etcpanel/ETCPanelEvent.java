@@ -23,7 +23,7 @@ import com.example.schedulemanager.panel.managerpanel.ManagerPanel;
 
 import static com.example.schedulemanager.helper.EventHelper.eventHelper;
 
-public class ETCPanelEvent implements View.OnClickListener{
+public class ETCPanelEvent implements View.OnClickListener, View.OnTouchListener{
 
     Context context;
     ETCPanel etcPanel;
@@ -177,6 +177,27 @@ public class ETCPanelEvent implements View.OnClickListener{
 
     private void addItemClickEvent() {
         new DialogHelper().showActivityItemAddDialog(context);
+    }
+
+    @Override
+    public boolean onTouch(View view, MotionEvent motionEvent) {
+        switch (motionEvent.getAction()){
+            case MotionEvent.ACTION_DOWN :
+                    changeButtonColorWhenDown(view);
+                break;
+            case MotionEvent.ACTION_UP :
+                    restoreButtonColorWhenUp(view);
+                break;
+        }
+        return false;
+    }
+
+    private void restoreButtonColorWhenUp(View view) {
+
+    }
+
+    private void changeButtonColorWhenDown(View view) {
+
     }
 
 }
