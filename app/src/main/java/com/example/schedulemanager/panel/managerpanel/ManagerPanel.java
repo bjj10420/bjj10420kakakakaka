@@ -66,7 +66,7 @@ public class ManagerPanel {
         for (String category : DataHelper.dataHelper.getCategories()) {
             addExpansionPanel(category);
         }
-        addLastRowViewToContentsLayout();
+//        addLastRowViewToContentsLayout();
     }
 
     private void addLastRowViewToContentsLayout() {

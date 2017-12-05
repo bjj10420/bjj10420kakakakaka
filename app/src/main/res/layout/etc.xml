@@ -99,45 +99,6 @@
                 </LinearLayout>
 
 
-                <info.hoang8f.widget.FButton
-                    android:layout_width="0dp"
-                    android:layout_height="75dp"
-                    android:layout_weight="1"
-                    android:background="@drawable/write"
-                    android:text="활동 추가"
-                    android:visibility="gone"
-                    fbutton:buttonColor="@color/strokeBrown"
-                    fbutton:cornerRadius="5dp"
-                    fbutton:shadowColor="#404040"
-                    fbutton:shadowEnabled="true"
-                    fbutton:shadowHeight="5dp" />
-
-                <info.hoang8f.widget.FButton
-                    android:layout_width="0dp"
-                    android:layout_height="75dp"
-                    android:layout_weight="1"
-                    android:text="관리"
-                    android:visibility="gone"
-                    fbutton:buttonColor="@color/strokeBrown"
-                    fbutton:cornerRadius="5dp"
-                    fbutton:shadowColor="#404040"
-                    fbutton:shadowEnabled="true"
-                    fbutton:shadowHeight="5dp" />
-
-
-                <info.hoang8f.widget.FButton
-                    android:layout_width="0dp"
-                    android:layout_height="75dp"
-                    android:layout_weight="1"
-                    android:text="사용자 입력"
-                    android:visibility="gone"
-                    fbutton:buttonColor="@color/strokeBrown"
-                    fbutton:cornerRadius="5dp"
-                    fbutton:shadowColor="#404040"
-                    fbutton:shadowEnabled="true"
-                    fbutton:shadowHeight="5dp"
-
-                    />
             </LinearLayout>
 
         </LinearLayout>
