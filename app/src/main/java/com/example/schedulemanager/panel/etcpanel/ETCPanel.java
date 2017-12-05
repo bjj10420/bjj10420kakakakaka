@@ -213,6 +213,7 @@ public class ETCPanel {
 
     private void attachTitle(String category) {
         TextView textView = makeTitleTextView(category);
+        textView.setPadding((int) Util.convertDpToPixel(10.0f),0,(int) Util.convertDpToPixel(10.0f),0);
         etcContentsLayout.addView(textView);
         addBottomMargin(textView, (int) Util.convertDpToPixel(10));
     }
@@ -244,6 +245,7 @@ public class ETCPanel {
         LinearLayout.LayoutParams rowLayoutParams = new LinearLayout.LayoutParams(LinearLayout.LayoutParams.MATCH_PARENT,
                 LinearLayout.LayoutParams.WRAP_CONTENT);
         rowLayout.setLayoutParams(rowLayoutParams);
+        rowLayout.setPadding((int) Util.convertDpToPixel(10.0f),0,(int) Util.convertDpToPixel(10.0f),0);
         return rowLayout;
     }
 
