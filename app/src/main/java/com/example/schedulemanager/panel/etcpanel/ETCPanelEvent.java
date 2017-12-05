@@ -153,7 +153,6 @@ public class ETCPanelEvent implements View.OnClickListener, View.OnTouchListener
 
     public void panelLayoutOffForManagerPanel() {
         final ManagerPanel managerPanel = eventHelper.getManagerPanel();
-
         if(managerPanel == null){
             Intent intent = new Intent(context, ProgressActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
