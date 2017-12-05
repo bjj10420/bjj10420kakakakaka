@@ -10,7 +10,9 @@
     <color name="makaroniOrange">#f5b881</color>
     <color name="cancelGrey">#404040</color>
     <color name="rail_train_type_ok_btn_pressed">#b4b4b4</color>
-    <color name="rail_train_type_ok_btn_normal">#c8c8c8</color>
+    <color name="light_grey">#c8c8c8</color>
+    <color name="more_light_grey">#f7f7f7</color>
+    <color name="loblolly">#b9b9b9</color>
     <color name="rail_timetable_train_type_ok_btn_text_normal">#e6e6e6</color>
     <color name="rail_timetable_train_type_ok_btn_text_enabled">#ffc000</color>
     <color name="rail_timetable_train_type_ok_btn_normal">#ffffff</color>

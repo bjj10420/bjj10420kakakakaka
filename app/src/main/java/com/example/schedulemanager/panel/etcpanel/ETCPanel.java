@@ -67,7 +67,13 @@ public class ETCPanel {
         userInputButton.setTypeface(dataHelper.getTypeface());
         userInputButton.setOnClickListener(etcPanelEvent);
         View closeButton = Util.getViewById(context, R.id.etcCloseBtn);
+        closeButton.bringToFront();
         closeButton.setOnClickListener(etcPanelEvent);
+        setColorColorFilter(addButton, managerButton, userInputButton);
+
+    }
+
+    private void setColorColorFilter(Button addButton, Button managerButton, Button userInputButton) {
 
     }
 

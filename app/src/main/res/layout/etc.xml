@@ -9,7 +9,7 @@
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginBottom="75dp">
+        android:layout_marginTop="75dp">
 
         <LinearLayout
             android:id="@+id/etcContentsLayout"
@@ -22,20 +22,6 @@
             android:paddingRight="10dp"
             android:paddingTop="10dp">
 
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <View
-                    android:id="@+id/etcCloseBtn"
-                    android:layout_width="25dp"
-                    android:layout_height="25dp"
-                    android:layout_alignParentRight="true"
-                    android:layout_marginRight="5dp"
-                    android:layout_marginTop="5dp"
-                    android:alpha="0.3"
-                    android:background="@drawable/cancel2_icon" />
-            </RelativeLayout>
 
         </LinearLayout>
     </ScrollView>
@@ -44,9 +30,69 @@
         android:id="@+id/etcBottomButtonLayout"
         android:layout_width="match_parent"
         android:layout_height="75dp"
-        android:layout_alignParentBottom="true"
-        android:background="@android:color/transparent"
+        android:layout_alignParentTop="true"
+        android:background="@color/more_light_grey"
         android:gravity="center">
+
+        <LinearLayout
+            android:layout_width="45dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/plus" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="활동추가"
+                android:textColor="@color/loblolly"
+                android:textSize="12dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="45dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/folder" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="관리"
+                android:textColor="@color/loblolly"
+                android:textSize="12dp" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="45dp"
+            android:layout_height="match_parent"
+            android:layout_marginRight="10dp"
+            android:gravity="center"
+            android:orientation="vertical">
+
+            <View
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:background="@drawable/write" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="사용자 입력"
+                android:textColor="@color/loblolly"
+                android:textSize="12dp" />
+        </LinearLayout>
 
 
         <info.hoang8f.widget.FButton
@@ -54,13 +100,14 @@
             android:layout_width="0dp"
             android:layout_height="75dp"
             android:layout_weight="1"
+            android:background="@drawable/write"
             android:text="활동 추가"
+            android:visibility="gone"
             fbutton:buttonColor="@color/strokeBrown"
             fbutton:cornerRadius="5dp"
             fbutton:shadowColor="#404040"
             fbutton:shadowEnabled="true"
-            fbutton:shadowHeight="5dp"
-            />
+            fbutton:shadowHeight="5dp" />
 
         <info.hoang8f.widget.FButton
             android:id="@+id/etcManagerBtn"
@@ -68,6 +115,7 @@
             android:layout_height="75dp"
             android:layout_weight="1"
             android:text="관리"
+            android:visibility="gone"
             fbutton:buttonColor="@color/strokeBrown"
             fbutton:cornerRadius="5dp"
             fbutton:shadowColor="#404040"
@@ -81,11 +129,28 @@
             android:layout_height="75dp"
             android:layout_weight="1"
             android:text="사용자 입력"
+            android:visibility="gone"
             fbutton:buttonColor="@color/strokeBrown"
             fbutton:cornerRadius="5dp"
             fbutton:shadowColor="#404040"
             fbutton:shadowEnabled="true"
-            fbutton:shadowHeight="5dp" />
+            fbutton:shadowHeight="5dp"
+
+            />
     </LinearLayout>
 
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <View
+            android:id="@+id/etcCloseBtn"
+            android:layout_width="25dp"
+            android:layout_height="25dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="5dp"
+            android:layout_marginTop="5dp"
+            android:alpha="0.3"
+            android:background="@drawable/cancel2_icon" />
+    </RelativeLayout>
 </RelativeLayout>
