@@ -235,6 +235,7 @@ public class ETCPanel {
         textView.setGravity(Gravity.CENTER_VERTICAL);
         textView.setLayoutParams(textParams);
         textView.setTextColor(Color.parseColor("#404040"));
+        textView.setPadding((int) Util.convertDpToPixel(10.0f),0,(int) Util.convertDpToPixel(10.0f),0);
     }
 
     private LinearLayout makeRowLayout() {
