@@ -163,7 +163,7 @@ public class ETCPanel {
     }
 
     private TextView makeTextView(ActivityVO activityVO) {
-        float textHeight = Util.convertDpToPixel(15);
+        float textHeight = Util.convertDpToPixel(20);
         ViewGroup.LayoutParams textParams = new ViewGroup.LayoutParams((int) Util.convertDpToPixel(60),
                 (int) textHeight);
         TextView textView = new TextView(context);
@@ -197,12 +197,13 @@ public class ETCPanel {
         LinearLayout buttonView = new LinearLayout(context);
         // 각 버튼 뷰 레이아웃 파라메터
         LinearLayout.LayoutParams buttonViewParams = new LinearLayout.LayoutParams(      (int) Util.convertDpToPixel(80),
-                (int) Util.convertDpToPixel(65));
+                (int) Util.convertDpToPixel(70));
 //        buttonViewParams.weight = 1;
         buttonView.setOrientation(LinearLayout.VERTICAL);
         buttonView.setGravity(Gravity.CENTER);
         buttonView.setLayoutParams(buttonViewParams);
         buttonView.addView(iconView);
+        textView.setPadding(0, (int) Util.convertDpToPixel(5), 0, 0);
         buttonView.addView(textView);
 
         return buttonView;
