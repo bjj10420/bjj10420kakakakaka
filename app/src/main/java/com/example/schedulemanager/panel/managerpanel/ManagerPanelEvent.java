@@ -14,6 +14,7 @@ import android.widget.TextView;
 import com.example.schedulemanager.R;
 import com.example.schedulemanager.Util;
 import com.example.schedulemanager.helper.DialogHelper;
+import com.example.schedulemanager.interface_.GeneralCallback;
 import com.example.schedulemanager.interface_.GeneralCallback2;
 import com.example.schedulemanager.panel.etcpanel.ETCPanel;
 import com.example.schedulemanager.vo.ActivityVO;
@@ -264,7 +265,7 @@ public class ManagerPanelEvent implements View.OnClickListener, View.OnTouchList
     }
 
     private void excuteByButtonId(View view, MotionEvent motionEvent) {
-        if(Util.checkIsIn(view, motionEvent)) {
+//        if(Util.checkIsIn(view, motionEvent)) {
             switch (view.getId()) {
                 case R.id.addCategoryBtn:
                     addCategoryEvent(view);
@@ -273,8 +274,24 @@ public class ManagerPanelEvent implements View.OnClickListener, View.OnTouchList
                     removeCategoryEvent(view);
                     break;
                 case R.id.resetBtn:
+                    showConfirmMessage();
                     break;
             }
-        }
+//        }
+    }
+
+    private void showConfirmMessage() {
+        // 삭제 버튼 클릭
+        new DialogHelper().setChoiceStyleDialogWithMessage(context, null, new GeneralCallback() {
+            @Override
+            public void onCallBack() {
+                clearActivityData();
+            }
+
+        }, "비우기", "취소", "활동 데이터를 비우시겠습니까?");
+    }
+
+    private void clearActivityData() {
+
     }
 }
