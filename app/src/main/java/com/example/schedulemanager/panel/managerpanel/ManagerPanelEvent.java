@@ -285,7 +285,6 @@ public class ManagerPanelEvent implements View.OnClickListener, View.OnTouchList
             @Override
             public void onCallBack() {
                 clearAllActivityData();
-
             }
 
         }, "비우기", "취소", "모든 활동 데이터와 카테고리를 비우시겠습니까?");
@@ -304,9 +303,27 @@ public class ManagerPanelEvent implements View.OnClickListener, View.OnTouchList
     }
 
     private void clearAllUI() {
-        managerPanel.getManagerContentsLayout().removeAllViews();
-        eventHelper.getEtcPanel().getEtcContentsLayout().removeAllViews();
+        clearManagerContentsLayout();
+        clearEtcContentsLayout();
         redrawMainFavoritePanel();
+    }
+
+    private void clearEtcContentsLayout() {
+        LinearLayout etcContentsLayout = eventHelper.getEtcPanel().getEtcContentsLayout();
+        int count = etcContentsLayout.getChildCount();
+        for (int i = 0; i < count; i++) {
+            if (i == 0) continue;
+            etcContentsLayout.removeViewAt(1);
+        }
+    }
+
+    private void clearManagerContentsLayout() {
+        LinearLayout managerContentsLayout = managerPanel.getManagerContentsLayout();
+        int count = managerContentsLayout.getChildCount();
+        for(int i = 0 ; i < count ; i++){
+            if(i == 0) continue;
+            managerContentsLayout.removeViewAt(1);
+        }
     }
 
     private void clearAllDBData() {
