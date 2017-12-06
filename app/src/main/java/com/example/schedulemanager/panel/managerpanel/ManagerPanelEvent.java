@@ -264,7 +264,7 @@ public class ManagerPanelEvent implements View.OnClickListener, View.OnTouchList
     }
 
     private void excuteByButtonId(View view, MotionEvent motionEvent) {
-//        if(Util.checkIsIn(view, motionEvent)) {
+        if(Util.checkIsIn(view, motionEvent)) {
             switch (view.getId()) {
                 case R.id.addCategoryBtn:
                     addCategoryEvent(view);
@@ -275,6 +275,6 @@ public class ManagerPanelEvent implements View.OnClickListener, View.OnTouchList
                 case R.id.resetBtn:
                     break;
             }
-//        }
+        }
     }
 }
