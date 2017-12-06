@@ -285,13 +285,24 @@ public class ManagerPanelEvent implements View.OnClickListener, View.OnTouchList
             @Override
             public void onCallBack() {
                 clearAllActivityData();
-                showClearToast();
+
             }
 
         }, "비우기", "취소", "모든 활동 데이터와 카테고리를 비우시겠습니까?");
     }
 
     private void clearAllActivityData() {
+        clearAllDBData();
+        clearAllUI();
+        showClearToast();
+    }
+
+    private void clearAllUI() {
+        managerPanel.getManagerContentsLayout().removeAllViews();
+        eventHelper.getEtcPanel().getEtcContentsLayout().removeAllViews();
+    }
+
+    private void clearAllDBData() {
         dbHelper.deleteClearAllData();
     }
 
