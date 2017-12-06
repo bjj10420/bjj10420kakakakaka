@@ -332,4 +332,10 @@ public class DBHelper extends SQLiteOpenHelper {
         int resultNumber = DB.delete(categoryTableName, categoryTable_categoryName_colum + " = ?",
                 new String[]{categoryName});
     }
+
+    public void deleteClearAllData(){
+        DB = getWritableDatabase();
+        DB.delete(activityTableName, null, null);
+        DB.delete(categoryTableName, null, null);
+    }
 }

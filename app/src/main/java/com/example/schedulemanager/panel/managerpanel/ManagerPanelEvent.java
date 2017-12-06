@@ -16,7 +16,6 @@ import com.example.schedulemanager.Util;
 import com.example.schedulemanager.helper.DialogHelper;
 import com.example.schedulemanager.interface_.GeneralCallback;
 import com.example.schedulemanager.interface_.GeneralCallback2;
-import com.example.schedulemanager.panel.etcpanel.ETCPanel;
 import com.example.schedulemanager.vo.ActivityVO;
 
 import java.util.ArrayList;
@@ -285,13 +284,19 @@ public class ManagerPanelEvent implements View.OnClickListener, View.OnTouchList
         new DialogHelper().setChoiceStyleDialogWithMessage(context, null, new GeneralCallback() {
             @Override
             public void onCallBack() {
-                clearActivityData();
+                clearAllActivityData();
+                showClearToast();
             }
 
-        }, "비우기", "취소", "활동 데이터를 비우시겠습니까?");
+        }, "비우기", "취소", "모든 활동 데이터와 카테고리를 비우시겠습니까?");
     }
 
-    private void clearActivityData() {
-
+    private void clearAllActivityData() {
+        dbHelper.deleteClearAllData();
     }
+
+    private void showClearToast() {
+        Util.customToast(context, "모든 데이터가 삭제되었습니다");
+    }
+
 }
