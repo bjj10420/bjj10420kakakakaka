@@ -293,13 +293,20 @@ public class ManagerPanelEvent implements View.OnClickListener, View.OnTouchList
 
     private void clearAllActivityData() {
         clearAllDBData();
+        clearAllDataMap();
         clearAllUI();
         showClearToast();
+    }
+
+    private void clearAllDataMap() {
+        dataHelper.getCategories().clear();
+        dataHelper.getActivities().clear();
     }
 
     private void clearAllUI() {
         managerPanel.getManagerContentsLayout().removeAllViews();
         eventHelper.getEtcPanel().getEtcContentsLayout().removeAllViews();
+        redrawMainFavoritePanel();
     }
 
     private void clearAllDBData() {
