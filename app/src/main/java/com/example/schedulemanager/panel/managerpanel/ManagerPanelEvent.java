@@ -124,8 +124,6 @@ public class ManagerPanelEvent implements View.OnClickListener, View.OnTouchList
           managerPanel.getManagerContentsLayout().removeViewAt(selectedIndex + 1);
     }
 
-
-
     private boolean isRemoveCategoryBtn(View view) {
         return view.getId() == R.id.removeCategoryBtn;
     }
