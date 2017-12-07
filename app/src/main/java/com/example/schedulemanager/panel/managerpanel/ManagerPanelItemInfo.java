@@ -268,7 +268,7 @@ public class ManagerPanelItemInfo {
         findAndRemoveETCButtonView();
     }
 
-    private void infoViewOff() {
+    public void infoViewOff() {
         alert.dismiss();
     }
 
@@ -276,9 +276,10 @@ public class ManagerPanelItemInfo {
         Log.d("액션체인지버튼체크", "액션체인지버튼체크");
         saveInfoVO();
         updateMangerPanelItemInfoDB();
-        showChangeToast();
         refreshChangeManagerPanel();
         refreshChangeEtcPanel();
+        infoViewOff();
+        showChangeToast();
     }
 
     private void refreshChangeEtcPanel() {
