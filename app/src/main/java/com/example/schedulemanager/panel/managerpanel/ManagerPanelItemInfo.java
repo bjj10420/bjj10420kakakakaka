@@ -291,14 +291,29 @@ public class ManagerPanelItemInfo {
         int itemIndex = activityVO.getManagerIndex();
         HorizontalScrollView scrollView = findScrollView();
         LinearLayout rowLayout = ((LinearLayout) scrollView.getChildAt(0));
+        itemIndex = findItemIndexFromRow(activityVO, rowLayout);
         LinearLayout buttonView = (LinearLayout) rowLayout.getChildAt(itemIndex);
         return  buttonView;
+    }
+
+    private int findItemIndexFromRow(ActivityVO activityVO, LinearLayout rowLayout) {
+        int itemIndex = 0;
+        for(int i = 0 ; i < rowLayout.getChildCount() ; i++) {
+            LinearLayout itemLayout = (LinearLayout) rowLayout.getChildAt(i);
+            TextView itemText = (TextView) itemLayout.getChildAt(1);
+            if(itemText.getText().equals(activityVO.getActivityName())){
+                itemIndex = i;
+                break;
+            }
+        }
+        return itemIndex;
     }
 
     private void findAndRemoveETCButtonView() {
         int itemIndex = activityVO.getManagerIndex();
         HorizontalScrollView scrollView = findScrollView();
         LinearLayout rowLayout = ((LinearLayout) scrollView.getChildAt(0));
+        itemIndex = findItemIndexFromRow(activityVO, rowLayout);
         rowLayout.removeViewAt(itemIndex);
     }
 
