@@ -103,7 +103,7 @@ public class ManagerPanelEvent implements View.OnClickListener, View.OnTouchList
     }
 
     private void removeCategory(String categoryName, Object parameter) {
-        removeCategoryFromDB(categoryName);
+        removeCategoryAndActivityFromDB(categoryName);
         removeCategoryFromMap(categoryName);
         removeRefreshManagerAndETCPanel(categoryName, parameter);
     }
@@ -178,8 +178,9 @@ public class ManagerPanelEvent implements View.OnClickListener, View.OnTouchList
         dbHelper.insertCategory(category);
     }
 
-    private void removeCategoryFromDB(String category) {
+    private void removeCategoryAndActivityFromDB(String category) {
         dbHelper.deleteCategory(category);
+        dbHelper.deleteActivityByCategory(category);
     }
 
     private boolean isAddCategoryBar(View view) {
