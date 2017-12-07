@@ -159,7 +159,7 @@ public class ManagerPanelEvent implements View.OnClickListener, View.OnTouchList
 
     private void addRefreshManagerPanel(String category) {
         int categoryIndex = eventHelper.getManagerPanel().getManagerContentsLayout().getChildCount();
-          managerPanel.addExpansionPanelWithIndex(category, categoryIndex - 1);
+          managerPanel.addExpansionPanelWithIndex(category, categoryIndex);
     }
 
     private void addCategoryToMap(String category) {
