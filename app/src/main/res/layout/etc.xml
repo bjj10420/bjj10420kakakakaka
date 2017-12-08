@@ -16,10 +16,10 @@
             android:layout_height="match_parent"
             android:background="#ffffff"
             android:orientation="vertical"
+            android:paddingBottom="10dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp">
+            android:paddingTop="10dp">
 
             <LinearLayout
                 android:id="@+id/etcBottomButtonLayout"
@@ -73,6 +73,30 @@
                         android:layout_height="wrap_content"
                         android:gravity="center"
                         android:text="관리"
+                        android:textColor="@color/loblolly"
+                        android:textSize="12dp" />
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/etcGuideBtn"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_marginRight="10dp"
+                    android:layout_weight="1"
+                    android:gravity="center"
+                    android:orientation="vertical">
+
+                    <View
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_marginBottom="5dp"
+                        android:background="@drawable/guide" />
+
+                    <TextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:gravity="center"
+                        android:text="가이드"
                         android:textColor="@color/loblolly"
                         android:textSize="12dp" />
                 </LinearLayout>
