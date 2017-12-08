@@ -92,6 +92,8 @@ public class DialogHelper {
      */
     public void setMessageDialog(Context context, final GeneralCallback2 callback1, final GeneralCallback callback2){
         final EditText et = new EditText(context);
+        et.setFocusableInTouchMode(true);
+        et.requestFocus();
         MaterialDialog dialog = new MaterialDialog(context);
         setAddMemoDialogButton(dialog, callback1, callback2, et);
         setDialogBasicOptions(context, "메모 입력", dialog, et, 300, 250);
