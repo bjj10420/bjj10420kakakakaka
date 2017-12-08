@@ -61,7 +61,6 @@ public class DialogHelper {
                 });
         AlertDialog alert = alt_bld.create();
 
-        // Icon for AlertDialog
         alert.show();
     }
 
