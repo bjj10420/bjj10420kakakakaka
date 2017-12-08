@@ -59,19 +59,26 @@ public class ETCPanel {
         managerButton.setOnTouchListener(etcPanelEvent);
         View userInputButton =  Util.getViewById(context, R.id.etcUserInputBtn);
         userInputButton.setOnTouchListener(etcPanelEvent);
+        View etcGuideBtn =  Util.getViewById(context, R.id.etcGuideBtn);
+        etcGuideBtn.setOnTouchListener(etcPanelEvent);
         View closeButton = Util.getViewById(context, R.id.etcCloseBtn);
         closeButton.bringToFront();
         closeButton.setOnClickListener(etcPanelEvent);
-        setButtonTypeface(addButton, managerButton, userInputButton);
+
+
+        setButtonTypeface(addButton, managerButton, userInputButton, etcGuideBtn);
     }
 
-    private void setButtonTypeface(View addButton, View managerButton, View userInputButton) {
+    private void setButtonTypeface(View addButton, View managerButton, View userInputButton, View etcGuideBtn) {
         TextView addText = (TextView) ((LinearLayout)addButton).getChildAt(1);
         TextView managerText = (TextView) ((LinearLayout)managerButton).getChildAt(1);
         TextView userInputText = (TextView) ((LinearLayout)userInputButton).getChildAt(1);
+        TextView etcGuideText = (TextView) ((LinearLayout)etcGuideBtn).getChildAt(1);
+
         addText.setTypeface(dataHelper.getTypeface());
         managerText.setTypeface(dataHelper.getTypeface());
         userInputText.setTypeface(dataHelper.getTypeface());
+        etcGuideText.setTypeface(dataHelper.getTypeface());
     }
 
     private void adaptorFont() {

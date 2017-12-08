@@ -13,6 +13,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.example.schedulemanager.R;
+import com.example.schedulemanager.activity.GuideActivity;
 import com.example.schedulemanager.activity.ProgressActivity;
 import com.example.schedulemanager.helper.DialogHelper;
 import com.example.schedulemanager.helper.UIHelper;
@@ -196,9 +197,18 @@ public class ETCPanelEvent implements View.OnClickListener, View.OnTouchListener
                 break;
             case R.id.etcAddBtn : addItemClickEvent();
                 break;
+            case R.id.etcGuideBtn : guideEvent();
+                break;
             case R.id.etcUserInputBtn : userInputEvent();
                 break;
         }
+    }
+
+    private void guideEvent() {
+        Intent intent = new Intent(context, GuideActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+        context.startActivity(intent);
+        ((Activity) context).overridePendingTransition(0, 0);
     }
 
     private void restoreButtonColorWhenUp(View view) {
