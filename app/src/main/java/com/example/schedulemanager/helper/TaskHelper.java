@@ -21,6 +21,7 @@ public class TaskHelper {
     public void loadETCPanel() {
         if (eventHelper.getEtcPanel() == null) {
             new ETCPanelLoadingTask(context).execute();
+
         }
     }
 
