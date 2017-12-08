@@ -91,34 +91,12 @@ public class DialogHelper {
      * 메세지 입력형 다이얼 로그 생성
      */
     public void setMessageDialog(Context context, final GeneralCallback2 callback1, final GeneralCallback callback2){
-        AlertDialog.Builder alt_bld = new AlertDialog.Builder(context, 3);
         final EditText et = new EditText(context);
-
-        alt_bld.setMessage("메모 입력").setView(et).setCancelable(
-                true).setPositiveButton("입력",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        Log.d("메모입력테스트", et.getText().toString());
-                        if(callback1 != null)
-                        callback1.onCallBack(et.getText().toString());
-                    }
-                }).setNegativeButton("취소",
-                new DialogInterface.OnClickListener() {
-                    public void onClick(DialogInterface dialog, int id) {
-                        // Action for 'NO' Button
-//                        dialog.cancel();
-                        if(callback2 != null)
-                        callback2.onCallBack();
-
-                    }
-                });
-
-        AlertDialog alert = alt_bld.create();
-
-        // Icon for AlertDialog
-        alert.show();
+        MaterialDialog dialog = new MaterialDialog(context);
+        setAddMemoDialogButton(dialog, callback1, callback2, et);
+        setDialogBasicOptions(context, "메모 입력", dialog, et, 300, 250);
     }
-//
+
     /**
      * 활동 관리 창에서 아이템 클릭시나타나는 아이템정보표시 다이얼로그
      */
@@ -172,6 +150,22 @@ public class DialogHelper {
             @Override
             public void onClick(View v) {
                 userInput.userInputBtn();
+            }
+        });
+    }
+
+    private void setAddMemoDialogButton(final MaterialDialog dialog, final GeneralCallback2 callback1, final GeneralCallback callback2, final EditText et){
+        dialog.setNegativeButton("입력", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                callback1.onCallBack(et.getText().toString());
+                dialog.dismiss();
+            }
+        });
+        dialog.setPositiveButton("취소", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dialog.dismiss();
             }
         });
     }
