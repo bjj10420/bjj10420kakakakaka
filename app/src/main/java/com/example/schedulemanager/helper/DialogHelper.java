@@ -48,9 +48,7 @@ public class DialogHelper {
 
         // Icon for AlertDialog
         alert.show();
-//        alert.getButton(DialogInterface.BUTTON_POSITIVE).setTextColor(R.color.strokeBrown);
     }
-
 
     public void setOneBtnStyleDialog(Context context, final GeneralCallback callback1, String btnString){
         AlertDialog.Builder alt_bld = new AlertDialog.Builder(context, 3);
@@ -66,7 +64,6 @@ public class DialogHelper {
         // Icon for AlertDialog
         alert.show();
     }
-
 
     /**
      * 선택형 다이얼 로그 생성
