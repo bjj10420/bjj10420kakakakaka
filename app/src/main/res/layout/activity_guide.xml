@@ -25,7 +25,7 @@
         android:id="@+id/guideTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:text="사용 가이드"
         android:textColor="#404040"
         android:textSize="30dp"
