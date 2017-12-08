@@ -25,7 +25,7 @@ public class GuideAdapter extends PagerAdapter {
 
     @Override
     public int getCount() {
-        return 3;
+        return 4;
     }
 
     @Override
@@ -42,6 +42,8 @@ public class GuideAdapter extends PagerAdapter {
             case 1 : convertView = layoutInflater.inflate(R.layout.guide_page1, null);
                 break;
             case 2 : convertView = layoutInflater.inflate(R.layout.guide_page2, null);
+                break;
+            case 3 : convertView = layoutInflater.inflate(R.layout.guide_page3, null);
                 break;
         }
         Util.setFontAllChildView(context, convertView, typeface, true);

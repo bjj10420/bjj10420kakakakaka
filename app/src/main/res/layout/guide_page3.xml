@@ -17,6 +17,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="35dp"
+            android:text="입력 기간 정하기 : \n\n 캘린더화면에서 상,하단중에 있는 즐겨찾기 활동 아이콘을 롱클릭 => 기간 선택"
+            android:textColor="#404040"
+            android:textSize="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="35dp"
+            android:text="활동 데이터 초기화 : \n\n 화면 우측하단 ... 아이콘 선택 후 관리 화면 => 초기화 버튼"
+            android:textColor="#404040"
+            android:textSize="16dp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="35dp"
             android:text="활동 데이터 추가, 삭제, 수정, 즐겨찾기 관리 : \n\n 화면 우측하단 ... 아이콘 선택 => 관리 버튼"
             android:textColor="#404040"
             android:textSize="16dp" />
@@ -25,15 +41,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginBottom="35dp"
-            android:text="활동 데이터 정보 확인 : \n\n 카테고리 선택후  => 보고싶은 아이템 클릭"
-            android:textColor="#404040"
-            android:textSize="16dp" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="35dp"
-            android:text="활동 데이터 수정 : \n\n 아이콘이나 활동명을 수정할때 => 정보창의 아이콘이나 텍스트를 직접 클릭후 수정, 변경 버튼으로 저장"
+            android:text="가이드 다시보기 : \n\n 화면 우측하단 ... 아이콘  => 가이드 버튼"
             android:textColor="#404040"
             android:textSize="16dp" />
     </LinearLayout>
