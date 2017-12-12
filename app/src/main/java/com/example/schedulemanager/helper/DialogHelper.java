@@ -198,6 +198,7 @@ public class DialogHelper {
         dialog.setPositiveButton("취소", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                dialog.dismiss();
             }
         });
     }
