@@ -152,8 +152,7 @@ public class UIHelper {
         // 각 버튼 레이아웃 파라메터
         ViewGroup.LayoutParams iconParams = new ViewGroup.LayoutParams((int) buttonHeight,
                 (int) buttonHeight);
-        // iconView.setBackgroundResource(findIdByFileName(iconNameMap.get(textData), this));
-        //
+
             Drawable drawable = new BitmapDrawable(context.getResources(), BitmapFactory.decodeResource(
                     context.getResources(), Util.getDrawableId(activityVO.getImageData())));
         if(activityVO.getActivityName().equals("기타")){
