@@ -485,6 +485,7 @@ public class EventHelper {
                     @Override
                     public void onCallBack(Object parameter) {
                         // 변경 버튼
+                        modifySchedule(e);
                     }
                 }, "메모 첨부", "삭제");
             }
@@ -494,6 +495,17 @@ public class EventHelper {
 
             }
         });
+    }
+
+    private void modifySchedule(Entry e) {
+        PieEntry pieEntry = ((PieEntry) e);
+        int index = dataHelper.getDailyScheduleDataSet().getEntryIndex(pieEntry);
+        int orderValue = dataHelper.getOrderValueFromSchedule(index);
+        Schedule originalSchedule = dataHelper.getScheduleFromDailyScheduleMapByMonth2(index);
+        String originalScheduleMemo = originalSchedule != null ? originalSchedule.getMemo() : "";
+
+        Log.d("오리지널 스케쥴 확인", originalSchedule.getActivityName());
+        Log.d("오리지널 스케쥴 확인", originalSchedule.getMemo());
     }
 
     /**
