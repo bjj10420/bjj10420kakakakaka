@@ -1,16 +1,15 @@
 package com.example.schedulemanager.helper;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.View;
-import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 import com.example.schedulemanager.R;
 import com.example.schedulemanager.Util;
@@ -19,10 +18,9 @@ import com.example.schedulemanager.interface_.GeneralCallback2;
 import com.example.schedulemanager.panel.managerpanel.ManagerPanelItemAdd;
 import com.example.schedulemanager.panel.managerpanel.ManagerPanelItemInfo;
 import com.example.schedulemanager.panel.managerpanel.ManagerUserInput;
+import com.example.schedulemanager.vo.Schedule;
 
 import me.drakeet.materialdialog.MaterialDialog;
-
-import static com.example.schedulemanager.helper.DataHelper.dataHelper;
 
 /**
  * 여러가지 용도의 다이얼로그 박스를 생성
@@ -109,6 +107,19 @@ public class DialogHelper {
         setItemInfoAlertDialog(context, itemInfo, dialogView);
     }
 
+    public void showScheduleInfoDialog(Context context, Schedule originalSchedule){
+        View dialogView = LayoutInflater.from(context).inflate(R.layout.schedule_modification, null);
+        setScheduleInfoDialogViewContents(dialogView, originalSchedule);
+        setScheduleInfoAlertDialog(context, dialogView);
+    }
+
+    private void setScheduleInfoDialogViewContents(View dialogView, Schedule originalSchedule) {
+        TextView scheduleName = (TextView) dialogView.findViewById(R.id.scheduleModificationName);
+        TextView scheduleMemo = (TextView) dialogView.findViewById(R.id.scheduleModificationMemo);
+        scheduleName.setText(originalSchedule.getActivityName());
+        scheduleMemo.setText(originalSchedule.getMemo());
+    }
+
     /**
      * 기타 패널에서 추가 버튼 클릭시나타나는 아이템정보표시 다이얼로그
      */
@@ -124,10 +135,15 @@ public class DialogHelper {
         setUserInputAlertDialog(context, uesrInput, dialogView);
     }
 
+    private void setScheduleInfoAlertDialog(Context context, View dialogView) {
+        MaterialDialog dialog = new MaterialDialog(context);
+        setScheduleInfoAlertDialogButton(dialog);
+        setDialogBasicOptions(context, "스케쥴 정보", dialog, dialogView, 300, 250);
+    }
 
     private void setItemInfoAlertDialog(Context context, ManagerPanelItemInfo itemInfo, View dialogView) {
         MaterialDialog dialog = new MaterialDialog(context);
-        setItemInfoAlertDialogButton(dialog, itemInfo);
+        setScheduleInfoAlertDialogButton(dialog, itemInfo);
         setDialogBasicOptions(context, "활동 정보", dialog, dialogView, 300, 250);
         itemInfo.setAlert(dialog);
     }
@@ -173,7 +189,21 @@ public class DialogHelper {
         });
     }
 
-    private void setItemInfoAlertDialogButton(final MaterialDialog dialog, final ManagerPanelItemInfo itemInfo) {
+    private void setScheduleInfoAlertDialogButton(final MaterialDialog dialog) {
+        dialog.setNegativeButton("변경", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
+        dialog.setPositiveButton("취소", new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        });
+    }
+
+
+    private void setScheduleInfoAlertDialogButton(final MaterialDialog dialog, final ManagerPanelItemInfo itemInfo) {
         dialog.setNegativeButton("변경", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
