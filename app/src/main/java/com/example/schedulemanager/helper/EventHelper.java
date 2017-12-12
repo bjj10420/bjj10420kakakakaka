@@ -507,6 +507,7 @@ public class EventHelper {
         new DialogHelper().showScheduleInfoDialog(context, originalSchedule);
         Log.d("오리지널 스케쥴 확인", originalSchedule.getActivityName());
         Log.d("오리지널 스케쥴 확인", originalSchedule.getMemo());
+        //
     }
 
     /**
