@@ -198,6 +198,7 @@ public class DialogHelper {
             public void onClick(View v) {
                 eventHelper.modifyConfirm(dialogView, pieEntry, originalSchedule);
                 dialog.dismiss();
+
             }
         });
         dialog.setPositiveButton("취소", new View.OnClickListener() {
