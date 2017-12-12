@@ -425,7 +425,10 @@ public class UIHelper {
      */
     public void updatePiechart(String memoContent, PieEntry pieEntry,String activityName) {
         StringBuilder sb = new StringBuilder();
-        sb.append(activityName).append("(").append(String.valueOf(memoContent)).append(")");
+        if(memoContent.equals(""))
+            sb.append(activityName);
+        else
+            sb.append(activityName).append("(").append(String.valueOf(memoContent)).append(")");
         (pieEntry).setLabel(sb.toString());
     }
 

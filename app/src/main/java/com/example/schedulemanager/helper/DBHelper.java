@@ -276,7 +276,6 @@ public class DBHelper extends SQLiteOpenHelper {
         Log.d("해당 월의 스케쥴맵에 추가할 때 키값 체크", String.valueOf(Integer.parseInt(schedule.getDate().substring(6,8) + "000" + schedule.getOrder())));
     }
 
-
     /**
      * 해당 스케쥴 데이터의 메모를 DB에 업데이트
      * @param parameter
@@ -287,6 +286,23 @@ public class DBHelper extends SQLiteOpenHelper {
         ContentValues values = new ContentValues();
         values.clear();
         values.put(memoValue_colum, memo);
+
+        int result = DB.update(scheduleTableName, values,
+                dateValue_colum + " = ? AND "
+                        + orderValue_colum + " = ?",
+                new String[] { dateValue,
+                        String.valueOf(orderValue)});
+        return result;
+    }
+
+
+    public int updateSchedule(String scheduleName, String scheduleMemo, String dateValue, int orderValue) {
+
+        DB = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.clear();
+        values.put(activityName_colum, scheduleName);
+        values.put(memoValue_colum, scheduleMemo);
 
         int result = DB.update(scheduleTableName, values,
                 dateValue_colum + " = ? AND "

@@ -504,12 +504,10 @@ public class EventHelper {
         int index = dataHelper.getDailyScheduleDataSet().getEntryIndex(pieEntry);
         int orderValue = dataHelper.getOrderValueFromSchedule(index);
         Schedule originalSchedule = dataHelper.getScheduleFromDailyScheduleMapByMonth2(index);
-        String originalScheduleMemo = originalSchedule != null ? originalSchedule.getMemo() : "";
-
-        new DialogHelper().showScheduleInfoDialog(context, originalSchedule, pieEntry);
+        new DialogHelper().showScheduleInfoDialog(context, originalSchedule, pieEntry, orderValue);
     }
 
-    public void modifyConfirm(View v, PieEntry pieEntry, Schedule originalSchedule){
+    public void modifyConfirm(View v, PieEntry pieEntry, Schedule originalSchedule, int orderValue){
         String nameModified = ((TextView) v.findViewById(R.id.scheduleModificationName)).getText().toString();
         String memoModified = ((TextView) v.findViewById(R.id.scheduleModificationMemo)).getText().toString();
 
@@ -517,6 +515,7 @@ public class EventHelper {
         originalSchedule.setMemo(memoModified);
         uiHelper.updatePiechart(memoModified, pieEntry, nameModified);
         uiHelper.resetPiechart(uiHelper.getPieChart());
+        dataHelper.getDbHelper().updateSchedule(nameModified, memoModified, dataHelper.getSelectedDateData(), orderValue);
 
     }
 

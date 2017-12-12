@@ -110,10 +110,10 @@ public class DialogHelper {
         setItemInfoAlertDialog(context, itemInfo, dialogView);
     }
 
-    public void showScheduleInfoDialog(Context context, Schedule originalSchedule, PieEntry pieEntry){
+    public void showScheduleInfoDialog(Context context, Schedule originalSchedule, PieEntry pieEntry, int orderValue){
         View dialogView = LayoutInflater.from(context).inflate(R.layout.schedule_modification, null);
         setScheduleInfoDialogViewContents(dialogView, originalSchedule);
-        setScheduleInfoAlertDialog(context, dialogView, pieEntry, originalSchedule);
+        setScheduleInfoAlertDialog(context, dialogView, pieEntry, originalSchedule, orderValue);
     }
 
     private void setScheduleInfoDialogViewContents(View dialogView, Schedule originalSchedule) {
@@ -138,9 +138,9 @@ public class DialogHelper {
         setUserInputAlertDialog(context, uesrInput, dialogView);
     }
 
-    private void setScheduleInfoAlertDialog(Context context, View dialogView, PieEntry pieEntry, Schedule originalSchedule) {
+    private void setScheduleInfoAlertDialog(Context context, View dialogView, PieEntry pieEntry, Schedule originalSchedule, int orderValue) {
         MaterialDialog dialog = new MaterialDialog(context);
-        setScheduleInfoAlertDialogButton(dialog, dialogView, pieEntry, originalSchedule);
+        setScheduleInfoAlertDialogButton(dialog, dialogView, pieEntry, originalSchedule, orderValue);
         setDialogBasicOptions(context, "스케쥴 정보", dialog, dialogView, 300, 250);
     }
 
@@ -192,11 +192,11 @@ public class DialogHelper {
         });
     }
 
-    private void setScheduleInfoAlertDialogButton(final MaterialDialog dialog, final View dialogView, final PieEntry pieEntry, final Schedule originalSchedule) {
+    private void setScheduleInfoAlertDialogButton(final MaterialDialog dialog, final View dialogView, final PieEntry pieEntry, final Schedule originalSchedule, final int orderValue) {
         dialog.setNegativeButton("변경", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                eventHelper.modifyConfirm(dialogView, pieEntry, originalSchedule);
+                eventHelper.modifyConfirm(dialogView, pieEntry, originalSchedule, orderValue);
                 dialog.dismiss();
 
             }
