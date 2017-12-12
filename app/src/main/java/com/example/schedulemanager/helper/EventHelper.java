@@ -465,7 +465,7 @@ public class EventHelper {
             @Override
             public void onValueSelected(final Entry e, Highlight h) {
                 // 삭제 버튼 클릭
-                new DialogHelper().setChoiceStyleDialog(context, new GeneralCallback() {
+                new DialogHelper().setDailyScheduleDialog(context, new GeneralCallback() {
                     @Override
                     public void onCallBack() {
                         deleteSchedule(e);
@@ -480,6 +480,11 @@ public class EventHelper {
                                 updateMemo(parameter, e);
                             }
                         }, null);
+                    }
+                }, new GeneralCallback2() {
+                    @Override
+                    public void onCallBack(Object parameter) {
+                        // 변경 버튼
                     }
                 }, "메모 첨부", "삭제");
             }

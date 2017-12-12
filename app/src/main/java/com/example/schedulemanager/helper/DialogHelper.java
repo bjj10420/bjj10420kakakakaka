@@ -64,12 +64,14 @@ public class DialogHelper {
         alert.show();
     }
 
-    /**
-     * 선택형 다이얼 로그 생성
-     */
-    public void setChoiceStyleDialog(Context context, final GeneralCallback callback1, final GeneralCallback callback2, String leftBtnString, String rightBtnString){
+    public void setDailyScheduleDialog(Context context, final GeneralCallback callback1, final GeneralCallback callback2, final GeneralCallback2 callback3, String leftBtnString, String rightBtnString){
         AlertDialog.Builder alt_bld = new AlertDialog.Builder(context, 3);
-        alt_bld.setCancelable(
+        alt_bld.setNeutralButton("변경", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                callback3.onCallBack(null);
+            }
+        }).setCancelable(
                 true).setPositiveButton(rightBtnString,
                 new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
