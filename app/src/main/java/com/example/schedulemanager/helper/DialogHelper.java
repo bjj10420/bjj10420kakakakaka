@@ -19,8 +19,11 @@ import com.example.schedulemanager.panel.managerpanel.ManagerPanelItemAdd;
 import com.example.schedulemanager.panel.managerpanel.ManagerPanelItemInfo;
 import com.example.schedulemanager.panel.managerpanel.ManagerUserInput;
 import com.example.schedulemanager.vo.Schedule;
+import com.github.mikephil.charting.data.PieEntry;
 
 import me.drakeet.materialdialog.MaterialDialog;
+
+import static com.example.schedulemanager.helper.EventHelper.eventHelper;
 
 /**
  * 여러가지 용도의 다이얼로그 박스를 생성
@@ -107,10 +110,10 @@ public class DialogHelper {
         setItemInfoAlertDialog(context, itemInfo, dialogView);
     }
 
-    public void showScheduleInfoDialog(Context context, Schedule originalSchedule){
+    public void showScheduleInfoDialog(Context context, Schedule originalSchedule, PieEntry pieEntry){
         View dialogView = LayoutInflater.from(context).inflate(R.layout.schedule_modification, null);
         setScheduleInfoDialogViewContents(dialogView, originalSchedule);
-        setScheduleInfoAlertDialog(context, dialogView);
+        setScheduleInfoAlertDialog(context, dialogView, pieEntry);
     }
 
     private void setScheduleInfoDialogViewContents(View dialogView, Schedule originalSchedule) {
@@ -135,9 +138,9 @@ public class DialogHelper {
         setUserInputAlertDialog(context, uesrInput, dialogView);
     }
 
-    private void setScheduleInfoAlertDialog(Context context, View dialogView) {
+    private void setScheduleInfoAlertDialog(Context context, View dialogView, PieEntry pieEntry) {
         MaterialDialog dialog = new MaterialDialog(context);
-        setScheduleInfoAlertDialogButton(dialog);
+        setScheduleInfoAlertDialogButton(dialog, dialogView, pieEntry);
         setDialogBasicOptions(context, "스케쥴 정보", dialog, dialogView, 300, 250);
     }
 
@@ -189,10 +192,11 @@ public class DialogHelper {
         });
     }
 
-    private void setScheduleInfoAlertDialogButton(final MaterialDialog dialog) {
+    private void setScheduleInfoAlertDialogButton(final MaterialDialog dialog, final View dialogView, final PieEntry pieEntry) {
         dialog.setNegativeButton("변경", new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                eventHelper.modifyConfirm(dialogView, pieEntry);
             }
         });
         dialog.setPositiveButton("취소", new View.OnClickListener() {

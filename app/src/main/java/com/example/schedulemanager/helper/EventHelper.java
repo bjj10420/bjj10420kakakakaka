@@ -13,6 +13,8 @@ import android.util.Log;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.TextView;
+
 import com.example.schedulemanager.interface_.GeneralCallback;
 import com.example.schedulemanager.R;
 import com.example.schedulemanager.interface_.GeneralCallback2;
@@ -504,10 +506,17 @@ public class EventHelper {
         Schedule originalSchedule = dataHelper.getScheduleFromDailyScheduleMapByMonth2(index);
         String originalScheduleMemo = originalSchedule != null ? originalSchedule.getMemo() : "";
 
-        new DialogHelper().showScheduleInfoDialog(context, originalSchedule);
-        Log.d("오리지널 스케쥴 확인", originalSchedule.getActivityName());
-        Log.d("오리지널 스케쥴 확인", originalSchedule.getMemo());
-        //
+        new DialogHelper().showScheduleInfoDialog(context, originalSchedule, pieEntry);
+    }
+
+    public void modifyConfirm(View v, PieEntry pieEntry){
+        String nameModified = ((TextView) v.findViewById(R.id.scheduleModificationName)).getText().toString();
+        String memoModified = ((TextView) v.findViewById(R.id.scheduleModificationMemo)).getText().toString();
+
+
+        uiHelper.updatePiechart(memoModified, pieEntry, nameModified);
+        uiHelper.resetPiechart(uiHelper.getPieChart());
+
     }
 
     /**
