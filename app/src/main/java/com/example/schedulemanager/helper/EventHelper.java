@@ -509,11 +509,12 @@ public class EventHelper {
         new DialogHelper().showScheduleInfoDialog(context, originalSchedule, pieEntry);
     }
 
-    public void modifyConfirm(View v, PieEntry pieEntry){
+    public void modifyConfirm(View v, PieEntry pieEntry, Schedule originalSchedule){
         String nameModified = ((TextView) v.findViewById(R.id.scheduleModificationName)).getText().toString();
         String memoModified = ((TextView) v.findViewById(R.id.scheduleModificationMemo)).getText().toString();
 
-
+        originalSchedule.setActivityName(nameModified);
+        originalSchedule.setMemo(memoModified);
         uiHelper.updatePiechart(memoModified, pieEntry, nameModified);
         uiHelper.resetPiechart(uiHelper.getPieChart());
 
