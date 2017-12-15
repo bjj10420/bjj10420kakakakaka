@@ -1,11 +1,9 @@
 package com.example.schedulemanager.helper;
 
-import android.animation.Animator;
 import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.res.Resources;
-import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.Color;
 import android.graphics.PorterDuff;
@@ -14,7 +12,6 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
@@ -33,16 +30,12 @@ import com.github.mikephil.charting.data.PieData;
 import com.github.mikephil.charting.data.PieDataSet;
 import com.github.mikephil.charting.data.PieEntry;
 import com.github.mikephil.charting.utils.ColorTemplate;
-import com.rey.material.widget.ProgressView;
 
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.TreeMap;
-
-import static com.example.schedulemanager.helper.DataHelper.dataHelper;
 
 /**
  * 모든 UI처리 담당
@@ -70,6 +63,12 @@ public class UIHelper {
     public void initUI(Context context, DataHelper dataHelper) {
         initFields(context, dataHelper);
         newInitButtonPanel(dataHelper.getActivities());
+        adaptorTypeface();
+    }
+
+    private void adaptorTypeface() {
+        TextView loadingText = (TextView) Util.getViewById(context, R.id.centerLoadingText);
+        loadingText.setTypeface(dataHelper.getTypeface());
     }
 
     private void initFields(Context context, DataHelper dataHelper) {
@@ -85,6 +84,7 @@ public class UIHelper {
         backBtn.setTypeface(this.dataHelper.getTypeface());
         cancelBtn = Util.getViewById(this.context,R.id.cancel_btn);
         pieChart = (PieChart) Util.getViewById(this.context,R.id.chart);
+
     }
 
     public void newInitButtonPanel(HashMap<String, ArrayList<ActivityVO>> activities) {
@@ -493,4 +493,8 @@ public class UIHelper {
         managerPanel.setManagerLayoutVisible(false);
     }
 
+    public void setCenterLoadingText(boolean isVisible) {
+        TextView loadingText = (TextView) Util.getViewById(context, R.id.centerLoadingText);
+        loadingText.setVisibility(isVisible ? View.VISIBLE : View.GONE);
+    }
 }

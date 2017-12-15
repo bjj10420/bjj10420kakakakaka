@@ -52,7 +52,7 @@
         android:id="@+id/iconBoxLoadingText"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:gravity = "center"
+        android:gravity="center"
         android:text="아이콘을 로딩중..."
         android:textColor="#404040"
         android:textSize="16dp" />
