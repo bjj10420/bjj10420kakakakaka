@@ -3,8 +3,11 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ScheduleManager.iml" filepath="$PROJECT_DIR$/ScheduleManager.iml" />
+      <module fileurl="file://C:\Users\bjj10\StudioProjects\ScheduleManager\ScheduleManager.iml" filepath="C:\Users\bjj10\StudioProjects\ScheduleManager\ScheduleManager.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://C:\Users\bjj10\StudioProjects\ScheduleManager\app\app.iml" filepath="C:\Users\bjj10\StudioProjects\ScheduleManager\app\app.iml" />
       <module fileurl="file://$PROJECT_DIR$/materialexpansionpanel/materialexpansionpanel.iml" filepath="$PROJECT_DIR$/materialexpansionpanel/materialexpansionpanel.iml" />
+      <module fileurl="file://C:\Users\bjj10\StudioProjects\ScheduleManager\materialexpansionpanel\materialexpansionpanel.iml" filepath="C:\Users\bjj10\StudioProjects\ScheduleManager\materialexpansionpanel\materialexpansionpanel.iml" />
     </modules>
   </component>
 </project>
